@@ -1,33 +1,19 @@
-#use ubuntu as base image
+# base image
 FROM ubuntu:xenial
 
-#install java jre
-RUN apt-get update && apt-get install -y\
- libz-dev\
- autoconf\
- automake\
- libtool\
- git\
- g++\
- make\
- libgsl-dev\
- libgsl2\
- curl
+# metadata
+LABEL base.image="ubuntu:xenial"
+LABEL version="1"
+LABEL software="Mash"
+LABEL software.version="2.0.0"
+LABEL description="Fast genome and metagenome distance estimation using MinHash"
+LABEL website="https://mash.readthedocs.io/en/latest/index.html"
+LABEL license="https://github.com/marbl/Mash/blob/master/LICENSE.txt"
 
-#RUN curl -O https://capnproto.org/capnproto-c++-0.7.0.tar.gz;\
-RUN curl -O https://capnproto.org/capnproto-c++-0.6.1.tar.gz;\
- tar zxf capnproto-c++-0.6.1.tar.gz;\
- cd capnproto-c++-0.6.1;\
- ./configure;\
- make -j6 check;\
- make install
+MAINTAINER Curtis Kapsak <curtis.kapsak@state.co.us>
 
-RUN git clone https://github.com/marbl/Mash.git
+# install dependencies
+RUN apt-get update && apt-get -y install wget && apt-get clean && apt-get autoclean
 
-RUN cd /Mash; \
- ./bootstrap.sh; \
- ./configure; \
- make; \
- make install
-
-COPY RefSeqSketchesDefaults.msh /RefSeqSketchesDefaults.msh
+RUN wget https://github.com/marbl/Mash/releases/download/v2.0/mash-Linux64-v2.0.tar && tar -xvf mash-Linux64-v2.0.tar
+ENV PATH="/mash-Linux64-v2.0:${PATH}"
