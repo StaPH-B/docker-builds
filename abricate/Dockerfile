@@ -1,5 +1,17 @@
 FROM ubuntu:xenial
 
+# metadata
+LABEL base.image="ubuntu:xenial"
+LABEL version="1"
+LABEL software="Prokka"
+LABEL software.version="1.13"
+LABEL description="Automated prokaryotic genome annotation tool"
+LABEL website="https://github.com/tseemann/prokka"
+LABEL license="https://github.com/tseemann/prokka#licence"
+
+# Maintainer
+MAINTAINER Curtis Kapsak <curtis.kapsak@state.co.us>
+
 # install dependencies
 RUN apt-get update && apt-get install -y \
   emboss \
