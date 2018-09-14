@@ -3,7 +3,7 @@ FROM ubuntu:xenial
 LABEL base.image="ubuntu:xenial"
 LABEL version="1"
 LABEL software="Serotypefinder"
-LABEL software.version="not specified"
+LABEL software.version="1.1"
 LABEL description="Tool for identifying the serotype of E. coli from reads or assemblies"
 LABEL website="https://bitbucket.org/genomicepidemiology/serotypefinder/src/master/"
 LABEL license="https://bitbucket.org/genomicepidemiology/serotypefinder/src/master/"
