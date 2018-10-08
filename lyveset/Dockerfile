@@ -1,6 +1,17 @@
 #Use ubuntu as base image
 FROM ubuntu:xenial
 
+# metadata
+LABEL base.image="ubuntu:xenial"
+LABEL version="1"
+LABEL software="Lyve-SET"
+LABEL software.version="2.0"
+LABEL description="LYVE-SET, a method of using hqSNPs to create a phylogeny, especially for outbreak investigations"
+LABEL website="https://github.com/lskatz/lyve-SET"
+LABEL license="https://github.com/lskatz/lyve-SET/blob/master/LICENSE"
+
+MAINTAINER Nicholas Florek <nicholas.florek@slh.wisc.edu>
+
 #install python
 RUN apt-get update && apt-get install -y\
  perl\
