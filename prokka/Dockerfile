@@ -17,7 +17,7 @@ MAINTAINER Curtis Kapsak <curtis.kapsak@state.co.us>
 RUN apt-get update && apt-get -y install \
  bzip2 \
  gzip \
- wget && apt-get clean && apt-get autoclean 
+ wget && apt-get clean && apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 RUN wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 RUN chmod +x Miniconda3-latest-Linux-x86_64.sh
