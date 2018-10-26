@@ -27,4 +27,4 @@ RUN apt-get update && apt-get install -y zlib1g-dev \
 
 RUN wget https://downloads.sourceforge.net/project/quast/quast-5.0.0.tar.gz && tar -xzf quast-5.0.0.tar.gz && rm -r quast-5.0.0.tar.gz
 RUN cd /quast-5.0.0 && /quast-5.0.0/setup.py install
-RUN cd /quast-5.0.0 && /quast-5.0.0/setup.py test
+RUN cd /quast-5.0.0 && /quast-5.0.0/setup.py test && mkdir /data
