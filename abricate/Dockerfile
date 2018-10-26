@@ -24,10 +24,11 @@ RUN apt-get update && apt-get install -y \
   libfile-slurp-perl \
   liblwp-protocol-https-perl \
   libwww-perl \
-  git && apt-get clean
+  git \
+  wget && apt-get clean
 
-RUN git clone https://github.com/tseemann/abricate.git
-ENV PATH="/abricate/bin:$PATH"
+RUN wget https://github.com/tseemann/abricate/archive/v0.8.7.tar.gz && tar -zxvf v0.8.7.tar.gz && rm -rf v0.8.7.tar.gz
+ENV PATH="/abricate-0.8.7/bin:$PATH"
 
 RUN abricate --check
-RUN abricate --setupdb
+RUN abricate --setupdb && mkdir /data
