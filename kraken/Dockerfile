@@ -1,0 +1,44 @@
+# base image
+FROM ubuntu:xenial
+
+# metadata
+LABEL base.image="ubuntu:xenial"
+LABEL version="1"
+LABEL software=""
+LABEL software.version=""
+LABEL description=""
+LABEL website=""
+LABEL license=""
+
+# Maintainer
+MAINTAINER Curtis Kapsak <curtis.kapsak@state.co.us>
+
+# install dependencies
+RUN apt-get update && apt-get -y install \
+  wget \
+  zlib1g-dev \
+  make \
+  g++
+
+# DL Jellyfish, unpack, and install
+RUN wget https://github.com/gmarcais/Jellyfish/releases/download/v1.1.12/jellyfish-1.1.12.tar.gz && \
+  tar -zxf jellyfish-1.1.12.tar.gz && rm -rf jellyfish-1.1.12.tar.gz
+RUN cd jellyfish-1.1.12 && ./configure --prefix=/opt/ && make -j 4 && make install
+
+# DL Kraken v1.0, unpack, and install
+RUN wget https://github.com/DerrickWood/kraken/archive/v1.0.tar.gz && \
+  tar -xzf v1.0.tar.gz && \ 
+  rm -rf v1.0.tar.gz && \
+  cd kraken-1.0 && \
+  mkdir /opt/kraken && \
+  ./install_kraken.sh /opt/kraken/
+
+# DL MiniKraken database
+RUN mkdir /kraken-database && \
+  cd /kraken-database && \
+  wget https://ccb.jhu.edu/software/kraken/dl/minikraken_20171019_4GB.tgz && \
+  tar -zxf minikraken_20171019_4GB.tgz && \
+  rm -rf minikraken_20171019_4GB.tgz && mkdir /data
+
+ENV PATH="$PATH:/opt/kraken:/opt/jellyfish/bin"
+WORKDIR /data
