@@ -8,7 +8,7 @@ LABEL software="Kraken"
 LABEL software.version="1.0"
 LABEL description="Taxonomic sequence classifier"
 LABEL website="https://github.com/DerrickWood/kraken"
-LABEL license=""
+LABEL license="https://github.com/DerrickWood/kraken/blob/master/LICENSE"
 
 # Maintainer
 MAINTAINER Curtis Kapsak <curtis.kapsak@state.co.us>
