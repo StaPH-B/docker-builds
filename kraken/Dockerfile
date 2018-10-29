@@ -4,10 +4,10 @@ FROM ubuntu:xenial
 # metadata
 LABEL base.image="ubuntu:xenial"
 LABEL version="1"
-LABEL software=""
-LABEL software.version=""
-LABEL description=""
-LABEL website=""
+LABEL software="Kraken"
+LABEL software.version="1.0"
+LABEL description="Taxonomic sequence classifier"
+LABEL website="https://github.com/DerrickWood/kraken"
 LABEL license=""
 
 # Maintainer
