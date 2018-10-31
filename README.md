@@ -46,5 +46,45 @@ docker pull staphb/spades-v3.12:latest
 NOTE: The `latest` tag is usually the default tag associated with the latest version of the Docker image, however if a container fails to download, check the "Tags" tab on the docker hub repo to see what tag was used to build the image originally.
 
 ## Usage of Docker containers
+I (Curtis) typically run Docker containers on an Ubuntu OS, but I believe the Docker commands will be the same for all operating systems (MacOS and Windows).
 
+Once a Docker image has been pulled with `docker pull` resulting in an output similar to this...
+```
+latest: Pulling from staphb/spades-v3.12
+18d680d61657: Already exists
+0addb6fece63: Already exists
+78e58219b215: Already exists
+eb6959a66df2: Already exists
+2ab7d8aa6fdf: Pull complete
+194b04b3cee9: Pull complete
+Digest: sha256:e7053ba61a9a9a24810a9fa04c7967d364e53f0f5a87ba5d64689eb092488e0d
+Status: Downloaded newer image for staphb/spades-v3.12:latest
+```
+...the image has been built on your machine and is ready for use. No further installation required!
 
+Docker containers are then spun up when you use the `docker run` command, and will run the program of choice on files located on your machine locally. Most containers should be run using this command:
+```
+docker run --rm=True -v $PWD:/data -u $(id -u):$(id -g) staphb/<name-of-docker-image>:latest <command>
+```
+```
+# explanation
+  --rm=True
+     By default, when a Docker container is run without this flag, the Docker container is created,
+     the container runs the specified program, and then it shuts down. In other words Docker conainers
+     are NOT ephemeral by default. A local copy of the container is kept and takes up unnecessary
+     storage space. It is a good idea to always use this flag so that the container is removed after
+     running it, unless for some reason you need the container after the specified program has been run.
+
+  -v $PWD:/data
+     The -v flag mounts a volume between your local machine and the Docker container. This specific
+     command mounts the present working directory to the /data directory within the Docker container,
+     which makes the files on your local machine accesible to the container. You can change these
+     paths to meet the needs of your system, however it is a good idea to have a working directory
+     in each of the containers, and thus each container contains the /data directory for such purpose.
+     
+  -u $(id -u):$(id -g)
+     By default, when Docker containers are run, they are run as the root user. This can be problematic
+     because any files created from within the container will have root permissions/ownership and
+     the local user will not be able to do much with them. The -u flag sets the container's user and group 
+     based on the user and group.
+```
