@@ -23,7 +23,10 @@ RUN apt-get update && apt-get install -y zlib1g-dev \
   perl \
   python \
   python-setuptools \
-  python-matplotlib && apt-get clean && apt-get autoclean
+  python-matplotlib \
+  python-pip && apt-get clean && apt-get autoclean
+
+RUN python -m pip install -U pip && python -m pip install -U matplotlib
 
 RUN wget https://downloads.sourceforge.net/project/quast/quast-5.0.0.tar.gz && tar -xzf quast-5.0.0.tar.gz && rm -r quast-5.0.0.tar.gz
 RUN cd /quast-5.0.0 && /quast-5.0.0/setup.py install
