@@ -17,5 +17,6 @@ RUN apt-get update && apt-get -y install wget && apt-get clean && apt-get autocl
 
 RUN wget https://github.com/marbl/Mash/releases/download/v2.0/mash-Linux64-v2.0.tar && tar -xvf mash-Linux64-v2.0.tar && mkdir /data
 ENV PATH="/mash-Linux64-v2.0:${PATH}"
+WORKDIR /data
 
 COPY RefSeqSketchesDefaults.msh /RefSeqSketchesDefaults.msh
