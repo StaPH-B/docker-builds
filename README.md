@@ -15,7 +15,7 @@ If you would like to contribute with your own Docker image or perhaps improve up
 | [Kraken](https://hub.docker.com/r/staphb/kraken-v1.0/) | 1.0 | https://github.com/DerrickWood/kraken |
 | [SPAdes](https://hub.docker.com/r/staphb/spades-v3.12/) | 3.12.0 | http://cab.spbu.ru/software/spades/ |
 | [QUAST](https://hub.docker.com/r/staphb/quast-v5.0.0/) | 5.0.0 | https://github.com/ablab/quast |
-| [Mash](https://hub.docker.com/r/staphb/mash/) | 2.0 | https://github.com/marbl/Mash |
+| [Mash](https://hub.docker.com/r/staphb/mash/) | 2.1 | https://github.com/marbl/Mash |
 | [SerotypeFinder](https://hub.docker.com/r/staphb/serotypefinder-v1.1/) | 1.1 | https://bitbucket.org/genomicepidemiology/serotypefinder/ |
 | [SeqSero](https://hub.docker.com/r/staphb/seqsero-v1.0.1/) | 1.0.1 | https://github.com/denglab/SeqSero |
 | [SISTR](https://hub.docker.com/r/staphb/sistr-v1.0.2/) | 1.0.2 | https://github.com/peterk87/sistr_cmd |
