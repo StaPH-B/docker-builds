@@ -13,14 +13,17 @@ LABEL license="https://github.com/marbl/Mash/blob/master/LICENSE.txt"
 MAINTAINER Curtis Kapsak <curtis.kapsak@state.co.us>
 
 # install dependencies
-RUN apt-get update && apt-get -y install wget && apt-get clean && apt-get autoclean
+RUN apt-get update && \
+    apt-get -y install wget && \
+    apt-get clean
 
 RUN wget https://github.com/marbl/Mash/releases/download/v2.1/mash-Linux64-v2.1.tar && \
   tar -xvf mash-Linux64-v2.1.tar && \
   rm -rf mash-Linux64-v2.1.tar && \
-  mkdir /data
+  mkdir /data && \
+  mkdir /db
 
 ENV PATH="${PATH}:/mash-Linux64-v2.1"
-WORKDIR /data
 
-COPY RefSeqSketchesDefaults.msh /RefSeqSketchesDefaults.msh
+COPY RefSeqSketchesDefaults.msh /db/RefSeqSketchesDefaults.msh
+WORKDIR /data
