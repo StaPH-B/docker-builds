@@ -62,7 +62,7 @@ Status: Downloaded newer image for staphb/spades-v3.12:latest
 ```
 ...meaning the image has been built on your machine and is ready for use. No further installation required!
 
-Each time you use the `docker run` command, brand new Docker containers are then spun up, and will run the program of choice on files located on your machine locally. Most containers should be run using this command:
+Each time you use the `docker run` command, a brand new Docker container is then spun up, and will run the program of choice on files located on your machine locally. Most containers should be run using this command:
 ```
 docker run --rm=True -v $PWD:/data -u $(id -u):$(id -g) staphb/<name-of-docker-image>:latest <command> <--flags --go --here>
 
@@ -92,19 +92,55 @@ docker run --rm=True -v $PWD:/data -u $(id -u):$(id -g) staphb/spades-v3.12:late
      the local user will not be able to do much with them. The -u flag sets the container's user and group 
      based on the user and group from the local machine, resulting in the correct file ownership.
 ```
-### `$SHELL` within containers
-Due to the way that these containers were built (built using the base `ubuntu:xenial` Docker image), the `$SHELL` that is used by the Docker container is `/bin/sh` and not `/bin/bash` or BASH shell that Ubuntu users are used to. This can cause for problems such as wildcard expansion, where a wildcard present in a command like so:
+### `$SHELL` within containers and wildcards
+Due to the way that these containers were built (built using the base `ubuntu:xenial` Docker image) and the way the docker daemon operates, the `$SHELL` that is used by the Docker container is `/bin/sh` and not `/bin/bash` or BASH shell that Ubuntu users are used to. This can cause for problems such as wildcard expansion, where a wildcard present in a command like so:
 ```
-# Run Roary on a directory containing multiple annotated genome files (.GFF)
+# Run Roary on a directory containing multiple annotated genome files (.GFF) to generate pangenome
 docker run --rm=True -v $PWD:/data -u $(id -u):$(id -g) staphb/roary-3.12.0:latest \
   roary -p 8 -e -n -v -f /data/roary-output/ /data/*.gff
   
 # results in the following output, due to the /bin/sh interpreting /data/*.gff literally as one file
 2018/10/31 21:19:43 Error: You need to provide at least 2 files to build a pan genome
 ```
-The solution to this problem is to first call the `/bin/bash -cl` shell when performing the `docker run` command, and to place the command for the specific program within single quotes:
+The solution to this problem is to first call the `/bin/bash -c` shell when performing the `docker run` command, and to place the command for the specific program within single quotes:
 ```
 # solution
-docker run --rm=True -v $PWD:/data -u $(id -u):$(id -g) staphb/roary-3.12.0:latest /bin/bash -cl 'roary -p 8 -e -n -v -f /data/roary-output/ /data/*.gff'
+docker run --rm=True -v $PWD:/data -u $(id -u):$(id -g) staphb/roary-3.12.0:latest /bin/bash -c \
+  'roary -p 8 -e -n -v -f /data/roary-output/ /data/*.gff'
 ```
 This way when the container runs, it will use the bash shell to run Roary, and will expand the wildcard to include all gff files within the `/data` directory.
+
+### Passing variables into containers
+More detailed info: https://docs.docker.com/edge/engine/reference/commandline/run/#set-environment-variables--e---env---env-file
+
+If you're like me, and would like to incorporate Docker images/containers to run as part of a script, containers need to be able to accept environmental variables (set within the bash script I use to string together all of these containers). Thankfully Docker has an easy way to pass variables so that the container $SHELL will recognize them.
+
+You can use the `-e`, `--env` (equivalent flags), or `--env-file [ENV-FILE.LIST]` to pass environment variables set by your bash script into the docker container when it is run.
+
+MyScript.sh
+```
+#!/bin/bash
+# set the variables
+variable1=isolate1
+variable2=isolate2
+
+# export them to make the variables global
+export variable1
+export variable2
+
+# pass them into the container
+docker run --env variable1 --env variable2 staphb/roary-3.12.0:latest /bin/bash -c \
+  'roary -p 8 -e -n -v -f /data/roary-output/ /data/${variable1}.gff /data/${variable2}.gff'
+```
+#### NOTE: Passing variables to docker container not necessary if you don't call `/bin/bash -c`
+For example, if you are running the following command which contains a variable and does NOT call the `/bin/bash` shell, there is no need to pass a variable in with `-e` or `--env`. The following command will recognize the variable, since no new shell is called when run.
+```
+#!/bin/bash
+# set the variable, no need to export
+variable1=isolate1
+variable2=isolate2
+# run the container without calling the /bin/bash shell, no single quotes around roary command
+docker run --rm=True -v $PWD:/data -u $(id -u):$(id -g) staphb/roary-3.12.0:latest \
+  roary -p 8 -e -n -v -f /data/roary-output/ /data/${variable1}.gff /data/${variable2}.gff
+```
+
