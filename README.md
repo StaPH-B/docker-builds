@@ -24,8 +24,9 @@ If you would like to contribute with your own Docker image or perhaps improve up
 | [Trimmomatic](https://hub.docker.com/r/staphb/trimmomatic/) | 0.38 | http://www.usadellab.org/cms/?page=trimmomatic |
 | [iqtree](https://hub.docker.com/r/staphb/iqtree/) | 1.6.7 | http://www.iqtree.org/ |
 | [Unicycler](https://hub.docker.com/r/staphb/unicycler/) | 0.4.7 | https://github.com/rrwick/Unicycler |
-| [Canu-Racon](https://hub.docker.com/r/staphb/canu-racon/) | 1.7.1 (Canu) | https://canu.readthedocs.io/en/latest/ |
+| [Canu-Racon](https://hub.docker.com/r/staphb/canu-racon/) | 1.7.1 (Canu) 1.3.1 (Racon) 2.13 (minimap2) | https://canu.readthedocs.io/en/latest/ https://github.com/isovic/racon https://lh3.github.io/minimap2/ |
 |[Roary](https://hub.docker.com/r/staphb/roary/) | 3.12.0 | https://github.com/sanger-pathogens/Roary |
+|[CDC-SPN](https://github.com/BenJamesMetcalf/Spn_Scripts_Reference) | 0.1 (no version) | https://github.com/BenJamesMetcalf/Spn_Scripts_Reference |
 
 ## Download Docker images
 You can view the list of images on Docker hub here: https://hub.docker.com/r/staphb/
@@ -72,7 +73,7 @@ docker run --rm=True -v $PWD:/data -u $(id -u):$(id -g) staphb/<name-of-docker-i
 
 # example: SPAdes
 docker run --rm=True -v $PWD:/data -u $(id -u):$(id -g) staphb/spades:3.12.0 \
-    spades.py --pe1-12 /data/trimmed-reads.fastq.gz -o /data/docker-spades-output 
+    spades.py --pe1-12 /data/trimmed-reads.fastq.gz -o /data/docker-spades-output
 ```
 ```
 # explanation
@@ -89,20 +90,23 @@ docker run --rm=True -v $PWD:/data -u $(id -u):$(id -g) staphb/spades:3.12.0 \
      which makes the files on your local machine accesible to the container. You can change these
      paths to meet the needs of your system, however it is a good idea to have a working directory
      in each of the containers, and thus each container contains the /data directory for such purpose.
-     
+
   -u $(id -u):$(id -g)
      By default, when Docker containers are run, they are run as the root user. This can be problematic
      because any files created from within the container will have root permissions/ownership and
-     the local user will not be able to do much with them. The -u flag sets the container's user and group 
+     the local user will not be able to do much with them. The -u flag sets the container's user and group
      based on the user and group from the local machine, resulting in the correct file ownership.
 ```
+
+Containers can also be run in an interactive mode allowing you to execute commands and access the file system within the docker container. To run containers in this mode simply add the `-it` flag to the `docker run` command. This instructs Docker to allocate a pseudo-TTY connected to the container’s stdin; creating an interactive bash shell in the container. You can exit this mode using the `exit` command which shuts down the running container.
+
 ### `$SHELL` within containers and wildcards
 Due to the way that these containers were built (built using the base `ubuntu:xenial` Docker image) and the way the docker daemon operates, the `$SHELL` that is used by the Docker container is `/bin/sh` and not `/bin/bash` or BASH shell that Ubuntu users are used to. This can cause for problems such as wildcard expansion, where a wildcard present in a command like so:
 ```
 # Run Roary on a directory containing multiple annotated genome files (.GFF) to generate pangenome
 docker run --rm=True -v $PWD:/data -u $(id -u):$(id -g) staphb/roary:3.12.0 \
   roary -p 8 -e -n -v -f /data/roary-output/ /data/*.gff
-  
+
 # results in the following output, due to the /bin/sh interpreting /data/*.gff literally as one file
 2018/10/31 21:19:43 Error: You need to provide at least 2 files to build a pan genome
 ```
@@ -147,4 +151,3 @@ variable2=isolate2
 docker run --rm=True -v $PWD:/data -u $(id -u):$(id -g) staphb/roary:3.12.0 \
   roary -p 8 -e -n -v -f /data/roary-output/ /data/${variable1}.gff /data/${variable2}.gff
 ```
-
