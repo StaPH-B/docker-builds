@@ -34,6 +34,12 @@ RUN curl -O https://capnproto.org/capnproto-c++-0.6.1.tar.gz;\
  make -j6 check;\
  make install
 
+# make database directory, store mash db there
+RUN mkdir /db && \
+  cd /db && \
+  wget https://gembox.cbcb.umd.edu/mash/RefSeqSketchesDefaults.msh.gz && \
+  gunzip RefSeqSketchesDefaults.msh.gz
+
 RUN wget https://github.com/marbl/Mash/archive/v2.1.tar.gz && \
   tar -xvf v2.1.tar.gz;\
   rm -rf v2.1.tar.gz;\
@@ -45,5 +51,6 @@ RUN wget https://github.com/marbl/Mash/archive/v2.1.tar.gz && \
   mkdir /data;\
   mkdir /db
 
-COPY RefSeqSketchesDefaults.msh /db/RefSeqSketchesDefaults.msh
 WORKDIR /data
+
+# path to Mash RefSeq k=21 s=1000 sketches database: /db/RefSeqSketchesDefaults.msh
