@@ -48,8 +48,7 @@ RUN wget https://github.com/marbl/Mash/archive/v2.1.tar.gz && \
   ./configure;\
   make;\
   make install;\
-  mkdir /data;\
-  mkdir /db
+  mkdir /data
 
 WORKDIR /data
 
