@@ -44,14 +44,16 @@ RUN wget https://github.com/lskatz/lyve-SET/archive/v2.0.1.tar.gz
 RUN tar -xzvf v2.0.1.tar.gz;rm v2.0.1.tar.gz;mv lyve-SET-2.0.1 lyve-SET
 
 #setup the lyveset filesystem
-RUN cpan Test::Most
-RUN cpan Bio::FeatureIO
-RUN cpan String::Escape
+RUN cpan Test::Most\
+         Bio::FeatureIO\
+         String::Escape
 RUN make -C /lyve-SET install -e PREFIX=/lyve-SET
-RUN make -C /lyve-SET env -e PREFIX=/lyve-SET
+RUN make -C /lyve-SET env -e PREFIX=/lyve-SET && \
+    mkdir /data
 
 
 ENV PATH="/lyve-SET:\
 /lyve-SET/scripts:\
 /edirect:\
 ${PATH}"
+WORKDIR /data
