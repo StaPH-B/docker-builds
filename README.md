@@ -11,12 +11,12 @@ If you would like to contribute with your own Docker image or perhaps improve up
 | Software | Version | Link |
 | -------- | ------- | -------- |
 | [SRA-toolkit](https://hub.docker.com/r/staphb/sratoolkit/) | 2.9.2 | https://github.com/ncbi/sra-tools |
-| [Lyve-SET (includes CG-Pipeline scripts and raxml)](https://hub.docker.com/r/staphb/lyveset/) | 2.0.1 (lyve-SET) | https://github.com/lskatz/lyve-SET https://github.com/lskatz/CG-Pipeline |
+| [Lyve-SET (includes CG-Pipeline scripts and raxml)](https://hub.docker.com/r/staphb/lyveset/) | 1.1.4f, 2.0.1 (lyve-SET) | https://github.com/lskatz/lyve-SET https://github.com/lskatz/CG-Pipeline |
 | [Kraken](https://hub.docker.com/r/staphb/kraken/) | 1.0 | https://github.com/DerrickWood/kraken |
 | [SPAdes](https://hub.docker.com/r/staphb/spades/) | 3.12.0 | http://cab.spbu.ru/software/spades/ |
 | [QUAST](https://hub.docker.com/r/staphb/quast/) | 5.0.0 | https://github.com/ablab/quast |
 | [Mash](https://hub.docker.com/r/staphb/mash/) | 2.1 | https://github.com/marbl/Mash |
-| [SerotypeFinder](https://hub.docker.com/r/staphb/serotypefinder/) | 1.1 | https://bitbucket.org/genomicepidemiology/serotypefinder/ |
+| [SerotypeFinder](https://hub.docker.com/r/staphb/serotypefinder/) | 1.1 (I think? Bitbucket repo does not list older versions like the one in this docker image) | https://bitbucket.org/genomicepidemiology/serotypefinder/ |
 | [SeqSero](https://hub.docker.com/r/staphb/seqsero/) | 1.0.1 | https://github.com/denglab/SeqSero |
 | [SISTR](https://hub.docker.com/r/staphb/sistr/) | 1.0.2 | https://github.com/peterk87/sistr_cmd |
 | [ABRicate](https://hub.docker.com/r/staphb/abricate/) | 0.8.7 | https://github.com/tseemann/abricate |
@@ -26,7 +26,7 @@ If you would like to contribute with your own Docker image or perhaps improve up
 | [Unicycler](https://hub.docker.com/r/staphb/unicycler/) | 0.4.7 | https://github.com/rrwick/Unicycler |
 | [Canu-Racon](https://hub.docker.com/r/staphb/canu-racon/) | 1.7.1 (Canu) 1.3.1 (Racon) 2.13 (minimap2) | https://canu.readthedocs.io/en/latest/ https://github.com/isovic/racon https://lh3.github.io/minimap2/ |
 |[Roary](https://hub.docker.com/r/staphb/roary/) | 3.12.0 | https://github.com/sanger-pathogens/Roary |
-|[CDC-SPN](https://github.com/BenJamesMetcalf/Spn_Scripts_Reference) | 0.1 (no version) | https://github.com/BenJamesMetcalf/Spn_Scripts_Reference |
+|[CDC-SPN](https://hub.docker.com/r/staphb/cdc-spn/) | 0.1 (no version) | https://github.com/BenJamesMetcalf/Spn_Scripts_Reference |
 
 ## Download Docker images
 You can view the list of images on Docker hub here: https://hub.docker.com/r/staphb/
@@ -48,7 +48,7 @@ docker pull staphb/spades:3.12.0
 ```
 NOTE: Each container will have a different docker image `tag` that is named after the version of the main program within the docker image. You can view the available tags for each docker image on the docker hub repo page under the 'tag' tab.
 
-The `latest` tag is usually the default tag associated with the latest version of the Docker image, however we have specified these image tags to be named after the version of the program. Check the "Tags" tab on the docker hub repo to see what tag was used to build the image originally.
+The `latest` tag is usually the default tag associated with the latest version of the Docker image, however we have specified these image tags to be named after the version of the program. Downloading one of these docker images with the "latest" tag will download the latest version of the program we have available. Check the "Tags" tab on the docker hub repo to see what tag was used to build the image originally.
 
 ## Usage of Docker containers
 I (Curtis) typically run Docker containers on an Ubuntu OS, but I believe the Docker commands will be the same for all operating systems (MacOS and Windows).
@@ -123,7 +123,7 @@ More detailed info: https://docs.docker.com/edge/engine/reference/commandline/ru
 
 If you're like me, and would like to incorporate Docker images/containers to run as part of a script, containers need to be able to accept environmental variables (set within the bash script I use to string together all of these containers). Thankfully Docker has an easy way to pass variables so that the container $SHELL will recognize them.
 
-You can use the `-e`, `--env` (equivalent flags), or `--env-file [ENV-FILE.LIST]` to pass environment variables set by your bash script into the docker container when it is run.
+You can use the `-e <variable>`, `--env <variable>` (equivalent flags), or `--env-file <ENV-FILE.LIST>` to pass environment variables set by your bash script into the docker container when it is run.
 
 MyScript.sh
 ```
@@ -141,7 +141,7 @@ docker run --env variable1 --env variable2 staphb/roary:3.12.0 /bin/bash -c \
   'roary -p 8 -e -n -v -f /data/roary-output/ /data/${variable1}.gff /data/${variable2}.gff'
 ```
 #### NOTE: Passing variables to docker container not necessary if you don't call `/bin/bash -c`
-For example, if you are running the following command which contains a variable and does NOT call the `/bin/bash` shell, there is no need to pass a variable in with `-e` or `--env`. The following command will recognize the variable, since no new shell is called when run.
+For example, if you are running the following command which contains a variable and does NOT call the `/bin/bash` shell, there is no need to pass a variable in with `-e <variable>` or `--env <variable>`. The following command will recognize the variable, since no new shell is called when run.
 ```
 #!/bin/bash
 # set the variable, no need to export
