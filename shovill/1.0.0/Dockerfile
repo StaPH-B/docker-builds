@@ -18,7 +18,16 @@ RUN apt-get update && apt-get install -y python \
   make \
   gcc \
   g++ \
-  libpthread-stubs0-dev 
+  libpthread-stubs0-dev \
+  openjdk-9-jre \
+  unzip \
+  bzip2 \
+  libncurses5-dev \
+  libbz2-dev \
+  liblzma-dev \
+  libcurl4-gnutls-dev \
+  libssl-dev \
+  libfindbin-libs-perl
 
 # get spades, unpack, remove tarball
 RUN mkdir spades &&\
@@ -54,6 +63,83 @@ RUN wget https://github.com/mourisl/Lighter/archive/v1.1.1.tar.gz &&\
   cd Lighter-1.1.1 &&\
   make
 
+# install trimmomatic
+# trimmomatic-0.38.jar in $PATH, but to need to prefix with:
+# java -jar trimmomatic-0.38.jar [TRIMMOMATIC OPTIONS]
+RUN mkdir trimmomatic &&\
+  cd trimmomatic &&\
+  wget http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-0.38.zip &&\
+  unzip Trimmomatic-0.38.zip &&\
+  rm -rf Trimmomatic-0.38.zip &&\
+  chmod +x Trimmomatic-0.38/trimmomatic-0.38.jar
+
+# install bwa (mem)
+RUN mkdir bwa &&\
+  cd bwa &&\
+  wget https://github.com/lh3/bwa/releases/download/v0.7.17/bwa-0.7.17.tar.bz2 &&\
+  tar -xjf bwa-0.7.17.tar.bz2 &&\
+  rm bwa-0.7.17.tar.bz2 &&\
+  cd bwa-0.7.17 &&\
+  make
+
+# install samtools 
+RUN mkdir samtools &&\
+  cd samtools &&\
+  wget https://github.com/samtools/samtools/releases/download/1.9/samtools-1.9.tar.bz2 &&\
+  tar -xjf samtools-1.9.tar.bz2 &&\
+  rm samtools-1.9.tar.bz2 &&\
+  cd samtools-1.9 &&\
+  ./configure &&\
+  make &&\
+  make install
+
+# install skesa binary?(I think?)
+# must be run using the following syntax:
+# [docker run] skesa.centos6.10 [SKESA OPTIONS]
+RUN mkdir skesa &&\
+  cd skesa &&\
+  wget https://github.com/ncbi/SKESA/releases/download/v2.3.0/skesa.centos6.10 &&\
+  chmod +x skesa.centos6.10
+
+# install MEGAHIT binary (I'm pretty sure these are binaries at this point)
+RUN mkdir megahit &&\
+  cd megahit &&\
+  wget https://github.com/voutcn/megahit/releases/download/v1.1.4/megahit_v1.1.4_LINUX_CPUONLY_x86_64-bin.tar.gz &&\
+  tar -xzf megahit_v1.1.4_LINUX_CPUONLY_x86_64-bin.tar.gz &&\
+  rm megahit_v1.1.4_LINUX_CPUONLY_x86_64-bin.tar.gz
+
+# install Velvet
+RUN mkdir velvet &&\
+  cd velvet &&\
+  wget https://github.com/dzerbino/velvet/archive/v1.2.10.tar.gz &&\
+  tar -xzf v1.2.10.tar.gz &&\
+  cd velvet-1.2.10 &&\
+  make
+
+# install Flash
+RUN mkdir flash &&\
+  cd flash &&\
+  wget https://sourceforge.net/projects/flashpage/files/FLASH-1.2.11.tar.gz &&\
+  tar -zxf FLASH-1.2.11.tar.gz &&\
+  cd FLASH-1.2.11 &&\
+  make
+
+# install pilon binary
+# must be run using this syntax:
+# [docker run] java -jar /pilon/pilon-1.22.jar [PILON OPTONS]
+RUN mkdir pilon &&\
+  cd pilon &&\
+  wget https://github.com/broadinstitute/pilon/releases/download/v1.22/pilon-1.22.jar &&\
+  chmod +x pilon-1.22.jar
+
+# aaannnddd finally install shovill v1.0.0 itself, check dependencies 
+# extra perl module I had to install via apt-get: libfindbin-libs-perl
+RUN mkdir shovill &&\
+  cd shovill &&\
+  wget https://github.com/tseemann/shovill/archive/v1.0.0.tar.gz &&\
+  tar -xzf v1.0.0.tar.gz &&\
+  rm v1.0.0.tar.gz 
+
 # create /data directory and set as working directory
 RUN mkdir /data
 WORKDIR /data
@@ -62,4 +148,15 @@ WORKDIR /data
 ENV PATH="${PATH}:\
 /spades/SPAdes-3.12.0-Linux/bin:\
 /mash-Linux64-v2.1:\
-/Lighter-1.1.1"
+/Lighter-1.1.1:\
+/trimmomatic/Trimmomatic-0.38:\
+/bwa/bwa-0.7.17:\
+/skesa:\
+/megahit/megahit_v1.1.4_LINUX_CPUONLY_x86_64-bin:\
+/velvet/velvet-1.2.10:\
+/flash/FLASH-1.2.11:\
+/shovill/shovill-1.0.0/bin"
+
+# Doing this because setting the path above wouldn't work. Shovill calls the literal
+# name pilon and pilon has to be called via java
+ENV pilon='$java -jar /pilon/pilon-1.22.jar'
