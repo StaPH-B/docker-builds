@@ -72,7 +72,7 @@ RUN mkdir trimmomatic &&\
   rm -rf Trimmomatic-0.38.zip &&\
   chmod +x Trimmomatic-0.38/trimmomatic-0.38.jar &&\
   echo "#!/bin/bash" >> trimmomatic &&\
-  echo "exec java -Xmx29G -jar /trimmomatic/Trimmomatic-0.38/trimmomatic-0.38.jar """"$""@"""" " >> trimmomatic &&\
+  echo "exec java -jar /trimmomatic/Trimmomatic-0.38/trimmomatic-0.38.jar """"$""@"""" " >> trimmomatic &&\
   chmod +x trimmomatic
 
 # install bwa (mem)
@@ -133,7 +133,7 @@ RUN mkdir pilon &&\
   wget https://github.com/broadinstitute/pilon/releases/download/v1.22/pilon-1.22.jar &&\
   chmod +x pilon-1.22.jar &&\
   echo "#!/bin/bash" >> pilon &&\
-  echo "exec java -Xmx29G -jar /pilon/pilon-1.22.jar """"$""@"""" " >> pilon &&\
+  echo "exec java -jar /pilon/pilon-1.22.jar """"$""@"""" " >> pilon &&\
   chmod +x pilon
 
 # Samclip
@@ -168,6 +168,3 @@ ENV PATH="${PATH}:\
 /shovill/shovill-1.0.4/bin:\
 /pilon:\
 /samclip"
-
-# check dependencies
-RUN shovill --check
