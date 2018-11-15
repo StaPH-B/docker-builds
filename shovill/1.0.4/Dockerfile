@@ -4,11 +4,11 @@ FROM ubuntu:xenial
 LABEL base.image="ubuntu:xenial"
 LABEL version="1"
 LABEL software="Shovill"
-LABEL software.version="1.0.0"
-LABEL description="faster than SPAdes de novo DBG genome assembler"
+LABEL software.version="1.0.4"
+LABEL description="faster than SPAdes de novo DBG genome assembler (with assembler options!)"
 LABEL website="https://github.com/tseemann/shovill"
+LABEL lisence="https://github.com/tseemann/shovill/blob/master/LICENSE"
 
-# Maintainer
 MAINTAINER Curtis Kapsak <curtis.kapsak@state.co.us>
 
 RUN apt-get update && apt-get install -y python \
@@ -46,7 +46,7 @@ RUN mkdir seqtk &&\
   make &&\
   make install
 
-# get Mash and the associated RefSeqSketches k=21 s=1000 database
+# get Mash and the associated RefSeqSketches k=21 s=1000 database. Is db even needed?
 RUN wget https://github.com/marbl/Mash/releases/download/v2.1/mash-Linux64-v2.1.tar && \
   tar -xvf mash-Linux64-v2.1.tar && \
   rm -rf mash-Linux64-v2.1.tar && \
@@ -64,14 +64,15 @@ RUN wget https://github.com/mourisl/Lighter/archive/v1.1.1.tar.gz &&\
   make
 
 # install trimmomatic
-# trimmomatic-0.38.jar in $PATH, but to need to prefix with:
-# java -jar trimmomatic-0.38.jar [TRIMMOMATIC OPTIONS]
 RUN mkdir trimmomatic &&\
   cd trimmomatic &&\
   wget http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-0.38.zip &&\
   unzip Trimmomatic-0.38.zip &&\
   rm -rf Trimmomatic-0.38.zip &&\
-  chmod +x Trimmomatic-0.38/trimmomatic-0.38.jar
+  chmod +x Trimmomatic-0.38/trimmomatic-0.38.jar &&\
+  echo "#!/bin/bash" >> trimmomatic &&\
+  echo "exec java -Xmx29G -jar /trimmomatic/Trimmomatic-0.38/trimmomatic-0.38.jar """"$""@"""" " >> trimmomatic &&\
+  chmod +x trimmomatic
 
 # install bwa (mem)
 RUN mkdir bwa &&\
@@ -94,12 +95,11 @@ RUN mkdir samtools &&\
   make install
 
 # install skesa binary?(I think?)
-# must be run using the following syntax:
-# [docker run] skesa.centos6.10 [SKESA OPTIONS]
 RUN mkdir skesa &&\
   cd skesa &&\
   wget https://github.com/ncbi/SKESA/releases/download/v2.3.0/skesa.centos6.10 &&\
-  chmod +x skesa.centos6.10
+  mv skesa.centos6.10 skesa &&\
+  chmod +x skesa
 
 # install MEGAHIT binary (I'm pretty sure these are binaries at this point)
 RUN mkdir megahit &&\
@@ -113,6 +113,7 @@ RUN mkdir velvet &&\
   cd velvet &&\
   wget https://github.com/dzerbino/velvet/archive/v1.2.10.tar.gz &&\
   tar -xzf v1.2.10.tar.gz &&\
+  rm -rf v1.2.10.tar.gz &&\
   cd velvet-1.2.10 &&\
   make
 
@@ -121,42 +122,51 @@ RUN mkdir flash &&\
   cd flash &&\
   wget https://sourceforge.net/projects/flashpage/files/FLASH-1.2.11.tar.gz &&\
   tar -zxf FLASH-1.2.11.tar.gz &&\
+  rm -rf FLASH-1.2.11.tar.gz &&\
   cd FLASH-1.2.11 &&\
   make
 
 # install pilon binary
-# must be run using this syntax:
-# [docker run] java -jar /pilon/pilon-1.22.jar [PILON OPTONS]
 RUN mkdir pilon &&\
   cd pilon &&\
   wget https://github.com/broadinstitute/pilon/releases/download/v1.22/pilon-1.22.jar &&\
-  chmod +x pilon-1.22.jar
+  chmod +x pilon-1.22.jar &&\
+  echo "#!/bin/bash" >> pilon &&\
+  echo "exec java -Xmx29G -jar /pilon/pilon-1.22.jar """"$""@"""" " >> pilon &&\
+  chmod +x pilon
 
-# aaannnddd finally install shovill v1.0.0 itself, check dependencies 
+# Samclip
+RUN mkdir samclip &&\
+  cd samclip &&\
+  wget https://raw.githubusercontent.com/tseemann/samclip/master/samclip &&\
+  chmod +x samclip
+
+# aaannnddd finally install shovill v1.0.4 itself
 # extra perl module I had to install via apt-get: libfindbin-libs-perl
 RUN mkdir shovill &&\
   cd shovill &&\
-  wget https://github.com/tseemann/shovill/archive/v1.0.0.tar.gz &&\
-  tar -xzf v1.0.0.tar.gz &&\
-  rm v1.0.0.tar.gz 
+  wget https://github.com/tseemann/shovill/archive/v1.0.4.tar.gz &&\
+  tar -xzf v1.0.4.tar.gz &&\
+  rm v1.0.4.tar.gz
 
 # create /data directory and set as working directory
 RUN mkdir /data
 WORKDIR /data
 
-# set $PATH
+# set $PATH's
 ENV PATH="${PATH}:\
 /spades/SPAdes-3.12.0-Linux/bin:\
 /mash-Linux64-v2.1:\
 /Lighter-1.1.1:\
-/trimmomatic/Trimmomatic-0.38:\
+/trimmomatic:\
 /bwa/bwa-0.7.17:\
 /skesa:\
 /megahit/megahit_v1.1.4_LINUX_CPUONLY_x86_64-bin:\
 /velvet/velvet-1.2.10:\
 /flash/FLASH-1.2.11:\
-/shovill/shovill-1.0.0/bin"
+/shovill/shovill-1.0.4/bin:\
+/pilon:\
+/samclip"
 
-# Doing this because setting the path above wouldn't work. Shovill calls the literal
-# name pilon and pilon has to be called via java
-ENV pilon='$java -jar /pilon/pilon-1.22.jar'
+# check dependencies
+RUN shovill --check
