@@ -49,12 +49,13 @@ RUN mkdir seqtk &&\
 # get Mash and the associated RefSeqSketches k=21 s=1000 database. Is db even needed?
 RUN wget https://github.com/marbl/Mash/releases/download/v2.1/mash-Linux64-v2.1.tar && \
   tar -xvf mash-Linux64-v2.1.tar && \
-  rm -rf mash-Linux64-v2.1.tar && \
-  # make database directory, store mash db there
-  mkdir /db && \
-  cd /db && \
-  wget https://gembox.cbcb.umd.edu/mash/RefSeqSketchesDefaults.msh.gz && \
-  gunzip RefSeqSketchesDefaults.msh.gz
+  rm -rf mash-Linux64-v2.1.tar
+  #### Commented out because I don't think the Mash database is needed
+  #make database directory, store mash db there
+  #mkdir /db && \
+  #cd /db && \
+  #wget https://gembox.cbcb.umd.edu/mash/RefSeqSketchesDefaults.msh.gz && \
+  #gunzip RefSeqSketchesDefaults.msh.gz
 
 # install lighter 1.1.1
 RUN wget https://github.com/mourisl/Lighter/archive/v1.1.1.tar.gz &&\
