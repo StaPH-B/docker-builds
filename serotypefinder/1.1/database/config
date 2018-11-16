@@ -1,0 +1,6 @@
+# Database configuration file - Describes the content of the database
+# Each db consist of 1 file(s) with the following extensions: fsa
+# Other important files are: notes.txt
+#db_prefix	name	description
+H_type	H_type	Database for H type genes
+O_type	O_type	Database for O type genes

@@ -21,9 +21,12 @@ RUN wget https://github.com/marbl/Mash/releases/download/v2.1/mash-Linux64-v2.1.
   tar -xvf mash-Linux64-v2.1.tar && \
   rm -rf mash-Linux64-v2.1.tar && \
   mkdir /data && \
-  mkdir /db
+  # make database directory, store mash db there
+  mkdir /db && \
+  cd /db && \
+  wget https://gembox.cbcb.umd.edu/mash/RefSeqSketchesDefaults.msh.gz && \
+  gunzip RefSeqSketchesDefaults.msh.gz
 
 ENV PATH="${PATH}:/mash-Linux64-v2.1"
 
-COPY RefSeqSketchesDefaults.msh /db/RefSeqSketchesDefaults.msh
 WORKDIR /data

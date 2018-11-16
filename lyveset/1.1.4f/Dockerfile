@@ -5,7 +5,7 @@ FROM ubuntu:xenial
 LABEL base.image="ubuntu:xenial"
 LABEL version="1"
 LABEL software="Lyve-SET"
-LABEL software.version="2.0.1"
+LABEL software.version="1.1.4f"
 LABEL description="LYVE-SET, a method of using hqSNPs to create a phylogeny, especially for outbreak investigations"
 LABEL website="https://github.com/lskatz/lyve-SET"
 LABEL license="https://github.com/lskatz/lyve-SET/blob/master/LICENSE"
@@ -44,16 +44,16 @@ RUN wget https://github.com/lskatz/lyve-SET/archive/v2.0.1.tar.gz
 RUN tar -xzvf v2.0.1.tar.gz;rm v2.0.1.tar.gz;mv lyve-SET-2.0.1 lyve-SET
 
 #setup the lyveset filesystem
-RUN cpan Test::Most\
-         Bio::FeatureIO\
-         String::Escape
+RUN cpan Test::Most
+RUN cpan Bio::FeatureIO
+RUN cpan String::Escape
+RUN cpan File::Slurp
+RUN cpan URI::Escape
 RUN make -C /lyve-SET install -e PREFIX=/lyve-SET
-RUN make -C /lyve-SET env -e PREFIX=/lyve-SET && \
-    mkdir /data
+RUN make -C /lyve-SET env -e PREFIX=/lyve-SET
 
 
 ENV PATH="/lyve-SET:\
 /lyve-SET/scripts:\
 /edirect:\
 ${PATH}"
-WORKDIR /data
