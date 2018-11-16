@@ -33,7 +33,7 @@ If you would like to contribute with your own Docker image or perhaps improve up
 You can view the list of images on Docker hub here: https://hub.docker.com/r/staphb/
 
 Docker CE must first be downloaded/installed onto your system. Check that it is installed by running:
-```
+```bash
 docker images
 # or
 docker ps
@@ -103,7 +103,7 @@ Containers can also be run in an interactive mode allowing you to execute comman
 
 ### `$SHELL` within containers and wildcards
 Due to the way that these containers were built (built using the base `ubuntu:xenial` Docker image) and the way the docker daemon operates, the `$SHELL` that is used by the Docker container is `/bin/sh` and not `/bin/bash` or BASH shell that Ubuntu users are used to. This can cause for problems such as wildcard expansion, where a wildcard present in a command like so:
-```
+```bash
 # Run Roary on a directory containing multiple annotated genome files (.GFF) to generate pangenome
 docker run --rm=True -v $PWD:/data -u $(id -u):$(id -g) staphb/roary:3.12.0 \
   roary -p 8 -e -n -v -f /data/roary-output/ /data/*.gff
@@ -112,7 +112,7 @@ docker run --rm=True -v $PWD:/data -u $(id -u):$(id -g) staphb/roary:3.12.0 \
 2018/10/31 21:19:43 Error: You need to provide at least 2 files to build a pan genome
 ```
 The solution to this problem is to first call the `/bin/bash -c` shell when performing the `docker run` command, and to place the command for the specific program within single quotes:
-```
+```bash
 # solution
 docker run --rm=True -v $PWD:/data -u $(id -u):$(id -g) staphb/roary:3.12.0 /bin/bash -c \
   'roary -p 8 -e -n -v -f /data/roary-output/ /data/*.gff'
@@ -127,7 +127,7 @@ If you're like me, and would like to incorporate Docker images/containers to run
 You can use the `-e <variable>`, `--env <variable>` (equivalent flags), or `--env-file <ENV-FILE.LIST>` to pass environment variables set by your bash script into the docker container when it is run.
 
 MyScript.sh
-```
+```bash
 #!/bin/bash
 # set the variables
 variable1=isolate1
@@ -143,7 +143,7 @@ docker run --env variable1 --env variable2 staphb/roary:3.12.0 /bin/bash -c \
 ```
 #### NOTE: Passing variables to docker container not necessary if you don't call `/bin/bash -c`
 For example, if you are running the following command which contains a variable and does NOT call the `/bin/bash` shell, there is no need to pass a variable in with `-e <variable>` or `--env <variable>`. The following command will recognize the variable, since no new shell is called when run.
-```
+```bash
 #!/bin/bash
 # set the variable, no need to export
 variable1=isolate1
