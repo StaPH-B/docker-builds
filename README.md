@@ -13,7 +13,7 @@ If you would like to contribute with your own Docker image or perhaps improve up
 | [SRA-toolkit](https://hub.docker.com/r/staphb/sratoolkit/) | 2.9.2 | https://github.com/ncbi/sra-tools |
 | [Lyve-SET (includes CG-Pipeline scripts and raxml)](https://hub.docker.com/r/staphb/lyveset/) | 1.1.4f, 2.0.1 (lyve-SET) | https://github.com/lskatz/lyve-SET https://github.com/lskatz/CG-Pipeline |
 | [Kraken](https://hub.docker.com/r/staphb/kraken/) | 1.0 | https://github.com/DerrickWood/kraken |
-| [SPAdes](https://hub.docker.com/r/staphb/spades/) | 3.12.0 | http://cab.spbu.ru/software/spades/ |
+| [SPAdes](https://hub.docker.com/r/staphb/spades/) | 3.12.0, 3.13.0 | http://cab.spbu.ru/software/spades/ |
 | [QUAST](https://hub.docker.com/r/staphb/quast/) | 5.0.0 | https://github.com/ablab/quast |
 | [Mash](https://hub.docker.com/r/staphb/mash/) | 2.1 | https://github.com/marbl/Mash |
 | [SerotypeFinder](https://hub.docker.com/r/staphb/serotypefinder/) | 1.1 (I think? Bitbucket repo does not list older versions like the one in this docker image) | https://bitbucket.org/genomicepidemiology/serotypefinder/ |
