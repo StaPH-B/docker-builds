@@ -208,7 +208,7 @@ WORKDIR /data
 
 Once you have a `Dockerfile` created, name it as `Dockerfile` and store it in a empty directory (unless you need files to build the docker image). Note the path to the directory containing your dockerfile. Then, run:
 ```
-docker build --tag your-name-here/name-of-your-program:0.1.0 /path/to/DIR/with/Dockerfile/`
+docker build --tag your-name-here/name-of-your-program:0.1.0 /path/to/DIR/with/Dockerfile/
 
 # OR if you are in the same directory as where the docker file is located:
 docker build --tag your-name-here/name-of-your-program:0.1.0 .
