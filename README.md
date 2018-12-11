@@ -18,7 +18,7 @@ If you would like to contribute with your own Docker image or perhaps improve up
 | [Mash](https://hub.docker.com/r/staphb/mash/) | 2.1 | https://github.com/marbl/Mash |
 | [SerotypeFinder](https://hub.docker.com/r/staphb/serotypefinder/) | 1.1 (I think? Bitbucket repo does not list older versions like the one in this docker image) | https://bitbucket.org/genomicepidemiology/serotypefinder/ |
 | [SeqSero](https://hub.docker.com/r/staphb/seqsero/) | 1.0.1 | https://github.com/denglab/SeqSero |
-| [SeqSero2](https://github.com/denglab/SeqSero2/) | 0.1.0 | https://github.com/denglab/SeqSero2/ |
+| [SeqSero2](https://hub.docker.com/r/staphb/seqsero2/) | 0.1.0 | https://github.com/denglab/SeqSero2/ |
 | [SISTR](https://hub.docker.com/r/staphb/sistr/) | 1.0.2 | https://github.com/peterk87/sistr_cmd |
 | [ABRicate](https://hub.docker.com/r/staphb/abricate/) | 0.8.7 | https://github.com/tseemann/abricate |
 | [Prokka](https://hub.docker.com/r/staphb/prokka/) | 1.13.3 | https://github.com/tseemann/prokka |
