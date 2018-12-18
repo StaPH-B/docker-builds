@@ -3,7 +3,7 @@ FROM ubuntu:xenial
 
 # metadata
 LABEL base.image="ubuntu:xenial"
-LABEL version="1"
+LABEL version="2"
 LABEL software="Prokka"
 LABEL software.version="1.13.3"
 LABEL description="Automated prokaryotic genome annotation tool"
@@ -24,23 +24,35 @@ RUN apt-get update && apt-get -y install \
  libxml-simple-perl \
  libdigest-md5-perl \
  default-jre \
- bioperl && apt-get clean && apt-get autoclean && rm -rf /var/lib/apt/lists/*
+ bioperl \
+ hmmer \
+ bedtools \
+ make && apt-get clean && apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-# Commented out conda install strategy for Prokka, going to install from source
-#RUN wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-#RUN chmod +x Miniconda3-latest-Linux-x86_64.sh
-#RUN ./Miniconda3-latest-Linux-x86_64.sh -b -p /miniconda
-#ENV PATH="/miniconda/bin:$PATH"
-## Configure channels for bioconda
-#RUN conda update -y -n base conda && conda config --add channels conda-forge && conda config --add channels defaults &&  conda config --add channels bioconda
-#RUN conda install -y prokka=1.13 && conda clean -ay
-#ENV PATH="./miniconda/bin/prokka:${PATH}"
+#### bedtools installed via apt-get. It's v2.25 (Sept 2015) but it should still work.
+#### It's too much of a pain to install and compile from source. Ran into problems with gcc/g++
+
+# install bedtools, required for barrnap
+#RUN wget https://github.com/arq5x/bedtools2/releases/download/v2.27.1/bedtools-2.27.1.tar.gz &&\
+#    tar -xzf bedtools-2.27.1.tar.gz &&\
+#    rm bedtools-2.27.1.tar.gz &&\
+#    cd bedtools2/ &&\
+#    make
+
+# install barrnap
+RUN wget https://github.com/tseemann/barrnap/archive/0.9.tar.gz &&\
+    tar -zxf 0.9.tar.gz &&\
+    rm 0.9.tar.gz &&\
+    cd barrnap-0.9 &&\
+    make test
 
 RUN wget https://github.com/tseemann/prokka/archive/v1.13.3.tar.gz && \
- tar -xzf v1.13.3.tar.gz && \
- rm -rf v1.13.3.tar.gz && \
- mkdir /data
+    tar -xzf v1.13.3.tar.gz && \
+    rm -rf v1.13.3.tar.gz && \
+    mkdir /data
 
-ENV PATH="$PATH:/prokka-1.13.3/bin"
+ENV PATH="$PATH:/prokka-1.13.3/bin:\
+/barrnap-0.9/bin"
 
 RUN prokka --setupdb && prokka --listdb
+WORKDIR /data

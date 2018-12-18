@@ -4,6 +4,7 @@ This repo contains the Dockerfiles and other assorted files necessary for buildi
 Each Dockerfile lists author/maintainer for that specific Docker image, but the authors/maintainers of the docker images are:
   * [@kapsakcj](https://github.com/kapsakcj)
   * [@nwflorek](https://github.com/nwflorek)
+  * [@garfinjm](https://github.com/garfinjm)
 
 If you would like to contribute with your own Docker image or perhaps improve upon the existing images, please fork the repository, make your changes/additions, and submit a pull request. If you are having an issue with an existing image, please submit an issue. We welcome any and all feedback! [See more details on how to contribute below.](https://github.com/StaPH-B/docker-auto-builds#Contributing)
 
@@ -166,7 +167,7 @@ Discover a bug or having issues with our images? Do you have a suggestion or adv
 4. Add your Dockerfile (and any other required files required for building) to your forked repository following this convention:
     * The first directory should be the name of the program with special characters removed, and it's preferable to remove uppercase - `/spades`
     * The second directory should be the version number of the program, in X.X.X format - `/spades/3.12.0`
-    * Lastly the Dockerfile and another files required for building (hopefully there are none) belong in the sub-directory - `/spades/3.12.0/Dockerfile` and `/spades/3.12.0/some-other-file-needed-for-building.txt`
+    * Lastly the Dockerfile and any other files required for building (hopefully there are none) belong in the sub-directory - `/spades/3.12.0/Dockerfile` and `/spades/3.12.0/some-other-file-needed-for-building.txt`
     * NOTE: Note that there is a file size limit for github (I believe 100MB/file), so if you have a program with a huge database or file of some kind -  we won't be able to store the it in our github repo, and that database should be downloaded as part of the Dockerfile instructions with `wget`, `curl`, etc.
 5.  Visit our docker-auto-builds github repo and a green "Submit Pull Request" button should appear near the top of the page. Click it, and submit a pull request to merge your forked repo into our repo.
 6. Myself or Nick will take a look at your additions/changes, do some testing, and decide on whether or not to incorporate the changes into the master branch. We will most likely accept all new docker images, but if you have a specific change to an existing image we may not accept it. These images were built with the purpose of being used for clinical lab validations, so they should stay static, especially if a particular public health lab has incoporated that image into their clinically validated workflow.
@@ -241,7 +242,7 @@ Then, your docker image is ready to be used to spin up containers with `docker r
   RUN rm -r SPAdes-3.13.0-Linux.tar.gz
   RUN mkdir /data
   ```
-  Each dockerfile command (e.g. `RUN`, `ENV`, `FROM`, etc.) you use will add an additional layer, increasing the size of the image. The less the better!
+  The dockerfile commands (`FROM`, `RUN`, `CMD`, and `COPY`) will each add an additional layer (everytime you use one), increasing the size of the image. The less the better!
   
   * Remove as many unnecessary files as possible (tarballs, temporary files, etc.) and don't install unnecessary dependencies/programs (again, the smaller the image the better)
   * Create a `/data` directory, and set it as the working directory with `WORKDIR /data` in your Dockerfile. Sometimes programs don't like it when they are run in the `/` root directory, which is the default working directory. This also makes it easy for mounting a volume when you run a container. I typically run a container like so:
