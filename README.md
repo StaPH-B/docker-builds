@@ -30,6 +30,8 @@ If you would like to contribute with your own Docker image or perhaps improve up
 |[Roary](https://hub.docker.com/r/staphb/roary/) | 3.12.0 | https://github.com/sanger-pathogens/Roary |
 |[CDC-SPN](https://hub.docker.com/r/staphb/cdc-spn/) | 0.1 (no version) | https://github.com/BenJamesMetcalf/Spn_Scripts_Reference |
 | [Shovill](https://hub.docker.com/r/staphb/shovill/) | 1.0.4 | https://github.com/tseemann/shovill |
+| [BWA](https://hub.docker.com/r/staphb/bwa) | 0.7.17 | https://github.com/lh3/bwa |
+| [Samtools](https://hub.docker.com/r/staphb/samtools) | 1.9 | https://github.com/samtools/samtools |
 
 ## Download Docker images
 You can view the list of images on Docker hub here: https://hub.docker.com/r/staphb/
