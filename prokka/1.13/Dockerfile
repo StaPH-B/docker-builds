@@ -46,12 +46,12 @@ RUN wget https://github.com/tseemann/barrnap/archive/0.9.tar.gz &&\
     cd barrnap-0.9 &&\
     make test
 
-RUN wget https://github.com/tseemann/prokka/archive/v1.13.3.tar.gz && \
-    tar -xzf v1.13.3.tar.gz && \
-    rm -rf v1.13.3.tar.gz && \
+RUN wget https://github.com/tseemann/prokka/archive/v1.13.4.tar.gz && \
+    tar -xzf v1.13.4.tar.gz && \
+    rm -rf v1.13.4.tar.gz && \
     mkdir /data
 
-ENV PATH="$PATH:/prokka-1.13.3/bin:\
+ENV PATH="$PATH:/prokka-1.13.4/bin:\
 /barrnap-0.9/bin"
 
 RUN prokka --setupdb && prokka --listdb
