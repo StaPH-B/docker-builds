@@ -1,5 +1,5 @@
 # docker-auto-builds
-This repo contains the Dockerfiles and other assorted files necessary for building Docker images/containers for a variety of programs used by members of the StaPH-B (State Public Health Lab Bioinformatics) consortium. The purpose of this repo is to provide a centralized location for Docker images that is easily accessible for users, with clear documentation on how the containers were built and how to use them.
+This repo contains the Dockerfiles and other assorted files necessary for building Docker images for a variety of programs used by members of the StaPH-B (State Public Health Lab Bioinformatics) consortium. The purpose of this repo is to provide a centralized location for Docker images that is easily accessible for users, with clear documentation on how the containers were built and how to use them.
 
 Each Dockerfile lists author/maintainer for that specific Docker image, but the authors/maintainers of the docker images are:
   * [@kapsakcj](https://github.com/kapsakcj)
@@ -8,36 +8,50 @@ Each Dockerfile lists author/maintainer for that specific Docker image, but the 
 
 If you would like to contribute with your own Docker image or perhaps improve upon the existing images, please fork the repository, make your changes/additions, and submit a pull request. If you are having an issue with an existing image, please submit an issue. We welcome any and all feedback! [See more details on how to contribute below.](https://github.com/StaPH-B/docker-auto-builds#Contributing)
 
+## Table of Contents
+* [Available Docker images](#available-docker-images)
+* [Download Docker images](#download-docker-images)
+* [Usage of Docker containers](#usage-of-docker-containers)
+    * [`$SHELL` within containers and wildcards](#shell-within-containers-and-wildcards)
+    * [Passing variables into containers](#passing-variables-into-containers)
+* [How to develop your own Docker image](#how-to-develop-your-own-docker-image)
+    * [Best practices for developing your own Docker image](#best-practices-for-developing-your-own-docker-image)
+* [Useful Links](#useful-links)
+* [Contributing](#contributing)
+    * [How to contribute a new Docker image](#how-to-contribute-a-new-docker-image)
+
 ## Available Docker images
 | Software | Version | Link |
-| -------- | ------- | -------- |
-| [SRA-toolkit](https://hub.docker.com/r/staphb/sratoolkit/) | 2.9.2 | https://github.com/ncbi/sra-tools |
-| [Lyve-SET (includes CG-Pipeline scripts and raxml)](https://hub.docker.com/r/staphb/lyveset/) | 1.1.4f, 2.0.1 (lyve-SET) | https://github.com/lskatz/lyve-SET https://github.com/lskatz/CG-Pipeline |
-| [Kraken](https://hub.docker.com/r/staphb/kraken/) | 1.0 | https://github.com/DerrickWood/kraken |
-| [SPAdes](https://hub.docker.com/r/staphb/spades/) | 3.12.0, 3.13.0 | http://cab.spbu.ru/software/spades/ |
-| [QUAST](https://hub.docker.com/r/staphb/quast/) | 5.0.0 | https://github.com/ablab/quast |
-| [Mash](https://hub.docker.com/r/staphb/mash/) | 2.1 | https://github.com/marbl/Mash |
-| [SerotypeFinder](https://hub.docker.com/r/staphb/serotypefinder/) | 1.1 (I think? Bitbucket repo does not list older versions like the one in this docker image) | https://bitbucket.org/genomicepidemiology/serotypefinder/ |
-| [SeqSero](https://hub.docker.com/r/staphb/seqsero/) | 1.0.1 | https://github.com/denglab/SeqSero |
-| [SeqSero2](https://hub.docker.com/r/staphb/seqsero2/) | 0.1.0 | https://github.com/denglab/SeqSero2/ |
-| [SISTR](https://hub.docker.com/r/staphb/sistr/) | 1.0.2 | https://github.com/peterk87/sistr_cmd |
-| [ABRicate](https://hub.docker.com/r/staphb/abricate/) | 0.8.7 | https://github.com/tseemann/abricate |
-| [Prokka](https://hub.docker.com/r/staphb/prokka/) | 1.13.3 | https://github.com/tseemann/prokka |
-| [Trimmomatic](https://hub.docker.com/r/staphb/trimmomatic/) | 0.38 | http://www.usadellab.org/cms/?page=trimmomatic |
-| [iqtree](https://hub.docker.com/r/staphb/iqtree/) | 1.6.7 | http://www.iqtree.org/ |
-| [Unicycler](https://hub.docker.com/r/staphb/unicycler/) | 0.4.7 | https://github.com/rrwick/Unicycler |
-| [Canu-Racon](https://hub.docker.com/r/staphb/canu-racon/) | 1.7.1 (Canu) 1.3.1 (Racon) 2.13 (minimap2) | https://canu.readthedocs.io/en/latest/ https://github.com/isovic/racon https://lh3.github.io/minimap2/ |
-|[Roary](https://hub.docker.com/r/staphb/roary/) | 3.12.0 | https://github.com/sanger-pathogens/Roary |
-|[CDC-SPN](https://hub.docker.com/r/staphb/cdc-spn/) | 0.1 (no version) | https://github.com/BenJamesMetcalf/Spn_Scripts_Reference |
-| [Shovill](https://hub.docker.com/r/staphb/shovill/) | 1.0.4 | https://github.com/tseemann/shovill |
-| [BWA](https://hub.docker.com/r/staphb/bwa) | 0.7.17 | https://github.com/lh3/bwa |
-| [Samtools](https://hub.docker.com/r/staphb/samtools) | 1.9 | https://github.com/samtools/samtools |
+| :--------: | :-------: | -------- |
+| [SRA-toolkit](https://hub.docker.com/r/staphb/sratoolkit/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/sratoolkit.svg?style=popout)](https://hub.docker.com/r/staphb/sratoolkit) | 2.9.2 | https://github.com/ncbi/sra-tools |
+| [Lyve-SET (includes CG-Pipeline scripts and raxml)](https://hub.docker.com/r/staphb/lyveset/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/lyveset.svg?style=popout)](https://hub.docker.com/r/staphb/lyveset) | 1.1.4f, 2.0.1 (lyve-SET) | https://github.com/lskatz/lyve-SET https://github.com/lskatz/CG-Pipeline |
+| [Kraken](https://hub.docker.com/r/staphb/kraken/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/kraken.svg?style=popout)](https://hub.docker.com/r/staphb/kraken) | 1.0 | https://github.com/DerrickWood/kraken |
+| [SPAdes](https://hub.docker.com/r/staphb/spades/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/spades.svg?style=popout)](https://hub.docker.com/r/staphb/spades) | 3.12.0, 3.13.0 | http://cab.spbu.ru/software/spades/ |
+| [QUAST](https://hub.docker.com/r/staphb/quast/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/quast.svg?style=popout)](https://hub.docker.com/r/staphb/quast) | 5.0.0 | https://github.com/ablab/quast |
+|  [Mash](https://hub.docker.com/r/staphb/mash/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/mash.svg?style=popout)](https://hub.docker.com/r/staphb/mash)  | 2.1 | https://github.com/marbl/Mash |
+| [SerotypeFinder](https://hub.docker.com/r/staphb/serotypefinder/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/serotypefinder.svg?style=popout)](https://hub.docker.com/r/staphb/serotypefinder) | 1.1 (I think? Bitbucket repo does not list older versions like the one in this docker image) | https://bitbucket.org/genomicepidemiology/serotypefinder/ |
+| [SeqSero](https://hub.docker.com/r/staphb/seqsero/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/seqsero.svg?style=popout)](https://hub.docker.com/r/staphb/seqsero) | 1.0.1 | https://github.com/denglab/SeqSero |
+| [SeqSero2](https://hub.docker.com/r/staphb/seqsero2/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/seqsero2.svg?style=popout)](https://hub.docker.com/r/staphb/seqsero2) | 0.1.0 | https://github.com/denglab/SeqSero2/ |
+| [SISTR](https://hub.docker.com/r/staphb/sistr/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/sistr.svg?style=popout)](https://hub.docker.com/r/staphb/sistr) | 1.0.2 | https://github.com/peterk87/sistr_cmd |
+| [ABRicate](https://hub.docker.com/r/staphb/abricate/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/abricate.svg?style=popout)](https://hub.docker.com/r/staphb/abricate) | 0.8.7 | https://github.com/tseemann/abricate |
+| [Prokka](https://hub.docker.com/r/staphb/prokka/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/prokka.svg?style=popout)](https://hub.docker.com/r/staphb/prokka) | 1.13 | https://github.com/tseemann/prokka |
+| [Trimmomatic](https://hub.docker.com/r/staphb/trimmomatic/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/trimmomatic.svg?style=popout)](https://hub.docker.com/r/staphb/trimmomatic) | 0.38 | http://www.usadellab.org/cms/?page=trimmomatic |
+| [iqtree](https://hub.docker.com/r/staphb/iqtree/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/iqtree.svg?style=popout)](https://hub.docker.com/r/staphb/iqtree) | 1.6.7 | http://www.iqtree.org/ |
+| [Unicycler](https://hub.docker.com/r/staphb/unicycler/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/unicycler.svg?style=popout)](https://hub.docker.com/r/staphb/unicycler) | 0.4.7 | https://github.com/rrwick/Unicycler |
+| [Canu-Racon](https://hub.docker.com/r/staphb/canu-racon/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/canu-racon.svg?style=popout)](https://hub.docker.com/r/staphb/canu-racon) | 1.7.1 (Canu) 1.3.1 (Racon) 2.13 (minimap2) | https://canu.readthedocs.io/en/latest/ https://github.com/isovic/racon https://lh3.github.io/minimap2/ |
+|[Roary](https://hub.docker.com/r/staphb/roary/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/roary.svg?style=popout)](https://hub.docker.com/r/staphb/roary) | 3.12.0 | https://github.com/sanger-pathogens/Roary |
+|[CDC-SPN](https://hub.docker.com/r/staphb/cdc-spn/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/cdc-spn.svg?style=popout)](https://hub.docker.com/r/staphb/cdc-spn) | 0.1 (no version) | https://github.com/BenJamesMetcalf/Spn_Scripts_Reference |
+| [Shovill](https://hub.docker.com/r/staphb/shovill/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/shovill.svg?style=popout)](https://hub.docker.com/r/staphb/shovill) | 1.0.4 | https://github.com/tseemann/shovill |
+| [BWA](https://hub.docker.com/r/staphb/bwa) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/bwa.svg?style=popout)](https://hub.docker.com/r/staphb/bwa) | 0.7.17 | https://github.com/lh3/bwa |
+| [Samtools](https://hub.docker.com/r/staphb/samtools) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/samtools.svg?style=popout)](https://hub.docker.com/r/staphb/samtools) | 1.9 | https://github.com/samtools/samtools |
 
 ## Download Docker images
 You can view the list of images on Docker hub here: https://hub.docker.com/r/staphb/
 
 Docker CE must first be downloaded/installed onto your system. Check that it is installed by running:
 ```bash
+docker info
+# or
 docker images
 # or
 docker ps
@@ -157,25 +171,7 @@ docker run --rm=True -v $PWD:/data -u $(id -u):$(id -g) staphb/roary:3.12.0 \
   roary -p 8 -e -n -v -f /data/roary-output/ /data/${variable1}.gff /data/${variable2}.gff
 ```
 
-## Contributing
-So far, we've created a bunch of docker images that we use in our day-to-day activities, but if there is a specific tool you do not see on our list and would like to add your own docker image, we would love to add it to the list.
-
-Discover a bug or having issues with our images? Do you have a suggestion or advice for improving our docker images? [Please submit an issue under the Issues tab on our github repo](https://github.com/StaPH-B/docker-auto-builds/issues)
-
-#### How to contribute a new Docker image (or alter an existing image):
-1. Build your own docker image using a Dockerfile (some information on this below)
-2. Test to make sure it works in the way that you intend it to (e.g. give ILMN reads to a SPAdes docker container, receive SPAdes assembly out)
-3. Fork this github repository using the fork button at the top right hand of the github page.
-4. Add your Dockerfile (and any other required files required for building) to your forked repository following this convention:
-    * The first directory should be the name of the program with special characters removed, and it's preferable to remove uppercase - `/spades`
-    * The second directory should be the version number of the program, in X.X.X format - `/spades/3.12.0`
-    * Lastly the Dockerfile and any other files required for building (hopefully there are none) belong in the sub-directory - `/spades/3.12.0/Dockerfile` and `/spades/3.12.0/some-other-file-needed-for-building.txt`
-    * NOTE: Note that there is a file size limit for github (I believe 100MB/file), so if you have a program with a huge database or file of some kind -  we won't be able to store the it in our github repo, and that database should be downloaded as part of the Dockerfile instructions with `wget`, `curl`, etc.
-5.  Visit our docker-auto-builds github repo and a green "Submit Pull Request" button should appear near the top of the page. Click it, and submit a pull request to merge your forked repo into our repo.
-6. Myself or Nick will take a look at your additions/changes, do some testing, and decide on whether or not to incorporate the changes into the master branch. We will most likely accept all new docker images, but if you have a specific change to an existing image we may not accept it. These images were built with the purpose of being used for clinical lab validations, so they should stay static, especially if a particular public health lab has incoporated that image into their clinically validated workflow.
-7. If we accept your pull request, we will then add your docker image to the StaPH-B docker hub repository. Once the docker-hub autobuilds the image (successfully), it will be available and downloadable via `docker pull staphb/name-of-your-image:0.0.0`
-   
-#### How to develop your own Docker image
+## How to develop your own Docker image
 In order to build your own docker image you need one file, the `Dockerfile`. This file is basically a set of instructions that are passed to the docker daemon in order to build your image. It is similar to a `.yml` file for making/sharing conda environments, or really any kind of installation script. Docker images need to be built once in order to spin up containers with `docker run`. Here's a simple example, our Dockerfile for SPAdes with some added explanation:
 ```Dockerfile
 # FROM defines the base docker image to start from. This command has to come first in the file
@@ -226,9 +222,11 @@ Successfully tagged kapsakcj/spades-test-build:3.12.0
 ```
 Then, your docker image is ready to be used to spin up containers with `docker run`!
 
-#### Best practices for developing your own docker image
+### Best practices for developing your own docker image
   * Pick out a base image, and stick with it. We typically use the offical docker `ubuntu:xenial` image (Ubuntu 16.04) as our base because it's a reliable and trusted base image and because Ubuntu is the OS we typically work on and are most familiar with. `alpine` is another frequently used image, and has the added benefit of being smaller than the `ubuntu:xenial` image. There are thousands out there to choose from.
+  * If you're using Ubuntu as the base image, it's best to run `apt-get update` and `apt-get install [packages]` prior to doing anything else
   * Write your dockerfile with as few layers as possible to reduce the size of the image - combine multiple commands in one RUN command using `&&`. The `\` is used to break a one-line command into multiple lines (for readability).
+  * Pin the exact versions of the programs that you download. In your dockerfile, specify downloading a specific version `wget http://cab.spbu.ru/files/release3.13.0/SPAdes-3.13.0-Linux.tar.gz` instead of cloning the repo `git clone https://github.com/ablab/spades.git`. These docker images are intended to be static (clinical testing validation), and this helps keep them that way.
   
   This:
   ```Dockerfile
@@ -251,9 +249,28 @@ Then, your docker image is ready to be used to spin up containers with `docker r
 ``` 
 $ docker run --rm=True -v $PWD:/data -u $(id -u):$(id -g) staphb/quast:5.0.0 quast.py /data/spades_assembly/$i/contigs.fasta -o /data/quast/$i
 ``` 
-#### Useful links
+## Useful links
   * Docker Documentation - a wealth of info here. Note that we use Docker Community Edition, as you have to pay for the Enterprise Edition https://docs.docker.com/
   * An awesome tutorial/workshop on docker for bioinformatics https://github.com/PawseySC/bio-workshop-18
   * Template for your Dockerfile: http://biocontainers.pro/docs/developer-manual/biocotainers-dockerfile/
   * Some best practices: http://biocontainers.pro/docs/developer-manual/best-practices/
   * Search for example dockerfiles here (if you sort for automated builds repositories, they will have Dockerfiles, not all docker hub repos have Dockerfiles listed): http://hub.docker.com/
+
+## Contributing
+So far, we've created a bunch of docker images that we use in our day-to-day activities, but if there is a specific tool you do not see on our list and would like to add your own docker image, we would love to add it to the list.
+
+Discover a bug or having issues with our images? Do you have a suggestion or advice for improving our docker images? [Please submit an issue under the Issues tab on our github repo](https://github.com/StaPH-B/docker-auto-builds/issues)
+
+### How to contribute a new Docker image
+1. Build your own docker image using a Dockerfile (some information on this above)
+2. Test to make sure it works in the way that you intend it to (e.g. give ILMN reads to a SPAdes docker container, receive SPAdes assembly out)
+3. Fork this github repository using the fork button at the top right hand of the github page.
+4. Add your Dockerfile (and any other required files required for building) to your forked repository following this convention:
+    * The first directory should be the name of the program with special characters removed, and it's preferable to remove uppercase - `/spades`
+    * The second directory should be the version number of the program, in X.X.X format - `/spades/3.12.0`
+    * Lastly the Dockerfile and any other files required for building (hopefully there are none) belong in the sub-directory - `/spades/3.12.0/Dockerfile` and `/spades/3.12.0/some-other-file-needed-for-building.txt`
+    * NOTE: There is a file size limit for github (I believe 100MB/file), so if you have a program with a huge database or file of some kind -  we won't be able to store the it in our github repo, and that database should be downloaded as part of the Dockerfile instructions with `wget`, `curl`, etc.
+5.  Visit our docker-auto-builds github repo and a green "Submit Pull Request" button should appear near the top of the page. Click it, and submit a pull request to merge your forked repo into our repo.
+6. Myself or Nick will take a look at your additions/changes, do some testing, and decide on whether or not to incorporate the changes into the master branch. We will most likely accept all new docker images, but if you have a specific change to an existing image we may not accept it. These images were built with the purpose of being used for clinical lab validations, so they should stay static, especially if a particular public health lab has incoporated that image into their clinically validated workflow.
+7. If we accept your pull request, we will then add your docker image to the StaPH-B docker hub repository. Once the docker-hub autobuilds the image (successfully), it will be available and downloadable via `docker pull staphb/name-of-your-image:0.0.0`
+   
