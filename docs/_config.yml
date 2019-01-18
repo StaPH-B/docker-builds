@@ -1,4 +1,4 @@
-theme: jekyll-theme-slate
+theme: jekyll-theme-minimal
 title: StaPH-B Docker Builds
 description: >- # this means to ignore newlines until "baseurl:"
   User guide and documentation for docker containers commonly used by public health bioinformaticians.
