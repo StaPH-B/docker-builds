@@ -1,0 +1,5 @@
+theme: jekyll-theme-minimal
+logo: /assets/logo.png
+title: 
+description: >- # this means to ignore newlines until "baseurl:"
+  User guide and documentation for docker containers commonly used by public health bioinformaticians.

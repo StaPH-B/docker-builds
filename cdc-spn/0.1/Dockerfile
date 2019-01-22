@@ -24,13 +24,18 @@ RUN apt-get update && apt-get install -y \
   python-cutadapt\
   python-scipy\
   bowtie2\
-  samtools\
   python-pip\
   environment-modules\
   velvet\
   zlib1g-dev\
   libbz2-dev\
-  liblzma-dev
+  liblzma-dev\
+  build-essential\
+  libncurses5-dev
+
+#install samtools version 0.1.18
+RUN wget 'https://sourceforge.net/projects/samtools/files/samtools/0.1.18/samtools-0.1.18.tar.bz2'
+RUN tar -xvf samtools-0.1.18.tar.bz2; rm samtools-0.1.18.tar.bz2;cd samtools-0.1.18; make
 
 #install srst2
 RUN wget https://github.com/katholt/srst2/archive/v0.2.0.tar.gz
@@ -42,4 +47,5 @@ RUN cd freebayes/;git checkout v1.2.0;make; make install
 
 #Add the spn scripts
 RUN git clone https://github.com/BenJamesMetcalf/Spn_Scripts_Reference.git
-ENV PATH="/Spn_Scripts_Reference:${PATH}"
+ENV PATH="/Spn_Scripts_Reference:/samtools-0.1.18:${PATH}"\
+ MODULESHOME="/usr/share/modules"
