@@ -8,9 +8,14 @@ LABEL description="A pipeline for the production of SNP matrices from sequence d
 LABEL website="https://github.com/CFSAN-Biostatistics/snp-pipeline"
 LABEL lisence="https://github.com/CFSAN-Biostatistics/snp-pipeline/blob/master/LICENSE.txt"
 
+# This Dockerfile is based on a Docker file from Justin Payne which can be found here:
+# https://hub.docker.com/r/crashfrog/snp-pipeline/dockerfile
+# The dockerfile has been modified from it's original form by Curtis Kapsak
 MAINTAINER Justin Payne, justin.payne@fda.hhs.gov
 MAINTAINER Curtis Kapsak, curtis.kapsak@state.co.us
 
+# Had to add this since openjdk-8-jre is not available in the apt-repository
+# for Ubuntu:trusty/Ubuntu 14.04 (version of Ubuntu that Phusion is based on)
 RUN add-apt-repository ppa:openjdk-r/ppa
 
 WORKDIR /tmp/
@@ -40,7 +45,7 @@ RUN apt-get update -y \
                 libperl-dev \
 	&& apt-get clean
 
-#install varscan, art and sra
+# install pip (code originally from Justin)
 RUN wget https://bootstrap.pypa.io/get-pip.py -q \
 	&& python get-pip.py
 
@@ -66,18 +71,19 @@ RUN mkdir bcftools &&\
     make &&\
     make install
 
-#get picard jar file
+# get picard jar file
 RUN mkdir /picard &&\
     cd /picard &&\
     wget https://github.com/broadinstitute/picard/releases/download/2.18.4/picard.jar
 
-#get GATK 3.8-1-0 jar flie
+# get GATK 3.8-1-0 jar flie
 RUN mkdir /gatk &&\
     cd /gatk &&\
     wget -O ./gatk.tar.bz2 'https://software.broadinstitute.org/gatk/download/auth?package=GATK-archive&version=3.8-1-0-gf15c1c3ef' &&\
     tar -xjf gatk.tar.bz2 &&\
     rm gatk.tar.bz2
 
+# get VarScan and SRA-toolkit
 RUN wget http://downloads.sourceforge.net/project/varscan/VarScan.v2.3.7.jar -q \
 	&& cp VarScan.v2.3.7.jar /usr/bin/VarScan.jar \
 	&& wget http://www.niehs.nih.gov/research/resources/assets/docs/artsrcchocolatecherrycake031915linuxtgz.tgz -q \
@@ -95,10 +101,13 @@ RUN wget http://downloads.sourceforge.net/project/varscan/VarScan.v2.3.7.jar -q 
 #install snp-pipeline and snp-mutator
 RUN pip install numpy snp-pipeline biopython snp-mutator
 
+# set java CLASSPATH variables
 ENV CLASSPATH /usr/bin/VarScan.jar:/picard/picard.jar:/gatk/GenomeAnalysisTK-3.8-1-0-gf15c1c3ef/GenomeAnalysisTK.jar
+# not sure why this is here, or what program uses NUMCORES, but I'm going to leave it for now.
 ENV NUMCORES 1
 
-#Test snp_pipeline
+# Test snp_pipeline (code originally from Justin). Running copy_snppipeline_data.py generates an message the the script is deprecated
+# but I figured I would leave it since the below commands test that the image runs properly.
 WORKDIR /test/
 RUN copy_snppipeline_data.py lambdaVirusInputs testLambdaVirus \
 	&& cd testLambdaVirus \
@@ -108,5 +117,6 @@ RUN copy_snppipeline_data.py lambdaVirusInputs testLambdaVirus \
 	&& diff -q snpma.fasta expectedResults/snpma.fasta \
 	&& diff -q referenceSNP.fasta expectedResults/referenceSNP.fasta
 
-ENTRYPOINT ["run_snp_pipeline.sh"]
-CMD ["-h"]
+# make a DIR called /data for running cfsan-snp-pipeline in
+RUN mkdir /data
+WORKDIR /data
