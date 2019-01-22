@@ -11,11 +11,13 @@ LABEL lisence="https://github.com/CFSAN-Biostatistics/snp-pipeline/blob/master/L
 MAINTAINER Justin Payne, justin.payne@fda.hhs.gov
 MAINTAINER Curtis Kapsak, curtis.kapsak@state.co.us
 
+RUN add-apt-repository ppa:openjdk-r/ppa
+
 WORKDIR /tmp/
 RUN apt-get update -y \
-	&& apt-get install \
-		bowtie2 -y \
-		default-jre \
+	&& apt-get install -y \
+		bowtie2 \
+		openjdk-8-jre \
 		g++ \
 		gcc \
 		gsl-bin \
