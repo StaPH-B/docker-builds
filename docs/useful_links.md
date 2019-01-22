@@ -6,3 +6,4 @@
   * Template for your Dockerfile: [http://biocontainers.pro/docs/developer-manual/biocotainers-dockerfile/](http://biocontainers.pro/docs/developer-manual/biocotainers-dockerfile/)
   * Some best practices: [http://biocontainers.pro/docs/developer-manual/best-practices/](http://biocontainers.pro/docs/developer-manual/best-practices/)
   * Search for example dockerfiles here (if you sort for automated builds repositories, they will have Dockerfiles, not all docker hub repos have Dockerfiles listed): [http://hub.docker.com/](http://hub.docker.com/)
+  * Docker SDK library for running docker containers easily within python code. [https://docker-py.readthedocs.io/en/stable/](https://docker-py.readthedocs.io/en/stable/)
