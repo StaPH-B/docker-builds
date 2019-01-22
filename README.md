@@ -7,11 +7,11 @@ Each Dockerfile lists author/maintainer for that specific Docker image, but the 
   * [@garfinjm](https://github.com/garfinjm)
 
 If you would like to contribute with your own Docker image or perhaps improve upon the existing images, please fork the repository, make your changes/additions, and submit a pull request. If you are having an issue with an existing image, please submit an issue. We welcome any and all feedback!  
-[See more details on how to contribute here](https://staph-b.github.io/docker-auto-builds/contribute.html)
+[See more details on how to contribute here](https://staph-b.github.io/docker-builds/contribute.html)
 
-## [Docker User Guide](https://staph-b.github.io/docker-auto-builds/)
+## [Docker User Guide](https://staph-b.github.io/docker-builds/)
 We have also created a user guide that outlines methods and best practices for using and developing docker containers.  
-[Docker User Guide](https://staph-b.github.io/docker-auto-builds/)
+[Docker User Guide](https://staph-b.github.io/docker-builds/)
 
 ## [Available Docker images](https://hub.docker.com/r/staphb/)
 | Software | Version | Link |
