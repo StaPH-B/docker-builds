@@ -1,10 +1,5 @@
 # Docker User Guide
 
-## Usage of Docker containers
-The following guide is written for use on an Ubuntu/Debian OS, but the Docker commands should be the same for all operating systems (MacOS and Windows).
+![docker-logo](https://i2.wp.com/blog.docker.com/wp-content/uploads/2013/06/Docker-logo-011.png?resize=300%2C232&ssl=1)
 
-1. [Downloading docker images](get_containers.md)
-2. [Running docker containers](run_containers.md)
-3. [Develop your own container](make_containers.md)
-4. [Useful links](useful_links.md)
-5. [Contributing to the StaPH-B repository](contribute.md)
+The following guide is written for use on an Ubuntu/Debian OS, but the Docker commands should be the same for all operating systems (MacOS and Windows).
