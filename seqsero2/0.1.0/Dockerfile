@@ -20,7 +20,6 @@ RUN apt-get update && apt-get install -y \
   ncbi-blast+\
   sra-toolkit\
   bedtools\
-  samtools\
   wget\
   zlib1g-dev\
   libbz2-dev\
