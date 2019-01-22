@@ -3,7 +3,7 @@
 ## Contributing
 So far, we've created a bunch of docker images that we use in our day-to-day activities, but if there is a specific tool you do not see on our list and would like to add your own docker image, we would love to add it to the list.
 
-Discover a bug or having issues with our images? Do you have a suggestion or advice for improving our docker images? [Please submit an issue under the Issues tab on our github repo](https://github.com/StaPH-B/docker-auto-builds/issues)
+Discover a bug or having issues with our images? Do you have a suggestion or advice for improving our docker images? [Please submit an issue under the Issues tab on our github repo](https://github.com/StaPH-B/docker-builds/issues)
 
 ### How to contribute a new Docker image
 1. Build your own docker image using a Dockerfile (some information on this above)

@@ -33,7 +33,7 @@ ENV PATH="${PATH}:/SPAdes-3.13.0-Linux/bin"
 # set the working directory as /data so that SPAdes.py runs in that directory, not the root DIR /
 WORKDIR /data
 ```
-[If you want a more complex example where more dependencies are installed and I had work some magic to get java executables to run, check out the Dockerfile for Shovill](https://github.com/StaPH-B/docker-auto-builds/blob/master/shovill/1.0.4/Dockerfile)
+[If you want a more complex example where more dependencies are installed and I had work some magic to get java executables to run, check out the Dockerfile for Shovill](https://github.com/StaPH-B/docker-builds/blob/master/shovill/1.0.4/Dockerfile)
 
 Once you have a `Dockerfile` created, name it as `Dockerfile` and store it in a empty directory (unless you need files to build the docker image). Note the path to the directory containing your dockerfile. Then, run:
 ```
@@ -77,4 +77,4 @@ Then, your docker image is ready to be used to spin up containers with `docker r
   * Create a `/data` directory, and set it as the working directory with `WORKDIR /data` in your Dockerfile. Sometimes programs don't like it when they are run in the `/` root directory, which is the default working directory. This also makes it easy for mounting a volume when you run a container. I typically run a container like so:
 ```
 $ docker run --rm=True -v $PWD:/data -u $(id -u):$(id -g) staphb/quast:5.0.0 quast.py /data/spades_assembly/$i/contigs.fasta -o /data/quast/$i
-``` 
+```
