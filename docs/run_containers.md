@@ -1,4 +1,7 @@
-# Docker User Guide
+---
+layout: page
+title: Docker User Guide
+---
 
 ### Pulling a docker image from docker hub
 Before running a docker image you must first retrieve the image using the command `docker pull`, then you should see an output similar to this...

@@ -1,4 +1,7 @@
-# Docker User Guide
+---
+layout: page
+title: Docker User Guide
+---
 
 ## How to develop your own Docker image
 In order to build your own docker image you need one file, the `Dockerfile`. This file is basically a set of instructions that are passed to the docker daemon in order to build your image. It is similar to a `.yml` file for making/sharing conda environments, or really any kind of installation script. Docker images need to be built once in order to spin up containers with `docker run`. Here's a simple example, our Dockerfile for SPAdes with some added explanation:

@@ -1,4 +1,7 @@
-# Docker User Guide
+---
+layout: page
+title: Docker User Guide
+---
 
 ## Download Docker images
 You can view the list of images on Docker hub here: https://hub.docker.com/r/staphb/

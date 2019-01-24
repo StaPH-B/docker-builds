@@ -1,4 +1,7 @@
-# Docker User Guide
+---
+layout: page
+title: Docker User Guide
+---
 
 ## Contributing
 So far, we've created a bunch of docker images that we use in our day-to-day activities, but if there is a specific tool you do not see on our list and would like to add your own docker image, we would love to add it to the list.

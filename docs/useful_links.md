@@ -1,4 +1,7 @@
-# Docker User Guide
+---
+layout: page
+title: Docker User Guide
+---
 
 ## Useful links
   * Docker Documentation - a wealth of info here. Note that we use Docker Community Edition, as you have to pay for the Enterprise Edition [https://docs.docker.com/](https://docs.docker.com/)
