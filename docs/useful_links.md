@@ -1,7 +1,8 @@
 ---
 layout: page
-title: Docker User Guide
 ---
+
+<img src="/docker-builds/assets/user_guide.png" style="display:block;margin-left:auto;margin-right:auto;width:400px">
 
 ## Useful links
   * Docker Documentation - a wealth of info here. Note that we use Docker Community Edition, as you have to pay for the Enterprise Edition [https://docs.docker.com/](https://docs.docker.com/)

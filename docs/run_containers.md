@@ -1,7 +1,8 @@
 ---
 layout: page
-title: Docker User Guide
 ---
+
+<img src="/docker-builds/assets/user_guide.png" style="display:block;margin-left:auto;margin-right:auto;width:400px">
 
 ### Pulling a docker image from docker hub
 Before running a docker image you must first retrieve the image using the command `docker pull`, then you should see an output similar to this...

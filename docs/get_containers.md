@@ -1,7 +1,8 @@
 ---
 layout: page
-title: Docker User Guide
 ---
+
+<img src="/docker-builds/assets/user_guide.png" style="display:block;margin-left:auto;margin-right:auto;width:400px">
 
 ## Download Docker images
 You can view the list of images on Docker hub here: https://hub.docker.com/r/staphb/
