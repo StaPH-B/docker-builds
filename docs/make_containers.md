@@ -39,7 +39,7 @@ WORKDIR /data
 ```
 [If you want a more complex example where more dependencies are installed and I had work some magic to get java executables to run, check out the Dockerfile for Shovill](https://github.com/StaPH-B/docker-builds/blob/master/shovill/1.0.4/Dockerfile)
 
-Once you have a `Dockerfile` created, name it as `Dockerfile` and store it in a empty directory (unless you need files to build the docker image). Note the path to the directory containing your dockerfile. Then, run:
+Once you have a `Dockerfile` created, name it as `Dockerfile` and store it in a empty directory (unless you need files to build the docker image). Note the path to the directory containing your Dockerfile. Then, run:
 ```
 docker build --tag your-name-here/name-of-your-program:0.1.0 /path/to/DIR/with/Dockerfile/
 
@@ -56,10 +56,10 @@ Successfully tagged kapsakcj/spades-test-build:3.12.0
 Then, your docker image is ready to be used to spin up containers with `docker run`!
 
 ### Best practices for developing your own docker image
-  * Pick out a base image, and stick with it. We typically use the offical docker `ubuntu:xenial` image (Ubuntu 16.04) as our base because it's a reliable and trusted base image and because Ubuntu is the OS we typically work on and are most familiar with. `alpine` is another frequently used image, and has the added benefit of being smaller than the `ubuntu:xenial` image. There are thousands out there to choose from.
+  * Pick out a base image, and stick with it. We typically use the official docker `ubuntu:xenial` image (Ubuntu 16.04) as our base because it's a reliable and trusted base image and because Ubuntu is the OS we typically work on and are most familiar with. `alpine` is another frequently used image, and has the added benefit of being smaller than the `ubuntu:xenial` image. There are thousands out there to choose from.
   * If you're using Ubuntu as the base image, it's best to run `apt-get update` and `apt-get install [packages]` prior to doing anything else
-  * Write your dockerfile with as few layers as possible to reduce the size of the image - combine multiple commands in one RUN command using `&&`. The `\` is used to break a one-line command into multiple lines (for readability).
-  * Pin the exact versions of the programs that you download. In your dockerfile, specify downloading a specific version `wget http://cab.spbu.ru/files/release3.13.0/SPAdes-3.13.0-Linux.tar.gz` instead of cloning the repo `git clone https://github.com/ablab/spades.git`. These docker images are intended to be static (clinical testing validation), and this helps keep them that way.
+  * Write your Dockerfile with as few layers as possible to reduce the size of the image - combine multiple commands in one RUN command using `&&`. The `\` is used to break a one-line command into multiple lines (for readability).
+  * Pin the exact versions of the programs that you download. In your Dockerfile, specify downloading a specific version `wget http://cab.spbu.ru/files/release3.13.0/SPAdes-3.13.0-Linux.tar.gz` instead of cloning the repo `git clone https://github.com/ablab/spades.git`. These docker images are intended to be static (clinical testing validation), and this helps keep them that way.
 
   This:
   ```Dockerfile

@@ -98,7 +98,7 @@ docker run --rm=True -v $PWD:/data -u $(id -u):$(id -g) staphb/roary:3.12.0 /bin
 This way when the container runs, it will use the bash shell to run Roary, and will expand the wildcard to include all gff files within the `/data` directory.
 
 #### Passing environment variables into containers
-More detailed info: https://docs.docker.com/edge/engine/reference/commandline/run/#set-environment-variables--e---env---env-file
+More detailed info: [https://docs.docker.com/edge/engine/reference/commandline/run/#set-environment-variables--e---env---env-file](https://docs.docker.com/edge/engine/reference/commandline/run/#set-environment-variables--e---env---env-file)
 
 If you would like to incorporate environmental variables in the container for example as part of a script, Docker has an easy way to pass them to the container so $SHELL will recognize them.
 
