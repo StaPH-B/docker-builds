@@ -12,9 +12,17 @@ LABEL license="GNU General Public License"
 
 MAINTAINER Nicholas Florek <nicholas.florek@slh.wisc.edu>
 
-#install java jre
-RUN apt-get update && apt-get install -y openjdk-9-jre wget unzip
+#install openjdk-11 jre
+RUN apt-get update && apt-get install -y software-properties-common &&\
+ add-apt-repository -y ppa:openjdk-r/ppa && apt-get update && apt-get install -y \
+ openjdk-11-jre\
+ wget\
+ unzip
 
 #copy the files into the image
-RUN wget http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-0.38.zip
-RUN unzip Trimmomatic-0.38.zip
+RUN wget http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-0.38.zip &&\
+ unzip Trimmomatic-0.38.zip
+
+ # create /data directory and set as working directory
+ RUN mkdir /data
+ WORKDIR /data
