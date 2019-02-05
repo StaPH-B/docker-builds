@@ -13,7 +13,7 @@ LABEL license="https://github.com/rrwick/Unicycler#license"
 MAINTAINER Nicholas Florek <nicholas.florek@slh.wisc.edu>
 
 #install prerequisites including openjdk-11
-RUN apt-get install software-properties-common &&\
+RUN apt-get update && apt-get install -y software-properties-common &&\
  add-apt-repository -y ppa:openjdk-r/ppa && apt-get update && apt-get install -y \
  python3\
  python3-pip\
