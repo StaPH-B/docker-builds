@@ -23,9 +23,7 @@ RUN apt-get update && apt-get install -y expat \
  cpanminus
 
 # install legacy blast
-# of course, on the day that I'm developing this container, NCBI decides to remove the old version of blast+
-# I'm going to copy it over from my local machine and make the files available through the git repo.....sigh.
-COPY blast-2.2.26/ /opt/blast-2.2.26
+RUN wget 'ftp://ftp.ncbi.nlm.nih.gov/blast/executables/legacy.NOTSUPPORTED/2.2.26/blast-2.2.26-x64-linux.tar.gz'
 
 # download serotypefinder 
 COPY serotypefinder /serotypefinder
