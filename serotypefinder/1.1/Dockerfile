@@ -20,10 +20,13 @@ RUN apt-get update && apt-get install -y expat \
  gcc \
  libextutils-pkgconfig-perl \
  libgd-perl \
- cpanminus
+ cpanminus \
+ wget
 
 # install legacy blast
-RUN wget 'ftp://ftp.ncbi.nlm.nih.gov/blast/executables/legacy.NOTSUPPORTED/2.2.26/blast-2.2.26-x64-linux.tar.gz'
+RUN wget 'ftp://ftp.ncbi.nlm.nih.gov/blast/executables/legacy.NOTSUPPORTED/2.2.26/blast-2.2.26-x64-linux.tar.gz' &&\
+  tar -xzf blast-2.2.26-x64-linux.tar.gz &&\
+  rm blast-2.2.26-x64-linux.tar.gz
 
 # download serotypefinder 
 COPY serotypefinder /serotypefinder
@@ -45,10 +48,10 @@ RUN cpanm inc::latest \
 # serotypefinder database is copied from local directory,
 # since DL'ing from bitbucket requires ssh-key login and is ANNOYING
 COPY database/ /serotypefinder/database
-ENV PATH="/serotypefinder:${PATH}"
+ENV PATH="${PATH}:/serotypefinder:/blast-2.2.26/bin"
 RUN mkdir /data
 # change working directory to /data so that it's not running in root / directory
 WORKDIR /data
 
-###### Path to legacy blast: /opt/blast-2.2.26
+###### Path to legacy blast: /blast-2.2.26
 ###### Path to serotypefinder database: /serotypefinder/database
