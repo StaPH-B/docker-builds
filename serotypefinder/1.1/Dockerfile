@@ -1,7 +1,7 @@
 FROM ubuntu:xenial
 
 LABEL base.image="ubuntu:xenial"
-LABEL version="1"
+LABEL version="1.1.0"
 LABEL software="Serotypefinder"
 LABEL software.version="1.1"
 LABEL description="Tool for identifying the serotype of E. coli from reads or assemblies"
@@ -28,7 +28,7 @@ RUN wget 'ftp://ftp.ncbi.nlm.nih.gov/blast/executables/legacy.NOTSUPPORTED/2.2.2
   tar -xzf blast-2.2.26-x64-linux.tar.gz &&\
   rm blast-2.2.26-x64-linux.tar.gz
 
-# download serotypefinder 
+# download serotypefinder from git repo
 COPY serotypefinder /serotypefinder
 
 # install perl modules
