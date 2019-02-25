@@ -40,8 +40,8 @@ RUN wget --max-redirect 50 --continue 'https://downloads.sourceforge.net/project
 RUN tar -zxvf smalt-0.7.6-static.tar.gz; rm smalt-0.7.6-static.tar.gz;cd smalt-0.7.6; ./configure; make; make install
 
 #get lyveset files
-RUN wget https://github.com/lskatz/lyve-SET/archive/v2.0.1.tar.gz
-RUN tar -xzvf v2.0.1.tar.gz;rm v2.0.1.tar.gz;mv lyve-SET-2.0.1 lyve-SET
+RUN wget https://github.com/lskatz/lyve-SET/archive/v1.1.4f.tar.gz
+RUN tar -xzvf v1.1.4f.tar.gz;rm v1.1.4f.tar.gz;mv lyve-SET-1.1.4f lyve-SET
 
 #setup the lyveset filesystem
 RUN cpan Test::Most
