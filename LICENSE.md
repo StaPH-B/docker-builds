@@ -1,11 +1,12 @@
-The licensing of a github repository full of Dockerfiles is not so straight-forward and is a controversial topic. We (the contributors of the repository) have decided not to specify a license for the repository and to use the default github no-license for the time being. This will likely change in the future, as we fully embrace the open-sourceness of this project and would like to share/distribute with the community.
+The licensing of a github repository full of Dockerfiles is not so straight-forward and is a controversial topic. We (the contributors of the repository) have decided not to specify a license for the repository and to use the default github no-license for the time being. This will likely change in the future, as we fully embrace the premise open-source and would like to share/distribute with the community.
 
-In this repo you will find numerous dockerfiles, but no source code of the programs we have built docker images for. The one exception to this is Serotypefinder, which is licensed under Apache 2.0, and allows for the re-distribution of the source code.
+In this repository you will find numerous dockerfiles, but no source code of the programs we have built docker images for. The one exception to this is Serotypefinder, which is licensed under Apache 2.0, and allows for the re-distribution of the source code.
 
 The licenses of the open-source software that is contained in these Docker images should be listed in each dockerfile's metadata, but is also listed in the table below.
 
 | Software | License | Link to license |
 | :--------: | :-------: | -------- |
+| FastANI | Apache v2.0 | https://github.com/ParBLiSS/FastANI/blob/master/LICENSE |
 | SRA-toolkit | Public Domain | https://github.com/ncbi/sra-tools/blob/master/LICENSE |
 | Lyve-SET  | MIT | https://github.com/lskatz/lyve-SET/blob/master/LICENSE |
 | Kraken | GNU GPLv3 | https://github.com/DerrickWood/kraken/blob/master/LICENSE |
