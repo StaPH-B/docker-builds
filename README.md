@@ -3,7 +3,7 @@ This repository contains the Dockerfiles and other assorted files necessary for 
 
 Each Dockerfile lists author/maintainer for that specific Docker image, but the authors/maintainers of the docker images are:
   * [@kapsakcj](https://github.com/kapsakcj)
-  * [@nwflorek](https://github.com/nwflorek)
+  * [@k-florek](https://github.com/k-florek)
   * [@garfinjm](https://github.com/garfinjm)
   * [@kevinlibuit](https://github.com/kevinlibuit)
 
