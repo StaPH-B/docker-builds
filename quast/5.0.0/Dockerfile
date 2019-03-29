@@ -11,7 +11,7 @@ LABEL website="https://github.com/ablab/quast"
 LABEL license="https://github.com/ablab/quast/blob/master/LICENSE.txt"
 
 # Maintainer
-MAINTAINER Curtis Kapsak <curtis.kapsak@state.co.us>
+MAINTAINER Curtis Kapsak <pjx8@cdc.gov>
 
 RUN apt-get update && apt-get install -y zlib1g-dev \
   pkg-config \

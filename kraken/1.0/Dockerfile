@@ -11,7 +11,7 @@ LABEL website="https://github.com/DerrickWood/kraken"
 LABEL license="https://github.com/DerrickWood/kraken/blob/master/LICENSE"
 
 # Maintainer
-MAINTAINER Curtis Kapsak <curtis.kapsak@state.co.us>
+MAINTAINER Curtis Kapsak <pjx8@cdc.gov>
 
 # install dependencies
 RUN apt-get update && apt-get -y install \

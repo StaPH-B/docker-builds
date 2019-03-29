@@ -9,7 +9,7 @@ LABEL description="de novo DBG genome assembler"
 LABEL website="http://cab.spbu.ru/files/release3.13.0/manual.html"
 
 # Maintainer
-MAINTAINER Curtis Kapsak <curtis.kapsak@state.co.us>
+MAINTAINER Curtis Kapsak <pjx8@cdc.gov>
 
 RUN apt-get update && apt-get install -y python \
   wget

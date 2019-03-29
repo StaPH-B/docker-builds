@@ -9,7 +9,7 @@ LABEL description="faster than SPAdes de novo DBG genome assembler (with assembl
 LABEL website="https://github.com/tseemann/shovill"
 LABEL lisence="https://github.com/tseemann/shovill/blob/master/LICENSE"
 
-MAINTAINER Curtis Kapsak <curtis.kapsak@state.co.us>
+MAINTAINER Curtis Kapsak <pjx8@cdc.gov>
 
 RUN apt-get update && apt-get install -y python \
   wget \

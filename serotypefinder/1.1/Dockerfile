@@ -9,7 +9,7 @@ LABEL website="https://bitbucket.org/genomicepidemiology/serotypefinder/src/mast
 LABEL license="https://bitbucket.org/genomicepidemiology/serotypefinder/src/master/"
 
 # Maintainer
-MAINTAINER Curtis Kapsak <curtis.kapsak@state.co.us>
+MAINTAINER Curtis Kapsak <pjx8@cdc.gov>
 
 # install dependencies
 RUN apt-get update && apt-get install -y expat \

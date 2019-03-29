@@ -8,7 +8,7 @@ LABEL description="Burrow-Wheeler Aligner for short-read alignment"
 LABEL website="https://github.com/lh3/bwa"
 LABEL lisence="https://github.com/lh3/bwa/blob/master/COPYING"
 
-MAINTAINER Curtis Kapsak <curtis.kapsak@state.co.us>
+MAINTAINER Curtis Kapsak <pjx8@cdc.gov>
 
 RUN apt-get update && apt-get install -y make \
   wget \

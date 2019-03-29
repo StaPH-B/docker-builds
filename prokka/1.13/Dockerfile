@@ -11,7 +11,7 @@ LABEL website="https://github.com/tseemann/prokka"
 LABEL license="https://github.com/tseemann/prokka#licence"
 
 # Maintainer
-MAINTAINER Curtis Kapsak <curtis.kapsak@state.co.us>
+MAINTAINER Curtis Kapsak <pjx8@cdc.gov>
 
 # install dependencies using conda
 RUN apt-get update && apt-get -y install \

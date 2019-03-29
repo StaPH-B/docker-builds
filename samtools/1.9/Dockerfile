@@ -8,7 +8,7 @@ LABEL description="Tools (written in C using htslib) for manipulating next-gener
 LABEL website="https://github.com/samtools/samtools"
 LABEL lisence="https://github.com/samtools/samtools/blob/develop/LICENSE"
 
-MAINTAINER Curtis Kapsak <curtis.kapsak@state.co.us>
+MAINTAINER Curtis Kapsak <pjx8@cdc.gov>
 
 RUN apt-get update && apt-get install -y libncurses5-dev \
   libbz2-dev \

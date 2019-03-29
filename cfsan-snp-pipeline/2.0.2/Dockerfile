@@ -11,8 +11,8 @@ LABEL lisence="https://github.com/CFSAN-Biostatistics/snp-pipeline/blob/master/L
 # This Dockerfile is based on a Docker file from Justin Payne which can be found here:
 # https://hub.docker.com/r/crashfrog/snp-pipeline/dockerfile
 # The dockerfile has been modified from it's original form by Curtis Kapsak
-MAINTAINER Justin Payne, justin.payne@fda.hhs.gov
-MAINTAINER Curtis Kapsak, curtis.kapsak@state.co.us
+MAINTAINER Justin Payne, <justin.payne@fda.hhs.gov>
+MAINTAINER Curtis Kapsak, <pjx8@cdc.gov>
 
 # Had to add this since openjdk-8-jre is not available in the apt-repository
 # for Ubuntu:trusty/Ubuntu 14.04 (version of Ubuntu that Phusion is based on)
