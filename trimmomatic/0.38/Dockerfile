@@ -10,7 +10,7 @@ LABEL description="Trimmomatic: A flexible read trimming tool for Illumina NGS d
 LABEL website="http://www.usadellab.org/cms/?page=trimmomatic"
 LABEL license="GNU General Public License"
 
-MAINTAINER Nicholas Florek <nicholas.florek@slh.wisc.edu>
+MAINTAINER Kelsey Florek <kelsey.florek@slh.wisc.edu>
 
 #install openjdk-11 jre
 RUN apt-get update && apt-get install -y software-properties-common &&\

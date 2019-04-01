@@ -10,7 +10,7 @@ LABEL website="https://github.com/ParBLiSS/FastANI"
 LABEL license="https://github.com/ParBLiSS/FastANI/blob/master/LICENSE"
 
 # Maintainer
-MAINTAINER Nicholas Florek <nicholas.florek@slh.wisc.edu>
+MAINTAINER Kelsey Florek <kelsey.florek@slh.wisc.edu>
 
 # install dependencies
 RUN apt-get update && apt-get install -y autoconf \

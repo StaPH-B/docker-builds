@@ -10,7 +10,7 @@ LABEL description="Scripts and reference files to type streptococcus pneumoniae"
 LABEL website="https://github.com/BenJamesMetcalf/Spn_Scripts_Reference"
 LABEL license="https://github.com/BenJamesMetcalf/Spn_Scripts_Reference"
 
-MAINTAINER Nicholas Florek <nicholas.florek@slh.wisc.edu>
+MAINTAINER Kelsey Florek <kelsey.florek@slh.wisc.edu>
 
 #install dependencies
 RUN apt-get update && apt-get install -y \

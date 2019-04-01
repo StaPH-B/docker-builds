@@ -10,7 +10,7 @@ LABEL description="Unicycler is an assembly pipeline for bacterial genomes."
 LABEL website="https://github.com/rrwick/Unicycler"
 LABEL license="https://github.com/rrwick/Unicycler#license"
 
-MAINTAINER Nicholas Florek <nicholas.florek@slh.wisc.edu>
+MAINTAINER Kelsey Florek <kelsey.florek@slh.wisc.edu>
 
 #install prerequisites including openjdk-11
 RUN apt-get update && apt-get install -y software-properties-common &&\

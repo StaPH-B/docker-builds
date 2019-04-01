@@ -10,7 +10,7 @@ LABEL description="LYVE-SET, a method of using hqSNPs to create a phylogeny, esp
 LABEL website="https://github.com/lskatz/lyve-SET"
 LABEL license="https://github.com/lskatz/lyve-SET/blob/master/LICENSE"
 
-MAINTAINER Nicholas Florek <nicholas.florek@slh.wisc.edu>
+MAINTAINER Kelsey Florek <kelsey.florek@slh.wisc.edu>
 
 #install dependencies
 RUN apt-get update && apt-get install -y\
