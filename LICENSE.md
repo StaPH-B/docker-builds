@@ -6,6 +6,8 @@ The licenses of the open-source software that is contained in these Docker image
 
 | Software | License | Link to license |
 | :--------: | :-------: | -------- |
+| mlst | GNU GPLv2 | https://github.com/tseemann/mlst/blob/master/LICENSE |
+| SKESA | Public Domain | https://github.com/ncbi/SKESA/blob/master/LICENSE |
 | FastANI | Apache v2.0 | https://github.com/ParBLiSS/FastANI/blob/master/LICENSE |
 | SRA-toolkit | Public Domain | https://github.com/ncbi/sra-tools/blob/master/LICENSE |
 | Lyve-SET  | MIT | https://github.com/lskatz/lyve-SET/blob/master/LICENSE |
