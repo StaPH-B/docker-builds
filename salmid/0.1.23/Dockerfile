@@ -23,7 +23,7 @@ RUN apt-get update && apt-get install -y \
 # install poetry, needed to make python wheel
 RUN pip3 install poetry
 
-RUN git clone https://github.com/hcdenbakker/SalmID.git &&\
+RUN git clone https://github.com/hcdenbakker/SalmID.git --branch 0.1.23 --single-branch &&\
  cd SalmID &&\
  poetry build -vvv &&\
  pip3 install dist/salmid*.whl &&\
