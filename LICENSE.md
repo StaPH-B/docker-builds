@@ -6,6 +6,7 @@ The licenses of the open-source software that is contained in these Docker image
 
 | Software | License | Link to license |
 | :--------: | :-------: | -------- |
+| seqyclean | MIT | https://github.com/ibest/seqyclean/blob/master/LICENSE |
 | SalmID| MIT | https://github.com/hcdenbakker/SalmID/blob/master/LICENSE |
 | mlst | GNU GPLv2 | https://github.com/tseemann/mlst/blob/master/LICENSE |
 | SKESA | Public Domain | https://github.com/ncbi/SKESA/blob/master/LICENSE |
