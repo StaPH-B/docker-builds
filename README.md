@@ -6,6 +6,7 @@ Each Dockerfile lists author/maintainer for that specific Docker image, but the 
   * [@k-florek](https://github.com/k-florek)
   * [@garfinjm](https://github.com/garfinjm)
   * [@kevinlibuit](https://github.com/kevinlibuit)
+  * [@Ikkik](https://github.com/Ikkik)
 
 If you would like to contribute with your own Docker image or perhaps improve upon the existing images, please fork the repository, make your changes/additions, and submit a pull request. If you are having an issue with an existing image, please submit an issue. We welcome any and all feedback!  
 [See more details on how to contribute here](https://staph-b.github.io/docker-builds/contribute/)
@@ -17,6 +18,7 @@ We have also created a user guide that outlines methods and best practices for u
 ## [Available Docker images](https://hub.docker.com/r/staphb/)
 | Software | Version | Link |
 | :--------: | :-------: | -------- |
+| [seqyclean](https://hub.docker.com/r/staphb/seqyclean) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/seqyclean.svg?style=popout)](https://hub.docker.com/r/staphb/seqyclean) | 1.10.09 | https://github.com/ibest/seqyclean |
 | [SalmID](https://hub.docker.com/r/staphb/salmid) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/salmid.svg?style=popout)](https://hub.docker.com/r/staphb/salmid) | 0.1.23 | https://github.com/hcdenbakker/SalmID |
 | [mlst](https://hub.docker.com/r/staphb/mlst) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/mlst.svg?style=popout)](https://hub.docker.com/r/staphb/mlst) | 2.16.2 | https://github.com/tseemann/mlst |
 | [SKESA](https://hub.docker.com/r/staphb/skesa) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/skesa.svg?style=popout)](https://hub.docker.com/r/staphb/skesa) | 2.3.0 | https://github.com/ncbi/SKESA |
