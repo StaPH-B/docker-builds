@@ -6,6 +6,7 @@ The licenses of the open-source software that is contained in these Docker image
 
 | Software | License | Link to license |
 | :--------: | :-------: | -------- |
+| mashtree | GNU GPLv3 | https://github.com/lskatz/mashtree/blob/master/LICENSE |
 | seqyclean | MIT | https://github.com/ibest/seqyclean/blob/master/LICENSE |
 | SalmID| MIT | https://github.com/hcdenbakker/SalmID/blob/master/LICENSE |
 | mlst | GNU GPLv2 | https://github.com/tseemann/mlst/blob/master/LICENSE |
