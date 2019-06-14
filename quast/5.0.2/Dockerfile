@@ -24,7 +24,13 @@ RUN apt-get update && apt-get install -y zlib1g-dev \
   python \
   python-setuptools \
   python-matplotlib \
-  python-pip && apt-get clean && apt-get autoclean
+  locales \
+  python-pip && \
+  locale-gen en_US.UTF-8 && \
+  apt-get clean && \
+  apt-get autoclean
+
+ENV LC_ALL=C
 
 RUN python -m pip install -U pip
 
