@@ -10,7 +10,7 @@ LABEL description="LYVE-SET, a method of using hqSNPs to create a phylogeny, esp
 LABEL website="https://github.com/lskatz/lyve-SET"
 LABEL license="https://github.com/lskatz/lyve-SET/blob/master/LICENSE"
 
-MAINTAINER Nicholas Florek <nicholas.florek@slh.wisc.edu>
+MAINTAINER Kelsey Florek <kelsey.florek@slh.wisc.edu>
 
 #install dependencies
 RUN apt-get update && apt-get install -y\
@@ -44,14 +44,20 @@ RUN wget https://github.com/lskatz/lyve-SET/archive/v2.0.1.tar.gz
 RUN tar -xzvf v2.0.1.tar.gz;rm v2.0.1.tar.gz;mv lyve-SET-2.0.1 lyve-SET
 
 #setup the lyveset filesystem
-RUN cpan Test::Most
-RUN cpan Bio::FeatureIO
-RUN cpan String::Escape
+RUN cpan Test::Most\
+         Bio::FeatureIO\
+         String::Escape\
+         Math::Round
 RUN make -C /lyve-SET install -e PREFIX=/lyve-SET
-RUN make -C /lyve-SET env -e PREFIX=/lyve-SET
+RUN make -C /lyve-SET env -e PREFIX=/lyve-SET && \
+    mkdir /data
 
 
 ENV PATH="/lyve-SET:\
 /lyve-SET/scripts:\
 /edirect:\
 ${PATH}"
+
+# set perl locale settings
+ENV LC_ALL=C
+WORKDIR /data

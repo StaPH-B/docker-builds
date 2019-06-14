@@ -10,7 +10,7 @@ LABEL website="https://github.com/sanger-pathogens/Roary"
 LABEL license="https://github.com/sanger-pathogens/Roary/blob/master/GPL-LICENSE"
 
 # Maintainer
-MAINTAINER Curtis Kapsak <curtis.kapsak@state.co.us>
+MAINTAINER Curtis Kapsak <pjx8@cdc.gov>
 
 # install dependencies
 RUN apt-get update && apt-get install -y bedtools \

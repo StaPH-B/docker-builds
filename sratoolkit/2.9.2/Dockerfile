@@ -11,7 +11,7 @@ LABEL website="https://github.com/ncbi/sra-tools"
 LABEL license="https://github.com/ncbi/sra-tools/blob/master/LICENSE"
 
 # Maintainer
-MAINTAINER Curtis Kapsak <curtis.kapsak@state.co.us>
+MAINTAINER Curtis Kapsak <pjx8@cdc.gov>
 
 # run update and install wget
 RUN apt-get update && apt-get install -y wget && apt-get clean

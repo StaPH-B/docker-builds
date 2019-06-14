@@ -11,7 +11,7 @@ LABEL website="https://github.com/denglab/SeqSero"
 LABEL license="https://github.com/denglab/SeqSero/blob/master/LICENSE"
 
 # Maintainer
-MAINTAINER Curtis Kapsak <curtis.kapsak@state.co.us>
+MAINTAINER Curtis Kapsak <pjx8@cdc.gov>
 
 # install dependencies using conda
 RUN apt-get update && apt-get -y install python-biopython \

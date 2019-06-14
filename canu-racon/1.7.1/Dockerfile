@@ -10,7 +10,7 @@ LABEL description="Long read assembly and polishing tools"
 LABEL website="https://github.com/marbl/canu;https://github.com/lh3/minimap2;https://github.com/isovic/racon"
 LABEL license="See program repositories"
 
-MAINTAINER Nicholas Florek <nicholas.florek@slh.wisc.edu>
+MAINTAINER Kelsey Florek <kelsey.florek@slh.wisc.edu>
 
 #install python
 RUN apt-get update && apt-get install -y\
@@ -26,7 +26,7 @@ RUN apt-get update && apt-get install -y\
  build-essential\
  cmake\
  zlib1g-dev
- 
+
 
 #install canu
 RUN wget https://github.com/marbl/canu/archive/v1.7.1.tar.gz
