@@ -57,7 +57,7 @@ RUN wget https://github.com/lskatz/lyve-SET/archive/v1.1.4f.tar.gz &&\
     mv lyve-SET-1.1.4f lyve-SET
 
 # download perl modules, setup the lyveset filesystem
-RUN cpanm Test::Most Bio::FeatureIO String::Escape File::Slurp URI::Escape
+RUN cpanm Test::Most Bio::FeatureIO String::Escape File::Slurp URI::Escape Math::Round
 RUN make -C /lyve-SET install -e PREFIX=/lyve-SET &&\
     make -C /lyve-SET env -e PREFIX=/lyve-SET
 
@@ -66,3 +66,4 @@ ENV PATH="/lyve-SET:\
 /lyve-SET/scripts:\
 /edirect:\
 ${PATH}"
+
