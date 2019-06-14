@@ -57,4 +57,7 @@ ENV PATH="/lyve-SET:\
 /lyve-SET/scripts:\
 /edirect:\
 ${PATH}"
+
+# set perl locale settings
+ENV LC_ALL=C
 WORKDIR /data
