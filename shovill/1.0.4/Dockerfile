@@ -168,3 +168,6 @@ ENV PATH="${PATH}:\
 /shovill/shovill-1.0.4/bin:\
 /pilon:\
 /samclip"
+
+# set perl locale settings
+ENV LC_ALL=C
