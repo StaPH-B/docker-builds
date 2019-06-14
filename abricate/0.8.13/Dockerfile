@@ -36,4 +36,7 @@ RUN abricate --check &&\
     abricate --setupdb &&\
     mkdir /data
 
+# set perl locale settings
+ENV LC_ALL=C
+
 WORKDIR /data
