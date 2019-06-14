@@ -54,5 +54,8 @@ RUN wget https://github.com/tseemann/prokka/archive/v1.13.4.tar.gz && \
 ENV PATH="$PATH:/prokka-1.13.4/bin:\
 /barrnap-0.9/bin"
 
+# set perl locale settings so barrnap works in singularity image
+ENV LC_ALL=C
+
 RUN prokka --setupdb && prokka --listdb
 WORKDIR /data
