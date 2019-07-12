@@ -33,3 +33,4 @@ The licenses of the open-source software that is contained in these Docker image
 | Shovill | GNU GPLv3 | https://github.com/tseemann/shovill/blob/master/LICENSE |
 | BWA | GNU GPLv3 | https://github.com/lh3/bwa/blob/master/COPYING |
 | Samtools | GNU GPLv3 | https://github.com/samtools/samtools/blob/develop/LICENSE |
+| kSNP3 | BSD | available in zipped kSNP archive on sourceforge or in docker image under `/kSNP3.1_Linux_package/THE BSD OPENSOURCE LICENSE.pdf` |
