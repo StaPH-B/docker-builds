@@ -15,8 +15,10 @@ RUN apt-get update && apt-get install -y python \
 
 RUN wget https://sourceforge.net/projects/ksnp/files/kSNP3.1_Linux_package.zip && \
   unzip kSNP3.1_Linux_package.zip && \
+  mv /kSNP3.1_Linux_package/kSNP3/ /usr/local && \
   rm -r kSNP3.1_Linux_package.zip && \
   mkdir data
 
-ENV PATH="${PATH}:/kSNP3.1_Linux_package/kSNP3"
+ENV PATH ="${PATH}:/usr/local/kSNP3/"
+
 WORKDIR /data
