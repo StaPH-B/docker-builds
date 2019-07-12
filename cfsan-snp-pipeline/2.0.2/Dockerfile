@@ -1,6 +1,7 @@
-FROM phusion/baseimage:0.9.12
+FROM ubuntu:xenial
 
-LABEL base.image="phusion/baseimage:0.9.12"
+# metadata
+LABEL base.image="ubuntu:xenial"
 LABEL version="1"
 LABEL software="cfsan_snp_pipeline"
 LABEL software.version="2.0.2"
@@ -13,10 +14,6 @@ LABEL lisence="https://github.com/CFSAN-Biostatistics/snp-pipeline/blob/master/L
 # The dockerfile has been modified from it's original form by Curtis Kapsak
 MAINTAINER Justin Payne, <justin.payne@fda.hhs.gov>
 MAINTAINER Curtis Kapsak, <pjx8@cdc.gov>
-
-# Had to add this since openjdk-8-jre is not available in the apt-repository
-# for Ubuntu:trusty/Ubuntu 14.04 (version of Ubuntu that Phusion is based on)
-RUN add-apt-repository ppa:openjdk-r/ppa
 
 WORKDIR /tmp/
 RUN apt-get update -y \
