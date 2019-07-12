@@ -6,31 +6,32 @@ The licenses of the open-source software that is contained in these Docker image
 
 | Software | License | Link to license |
 | :--------: | :-------: | -------- |
-| mashtree | GNU GPLv3 | https://github.com/lskatz/mashtree/blob/master/LICENSE |
-| seqyclean | MIT | https://github.com/ibest/seqyclean/blob/master/LICENSE |
-| SalmID| MIT | https://github.com/hcdenbakker/SalmID/blob/master/LICENSE |
-| mlst | GNU GPLv2 | https://github.com/tseemann/mlst/blob/master/LICENSE |
-| SKESA | Public Domain | https://github.com/ncbi/SKESA/blob/master/LICENSE |
+| ABRicate | GNU GPLv2 | https://github.com/tseemann/abricate/blob/master/LICENSE |
+| BWA | GNU GPLv3 | https://github.com/lh3/bwa/blob/master/COPYING |
+| Canu <br/> Racon <br/> Minimap2 | GNU GPLv3 (Canu), <br/> MIT (Racon), <br/> MIT (Minimap2) | https://github.com/marbl/canu/blob/master/README.license.GPL https://github.com/isovic/racon/blob/master/LICENSE https://github.com/lh3/minimap2/blob/master/LICENSE.txt |
+| CDC-SPN | ? | https://github.com/BenJamesMetcalf/Spn_Scripts_Reference |
+| cfsan-snp-pipeline | non-standard license see --> | https://github.com/CFSAN-Biostatistics/snp-pipeline/blob/master/LICENSE.txt |
 | FastANI | Apache v2.0 | https://github.com/ParBLiSS/FastANI/blob/master/LICENSE |
-| SRA-toolkit | Public Domain | https://github.com/ncbi/sra-tools/blob/master/LICENSE |
-| Lyve-SET  | MIT | https://github.com/lskatz/lyve-SET/blob/master/LICENSE |
+| iqtree | GNU GPLv2 | https://github.com/Cibiv/IQ-TREE/blob/master/LICENSE |
 | Kraken | GNU GPLv3 | https://github.com/DerrickWood/kraken/blob/master/LICENSE |
-| SPAdes | GNU GPLv2 | https://github.com/ablab/spades/blob/spades_3.13.0/assembler/LICENSE |
-| QUAST | GNU GPLv2 | https://github.com/ablab/quast/blob/master/LICENSE.txt |
+| kSNP3 | BSD | available in zipped kSNP archive on sourceforge or in docker image under `/kSNP3.1_Linux_package/THE BSD OPENSOURCE LICENSE.pdf` |
+| Lyve-SET  | MIT | https://github.com/lskatz/lyve-SET/blob/master/LICENSE |
 | Mash | non-standard license (see link) | https://github.com/marbl/Mash/blob/master/LICENSE.txt |
-| SerotypeFinder | Apache 2.0 | https://bitbucket.org/genomicepidemiology/serotypefinder/ |
+| mashtree | GNU GPLv3 | https://github.com/lskatz/mashtree/blob/master/LICENSE |
+| mlst | GNU GPLv2 | https://github.com/tseemann/mlst/blob/master/LICENSE |
+| Prokka | GNU GPLv3 | https://raw.githubusercontent.com/tseemann/prokka/master/doc/LICENSE.Prokka |
+| QUAST | GNU GPLv2 | https://github.com/ablab/quast/blob/master/LICENSE.txt |
+| Roary | GNU GPLv3 | https://github.com/sanger-pathogens/Roary/blob/master/GPL-LICENSE |
+| SalmID| MIT | https://github.com/hcdenbakker/SalmID/blob/master/LICENSE |
+| Samtools | GNU GPLv3 | https://github.com/samtools/samtools/blob/develop/LICENSE |
 | SeqSero | GNU GPLv2 | https://github.com/denglab/SeqSero/blob/master/LICENSE |
 | SeqSero2 | GNU GPLv2 | https://github.com/denglab/SeqSero2/blob/master/LICENSE |
-| SISTR | Apache 2.0 | https://github.com/phac-nml/sistr_cmd/blob/master/LICENSE |
-| ABRicate | GNU GPLv2 | https://github.com/tseemann/abricate/blob/master/LICENSE |
-| Prokka | GNU GPLv3 | https://raw.githubusercontent.com/tseemann/prokka/master/doc/LICENSE.Prokka |
-| Trimmomatic | GNU GPLv3 | https://academic.oup.com/bioinformatics/article/30/15/2114/2390096 |
-| iqtree | GNU GPLv2 | https://github.com/Cibiv/IQ-TREE/blob/master/LICENSE |
-| Unicycler | GNU GPLv3 | https://github.com/rrwick/Unicycler/blob/master/LICENSE |
-| Canu <br/> Racon <br/> Minimap2 | GNU GPLv3 (Canu), <br/> MIT (Racon), <br/> MIT (Minimap2) | https://github.com/marbl/canu/blob/master/README.license.GPL https://github.com/isovic/racon/blob/master/LICENSE https://github.com/lh3/minimap2/blob/master/LICENSE.txt |
-| Roary | GNU GPLv3 | https://github.com/sanger-pathogens/Roary/blob/master/GPL-LICENSE |
-| CDC-SPN | ? | https://github.com/BenJamesMetcalf/Spn_Scripts_Reference |
+| seqyclean | MIT | https://github.com/ibest/seqyclean/blob/master/LICENSE |
+| SerotypeFinder | Apache 2.0 | https://bitbucket.org/genomicepidemiology/serotypefinder/ |
 | Shovill | GNU GPLv3 | https://github.com/tseemann/shovill/blob/master/LICENSE |
-| BWA | GNU GPLv3 | https://github.com/lh3/bwa/blob/master/COPYING |
-| Samtools | GNU GPLv3 | https://github.com/samtools/samtools/blob/develop/LICENSE |
-| kSNP3 | BSD | available in zipped kSNP archive on sourceforge or in docker image under `/kSNP3.1_Linux_package/THE BSD OPENSOURCE LICENSE.pdf` |
+| SISTR | Apache 2.0 | https://github.com/phac-nml/sistr_cmd/blob/master/LICENSE |
+| SKESA | Public Domain | https://github.com/ncbi/SKESA/blob/master/LICENSE |
+| SPAdes | GNU GPLv2 | https://github.com/ablab/spades/blob/spades_3.13.0/assembler/LICENSE |
+| SRA-toolkit | Public Domain | https://github.com/ncbi/sra-tools/blob/master/LICENSE |
+| Trimmomatic | GNU GPLv3 | https://academic.oup.com/bioinformatics/article/30/15/2114/2390096 |
+| Unicycler | GNU GPLv3 | https://github.com/rrwick/Unicycler/blob/master/LICENSE |
