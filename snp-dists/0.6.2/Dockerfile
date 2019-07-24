@@ -11,11 +11,14 @@ LABEL website="https://github.com/tseemann/snp-dists"
 MAINTAINER Kevin Libuit <kevin.libuit@dgs.virginia.gov>
 
 RUN apt-get update && apt-get install -y python \
-  git make libz-dev gcc
+  wget make libz-dev gcc
 
 RUN cd / &&\
-  git clone https://github.com/tseemann/snp-dists.git && \
-  cd /snp-dists &&\
+  wget https://github.com/tseemann/snp-dists/archive/v0.6.2.tar.gz && \
+  tar -xzf v0.6.2.tar.gz &&\
+  cd /snp-dists-0.6.2 &&\
   make &&\
   make PREFIX=/usr/local install 
 
+RUN mkdir /data
+WORKDIR /data
