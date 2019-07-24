@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y python \
 RUN cd / &&\
   wget https://github.com/tseemann/snp-dists/archive/v0.6.2.tar.gz && \
   tar -xzf v0.6.2.tar.gz &&\
+  rm v0.6.2.tar.gz &&\
   cd /snp-dists-0.6.2 &&\
   make &&\
   make PREFIX=/usr/local install 
