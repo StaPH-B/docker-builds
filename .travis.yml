@@ -5,6 +5,7 @@ services:
   - docker
 install:
   - docker build -t mash:2.1 mash/2.1
+  - docker build -t mashtree:0.52 mashtree/0.52.0
 script:
   - bash tests/mash-test.sh
-
+  - bash tests/mashtree-test.sh
