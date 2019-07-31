@@ -7,4 +7,5 @@ install:
   - docker build -t mash:2.1 mash/2.1
 script:
   - docker run mash:2.1 mash
-  - ls -F
+  - docker run mash:2.1 mash info /db/RefSeqSketchesDefaults.msh > mashdb.info
+  - md5sum mashdb.info
