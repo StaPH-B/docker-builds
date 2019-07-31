@@ -6,6 +6,5 @@ services:
 install:
   - docker build -t mash:2.1 mash/2.1
 script:
-  - docker run mash:2.1 mash
-  - docker run mash:2.1 mash info /db/RefSeqSketchesDefaults.msh > mashdb.info
+  - bash tests/mash-test.sh
 
