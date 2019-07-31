@@ -6,11 +6,11 @@ services:
 install:
   - mkdir -pv test/builds
   #- docker build -t quast:5.0.2 quast/5.0.2
-  #- docker run -d -p 127.0.0.1:80:80 --name staphb/quast:5.0.2 quast.py --version
+  #- docker run -d -p 127.0.0.1:80:80 quast:5.0.2 quast.py --version
   #- docker build -t lyveset:1.1.4f lyveset/1.1.4f
   #- docker run -d -p  127.0.0.1:80:81 --name lyveset:1.1.4f
   - docker build -t mash:2.1 mash/2.1
-  - docker run -d -p 127.0.0.1:80:82 --name staphb/mash:2.1 mash
+  - docker run -d -p 127.0.0.1:80:82 mash:2.1 mash
 script:
   - docker ps | grep mash 
   - ls -F
