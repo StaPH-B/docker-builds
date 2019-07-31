@@ -1,0 +1,12 @@
+language: python
+python:
+  - 2.7
+  - 3.5
+services:
+  - docker
+install:
+  - mkdir -pv test/builds
+  - docker build -t lyveset:1.1.4f lyveset/1.1.4f
+  - docker run -d -p  127.0.0.1:80:80 --name lyveset:1.1.4f
+script:
+  - docker ps | grep -q lyveset
