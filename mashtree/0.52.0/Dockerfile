@@ -46,7 +46,6 @@ RUN wget https://github.com/lskatz/mashtree/archive/v0.52.tar.gz && \
   rm -rf v0.52.tar.gz && \
   cd mashtree-0.52/ && \
   perl Makefile.PL && \
-  make test && \
   mkdir /data
 
 ENV PATH="${PATH}:/mashtree-0.52/bin"
