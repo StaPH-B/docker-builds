@@ -9,6 +9,6 @@ install:
 script:
   - docker run mash:2.1 mash
   - docker run mash:2.1 mash info /db/RefSeqSketchesDefaults.msh > mashdb.info
-  - [ "$(md5sum mashdb.info | cut -f 1)" == "a1214deaaa03ef288f4bd063aab8eebd" ] 
+  - bash -c ' [ "$(md5sum mashdb.info | cut -f 1)" == "a1214deaaa03ef288f4bd063aab8eebd" ] '
   - docker run mashtree:0.52 /bin/bash -c 'cd /mashtree-0.52 && perl Makefile.PL && make test'
 
