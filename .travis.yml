@@ -6,7 +6,7 @@ services:
 install:
   - mkdir -pv test/builds
   - docker build -t quast:5.0.2 quast/5.0.2
-  - docker run -d -p 127.0.0.1:80:80 --name quast:5.0.2
+  - docker run -d -p 127.0.0.1:80:80 --name quast:5.0.2 quast.py --version
   #- docker build -t lyveset:1.1.4f lyveset/1.1.4f
   #- docker run -d -p  127.0.0.1:80:81 --name lyveset:1.1.4f
 script:
