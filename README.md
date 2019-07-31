@@ -7,6 +7,7 @@ Each Dockerfile lists author/maintainer for that specific Docker image, but the 
   * [@garfinjm](https://github.com/garfinjm)
   * [@kevinlibuit](https://github.com/kevinlibuit)
   * [@Ikkik](https://github.com/Ikkik)
+  * [@lskatz](https://github.com/lskatz)
 
 If you would like to contribute with your own Docker image or perhaps improve upon the existing images, please fork the repository, make your changes/additions, and submit a pull request. If you are having an issue with an existing image, please submit an issue. We welcome any and all feedback!  
 [See more details on how to contribute here](https://staph-b.github.io/docker-builds/contribute/)
@@ -16,6 +17,8 @@ We have also created a user guide that outlines methods and best practices for u
 [Docker User Guide](https://staph-b.github.io/docker-builds/)
 
 ## [Available Docker images](https://hub.docker.com/r/staphb/)
+[![Build Status](https://travis-ci.com/StaPH-B/docker-builds.svg?branch=master)](https://travis-ci.com/StaPH-B/docker-builds) (Build only reflects those containers that have been added to the TravisCI tests)
+
 | Software | Version | Link |
 | :--------: | :-------: | -------- |
 | [ABRicate](https://hub.docker.com/r/staphb/abricate/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/abricate.svg?style=popout)](https://hub.docker.com/r/staphb/abricate) | 0.8.7, 0.8.13 | https://github.com/tseemann/abricate |
