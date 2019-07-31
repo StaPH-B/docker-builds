@@ -5,7 +5,6 @@ services:
   - docker
 install:
   - docker build -t mash:2.1 mash/2.1
-  - docker run mash:2.1
 script:
-  - docker ps | grep mash 
+  - docker run mash:2.1 mash
   - ls -F
