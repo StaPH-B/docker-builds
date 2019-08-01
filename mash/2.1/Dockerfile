@@ -29,4 +29,7 @@ RUN wget https://github.com/marbl/Mash/releases/download/v2.1/mash-Linux64-v2.1.
 
 ENV PATH="${PATH}:/mash-Linux64-v2.1"
 
+# set perl locale settings
+ENV LC_ALL=C
+
 WORKDIR /data
