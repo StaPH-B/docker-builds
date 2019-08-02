@@ -8,8 +8,10 @@ install:
   - docker build -t mashtree:0.52 mashtree/0.52.0
   - docker build -t spades:3.13.0 spades/3.13.0
   - docker build -t quast:5.0.2 quast/5.0.2
+  - docker build -t shovill:1.0.4 shovill/1.0.4
 script:
   - bash tests/mash-test.sh
   - bash tests/mashtree-test.sh
   - bash tests/spades.sh
   - bash tests/quast.sh
+  - bash tests/shovill.sh
