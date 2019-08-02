@@ -38,9 +38,7 @@ RUN wget https://github.com/ablab/quast/releases/download/quast_5.0.2/quast-5.0.
     tar -xzf quast-5.0.2.tar.gz && \
     rm -r quast-5.0.2.tar.gz
 RUN cd /quast-5.0.2 && \
-    /quast-5.0.2/setup.py install
-RUN cd /quast-5.0.2 && \
-    /quast-5.0.2/setup.py test && \
+    /quast-5.0.2/setup.py install && \
     mkdir /data
 
 WORKDIR /data
