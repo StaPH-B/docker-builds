@@ -6,7 +6,7 @@ LABEL software="Flye"
 LABEL software.version="2.5"
 LABEL description="Fast and accurate de novo assembler for single molecule sequencing reads"
 LABEL website="https://github.com/fenderglass/Flye"
-LABEL lisence="https://github.com/fenderglass/Flye/blob/flye/LICENSE"
+LABEL license="https://github.com/fenderglass/Flye/blob/flye/LICENSE"
 
 MAINTAINER Curtis Kapsak <pjx8@cdc.gov>
 

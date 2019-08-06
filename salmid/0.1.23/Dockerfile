@@ -6,7 +6,7 @@ LABEL software="SalmID"
 LABEL software.version="0.1.23"
 LABEL description="Rapid confirmation of Salmonella spp. and subspp. from sequence data"
 LABEL website="https://github.com/hcdenbakker/SalmID"
-LABEL lisence="https://github.com/hcdenbakker/SalmID/blob/master/LICENSE"
+LABEL license="https://github.com/hcdenbakker/SalmID/blob/master/LICENSE"
 
 MAINTAINER Curtis Kapsak <pjx8@cdc.gov>
 

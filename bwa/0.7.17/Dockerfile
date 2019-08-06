@@ -6,7 +6,7 @@ LABEL software="BWA"
 LABEL software.version="0.7.17"
 LABEL description="Burrow-Wheeler Aligner for short-read alignment"
 LABEL website="https://github.com/lh3/bwa"
-LABEL lisence="https://github.com/lh3/bwa/blob/master/COPYING"
+LABEL license="https://github.com/lh3/bwa/blob/master/COPYING"
 
 MAINTAINER Curtis Kapsak <pjx8@cdc.gov>
 

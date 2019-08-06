@@ -6,7 +6,7 @@ LABEL software="mlst"
 LABEL software.version="2.16.2"
 LABEL description="Scan contig files against PubMLST typing schemes"
 LABEL website="https://github.com/tseemann/mlst"
-LABEL lisence="https://github.com/tseemann/mlst/blob/master/LICENSE"
+LABEL license="https://github.com/tseemann/mlst/blob/master/LICENSE"
 
 MAINTAINER Curtis Kapsak <pjx8@cdc.gov>
 

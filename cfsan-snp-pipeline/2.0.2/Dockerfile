@@ -7,7 +7,7 @@ LABEL software="cfsan_snp_pipeline"
 LABEL software.version="2.0.2"
 LABEL description="A pipeline for the production of SNP matrices from sequence data used in the phylogenetic analysis of pathogenic organisms sequenced from samples of interest to food safety."
 LABEL website="https://github.com/CFSAN-Biostatistics/snp-pipeline"
-LABEL lisence="https://github.com/CFSAN-Biostatistics/snp-pipeline/blob/master/LICENSE.txt"
+LABEL license="https://github.com/CFSAN-Biostatistics/snp-pipeline/blob/master/LICENSE.txt"
 
 # This Dockerfile is based on a Docker file from Justin Payne which can be found here:
 # https://hub.docker.com/r/crashfrog/snp-pipeline/dockerfile
