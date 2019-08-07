@@ -9,9 +9,8 @@ LABEL software.version="5.0.2"
 LABEL description="Genome assembly evaluation tool"
 LABEL website="https://github.com/ablab/quast"
 LABEL license="https://github.com/ablab/quast/blob/master/LICENSE.txt"
-
-# Maintainer
-MAINTAINER Curtis Kapsak <pjx8@cdc.gov>
+LABEL maintainer="Curtis Kapsak"
+LABEL maintainer.email="pjx8@cdc.gov"
 
 RUN apt-get update && apt-get install -y zlib1g-dev \
   pkg-config \

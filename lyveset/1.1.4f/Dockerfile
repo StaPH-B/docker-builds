@@ -9,9 +9,10 @@ LABEL software.version="1.1.4f"
 LABEL description="LYVE-SET, a method of using hqSNPs to create a phylogeny, especially for outbreak investigations"
 LABEL website="https://github.com/lskatz/lyve-SET"
 LABEL license="https://github.com/lskatz/lyve-SET/blob/master/LICENSE"
-
-MAINTAINER Kelsey Florek <kelsey.florek@slh.wisc.edu>
-MAINTAINER Curtis Kapsak <pjx8@cdc.gov>
+LABEL maintainer1="Kelsey Florek"
+LABEL maintainer1.email="kelsey.florek@slh.wisc.edu"
+LABEL maintainer2="Curtis Kapsak"
+LABEL maintainer2.email="pjx8@cdc.gov"
 
 #install dependencies
 RUN apt-get update && apt-get install -y\

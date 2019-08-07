@@ -7,8 +7,8 @@ LABEL software="snp-dists"
 LABEL software.version="1.0"
 LABEL description="Convert a FASTA alignment to SNP distance matrix"
 LABEL website="https://github.com/tseemann/snp-dists"
-
-MAINTAINER Kevin Libuit <kevin.libuit@dgs.virginia.gov>
+LABEL maintainer="Kevin Libuit"
+LABEL maintainer.email="kevin.libuit@dgs.virginia.gov"
 
 RUN apt-get update && apt-get install -y python \
   wget make libz-dev gcc

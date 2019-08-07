@@ -9,9 +9,8 @@ LABEL software.version="1.13.3"
 LABEL description="Automated prokaryotic genome annotation tool"
 LABEL website="https://github.com/tseemann/prokka"
 LABEL license="https://github.com/tseemann/prokka#licence"
-
-# Maintainer
-MAINTAINER Curtis Kapsak <pjx8@cdc.gov>
+LABEL maintainer="Curtis Kapsak"
+LABEL maintainer.email="pjx8@cdc.gov"
 
 # install dependencies using conda
 RUN apt-get update && apt-get -y install \

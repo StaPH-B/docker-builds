@@ -1,6 +1,6 @@
 FROM ubuntu:xenial
 
-# metadata (there are a few other labels you can add, these are optional but preferred!)
+# metadata
 LABEL base.image="ubuntu:xenial"
 LABEL version="1"
 LABEL software="seqyclean"
@@ -8,8 +8,8 @@ LABEL software.version="1.10.09"
 LABEL description="Trims and cleans fastq files"
 LABEL website="https://github.com/ibest/seqyclean"
 LABEL license="https://github.com/ibest/seqyclean/blob/master/LICENSE"
-
-MAINTAINER Erin Young <eriny@utah.gov>
+LABEL maintainer="Erin Young"
+LABEL maintainer.email="eriny@utah.gov"
 
 # getting dependencies
 RUN apt-get update && \

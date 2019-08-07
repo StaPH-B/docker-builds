@@ -9,8 +9,8 @@ LABEL software.version="1.6.7"
 LABEL description="Efficient software for phylogenomic inference"
 LABEL website="http://www.iqtree.org/"
 LABEL license="https://github.com/Cibiv/IQ-TREE/blob/master/LICENSE"
-
-MAINTAINER Kelsey Florek <kelsey.florek@slh.wisc.edu>
+LABEL maintainer="Kelsey Florek"
+LABEL maintainer.email="kelsey.florek@slh.wisc.edu"
 
 #install dependencies
 RUN apt-get update && apt-get install -y \

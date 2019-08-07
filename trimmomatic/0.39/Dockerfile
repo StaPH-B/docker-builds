@@ -9,9 +9,10 @@ LABEL software.version="0.39"
 LABEL description="Trimmomatic: A flexible read trimming tool for Illumina NGS data"
 LABEL website="http://www.usadellab.org/cms/?page=trimmomatic"
 LABEL license="GNU General Public License"
-
-MAINTAINER Kelsey Florek <kelsey.florek@slh.wisc.edu>
-MAINTAINER Curtis Kapsak <pjx8@cdc.gov> 
+LABEL maintainer1="Kelsey Florek"
+LABEL maintainer1.email="kelsey.florek@slh.wisc.edu"
+LABEL maintainer2="Curtis Kapsak"
+LABEL maintainer2.email="pjx8@cdc.gov"
 
 #install openjdk-11 jre
 RUN apt-get update && apt-get install -y software-properties-common &&\

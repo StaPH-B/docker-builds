@@ -7,8 +7,8 @@ LABEL software.version="2.5"
 LABEL description="Fast and accurate de novo assembler for single molecule sequencing reads"
 LABEL website="https://github.com/fenderglass/Flye"
 LABEL license="https://github.com/fenderglass/Flye/blob/flye/LICENSE"
-
-MAINTAINER Curtis Kapsak <pjx8@cdc.gov>
+LABEL maintainer="Curtis Kapsak"
+LABEL maintainer.email="pjx8@cdc.gov"
 
 RUN apt-get update && apt-get install -y make \
   gcc \

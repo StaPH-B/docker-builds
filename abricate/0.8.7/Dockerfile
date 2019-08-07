@@ -2,15 +2,14 @@ FROM ubuntu:xenial
 
 # metadata
 LABEL base.image="ubuntu:xenial"
-LABEL version="1"
+LABEL version="1.0.0"
 LABEL software="Abricate"
 LABEL software.version="0.8.7"
 LABEL description="Mass screening of contigs for AMR or virulence genes"
 LABEL website="https://github.com/tseemann/abricate"
 LABEL license="https://github.com/tseemann/abricate/blob/master/LICENSE"
-
-# Maintainer
-MAINTAINER Curtis Kapsak <pjx8@cdc.gov>
+LABEL maintainer="Curtis Kapsak"
+LABEL maintainer.email="pjx8@cdc.gov"
 
 # install dependencies
 RUN apt-get update && apt-get install -y \
@@ -32,3 +31,6 @@ ENV PATH="/abricate-0.8.7/bin:$PATH"
 
 RUN abricate --check
 RUN abricate --setupdb && mkdir /data
+
+# set perl locale settings
+ENV LC_ALL=C

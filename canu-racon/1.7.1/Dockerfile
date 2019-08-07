@@ -9,8 +9,8 @@ LABEL software.version="1.7.1"
 LABEL description="Long read assembly and polishing tools"
 LABEL website="https://github.com/marbl/canu;https://github.com/lh3/minimap2;https://github.com/isovic/racon"
 LABEL license="See program repositories"
-
-MAINTAINER Kelsey Florek <kelsey.florek@slh.wisc.edu>
+LABEL maintainer="Kelsey Florek"
+LABEL maintainer.email="kelsey.florek@slh.wisc.edu"
 
 #install python
 RUN apt-get update && apt-get install -y\
