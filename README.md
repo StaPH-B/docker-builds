@@ -8,6 +8,7 @@ Each Dockerfile lists author/maintainer for that specific Docker image, but the 
   * [@kevinlibuit](https://github.com/kevinlibuit)
   * [@Ikkik](https://github.com/Ikkik)
   * [@lskatz](https://github.com/lskatz)
+  * [@stjacqrm](https://github.com/stjacqrm)
 
 If you would like to contribute with your own Docker image or perhaps improve upon the existing images, please fork the repository, make your changes/additions, and submit a pull request. If you are having an issue with an existing image, please submit an issue. We welcome any and all feedback!  
 [See more details on how to contribute here](https://staph-b.github.io/docker-builds/contribute/)
@@ -51,6 +52,7 @@ We have also created a user guide that outlines methods and best practices for u
 | [snp-dists](https://hub.docker.com/r/staphb/snp-dists) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/snp-dists.svg?style=popout)](https://hub.docker.com/r/staphb/snp-dists) | 0.6.2 | https://github.com/tseemann/snp-dists |
 | [SPAdes](https://hub.docker.com/r/staphb/spades/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/spades.svg?style=popout)](https://hub.docker.com/r/staphb/spades) | 3.12.0, 3.13.0 | http://cab.spbu.ru/software/spades/ |
 | [SRA-toolkit](https://hub.docker.com/r/staphb/sratoolkit/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/sratoolkit.svg?style=popout)](https://hub.docker.com/r/staphb/sratoolkit) | 2.9.2 | https://github.com/ncbi/sra-tools |
+| [Staramr](https://hub.docker.com/r/staphb/staramr/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/staramr.svg?style=popout) | 0.5.1 | https://github.com/phac-nml/staramr |
 | [Trimmomatic](https://hub.docker.com/r/staphb/trimmomatic/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/trimmomatic.svg?style=popout)](https://hub.docker.com/r/staphb/trimmomatic) | 0.38, 0.39 | http://www.usadellab.org/cms/?page=trimmomatic |
 | [Unicycler](https://hub.docker.com/r/staphb/unicycler/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/unicycler.svg?style=popout)](https://hub.docker.com/r/staphb/unicycler) | 0.4.7 | https://github.com/rrwick/Unicycler |
 
