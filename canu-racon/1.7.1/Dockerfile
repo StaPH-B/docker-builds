@@ -42,3 +42,5 @@ RUN cd racon/build/; make; make install
 RUN git clone https://github.com/lh3/minimap2; cd minimap2; git checkout v2.13; make
 
 ENV PATH="/canu-1.7.1/Linux-amd64/bin/:/racon/build/bin:/minimap2:${PATH}"
+
+WORKDIR /data
