@@ -9,8 +9,8 @@ LABEL software.version="0.4.7"
 LABEL description="Unicycler is an assembly pipeline for bacterial genomes."
 LABEL website="https://github.com/rrwick/Unicycler"
 LABEL license="https://github.com/rrwick/Unicycler#license"
-
-MAINTAINER Kelsey Florek <kelsey.florek@slh.wisc.edu>
+LABEL maintainer="Kelsey Florek"
+LABEL maintainer.email="kelsey.florek@slh.wisc.edu"
 
 #install prerequisites including openjdk-11
 RUN apt-get update && apt-get install -y software-properties-common &&\
@@ -29,7 +29,6 @@ RUN apt-get update && apt-get install -y software-properties-common &&\
  liblzma-dev\
  cmake
 
-
 #get unicycler
 RUN wget https://github.com/rrwick/Unicycler/archive/v0.4.7.tar.gz &&\
  mkdir unicycler &&\
@@ -39,13 +38,11 @@ RUN wget https://github.com/rrwick/Unicycler/archive/v0.4.7.tar.gz &&\
 #get pilon
 RUN wget https://github.com/broadinstitute/pilon/releases/download/v1.22/pilon-1.22.jar -P /pilon
 
-
 #get spades
 RUN wget http://cab.spbu.ru/files/release3.13.0/SPAdes-3.13.0-Linux.tar.gz &&\
  mkdir spades &&\
  tar -xzvf SPAdes-3.13.0-Linux.tar.gz -C spades --strip-components 1 &&\
  rm SPAdes-3.13.0-Linux.tar.gz
-
 
 #get samtools and bcftools
 RUN wget https://github.com/samtools/samtools/releases/download/1.9/samtools-1.9.tar.bz2 &&\
@@ -82,7 +79,6 @@ RUN wget https://github.com/lh3/miniasm/archive/v0.3.tar.gz &&\
  rm v0.3.tar.gz &&\
  cd miniasm &&\
  make
-
 
 #build unicycler
 RUN python3 /unicycler/setup.py install

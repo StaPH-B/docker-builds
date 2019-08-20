@@ -9,9 +9,8 @@ LABEL software.version="1.0.2"
 LABEL description="Salmonella In Silico Typing Resource (SISTR)"
 LABEL website="https://github.com/peterk87/sistr_cmd"
 LABEL license="https://github.com/peterk87/sistr_cmd/blob/master/LICENSE"
-
-# Maintainer
-MAINTAINER Curtis Kapsak <pjx8@cdc.gov>
+LABEL maintainer="Curtis Kapsak"
+LABEL maintainer.email="pjx8@cdc.gov"
 
 # install dependencies using conda
 RUN apt-get update && apt-get -y install \

@@ -8,9 +8,8 @@ LABEL software.version="3.12.0"
 LABEL description="Rapid large-scale prokaryotic pan genome analysis"
 LABEL website="https://github.com/sanger-pathogens/Roary"
 LABEL license="https://github.com/sanger-pathogens/Roary/blob/master/GPL-LICENSE"
-
-# Maintainer
-MAINTAINER Curtis Kapsak <pjx8@cdc.gov>
+LABEL maintainer="Curtis Kapsak"
+LABEL maintainer.email="pjx8@cdc.gov"
 
 # install dependencies
 RUN apt-get update && apt-get install -y bedtools \
@@ -36,3 +35,7 @@ RUN cpanm LWP::Simple \
 
 RUN cpanm --force AJPAGE/Bio-Roary-3.12.0.tar.gz && \
       mkdir /data
+
+WORKDIR /data
+# set perl locale settings
+ENV LC_ALL=C

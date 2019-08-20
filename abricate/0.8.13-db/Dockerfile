@@ -13,6 +13,7 @@ LABEL maintainer.email="pjx8@cdc.gov"
 
 # install dependencies
 RUN apt-get update && apt-get install -y \
+  bzip2 \
   emboss \
   bioperl \
   ncbi-blast+ \
@@ -24,16 +25,34 @@ RUN apt-get update && apt-get install -y \
   liblwp-protocol-https-perl \
   libwww-perl \
   git \
-  wget && apt-get clean
+  wget && apt-get clean && apt-get autoclean
+
+# edirect needed for updating dbs
+RUN wget ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/edirect.tar.gz &&\
+    tar -xzvf edirect.tar.gz &&\
+    rm edirect.tar.gz &&\
+    cd edirect &&\
+    ./setup.sh
 
 RUN wget https://github.com/tseemann/abricate/archive/v0.8.13.tar.gz &&\
     tar -zxvf v0.8.13.tar.gz &&\
     rm -rf v0.8.13.tar.gz
-ENV PATH="/abricate-0.8.13/bin:$PATH"
+ENV PATH="/abricate-0.8.13/bin:/edirect:$PATH"
 
 RUN abricate --check &&\
     abricate --setupdb &&\
     mkdir /data
+
+RUN abricate-get_db --db plasmidfinder --force &&\
+abricate-get_db --db vfdb --force &&\
+abricate-get_db --db ecoh --force &&\
+abricate-get_db --db card --force &&\
+abricate-get_db --db ecoli_vf --force &&\
+abricate-get_db --db ncbi --force &&\
+abricate-get_db --db resfinder --force 
+## commented out because the argannot link is broken, Torsten hasn't put the fix in a release yet
+#abricate-get_db --db argannot --force 
+
 
 # set perl locale settings
 ENV LC_ALL=C

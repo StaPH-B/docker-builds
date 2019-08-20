@@ -9,9 +9,8 @@ LABEL software.version="1.1.1"
 LABEL description="Taxonomic sequence classifier"
 LABEL website="https://github.com/DerrickWood/kraken"
 LABEL license="https://github.com/DerrickWood/kraken/blob/master/LICENSE"
-
-# Maintainer
-MAINTAINER Curtis Kapsak <pjx8@cdc.gov>
+LABEL maintainer="Curtis Kapsak"
+LABEL maintainer.email="pjx8@cdc.gov"
 
 # install dependencies
 RUN apt-get update && apt-get -y install \

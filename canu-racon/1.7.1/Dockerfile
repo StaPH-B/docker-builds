@@ -9,8 +9,8 @@ LABEL software.version="1.7.1"
 LABEL description="Long read assembly and polishing tools"
 LABEL website="https://github.com/marbl/canu;https://github.com/lh3/minimap2;https://github.com/isovic/racon"
 LABEL license="See program repositories"
-
-MAINTAINER Kelsey Florek <kelsey.florek@slh.wisc.edu>
+LABEL maintainer="Kelsey Florek"
+LABEL maintainer.email="kelsey.florek@slh.wisc.edu"
 
 #install python
 RUN apt-get update && apt-get install -y\
@@ -42,3 +42,5 @@ RUN cd racon/build/; make; make install
 RUN git clone https://github.com/lh3/minimap2; cd minimap2; git checkout v2.13; make
 
 ENV PATH="/canu-1.7.1/Linux-amd64/bin/:/racon/build/bin:/minimap2:${PATH}"
+
+WORKDIR /data
