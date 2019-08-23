@@ -50,6 +50,9 @@ RUN wget https://github.com/marbl/Mash/archive/v2.1.tar.gz && \
   make install;\
   mkdir /data
 
+# set perl locale settings
+ENV LC_ALL=C
+
 WORKDIR /data
 
 # path to Mash RefSeq k=21 s=1000 sketches database: /db/RefSeqSketchesDefaults.msh

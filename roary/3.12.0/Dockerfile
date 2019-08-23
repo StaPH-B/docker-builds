@@ -34,7 +34,8 @@ RUN cpanm LWP::Simple \
       File::Slurp
 
 RUN cpanm --force AJPAGE/Bio-Roary-3.12.0.tar.gz && \
-      mkdir /data
+      mkdir /data && \
+      mkdir /kraken_db
 
 WORKDIR /data
 # set perl locale settings
