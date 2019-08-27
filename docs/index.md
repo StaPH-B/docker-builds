@@ -3,9 +3,9 @@ layout: page
 subtitle: Docker User Guide
 ---
 
-<img src="/docker-builds/assets/user_guide.png" style="display:block;margin-left:auto;margin-right:auto;width:600px">
+<a href="https://www.docker.com/"><img src="/docker-builds/assets/user_guide.png" style="display:block;margin-left:auto;margin-right:auto;width:600px"></a>
 
-Traditional software development code is developed in a specific compute environment often requiring numerous dependencies to function correctly. This can be an issue especially for bioinformatics where compute environments from one location to another are very different. This can lead to bugs and glitches that could impact reproducibility of sequencing data analysis.
+Traditionally software is developed in a specific compute environment often requiring numerous dependencies to function correctly. This can be an issue especially for bioinformatics where compute environments from one location to another are very different. This can lead to bugs and glitches that could impact reproducibility of sequencing data analysis.
 
 Containerization was developed to solve this problem.
 
