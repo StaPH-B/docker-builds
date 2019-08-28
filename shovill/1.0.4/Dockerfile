@@ -8,8 +8,8 @@ LABEL software.version="1.0.4"
 LABEL description="faster than SPAdes de novo DBG genome assembler (with assembler options!)"
 LABEL website="https://github.com/tseemann/shovill"
 LABEL lisence="https://github.com/tseemann/shovill/blob/master/LICENSE"
-
-MAINTAINER Curtis Kapsak <pjx8@cdc.gov>
+LABEL maintainer="Curtis Kapsak"
+LABEL maintainer.email="pjx8@cdc.gov"
 
 RUN apt-get update && apt-get install -y python \
   wget \
@@ -168,3 +168,6 @@ ENV PATH="${PATH}:\
 /shovill/shovill-1.0.4/bin:\
 /pilon:\
 /samclip"
+
+# set perl locale settings
+ENV LC_ALL=C

@@ -9,9 +9,8 @@ LABEL software.version="1.13.3"
 LABEL description="Automated prokaryotic genome annotation tool"
 LABEL website="https://github.com/tseemann/prokka"
 LABEL license="https://github.com/tseemann/prokka#licence"
-
-# Maintainer
-MAINTAINER Curtis Kapsak <pjx8@cdc.gov>
+LABEL maintainer="Curtis Kapsak"
+LABEL maintainer.email="pjx8@cdc.gov"
 
 # install dependencies using conda
 RUN apt-get update && apt-get -y install \
@@ -53,6 +52,9 @@ RUN wget https://github.com/tseemann/prokka/archive/v1.13.4.tar.gz && \
 
 ENV PATH="$PATH:/prokka-1.13.4/bin:\
 /barrnap-0.9/bin"
+
+# set perl locale settings so barrnap works in singularity image
+ENV LC_ALL=C
 
 RUN prokka --setupdb && prokka --listdb
 WORKDIR /data

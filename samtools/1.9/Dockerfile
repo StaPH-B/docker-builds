@@ -6,9 +6,9 @@ LABEL software="Samtools"
 LABEL software.version="1.9"
 LABEL description="Tools (written in C using htslib) for manipulating next-generation sequencing data"
 LABEL website="https://github.com/samtools/samtools"
-LABEL lisence="https://github.com/samtools/samtools/blob/develop/LICENSE"
-
-MAINTAINER Curtis Kapsak <pjx8@cdc.gov>
+LABEL license="https://github.com/samtools/samtools/blob/develop/LICENSE"
+LABEL maintainer="Curtis Kapsak"
+LABEL maintainer.email="pjx8@cdc.gov"
 
 RUN apt-get update && apt-get install -y libncurses5-dev \
   libbz2-dev \
@@ -32,5 +32,8 @@ RUN mkdir samtools &&\
   ./configure &&\
   make &&\
   make install
+
+# set perl locale settings
+ENV LC_ALL=C
 
 WORKDIR /data

@@ -3,14 +3,14 @@ FROM ubuntu:xenial
 
 # metadata
 LABEL base.image="ubuntu:xenial"
-LABEL version="1"
+LABEL version="1.0.0"
 LABEL software="Lyve-SET"
 LABEL software.version="2.0.1"
 LABEL description="LYVE-SET, a method of using hqSNPs to create a phylogeny, especially for outbreak investigations"
 LABEL website="https://github.com/lskatz/lyve-SET"
 LABEL license="https://github.com/lskatz/lyve-SET/blob/master/LICENSE"
-
-MAINTAINER Kelsey Florek <kelsey.florek@slh.wisc.edu>
+LABEL maintainer="Kelsey Florek"
+LABEL maintainer.email="kelsey.florek@slh.wisc.edu"
 
 #install dependencies
 RUN apt-get update && apt-get install -y\
@@ -57,4 +57,7 @@ ENV PATH="/lyve-SET:\
 /lyve-SET/scripts:\
 /edirect:\
 ${PATH}"
+
+# set perl locale settings
+ENV LC_ALL=C
 WORKDIR /data

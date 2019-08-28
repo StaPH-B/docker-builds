@@ -7,9 +7,8 @@ LABEL software.version="1.1"
 LABEL description="Tool for identifying the serotype of E. coli from reads or assemblies"
 LABEL website="https://bitbucket.org/genomicepidemiology/serotypefinder/src/master/"
 LABEL license="https://bitbucket.org/genomicepidemiology/serotypefinder/src/master/"
-
-# Maintainer
-MAINTAINER Curtis Kapsak <pjx8@cdc.gov>
+LABEL maintainer="Curtis Kapsak"
+LABEL maintainer.email="pjx8@cdc.gov"
 
 # install dependencies
 RUN apt-get update && apt-get install -y expat \
@@ -52,6 +51,7 @@ ENV PATH="${PATH}:/serotypefinder:/blast-2.2.26/bin"
 RUN mkdir /data
 # change working directory to /data so that it's not running in root / directory
 WORKDIR /data
-
+# set perl locale
+ENV LC_ALL=C
 ###### Path to legacy blast: /blast-2.2.26
 ###### Path to serotypefinder database: /serotypefinder/database

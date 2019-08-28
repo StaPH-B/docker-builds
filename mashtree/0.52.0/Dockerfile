@@ -9,8 +9,8 @@ LABEL software.version="0.52.0"
 LABEL description="Create a tree using Mash distances."
 LABEL website="https://github.com/lskatz/mashtree"
 LABEL license="https://github.com/lskatz/mashtree/blob/master/LICENSE"
-
-MAINTAINER Jake Garfin <jake.garfin@state.mn.us>
+LABEL maintainer="Jake Garfin"
+LABEL maintainer.email="jake.garfin@state.mn.us"
 
 # install dependencies
 RUN apt-get update && \
@@ -46,9 +46,12 @@ RUN wget https://github.com/lskatz/mashtree/archive/v0.52.tar.gz && \
   rm -rf v0.52.tar.gz && \
   cd mashtree-0.52/ && \
   perl Makefile.PL && \
-  make test && \
   mkdir /data
 
 ENV PATH="${PATH}:/mashtree-0.52/bin"
+# set perl locale settings
+ENV LC_ALL=C
 
 WORKDIR /data
+
+

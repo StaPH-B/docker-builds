@@ -6,9 +6,9 @@ LABEL software="mlst"
 LABEL software.version="2.16.2"
 LABEL description="Scan contig files against PubMLST typing schemes"
 LABEL website="https://github.com/tseemann/mlst"
-LABEL lisence="https://github.com/tseemann/mlst/blob/master/LICENSE"
-
-MAINTAINER Curtis Kapsak <pjx8@cdc.gov>
+LABEL license="https://github.com/tseemann/mlst/blob/master/LICENSE"
+LABEL maintainer="Curtis Kapsak"
+LABEL maintainer.email="pjx8@cdc.gov"
 
 RUN apt-get update && apt-get install -y wget \
  libmoo-perl \
@@ -23,7 +23,8 @@ RUN wget https://github.com/tseemann/mlst/archive/v2.16.2.tar.gz &&\
  rm v2.16.2.tar.gz
 
 ENV PATH=${PATH}:/mlst-2.16.2/bin
-
+# set perl locale settings
+ENV LC_ALL=C
 # check dependencies and list available schemes
 RUN mlst --check && mlst --list
 
