@@ -25,5 +25,8 @@ RUN wget https://github.com/rrwick/Filtlong/archive/v0.2.0.tar.gz && \
   make -j && \
   mkdir /data
 
+# required for singularity compatibility
+ENV LC_ALL=C
+
 ENV PATH="${PATH}:/Filtlong-0.2.0/bin"
 WORKDIR /data
