@@ -1,7 +1,7 @@
 FROM ubuntu:xenial
 
 LABEL base.image="ubuntu:xenial"
-LABEL version="1.0.0"
+LABEL version="1.1.0"
 LABEL software="Prokka"
 LABEL software.version="1.14.0"
 LABEL description="Automated prokaryotic genome annotation tool"
@@ -23,17 +23,31 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
  default-jre \
  bioperl \
  hmmer \
- bedtools \
+ zlib1g-dev \
+ python \
+ liblzma-dev \
+ libbz2-dev \
+ xz-utils \ 
+ curl \
+ g++ \
  make && apt-get clean && apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-#### bedtools installed via apt-get. It's v2.25 (Sept 2015) but it should still work.
-#### It's too much of a pain to install and compile from source. Ran into problems with gcc/g++
+# install bedtools 2.29.0 since >=2.27.0 is required for barrnap and the apt-get package is 2.25.0
+# dependencies required for bedtools: zlib1g-dev python liblzma-dev libbz2-dev xz-utils curl g++
+RUN wget https://github.com/arq5x/bedtools2/releases/download/v2.29.0/bedtools-2.29.0.tar.gz && \
+  tar -zxf bedtools-2.29.0.tar.gz && \
+  rm bedtools-2.29.0.tar.gz && \
+  cd bedtools2 && \
+  make
+
+# add bedtools to PATH for barrnap test
+ENV PATH="$PATH:/bedtools2/bin"
 
 # install barrnap
-RUN wget https://github.com/tseemann/barrnap/archive/0.9.tar.gz &&\
-    tar -zxf 0.9.tar.gz &&\
-    rm 0.9.tar.gz &&\
-    cd barrnap-0.9 &&\
+RUN wget https://github.com/tseemann/barrnap/archive/0.9.tar.gz && \
+    tar -zxf 0.9.tar.gz && \
+    rm 0.9.tar.gz && \
+    cd barrnap-0.9 && \
     make test
 
 RUN wget https://github.com/tseemann/prokka/archive/v1.14.0.tar.gz && \
@@ -41,8 +55,9 @@ RUN wget https://github.com/tseemann/prokka/archive/v1.14.0.tar.gz && \
     rm -rf v1.14.0.tar.gz && \
     mkdir /data
 
-ENV PATH="$PATH:/prokka-1.14.0/bin:\
-/barrnap-0.9/bin"
+ENV PATH="/prokka-1.14.0/bin:\
+/barrnap-0.9/bin:\
+$PATH"
 
 # set perl locale settings so barrnap works in singularity image
 ENV LC_ALL=C
