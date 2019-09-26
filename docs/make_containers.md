@@ -17,9 +17,8 @@ LABEL software="SPAdes"
 LABEL software.version="3.13.0"
 LABEL description="de novo DBG genome assembler"
 LABEL website="http://cab.spbu.ru/files/release3.13.0/manual.html"
-
-# Maintainer
-MAINTAINER Curtis Kapsak <pjx8@cdc.gov>
+LABEL maintainer="Curtis Kapsak"
+LABEL maintainer.email="pjx8@cdc.gov"
 
 # If you're using Ubuntu as the base image, it's best to run apt-get update and install prior to doing anything else
 RUN apt-get update && apt-get install -y python \
