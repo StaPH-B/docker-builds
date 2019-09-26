@@ -9,8 +9,10 @@ LABEL software.version="1.0.0"
 LABEL description="Salmonella serotyping from genome sequencing data"
 LABEL website="https://github.com/denglab/SeqSero2"
 LABEL license="https://github.com/denglab/SeqSero2/blob/master/LICENSE"
-LABEL maintainer="Jake Garfin"
-LABEL maintainer.email="jake.garfin@state.mn.us"
+LABEL maintainer1="Jake Garfin"
+LABEL maintainer1.email="jake.garfin@state.mn.us"
+LABEL maintainer2="Curtis Kapsak"
+LABEL maintainer2.email="pjx8@cdc.gov"
 
 RUN apt-get update && apt-get install -y \
   python3\
