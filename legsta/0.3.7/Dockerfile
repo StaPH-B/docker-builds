@@ -23,7 +23,8 @@ RUN cpanm Data::Dumper
 
 # Install Legsta
 RUN wget 'https://github.com/tseemann/legsta/archive/v0.3.7.tar.gz' && \
-  tar -xvf 'v0.3.7.tar.gz'
+  tar -xvf 'v0.3.7.tar.gz' && \
+  rm v0.3.7.tar.gz
 
 ENV PATH="${PATH}:/legsta-0.3.7/bin"
 
