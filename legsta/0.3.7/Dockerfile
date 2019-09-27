@@ -28,4 +28,7 @@ RUN wget 'https://github.com/tseemann/legsta/archive/v0.3.7.tar.gz' && \
 
 ENV PATH="${PATH}:/legsta-0.3.7/bin"
 
+# set perl locale settings for singularity compatibility
+ENV LC_ALL=C
+
 WORKDIR /data
