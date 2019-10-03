@@ -161,25 +161,25 @@ It is also important to note that with Singularity it does the following automat
     singularity shell --no-home -B $PWD:/data singularity-images/spades.3.13.0.simg
     ```
   * sets your user and group inside the container to match your local user and group. Try running `whoami` while inside your singularity container shell. 
-  
-  #### Passing environment variables into singularity containers
-  You can pass environmental variables into containers at runtime a couple of different ways. If you do not call a separate `/bin/bash -c` shell you can easily pass the variable like so:
-  ```bash
-  export exampleVar="WOMP WOMP"
-  singularity exec spades.3.13.0.simg echo $exampleVar
-  # OUTPUT:
-  WOMP WOMP
-  ```
-  However, if you need to use `/bin/bash -c` at the beginning of the command you're passing into the container, you can use environmental variables like so from the command-line:
-  ```bash
-  exampleVar="WOMP WOMP" singularity exec spades.3.13.0.simg /bin/bash -c 'echo $exampleVar'
-  # OUTPUT:
-  WOMP WOMP
-  ```
-  or from inside of a bash script:
-  ```bash
-  #!/bin/bash
-  export exampleVar="WOMP WOMP"
-  singularity exec spades.3.13.0.simg /bin/bash -c 'echo $exampleVar'
-  ```
-  
+
+
+#### Passing environment variables into singularity containers
+You can pass environmental variables into containers at runtime a couple of different ways. If you do not call a separate `/bin/bash -c` shell you can easily pass the variable like so:
+```bash
+export exampleVar="WOMP WOMP"
+singularity exec spades.3.13.0.simg echo $exampleVar
+# OUTPUT:
+WOMP WOMP
+```
+However, if you need to use `/bin/bash -c` at the beginning of the command you're passing into the container, you can use environmental variables like so from the command-line:
+```bash
+exampleVar="WOMP WOMP" singularity exec spades.3.13.0.simg /bin/bash -c 'echo $exampleVar'
+# OUTPUT:
+WOMP WOMP
+```
+or from inside of a bash script:
+```bash
+#!/bin/bash
+export exampleVar="WOMP WOMP"
+singularity exec spades.3.13.0.simg /bin/bash -c 'echo $exampleVar'
+```
