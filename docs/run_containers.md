@@ -130,3 +130,56 @@ variable2=isolate2
 docker run --rm=True -v $PWD:/data -u $(id -u):$(id -g) staphb/roary:3.12.0 \
   roary -p 8 -e -n -v -f /data/roary-output/ /data/${variable1}.gff /data/${variable2}.gff
 ```
+
+## Running a Singularity container
+One major difference between docker and singularity is that docker containers are not visible files in your filesystem, while with singularity, containers are present as executable files in your filesystem. You need to tell singularity the path to your singularity image to run it.
+```bash
+# if our singularity image lies in a directory called 'singularity-images/` then we can run it like so:
+singularity exec singularity-images/spades.3.13.0.simg echo "hello from inside the container"
+```
+
+In the above example, we ran the container from the 'non-interactive mode' using `singularity exec` where we tell the container what command to execute: `echo "hello from inside the container"`, and then the container exits. If we want to run the container in 'interactive mode' similar to using `docker run -it`, we are also able to do the same with Singularity and work from inside the container with `singularity shell`.
+```bash
+curtis@host:~/$ singularity shell singularity-images/spades.3.13.0.simg
+
+# OUTPUT:
+Singularity: Invoking an interactive shell within container...
+
+Singularity spades.3.13.0.simg:~/>
+```
+Our terminal prompt changes to reflect that we are in a shell within the container.
+
+It is also important to note that with Singularity it does the following automatically (unless you specify otherwise):
+  * mounts your local home directory inside the container
+    * You can disable this using the `--no-home` option: 
+    ```
+    singularity shell --no-home singularity-images/spades.3.13.0.simg
+    ```
+    * You can mount or Bind specific directories (similar to mounting volumes with `docker run -v`) to directories in the container filesystem using the `-B /local-dir:/dir-in-container` option: 
+    ```
+    # mount your present working directory to /data inside the container
+    singularity shell --no-home -B $PWD:/data singularity-images/spades.3.13.0.simg
+    ```
+  * sets your user and group inside the container to match your local user and group. Try running `whoami` while inside your singularity container shell. 
+  
+  #### Passing environment variables into singularity containers
+  You can pass environmental variables into containers at runtime a couple of different ways. If you do not call a separate `/bin/bash -c` shell you can easily pass the variable like so:
+  ```bash
+  export exampleVar="WOMP WOMP"
+  singularity exec spades.3.13.0.simg echo $exampleVar
+  # OUTPUT:
+  WOMP WOMP
+  ```
+  However, if you need to use `/bin/bash -c` at the beginning of the command you're passing into the container, you can use environmental variables like so from the command-line:
+  ```bash
+  exampleVar="WOMP WOMP" singularity exec spades.3.13.0.simg /bin/bash -c 'echo $exampleVar'
+  # OUTPUT:
+  WOMP WOMP
+  ```
+  or from inside of a bash script:
+  ```bash
+  #!/bin/bash
+  export exampleVar="WOMP WOMP"
+  singularity exec spades.3.13.0.simg /bin/bash -c 'echo $exampleVar'
+  ```
+  
