@@ -44,7 +44,7 @@ singularity --version
 # or
 singularity --help
 ```
-If it is not installed, please visit the following link for installing the latest version of Singularity (at time of writing this). You will need administrator priveleges and to install some additional dependencies before installing singularity itself. https://sylabs.io/guides/3.4/user-guide/quick_start.html#quick-installation-steps
+If it is not installed, please visit the following link for installing the latest version of Singularity (at time of writing this). You will need administrator priveleges and to install some additional dependencies before installing singularity itself. [https://sylabs.io/guides/3.4/user-guide/quick_start.html#quick-installation-steps](https://sylabs.io/guides/3.4/user-guide/quick_start.html#quick-installation-steps)
 
 Images can then be downloaded from dockerhub by running the following commands. This is similar to the way you would download an image using docker.
 ```bash
