@@ -17,6 +17,9 @@ If you would like to contribute with your own Docker image or perhaps improve up
 We have also created a user guide that outlines methods and best practices for using and developing docker containers.  
 [Docker User Guide](https://staph-b.github.io/docker-builds/)
 
+### What about Singularity?
+For many people Docker is not an option, but Singularity is. Most Docker containers are compatible with Singularity and can easily be converted to Singularity format. Please see the User Guide linked above to for instructions on how to download docker images from dockerhub and how to run them using Singularity. We've worked hard to ensure that our containers are compatibile with Singularity, but if you find one that isn't, please leave an issue and let us know!
+
 ## [Available Docker images](https://hub.docker.com/r/staphb/)
 [![Build Status](https://travis-ci.com/StaPH-B/docker-builds.svg?branch=master)](https://travis-ci.com/StaPH-B/docker-builds) (Build only reflects those containers that have been added to the TravisCI tests)
 
