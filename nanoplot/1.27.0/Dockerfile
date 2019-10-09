@@ -30,7 +30,7 @@ ENV LC_ALL=C
 
 # update pip, install NanoPlot 1.27.0
 RUN python3 -m pip install -U pip && \
-  pip3 install NanoPlot==1.27.0 && \
+  pip3 install requests NanoPlot==1.27.0 && \
   mkdir /data
 
 WORKDIR /data
