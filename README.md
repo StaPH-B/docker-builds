@@ -17,6 +17,9 @@ If you would like to contribute with your own Docker image or perhaps improve up
 We have also created a user guide that outlines methods and best practices for using and developing docker containers.  
 [Docker User Guide](https://staph-b.github.io/docker-builds/)
 
+### What about Singularity?
+For many people Docker is not an option, but Singularity is. Most Docker containers are compatible with Singularity and can easily be converted to Singularity format. Please see the User Guide linked above to for instructions on how to download docker images from dockerhub and how to run them using Singularity. We've worked hard to ensure that our containers are compatibile with Singularity, but if you find one that isn't, please leave an issue and let us know!
+
 ## [Available Docker images](https://hub.docker.com/r/staphb/)
 [![Build Status](https://travis-ci.com/StaPH-B/docker-builds.svg?branch=master)](https://travis-ci.com/StaPH-B/docker-builds) (Build only reflects those containers that have been added to the TravisCI tests)
 
@@ -40,6 +43,7 @@ We have also created a user guide that outlines methods and best practices for u
 | [mashtree](https://hub.docker.com/r/staphb/mashtree) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/mashtree.svg?style=popout)](https://hub.docker.com/r/staphb/mashtree) | 0.52.0 | https://github.com/lskatz/mashtree |
 | [medaka](https://hub.docker.com/r/staphb/medaka) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/medaka.svg?style=popout)](https://hub.docker.com/r/staphb/medaka) | 0.8.1 | https://github.com/nanoporetech/medaka |
 | [mlst](https://hub.docker.com/r/staphb/mlst) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/mlst.svg?style=popout)](https://hub.docker.com/r/staphb/mlst) | 2.16.2, 2.17.6 | https://github.com/tseemann/mlst |
+| [NanoPlot](https://hub.docker.com/r/staphb/nanoplot) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/nanoplot.svg?style=popout)](https://hub.docker.com/r/staphb/nanoplot) | 1.27.0 | https://github.com/wdecoster/NanoPlot |
 | [NCBI AMRFinderPlus](https://github.com/ncbi/amr) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/ncbi-amrfinderplus.svg?style=popout)](https://hub.docker.com/r/staphb/ncbi-amrfinderplus) | 3.1.1b | [https://github.com/ncbi/amr](https://github.com/ncbi/amr)
 | [Prokka](https://hub.docker.com/r/staphb/prokka/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/prokka.svg?style=popout)](https://hub.docker.com/r/staphb/prokka) | 1.13.4, 1.14.0 | https://github.com/tseemann/prokka |
 | [QUAST](https://hub.docker.com/r/staphb/quast/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/quast.svg?style=popout)](https://hub.docker.com/r/staphb/quast) | 5.0.0, 5.0.2 | https://github.com/ablab/quast |
