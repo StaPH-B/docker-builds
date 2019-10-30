@@ -70,3 +70,5 @@ ${PATH}"
 
 # set perl locale settings for singularity
 ENV LC_ALL=C
+
+WORKDIR /data
