@@ -50,14 +50,11 @@ RUN wget https://github.com/arq5x/bedtools2/releases/download/v2.29.0/bedtools-2
 # add bedtools to PATH for barrnap test
 ENV PATH="$PATH:/bedtools2/bin"
 
-# install bwa
-RUN mkdir bwa &&\
-  cd /bwa &&\
-  wget https://github.com/lh3/bwa/releases/download/v0.7.17/bwa-0.7.17.tar.bz2 &&\
-  tar -xjf bwa-0.7.17.tar.bz2 &&\
-  rm bwa-0.7.17.tar.bz2 &&\
-  cd bwa-0.7.17 &&\
-  make
+# install bwa - bundled
+
+# install minimap2
+
+# install samtools - bundled
 
 # get Seqtk
 RUN mkdir seqtk &&\ 
@@ -75,7 +72,7 @@ RUN wget https://github.com/tseemann/prokka/archive/v1.14.0.tar.gz && \
     mkdir /data
 
 ENV PATH="/prokka-1.14.0/bin:\
-/barrnap-0.9/bin:\
+/bedtools2/bin:\
 $PATH"
 
 # set perl locale settings so barrnap works in singularity image
