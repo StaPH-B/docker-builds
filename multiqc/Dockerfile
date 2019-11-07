@@ -23,10 +23,7 @@ RUN apt-get update && apt-get install -y \
   apt-get clean && apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # install multiqc
-RUN wget https://github.com/ewels/MultiQC/archive/v1.7.tar.gz && \
-    tar -xvf v1.7.tar.gz && \
-    cd MultiQC-1.7/ && \
-    pip3 install multiqc
+RUN pip3 install multiqc
 
 ENV LC_ALL='C.UTF-8' LANG='C.UTF-8'
 
