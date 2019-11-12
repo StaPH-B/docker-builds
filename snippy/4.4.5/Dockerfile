@@ -16,9 +16,11 @@ RUN apt-get update && apt-get -y install \
  gcc \ 
  libstdc++6 \ 
  libbz2-1.0 \
- emboss \
  cpanminus \
-
+ autoconf \
+ parallel \
+ unzip \
+ libsnp-sites1 \
  bzip2 \
  gzip \
  wget \
@@ -37,7 +39,21 @@ RUN apt-get update && apt-get -y install \
  xz-utils \ 
  curl \
  g++ \
+ libcurl4-openssl-dev \
+ libssl-dev \
  make && apt-get clean && apt-get autoclean && rm -rf /var/lib/apt/lists/*
+
+# REMOVED FROM ABOVE: emboss
+
+
+# install bwa - bundled
+
+# install minimap2
+RUN wget https://github.com/lh3/minimap2/releases/download/v2.17/minimap2-2.17_x64-linux.tar.bz2 && \
+  tar -xvf minimap2-2.17_x64-linux.tar.bz2 && \
+  rm minimap2-2.17_x64-linux.tar.bz2
+
+# install samtools - bundled
 
 # install bedtools 2.29.0 since >=2.27.0 is required for barrnap and the apt-get package is 2.25.0
 # dependencies required for bedtools: zlib1g-dev python liblzma-dev libbz2-dev xz-utils curl g++
@@ -47,14 +63,23 @@ RUN wget https://github.com/arq5x/bedtools2/releases/download/v2.29.0/bedtools-2
   cd bedtools2 && \
   make
 
-# add bedtools to PATH for barrnap test
-ENV PATH="$PATH:/bedtools2/bin"
+# bcftools - bundled
 
-# install bwa - bundled
+# freebayes - bundled (hopefully all of the three things listed on snippy github)
 
-# install minimap2
+# vcflib - bundled
 
-# install samtools - bundled
+# install vt - libcurl3 needed for this?
+RUN wget https://github.com/atks/vt/archive/0.57721.tar.gz &&\
+  tar -xzf 0.57721.tar.gz && \
+  rm 0.57721.tar.gz && \
+  cd vt-0.57721 && \
+  make && \
+  make test
+
+# install SnpEff - unzip needed
+RUN wget http://sourceforge.net/projects/snpeff/files/snpEff_latest_core.zip && \
+  unzip snipEff_latest_core.zip
 
 # get Seqtk
 RUN mkdir seqtk &&\ 
@@ -66,17 +91,20 @@ RUN mkdir seqtk &&\
   make &&\
   make install
 
-RUN wget https://github.com/tseemann/prokka/archive/v1.14.0.tar.gz && \
-    tar -xzf v1.14.0.tar.gz && \
-    rm -rf v1.14.0.tar.gz && \
-    mkdir /data
+# Samclip
+RUN mkdir samclip &&\
+  cd samclip &&\
+  wget https://raw.githubusercontent.com/tseemann/samclip/master/samclip &&\
+  chmod +x samclip
 
-ENV PATH="/prokka-1.14.0/bin:\
-/bedtools2/bin:\
-$PATH"
 
-# set perl locale settings so barrnap works in singularity image
+ENV PATH="/bedtools2/bin:\
+/minimap2-2.17_x64-linux:\
+/snpEff/scripts:\
+/samclip:\
+${PATH}"
+
+# set perl locale settings for singularity compatibility
 ENV LC_ALL=C
 
-RUN prokka --setupdb && prokka --listdb
 WORKDIR /data
