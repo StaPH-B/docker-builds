@@ -9,7 +9,7 @@ Each Dockerfile lists author/maintainer for that specific Docker image, but the 
   * [@Ikkik](https://github.com/Ikkik)
   * [@lskatz](https://github.com/lskatz)
   * [@stjacqrm](https://github.com/stjacqrm)
-  * [@AbigalShockey](https://github.com/AbigailShockey)
+  * [@AbigailShockey](https://github.com/AbigailShockey)
 
 If you would like to contribute with your own Docker image or perhaps improve upon the existing images, please fork the repository, make your changes/additions, and submit a pull request. If you are having an issue with an existing image, please submit an issue. We welcome any and all feedback!  
 [See more details on how to contribute here](https://staph-b.github.io/docker-builds/contribute/)
