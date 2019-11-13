@@ -26,6 +26,8 @@ The licenses of the open-source software that is contained in these Docker image
 | mlst | GNU GPLv2 | https://github.com/tseemann/mlst/blob/master/LICENSE |
 | MultiQC | GNU GPLv3 | https://github.com/ewels/MultiQC/blob/master/LICENSE |
 | NanoPlot | GNU GPLv3 | https://github.com/wdecoster/NanoPlot/blob/master/LICENSE |
+| NCBI AMRFinderPlus | Public Domain | https://github.com/ncbi/amr/blob/master/LICENSE |
+| OrthoFinder | GNU GPLv3 | https://github.com/davidemms/OrthoFinder/blob/master/License.md |
 | PlasmidSeeker | BSD 3-Clause | https://github.com/bioinfo-ut/PlasmidSeeker/blob/master/LICENSE |
 | Prokka | GNU GPLv3 | https://raw.githubusercontent.com/tseemann/prokka/master/doc/LICENSE.Prokka |
 | QUAST | GNU GPLv2 | https://github.com/ablab/quast/blob/master/LICENSE.txt |
@@ -46,3 +48,4 @@ The licenses of the open-source software that is contained in these Docker image
 | Staramr | Apache 2.0 | https://github.com/phac-nml/staramr/blob/master/LICENSE |
 | Trimmomatic | GNU GPLv3 | https://academic.oup.com/bioinformatics/article/30/15/2114/2390096 |
 | Unicycler | GNU GPLv3 | https://github.com/rrwick/Unicycler/blob/master/LICENSE |
+| wtdbg2 | GNU GPLv3 | https://github.com/ruanjue/wtdbg2/blob/master/LICENSE.txt |
