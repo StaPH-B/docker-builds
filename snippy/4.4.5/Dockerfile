@@ -41,10 +41,10 @@ RUN apt-get update && apt-get -y install \
  g++ \
  libcurl4-openssl-dev \
  libssl-dev \
- make && apt-get clean && apt-get autoclean && rm -rf /var/lib/apt/lists/*
+ make && apt-get clean && apt-get autoclean && rm -rf /var/lib/apt/lists/* &&\
+ apt-get remove -y samtools
 
 # REMOVED FROM ABOVE: emboss
-
 
 # install bwa - bundled
 
@@ -79,7 +79,7 @@ RUN wget https://github.com/atks/vt/archive/0.57721.tar.gz &&\
 
 # install SnpEff - unzip needed
 RUN wget http://sourceforge.net/projects/snpeff/files/snpEff_latest_core.zip && \
-  unzip snipEff_latest_core.zip
+  unzip snpEff_latest_core.zip
 
 # get Seqtk
 RUN mkdir seqtk &&\ 
@@ -97,11 +97,19 @@ RUN mkdir samclip &&\
   wget https://raw.githubusercontent.com/tseemann/samclip/master/samclip &&\
   chmod +x samclip
 
+#get Snippy itself
+RUN wget https://github.com/tseemann/snippy/archive/v4.4.5.tar.gz &&\
+  tar -zxf v4.4.5.tar.gz &&\
+  rm v4.4.5.tar.gz &&\
+  cd snippy-4.4.5
 
 ENV PATH="/bedtools2/bin:\
 /minimap2-2.17_x64-linux:\
+/vt-0.57721/:\
 /snpEff/scripts:\
 /samclip:\
+/snippy-4.4.5/bin:\
+/snippy-4.4.5/binaries/linux:\
 ${PATH}"
 
 # set perl locale settings for singularity compatibility
