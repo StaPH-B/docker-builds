@@ -44,8 +44,6 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
  make \
  git && apt-get clean && apt-get autoclean && rm -rf /var/lib/apt/lists/* 
 
-# REMOVED FROM ABOVE: emboss
-
 # install bwa - bundled
 
 # install minimap2
@@ -69,7 +67,7 @@ RUN wget https://github.com/arq5x/bedtools2/releases/download/v2.29.0/bedtools-2
 
 # vcflib - bundled
 
-# install vt - libcurl3 needed for this?
+# install vt - libcurl4-openssl-dev required for vt
 RUN wget https://github.com/atks/vt/archive/0.57721.tar.gz && \
   tar -xzf 0.57721.tar.gz && \
   rm 0.57721.tar.gz && \
@@ -116,8 +114,6 @@ ENV PATH="/bedtools2/bin:\
 /snippy-4.4.5/binaries/linux:\
 /wgsim:\
 ${PATH}"
-
-# temp removed from above: /snippy-4.4.5/binaries/linux:\
 
 # set perl locale settings for singularity compatibility
 ENV LC_ALL=C
