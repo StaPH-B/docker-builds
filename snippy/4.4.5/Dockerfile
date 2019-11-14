@@ -11,7 +11,7 @@ LABEL maintainer="Curtis Kapsak"
 LABEL maintainer.email="pjx8@cdc.gov"
 
 # install dependencies
-RUN apt-get update && apt-get -y install \
+RUN apt-get update && apt-get -y --no-install-recommends install \
  wget \ 
  gcc \ 
  libstdc++6 \ 
@@ -20,7 +20,7 @@ RUN apt-get update && apt-get -y install \
  autoconf \
  parallel \
  unzip \
- libsnp-sites1 \
+ snp-sites \
  bzip2 \
  gzip \
  wget \
@@ -41,8 +41,8 @@ RUN apt-get update && apt-get -y install \
  g++ \
  libcurl4-openssl-dev \
  libssl-dev \
- make && apt-get clean && apt-get autoclean && rm -rf /var/lib/apt/lists/* &&\
- apt-get remove -y samtools
+ make \
+ git && apt-get clean && apt-get autoclean && rm -rf /var/lib/apt/lists/* 
 
 # REMOVED FROM ABOVE: emboss
 
@@ -55,7 +55,7 @@ RUN wget https://github.com/lh3/minimap2/releases/download/v2.17/minimap2-2.17_x
 
 # install samtools - bundled
 
-# install bedtools 2.29.0 since >=2.27.0 is required for barrnap and the apt-get package is 2.25.0
+# install bedtools 2.29.0 since the debian package is 2.25.0
 # dependencies required for bedtools: zlib1g-dev python liblzma-dev libbz2-dev xz-utils curl g++
 RUN wget https://github.com/arq5x/bedtools2/releases/download/v2.29.0/bedtools-2.29.0.tar.gz && \
   tar -zxf bedtools-2.29.0.tar.gz && \
@@ -70,7 +70,7 @@ RUN wget https://github.com/arq5x/bedtools2/releases/download/v2.29.0/bedtools-2
 # vcflib - bundled
 
 # install vt - libcurl3 needed for this?
-RUN wget https://github.com/atks/vt/archive/0.57721.tar.gz &&\
+RUN wget https://github.com/atks/vt/archive/0.57721.tar.gz && \
   tar -xzf 0.57721.tar.gz && \
   rm 0.57721.tar.gz && \
   cd vt-0.57721 && \
@@ -84,24 +84,28 @@ RUN wget http://sourceforge.net/projects/snpeff/files/snpEff_latest_core.zip && 
 # get Seqtk
 RUN mkdir seqtk &&\ 
   cd seqtk &&\
-  wget https://github.com/lh3/seqtk/archive/v1.3.tar.gz &&\
-  tar -zxf v1.3.tar.gz &&\
-  rm v1.3.tar.gz &&\
-  cd seqtk-1.3/ &&\
-  make &&\
+  wget https://github.com/lh3/seqtk/archive/v1.3.tar.gz && \
+  tar -zxf v1.3.tar.gz && \
+  rm v1.3.tar.gz && \
+  cd seqtk-1.3/ && \
+  make && \
   make install
 
 # Samclip
-RUN mkdir samclip &&\
-  cd samclip &&\
-  wget https://raw.githubusercontent.com/tseemann/samclip/master/samclip &&\
+RUN mkdir samclip && \
+  cd samclip && \
+  wget https://raw.githubusercontent.com/tseemann/samclip/master/samclip && \
   chmod +x samclip
 
+# wgsim for testing snippy
+RUN git clone https://github.com/lh3/wgsim.git && \
+ cd /wgsim && \
+ gcc -g -O2 -Wall -o wgsim wgsim.c -lz -lm
+
 #get Snippy itself
-RUN wget https://github.com/tseemann/snippy/archive/v4.4.5.tar.gz &&\
-  tar -zxf v4.4.5.tar.gz &&\
-  rm v4.4.5.tar.gz &&\
-  cd snippy-4.4.5
+RUN wget https://github.com/tseemann/snippy/archive/v4.4.5.tar.gz && \
+  tar -zxf v4.4.5.tar.gz && \
+  rm v4.4.5.tar.gz
 
 ENV PATH="/bedtools2/bin:\
 /minimap2-2.17_x64-linux:\
@@ -110,7 +114,10 @@ ENV PATH="/bedtools2/bin:\
 /samclip:\
 /snippy-4.4.5/bin:\
 /snippy-4.4.5/binaries/linux:\
+/wgsim:\
 ${PATH}"
+
+# temp removed from above: /snippy-4.4.5/binaries/linux:\
 
 # set perl locale settings for singularity compatibility
 ENV LC_ALL=C
