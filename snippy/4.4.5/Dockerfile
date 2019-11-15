@@ -1,6 +1,6 @@
-FROM ubuntu:xenial
+FROM ubuntu:bionic
 
-LABEL base.image="ubuntu:xenial"
+LABEL base.image="ubuntu:bionic"
 LABEL container.version="1.0.0"
 LABEL software="Snippy"
 LABEL software.version="4.4.5"
@@ -63,7 +63,7 @@ RUN wget https://github.com/arq5x/bedtools2/releases/download/v2.29.0/bedtools-2
 
 # bcftools - bundled
 
-# freebayes - bundled (hopefully all of the three things listed on snippy github)
+# freebayes - bundled
 
 # vcflib - bundled
 
@@ -75,7 +75,7 @@ RUN wget https://github.com/atks/vt/archive/0.57721.tar.gz && \
   make && \
   make test
 
-# install SnpEff - unzip needed
+# install SnpEff v4.3t (build 2017-11-24 10:18) - unzip needed
 RUN wget http://sourceforge.net/projects/snpeff/files/snpEff_latest_core.zip && \
   unzip snpEff_latest_core.zip
 
@@ -95,12 +95,14 @@ RUN mkdir samclip && \
   wget https://raw.githubusercontent.com/tseemann/samclip/master/samclip && \
   chmod +x samclip
 
+# snp-sites v2.3.3 - via apt-get 
+
 # wgsim for testing snippy
 RUN git clone https://github.com/lh3/wgsim.git && \
  cd /wgsim && \
  gcc -g -O2 -Wall -o wgsim wgsim.c -lz -lm
 
-#get Snippy itself
+# get Snippy itself
 RUN wget https://github.com/tseemann/snippy/archive/v4.4.5.tar.gz && \
   tar -zxf v4.4.5.tar.gz && \
   rm v4.4.5.tar.gz
