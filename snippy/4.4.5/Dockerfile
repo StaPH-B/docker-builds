@@ -76,8 +76,8 @@ RUN wget https://github.com/atks/vt/archive/0.57721.tar.gz && \
   make test
 
 # install SnpEff v4.3t (build 2017-11-24 10:18) - unzip needed
-RUN wget http://sourceforge.net/projects/snpeff/files/snpEff_latest_core.zip && \
-  unzip snpEff_latest_core.zip
+RUN wget https://sourceforge.net/projects/snpeff/files/snpEff_v4_3t_core.zip && \
+  unzip snpEff_v4_3t_core.zip
 
 # get Seqtk
 RUN mkdir seqtk &&\ 
