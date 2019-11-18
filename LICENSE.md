@@ -11,6 +11,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Canu <br/> Racon <br/> Minimap2 | GNU GPLv3 (Canu), <br/> MIT (Racon), <br/> MIT (Minimap2) | https://github.com/marbl/canu/blob/master/README.license.GPL https://github.com/isovic/racon/blob/master/LICENSE https://github.com/lh3/minimap2/blob/master/LICENSE.txt |
 | CDC-SPN | ? | https://github.com/BenJamesMetcalf/Spn_Scripts_Reference |
 | cfsan-snp-pipeline | non-standard license see --> | https://github.com/CFSAN-Biostatistics/snp-pipeline/blob/master/LICENSE.txt |
+| Circlator | GNU GPLv3 | https://github.com/sanger-pathogens/circlator/blob/master/LICENSE |
 | FastANI | Apache v2.0 | https://github.com/ParBLiSS/FastANI/blob/master/LICENSE |
 | FastQC | GNU GPLv3 | https://github.com/s-andrews/FastQC/blob/master/LICENSE.txt |
 | Filtlong | GNU GPLv3 | https://github.com/rrwick/Filtlong/blob/master/LICENSE |
@@ -47,6 +48,7 @@ The licenses of the open-source software that is contained in these Docker image
 | SPAdes | GNU GPLv2 | https://github.com/ablab/spades/blob/spades_3.13.0/assembler/LICENSE |
 | SRA-toolkit | Public Domain | https://github.com/ncbi/sra-tools/blob/master/LICENSE |
 | Staramr | Apache 2.0 | https://github.com/phac-nml/staramr/blob/master/LICENSE |
+| TipToft | GNU GPLv3 | https://github.com/andrewjpage/tiptoft/blob/master/LICENSE |
 | Trimmomatic | GNU GPLv3 | https://academic.oup.com/bioinformatics/article/30/15/2114/2390096 |
 | Unicycler | GNU GPLv3 | https://github.com/rrwick/Unicycler/blob/master/LICENSE |
 | wtdbg2 | GNU GPLv3 | https://github.com/ruanjue/wtdbg2/blob/master/LICENSE.txt |
