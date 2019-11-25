@@ -26,6 +26,7 @@ The licenses of the open-source software that is contained in these Docker image
 | mashtree | GNU GPLv3 | https://github.com/lskatz/mashtree/blob/master/LICENSE |
 | Medaka | Mozilla Public License 2.0 | https://github.com/nanoporetech/medaka/blob/master/LICENSE.md |
 | mlst | GNU GPLv2 | https://github.com/tseemann/mlst/blob/master/LICENSE |
+| Mugsy | Artistic License 2.0 | Archived in: <br/> https://sourceforge.net/projects/mugsy/files/mugsy_x86-64-v1r2.3.tgz |
 | MultiQC | GNU GPLv3 | https://github.com/ewels/MultiQC/blob/master/LICENSE |
 | NanoPlot | GNU GPLv3 | https://github.com/wdecoster/NanoPlot/blob/master/LICENSE |
 | NCBI AMRFinderPlus | Public Domain | https://github.com/ncbi/amr/blob/master/LICENSE |
