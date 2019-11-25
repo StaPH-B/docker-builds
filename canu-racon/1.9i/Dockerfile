@@ -49,7 +49,7 @@ RUN wget https://github.com/isovic/racon/releases/download/1.4.3/racon-v1.4.3.ta
   make
 
 # get interleaving script
-RUN wget -P /usr/local/bin https://raw.githubusercontent.com/StaPH-B/docker-builds/erin-dev/canu-racon/1.9i/combine_fastq.py
+RUN wget -P /usr/local/bin https://raw.githubusercontent.com/lbcb-sci/racon/master/scripts/racon_preprocess.py
 
 ENV PATH="/canu-1.9/Linux-amd64/bin:/racon-v1.4.3/build/bin:/minimap2-2.17_x64-linux:${PATH}"
 
