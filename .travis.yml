@@ -9,7 +9,7 @@ install:
   - docker build -t spades:3.13.0 spades/3.13.0
   - docker build -t quast:5.0.2 quast/5.0.2
   - docker build -t shovill:1.0.4 shovill/1.0.4
-  - docker build -t samtools:1.9 samtools/1.9
+  - docker build -t samtools:1.10 samtools/1.10
 script:
   - bash tests/mash-test.sh
   - bash tests/mashtree-test.sh
