@@ -5,7 +5,7 @@ FROM ubuntu:xenial
 LABEL base.image="ubuntu:xenial"
 LABEL version="1"
 LABEL software="mashtree"
-LABEL software.version="1.0"
+LABEL software.version="1.0.4"
 LABEL description="Create a tree using Mash distances"
 LABEL website="https://github.com/lskatz/mashtree"
 LABEL license="https://github.com/lskatz/mashtree/blob/master/LICENSE"
@@ -31,13 +31,12 @@ RUN cpanm --notest BioPerl \
   Bio::Sketch::Mash \
   DBD::SQLite \
   DBI \
-  Graph::Dijkstra \
   File::Which
 
 # install mash
-RUN wget https://github.com/marbl/Mash/releases/download/v2.1/mash-Linux64-v2.1.tar && \
-  tar -xvf mash-Linux64-v2.1.tar && \
-  rm -rf mash-Linux64-v2.1.tar
+RUN wget https://github.com/marbl/Mash/releases/download/v2.2/mash-Linux64-v2.2.tar && \
+  tar -xvf mash-Linux64-v2.2.tar && \
+  rm -rf mash-Linux64-v2.2.tar
 
 # install quicktree
 RUN wget https://github.com/khowe/quicktree/archive/v2.5.tar.gz && \
@@ -47,20 +46,17 @@ RUN wget https://github.com/khowe/quicktree/archive/v2.5.tar.gz && \
   make quicktree
 
 # add mash and quicktree to the path to allow mashtree to pass tests
-ENV PATH="${PATH}:/mash-Linux64-v2.1:/quicktree-2.5"
+ENV PATH="${PATH}:/mash-Linux64-v2.2:/quicktree-2.5"
 
 # install mashtree
-RUN wget https://github.com/lskatz/mashtree/archive/v1.0.tar.gz && \
-  tar -xvf v1.0.tar.gz && \
-  rm -rf v1.0.tar.gz && \
-  cd mashtree-1.0/ && \
+RUN wget https://github.com/lskatz/mashtree/archive/v1.0.4.tar.gz && \
+  tar -xvf v1.0.4.tar.gz && \
+  rm -rf v1.0.4.tar.gz && \
+  cd mashtree-1.0.4/ && \
   perl Makefile.PL && \
   mkdir /data
 
-ENV PATH="${PATH}:/mashtree-1.0/bin:$HOME/bin"
-
-# required since perl modules are installed in the mode directory
-ENV PERL5LIB="$HOME/lib/perl5"
+ENV PATH="${PATH}:/mashtree-1.0.4/bin"
 
 # set perl locale settings
 ENV LC_ALL=C
