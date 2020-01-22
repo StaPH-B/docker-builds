@@ -30,14 +30,15 @@ RUN wget https://github.com/DerrickWood/kraken/archive/v1.1.1.tar.gz && \
   rm -rf v1.1.1.tar.gz && \
   cd kraken-1.1.1 && \
   mkdir /opt/kraken && \
-  ./install_kraken.sh /opt/kraken/
+  ./install_kraken.sh /opt/kraken/ && \
+  mkdir /data
+
+ENV PATH="$PATH:/opt/kraken:/opt/bin"
+WORKDIR /data
 
 # DL MiniKraken database
 RUN mkdir /kraken-database && \
   cd /kraken-database && \
   wget https://ccb.jhu.edu/software/kraken/dl/minikraken_20171019_4GB.tgz && \
   tar -zxf minikraken_20171019_4GB.tgz && \
-  rm -rf minikraken_20171019_4GB.tgz && mkdir /data
-
-ENV PATH="$PATH:/opt/kraken:/opt/jellyfish/bin"
-WORKDIR /data
+  rm -rf minikraken_20171019_4GB.tgz
