@@ -1,4 +1,4 @@
-The licensing of a github repository full of Dockerfiles is not so straight-forward and is a controversial topic. We (the contributors of the repository) have decided not to specify a license for the repository and to use the default github no-license for the time being. This will likely change in the future, as we fully embrace the premise open-source and would like to share/distribute with the community.
+The StaPH-B/docker-builds repository is licensed under GNU GPLv3 as of 2020-01-16 (commit: https://github.com/StaPH-B/docker-builds/commit/a4f6e3c7cd7f82aab5117f6f48a292a48cc1091a )
 
 In this repository you will find numerous dockerfiles, but no source code of the programs we have built docker images for. The one exception to this is Serotypefinder, which is licensed under Apache 2.0, and allows for the re-distribution of the source code.
 
@@ -19,6 +19,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Flye | BSD-3 | https://github.com/fenderglass/Flye/blob/flye/LICENSE |
 | iqtree | GNU GPLv2 | https://github.com/Cibiv/IQ-TREE/blob/master/LICENSE |
 | Kraken | GNU GPLv3 | https://github.com/DerrickWood/kraken/blob/master/LICENSE |
+| Kraken2 | MIT | https://github.com/DerrickWood/kraken2/blob/master/LICENSE |
 | kSNP3 | BSD | available in zipped kSNP archive on sourceforge or in docker image under `/kSNP3.1_Linux_package/THE BSD OPENSOURCE LICENSE.pdf` |
 | legsta | GNU GPLv3 | https://github.com/tseemann/legsta/blob/master/LICENSE |
 | Lyve-SET  | MIT | https://github.com/lskatz/lyve-SET/blob/master/LICENSE |
