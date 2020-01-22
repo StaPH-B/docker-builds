@@ -27,7 +27,9 @@ RUN wget https://github.com/DerrickWood/kraken2/archive/v2.0.8-beta.tar.gz && \
   ./install_kraken2.sh . && \
   mkdir /data
 
-ENV PATH="$PATH:/kraken2-2.0.8-beta"
+ENV PATH="$PATH:/kraken2-2.0.8-beta" \
+    LC_ALL=C
+
 WORKDIR /data
 
 # DL MiniKraken2_v1_8GB database. Built from RefSeq bacteria, archaea, and viral libraries. No human.
