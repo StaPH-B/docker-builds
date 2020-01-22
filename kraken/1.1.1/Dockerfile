@@ -33,7 +33,8 @@ RUN wget https://github.com/DerrickWood/kraken/archive/v1.1.1.tar.gz && \
   ./install_kraken.sh /opt/kraken/ && \
   mkdir /data
 
-ENV PATH="$PATH:/opt/kraken:/opt/bin"
+ENV PATH="$PATH:/opt/kraken:/opt/bin" \
+    LC_ALL=C
 WORKDIR /data
 
 # DL MiniKraken database
