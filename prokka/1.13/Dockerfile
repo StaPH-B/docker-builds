@@ -3,9 +3,9 @@ FROM ubuntu:xenial
 
 # metadata
 LABEL base.image="ubuntu:xenial"
-LABEL version="2"
+LABEL container.version="3"
 LABEL software="Prokka"
-LABEL software.version="1.13.3"
+LABEL software.version="1.13.4"
 LABEL description="Automated prokaryotic genome annotation tool"
 LABEL website="https://github.com/tseemann/prokka"
 LABEL license="https://github.com/tseemann/prokka#licence"
@@ -53,6 +53,7 @@ RUN wget https://github.com/tseemann/barrnap/archive/0.9.tar.gz &&\
     cd barrnap-0.9 &&\
     make test
 
+# install prokka
 RUN wget https://github.com/tseemann/prokka/archive/v1.13.4.tar.gz && \
     tar -xzf v1.13.4.tar.gz && \
     rm -rf v1.13.4.tar.gz && \
