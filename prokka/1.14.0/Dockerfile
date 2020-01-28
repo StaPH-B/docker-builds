@@ -55,9 +55,16 @@ RUN wget https://github.com/tseemann/prokka/archive/v1.14.0.tar.gz && \
     rm -rf v1.14.0.tar.gz && \
     mkdir /data
 
-ENV PATH="/prokka-1.14.0/bin:\
-/barrnap-0.9/bin:\
-$PATH"
+# install tbl2asn manually since the one included with prokka is expired.
+# Probably will have to do again in Jan 2021 unless Torsten removes it from prokka
+RUN wget ftp://ftp.ncbi.nih.gov/toolbox/ncbi_tools/converters/by_program/tbl2asn/linux64.tbl2asn.gz -O linux64.tbl2asn.gz && \
+    gunzip linux64.tbl2asn.gz && \
+    mv linux64.tbl2asn /usr/bin/tbl2asn && \
+    chmod 755 /usr/bin/tbl2asn
+
+# set PATH to prioritize /usr/bin/tbl2asn before /prokka-[VERSION]/binaries/*/tbl2asn
+ENV PATH="$PATH:/prokka-1.14.0/bin:\
+/barrnap-0.9/bin"
 
 # set perl locale settings so barrnap works in singularity image
 ENV LC_ALL=C
