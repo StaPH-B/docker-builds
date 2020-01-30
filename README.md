@@ -32,6 +32,7 @@ For many people Docker is not an option, but Singularity is. Most Docker contain
 | [CDC-SPN](https://hub.docker.com/r/staphb/cdc-spn/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/cdc-spn.svg?style=popout)](https://hub.docker.com/r/staphb/cdc-spn) | 0.1 (no version) | https://github.com/BenJamesMetcalf/Spn_Scripts_Reference |
 | [cfsan-snp-pipeline](https://hub.docker.com/r/staphb/cfsan-snp-pipeline) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/cfsan-snp-pipeline.svg?style=popout)](https://hub.docker.com/r/staphb/cfsan-snp-pipeline) | 2.0.2 | https://github.com/CFSAN-Biostatistics/snp-pipeline |
 | [Circlator](https://hub.docker.com/r/staphb/circlator) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/circlator.svg?style=popout)](https://hub.docker.com/r/staphb/circlator) | 1.5.6 | https://github.com/sanger-pathogens/circlator |
+| [Clustalo](https://hub.docker.com/r/staphb/clustalo) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/clustalo.svg?style=popout)](https://hub.docker.com/r/staphb/clustalo) | 1.2.4 | http://www.clustal.org/omega/ |
 | [emm-typing-tool](https://hub.docker.com/r/staphb/emm-typing-tool) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/emm-typing-tool.svg?style=popout)](https://hub.docker.com/r/staphb/emm-typing-tool) | 0.0.1 (no version) | https://github.com/phe-bioinformatics/emm-typing-tool |
 | [FastANI](https://hub.docker.com/r/staphb/fastani) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/fastani.svg?style=popout)](https://hub.docker.com/r/staphb/fastani) | 1.1 | https://github.com/ParBLiSS/FastANI |
 | [FastTree](https://hub.docker.com/r/staphb/fasttree) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/fasttree.svg?style=popout)](https://hub.docker.com/r/staphb/fasttree) | 2.1.11 | http://www.microbesonline.org/fasttree/ |
@@ -47,6 +48,7 @@ For many people Docker is not an option, but Singularity is. Most Docker contain
 | [Mash](https://hub.docker.com/r/staphb/mash/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/mash.svg?style=popout)](https://hub.docker.com/r/staphb/mash)  | 2.1, 2.2 | https://github.com/marbl/Mash |
 | [mashtree](https://hub.docker.com/r/staphb/mashtree) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/mashtree.svg?style=popout)](https://hub.docker.com/r/staphb/mashtree) | 0.52.0, 0.57.0, 1.0.4 | https://github.com/lskatz/mashtree |
 | [medaka](https://hub.docker.com/r/staphb/medaka) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/medaka.svg?style=popout)](https://hub.docker.com/r/staphb/medaka) | 0.8.1 | https://github.com/nanoporetech/medaka |
+| [minimap2](https://hub.docker.com/r/staphb/minimap2) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/minimap2.svg?style=popout)](https://hub.docker.com/r/staphb/minimap2) | 2.17 | https://github.com/lh3/minimap2 |
 | [mlst](https://hub.docker.com/r/staphb/mlst) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/mlst.svg?style=popout)](https://hub.docker.com/r/staphb/mlst) | 2.16.2, 2.17.6 | https://github.com/tseemann/mlst |
 | [Mugsy](https://hub.docker.com/r/staphb/mugsy) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/mugsy.svg?style=popout)](https://hub.docker.com/r/staphb/mugsy) | 1r2.3 | http://mugsy.sourceforge.net/ |
 | [MultiQC](https://hub.docker.com/r/staphb/multiqc) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/multiqc.svg?style=popout)](https://hub.docker.com/r/staphb/multiqc) | 1.7, 1.8 | https://github.com/ewels/MultiQC |
@@ -80,3 +82,8 @@ For many people Docker is not an option, but Singularity is. Most Docker contain
 | [wtdbg2](https://hub.docker.com/r/staphb/wtdbg2/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/wtdbg2.svg?style=popout)](https://hub.docker.com/r/staphb/wtdbg2) | 2.5 | https://github.com/ruanjue/wtdbg2 |
 
 You can also view the list of images on Docker hub here: https://hub.docker.com/r/staphb/
+
+## License 
+  * [GNU GPLv3 license](/LICENSE) was added 2020-01-16
+  * We keep a list of the licenses for the main software within the docker images here: [Program_Licenses.md](/Program_Licenses.md)
+  * Links to licenses for each program should also be listed as a metadata `LABEL` within each dockerfile
