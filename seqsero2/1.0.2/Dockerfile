@@ -45,11 +45,12 @@ RUN wget https://github.com/ablab/spades/releases/download/v3.9.0/SPAdes-3.9.0-L
 RUN wget https://github.com/denglab/SeqSero2/archive/v1.0.2.tar.gz && \
   tar -xzf v1.0.2.tar.gz && \
   rm -rf v1.0.2.tar.gz && \
-  cd /SeqSero2-1.0.2/ && python3 -m pip install --user . && \
+  cd /SeqSero2-1.0.2/ && \
+  python3 -m pip install . && \
   mkdir /data
 
 # PATH edited to include /SeqSero2-1.0.2/bin in previous python3 command
-ENV PATH="${PATH}:/SeqSero2-1.0.2/bin:/SPAdes-3.9.0-Linux/bin:/SalmID-0.122:/samtools-1.9" \
+ENV PATH="${PATH}:/SPAdes-3.9.0-Linux/bin:/SalmID-0.122:/samtools-1.9" \
     LC_ALL=C
 
 WORKDIR /data
