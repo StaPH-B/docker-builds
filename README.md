@@ -6,7 +6,7 @@ Each Dockerfile lists author/maintainer for that specific Docker image, but the 
   * [@k-florek](https://github.com/k-florek)
   * [@garfinjm](https://github.com/garfinjm)
   * [@kevinlibuit](https://github.com/kevinlibuit)
-  * [@Ikkik](https://github.com/Ikkik)
+  * [@erinyoung](https://github.com/erinyoung)
   * [@lskatz](https://github.com/lskatz)
   * [@stjacqrm](https://github.com/stjacqrm)
   * [@AbigailShockey](https://github.com/AbigailShockey)
