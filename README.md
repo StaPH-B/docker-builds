@@ -6,7 +6,7 @@ Each Dockerfile lists author/maintainer for that specific Docker image, but the 
   * [@k-florek](https://github.com/k-florek)
   * [@garfinjm](https://github.com/garfinjm)
   * [@kevinlibuit](https://github.com/kevinlibuit)
-  * [@Ikkik](https://github.com/Ikkik)
+  * [@erinyoung](https://github.com/erinyoung)
   * [@lskatz](https://github.com/lskatz)
   * [@stjacqrm](https://github.com/stjacqrm)
   * [@AbigailShockey](https://github.com/AbigailShockey)
@@ -32,6 +32,7 @@ For many people Docker is not an option, but Singularity is. Most Docker contain
 | [CDC-SPN](https://hub.docker.com/r/staphb/cdc-spn/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/cdc-spn.svg?style=popout)](https://hub.docker.com/r/staphb/cdc-spn) | 0.1 (no version) | https://github.com/BenJamesMetcalf/Spn_Scripts_Reference |
 | [cfsan-snp-pipeline](https://hub.docker.com/r/staphb/cfsan-snp-pipeline) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/cfsan-snp-pipeline.svg?style=popout)](https://hub.docker.com/r/staphb/cfsan-snp-pipeline) | 2.0.2 | https://github.com/CFSAN-Biostatistics/snp-pipeline |
 | [Circlator](https://hub.docker.com/r/staphb/circlator) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/circlator.svg?style=popout)](https://hub.docker.com/r/staphb/circlator) | 1.5.6 | https://github.com/sanger-pathogens/circlator |
+| [Clustalo](https://hub.docker.com/r/staphb/clustalo) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/clustalo.svg?style=popout)](https://hub.docker.com/r/staphb/clustalo) | 1.2.4 | http://www.clustal.org/omega/ |
 | [emm-typing-tool](https://hub.docker.com/r/staphb/emm-typing-tool) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/emm-typing-tool.svg?style=popout)](https://hub.docker.com/r/staphb/emm-typing-tool) | 0.0.1 (no version) | https://github.com/phe-bioinformatics/emm-typing-tool |
 | [FastANI](https://hub.docker.com/r/staphb/fastani) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/fastani.svg?style=popout)](https://hub.docker.com/r/staphb/fastani) | 1.1 | https://github.com/ParBLiSS/FastANI |
 | [FastTree](https://hub.docker.com/r/staphb/fasttree) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/fasttree.svg?style=popout)](https://hub.docker.com/r/staphb/fasttree) | 2.1.11 | http://www.microbesonline.org/fasttree/ |
@@ -39,18 +40,21 @@ For many people Docker is not an option, but Singularity is. Most Docker contain
 | [Filtlong](https://hub.docker.com/r/staphb/filtlong) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/filtlong.svg?style=popout)](https://hub.docker.com/r/staphb/filtlong) | 0.2.0 | https://github.com/rrwick/filtlong |
 | [Flye](https://hub.docker.com/r/staphb/flye) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/flye.svg?style=popout)](https://hub.docker.com/r/staphb/flye) | 2.5 | https://github.com/fenderglass/Flye |
 | [iqtree](https://hub.docker.com/r/staphb/iqtree/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/iqtree.svg?style=popout)](https://hub.docker.com/r/staphb/iqtree) | 1.6.7 | http://www.iqtree.org/ |
+| [kma](https://hub.docker.com/r/staphb/kma/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/kma.svg?style=popout)](https://hub.docker.com/r/staphb/kma) | 1.2.21 | https://bitbucket.org/genomicepidemiology/kma/ |
 | [Kraken](https://hub.docker.com/r/staphb/kraken/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/kraken.svg?style=popout)](https://hub.docker.com/r/staphb/kraken) | 1.0, 1.1.1 | https://github.com/DerrickWood/kraken |
+| [Kraken2](https://hub.docker.com/r/staphb/kraken2/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/kraken2.svg?style=popout)](https://hub.docker.com/r/staphb/kraken2) | 2.0.8-beta | https://github.com/DerrickWood/kraken2 |
 | [kSNP3](https://hub.docker.com/r/staphb/ksnp3/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/ksnp3.svg?style=popout)](https://hub.docker.com/r/staphb/ksnp3)| 3.1 | https://sourceforge.net/projects/ksnp/ |
 | [legsta](https://hub.docker.com/r/staphb/legsta/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/legsta.svg?style=popout)](https://hub.docker.com/r/staphb/legsta)| 0.3.7 | https://github.com/tseemann/legsta |
 | [Lyve-SET (includes CG-Pipeline scripts and raxml)](https://hub.docker.com/r/staphb/lyveset/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/lyveset.svg?style=popout)](https://hub.docker.com/r/staphb/lyveset) | 1.1.4f, 2.0.1 (lyve-SET) | https://github.com/lskatz/lyve-SET https://github.com/lskatz/CG-Pipeline |
-| [Mash](https://hub.docker.com/r/staphb/mash/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/mash.svg?style=popout)](https://hub.docker.com/r/staphb/mash)  | 2.1 | https://github.com/marbl/Mash |
+| [Mash](https://hub.docker.com/r/staphb/mash/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/mash.svg?style=popout)](https://hub.docker.com/r/staphb/mash)  | 2.1, 2.2 | https://github.com/marbl/Mash |
 | [mashtree](https://hub.docker.com/r/staphb/mashtree) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/mashtree.svg?style=popout)](https://hub.docker.com/r/staphb/mashtree) | 0.52.0, 0.57.0, 1.0.4 | https://github.com/lskatz/mashtree |
 | [medaka](https://hub.docker.com/r/staphb/medaka) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/medaka.svg?style=popout)](https://hub.docker.com/r/staphb/medaka) | 0.8.1 | https://github.com/nanoporetech/medaka |
+| [minimap2](https://hub.docker.com/r/staphb/minimap2) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/minimap2.svg?style=popout)](https://hub.docker.com/r/staphb/minimap2) | 2.17 | https://github.com/lh3/minimap2 |
 | [mlst](https://hub.docker.com/r/staphb/mlst) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/mlst.svg?style=popout)](https://hub.docker.com/r/staphb/mlst) | 2.16.2, 2.17.6 | https://github.com/tseemann/mlst |
 | [Mugsy](https://hub.docker.com/r/staphb/mugsy) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/mugsy.svg?style=popout)](https://hub.docker.com/r/staphb/mugsy) | 1r2.3 | http://mugsy.sourceforge.net/ |
 | [MultiQC](https://hub.docker.com/r/staphb/multiqc) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/multiqc.svg?style=popout)](https://hub.docker.com/r/staphb/multiqc) | 1.7, 1.8 | https://github.com/ewels/MultiQC |
 | [NanoPlot](https://hub.docker.com/r/staphb/nanoplot) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/nanoplot.svg?style=popout)](https://hub.docker.com/r/staphb/nanoplot) | 1.27.0 | https://github.com/wdecoster/NanoPlot |
-| [NCBI AMRFinderPlus](https://github.com/ncbi/amr) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/ncbi-amrfinderplus.svg?style=popout)](https://hub.docker.com/r/staphb/ncbi-amrfinderplus) | 3.1.1b | [https://github.com/ncbi/amr](https://github.com/ncbi/amr) |
+| [NCBI AMRFinderPlus](https://hub.docker.com/r/staphb/ncbi-amrfinderplus) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/ncbi-amrfinderplus.svg?style=popout)](https://hub.docker.com/r/staphb/ncbi-amrfinderplus) | 3.1.1b | [https://github.com/ncbi/amr](https://github.com/ncbi/amr) |
 | [OrthoFinder](https://hub.docker.com/r/staphb/OrthoFinder) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/orthofinder.svg?style=popout)](https://hub.docker.com/r/staphb/orthofinder) | 2.17 | https://github.com/davidemms/OrthoFinder |
 | [PlasmidSeeker](https://hub.docker.com/r/staphb/plasmidseeker) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/plasmidseeker.svg?style=popout)](https://hub.docker.com/r/staphb/plasmidseeker) | 1.0 | https://github.com/bioinfo-ut/PlasmidSeeker |
 | [Prokka](https://hub.docker.com/r/staphb/prokka/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/prokka.svg?style=popout)](https://hub.docker.com/r/staphb/prokka) | 1.13.4, 1.14.0, 1.14.5 | https://github.com/tseemann/prokka |
@@ -61,7 +65,7 @@ For many people Docker is not an option, but Singularity is. Most Docker contain
 | [SalmID](https://hub.docker.com/r/staphb/salmid) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/salmid.svg?style=popout)](https://hub.docker.com/r/staphb/salmid) | 0.1.23 | https://github.com/hcdenbakker/SalmID |
 | [Samtools](https://hub.docker.com/r/staphb/samtools) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/samtools.svg?style=popout)](https://hub.docker.com/r/staphb/samtools) | 1.9, 1.10 | https://github.com/samtools/samtools |
 | [SeqSero](https://hub.docker.com/r/staphb/seqsero/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/seqsero.svg?style=popout)](https://hub.docker.com/r/staphb/seqsero) | 1.0.1 | https://github.com/denglab/SeqSero |
-| [SeqSero2](https://hub.docker.com/r/staphb/seqsero2/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/seqsero2.svg?style=popout)](https://hub.docker.com/r/staphb/seqsero2) | 0.1.0, 1.0.0 | https://github.com/denglab/SeqSero2/ |
+| [SeqSero2](https://hub.docker.com/r/staphb/seqsero2/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/seqsero2.svg?style=popout)](https://hub.docker.com/r/staphb/seqsero2) | 0.1.0, 1.0.0, 1.0.2 | https://github.com/denglab/SeqSero2/ |
 | [seqyclean](https://hub.docker.com/r/staphb/seqyclean) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/seqyclean.svg?style=popout)](https://hub.docker.com/r/staphb/seqyclean) | 1.10.09 | https://github.com/ibest/seqyclean |
 | [Seroba](https://hub.docker.com/r/staphb/seroba) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/seroba.svg?style=popout)](https://hub.docker.com/r/staphb/seroba) | 1.0.0 | https://github.com/sanger-pathogens/seroba |
 | [SerotypeFinder](https://hub.docker.com/r/staphb/serotypefinder/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/serotypefinder.svg?style=popout)](https://hub.docker.com/r/staphb/serotypefinder) | 1.1 (I think? Bitbucket repo does not list older versions like the one in this docker image) | https://bitbucket.org/genomicepidemiology/serotypefinder/ |
@@ -70,7 +74,7 @@ For many people Docker is not an option, but Singularity is. Most Docker contain
 | [SKESA](https://hub.docker.com/r/staphb/skesa) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/skesa.svg?style=popout)](https://hub.docker.com/r/staphb/skesa) | 2.3.0 | https://github.com/ncbi/SKESA |
 | [Snippy](https://hub.docker.com/r/staphb/snippy) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/snippy.svg?style=popout)](https://hub.docker.com/r/staphb/snippy) | 4.4.5 | https://github.com/tseemann/snippy |
 | [snp-dists](https://hub.docker.com/r/staphb/snp-dists) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/snp-dists.svg?style=popout)](https://hub.docker.com/r/staphb/snp-dists) | 0.6.2 | https://github.com/tseemann/snp-dists |
-| [SPAdes](https://hub.docker.com/r/staphb/spades/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/spades.svg?style=popout)](https://hub.docker.com/r/staphb/spades) | 3.12.0, 3.13.0 | http://cab.spbu.ru/software/spades/ |
+| [SPAdes](https://hub.docker.com/r/staphb/spades/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/spades.svg?style=popout)](https://hub.docker.com/r/staphb/spades) | 3.8.2, 3.12.0, 3.13.0, 3.14.0 | http://cab.spbu.ru/software/spades/ |
 | [SRA-toolkit](https://hub.docker.com/r/staphb/sratoolkit/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/sratoolkit.svg?style=popout)](https://hub.docker.com/r/staphb/sratoolkit) | 2.9.2 | https://github.com/ncbi/sra-tools |
 | [Staramr](https://hub.docker.com/r/staphb/staramr/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/staramr.svg?style=popout)](https://hub.docker.com/r/staphb/staramr) | 0.5.1 | https://github.com/phac-nml/staramr |
 | [TipToft](https://hub.docker.com/r/staphb/tiptoft/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/tiptoft.svg?style=popout)](https://hub.docker.com/r/staphb/tiptoft) | 1.0.0 | https://github.com/andrewjpage/tiptoft |
@@ -79,3 +83,8 @@ For many people Docker is not an option, but Singularity is. Most Docker contain
 | [wtdbg2](https://hub.docker.com/r/staphb/wtdbg2/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/wtdbg2.svg?style=popout)](https://hub.docker.com/r/staphb/wtdbg2) | 2.5 | https://github.com/ruanjue/wtdbg2 |
 
 You can also view the list of images on Docker hub here: https://hub.docker.com/r/staphb/
+
+## License 
+  * [GNU GPLv3 license](/LICENSE) was added 2020-01-16
+  * We keep a list of the licenses for the main software within the docker images here: [Program_Licenses.md](/Program_Licenses.md)
+  * Links to licenses for each program should also be listed as a metadata `LABEL` within each dockerfile
