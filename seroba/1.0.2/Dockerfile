@@ -37,7 +37,7 @@ RUN wget https://github.com/sanger-pathogens/seroba/archive/v1.0.2.tar.gz && \
 ENV PATH="/seroba-1.0.2:/seroba-1.0.2/build:/seroba-1.0.2/build/MUMmer3.23:/seroba-1.0.2/build/bowtie2-2.3.1-legacy:/seroba-1.0.2/build/cdhit-4.6.8:${PATH}"
 
 # install seroba and create database (/seroba-1.0.2/database/)
-RUN cd /seroba-1.0.0 && \
+RUN cd /seroba-1.0.2 && \
   python3 setup.py install && \
   seroba createDBs database/ 71
 
