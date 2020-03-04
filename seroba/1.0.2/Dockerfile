@@ -30,6 +30,7 @@ RUN apt-get update && apt-get -y upgrade && apt-get -y install git \
 RUN wget https://github.com/sanger-pathogens/seroba/archive/v1.0.2.tar.gz && \
   tar -xvf v1.0.2.tar.gz && \
   cd seroba-1.0.2 && \
+  pip3 install pysam==0.15.0 &&\
   sed -i 's/pymummer/\"pymummer==0.10.3\"/g' /seroba-1.0.2/install_dependencies.sh && \
   /seroba-1.0.2/install_dependencies.sh
 
