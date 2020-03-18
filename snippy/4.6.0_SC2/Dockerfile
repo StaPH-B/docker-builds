@@ -77,9 +77,6 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
 
 # wgsim 0.3.1-r13 - bundled for testing snippy
 
-# SARS-CoV-2 Reference Genome
-RUN curl -s ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/009/858/895/GCF_009858895.2_ASM985889v3/GCF_009858895.2_ASM985889v3_genomic.fna.gz | gzip -dc > MN908947_SC2_reference.fasta  
-
 # Snippy 4.6.0, make /data, and grab reference genome
 RUN wget https://github.com/tseemann/snippy/archive/v4.6.0.tar.gz && \
   tar -zxf v4.6.0.tar.gz && \
