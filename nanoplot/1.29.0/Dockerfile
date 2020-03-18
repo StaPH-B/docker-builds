@@ -1,9 +1,9 @@
-FROM ubuntu:xenial
+FROM ubuntu:bionic
 
-LABEL base.image="ubuntu:xenial"
-LABEL container.version="2"
+LABEL base.image="ubuntu:bionic"
+LABEL container.version="1"
 LABEL software="NanoPlot"
-LABEL software.version="1.27.0"
+LABEL software.version="1.29.0"
 LABEL description="Plotting suite for Oxford Nanopore sequencing data and alignments"
 LABEL website="https://github.com/wdecoster/NanoPlot"
 LABEL license="https://github.com/wdecoster/NanoPlot/blob/master/LICENSE"
@@ -27,9 +27,14 @@ RUN apt-get update && apt-get install -y zlib1g-dev \
 # for singularity compatibility
 ENV LC_ALL=C
 
-# update pip, install NanoPlot 1.27.0
+# update pip, install NanoPlot
 RUN python3 -m pip install -U pip && \
-  pip3 install psutil requests NanoPlot==1.27.0 && \
+  pip3 install psutil requests NanoPlot==1.29.0 && \
   mkdir /data
 
 WORKDIR /data
+
+## NOTICE: YOU MAY SEE A WARNING REGARDING ORCA NOT BEING INSTALLED
+## WHEN RUNNING NANOPLOT. DO NOT FEAR, AS IT'S OPTIONAL AND NANOPLOT
+## SHOULD RUN AS NORMAL. SEE THE LINK BELOW FOR MORE INFO:
+## https://github.com/wdecoster/NanoPlot/issues/174
