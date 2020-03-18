@@ -1,8 +1,7 @@
 FROM ubuntu:xenial
 
-# metadata
 LABEL base.image="ubuntu:xenial"
-LABEL version="1"
+LABEL container.version="2"
 LABEL software="NanoPlot"
 LABEL software.version="1.27.0"
 LABEL description="Plotting suite for Oxford Nanopore sequencing data and alignments"
@@ -30,7 +29,7 @@ ENV LC_ALL=C
 
 # update pip, install NanoPlot 1.27.0
 RUN python3 -m pip install -U pip && \
-  pip3 install requests NanoPlot==1.27.0 && \
+  pip3 install psutil requests NanoPlot==1.27.0 && \
   mkdir /data
 
 WORKDIR /data
