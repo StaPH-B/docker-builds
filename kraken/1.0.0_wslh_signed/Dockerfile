@@ -9,8 +9,8 @@ LABEL software.version="1.0"
 LABEL description="Taxonomic sequence classifier"
 LABEL website="https://github.com/DerrickWood/kraken"
 LABEL license="https://github.com/DerrickWood/kraken/blob/master/LICENSE"
-LABEL maintainer="Curtis Kapsak"
-LABEL maintainer.email="pjx8@cdc.gov"
+LABEL maintainer="Kelsey Florek(signed)"
+LABEL maintainer.email="kelsey.florek@slh.wisc.edu"
 
 # install dependencies
 RUN apt-get update && apt-get -y install \
@@ -28,7 +28,7 @@ RUN cd jellyfish-1.1.12 && ./configure --prefix=/opt/ && make -j 4 && make insta
 
 # DL Kraken v1.0, unpack, and install
 RUN wget https://github.com/DerrickWood/kraken/archive/v1.0.tar.gz && \
-  tar -xzf v1.0.tar.gz && \ 
+  tar -xzf v1.0.tar.gz && \
   rm -rf v1.0.tar.gz && \
   cd kraken-1.0 && \
   mkdir /opt/kraken && \
@@ -48,4 +48,3 @@ RUN mkdir /kraken-database && \
   wget https://ccb.jhu.edu/software/kraken/dl/minikraken_20171019_4GB.tgz && \
   tar -zxf minikraken_20171019_4GB.tgz && \
   rm -rf minikraken_20171019_4GB.tgz
-

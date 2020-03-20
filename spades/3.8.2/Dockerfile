@@ -1,0 +1,24 @@
+FROM ubuntu:xenial
+
+# metadata
+LABEL base.image="ubuntu:xenial"
+LABEL version="1"
+LABEL software="SPAdes"
+LABEL software.version="3.8.2"
+LABEL description="de novo DBG genome assembler"
+LABEL website="http://cab.spbu.ru/software/spades/"
+LABEL maintainer="Curtis Kapsak"
+LABEL maintainer.email="pjx8@cdc.gov"
+
+RUN apt-get update && apt-get install -y python \
+  wget
+
+RUN wget https://github.com/ablab/spades/releases/download/v3.8.2/SPAdes-3.8.2-Linux.tar.gz && \
+  tar -xzf SPAdes-3.8.2-Linux.tar.gz && \
+  rm -r SPAdes-3.8.2-Linux.tar.gz && \
+  mkdir /data
+
+ENV PATH="${PATH}:/SPAdes-3.8.2-Linux/bin" \
+    LC_ALL=C
+
+WORKDIR /data

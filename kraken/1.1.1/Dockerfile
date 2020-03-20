@@ -3,7 +3,7 @@ FROM ubuntu:xenial
 
 # metadata
 LABEL base.image="ubuntu:xenial"
-LABEL version="1"
+LABEL container.version="1.1"
 LABEL software="Kraken"
 LABEL software.version="1.1.1"
 LABEL description="Taxonomic sequence classifier"
@@ -17,7 +17,9 @@ RUN apt-get update && apt-get -y install \
   wget \
   zlib1g-dev \
   make \
-  g++
+  g++ \
+  rsync \
+  cpanminus
 
 # DL Jellyfish, unpack, and install
 RUN wget https://github.com/gmarcais/Jellyfish/releases/download/v1.1.12/jellyfish-1.1.12.tar.gz && \
@@ -30,14 +32,19 @@ RUN wget https://github.com/DerrickWood/kraken/archive/v1.1.1.tar.gz && \
   rm -rf v1.1.1.tar.gz && \
   cd kraken-1.1.1 && \
   mkdir /opt/kraken && \
-  ./install_kraken.sh /opt/kraken/
+  ./install_kraken.sh /opt/kraken/ && \
+  mkdir /data
+
+ENV PATH="$PATH:/opt/kraken:/opt/bin" \
+    LC_ALL=C
+WORKDIR /data
+
+# this perl module and rsync required for kraken-build
+RUN cpanm Getopt::Std
 
 # DL MiniKraken database
 RUN mkdir /kraken-database && \
   cd /kraken-database && \
   wget https://ccb.jhu.edu/software/kraken/dl/minikraken_20171019_4GB.tgz && \
   tar -zxf minikraken_20171019_4GB.tgz && \
-  rm -rf minikraken_20171019_4GB.tgz && mkdir /data
-
-ENV PATH="$PATH:/opt/kraken:/opt/jellyfish/bin"
-WORKDIR /data
+  rm -rf minikraken_20171019_4GB.tgz
