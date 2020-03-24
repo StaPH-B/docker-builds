@@ -55,6 +55,7 @@ The licenses of the open-source software that is contained in these Docker image
 | SKESA | Public Domain | https://github.com/ncbi/SKESA/blob/master/LICENSE |
 | Snippy | GNU GPLv2 | https://github.com/tseemann/snippy/blob/master/LICENSE |
 | snp-dists | GNU GPLv3 | https://github.com/tseemann/snp-dists/blob/master/LICENSE |
+| SNP-sites | GNU GPLv3 | https://github.com/sanger-pathogens/snp-sites/blob/master/LICENSE |
 | SPAdes | GNU GPLv2 | https://github.com/ablab/spades/blob/spades_3.13.0/assembler/LICENSE |
 | SRA-toolkit | Public Domain | https://github.com/ncbi/sra-tools/blob/master/LICENSE |
 | Staramr | Apache 2.0 | https://github.com/phac-nml/staramr/blob/master/LICENSE |
