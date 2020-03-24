@@ -12,11 +12,11 @@ LABEL license="https://mafft.cbrc.jp/alignment/software/license.txt"
 LABEL maintainer="Kevin Libuit"
 LABEL maintainer.email="kevin.libuit@dgs.virginia.gov"
 
-
 RUN apt-get update && apt-get install -y wget
 
-# install mafft binary
-RUN wget https://mafft.cbrc.jp/alignment/software/mafft_7.450-1_amd64.deb &&\
-    dpkg -i mafft_7.450-1_amd64.deb
+# install mafft binary and make /data
+RUN wget https://mafft.cbrc.jp/alignment/software/mafft_7.450-1_amd64.deb && \
+    dpkg -i mafft_7.450-1_amd64.deb && \
+    mkdir /data
 
 WORKDIR /data
