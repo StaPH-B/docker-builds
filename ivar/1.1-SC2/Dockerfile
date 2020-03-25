@@ -18,6 +18,12 @@ RUN apt-get install -y build-essential autoconf zlib1g-dev python3 wget libbz2-d
 RUN git clone -n https://github.com/artic-network/artic-ncov2019.git &&\
     cd artic-ncov2019 &&\
     git checkout d50a5f6a3265fb45a5d0c8949dfd037fd869f8f9 
+# Reformat Artic BED files for use in iVar
+RUN mkdir reference &&\
+    perl -ne 'my @x=split m/\t/; print join("\t",@x[0..3], 60, $x[3]=~m/LEFT/?"+":"-"),"\n";' < artic-ncov2019/primer_schemes/nCoV-2019/V1/nCoV-2019.scheme.bed  > /reference/ARTIC-V1.bed &&\
+    perl -ne 'my @x=split m/\t/; print join("\t",@x[0..3], 60, $x[3]=~m/LEFT/?"+":"-"),"\n";' < artic-ncov2019/primer_schemes/nCoV-2019/V2/nCoV-2019.scheme.bed  > /reference/ARTIC-V2.bed &&\
+    perl -ne 'my @x=split m/\t/; print join("\t",@x[0..3], 60, $x[3]=~m/LEFT/?"+":"-"),"\n";' < artic-ncov2019/primer_schemes/nCoV-2019/V3/nCoV-2019.scheme.bed  > /reference/ARTIC-V3.bed &&\
+    mv artic-ncov2019/primer_schemes/nCoV-2019/V1/nCoV-2019.reference.fasta /reference 
 # Seqtk
 RUN mkdir seqtk &&\
     cd seqtk &&\
@@ -52,11 +58,11 @@ RUN cd root &&\
     make install &&\
     cd ../ &&\
     rm samtools-1.9.tar.bz2
-# iVar v1.1-PR (most recent commit as of 03/19/2020)
+# iVar v1.1-PR (most recent commit with succesfful build  as of 03/25/2020)
 RUN cd root/ &&\
     git clone -n https://github.com/andersen-lab/ivar.git &&\
     cd ivar/ &&\
-    git checkout 1610e0efee46459528a65769692936e1e35a17f3 &&\
+    git checkout 51d21d15af8f1763e5f0acaa8e60592b17a76d59 &&\
     ./autogen.sh &&\
     ./configure &&\
     make &&\
