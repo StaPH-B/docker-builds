@@ -1,3 +1,4 @@
+ed
 # [docker-builds](#)
 This repository contains the Dockerfiles and other assorted files necessary for building Docker images for a variety of programs used by members of the StaPH-B (State Public Health Lab Bioinformatics) consortium. The purpose of this repository is to provide a centralized location for Docker images that is easily accessible for users, with clear documentation on how the containers were built and how to use them.
 
@@ -63,7 +64,7 @@ For many people Docker is not an option, but Singularity is. Most Docker contain
 | [PlasmidSeeker](https://hub.docker.com/r/staphb/plasmidseeker) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/plasmidseeker.svg?style=popout)](https://hub.docker.com/r/staphb/plasmidseeker) | 1.0 | https://github.com/bioinfo-ut/PlasmidSeeker |
 | [Prokka](https://hub.docker.com/r/staphb/prokka/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/prokka.svg?style=popout)](https://hub.docker.com/r/staphb/prokka) | 1.13.4, 1.14.0, 1.14.5 | https://github.com/tseemann/prokka |
 | [QUAST](https://hub.docker.com/r/staphb/quast/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/quast.svg?style=popout)](https://hub.docker.com/r/staphb/quast) | 5.0.0, 5.0.2 | https://github.com/ablab/quast |
-| [rasusa](https://hub.docker.com/r/staphb/rasusa/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/rasusa.svg?style=popout)](https://hub.docker.com/r/staphb/rasusa) | 0.1.0 | https://github.com/mbhall88/rasusa |
+| [rasusa](https://hub.docker.com/r/staphb/rasusa/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/rasusa.svg?style=popout)](https://hub.docker.com/r/staphb/rasusa) | 0.1.0, 0.2.0 | https://github.com/mbhall88/rasusa |
 | [RAxML](https://hub.docker.com/r/staphb/raxml/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/raxml.svg?style=popout)](https://hub.docker.com/r/staphb/raxml) | 8.2.12 (RAxML) <br/> 0.9.0 (RAxML Next Generation) | https://github.com/stamatak/standard-RAxML <br/> https://github.com/amkozlov/raxml-ng |
 | [Roary](https://hub.docker.com/r/staphb/roary/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/roary.svg?style=popout)](https://hub.docker.com/r/staphb/roary) | 3.12.0 | https://github.com/sanger-pathogens/Roary |
 | [SalmID](https://hub.docker.com/r/staphb/salmid) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/salmid.svg?style=popout)](https://hub.docker.com/r/staphb/salmid) | 0.1.23 | https://github.com/hcdenbakker/SalmID |
@@ -89,7 +90,7 @@ For many people Docker is not an option, but Singularity is. Most Docker contain
 
 You can also view the list of images on Docker hub here: https://hub.docker.com/r/staphb/
 
-## License 
+## License
   * [GNU GPLv3 license](/LICENSE) was added 2020-01-16
   * We keep a list of the licenses for the main software within the docker images here: [Program_Licenses.md](/Program_Licenses.md)
   * Links to licenses for each program should also be listed as a metadata `LABEL` within each dockerfile
