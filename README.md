@@ -26,7 +26,7 @@ For many people Docker is not an option, but Singularity is. Most Docker contain
 
 | Software | Version | Link |
 | :--------: | :-------: | -------- |
-| [ABRicate](https://hub.docker.com/r/staphb/abricate/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/abricate.svg?style=popout)](https://hub.docker.com/r/staphb/abricate) | 0.8.7, 0.8.13, 0.8.13s (+serotypefinder db), 0.9.8 | https://github.com/tseemann/abricate |
+| [ABRicate](https://hub.docker.com/r/staphb/abricate/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/abricate.svg?style=popout)](https://hub.docker.com/r/staphb/abricate) | 0.8.7, 0.8.13, 0.8.13s (+serotypefinder db), 0.9.8, 1.0.0 | https://github.com/tseemann/abricate |
 | [BBTools](https://hub.docker.com/r/staphb/bbtools/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/bbtools.svg?style=popout)](https://hub.docker.com/r/staphb/bbtools) | 38.76 | https://jgi.doe.gov/data-and-tools/bbtools/ |
 | [BWA](https://hub.docker.com/r/staphb/bwa) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/bwa.svg?style=popout)](https://hub.docker.com/r/staphb/bwa) | 0.7.17 | https://github.com/lh3/bwa |
 | [Canu-Racon](https://hub.docker.com/r/staphb/canu-racon/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/canu-racon.svg?style=popout)](https://hub.docker.com/r/staphb/canu-racon) | 2.0 (Canu) 1.4.3 (Racon) 2.17 (minimap2); <br/> 1.9 (Canu) 1.4.3 (Racon) 2.17 (minimap2); <br/> 1.9i (Canu) 1.4.3 (Racon) 2.17 (minimap2) (+racon_preprocess.py); <br/> 1.7.1 (Canu) 1.3.1 (Racon) 2.13 (minimap2) | https://canu.readthedocs.io/en/latest/ https://github.com/isovic/racon https://lh3.github.io/minimap2/ |
