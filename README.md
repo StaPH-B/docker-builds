@@ -26,7 +26,7 @@ For many people Docker is not an option, but Singularity is. Most Docker contain
 
 | Software | Version | Link |
 | :--------: | :-------: | -------- |
-| [ABRicate](https://hub.docker.com/r/staphb/abricate/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/abricate.svg?style=popout)](https://hub.docker.com/r/staphb/abricate) | 0.8.7, 0.8.13, 0.8.13s (+serotypefinder db), 0.9.8 | https://github.com/tseemann/abricate |
+| [ABRicate](https://hub.docker.com/r/staphb/abricate/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/abricate.svg?style=popout)](https://hub.docker.com/r/staphb/abricate) | 0.8.7, 0.8.13, 0.8.13s (+serotypefinder db), 0.9.8, 1.0.0 | https://github.com/tseemann/abricate |
 | [BBTools](https://hub.docker.com/r/staphb/bbtools/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/bbtools.svg?style=popout)](https://hub.docker.com/r/staphb/bbtools) | 38.76 | https://jgi.doe.gov/data-and-tools/bbtools/ |
 | [BWA](https://hub.docker.com/r/staphb/bwa) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/bwa.svg?style=popout)](https://hub.docker.com/r/staphb/bwa) | 0.7.17 | https://github.com/lh3/bwa |
 | [Canu-Racon](https://hub.docker.com/r/staphb/canu-racon/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/canu-racon.svg?style=popout)](https://hub.docker.com/r/staphb/canu-racon) | 2.0 (Canu) 1.4.3 (Racon) 2.17 (minimap2); <br/> 1.9 (Canu) 1.4.3 (Racon) 2.17 (minimap2); <br/> 1.9i (Canu) 1.4.3 (Racon) 2.17 (minimap2) (+racon_preprocess.py); <br/> 1.7.1 (Canu) 1.3.1 (Racon) 2.13 (minimap2) | https://canu.readthedocs.io/en/latest/ https://github.com/isovic/racon https://lh3.github.io/minimap2/ |
@@ -63,7 +63,7 @@ For many people Docker is not an option, but Singularity is. Most Docker contain
 | [PlasmidSeeker](https://hub.docker.com/r/staphb/plasmidseeker) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/plasmidseeker.svg?style=popout)](https://hub.docker.com/r/staphb/plasmidseeker) | 1.0 | https://github.com/bioinfo-ut/PlasmidSeeker |
 | [Prokka](https://hub.docker.com/r/staphb/prokka/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/prokka.svg?style=popout)](https://hub.docker.com/r/staphb/prokka) | 1.13.4, 1.14.0, 1.14.5 | https://github.com/tseemann/prokka |
 | [QUAST](https://hub.docker.com/r/staphb/quast/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/quast.svg?style=popout)](https://hub.docker.com/r/staphb/quast) | 5.0.0, 5.0.2 | https://github.com/ablab/quast |
-| [rasusa](https://hub.docker.com/r/staphb/rasusa/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/rasusa.svg?style=popout)](https://hub.docker.com/r/staphb/rasusa) | 0.1.0 | https://github.com/mbhall88/rasusa |
+| [rasusa](https://hub.docker.com/r/staphb/rasusa/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/rasusa.svg?style=popout)](https://hub.docker.com/r/staphb/rasusa) | 0.1.0, 0.2.0 | https://github.com/mbhall88/rasusa |
 | [RAxML](https://hub.docker.com/r/staphb/raxml/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/raxml.svg?style=popout)](https://hub.docker.com/r/staphb/raxml) | 8.2.12 (RAxML) <br/> 0.9.0 (RAxML Next Generation) | https://github.com/stamatak/standard-RAxML <br/> https://github.com/amkozlov/raxml-ng |
 | [Roary](https://hub.docker.com/r/staphb/roary/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/roary.svg?style=popout)](https://hub.docker.com/r/staphb/roary) | 3.12.0 | https://github.com/sanger-pathogens/Roary |
 | [SalmID](https://hub.docker.com/r/staphb/salmid) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/salmid.svg?style=popout)](https://hub.docker.com/r/staphb/salmid) | 0.1.23 | https://github.com/hcdenbakker/SalmID |
@@ -73,11 +73,12 @@ For many people Docker is not an option, but Singularity is. Most Docker contain
 | [seqyclean](https://hub.docker.com/r/staphb/seqyclean) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/seqyclean.svg?style=popout)](https://hub.docker.com/r/staphb/seqyclean) | 1.10.09 | https://github.com/ibest/seqyclean |
 | [Seroba](https://hub.docker.com/r/staphb/seroba) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/seroba.svg?style=popout)](https://hub.docker.com/r/staphb/seroba) | 1.0.0 | https://github.com/sanger-pathogens/seroba |
 | [SerotypeFinder](https://hub.docker.com/r/staphb/serotypefinder/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/serotypefinder.svg?style=popout)](https://hub.docker.com/r/staphb/serotypefinder) | 1.1 (I think? Bitbucket repo does not list older versions like the one in this docker image) | https://bitbucket.org/genomicepidemiology/serotypefinder/ |
-| [Shovill](https://hub.docker.com/r/staphb/shovill/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/shovill.svg?style=popout)](https://hub.docker.com/r/staphb/shovill) | 1.0.4 | https://github.com/tseemann/shovill |
+| [Shovill](https://hub.docker.com/r/staphb/shovill/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/shovill.svg?style=popout)](https://hub.docker.com/r/staphb/shovill) | 1.0.4, 1.1.0 | https://github.com/tseemann/shovill |
 | [SISTR](https://hub.docker.com/r/staphb/sistr/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/sistr.svg?style=popout)](https://hub.docker.com/r/staphb/sistr) | 1.0.2 | https://github.com/peterk87/sistr_cmd |
 | [SKESA](https://hub.docker.com/r/staphb/skesa) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/skesa.svg?style=popout)](https://hub.docker.com/r/staphb/skesa) | 2.3.0, 2.4.0 (`gfa_connector` & `kmercounter` included) | https://github.com/ncbi/SKESA |
 | [Snippy](https://hub.docker.com/r/staphb/snippy) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/snippy.svg?style=popout)](https://hub.docker.com/r/staphb/snippy) | 4.4.5, 4.5.1, 4.6.0 | https://github.com/tseemann/snippy |
 | [snp-dists](https://hub.docker.com/r/staphb/snp-dists) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/snp-dists.svg?style=popout)](https://hub.docker.com/r/staphb/snp-dists) | 0.6.2 | https://github.com/tseemann/snp-dists |
+| [SNP-sites](https://hub.docker.com/r/staphb/snp-sites) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/snp-sites.svg?style=popout)](https://hub.docker.com/r/staphb/snp-sites) | 2.3.3 | https://github.com/sanger-pathogens/snp-sites |
 | [SPAdes](https://hub.docker.com/r/staphb/spades/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/spades.svg?style=popout)](https://hub.docker.com/r/staphb/spades) | 3.8.2, 3.12.0, 3.13.0, 3.14.0 | http://cab.spbu.ru/software/spades/ |
 | [SRA-toolkit](https://hub.docker.com/r/staphb/sratoolkit/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/sratoolkit.svg?style=popout)](https://hub.docker.com/r/staphb/sratoolkit) | 2.9.2 | https://github.com/ncbi/sra-tools |
 | [Staramr](https://hub.docker.com/r/staphb/staramr/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/staramr.svg?style=popout)](https://hub.docker.com/r/staphb/staramr) | 0.5.1 | https://github.com/phac-nml/staramr |
@@ -88,7 +89,7 @@ For many people Docker is not an option, but Singularity is. Most Docker contain
 
 You can also view the list of images on Docker hub here: https://hub.docker.com/r/staphb/
 
-## License 
+## License
   * [GNU GPLv3 license](/LICENSE) was added 2020-01-16
   * We keep a list of the licenses for the main software within the docker images here: [Program_Licenses.md](/Program_Licenses.md)
   * Links to licenses for each program should also be listed as a metadata `LABEL` within each dockerfile
