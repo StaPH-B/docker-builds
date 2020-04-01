@@ -47,7 +47,7 @@ RUN R -e "install.packages(c('knitr',\
   'devtools',\
   'phytools',\
   'viridisLite',\
-  'viridis), repos = 'http://cran.us.r-project.org')" && \
+  'viridis'), repos = 'http://cran.us.r-project.org')" && \
   R -e "devtools::install_github('AbigailShockey/ggtree')" && \
   R -e "tinytex::install_tinytex()"
 
