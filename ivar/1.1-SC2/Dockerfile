@@ -7,8 +7,8 @@ LABEL software="iVar"
 LABEL software.version="1.1-PR"
 LABEL comments="Clone of ivar v1.1 pre-release most recent commit as of 05/09/2020"
 LABEL description="Computational package that contains functions broadly useful for viral amplicon-based sequencing."
-LABEL website="https://github.com/gkarthik/ivar"
-LABEL license="https://github.com/gkarthik/ivar/blob/master/LICENSE"
+LABEL website="https://github.com/andersen-lab/ivar"
+LABEL license="https://github.com/andersen-lab/ivar/blob/master/LICENSE"
 LABEL maintainer="Kevin Libuit"
 LABEL maintainer.email="kevin.libuit@dgs.virginia.gov"
 
@@ -22,7 +22,6 @@ RUN git clone -n https://github.com/artic-network/artic-ncov2019.git &&\
 RUN mkdir reference &&\
     perl -ne 'my @x=split m/\t/; print join("\t",@x[0..3], 60, $x[3]=~m/LEFT/?"+":"-"),"\n";' < artic-ncov2019/primer_schemes/nCoV-2019/V1/nCoV-2019.scheme.bed  > /reference/ARTIC-V1.bed &&\
     perl -ne 'my @x=split m/\t/; print join("\t",@x[0..3], 60, $x[3]=~m/LEFT/?"+":"-"),"\n";' < artic-ncov2019/primer_schemes/nCoV-2019/V2/nCoV-2019.scheme.bed  > /reference/ARTIC-V2.bed &&\
-    perl -ne 'my @x=split m/\t/; print join("\t",@x[0..3], 60, $x[3]=~m/LEFT/?"+":"-"),"\n";' < artic-ncov2019/primer_schemes/nCoV-2019/V3/nCoV-2019.scheme.bed  > /reference/ARTIC-V3.bed &&\
     mv artic-ncov2019/primer_schemes/nCoV-2019/V1/nCoV-2019.reference.fasta /reference 
 # Seqtk
 RUN mkdir seqtk &&\
