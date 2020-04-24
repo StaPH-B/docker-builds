@@ -22,7 +22,6 @@ RUN git clone -n https://github.com/artic-network/artic-ncov2019.git &&\
 RUN mkdir reference &&\
     perl -ne 'my @x=split m/\t/; print join("\t",@x[0..3], 60, $x[3]=~m/LEFT/?"+":"-"),"\n";' < artic-ncov2019/primer_schemes/nCoV-2019/V1/nCoV-2019.scheme.bed  > /reference/ARTIC-V1.bed &&\
     perl -ne 'my @x=split m/\t/; print join("\t",@x[0..3], 60, $x[3]=~m/LEFT/?"+":"-"),"\n";' < artic-ncov2019/primer_schemes/nCoV-2019/V2/nCoV-2019.scheme.bed  > /reference/ARTIC-V2.bed &&\
-    perl -ne 'my @x=split m/\t/; print join("\t",@x[0..3], 60, $x[3]=~m/LEFT/?"+":"-"),"\n";' < artic-ncov2019/primer_schemes/nCoV-2019/V3/nCoV-2019.scheme.bed  > /reference/ARTIC-V3.bed &&\
     mv artic-ncov2019/primer_schemes/nCoV-2019/V1/nCoV-2019.reference.fasta /reference 
 # Seqtk
 RUN mkdir seqtk &&\
