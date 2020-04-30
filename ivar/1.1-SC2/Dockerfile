@@ -20,8 +20,8 @@ RUN git clone -n https://github.com/artic-network/artic-ncov2019.git &&\
     git checkout d50a5f6a3265fb45a5d0c8949dfd037fd869f8f9 
 # Reformat Artic BED files for use in iVar
 RUN mkdir reference &&\
-    perl -ne 'my @x=split m/\t/; print join("\t",@x[0..3], 60, $x[3]=~m/LEFT/?"+":"-"),"\n";' < artic-ncov2019/primer_schemes/nCoV-2019/V1/nCoV-2019.scheme.bed  > /reference/ARTIC-V1.bed &&\
-    perl -ne 'my @x=split m/\t/; print join("\t",@x[0..3], 60, $x[3]=~m/LEFT/?"+":"-"),"\n";' < artic-ncov2019/primer_schemes/nCoV-2019/V2/nCoV-2019.scheme.bed  > /reference/ARTIC-V2.bed &&\
+    perl -ne 'my @x=split m/\t/; print join("\t",@x[0..3], 60, $x[3]=~m/LEFT/?"+":"-"),"\n";' < artic-ncov2019/primer_schemes/nCoV-2019/V1/nCoV-2019.bed  > /reference/ARTIC-V1.bed &&\
+    perl -ne 'my @x=split m/\t/; print join("\t",@x[0..3], 60, $x[3]=~m/LEFT/?"+":"-"),"\n";' < artic-ncov2019/primer_schemes/nCoV-2019/V2/nCoV-2019.bed  > /reference/ARTIC-V2.bed &&\
     mv artic-ncov2019/primer_schemes/nCoV-2019/V1/nCoV-2019.reference.fasta /reference 
 # Seqtk
 RUN mkdir seqtk &&\
