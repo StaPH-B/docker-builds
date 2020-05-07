@@ -3,7 +3,7 @@ FROM ubuntu:xenial
 
 # metadata
 LABEL base.image="ubuntu:xenial"
-LABEL description="Render a genomic clustering report using R"
+LABEL description="An r environment and script for generating a genome cluster report"
 LABEL website="https://github.com/AbigailShockey/reports"
 LABEL maintainer="Abigail Shockey"
 LABEL maintainer.email="abigail.shockey@slh.wisc.edu"
