@@ -48,7 +48,8 @@ RUN R -e "install.packages(c('knitr',\
   'phytools',\
   'viridisLite',\
   'viridis',\
-  'kableExtra'), repos = 'http://cran.us.r-project.org')" && \
+  'kableExtra',\
+  'pander'), repos = 'http://cran.us.r-project.org')" && \
   R -e "devtools::install_github('AbigailShockey/ggtree')" && \
   R -e "tinytex::install_tinytex()"
 
