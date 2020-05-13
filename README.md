@@ -1,17 +1,7 @@
 # [docker-builds](#)
 This repository contains the Dockerfiles and other assorted files necessary for building Docker images for a variety of programs used by members of the StaPH-B (State Public Health Lab Bioinformatics) consortium. The purpose of this repository is to provide a centralized location for Docker images that is easily accessible for users, with clear documentation on how the containers were built and how to use them.
 
-Each Dockerfile lists author/maintainer for that specific Docker image, but the authors/maintainers of the docker images are:
-  * [@kapsakcj](https://github.com/kapsakcj)
-  * [@k-florek](https://github.com/k-florek)
-  * [@garfinjm](https://github.com/garfinjm)
-  * [@kevinlibuit](https://github.com/kevinlibuit)
-  * [@erinyoung](https://github.com/erinyoung)
-  * [@lskatz](https://github.com/lskatz)
-  * [@stjacqrm](https://github.com/stjacqrm)
-  * [@AbigailShockey](https://github.com/AbigailShockey)
-
-If you would like to contribute with your own Docker image or perhaps improve upon the existing images, please fork the repository, make your changes/additions, and submit a pull request. If you are having an issue with an existing image, please submit an issue. We welcome any and all feedback!  
+If you would like to contribute with a Docker image or improve upon the existing images, please fork the repository, make your changes/additions, and submit a pull request. If you are having an issue with an existing image, please submit an issue. We welcome any and all feedback!  
 [See more details on how to contribute here](https://staph-b.github.io/docker-builds/contribute/)
 
 ## [Docker User Guide](https://staph-b.github.io/docker-builds/)
@@ -95,3 +85,14 @@ You can also view the list of images on Docker hub here: https://hub.docker.com/
   * [GNU GPLv3 license](/LICENSE) was added 2020-01-16
   * We keep a list of the licenses for the main software within the docker images here: [Program_Licenses.md](/Program_Licenses.md)
   * Links to licenses for each program should also be listed as a metadata `LABEL` within each dockerfile
+  
+## Authors/Maintainers
+Each Dockerfile lists the author(s)/maintainer(s) as a metadata `LABEL`, but the authors/maintainers of the docker images are:
+  * [@kapsakcj](https://github.com/kapsakcj)
+  * [@k-florek](https://github.com/k-florek)
+  * [@garfinjm](https://github.com/garfinjm)
+  * [@kevinlibuit](https://github.com/kevinlibuit)
+  * [@erinyoung](https://github.com/erinyoung)
+  * [@lskatz](https://github.com/lskatz)
+  * [@stjacqrm](https://github.com/stjacqrm)
+  * [@AbigailShockey](https://github.com/AbigailShockey)
