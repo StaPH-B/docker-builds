@@ -36,6 +36,9 @@ ENV PATH="${PATH}:/SPAdes-3.13.0-Linux/bin"
 # set the working directory as /data so that SPAdes.py runs in that directory, not the root DIR /
 WORKDIR /data
 ```
+
+[Here is a minimal Dockerfile template that can be used as a starting point](https://github.com/StaPH-B/docker-builds/blob/master/dockerfile-template/Dockerfile)
+
 [If you want a more complex example where more dependencies are installed and I had work some magic to get java executables to run, check out the Dockerfile for Shovill](https://github.com/StaPH-B/docker-builds/blob/master/shovill/1.0.4/Dockerfile)
 
 Once you have a `Dockerfile` created, name it as `Dockerfile` and store it in a empty directory (unless you need files to build the docker image). Note the path to the directory containing your Dockerfile. Then, run:
