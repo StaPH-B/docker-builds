@@ -78,6 +78,8 @@ For many people Docker is not an option, but Singularity is. Most Docker contain
 | [TipToft](https://hub.docker.com/r/staphb/tiptoft/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/tiptoft.svg?style=popout)](https://hub.docker.com/r/staphb/tiptoft) | 1.0.0 | https://github.com/andrewjpage/tiptoft |
 | [Trimmomatic](https://hub.docker.com/r/staphb/trimmomatic/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/trimmomatic.svg?style=popout)](https://hub.docker.com/r/staphb/trimmomatic) | 0.38, 0.39 | http://www.usadellab.org/cms/?page=trimmomatic |
 | [Unicycler](https://hub.docker.com/r/staphb/unicycler/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/unicycler.svg?style=popout)](https://hub.docker.com/r/staphb/unicycler) | 0.4.7 | https://github.com/rrwick/Unicycler |
+| [VIBRANT](https://hub.docker.com/r/staphb/vibrant/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/vibrant.svg?style=popout)](https://hub.docker.com/r/staphb/vibrant) | 1.2.1 | https://github.com/AnantharamanLab/VIBRANT |
+| [VIGOR4](https://hub.docker.com/r/staphb/vigor4/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/vigor4.svg?style=popout)](https://hub.docker.com/r/staphb/vigor4) | 4.1.20190131 | https://github.com/JCVenterInstitute/VIGOR4 |
 | [wtdbg2](https://hub.docker.com/r/staphb/wtdbg2/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/wtdbg2.svg?style=popout)](https://hub.docker.com/r/staphb/wtdbg2) | 2.5 | https://github.com/ruanjue/wtdbg2 |
 
 You can also view the list of images on Docker hub here: https://hub.docker.com/r/staphb/
@@ -86,7 +88,7 @@ You can also view the list of images on Docker hub here: https://hub.docker.com/
   * [GNU GPLv3 license](/LICENSE) was added 2020-01-16
   * We keep a list of the licenses for the main software within the docker images here: [Program_Licenses.md](/Program_Licenses.md)
   * Links to licenses for each program should also be listed as a metadata `LABEL` within each dockerfile
-  
+
 ## Authors/Maintainers
 Each Dockerfile lists the author(s)/maintainer(s) as a metadata `LABEL`, but the authors/maintainers of the docker images are:
   * [@kapsakcj](https://github.com/kapsakcj)
