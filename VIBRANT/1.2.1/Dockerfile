@@ -21,17 +21,14 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
     prodigal \
     hmmer \
     python3-pip \
+    python3-setuptools \
     python3-biopython \
     python3-matplotlib && \
     #python3-numpy  \
     apt-get clean
 
-RUN python3 --version
-RUN pip3 install --upgrade setuptools
-RUN pip3 install seaborn==0.10.0
-RUN pip3 install numpy==1.18.4
-RUN pip3 install scikit-learn==0.21.3
-RUN pip3 install pickle-mixin
+#install more dependencies
+RUN pip3 install seaborn==0.10.0 numpy==1.18.4 scikit-learn==0.21.3 pickle-mixin
 
 #install the software
 RUN wget https://github.com/AnantharamanLab/VIBRANT/archive/8a01435694ff016157a7e2a345ae353c8812d9cb.zip && \
