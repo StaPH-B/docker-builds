@@ -1,7 +1,7 @@
 FROM ubuntu:xenial
 
 LABEL base.image="ubuntu:xenial"
-LABEL version="1"
+LABEL container.version="2"
 LABEL software="QUAST"
 LABEL software.version="5.0.2"
 LABEL description="Genome assembly evaluation tool"
