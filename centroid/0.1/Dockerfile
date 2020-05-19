@@ -32,10 +32,10 @@ RUN wget --no-check-certificate https://github.com/marbl/Mash/releases/download/
     mkdir /data
 
 #install the software
-RUN wget --no-check-certificate https://github.com/stjacqrm/centroid/archive/f71f04ba906617f6a880a76ccc8fccbbdaabcf07.zip && \
-    unzip f71f04ba906617f6a880a76ccc8fccbbdaabcf07.zip && \
-    rm f71f04ba906617f6a880a76ccc8fccbbdaabcf07.zip && \
-    mv centroid-f71f04ba906617f6a880a76ccc8fccbbdaabcf07 centroid && \
+RUN wget --no-check-certificate https://github.com/stjacqrm/centroid/archive/72fba4a8cd1e289fd48cd1b3581d1710813eae3b.zip && \
+    unzip 72fba4a8cd1e289fd48cd1b3581d1710813eae3b.zip && \
+    rm 72fba4a8cd1e289fd48cd1b3581d1710813eae3b.zip && \
+    mv centroid-72fba4a8cd1e289fd48cd1b3581d1710813eae3b centroid && \
     chmod 777 -R centroid
 
 #set paths
