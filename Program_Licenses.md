@@ -13,6 +13,7 @@ The licenses of the open-source software that is contained in these Docker image
 | BBTools | non-standard - see `licence.txt` and `legal.txt` that is included in docker image under `/bbmap/docs/`; Also on sourceforge repo for BBTools | https://jgi.doe.gov/disclaimer/ |
 | BWA | GNU GPLv3 | https://github.com/lh3/bwa/blob/master/COPYING |
 | Canu <br/> Racon <br/> Minimap2 | GNU GPLv3 (Canu), <br/> MIT (Racon), <br/> MIT (Minimap2) | https://github.com/marbl/canu/blob/master/README.license.GPL https://github.com/isovic/racon/blob/master/LICENSE https://github.com/lh3/minimap2/blob/master/LICENSE.txt |
+| centroid | GitHub No License | https://github.com/https://github.com/stjacqrm/centroid |
 | CDC-SPN | GitHub No License | https://github.com/BenJamesMetcalf/Spn_Scripts_Reference |
 | cfsan-snp-pipeline | non-standard license see --> | https://github.com/CFSAN-Biostatistics/snp-pipeline/blob/master/LICENSE.txt |
 | Circlator | GNU GPLv3 | https://github.com/sanger-pathogens/circlator/blob/master/LICENSE |
