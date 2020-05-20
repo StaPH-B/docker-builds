@@ -29,7 +29,7 @@ RUN apt-get update && apt-get install -y python \
   libssl-dev \
   libfindbin-libs-perl && \
   apt-get clean && apt-get autoclean && \
-  rm -rf /var/lib/apt/lists*
+  rm -rf /var/lib/apt/lists/*
 
 # SPAdes
 ENV spadesVer=3.14.1
