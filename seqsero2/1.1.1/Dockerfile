@@ -77,6 +77,7 @@ RUN wget https://github.com/denglab/SeqSero2/archive/v${SeqSero2Ver}.tar.gz && \
  tar -xzf v${SeqSero2Ver}.tar.gz && \
  rm -rf v${SeqSero2Ver}.tar.gz && \
  cd /SeqSero2-${SeqSero2Ver}/ && \
+ python3 -m pip install -U pip && \
  python3 -m pip install . && \
  mkdir /data
 
