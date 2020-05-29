@@ -72,13 +72,14 @@ RUN cd root/ &&\
     make &&\
     make install
 # bwa
-RUN cd root/ &&\
-    wget https://github.com/lh3/bwa/archive/v0.7.17.tar.gz &&\
-    tar xvf v0.7.17.tar.gz &&\
-    cd bwa-0.7.17/ &&\
-    make &&\
-    cd ../ &&\
-    rm v0.7.17.tar.gz
+RUN mkdir bwa &&\
+  mkdir /data &&\
+  cd bwa &&\
+  wget https://github.com/lh3/bwa/releases/download/v0.7.17/bwa-0.7.17.tar.bz2 &&\
+  tar -xjf bwa-0.7.17.tar.bz2 &&\
+  rm bwa-0.7.17.tar.bz2 &&\
+  cd bwa-0.7.17 &&\
+  make
 
 ENV PATH="/bwa/bwa-0.7.17:/minimap2-2.17_x64-linux:${PATH}"
 # Snakemake
