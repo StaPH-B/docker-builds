@@ -73,7 +73,6 @@ RUN cd root/ &&\
     make install
 # bwa
 RUN mkdir bwa &&\
-  mkdir /data &&\
   cd bwa &&\
   wget https://github.com/lh3/bwa/releases/download/v0.7.17/bwa-0.7.17.tar.bz2 &&\
   tar -xjf bwa-0.7.17.tar.bz2 &&\
