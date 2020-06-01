@@ -94,6 +94,11 @@ ENV PATH="/bwa/bwa-0.7.17:/minimap2-2.17_x64-linux:${PATH}"
 # Snakemake
 RUN pip3 install pandas snakemake
 
+# indexing the reference sequences
+RUN for artic_version in "V1" "V2" "V3" ; do \
+    bwa index /artic-ncov2019/primer_schemes/nCoV-2019/$artic_version/nCoV-2019.reference.fasta && \
+    samtools faidx /artic-ncov2019/primer_schemes/nCoV-2019/$artic_version/nCoV-2019.reference.fasta ; done
+
 # create /data directory and set as working directory
 RUN mkdir /data
 WORKDIR /data
