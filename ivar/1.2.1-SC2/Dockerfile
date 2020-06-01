@@ -72,14 +72,14 @@ RUN cd root/ &&\
     make &&\
     make install
 # bwa
-RUN cd root/ &&\
+RUN mkdir bwa &&\
+    cd bwa &&\
     wget https://github.com/lh3/bwa/archive/v0.7.17.tar.gz &&\
     tar xvf v0.7.17.tar.gz &&\
+    rm v0.7.17.tar.gz &&\ 
     cd bwa-0.7.17/ &&\
-    make &&\
-    cd ../ &&\
-    rm v0.7.17.tar.gz
-
+    make
+    
 ENV PATH="/bwa/bwa-0.7.17:/minimap2-2.17_x64-linux:${PATH}"
 # Snakemake
 RUN pip3 install pandas snakemake
