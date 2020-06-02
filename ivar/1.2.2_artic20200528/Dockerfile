@@ -1,7 +1,7 @@
 FROM ubuntu:18.04
 
 LABEL base.image="ubuntu:18.04"
-LABEL container.version="1.2.2"
+LABEL container.version="1"
 LABEL software="iVar"
 LABEL software.version="1.2.2"
 LABEL description="Computational package that contains functions broadly useful for viral amplicon-based sequencing."
