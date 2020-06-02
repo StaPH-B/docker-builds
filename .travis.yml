@@ -12,6 +12,7 @@ install:
   - docker build -t samtools:1.10 samtools/1.10
   - docker build -t abricate:1.0.0 abricate/1.0.0
   - docker build -t ariba:2.14.4 ariba/2.14.4
+  - docker build -t ivar:1.2.2_artic20200528 ivar/1.2.2_artic20200528
 script:
   - bash tests/mash-test.sh
   - bash tests/mashtree-test.sh
@@ -21,3 +22,4 @@ script:
   - bash tests/samtools.sh
   - bash tests/abricate.sh
   - bash tests/ariba.sh
+  - bash tests/ivar.sh
