@@ -37,11 +37,12 @@ RUN cd root &&\
     make install &&\
     cd ../ &&\
     rm samtools-1.9.tar.bz2
-# iVar v1.1-PR (most recent commit as of 03/19/2020)
+# iVar v1.2.1
 RUN cd root/ &&\
-    git clone -n https://github.com/andersen-lab/ivar.git &&\
-    cd ivar/ &&\
-    git checkout 1610e0efee46459528a65769692936e1e35a17f3 &&\
+    wget https://github.com/andersen-lab/ivar/archive/v1.2.1.tar.gz &&\
+    tar -xvf v1.2.1.tar.gz &&\
+    rm -rf v1.2.1.tar.gz &&\
+    cd ivar-1.2.1 &&\
     ./autogen.sh &&\
     ./configure &&\
     make &&\

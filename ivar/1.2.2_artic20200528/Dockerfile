@@ -1,28 +1,42 @@
 FROM ubuntu:18.04
 
 LABEL base.image="ubuntu:18.04"
-LABEL container.version="1.1-SC2"
-LABEL sc2="Modified from the staphb/ivar:1.1 image to include tools for SARS-CoV-2 (SC2) analysis"
+LABEL container.version="1"
 LABEL software="iVar"
-LABEL software.version="1.1-PR"
-LABEL comments="Clone of ivar v1.1 pre-release most recent commit as of 05/09/2020"
+LABEL software.version="1.2.2"
 LABEL description="Computational package that contains functions broadly useful for viral amplicon-based sequencing."
+LABEL comments="Contains iVar 1.2.2 as well as compatible artic V3 primer schemes"
 LABEL website="https://github.com/andersen-lab/ivar"
 LABEL license="https://github.com/andersen-lab/ivar/blob/master/LICENSE"
-LABEL maintainer="Kevin Libuit"
-LABEL maintainer.email="kevin.libuit@dgs.virginia.gov"
+LABEL maintainer="Erin Young"
+LABEL maintainer.email="eriny@utah.gov"
+LABEL modified.from="https://github.com/andersen-lab/ivar/blob/master/Dockerfile"
+LABEL original.maintainer="Kathik G"
+LABEL original.maintainer.email="gkarthik@scripps.edu"
 
 RUN apt-get update
 RUN apt-get install -y build-essential autoconf zlib1g-dev python3 wget libbz2-dev liblzma-dev libncurses-dev git bedtools python3-pip vim nano
-# Artic ncov2019 (most recent commit as of 03/24/2020)
+
+# Artic ncov2019 (most recent commit was 05/28/2020 as of 06/01/2020)
 RUN git clone -n https://github.com/artic-network/artic-ncov2019.git &&\
     cd artic-ncov2019 &&\
-    git checkout d50a5f6a3265fb45a5d0c8949dfd037fd869f8f9 
-# Reformat Artic BED files for use in iVar
-RUN mkdir reference &&\
-    perl -ne 'my @x=split m/\t/; print join("\t",@x[0..3], 60, $x[3]=~m/LEFT/?"+":"-"),"\n";' < artic-ncov2019/primer_schemes/nCoV-2019/V1/nCoV-2019.bed  > /reference/ARTIC-V1.bed &&\
-    perl -ne 'my @x=split m/\t/; print join("\t",@x[0..3], 60, $x[3]=~m/LEFT/?"+":"-"),"\n";' < artic-ncov2019/primer_schemes/nCoV-2019/V2/nCoV-2019.bed  > /reference/ARTIC-V2.bed &&\
-    mv artic-ncov2019/primer_schemes/nCoV-2019/V1/nCoV-2019.reference.fasta /reference 
+    git checkout ef3f1ce9f66d49ec7caa67e0425e556bd67c53de
+# Turn primer bedfiles into bedfiles reprenting amiplicons (alt primers are ignored)
+RUN for artic_version in "V1" "V2"; do \
+    cat /artic-ncov2019/primer_schemes/nCoV-2019/$artic_version/nCoV-2019.bed | \
+    	awk '{ if ($0 ~ "LEFT") { print $1 "\t" $2 } else {print $3 "\t" $4 "\t" $5 }}' | \
+	paste - - | \
+	sed 's/_RIGHT//g' > /artic-ncov2019/primer_schemes/nCoV-2019/$artic_version/nCoV-2019_amplicon.bed ; \
+	done && \
+    cat /artic-ncov2019/primer_schemes/nCoV-2019/V3/nCoV-2019.bed | \
+    	grep -v "alt" | \
+	awk '{ if ($0 ~ "LEFT") { print $1 "\t" $2 } else {print $3 "\t" $4 "\t" $5 }}' | \
+	paste - - | \
+	sed 's/_RIGHT//g' > /artic-ncov2019/primer_schemes/nCoV-2019/V3/nCoV-2019_amplicon.bed
+# Get gff file for reference genome
+RUN mkdir /reference && \
+     wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/009/858/895/GCF_009858895.2_ASM985889v3/GCF_009858895.2_ASM985889v3_genomic.gff.gz -P /reference && \
+     gunzip /reference/GCF_009858895.2_ASM985889v3_genomic.gff.gz
 # Seqtk
 RUN mkdir seqtk &&\
     cd seqtk &&\
@@ -57,11 +71,12 @@ RUN cd root &&\
     make install &&\
     cd ../ &&\
     rm samtools-1.9.tar.bz2
-# iVar v1.1-PR (most recent commit with succesfful build  as of 03/25/2020)
+# iVar v1.2.2
 RUN cd root/ &&\
-    git clone -n https://github.com/andersen-lab/ivar.git &&\
-    cd ivar/ &&\
-    git checkout 51d21d15af8f1763e5f0acaa8e60592b17a76d59 &&\
+    wget https://github.com/andersen-lab/ivar/archive/v1.2.2.tar.gz &&\
+    tar -xvf v1.2.2.tar.gz &&\
+    rm -rf v1.2.2.tar.gz &&\
+    cd ivar-1.2.2 &&\
     ./autogen.sh &&\
     ./configure &&\
     make &&\
@@ -73,11 +88,16 @@ RUN mkdir bwa &&\
     tar xvf v0.7.17.tar.gz &&\
     rm v0.7.17.tar.gz &&\ 
     cd bwa-0.7.17/ &&\
-    make 
+    make
 
 ENV PATH="/bwa/bwa-0.7.17:/minimap2-2.17_x64-linux:${PATH}"
 # Snakemake
 RUN pip3 install pandas snakemake
+
+# indexing the reference sequences
+RUN for artic_version in "V1" "V2" "V3" ; do \
+    bwa index /artic-ncov2019/primer_schemes/nCoV-2019/$artic_version/nCoV-2019.reference.fasta && \
+    samtools faidx /artic-ncov2019/primer_schemes/nCoV-2019/$artic_version/nCoV-2019.reference.fasta ; done
 
 # create /data directory and set as working directory
 RUN mkdir /data

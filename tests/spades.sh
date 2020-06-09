@@ -2,5 +2,5 @@
 # test for spades container
 set -e
 
-docker run spades:3.13.0 spades.py
-docker run spades:3.13.0 spades.py --test 
+docker run spades:3.14.1 spades.py
+docker run spades:3.14.1 spades.py --test 
