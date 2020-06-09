@@ -1,7 +1,7 @@
 FROM ubuntu:xenial
 
 LABEL base.image="ubuntu:xenial"
-LABEL container.version="1"
+LABEL dockerfile.version="2"
 LABEL software="SeqSero2"
 LABEL software.version="1.1.1"
 LABEL description="Salmonella serotyping from genome sequencing data"
