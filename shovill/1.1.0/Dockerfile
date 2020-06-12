@@ -1,7 +1,7 @@
 FROM ubuntu:xenial
 
 LABEL base.image="ubuntu:xenial"
-LABEL container.version="1"
+LABEL container.version="2"
 LABEL software="Shovill"
 LABEL software.version="1.1.0"
 LABEL description="faster than SPAdes de novo DBG genome assembler (with assembler options!)"
@@ -10,6 +10,7 @@ LABEL lisence="https://github.com/tseemann/shovill/blob/master/LICENSE"
 LABEL maintainer="Curtis Kapsak"
 LABEL maintainer.email="pjx8@cdc.gov"
 
+# install dependencies, cleanup apt garbage
 RUN apt-get update && apt-get install -y python \
   wget \
   pigz \
@@ -26,12 +27,15 @@ RUN apt-get update && apt-get install -y python \
   liblzma-dev \
   libcurl4-gnutls-dev \
   libssl-dev \
-  libfindbin-libs-perl
+  libfindbin-libs-perl && \
+  apt-get clean && apt-get autoclean && \
+  rm -rf /var/lib/apt/lists/*
 
-# SPAdes 3.14.0
-RUN wget http://cab.spbu.ru/files/release3.14.0/SPAdes-3.14.0-Linux.tar.gz && \
-  tar -xzf SPAdes-3.14.0-Linux.tar.gz && \
-  rm SPAdes-3.14.0-Linux.tar.gz
+# SPAdes
+ENV spadesVer=3.14.1
+RUN wget https://github.com/ablab/spades/releases/download/v${spadesVer}/SPAdes-${spadesVer}-Linux.tar.gz && \
+  tar -xzf SPAdes-${spadesVer}-Linux.tar.gz && \
+  rm SPAdes-${spadesVer}-Linux.tar.gz
 
 # Seqtk 1.3
 RUN mkdir seqtk && \ 
@@ -150,7 +154,7 @@ WORKDIR /data
 
 # set $PATH's
 ENV PATH="${PATH}:\
-/SPAdes-3.14.0-Linux/bin:\
+/SPAdes-${spadesVer}-Linux/bin:\
 /kmc:\
 /Lighter-1.1.1:\
 /trimmomatic:\
