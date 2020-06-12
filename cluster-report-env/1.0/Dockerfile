@@ -54,7 +54,7 @@ RUN R -e "install.packages(c('knitr',\
 # install report repository
 RUN git clone -n https://github.com/AbigailShockey/reports.git && \
   cd reports/ && \
-  git checkout 45fd8bb
+  git checkout a8fce56
 
 WORKDIR /data
 ENV PATH "$PATH:/reports"
