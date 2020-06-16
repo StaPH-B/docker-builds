@@ -2,7 +2,7 @@ FROM ubuntu:bionic
 
 # metadata
 LABEL base.image="ubuntu:bionic"
-LABEL container.version="1"
+LABEL dockerfile.version="1"
 LABEL software="Augur"
 LABEL software.version="8.0.0"
 LABEL description="Pipeline components for real-time phylodynamic analysis"
@@ -29,6 +29,7 @@ RUN wget https://github.com/vcftools/vcftools/releases/download/v0.1.16/vcftools
   ./configure &&\
   make && make install
 
-RUN pip3 install nextstrain-augur==8.0.0
+RUN pip3 install nextstrain-augur==8.0.0 &&\
+  mkdir /data
 
 WORKDIR /data
