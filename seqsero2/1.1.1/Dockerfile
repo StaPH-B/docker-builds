@@ -1,7 +1,7 @@
 FROM ubuntu:xenial
 
 LABEL base.image="ubuntu:xenial"
-LABEL container.version="1"
+LABEL dockerfile.version="2"
 LABEL software="SeqSero2"
 LABEL software.version="1.1.1"
 LABEL description="Salmonella serotyping from genome sequencing data"
@@ -22,6 +22,7 @@ LABEL maintainer3.email="kelsey.florek@slh.wisc.edu"
 RUN apt-get update && apt-get install -y \
  python3 \
  python3-pip \
+ python3-setuptools \
  bwa \
  ncbi-blast+ \
  bedtools \
@@ -85,7 +86,6 @@ RUN wget https://github.com/denglab/SeqSero2/archive/v${SeqSero2Ver}.tar.gz && \
 # locale settings for singularity compatibility
 ENV PATH="${PATH}:/SPAdes-${SPAdesVer}-Linux/bin:\
 /SalmID-${SalmIDVer}:\
-/samtools-&{samtoolsVer}:\
 /sratoolkit.${sratoolkitVer}-ubuntu64/bin" \
     LC_ALL=C
 
