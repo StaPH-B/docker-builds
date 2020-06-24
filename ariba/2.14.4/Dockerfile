@@ -1,7 +1,7 @@
 FROM ubuntu:bionic
 
 LABEL base.image="ubuntu:bionic"
-LABEL container.version="1"
+LABEL dockerfile.version="2"
 LABEL software="ARIBA"
 LABEL software.version="2.14.4"
 LABEL description="ARIBA: Antimicrobial Resistance Identification By Assembly"
@@ -60,7 +60,8 @@ ENV MPLBACKEND="agg"
 # This installs: BeautifulSoup4-4.9.0 ariba-2.14.4 biopython-1.76 cycler-0.10.0 dendropy-4.4.0 
 # kiwisolver-1.2.0 matplotlib-3.2.1 numpy-1.18.4 pyfastaq-3.17.0 pymummer-0.10.3 pyparsing-2.4.7 
 # pysam-0.15.4 python-dateutil-2.8.1 six-1.14.0 soupsieve-2.0
-RUN pip3 install ariba==2.14.4
+# pysam=0.16.0 breaks ariba 2.14.4 (June 2020)
+RUN pip3 install pysam==0.15.4 ariba==2.14.4
 
 # set $PATH and locale settings for singularity compatibility
 ENV PATH="$PATH:/SPAdes-3.13.1-Linux/bin" \
