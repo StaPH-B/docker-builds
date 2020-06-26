@@ -1,7 +1,7 @@
 FROM ubuntu:xenial
 
 LABEL base.image="ubuntu:xenial"
-LABEL version="1"
+LABEL dockerfile.version="1"
 LABEL software="BBTools"
 LABEL software.version="38.86"
 LABEL description="A set of tools labeled as \"Bestus Bioinformaticus\""
@@ -32,5 +32,7 @@ RUN wget https://sourceforge.net/projects/bbmap/files/BBMap_38.86.tar.gz && \
   tar -xzf BBMap_38.86.tar.gz && \
   rm BBMap_38.86.tar.gz
 
-ENV PATH="${PATH}:/bbmap"
+ENV PATH="${PATH}:/bbmap"\
+ LC_ALL=C
+
 WORKDIR /data
