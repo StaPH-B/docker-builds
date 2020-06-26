@@ -3,6 +3,7 @@ FROM ubuntu:xenial
 
 # metadata
 LABEL base.image="ubuntu:xenial"
+LABEL dockerfile.version="3"
 LABEL description="An r environment and script for generating a genome cluster report"
 LABEL website="https://github.com/AbigailShockey/reports"
 LABEL maintainer="Abigail Shockey"
@@ -54,7 +55,7 @@ RUN R -e "install.packages(c('knitr',\
 # install report repository
 RUN git clone -n https://github.com/AbigailShockey/reports.git && \
   cd reports/ && \
-  git checkout a8fce56
+  git checkout 90ec4a0
 
 WORKDIR /data
 ENV PATH "$PATH:/reports"
