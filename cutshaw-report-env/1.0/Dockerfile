@@ -3,6 +3,7 @@ FROM ubuntu:xenial
 
 # metadata
 LABEL base.image="ubuntu:xenial"
+LABEL dockerfile.version="1"
 LABEL description="An r environment and script for generating a genome cluster report"
 LABEL website="https://github.com/kevinlibuit/wgs_competency"
 LABEL maintainer="Kevin Libuit"
@@ -53,7 +54,9 @@ RUN R -e "install.packages(c('cowplot',\
 RUN git clone -n  https://github.com/kevinlibuit/wgs_competency.git && \
   cd wgs_competency/ && \
   git checkout 0ba8d39 && \
-  chmod +x /wgs_competency/create_competency_report.sh
+  chmod +x /wgs_competency/create_competency_report.sh && \
+  mkdir data
 
 WORKDIR /data
-ENV PATH "/wgs_competency:$PATH"
+ENV PATH "/wgs_competency:$PATH"\
+  LC_ALL=C
