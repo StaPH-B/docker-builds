@@ -58,5 +58,5 @@ RUN git clone -n  https://github.com/kevinlibuit/wgs_competency.git && \
   mkdir data
 
 WORKDIR /data
-ENV PATH "/wgs_competency:$PATH"\
+ENV PATH="/wgs_competency:$PATH"\
   LC_ALL=C
