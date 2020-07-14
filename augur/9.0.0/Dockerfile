@@ -28,7 +28,8 @@ RUN wget https://github.com/vcftools/vcftools/releases/download/v0.1.16/vcftools
   rm vcftools-0.1.16.tar.gz &&\
   cd vcftools-0.1.16 &&\
   ./configure &&\
-  make && make install
+  make && make install &&\
+  mkdir /data
 
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
   locale-gen
