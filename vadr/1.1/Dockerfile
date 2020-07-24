@@ -22,22 +22,23 @@ ENV PERL5LIB=$VADRSCRIPTSDIR:$VADRSEQUIPDIR:$VADRBIOEASELDIR/blib/lib:$VADRBIOEA
 LABEL base.image="ubuntu:xenial"
 LABEL dockerfile.version="1"
 LABEL software="VADR"
-LABEL software.version=${VADR_VERSION}}
+LABEL software.version=${VADR_VERSION}
 LABEL description="This software does viral annotations"
 LABEL website="https://github.com/nawrockie/vadr"
 LABEL license="https://github.com/nawrockie/vadr/blob/master/LICENSE"
 LABEL maintainer="Anders Goncalves da Silva"
 LABEL maintainer.email="andersgs@gmail.com"
 
-# install dependencies via apt-get or yum if using a centos or fedora base 
-RUN  apt-get update && apt-get install -y \
+# install dependencies via apt-get. Clean up apt garbage 
+RUN apt-get update && apt-get install -y \
  wget \
  perl \
  curl \
  unzip \
  build-essential \
  autoconf && \
- apt-get install -y libinline-c-perl liblwp-protocol-https-perl
+ apt-get install -y libinline-c-perl liblwp-protocol-https-perl && \
+ apt-get clean && apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # install and/or setup more things. Make /data for use as a working dir
 RUN mkdir -p ${VADRINSTALLDIR} && \
