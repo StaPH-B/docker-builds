@@ -5,7 +5,7 @@ services:
   - docker
 install:
   - docker build -t mash:2.2 mash/2.2
-  - docker build -t mashtree:1.0.4 mashtree/1.0.4
+  - docker build -t mashtree:1.2.0 mashtree/1.2.0
   - docker build -t spades:3.14.1 spades/3.14.1
   - docker build -t quast:5.0.2 quast/5.0.2
   - docker build -t shovill:1.1.0 shovill/1.1.0
