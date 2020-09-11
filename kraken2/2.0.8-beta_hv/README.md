@@ -4,6 +4,8 @@ Main tool : [KRAKEN2](https://ccb.jhu.edu/software/kraken2/)
 
 It comes bundled with a database containing viral (including SARS-CoV-2) and human sequences downloaded from https://storage.googleapis.com/sars-cov-2/kraken2_h%2Bv_20200319.tar.gz.
 
+Since it comes bundled with a large database, singularity may have issues pulling this container. As a workaround, consider the `--sandbox` option or specifying a new temporary directory for the download (i.e. `export SINGULARITY_TMPDIR=/scratch`).
+
 # Example Usage
 
 ```
