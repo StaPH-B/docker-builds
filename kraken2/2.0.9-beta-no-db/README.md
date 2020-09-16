@@ -1,4 +1,4 @@
-# KRAKEN2-2.0.9-beta-no-db container
+# KRAKEN2-2.0.9-beta-no-db docker image
 
 Main tool: [KRAKEN2](https://ccb.jhu.edu/software/kraken2/)
 
@@ -58,7 +58,7 @@ $ singularity build kraken2.2.0.9-beta-no-db.sif docker://staphb/kraken2:2.0.9-b
 # directory containing kraken2 db files
 $ ls minikraken2_v2_8GB_201904_UPDATE/
 database100mers.kmer_distrib  database150mers.kmer_distrib  database200mers.kmer_distrib  hash.k2d  opts.k2d  taxo.k2d
-i
+
 # fastq files in my $PWD
 $ ls
 minikraken2_v2_8GB_201904_UPDATE/ SRR500494_1.fastq.gz SRR500494_2.fastq.gz
@@ -76,3 +76,4 @@ Loading database information... done.
   555247 sequences classified (99.44%)
   3127 sequences unclassified (0.56%)
 # SUCCESS!
+```
