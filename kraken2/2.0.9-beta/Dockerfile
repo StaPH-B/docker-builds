@@ -40,5 +40,5 @@ WORKDIR /data
 RUN mkdir /kraken2-db && \
  cd /kraken2-db && \
  wget https://genome-idx.s3.amazonaws.com/kraken/minikraken2_v2_8GB_201904.tgz && \
- tar -zxf --strip-components=1 minikraken2_v2_8GB_201904.tgz && \
+ tar -zxf minikraken2_v2_8GB_201904.tgz --strip-components=1 && \
  rm -rf minikraken2_v2_8GB_201904.tgz
