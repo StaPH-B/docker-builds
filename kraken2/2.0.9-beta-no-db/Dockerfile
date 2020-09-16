@@ -16,6 +16,7 @@ LABEL maintainer.email="pjx8@cdc.gov"
 # install dependencies and cleanup apt garbage
 RUN apt-get update && apt-get -y --no-install-recommends install \
  wget \
+ ca-certificates \
  zlib1g-dev \
  make \
  g++ && \
