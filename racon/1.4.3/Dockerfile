@@ -4,11 +4,12 @@ FROM ubuntu:xenial
 # metadata
 LABEL base.image="ubuntu:xenial"
 LABEL version="1"
+LABEL dockerfile.version="1"
 LABEL software="Racon"
 LABEL software.version="1.4.3"
 LABEL description="Long read assembly and polishing tools"
 LABEL website="https://github.com/isovic/racon"
-LABEL license="See program repositories"
+LABEL license="https://github.com/isovic/racon/blob/master/LICENSE"
 LABEL maintainer="Erin Young"
 LABEL maintainer.email="eriny@utah.gov"
 
@@ -26,7 +27,7 @@ RUN apt-get update && apt-get install -y \
    build-essential \
    cmake \
    zlib1g-dev && \
-   apt-get clean
+   apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # install racon
 RUN wget https://github.com/isovic/racon/releases/download/1.4.3/racon-v1.4.3.tar.gz && \
@@ -36,11 +37,11 @@ RUN wget https://github.com/isovic/racon/releases/download/1.4.3/racon-v1.4.3.ta
   mkdir build && \
   cd build && \
   cmake -DCMAKE_BUILD_TYPE=Release .. && \
-  make
+  make && \
+  mkdir /data
 
 ENV PATH="/racon-v1.4.3/build/bin:${PATH}"
 
-RUN mkdir /data
 WORKDIR /data
 
 # set perl locale settings
