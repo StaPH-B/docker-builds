@@ -9,7 +9,7 @@ LABEL software.version="2.0"
 LABEL dockerfile.version="1"
 LABEL description="Long read assembly and polishing tools"
 LABEL website="https://github.com/marbl/canu"
-LABEL license="See program repositories"
+LABEL license="https://github.com/marbl/canu/blob/master/README.license.GPL"
 LABEL maintainer="Erin Young"
 LABEL maintainer.email="eriny@utah.gov"
 
