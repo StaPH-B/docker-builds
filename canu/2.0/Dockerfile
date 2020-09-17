@@ -27,7 +27,7 @@ RUN apt-get update && apt-get install -y \
    build-essential \
    cmake \
    zlib1g-dev && \
-   apt-get clean
+   apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # install canu
 RUN wget https://github.com/marbl/canu/releases/download/v2.0/canu-2.0.Linux-amd64.tar.xz && \
