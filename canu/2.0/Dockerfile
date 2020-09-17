@@ -5,7 +5,7 @@ FROM ubuntu:xenial
 LABEL base.image="ubuntu:xenial"
 LABEL version="1"
 LABEL software="Canu"
-LABEL software.version="2.0; 2.17; 1.4.3"
+LABEL software.version="2.0"
 LABEL dockerfile.version="1"
 LABEL description="Long read assembly and polishing tools"
 LABEL website="https://github.com/marbl/canu"
