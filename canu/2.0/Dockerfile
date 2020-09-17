@@ -27,7 +27,8 @@ RUN apt-get update && apt-get install -y \
    build-essential \
    cmake \
    zlib1g-dev && \
-   apt-get autoclean && rm -rf /var/lib/apt/lists/*
+   apt-get autoclean && rm -rf /var/lib/apt/lists/* && \
+   mkdir /data
 
 # install canu
 RUN wget https://github.com/marbl/canu/releases/download/v2.0/canu-2.0.Linux-amd64.tar.xz && \
@@ -36,7 +37,6 @@ RUN wget https://github.com/marbl/canu/releases/download/v2.0/canu-2.0.Linux-amd
 
 ENV PATH="/canu-2.0/Linux-amd64/bin:${PATH}"
 
-RUN mkdir /data
 WORKDIR /data
 
 # set perl locale settings
