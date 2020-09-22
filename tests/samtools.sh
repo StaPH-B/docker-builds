@@ -1,5 +1,8 @@
 #!/bin/bash
-# test for samtools 1.10
+# test for samtools
+
+samtoolsVer=1.11
+
 set -e
 
-docker run samtools:1.10 /bin/bash -c 'cd /samtools/samtools-1.10; make test'
+docker run -e samtoolsVer=${samtoolsVer} samtools:${samtoolsVer} /bin/bash -c 'cd /samtools-${samtoolsVer}; make test'
