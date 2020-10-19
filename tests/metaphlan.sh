@@ -1,4 +1,4 @@
-!#/bin/bash
+#!/bin/bash
 # test for metaphlan container
 set -e
 
