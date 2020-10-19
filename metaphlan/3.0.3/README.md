@@ -2,7 +2,7 @@
 
 Main tool: [MetaPhlAn/3.0](https://github.com/biobakery/MetaPhlAn/tree/3.0)  
 
-This docker image contains the metaphlan3 database along with the metaphlan3 program and its dependencies. Specifically, the database is a ~1.1M unique clade-specific marker genes from ~100,000 reference genomes (~99,500 bacterial and archaeal and ~500 eukaryotic). The database (mpa_v30_CHOCOPhlAn_201901_marker_info.txt.bz2) can be found on Metaphlan3's github (https://github.com/biobakery/MetaPhlAn/tree/3.0). To build this image, the database was downloaded on Oct 16 2020.  
+This docker image contains the metaphlan3 database along with the metaphlan3 program and its dependencies. Specifically, the database is a ~1.1M unique clade-specific marker genes from ~100,000 reference genomes (~99,500 bacterial and archaeal and ~500 eukaryotic). The database can be found on Metaphlan3's github (https://github.com/biobakery/MetaPhlAn/tree/3.0). To build this image, the database was downloaded on Oct 16 2020.  
 
 Please note the size of this docker image with the metaphlan3 database is ~3.6 GB. If downloading this image fails or takes too long, consider using the docker image version without the metaphlan 3 database:  
   * https://github.com/StaPH-B/docker-builds/blob/  
