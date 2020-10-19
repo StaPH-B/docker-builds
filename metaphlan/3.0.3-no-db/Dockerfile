@@ -3,7 +3,7 @@ FROM ubuntu:bionic AS builder_metaphlan
 # multstage build
 # labels associated with final docker image are further down
 # label the intermediate image so we can delete later 
-LABEL stage=builder_metaphlan
+LABEL stage=builder_metaphlan_nodb
 
 # install python (>3.6) and other dependencies
 # R necessary if user wants to run unifrac function in metaphlan
@@ -35,18 +35,18 @@ ENV PATH="$PATH:/usr/bin/bowtie2/bowtie2-2.3.3.1-linux-x86_64" \
 	LC_ALL=C
 
 # install metaphlan 3
-RUN python3.7 -m pip install metaphlan==3.0.3
+RUN python3.7 -m pip install metaphlan==3.0.3 && \
+	mkdir /data
 
-# download metaphlan database
-RUN metaphlan --install && \ 
-	mkdir /data 
+# don't install  metaphlan database, user will do. see README.md
+# RUN metaphlan --install
 
 # build onto first stage
 # this will make the final docker image ~0.5 GB smaller 
 # after the build completes, recommend deleting the intermediate image generated from builder stage
 # can do this with the flag label=stage=filter:
-# docker image ls --filter "label=stage=builder_metaphlan"
-# docker image prune --filter "label=stage=builder_metaphlan"
+# docker image ls --filter "label=stage=builder_metaphlan_nodb" 
+# docker image prune --filter "label=stage=builder_metaphlan_nodb"
 
 FROM ubuntu:bionic
 
@@ -54,7 +54,7 @@ FROM ubuntu:bionic
 LABEL base.image="ubuntu:bionic"
 LABEL dockerfile.version="1"
 LABEL software="MetaPhlAn3.0"
-LABEL software.version="3.0.3"
+LABEL software.version="3.0.3-no-db"
 LABEL description="microbial composition of metagenomes"
 LABEL website="https://github.com/biobakery/MetaPhlAn/tree/3.0"
 LABEL maintainer="Tara Gallagher"
@@ -82,7 +82,10 @@ ENV PATH="$PATH:/usr/bin/bowtie2/bowtie2-2.3.3.1-linux-x86_64" \
 
 WORKDIR /data
 
-# link to python & check locale settings in env by running perl
-RUN  ln -s /usr/bin/python3.7 /usr/bin/python && \
-	perl -e 'print'
 
+# make dir for metaphlan database
+RUN mkdir /usr/local/lib/python3.7/dist-packages/metaphlan/metaphlan_databases && \
+ ln -s /usr/bin/python3.7 /usr/bin/python
+
+# check locale settings in env by running perl
+RUN perl -e 'print'
