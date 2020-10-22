@@ -38,7 +38,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Mash | non-standard license (see link) | https://github.com/marbl/Mash/blob/master/LICENSE.txt |
 | mashtree | GNU GPLv3 | https://github.com/lskatz/mashtree/blob/master/LICENSE |
 | Medaka | Mozilla Public License 2.0 | https://github.com/nanoporetech/medaka/blob/master/LICENSE.md |
-| Metaphlan | non-standard license (see link) | https://github.com/biobakery/MetaPhlAn/blob/3.0/license.txt |
+| Metaphlan | MIT | https://github.com/biobakery/MetaPhlAn/blob/3.0/license.txt |
 | minimap2 | MIT | https://github.com/lh3/minimap2/blob/master/LICENSE.txt |
 | mlst | GNU GPLv2 | https://github.com/tseemann/mlst/blob/master/LICENSE |
 | Mugsy | Artistic License 2.0 | Archived in: <br/> https://sourceforge.net/projects/mugsy/files/mugsy_x86-64-v1r2.3.tgz |
