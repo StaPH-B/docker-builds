@@ -9,7 +9,7 @@ LABEL stage=builder_metaphlan
 # R necessary if user wants to run unifrac function in metaphlan
 
 RUN apt-get update && apt-get install -y software-properties-common && \
-	add-apt-repository ppa:deadsnakes/ppa&& \
+	add-apt-repository ppa:deadsnakes/ppa && \
 	apt-get update && apt-get install -y --no-install-recommends --no-install-suggests \
         gcc \
 	wget \
@@ -82,7 +82,5 @@ ENV PATH="$PATH:/usr/bin/bowtie2/bowtie2-2.3.3.1-linux-x86_64" \
 
 WORKDIR /data
 
-# link to python & check locale settings in env by running perl
-RUN  ln -s /usr/bin/python3.7 /usr/bin/python && \
-	perl -e 'print'
-
+# link to python, soft link doesn't get copied from intermed stage
+RUN  ln -s /usr/bin/python3.7 /usr/bin/python 

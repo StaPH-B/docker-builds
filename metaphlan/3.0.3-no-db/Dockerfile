@@ -9,7 +9,7 @@ LABEL stage=builder_metaphlan_nodb
 # R necessary if user wants to run unifrac function in metaphlan
 
 RUN apt-get update && apt-get install -y software-properties-common && \
-	add-apt-repository ppa:deadsnakes/ppa&& \
+	add-apt-repository ppa:deadsnakes/ppa && \
 	apt-get update && apt-get install -y --no-install-recommends --no-install-suggests \
         gcc \
 	wget \
@@ -77,15 +77,11 @@ COPY --from=builder_metaphlan /usr/local/lib/R /usr/local/lib/R
 COPY --from=builder_metaphlan /etc/R /etc/R
 COPY --from=builder_metaphlan /usr/lib/libR.so /usr/lib/libR.so
 
-ENV PATH="$PATH:/usr/bin/bowtie2/bowtie2-2.3.3.1-linux-x86_64" \ 
-	LC_ALL=C
+ENV PATH="$PATH:/usr/bin/bowtie2/bowtie2-2.3.3.1-linux-x86_64" \
+	 LC_ALL=C
 
 WORKDIR /data
 
-
 # make dir for metaphlan database
 RUN mkdir /usr/local/lib/python3.7/dist-packages/metaphlan/metaphlan_databases && \
- ln -s /usr/bin/python3.7 /usr/bin/python
-
-# check locale settings in env by running perl
-RUN perl -e 'print'
+ln -s /usr/bin/python3.7 /usr/bin/python
