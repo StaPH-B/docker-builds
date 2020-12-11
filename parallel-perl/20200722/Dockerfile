@@ -12,7 +12,7 @@ LABEL maintainer="Erin Young"
 LABEL maintainer.email="eriny@utah.gov"
 
 # install dependencies
-RUN apt-get update && apt-get install -y 
+RUN apt-get update && apt-get install -y \
                      parallel \
                      make \
                      curl \
