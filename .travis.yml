@@ -13,7 +13,7 @@ install:
   - docker build -t abricate:1.0.0 abricate/1.0.0
   - docker build -t ariba:2.14.4 ariba/2.14.4
   - docker build -t ivar:1.2.2_artic20200528 ivar/1.2.2_artic20200528
-  - docker build -t metaphlan:3.0.3 metaphlan/3.0.3       
+  - docker build -t metaphlan:3.0.3-no-db metaphlan/3.0.3-no-db       
 script:
   - bash tests/mash-test.sh
   - bash tests/mashtree-test.sh
