@@ -4,6 +4,9 @@
 # exit script with exit code=0 if any test fails
 set -e
 
+# this should spit out 'abricate #.#.#' and exit 0
+docker run abricate:1.0.0 abricate --version
+
 # test default db: ncbi
 # expect 5 genes in results
 docker run abricate:1.0.0 abricate /abricate-1.0.0/test/assembly.fa
