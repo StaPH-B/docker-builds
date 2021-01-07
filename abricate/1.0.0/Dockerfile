@@ -1,7 +1,10 @@
-FROM ubuntu:xenial
+FROM ubuntu:focal
 
-LABEL base.image="ubuntu:xenial"
-LABEL container.version="1"
+# For easy upgrade later. ARG varibles only persist during docker image build time
+ARG ABRICATE_VER="1.0.0"
+
+LABEL base.image="ubuntu:focal"
+LABEL dockerfile.version="2"
 LABEL software="Abricate"
 LABEL software.version="1.0.0"
 LABEL description="Mass screening of contigs for AMR or virulence genes"
@@ -11,11 +14,13 @@ LABEL maintainer="Curtis Kapsak"
 LABEL maintainer.email="pjx8@cdc.gov"
 
 # install dependencies
-RUN apt-get update && apt-get install -y \
-  emboss \
+# removed: emboss
+# ncbi-blast+ version in apt for ubuntu:focal = v2.9.0 
+RUN apt-get update && apt-get install -y --no-install-recommends \
   bioperl \
   gzip \
   unzip \
+  liblist-moreutils-perl \
   libjson-perl \
   libtext-csv-perl \
   libfile-slurp-perl \
@@ -23,28 +28,23 @@ RUN apt-get update && apt-get install -y \
   libwww-perl \
   libpath-tiny-perl \
   git \
-  wget && apt-get clean
-
-# ncbi-blast+ 2.9.0
-# apt version of blast is very old (2.2.31)
-RUN wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.9.0/ncbi-blast-2.9.0+-x64-linux.tar.gz && \
- tar -xzf ncbi-blast-2.9.0+-x64-linux.tar.gz && \
- rm ncbi-blast-2.9.0+-x64-linux.tar.gz
+  ncbi-blast+ \
+  wget && \
+  apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # get any2fasta
 RUN cd /usr/local/bin && \
   wget https://raw.githubusercontent.com/tseemann/any2fasta/master/any2fasta && \
   chmod +x any2fasta
 
-# abricate 1.0.0
-RUN wget https://github.com/tseemann/abricate/archive/v1.0.0.tar.gz && \
-    tar -zxvf v1.0.0.tar.gz && \
-    rm -rf v1.0.0.tar.gz
+# download abricate
+RUN wget https://github.com/tseemann/abricate/archive/v${ABRICATE_VER}.tar.gz && \
+    tar -zxvf v${ABRICATE_VER}.tar.gz && \
+    rm -rf v${ABRICATE_VER}.tar.gz
 
 # set $PATH
 # set perl locale settings for singularity compatibility
-ENV PATH="/abricate-1.0.0/bin:\
-/ncbi-blast-2.9.0+/bin:\
+ENV PATH="/abricate-${ABRICATE_VER}/bin:\
 $PATH"\
     LC_ALL=C
 
