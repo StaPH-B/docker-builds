@@ -2,7 +2,7 @@
 FROM ubuntu:xenial
 
 ENV VADR_VERSION="1.1.2"\
-  VADR_CORONA_MODELS_VERSION="1.1-1" \
+  VADR_CORONA_MODELS_VERSION="1.1.2-1" \
   LC_ALL=C \
   VADRINSTALLDIR=/opt/vadr
 
@@ -26,8 +26,10 @@ LABEL software.version=${VADR_VERSION}
 LABEL description="This software does viral annotations"
 LABEL website="https://github.com/nawrockie/vadr"
 LABEL license="https://github.com/nawrockie/vadr/blob/master/LICENSE"
-LABEL maintainer="Anders Goncalves da Silva"
-LABEL maintainer.email="andersgs@gmail.com"
+LABEL maintainer1="Anders Goncalves da Silva"
+LABEL maintainer1.email="andersgs@gmail.com"
+LABEL maintainer2="Curtis Kapsak"
+LABEL maintainer2.email="pjx8@cdc.gov"
 
 # install dependencies via apt-get. Clean up apt garbage 
 RUN apt-get update && apt-get install -y \
@@ -38,7 +40,7 @@ RUN apt-get update && apt-get install -y \
  build-essential \
  autoconf && \
  apt-get install -y libinline-c-perl liblwp-protocol-https-perl && \
- apt-get clean && apt-get autoclean && rm -rf /var/lib/apt/lists/*
+ apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # install and/or setup more things. Make /data for use as a working dir
 RUN mkdir -p ${VADRINSTALLDIR} && \
@@ -47,10 +49,10 @@ RUN mkdir -p ${VADRINSTALLDIR} && \
  bash vadr-install.sh linux
 
 # install the latest corona virus models
-RUN wget -O vadr-models-corona.tar.gz https://ftp.ncbi.nlm.nih.gov/pub/nawrocki/vadr-models/coronaviridae/${VADR_CORONA_MODELS_VERSION}/vadr-models-corona-${VADR_CORONA_MODELS_VERSION}.tar.gz
-RUN tar -xf vadr-models-corona.tar.gz
-RUN cp -n /vadr-models-corona-${VADR_CORONA_MODELS_VERSION}/* ${VADRMODELDIR}
-RUN rm -rf /vadr-models-corona*
+RUN wget -O vadr-models-corona.tar.gz https://ftp.ncbi.nlm.nih.gov/pub/nawrocki/vadr-models/coronaviridae/${VADR_CORONA_MODELS_VERSION}/vadr-models-corona-${VADR_CORONA_MODELS_VERSION}.tar.gz && \
+ tar -xf vadr-models-corona.tar.gz && \
+ cp -n /vadr-models-corona-${VADR_CORONA_MODELS_VERSION}/* ${VADRMODELDIR} && \
+ rm -rf /vadr-models-corona*
 
 # set working directory
 WORKDIR /data
