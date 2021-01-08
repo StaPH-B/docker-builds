@@ -24,8 +24,8 @@ LABEL dockerfile.version="1"
 LABEL software="VADR"
 LABEL software.version=${VADR_VERSION}
 LABEL description="This software does viral annotations"
-LABEL website="https://github.com/nawrockie/vadr"
-LABEL license="https://github.com/nawrockie/vadr/blob/master/LICENSE"
+LABEL website="https://github.com/ncbi/vadr"
+LABEL license="https://github.com/ncbi/vadr/blob/master/LICENSE"
 LABEL maintainer1="Anders Goncalves da Silva"
 LABEL maintainer1.email="andersgs@gmail.com"
 LABEL maintainer2="Curtis Kapsak"
@@ -45,7 +45,7 @@ RUN apt-get update && apt-get install -y \
 # install and/or setup more things. Make /data for use as a working dir
 RUN mkdir -p ${VADRINSTALLDIR} && \
  cd ${VADRINSTALLDIR} &&\
- wget https://raw.githubusercontent.com/nawrockie/vadr/release-${VADR_VERSION}/vadr-install.sh &&\
+ wget https://raw.githubusercontent.com/ncbi/vadr/release-${VADR_VERSION}/vadr-install.sh &&\
  bash vadr-install.sh linux
 
 # install the latest corona virus models
