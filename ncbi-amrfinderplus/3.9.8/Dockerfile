@@ -29,7 +29,7 @@ RUN apt-get update && apt-get install -y \
  apt-get autoclean && \
  rm -rf /var/lib/apt/lists/*
 
-# ncbi-blast+ installed via apt is v2.9.0
+# ncbi-blast+ installed via apt is v2.10.1
 # hmmer installed via apt is v3.3
 
 # ncbi-blast+; make /data directory
@@ -38,7 +38,7 @@ RUN apt-get update && apt-get install -y \
 # rm ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz && \
 # mkdir /data 
 
-# hmmer 3.3 since amrfinder requires 3.2 or higher (apt version is 3.1)
+# hmmer 3.3 since amrfinder requires 3.2 or higher
 # apt dependencies: make, g++
 #RUN wget http://eddylab.org/software/hmmer/hmmer-${HMMER_VER}.tar.gz && \
 # tar xzf hmmer-${HMMER_VER}.tar.gz && \
