@@ -1,11 +1,11 @@
-FROM ubuntu:focal
+FROM ubuntu:groovy
 
 # For easy upgrade later. ARG variables only persist during build time
 ARG AMRFINDER_VER="3.9.8"
 #ARG BLAST_VER="2.11.0"
 #ARG HMMER_VER="3.3"
 
-LABEL base.image="ubuntu:focal"
+LABEL base.image="ubuntu:groovy"
 LABEL dockerfile.version="1"
 LABEL software="NCBI AMRFinderPlus"
 LABEL software.version="3.9.8"
