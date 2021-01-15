@@ -17,6 +17,33 @@ You may be familiar with the web version of SerotypeFinder: https://cge.cbs.dtu.
   * E. coli raw reads (fastq.gz) or assembly (fasta)
     * Illumina, Ion Torrent, Roche 454, SOLiD, Oxford Nanopore, and PacBio reads are supported. (I've only tested Illumina reads)
 
+## Usage
+```
+usage: serotypefinder.py [-h] -i INFILE [INFILE ...] [-o OUTDIR] [-tmp TMP_DIR] [-mp METHOD_PATH] [-p DB_PATH] [-d DATABASES] [-l MIN_COV] [-t THRESHOLD] [-x] [-q]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -i INFILE [INFILE ...], --infile INFILE [INFILE ...]
+                        FASTA or FASTQ input files.
+  -o OUTDIR, --outputPath OUTDIR
+                        Path to blast output
+  -tmp TMP_DIR, --tmp_dir TMP_DIR
+                        Temporary directory for storage of the results from the external software.
+  -mp METHOD_PATH, --methodPath METHOD_PATH
+                        Path to method to use (kma or blastn)
+  -p DB_PATH, --databasePath DB_PATH
+                        Path to the databases
+  -d DATABASES, --databases DATABASES
+                        Databases chosen to search in - if non is specified all is used
+  -l MIN_COV, --mincov MIN_COV
+                        Minimum coverage
+  -t THRESHOLD, --threshold THRESHOLD
+                        Minimum threshold for identity
+  -x, --extented_output
+                        Give extented output with allignment files, template and query hits in fasta and a tab seperated file with gene profile results
+  -q, --quiet
+```
+
 ## Notes and Recommendations
   * You do not need to supply a database or use the `-p` or `-d` flags
     * Database is included in the container and is in the default/expected location within the container: `/database`
