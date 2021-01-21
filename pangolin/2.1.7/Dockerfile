@@ -1,11 +1,11 @@
 FROM ubuntu:xenial
 
 ENV PANGOLIN_VERSION="2.1.7"\
-  PANGOLIN_LEARN_VERSION="2021-01-11"\
+  PANGOLIN_LEARN_VERSION="2021-01-20"\
   PANGOLIN_LINEAGES_COMMIT_HASH="8156a48e0822093d216adebc8e12a8f32ab73428"
 
 LABEL base.image="ubuntu:xenial"
-LABEL dockerfile.version="1"
+LABEL dockerfile.version="2"
 LABEL software="pangolin"
 LABEL software.version=${PANGOLIN_VERSION}
 LABEL description="Conda environment for Pangolin. Pangolin: Software package for assigning SARS-CoV-2 genome sequences to global lineages."
