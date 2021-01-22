@@ -1,7 +1,10 @@
 FROM ubuntu:xenial
 
+# For easy upgrade. ARG variables only persist during image build time, not available when running the container
+ARG QUAST_VER=5.0.2
+
 LABEL base.image="ubuntu:xenial"
-LABEL container.version="2"
+LABEL dockerfile.version="3"
 LABEL software="QUAST"
 LABEL software.version="5.0.2"
 LABEL description="Genome assembly evaluation tool"
@@ -30,15 +33,19 @@ RUN apt-get update && apt-get install -y zlib1g-dev \
   apt-get autoclean && \
   rm -rf /var/lib/apt/lists/*
 
+# for singularity compatibility
 ENV LC_ALL=C
 
-RUN python -m pip install -U pip
+# Not necessary to upgrade pip, especially system pip
+# It actually messes things up (matplotlib fails in quast tests)
+#RUN python -m pip install -U pip
 
-RUN wget https://github.com/ablab/quast/releases/download/quast_5.0.2/quast-5.0.2.tar.gz && \
-    tar -xzf quast-5.0.2.tar.gz && \
-    rm -rf quast-5.0.2.tar.gz && \
-    cd /quast-5.0.2 && \
-    /quast-5.0.2/setup.py install && \
+# install quast and make /data directory
+RUN wget https://github.com/ablab/quast/releases/download/quast_${QUAST_VER}/quast-${QUAST_VER}.tar.gz && \
+    tar -xzf quast-${QUAST_VER}.tar.gz && \
+    rm -rf quast-${QUAST_VER}.tar.gz && \
+    cd /quast-${QUAST_VER} && \
+    /quast-${QUAST_VER}/setup.py install && \
     mkdir /data
 
 WORKDIR /data
