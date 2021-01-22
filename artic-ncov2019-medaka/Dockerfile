@@ -21,7 +21,9 @@ RUN apt-get update && apt-get install -y \
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh &&\
  bash ./Miniconda3-latest-Linux-x86_64.sh -p /miniconda -b  &&\
   rm Miniconda3-latest-Linux-x86_64.sh &&\
-  git clone --recursive https://github.com/artic-network/artic-ncov2019.git
+  git clone --recursive https://github.com/artic-network/artic-ncov2019.git &&\
+  cd artic-ncov2019/ &&\
+  git checkout 270d954
 
 # set the environment
 ENV PATH="/miniconda/bin:$PATH"
