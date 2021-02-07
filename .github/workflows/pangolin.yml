@@ -3,6 +3,13 @@ on:
   schedule:
   # run at 9am (UTC) every day
   - cron:  '0 9 * * *'
+# specifically for manually triggering the workflow
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'How do you spell Curtis?'
+        required: true
+        default: 'Curtis'
 jobs:
   get-version:
     runs-on: ubuntu-latest
