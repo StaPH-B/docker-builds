@@ -7,12 +7,12 @@ jobs:
   get-version:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Fetch release version for pangolin and pangoLEARN
+        uses: actions/checkout@v2
         with:
           # Personal Access Token is required to be able to push commits via GH actions
           # https://stackoverflow.com/questions/58465057/trigger-a-github-action-when-another-repository-creates-a-new-release
           token: ${{ secrets.REPO_SCOPED_TOKEN }}
-      - name: Fetch release version for pangolin and pangoLEARN
         run: |
           # check pangolin for new releases
           curl -sL https://api.github.com/repos/cov-lineages/pangolin/releases/latest | \
@@ -26,7 +26,7 @@ jobs:
           echo ::set-output name=modified::$([ -z "`git status --porcelain`" ] && echo "false" || echo "true")
       - name: Make new Dockerfile for latest release; commit
         if: steps.git-check.outputs.modified == 'true'
-      - shell: bash
+        shell: bash
         run: |
           PANGOLIN_VER=$(cat pangolin/pangolin-latest-version.txt | sed 's|v||')
           PANGOLEARN_VER=$(cat pangolin/pangoLEARN-latest-version.txt)
@@ -53,14 +53,14 @@ jobs:
         uses: actions/checkout@v2
         
       - name: Build new docker image
-      - shell: bash
+        shell: bash
         run: |
           PANGOLIN_VER=$(cat pangolin/pangolin-latest-version.txt | sed 's|v||' )
           PANGOLEARN_VER=$(cat pangolin/pangoLEARN-latest-version.txt)
           docker build --no-cache -t staphb/pangolin:latest -t staphb/pangolin:${PANGOLIN_VER}-pangolearn-${PANGOLEARN_VER} pangolin/${PANGOLIN_VER}/
 
       - name: Push Docker image to DockerHub
-      - shell: bash
+        shell: bash
         run: |
           echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
           docker push staphb/pangolin:latest staphb/pangolin:${PANGOLIN_VER}-pangolearn-${PANGOLEARN_VER}
