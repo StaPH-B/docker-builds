@@ -7,12 +7,14 @@ jobs:
   get-version:
     runs-on: ubuntu-latest
     steps:
-      - name: Fetch release version for pangolin and pangoLEARN
+      - name: Checkout repo
         uses: actions/checkout@v2
         with:
           # Personal Access Token is required to be able to push commits via GH actions
           # https://stackoverflow.com/questions/58465057/trigger-a-github-action-when-another-repository-creates-a-new-release
           token: ${{ secrets.REPO_SCOPED_TOKEN }}
+      - name: Fetch release version for pangolin and pangoLEARN
+        shell: bash
         run: |
           # check pangolin for new releases
           curl -sL https://api.github.com/repos/cov-lineages/pangolin/releases/latest | \
@@ -26,7 +28,6 @@ jobs:
           echo ::set-output name=modified::$([ -z "`git status --porcelain`" ] && echo "false" || echo "true")
       - name: Make new Dockerfile for latest release; commit
         if: steps.git-check.outputs.modified == 'true'
-        shell: bash
         run: |
           PANGOLIN_VER=$(cat pangolin/pangolin-latest-version.txt | sed 's|v||')
           PANGOLEARN_VER=$(cat pangolin/pangoLEARN-latest-version.txt)
