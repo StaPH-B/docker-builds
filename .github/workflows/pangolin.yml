@@ -1,12 +1,8 @@
 name: Docker push
-# This builds the docker image and pushes it to DockerHub
-# Runs on cov-lineages/pangolin repo releases
-# and push event to 'dev' branch (PR merges)
 on:
   schedule:
   # run at 9am (UTC) every day
   - cron:  '0 9 * * *'
-
 jobs:
   get-version:
     runs-on: ubuntu-latest
@@ -26,9 +22,9 @@ jobs:
           jq -r ".tag_name" > pangolin/pangoLEARN-latest-version.txt
       - name: Check for modified files
         id: git-check
-        run: echo ::set-output name=modified::$([ -z "`git status --porcelain`" ] && echo "false" || echo "true")
+        run: |
+          echo ::set-output name=modified::$([ -z "`git status --porcelain`" ] && echo "false" || echo "true")
       - name: Make new Dockerfile for latest release; commit
-      - id: new-dockerfile
         if: steps.git-check.outputs.modified == 'true'
       - shell: bash
         run: |
