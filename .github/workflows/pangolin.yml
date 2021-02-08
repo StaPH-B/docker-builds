@@ -79,5 +79,6 @@ jobs:
         shell: bash
         run: |
           echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-          # this should push both tags to dockerhub
-          docker image push --all-tags staphb/pangolin
+          # apparently docker image push --all-tags is not a valid option. going to push each manually
+          docker image push staphb/pangolin:latest
+          docker image push staphb/pangolin:${PANGOLIN_VER}-pangolearn-${PANGOLEARN_VER}
