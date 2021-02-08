@@ -13,6 +13,8 @@ on:
 jobs:
   get-version:
     runs-on: ubuntu-latest
+    outputs:
+      new-dockerfile: ${{ steps.git-check.outputs.modified }}
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -49,7 +51,7 @@ jobs:
           git push
   push_dockerhub:
     needs: get-version
-    if: ${{ jobs.get-version.steps.git-check.outputs.modified }} == 'true'   
+    if: ${{ jobs.get-version.outputs.new-dockerfile }} == 'true'   
     name: Push new Docker image to Docker Hub
     runs-on: ubuntu-latest
     env:
