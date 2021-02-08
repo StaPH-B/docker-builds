@@ -49,7 +49,7 @@ jobs:
           git config --global user.email 'kapsakcj@gmail.com'
           # have to stage new files or else they won't be commited; this doesn't fail if there is nothing new
           git add pangolin/${PANGOLIN_VER}
-          git commit -am "New Dockerfile for pangolin"
+          git commit -am "GH Actions: New/Updated Dockerfile for pangolin ${PANGOLIN_VER} and pangoLEARN ${PANGOLEARN_VER}"
           git push
   push_dockerhub:
     needs: get-version
