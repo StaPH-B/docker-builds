@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
     inputs:
       name:
-        description: 'How do you spell Curtis?'
+        description: 'Do you want to manually trigger this workflow?'
         required: true
-        default: 'Curtis'
+        default: 'Yes! Do the work for me!'
 jobs:
   get-version:
     runs-on: ubuntu-latest
