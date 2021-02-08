@@ -78,6 +78,10 @@ jobs:
       - name: Push Docker image to DockerHub
         shell: bash
         run: |
+          PANGOLIN_VER=$(cat pangolin/pangolin-latest-version.txt | sed 's|v||' )
+          PANGOLEARN_VER=$(cat pangolin/pangoLEARN-latest-version.txt)
+          echo '$PANGOLIN_VER=' $PANGOLIN_VER
+          echo '$PANGOLEARN_VER=' $PANGOLEARN_VER
           echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
           # apparently docker image push --all-tags is not a valid option. going to push each manually
           docker image push staphb/pangolin:latest
