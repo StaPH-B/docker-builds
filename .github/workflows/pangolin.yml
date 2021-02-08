@@ -40,8 +40,9 @@ jobs:
           PANGOLIN_VER=$(cat pangolin/pangolin-latest-version.txt | sed 's|v||')
           PANGOLEARN_VER=$(cat pangolin/pangoLEARN-latest-version.txt)
           # make new dir for new dockerfile; use 2.1.10 dockerfile as template
-          mkdir -v pangolin/${PANGOLIN_VER}
-          cp -v pangolin/2.1.10/* pangolin/${PANGOLIN_VER}
+          mkdir -pv pangolin/${PANGOLIN_VER}
+          # no clobber here in case a dockerfile already exists - just pangoLEARN being updated
+          cp -nv pangolin/2.1.10/* pangolin/${PANGOLIN_VER}
           # edit dockerfile with new versions
           sed -i "s|2.1.10|${PANGOLIN_VER}|" pangolin/${PANGOLIN_VER}/Dockerfile
           sed -i "s|2021-02-01|${PANGOLEARN_VER}|" pangolin/${PANGOLIN_VER}/Dockerfile
