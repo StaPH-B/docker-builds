@@ -7,8 +7,8 @@ LABEL software.version="2.3.0"
 LABEL description="Strategic Kmer Extension for Scrupulous Assemblies"
 LABEL website="https://github.com/ncbi/SKESA"
 LABEL lisence="https://github.com/ncbi/SKESA/blob/master/LICENSE"
-
-MAINTAINER Curtis Kapsak <pjx8@cdc.gov>
+LABEL maintainer="Curtis Kapsak"
+LABEL maintainer.email="pjx8@cdc.gov"
 
 RUN apt-get update && apt-get install -y wget
 

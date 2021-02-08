@@ -6,9 +6,9 @@ LABEL software="BWA"
 LABEL software.version="0.7.17"
 LABEL description="Burrow-Wheeler Aligner for short-read alignment"
 LABEL website="https://github.com/lh3/bwa"
-LABEL lisence="https://github.com/lh3/bwa/blob/master/COPYING"
-
-MAINTAINER Curtis Kapsak <pjx8@cdc.gov>
+LABEL license="https://github.com/lh3/bwa/blob/master/COPYING"
+LABEL maintainer="Curtis Kapsak"
+LABEL maintainer.email="pjx8@cdc.gov"
 
 RUN apt-get update && apt-get install -y make \
   wget \

@@ -9,9 +9,8 @@ LABEL software.version="0.1"
 LABEL description="Salmonella serotyping from genome sequencing data"
 LABEL website="https://github.com/denglab/SeqSero2"
 LABEL license="https://github.com/denglab/SeqSero2/blob/master/LICENSE"
-
-# Maintainer
-MAINTAINER Jake Garfin <jake.garfin@state.mn.us>
+LABEL maintainer="Jake Garfin"
+LABEL maintainer.email="jake.garfin@state.mn.us"
 
 RUN apt-get update && apt-get install -y \
   python3\
@@ -45,7 +44,6 @@ RUN wget http://cab.spbu.ru/files/release3.13.0/SPAdes-3.13.0-Linux.tar.gz && \
 # Install SeqSero2
 RUN wget https://github.com/denglab/SeqSero2/archive/v0.1.tar.gz && \
   tar -xzf v0.1.tar.gz && rm -rf v0.1.tar.gz && mkdir /data
-
 
 ENV PATH="/SeqSero2-0.1:/SPAdes-3.13.0-Linux/bin:/SalmID-0.122:/samtools-1.9:${PATH}"
 

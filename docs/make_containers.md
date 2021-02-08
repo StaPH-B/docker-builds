@@ -17,9 +17,8 @@ LABEL software="SPAdes"
 LABEL software.version="3.13.0"
 LABEL description="de novo DBG genome assembler"
 LABEL website="http://cab.spbu.ru/files/release3.13.0/manual.html"
-
-# Maintainer
-MAINTAINER Curtis Kapsak <pjx8@cdc.gov>
+LABEL maintainer="Curtis Kapsak"
+LABEL maintainer.email="pjx8@cdc.gov"
 
 # If you're using Ubuntu as the base image, it's best to run apt-get update and install prior to doing anything else
 RUN apt-get update && apt-get install -y python \
@@ -37,6 +36,9 @@ ENV PATH="${PATH}:/SPAdes-3.13.0-Linux/bin"
 # set the working directory as /data so that SPAdes.py runs in that directory, not the root DIR /
 WORKDIR /data
 ```
+
+[Here is a minimal Dockerfile template that can be used as a starting point](https://github.com/StaPH-B/docker-builds/blob/master/dockerfile-template/Dockerfile)
+
 [If you want a more complex example where more dependencies are installed and I had work some magic to get java executables to run, check out the Dockerfile for Shovill](https://github.com/StaPH-B/docker-builds/blob/master/shovill/1.0.4/Dockerfile)
 
 Once you have a `Dockerfile` created, name it as `Dockerfile` and store it in a empty directory (unless you need files to build the docker image). Note the path to the directory containing your Dockerfile. Then, run:

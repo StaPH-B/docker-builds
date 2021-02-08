@@ -8,9 +8,8 @@ LABEL software.version="1.1"
 LABEL description="Fast alignment-free computation of whole-genome Average Nucleotide Identity"
 LABEL website="https://github.com/ParBLiSS/FastANI"
 LABEL license="https://github.com/ParBLiSS/FastANI/blob/master/LICENSE"
-
-# Maintainer
-MAINTAINER Kelsey Florek <kelsey.florek@slh.wisc.edu>
+LABEL maintainer="Kelsey Florek"
+LABEL maintainer.email="kelsey.florek@slh.wisc.edu"
 
 # install dependencies
 RUN apt-get update && apt-get install -y autoconf \
@@ -19,8 +18,7 @@ RUN apt-get update && apt-get install -y autoconf \
 	zlib1g-dev \
 	g++ \
 	make \
-	wget
-                     
+	wget                     
 
 RUN wget https://github.com/ParBLiSS/FastANI/archive/v1.1.tar.gz &&\
 	tar -xzf v1.1.tar.gz &&\

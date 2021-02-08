@@ -1,0 +1,75 @@
+name: Docker push
+on:
+  #schedule:
+  # run at 9am (UTC) every day
+  #- cron:  '0 9 * * *'
+# specifically for manually triggering the workflow
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'How do you spell Curtis?'
+        required: true
+        default: 'Curtis'
+jobs:
+  get-version:
+    runs-on: ubuntu-latest
+    outputs:
+      new-dockerfile: ${{ steps.git-check.outputs.modified }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+        with:
+          # Personal Access Token is required to be able to push commits via GH actions
+          # https://stackoverflow.com/questions/58465057/trigger-a-github-action-when-another-repository-creates-a-new-release
+          token: ${{ secrets.REPO_SCOPED_TOKEN }}
+      - name: Fetch release version for pangolin and pangoLEARN
+        shell: bash
+        run: |
+          # check pangolin for new releases
+          curl -sL https://api.github.com/repos/cov-lineages/pangolin/releases/latest | \
+          jq -r ".tag_name" > pangolin/pangolin-latest-version.txt
+          # check pangoLEARN for new releases
+          curl -sL https://api.github.com/repos/cov-lineages/pangoLEARN/releases/latest | \
+          jq -r ".tag_name" > pangolin/pangoLEARN-latest-version.txt
+      - name: Check for modified files
+        id: git-check
+        run: echo ::set-output name=modified::$([ -z "`git status --porcelain`" ] && echo "false" || echo "true")
+      - name: Make new Dockerfile for latest release; commit
+        if: ${{ steps.git-check.outputs.modified }} == 'true'
+        run: |
+          PANGOLIN_VER=$(cat pangolin/pangolin-latest-version.txt | sed 's|v||')
+          PANGOLEARN_VER=$(cat pangolin/pangoLEARN-latest-version.txt)
+          # make new dir for new dockerfile; use 2.1.10 dockerfile as template
+          mkdir -v pangolin/${PANGOLIN_VER}
+          cp -v pangolin/2.1.10/* pangolin/${PANGOLIN_VER}
+          # edit dockerfile with new versions
+          sed -i "s|2.1.10|${PANGOLIN_VER}|" pangolin/${PANGOLIN_VER}/Dockerfile
+          sed -i "s|2021-02-01|${PANGOLEARN_VER}|" pangolin/${PANGOLIN_VER}/Dockerfile
+          git config --global user.name 'kapsakcj'
+          git config --global user.email 'kapsakcj@gmail.com'
+          git commit -am "New Dockerfile for pangolin"
+          git push
+  push_dockerhub:
+    needs: get-version
+    if: needs.get-version.outputs.new-dockerfile == 'true'   
+    name: Push new Docker image to Docker Hub
+    runs-on: ubuntu-latest
+    env:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_PASS: ${{ secrets.DOCKERHUB_PASS }}
+    steps:
+      - name: Check out pipeline code
+        uses: actions/checkout@v2
+        
+      - name: Build new docker image
+        shell: bash
+        run: |
+          PANGOLIN_VER=$(cat pangolin/pangolin-latest-version.txt | sed 's|v||' )
+          PANGOLEARN_VER=$(cat pangolin/pangoLEARN-latest-version.txt)
+          docker build --no-cache -t staphb/pangolin:latest -t staphb/pangolin:${PANGOLIN_VER}-pangolearn-${PANGOLEARN_VER} pangolin/${PANGOLIN_VER}/
+
+      - name: Push Docker image to DockerHub
+        shell: bash
+        run: |
+          echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+          docker push staphb/pangolin:latest staphb/pangolin:${PANGOLIN_VER}-pangolearn-${PANGOLEARN_VER}

@@ -9,9 +9,8 @@ LABEL software.version="2.9.2"
 LABEL description="collection of tools and libraries for using data in the INSDC Sequence Read Archives"
 LABEL website="https://github.com/ncbi/sra-tools"
 LABEL license="https://github.com/ncbi/sra-tools/blob/master/LICENSE"
-
-# Maintainer
-MAINTAINER Curtis Kapsak <pjx8@cdc.gov>
+LABEL maintainer="Curtis Kapsak"
+LABEL maintainer.email="pjx8@cdc.gov"
 
 # run update and install wget
 RUN apt-get update && apt-get install -y wget && apt-get clean

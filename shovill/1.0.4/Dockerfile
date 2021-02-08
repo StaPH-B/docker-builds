@@ -2,14 +2,14 @@ FROM ubuntu:xenial
 
 # metadata
 LABEL base.image="ubuntu:xenial"
-LABEL version="1"
+LABEL container.version="2"
 LABEL software="Shovill"
 LABEL software.version="1.0.4"
 LABEL description="faster than SPAdes de novo DBG genome assembler (with assembler options!)"
 LABEL website="https://github.com/tseemann/shovill"
 LABEL lisence="https://github.com/tseemann/shovill/blob/master/LICENSE"
-
-MAINTAINER Curtis Kapsak <pjx8@cdc.gov>
+LABEL maintainer="Curtis Kapsak"
+LABEL maintainer.email="pjx8@cdc.gov"
 
 RUN apt-get update && apt-get install -y python \
   wget \
@@ -30,11 +30,9 @@ RUN apt-get update && apt-get install -y python \
   libfindbin-libs-perl
 
 # get spades, unpack, remove tarball
-RUN mkdir spades &&\
-  cd spades &&\ 
-  wget http://cab.spbu.ru/files/release3.12.0/SPAdes-3.12.0-Linux.tar.gz &&\
-  tar -xzf SPAdes-3.12.0-Linux.tar.gz &&\
-  rm -r SPAdes-3.12.0-Linux.tar.gz
+RUN wget http://cab.spbu.ru/files/release3.13.0/SPAdes-3.13.0-Linux.tar.gz &&\
+  tar -xzf SPAdes-3.13.0-Linux.tar.gz &&\
+  rm SPAdes-3.13.0-Linux.tar.gz
 
 # get Seqtk
 RUN mkdir seqtk &&\ 
@@ -156,7 +154,7 @@ WORKDIR /data
 
 # set $PATH's
 ENV PATH="${PATH}:\
-/spades/SPAdes-3.12.0-Linux/bin:\
+/SPAdes-3.13.0-Linux/bin:\
 /mash-Linux64-v2.1:\
 /Lighter-1.1.1:\
 /trimmomatic:\
