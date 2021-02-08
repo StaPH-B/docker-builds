@@ -48,8 +48,8 @@ jobs:
           git commit -am "New Dockerfile for pangolin"
           git push
   push_dockerhub:
-    if: steps.git-check.outputs.modified == 'true'   
     needs: get-version
+    if: jobs.get-version.steps.git-check.outputs.modified == 'true'   
     name: Push new Docker image to Docker Hub
     runs-on: ubuntu-latest
     env:
