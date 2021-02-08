@@ -51,7 +51,7 @@ jobs:
           git push
   push_dockerhub:
     needs: get-version
-    if: ${{ jobs.get-version.outputs.new-dockerfile }} == 'true'   
+    if: needs.get-version.outputs.new-dockerfile == 'true'   
     name: Push new Docker image to Docker Hub
     runs-on: ubuntu-latest
     env:
