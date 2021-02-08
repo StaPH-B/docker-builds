@@ -1,8 +1,8 @@
-name: Docker push
+name: Update Pangolin
 on:
-  #schedule:
-  # run at 9am (UTC) every day
-  #- cron:  '0 9 * * *'
+  schedule:
+  # run at 12am (UTC) same as 7am (ET) every Monday
+  - cron:  '0 0 * * 1'
 # specifically for manually triggering the workflow
   workflow_dispatch:
     inputs:
