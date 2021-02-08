@@ -31,10 +31,9 @@ jobs:
           jq -r ".tag_name" > pangolin/pangoLEARN-latest-version.txt
       - name: Check for modified files
         id: git-check
-        run: |
-          echo ::set-output name=modified::$([ -z "`git status --porcelain`" ] && echo "false" || echo "true")
+        run: echo ::set-output name=modified::$([ -z "`git status --porcelain`" ] && echo "false" || echo "true")
       - name: Make new Dockerfile for latest release; commit
-        if: steps.git-check.outputs.modified == 'true'
+        if: ${{ steps.git-check.outputs.modified }} == 'true'
         run: |
           PANGOLIN_VER=$(cat pangolin/pangolin-latest-version.txt | sed 's|v||')
           PANGOLEARN_VER=$(cat pangolin/pangoLEARN-latest-version.txt)
