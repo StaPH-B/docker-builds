@@ -1,7 +1,7 @@
 FROM ubuntu:xenial
 
 ENV PANGOLIN_VERSION="2.2.1"\
-  PANGOLIN_LEARN_VERSION="2021-02-05"\
+  PANGOLIN_LEARN_VERSION="2021-02-06"\
   PANGOLIN_LINEAGES_COMMIT_HASH="8156a48e0822093d216adebc8e12a8f32ab73428"
 
 LABEL base.image="ubuntu:xenial"
@@ -73,5 +73,5 @@ RUN /bin/bash -c 'cd .. && \
 
 WORKDIR /data
 
-# check versions; 'pangolin -lv' has been deprecated
+# check versions; 'pangolin -lv' deprecated in pangolin >=v2.2.0
 RUN pangolin -v && pangolin -pv
