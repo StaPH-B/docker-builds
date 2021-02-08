@@ -73,4 +73,5 @@ RUN /bin/bash -c 'cd .. && \
 
 WORKDIR /data
 
-RUN pangolin -v && pangolin -lv && pangolin -pv
+# check versions; 'pangolin -lv' has been deprecated
+RUN pangolin -v && pangolin -pv
