@@ -2,7 +2,6 @@ FROM ubuntu:xenial
 
 # metadata
 LABEL base.image="ubuntu:xenial"
-LABEL container.version="1"
 LABEL dockerfile.version="1"
 LABEL software="ARTIC-nCov19"
 LABEL software.version="2.0.0"
