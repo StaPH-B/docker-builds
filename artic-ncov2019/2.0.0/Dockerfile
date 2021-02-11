@@ -3,6 +3,7 @@ FROM ubuntu:xenial
 # metadata
 LABEL base.image="ubuntu:xenial"
 LABEL container.version="1"
+LABEL dockerfile.version="1"
 LABEL software="ARTIC-nCov19"
 LABEL software.version="2.0.0"
 LABEL description="A bioinformatics pipeline for working with virus sequencing data sequenced with nanopore"
@@ -15,7 +16,9 @@ LABEL maintainer.email="abigail.shockey@slh.wisc.edu"
 RUN apt-get update && apt-get install -y \
   wget \
   git \
-  build-essential
+  build-essential && \
+  apt-get autoclean && \
+  rm -rf /var/lib/apt/lists/*
 
 # get miniconda and the artic-ncov19 repo
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh &&\
