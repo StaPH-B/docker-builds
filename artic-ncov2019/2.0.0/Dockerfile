@@ -20,24 +20,25 @@ RUN apt-get update && apt-get install -y \
   rm -rf /var/lib/apt/lists/*
 
 # get miniconda and the artic-ncov19 repo
-RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh &&\
- bash ./Miniconda3-latest-Linux-x86_64.sh -p /miniconda -b  &&\
-  rm Miniconda3-latest-Linux-x86_64.sh &&\
-  git clone --recursive https://github.com/artic-network/fieldbioinformatics &&\
-  cd fieldbioinformatics/ &&\
+RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
+ bash ./Miniconda3-latest-Linux-x86_64.sh -p /miniconda -b  && \
+  rm Miniconda3-latest-Linux-x86_64.sh && \
+  git clone --recursive https://github.com/artic-network/fieldbioinformatics && \
+  cd fieldbioinformatics/ && \
   git checkout 23a8460
 
 ENV PATH="/miniconda/bin:$PATH"
 
 # create the conda environment and set as default
-RUN conda env create -f /fieldbioinformatics/environment.yml &&\
-  echo "source activate artic" > /etc/bash.bashrc &&\
-  cd /fieldbioinformatics/ &&\
-  python setup.py install
+RUN conda env create -f /fieldbioinformatics/environment.yml && \
+  echo "source activate artic" > /etc/bash.bashrc && \
+  cd /fieldbioinformatics/ && \
+  python setup.py install && \
+  conda clean -a -y
 
 # get field bioinformatics repo
-RUN git clone --recursive https://github.com/artic-network/primer-schemes &&\
-  cd primer-schemes/ &&\
+RUN git clone --recursive https://github.com/artic-network/primer-schemes && \
+  cd primer-schemes/ && \
   git checkout 34fcf68
 
 RUN mkdir /data
