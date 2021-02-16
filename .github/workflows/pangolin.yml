@@ -1,8 +1,8 @@
 name: Update Pangolin
 on:
   schedule:
-  # run at 12am (UTC) same as 7am (ET) every Monday
-  - cron:  '0 0 * * 1'
+  # run at 12pm (UTC) same as 7am (ET) every Monday, Wed, Fri
+  - cron:  '0 12 * * 1,3,5'
 # specifically for manually triggering the workflow
   workflow_dispatch:
     inputs:
