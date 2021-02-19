@@ -10,9 +10,7 @@ LABEL license=""
 LABEL maintainer="Abigail Shockey"
 LABEL maintainer.email="abigail.shockey@slh.wisc.edu"
 
-# install dependencies; cleanup apt garbage
-# ncbi-blast = 2.2.31
-# mafft = 7.271
+# install dependencies and clean apt
 RUN  apt-get update && apt-get -y install \
   build-essential \
   git \
