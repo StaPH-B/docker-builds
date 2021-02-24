@@ -36,7 +36,7 @@ RUN apt-get update --fix-missing \
     && mkdir data
 
 # set environmental variables e.g. $PATH and locale settings for singularity compatibility
-ENV PATH="/hmmer-${HMMERVERSION}/bin:$PATH" \
+ENV PATH="/hmmer-${HMMERVERSION}/src:$PATH" \
  LC_ALL=C
 
 # set working directory
