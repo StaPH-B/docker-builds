@@ -11,8 +11,8 @@ LABEL dockerfile.version="1"
 LABEL software="hmmer"
 LABEL software.version="3.3"
 LABEL description="This software provides HMMer for hmmsearch etc.!"
-LABEL website="https://github.com/StaPH-B/docker-builds"
-LABEL license="https://github.com/StaPH-B/docker-builds/blob/master/LICENSE"
+LABEL website="http://hmmer.org/"
+LABEL license="http://eddylab.org/software/hmmer/Userguide.pdf"
 LABEL maintainer="Joachim Johansen"
 LABEL maintainer.email="joacjohansen@gmail.com"
 
@@ -31,7 +31,7 @@ RUN apt-get update --fix-missing \
     && make install \
     && apt-get remove -y wget make gcc \
     && apt-get autoremove -y \
-    && apt-get clean \
+    && apt-get autoclean \
     && rm -rf /var/lib/apt/lists/* \
     && mkdir data
 
