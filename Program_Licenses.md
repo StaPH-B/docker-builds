@@ -26,6 +26,7 @@ The licenses of the open-source software that is contained in these Docker image
 | FastQC | GNU GPLv3 | https://github.com/s-andrews/FastQC/blob/master/LICENSE.txt |
 | Filtlong | GNU GPLv3 | https://github.com/rrwick/Filtlong/blob/master/LICENSE |
 | Flye | BSD-3 | https://github.com/fenderglass/Flye/blob/flye/LICENSE |
+| Hmmer | BSD-3 | http://eddylab.org/software/hmmer/Userguide.pdf |
 | iqtree | GNU GPLv2 | https://github.com/Cibiv/IQ-TREE/blob/master/LICENSE |
 | iVar | GNU GPLv3 | https://github.com/andersen-lab/ivar/blob/master/LICENSE |
 | kma | Apache v2.0 | https://bitbucket.org/genomicepidemiology/kma/src/master/ |
@@ -79,4 +80,5 @@ The licenses of the open-source software that is contained in these Docker image
 | VADR | Public Domain | https://github.com/nawrockie/vadr/blob/master/LICENSE |
 | VIBRANT | GNU GPLv3 | https://github.com/AnantharamanLab/VIBRANT/blob/master/LICENSE |
 | VIGOR4 | GNU GPLv3 | https://github.com/JCVenterInstitute/VIGOR4/blob/master/LICENSE.txt |
+| VirSorter2 | GNU GPLv2 | https://github.com/jiarong/VirSorter2/blob/master/LICENSE |
 | wtdbg2 | GNU GPLv3 | https://github.com/ruanjue/wtdbg2/blob/master/LICENSE.txt |
