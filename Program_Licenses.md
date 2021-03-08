@@ -28,6 +28,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Flye | BSD-3 | https://github.com/fenderglass/Flye/blob/flye/LICENSE |
 | Hmmer | BSD-3 | http://eddylab.org/software/hmmer/Userguide.pdf |
 | iqtree | GNU GPLv2 | https://github.com/Cibiv/IQ-TREE/blob/master/LICENSE |
+| iqtree2 | GNU GPLv2 | https://github.com/iqtree/iqtree2/blob/master/LICENSE |
 | iVar | GNU GPLv3 | https://github.com/andersen-lab/ivar/blob/master/LICENSE |
 | kma | Apache v2.0 | https://bitbucket.org/genomicepidemiology/kma/src/master/ |
 | Kraken | GNU GPLv3 | https://github.com/DerrickWood/kraken/blob/master/LICENSE |
