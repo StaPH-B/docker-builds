@@ -1,7 +1,7 @@
 FROM ubuntu:xenial
 
 LABEL base.image="ubuntu:xenial"
-LABEL dockerfile.version="1"
+LABEL dockerfile.version="2"
 LABEL software="Kraken2"
 LABEL software.version="2.0.8-beta"
 LABEL description="Taxonomic sequence classifier"
@@ -15,8 +15,13 @@ RUN apt-get update && apt-get -y install \
  wget \
  zlib1g-dev \
  make \
- g++ && \
- apt-get clean && apt-get autoclean && rm -rf /var/lib/apt/lists/*
+ g++ \ 
+ rsync \
+ cpanminus && \
+ apt-get autoclean && rm -rf /var/lib/apt/lists/*
+
+# perl module required for kraken2-build
+RUN cpanm Getopt::Std
 
 # DL Kraken2, unpack, and install
 RUN wget https://github.com/DerrickWood/kraken2/archive/v2.0.8-beta.tar.gz && \
