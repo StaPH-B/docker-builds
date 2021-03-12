@@ -36,83 +36,69 @@ jobs:
 
           JSON="{\"include\":["
 
+          image_versions () {
+            # Get version of image to test.
+            case $1 in
+              abricate)
+                ref_versions=(1.0.0)
+                ;;
+              ariba)
+                ref_versions=(2.14.4)
+                ;;
+              ivar)
+                ref_versions=(1.2.2_artic20200528)
+                ;;
+              mash)
+                ref_versions=(2.3)
+                ;;
+              mashtree)
+                ref_versions=(1.2.0)
+                ;;
+              metaphlan)
+                ref_versions=(3.0.3-no-db)
+                ;;
+              quast)
+                ref_versions=(5.0.2)
+                ;;
+              samtools)
+                ref_versions=(1.11)
+                ;;
+              shovill)
+                ref_versions=(1.1.0)
+                ;;
+              spades)
+                ref_versions=(3.15.2)
+                ;;
+              *)
+                ref_versions=()
+                ;;
+            esac
+          }
+
           # Loop by lines
           while read path; do
             # Set $directory to substring before /
             image="$( echo $path | cut -d'/' -f1 -s )"
 
             case $image in
-            
-              abricate)
-                version=1.0.0
-                ;;
-              ariba)
-                version=2.14.4
-                ;;
-              ivar)
-                version=1.2.2_artic20200528
-                ;;
-              mash)
-                version=2.3
-                ;;
-              mashtree)
-                version=1.2.0
-                ;;
-              metaphlan)
-                version=3.0.3-no-db
-                ;;
-              quast)
-                version=5.0.2
-                ;;
-              samtools)
-                version=1.11
-                ;;
-              shovill)
-                version=1.1.0
-                ;;
-              spades)
-                version=3.15.2
-                ;;
               tests)
-                image=$(basename $path .sh)
-                case $image in
-                  abricate)
-                    version=1.0.0
-                    ;;
-                  ariba)
-                    version=2.14.4
-                    ;;
-                  ivar)
-                    version=1.2.2_artic20200528
-                    ;;
-                  mash)
-                    version=2.3
-                    ;;
-                  mashtree)
-                    version=1.2.0
-                    ;;
-                  metaphlan)
-                    version=3.0.3-no-db
-                    ;;
-                  quast)
-                    version=5.0.2
-                    ;;
-                  samtools)
-                    version=1.11
-                    ;;
-                  shovill)
-                    version=1.1.0
-                    ;;
-                  spades)
-                    version=3.15.2
-                    ;;
-                  *)
-                    continue # No match.
-                    ;;
-                esac
+                image="$(basename $path .sh)"
+                image_versions $image
+                # Only test first version in array if test file has changed.
+                version="${ref_versions[0]}"
                 ;;
               *)
-                continue # No match.
+                if echo $path | grep -qvP 'Dockerfile$'; then
+                  continue # Change happened to something that wasn't a Dockerfile.
+                fi
+                image_versions $image
+                if [[ ${#ref_versions[@]} -eq 0 ]]; then
+                  continue # Image that changed isn't part of the reference list.
+                fi
+                version="$( echo $path | cut -d'/' -f1 -s )"
+                if printf '%s\n' "${ref_versions[@]}" | grep -qvP "^${version}$"; then
+                  continue # Version of image that changed isn't a version we're testing.
+                fi
                 ;;
             esac
 
