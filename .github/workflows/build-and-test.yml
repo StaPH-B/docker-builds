@@ -70,6 +70,47 @@ jobs:
               spades)
                 version=3.15.2
                 ;;
+              tests)
+                image=$(basename $path .sh)
+                case $image in
+                  abricate)
+                    version=1.0.0
+                    ;;
+                  ariba)
+                    version=2.14.4
+                    ;;
+                  ivar)
+                    version=1.2.2_artic20200528
+                    ;;
+                  mash)
+                    version=2.3
+                    ;;
+                  mashtree)
+                    version=1.2.0
+                    ;;
+                  quast)
+                    version=5.0.2
+                    ;;
+                  samtools)
+                    version=1.11
+                    ;;
+                  shovill)
+                    version=1.1.0
+                    ;;
+                  spades)
+                    version=3.15.2
+                    ;;
+                  *)
+                    continue # No match.
+                    ;;
+                esac
+                # # Add build to the matrix only if it is not already included
+                # JSONline="{\"image\": \"$test_image\", \"version\": \"$version\"},"
+                # if [[ "$JSON" != *"$JSONline"* ]]; then
+                #   JSON="$JSON$JSONline"
+                # fi
+                # continue
+                ;;
               *)
                 continue # No match.
                 ;;
