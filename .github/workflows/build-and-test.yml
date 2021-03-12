@@ -58,6 +58,9 @@ jobs:
               mashtree)
                 version=1.2.0
                 ;;
+              metaphlan)
+                version=3.0.3-no-db
+                ;;
               quast)
                 version=5.0.2
                 ;;
@@ -87,6 +90,9 @@ jobs:
                     ;;
                   mashtree)
                     version=1.2.0
+                    ;;
+                  metaphlan)
+                    version=3.0.3-no-db
                     ;;
                   quast)
                     version=5.0.2
