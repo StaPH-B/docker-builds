@@ -103,6 +103,7 @@ jobs:
   build-and-test:
     name: Build ${{ matrix.image }} version ${{ matrix.version }} and test it
     needs: generate-matrix
+    if: contains(fromJSON(needs.generate-matrix.outputs.matrix), 'image')
     strategy:
       matrix: ${{ fromJSON(needs.generate-matrix.outputs.matrix) }}
     runs-on: ubuntu-latest
