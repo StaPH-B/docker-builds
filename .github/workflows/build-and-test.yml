@@ -41,14 +41,6 @@ jobs:
             # Set $directory to substring before /
             image="$( echo $path | cut -d'/' -f1 -s )"
 
-            # if [ -z "$image" ]; then
-            #   continue # Exclude root directory
-            # elif [ "$directory" == docs ]; then
-            #   continue # Exclude docs directory
-            # elif [ "$path" == *.rst ]; then
-            #   continue # Exclude *.rst files
-            # fi
-
             case $image in
             
               abricate)
