@@ -104,12 +104,6 @@ jobs:
                     continue # No match.
                     ;;
                 esac
-                # # Add build to the matrix only if it is not already included
-                # JSONline="{\"image\": \"$test_image\", \"version\": \"$version\"},"
-                # if [[ "$JSON" != *"$JSONline"* ]]; then
-                #   JSON="$JSON$JSONline"
-                # fi
-                # continue
                 ;;
               *)
                 continue # No match.
