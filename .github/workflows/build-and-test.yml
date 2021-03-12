@@ -142,7 +142,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Build and test
-        run: |
-          docker build -t ${{ matrix.image }}:${{ matrix.version }} ${{ matrix.image }}/${{ matrix.version }}
-          bash ./tests/${{ matrix.image }}.sh
+      - name: Build ${{ matrix.image }} version ${{ matrix.version }}
+        run: docker build -t ${{ matrix.image }}:${{ matrix.version }} ${{ matrix.image }}/${{ matrix.version }}
+      - name: Test ${{ matrix.image }} version ${{ matrix.version }}
+        run: ./tests/${{ matrix.image }}.sh
