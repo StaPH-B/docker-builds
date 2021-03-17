@@ -1,16 +1,16 @@
 FROM ubuntu:18.04
 
 # for easy upgrade later. ARG variables only persist during image build
-ARG SAMTOOLSVER=1.11
-ARG HTSLIBVER=1.11
+ARG SAMTOOLSVER=1.12
+ARG HTSLIBVER=1.12
 ARG IVARVER=1.3.1
 
 LABEL base.image="ubuntu:18.04"
-LABEL dockerfile.version="1"
+LABEL dockerfile.version="2"
 LABEL software="iVar"
 LABEL software.version="1.3.1"
 LABEL description="Computational package that contains functions broadly useful for viral amplicon-based sequencing."
-LABEL comments="Contains iVar 1.3.1 as well as htslib/samtools 1.11"
+LABEL comments="Contains iVar 1.3.1 as well as htslib/samtools 1.12"
 LABEL website="https://github.com/andersen-lab/ivar"
 LABEL license="https://github.com/andersen-lab/ivar/blob/master/LICENSE"
 LABEL maintainer1="Erin Young"
