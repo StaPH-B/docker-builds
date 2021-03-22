@@ -26,7 +26,8 @@ RUN git clone -n https://github.com/artic-network/artic-ncov2019.git && \
     mkdir /reference && \
     mv -v primer_schemes/nCoV-2019/V1/nCoV-2019.primer.bed /reference/ARTIC-V1.bed && \
     mv -v primer_schemes/nCoV-2019/V2/nCoV-2019.primer.bed /reference/ARTIC-V2.bed && \
-    mv -v primer_schemes/nCoV-2019/V3/nCoV-2019.primer.bed /reference/ARTIC-V3.bed
+    mv -v primer_schemes/nCoV-2019/V3/nCoV-2019.primer.bed /reference/ARTIC-V3.bed && \
+    mv -v primer_schemes/nCoV-2019/V3/nCoV-2019.reference.fasta /reference
 
 # Seqtk
 RUN mkdir seqtk &&\
