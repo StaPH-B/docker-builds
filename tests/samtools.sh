@@ -1,7 +1,7 @@
 #!/bin/bash
 # test for samtools
 
-samtoolsVer=1.11
+samtoolsVer=1.12
 
 set -e
 

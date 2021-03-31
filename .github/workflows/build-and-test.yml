@@ -61,7 +61,7 @@ jobs:
                 ref_versions=(5.0.2)
                 ;;
               samtools)
-                ref_versions=(1.11)
+                ref_versions=(1.12)
                 ;;
               shovill)
                 ref_versions=(1.1.0)
