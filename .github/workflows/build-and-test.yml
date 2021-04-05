@@ -82,6 +82,9 @@ jobs:
 
             case $image in
               tests)
+                if [[ $path != *.sh ]]; then
+                  continue # Change happened to something that wasn't a shell script.
+                fi
                 image="$(basename $path .sh)"
                 image_versions $image
                 # Only test first version in array if test file has changed.
