@@ -91,7 +91,7 @@ jobs:
                 version="${ref_versions[0]}"
                 ;;
               *)
-                if echo $path | grep -qvP 'Dockerfile$'; then
+                if [[ $path != */Dockerfile ]]; then
                   continue # Change happened to something that wasn't a Dockerfile.
                 fi
                 image_versions $image
