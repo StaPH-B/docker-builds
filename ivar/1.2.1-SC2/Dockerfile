@@ -1,15 +1,16 @@
 FROM ubuntu:18.04
 
 LABEL base.image="ubuntu:18.04"
-LABEL container.version="1.1.0"
+LABEL dockerfile.version="3"
 LABEL software="iVar"
-LABEL software.version="1.1-PR"
-LABEL comments="Clone of ivar v1.1 pre-release most recent commit as of 05/09/2020"
+LABEL software.version="1.2.1"
+LABEL comments="Clone of ivar v1.2.1 pre-release most recent commit as of 05/09/2020"
+LABEL artic.primer.comment="Dockerfile contains artic primer bed file from sept 17 2020 commit. see notes in Dockerfile"
 LABEL description="Computational package that contains functions broadly useful for viral amplicon-based sequencing."
 LABEL website="https://github.com/andersen-lab/ivar"
 LABEL license="https://github.com/andersen-lab/ivar/blob/master/LICENSE"
 LABEL maintainer="Kevin Libuit"
-LABEL maintainer.email="kevin.libuit@dgs.virginia.gov"
+LABEL maintainer.email="kevin@libuitsci.com"
 LABEL modified.from="https://github.com/andersen-lab/ivar/blob/master/Dockerfile"
 LABEL original.maintainer="Kathik G"
 LABEL original.maintainer.email="gkarthik@scripps.edu"
@@ -17,16 +18,17 @@ LABEL original.maintainer.email="gkarthik@scripps.edu"
 RUN apt-get update
 RUN apt-get install -y build-essential autoconf zlib1g-dev python3 wget libbz2-dev liblzma-dev libncurses-dev git bedtools python3-pip vim nano
 
-# Artic ncov2019 (most recent commit as of 03/24/2020)
-RUN git clone -n https://github.com/artic-network/artic-ncov2019.git &&\
-    cd artic-ncov2019 &&\
-    git checkout d50a5f6a3265fb45a5d0c8949dfd037fd869f8f9
-# Reformat Artic BED files for use in iVar
-RUN mkdir reference &&\
-    mv artic-ncov2019/primer_schemes/nCoV-2019/V1/nCoV-2019.bed  /reference/ARTIC-V1.bed &&\
-    mv artic-ncov2019/primer_schemes/nCoV-2019/V2/nCoV-2019.bed  /reference/ARTIC-V2.bed &&\
-    awk -F $'\t' 'BEGIN{OFS=FS;}{$5=60;print}' artic-ncov2019/primer_schemes/nCoV-2019/V3/nCoV-2019.bed  > /reference/ARTIC-V3.bed &&\
-    mv artic-ncov2019/primer_schemes/nCoV-2019/V1/nCoV-2019.reference.fasta /reference
+# Artic ncov2019 (most recent commit as of 09/17/2020)
+RUN git clone -n https://github.com/artic-network/artic-ncov2019.git && \
+    cd artic-ncov2019 && \
+    # this commit is when the nCov-2019.primer.bed file was last changed. Sept 17 2020
+    git checkout 87449a03f5d85230a2a9214064adf2e2cc2abd51 && \
+    mkdir /reference && \
+    mv -v primer_schemes/nCoV-2019/V1/nCoV-2019.primer.bed /reference/ARTIC-V1.bed && \
+    mv -v primer_schemes/nCoV-2019/V2/nCoV-2019.primer.bed /reference/ARTIC-V2.bed && \
+    mv -v primer_schemes/nCoV-2019/V3/nCoV-2019.primer.bed /reference/ARTIC-V3.bed && \
+    mv -v primer_schemes/nCoV-2019/V3/nCoV-2019.reference.fasta /reference
+
 # Seqtk
 RUN mkdir seqtk &&\
     cd seqtk &&\

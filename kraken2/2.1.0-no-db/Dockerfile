@@ -4,7 +4,7 @@ FROM ubuntu:xenial
 ARG K2VER="2.1.0"
 
 LABEL base.image="ubuntu:xenial"
-LABEL dockerfile.version="1"
+LABEL dockerfile.version="2"
 LABEL software="Kraken2"
 LABEL software.version="2.1.0"
 LABEL description="Taxonomic sequence classifier"
@@ -19,8 +19,13 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
  ca-certificates \
  zlib1g-dev \
  make \
- g++ && \
+ g++ \
+ rsync \
+ cpanminus && \
  rm -rf /var/lib/apt/lists/* && apt-get autoclean
+
+# perl module required for kraken2-build
+RUN cpanm Getopt::Std
 
 # DL Kraken2, unpack, and install
 RUN wget https://github.com/DerrickWood/kraken2/archive/v${K2VER}.tar.gz && \
@@ -41,7 +46,7 @@ WORKDIR /data
 
 
 # DL MiniKraken2_8GB database. Built from RefSeq bacteria, archaea, viral, and human libraries.
-# --strip-components=1 used so that the *.k2d files end up inside /kraken2-db and not anoter directory
+# --strip-components=1 used so that the *.k2d files end up inside /kraken2-db and not another directory
 #RUN mkdir /kraken2-db && \
 # cd /kraken2-db && \
 # wget --no-check-certificate https://genome-idx.s3.amazonaws.com/kraken/minikraken2_v2_8GB_201904.tgz && \
