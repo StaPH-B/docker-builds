@@ -87,6 +87,9 @@ jobs:
                 fi
                 image="$(basename $path .sh)"
                 image_versions $image
+                if [[ ${#ref_versions[@]} -eq 0 ]]; then
+                  continue # Test script doesn't have an associated version number.
+                fi
                 # Only test first version in array if test file has changed.
                 version="${ref_versions[0]}"
                 ;;
