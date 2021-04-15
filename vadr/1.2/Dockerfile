@@ -1,6 +1,7 @@
 # base image
 FROM ubuntu:xenial
 
+# for easy upgrade later. LC_ALL set for singularity compatibility
 ENV VADR_VERSION="1.2" \
   VADR_SARSCOV2_MODELS_VERSION="1.2-2" \
   LC_ALL=C \
@@ -43,11 +44,22 @@ RUN apt-get update && apt-get install -y \
  apt-get install -y libinline-c-perl liblwp-protocol-https-perl && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
+### OLD ###
 # install and/or setup more things. Make /data for use as a working dir
+#RUN mkdir -p ${VADRINSTALLDIR} && \
+ # cd ${VADRINSTALLDIR} && \
+ # wget https://raw.githubusercontent.com/ncbi/vadr/release-${VADR_VERSION}/vadr-install.sh && \
+ # bash vadr-install.sh linux && \
+ # mkdir /data
+
+### NEW ###
 RUN mkdir -p ${VADRINSTALLDIR} && \
- cd ${VADRINSTALLDIR} && \
- wget https://raw.githubusercontent.com/ncbi/vadr/release-${VADR_VERSION}/vadr-install.sh && \
- bash vadr-install.sh linux && \
+ cd ${VADRINSTALLDIR} && \ 
+ wget https://github.com/ncbi/vadr/archive/refs/tags/vadr-${VADR_VERSION}.tar.gz && \
+ mkdir vadr-${VADR_VERSION} && tar -xzf vadr-${VADR_VERSION}.tar.gz -C vadr-${VADR_VERSION} --strip-components 1 && \
+ rm vadr-${VADR_VERSION}.tar.gz && \
+ # cd vadr-${VADR_VERSION} && \
+ bash vadr-${VADR_VERSION}/vadr-install.sh linux && \
  mkdir /data
 
 # install the latest sarscov2 models 
