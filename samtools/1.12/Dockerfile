@@ -4,7 +4,7 @@ FROM ubuntu:xenial
 ARG SAMTOOLSVER=1.12
 
 LABEL base.image="ubuntu:xenial"
-LABEL dockerfile.version="1"
+LABEL dockerfile.version="2"
 LABEL software="Samtools"
 LABEL software.version="1.12"
 LABEL description="Tools (written in C using htslib) for manipulating next-generation sequencing data"
@@ -26,6 +26,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
  make \
  perl \
  bzip2 \
+ gnuplot \
  ca-certificates && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
