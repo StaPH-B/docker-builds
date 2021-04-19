@@ -23,7 +23,7 @@ ENV PERL5LIB=$VADRSCRIPTSDIR:$VADRSEQUIPDIR:$VADRBIOEASELDIR/blib/lib:$VADRBIOEA
 
 # metadata - optional, but highly recommended
 LABEL base.image="ubuntu:xenial"
-LABEL dockerfile.version="1"
+LABEL dockerfile.version="2"
 LABEL software="VADR"
 LABEL software.version=${VADR_VERSION}
 LABEL description="This software does viral annotations"
