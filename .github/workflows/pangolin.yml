@@ -37,20 +37,22 @@ jobs:
       - name: Make new Dockerfile for latest release; commit
         if: steps.git-check.outputs.modified == 'true'
         run: |
+          PANGOLIN_VER=$(cat pangolin/pangolin-latest-version.txt)
           # sed line is to strip out leading 'v' and '.' which leaves #.#.#
-          PANGOLIN_VER=$(cat pangolin/pangolin-latest-version.txt | sed -e 's|^v||' -e 's|^\.||')
+          PANGOLIN_VER_CLEAN=$(cat pangolin/pangolin-latest-version.txt | sed -e 's|^v||' -e 's|^\.||')
           PANGOLEARN_VER=$(cat pangolin/pangoLEARN-latest-version.txt)
           # make new dir for new dockerfile; use 2.1.10 dockerfile as template
-          mkdir -pv pangolin/${PANGOLIN_VER}
-          cp -v pangolin/2.1.10/* pangolin/${PANGOLIN_VER}
+          mkdir -pv pangolin/${PANGOLIN_VER_CLEAN}
+          cp -v pangolin/2.1.10/* pangolin/${PANGOLIN_VER_CLEAN}
           # edit dockerfile with new versions
-          sed -i "s|2.1.10|${PANGOLIN_VER}|" pangolin/${PANGOLIN_VER}/Dockerfile
-          sed -i "s|2021-02-01|${PANGOLEARN_VER}|" pangolin/${PANGOLIN_VER}/Dockerfile
+          # have to use unaltered PANGOLIN_VER here so that docker image builds properly
+          sed -i "s|2.1.10|${PANGOLIN_VER}|" pangolin/${PANGOLIN_VER_CLEAN}/Dockerfile
+          sed -i "s|2021-02-01|${PANGOLEARN_VER}|" pangolin/${PANGOLIN_VER_CLEAN}/Dockerfile
           git config --global user.name 'kapsakcj'
           git config --global user.email 'kapsakcj@gmail.com'
           # have to stage new files or else they won't be commited; this doesn't fail if there is nothing new
-          git add pangolin/${PANGOLIN_VER}
-          git commit -am "GH Actions: New/Updated Dockerfile pangolin ${PANGOLIN_VER} & pangoLEARN ${PANGOLEARN_VER}"
+          git add pangolin/${PANGOLIN_VER_CLEAN}
+          git commit -am "GH Actions: New/Updated Dockerfile pangolin ${PANGOLIN_VER_CLEAN} & pangoLEARN ${PANGOLEARN_VER}"
           git push
   push_dockerhub:
     needs: get-version
@@ -71,19 +73,23 @@ jobs:
           git log --oneline | head -n 3
           # Have to pull in commit from previous job (with new dockerfile)
           git pull --ff-only
-          PANGOLIN_VER=$(cat pangolin/pangolin-latest-version.txt | sed -e 's|^v||' -e 's|^\.||' )
+          # PANGOLIN_VER is the unaltered release tag returned from GH API
+          # PANGOLIN_VER_CLEAN is the altered version with leading v and leading periods removed, leaving #.#.# 
+          PANGOLIN_VER=$(cat pangolin/pangolin-latest-version.txt)
+          PANGOLIN_VER_CLEAN=$(cat pangolin/pangolin-latest-version.txt | sed -e 's|^v||' -e 's|^\.||' )
           PANGOLEARN_VER=$(cat pangolin/pangoLEARN-latest-version.txt)
           echo '$PANGOLIN_VER=' $PANGOLIN_VER
+          echo '$PANGOLIN_VER_CLEAN=' $PANGOLIN_VER_CLEAN
           echo '$PANGOLEARN_VER=' $PANGOLEARN_VER
-          docker build --no-cache -t staphb/pangolin:latest -t staphb/pangolin:${PANGOLIN_VER}-pangolearn-${PANGOLEARN_VER} pangolin/${PANGOLIN_VER}/
+          docker build --no-cache -t staphb/pangolin:latest -t staphb/pangolin:${PANGOLIN_VER_CLEAN}-pangolearn-${PANGOLEARN_VER} pangolin/${PANGOLIN_VER_CLEAN}/
       - name: Push Docker image to DockerHub
         shell: bash
         run: |
-          PANGOLIN_VER=$(cat pangolin/pangolin-latest-version.txt | sed -e 's|^v||' -e 's|^\.||' )
+          PANGOLIN_VER_CLEAN=$(cat pangolin/pangolin-latest-version.txt | sed -e 's|^v||' -e 's|^\.||' )
           PANGOLEARN_VER=$(cat pangolin/pangoLEARN-latest-version.txt)
-          echo '$PANGOLIN_VER=' $PANGOLIN_VER
+          echo '$PANGOLIN_VER_CLEAN=' $PANGOLIN_VER_CLEAN
           echo '$PANGOLEARN_VER=' $PANGOLEARN_VER
           echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
           # apparently docker image push --all-tags is not a valid option. going to push each manually
           docker image push staphb/pangolin:latest
-          docker image push staphb/pangolin:${PANGOLIN_VER}-pangolearn-${PANGOLEARN_VER}
+          docker image push staphb/pangolin:${PANGOLIN_VER_CLEAN}-pangolearn-${PANGOLEARN_VER}

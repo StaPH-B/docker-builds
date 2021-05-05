@@ -29,9 +29,9 @@ RUN apt-get update && apt-get install -y \
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
  bash ./Miniconda3-latest-Linux-x86_64.sh -p /miniconda -b  && \
  rm Miniconda3-latest-Linux-x86_64.sh && \
- wget "https://github.com/cov-lineages/pangolin/archive/v${PANGOLIN_VERSION}.tar.gz" && \
- tar -xf v${PANGOLIN_VERSION}.tar.gz && \
- rm v${PANGOLIN_VERSION}.tar.gz && \
+ wget "https://github.com/cov-lineages/pangolin/archive/${PANGOLIN_VERSION}.tar.gz" && \
+ tar -xf ${PANGOLIN_VERSION}.tar.gz && \
+ rm ${PANGOLIN_VERSION}.tar.gz && \
  mv pangolin-${PANGOLIN_VERSION} pangolin
 
 # set the environment
