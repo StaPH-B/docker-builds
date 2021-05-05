@@ -32,7 +32,6 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh &
  rm Miniconda3-latest-Linux-x86_64.sh && \
  wget "https://github.com/cov-lineages/pangolin/archive/v${PANGOLIN_VERSION}.tar.gz" && \
  tar -xf v${PANGOLIN_VERSION}.tar.gz && \
- rm v${PANGOLIN_VERSION}.tar.gz && \
  mv pangolin-${PANGOLIN_VERSION} pangolin
 
 # set the environment
@@ -54,10 +53,8 @@ RUN /bin/bash -c 'cd .. && \
  source activate pangolin && \
  wget https://github.com/cov-lineages/pangoLEARN/archive/${PANGOLIN_LEARN_VERSION}.tar.gz && \
  tar -xf ${PANGOLIN_LEARN_VERSION}.tar.gz && \
- rm ${PANGOLIN_LEARN_VERSION}.tar.gz && \
  cd pangoLEARN-${PANGOLIN_LEARN_VERSION} && \
- pip install . && \
- conda clean -a -y'
+ pip install .'
 
 # install the latest lineages release
 # looks like it will be deprecated
@@ -66,13 +63,13 @@ RUN /bin/bash -c 'cd .. && \
 # reproduciability
 
 # install lineages. cleanup conda garbage
-#RUN /bin/bash -c 'cd .. && \
-# source activate pangolin && \
-# git clone https://github.com/cov-lineages/lineages.git && \
-# cd lineages && \
-# git checkout ${PANGOLIN_LINEAGES_COMMIT_HASH} && \
-# pip install .' && \
-# conda clean -a -y
+RUN /bin/bash -c 'cd .. && \
+ source activate pangolin && \
+ git clone https://github.com/cov-lineages/lineages.git && \
+ cd lineages && \
+ git checkout ${PANGOLIN_LINEAGES_COMMIT_HASH} && \
+ pip install .' && \
+ conda clean -a -y
 
 WORKDIR /data
 
