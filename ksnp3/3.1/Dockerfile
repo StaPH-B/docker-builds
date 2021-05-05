@@ -8,7 +8,7 @@ LABEL software.version="3.1"
 LABEL description="K-mer-based phylgenetic inference"
 LABEL website="https://github.com/cdeanj/kSNP3/blob/master/kSNP3"
 LABEL maintainer="Kevin Libuit"
-LABEL maintainer.email-"kevin.libuit@dgs.virginia.gov"
+LABEL maintainer.email="kevin.libuit@dgs.virginia.gov"
 
 RUN apt-get update && apt-get install -y python \
   wget tcsh unzip make gcc build-essential
