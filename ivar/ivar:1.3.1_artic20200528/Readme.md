@@ -8,7 +8,7 @@ Additional tools (required):
 * [bwa](http://bio-bwa.sourceforge.net/)
 
 Also includes the 
-* [artic primers](https://github.com/artic-network/artic-ncov2019.git) as they were on 2021-05-06 (ef3f1ce9f66d49ec7caa67e0425e556bd67c53de) <-- update
+* [artic primers](https://github.com/artic-network/artic-ncov2019.git) as they were on 2021-05-06 (7e359dae37d894b40ae7e35c3582f14244ef4d36)
 * A bedfile representing the amplicons (alt primers are ignored) at `/artic-ncov2019/primer_schemes/nCoV-2019/{V1,V2,V3}/nCoV-2019_amplicon.bed`
 * A gff file for the reference sequence /reference/GCF_009858895.2_ASM985889v3_genomic.gff.gz
 
