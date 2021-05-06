@@ -1,0 +1,111 @@
+FROM ubuntu:18.04
+
+# for easy upgrade later. ARG variables only persist during image build
+ARG SAMTOOLSVER=1.10
+ARG HTSLIBVER=1.11
+ARG IVARVER=1.3.1
+ARG BWASVER=0.7.17-r1188
+
+LABEL base.image="ubuntu:18.04"
+LABEL dockerfile.version="1"
+LABEL software="iVar"
+LABEL software.version="1.3.1"
+LABEL description="Computational package that contains functions broadly useful for viral amplicon-based sequencing."
+LABEL comments="Contains iVar 1.3.1, htslib/samtools 1.10, bwa 0.7.17-r1188"
+LABEL website="https://github.com/andersen-lab/ivar"
+LABEL license="https://github.com/andersen-lab/ivar/blob/master/LICENSE"
+LABEL maintainer="Jill Hagey"
+LABEL maintainer.email="qpk9@cdc.gov"
+LABEL modified.from="https://github.com/andersen-lab/ivar/blob/master/Dockerfile"
+LABEL original.maintainer="Kathik G"
+LABEL original.maintainer.email="gkarthik@scripps.edu"
+
+# Artic ncov2019 (most recent commit was 05/28/2020 as of 06/01/2020)
+RUN git clone -n https://github.com/artic-network/artic-ncov2019.git &&\
+    cd artic-ncov2019 &&\
+    git checkout ef3f1ce9f66d49ec7caa67e0425e556bd67c53de
+    
+# Turn primer bedfiles into bedfiles reprenting amiplicons (alt primers are ignored)
+RUN for artic_version in "V1" "V2"; do \
+    cat /artic-ncov2019/primer_schemes/nCoV-2019/$artic_version/nCoV-2019.bed | \
+    	awk '{ if ($0 ~ "LEFT") { print $1 "\t" $2 } else {print $3 "\t" $4 "\t" $5 }}' | \
+	paste - - | \
+	sed 's/_RIGHT//g' > /artic-ncov2019/primer_schemes/nCoV-2019/$artic_version/nCoV-2019_amplicon.bed ; \
+	done && \
+    cat /artic-ncov2019/primer_schemes/nCoV-2019/V3/nCoV-2019.bed | \
+    	grep -v "alt" | \
+	awk '{ if ($0 ~ "LEFT") { print $1 "\t" $2 } else {print $3 "\t" $4 "\t" $5 }}' | \
+	paste - - | \
+	sed 's/_RIGHT//g' > /artic-ncov2019/primer_schemes/nCoV-2019/V3/nCoV-2019_amplicon.bed
+  
+# Get gff file for reference genome
+RUN mkdir /reference && \
+     wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/009/858/895/GCF_009858895.2_ASM985889v3/GCF_009858895.2_ASM985889v3_genomic.gff.gz -P /reference && \
+     gunzip /reference/GCF_009858895.2_ASM985889v3_genomic.gff.gz
+
+# install dependencies, cleanup apt garbage.
+# bedtools version=2.26.0
+RUN apt-get update && apt-get install -y \
+ build-essential \
+ autoconf \
+ zlib1g-dev \
+ python3 \
+ wget \
+ libbz2-dev \
+ liblzma-dev \
+ libncurses-dev \
+ git \
+ bedtools \
+ python3-pip \
+ vim \
+ nano && \
+ apt-get autoclean && rm -rf /var/lib/apt/lists/*
+
+RUN cd root/ &&\
+  wget https://github.com/samtools/htslib/releases/download/${HTSLIBVER}/htslib-${HTSLIBVER}.tar.bz2 && \
+  tar xvf htslib-${HTSLIBVER}.tar.bz2 && \
+  cd htslib-${HTSLIBVER}/ && \
+  ./configure && \
+  make && \
+  make install && \
+  cd ../ && \
+  rm htslib-${HTSLIBVER}.tar.bz2
+ENV LD_LIBRARY_PATH /usr/local/lib:$LD_LIBRARY_PATH
+
+# SAMtools
+RUN wget https://github.com/samtools/samtools/releases/download/${SAMTOOLSVER}/samtools-${SAMTOOLSVER}.tar.bz2 && \
+  tar -xjf samtools-${SAMTOOLSVER}.tar.bz2 && \
+  rm samtools-${SAMTOOLSVER}.tar.bz2 && \
+  cd samtools-${SAMTOOLSVER} && \
+  ./configure && \
+  make && \
+  make install
+  
+# iVar; make /data
+RUN cd root/ && \
+  wget https://github.com/andersen-lab/ivar/archive/v${IVARVER}.tar.gz && \
+  tar -xvf v${IVARVER}.tar.gz && \
+  rm -rf v${IVARVER}.tar.gz && \
+  cd ivar-${IVARVER} && \
+  ./autogen.sh && \
+  ./configure && \
+  make && \
+  make install && \
+  mkdir /data
+
+# bwa
+RUN mkdir bwa &&\
+    cd bwa &&\
+    wget https://github.com/lh3/bwa/archive/v${BWASVER}.tar.gz &&\
+    tar xvf v${BWASVER}.tar.gz &&\
+    rm v${BWASVER}.tar.gz &&\ 
+    cd bwa-${BWASVER}/ &&\
+    make
+
+# indexing the reference sequences
+RUN for artic_version in "V1" "V2" "V3" ; do \
+    bwa index /artic-ncov2019/primer_schemes/nCoV-2019/$artic_version/nCoV-2019.reference.fasta && \
+    samtools faidx /artic-ncov2019/primer_schemes/nCoV-2019/$artic_version/nCoV-2019.reference.fasta ; done
+
+# set /data as working directory
+WORKDIR /data
