@@ -23,7 +23,7 @@ LABEL original.maintainer.email="gkarthik@scripps.edu"
 # Artic ncov2019 (most recent commit was 05/28/2020 as of 06/01/2020)
 RUN git clone -n https://github.com/artic-network/artic-ncov2019.git &&\
     cd artic-ncov2019 &&\
-    git checkout ef3f1ce9f66d49ec7caa67e0425e556bd67c53de
+    git checkout 7e359dae37d894b40ae7e35c3582f14244ef4d36
     
 # Turn primer bedfiles into bedfiles reprenting amiplicons (alt primers are ignored)
 RUN for artic_version in "V1" "V2"; do \
