@@ -1,7 +1,7 @@
 FROM ubuntu:xenial
 
 ENV PANGOLIN_VERSION="v.2.4.2" \
-  PANGOLIN_LEARN_VERSION="2021-04-28"
+  PANGOLIN_LEARN_VERSION="2021-05-10"
 
 LABEL base.image="ubuntu:xenial"
 LABEL dockerfile.version="1"
