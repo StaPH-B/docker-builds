@@ -35,6 +35,7 @@ RUN apt-get update && apt-get install -y \
  bedtools \
  python3-pip \
  vim \
+ gnuplot \
  nano && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
