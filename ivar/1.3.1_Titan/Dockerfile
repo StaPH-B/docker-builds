@@ -20,23 +20,10 @@ LABEL modified.from="https://github.com/andersen-lab/ivar/blob/master/Dockerfile
 LABEL original.maintainer="Kathik G"
 LABEL original.maintainer.email="gkarthik@scripps.edu"
 
-# Artic ncov2019 (most recent commit was 05/28/2020 as of 06/01/2020)
+# Artic ncov2019 (most recent commit was 02/18/2021 as of 05/19/2021)
 RUN git clone -n https://github.com/artic-network/artic-ncov2019.git &&\
     cd artic-ncov2019 &&\
     git checkout 7e359dae37d894b40ae7e35c3582f14244ef4d36
-    
-# Turn primer bedfiles into bedfiles reprenting amiplicons (alt primers are ignored)
-RUN for artic_version in "V1" "V2"; do \
-    cat /artic-ncov2019/primer_schemes/nCoV-2019/$artic_version/nCoV-2019.bed | \
-    	awk '{ if ($0 ~ "LEFT") { print $1 "\t" $2 } else {print $3 "\t" $4 "\t" $5 }}' | \
-	paste - - | \
-	sed 's/_RIGHT//g' > /artic-ncov2019/primer_schemes/nCoV-2019/$artic_version/nCoV-2019_amplicon.bed ; \
-	done && \
-    cat /artic-ncov2019/primer_schemes/nCoV-2019/V3/nCoV-2019.bed | \
-    	grep -v "alt" | \
-	awk '{ if ($0 ~ "LEFT") { print $1 "\t" $2 } else {print $3 "\t" $4 "\t" $5 }}' | \
-	paste - - | \
-	sed 's/_RIGHT//g' > /artic-ncov2019/primer_schemes/nCoV-2019/V3/nCoV-2019_amplicon.bed
   
 # Get gff file for reference genome
 RUN mkdir /reference && \
