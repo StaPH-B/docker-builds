@@ -6,6 +6,8 @@ It comes bundled with a database containing viral (including SARS-CoV-2) and hum
 
 Since it comes bundled with a large database, singularity may have issues pulling this container. As a workaround, consider the `--sandbox` option or specifying a new temporary directory for the download (i.e. `export SINGULARITY_TMPDIR=/scratch`).
 
+You can see what taxa are in the database by looking at `Taxa_in_DB.txt` file. 
+
 # Example Usage
 
 ```
