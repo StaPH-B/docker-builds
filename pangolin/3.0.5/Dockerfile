@@ -5,7 +5,7 @@ FROM ubuntu:xenial
 # USHER ver is in the conda version style. 
 # thankfully pangolearn github tag is simply a date
 ARG PANGOLIN_VER="v3.0.5"
-ARG PANGOLEARN_VER="2021-05-27"
+ARG PANGOLEARN_VER="2021-06-05"
 ARG SCORPIO_VER="v0.3" 
 ARG CONSTELLATIONS_VER="v0.0.4"
 ARG USHER_VER="0.2.1-0"
@@ -61,6 +61,6 @@ RUN cd pangolin && \
  pip install . && \
  conda clean -a -y && \
  mkdir /data && \
- pangolin -v && pangolin -pv
+ pangolin -v && pangolin -pv && pangolin -dv
 
 WORKDIR /data
