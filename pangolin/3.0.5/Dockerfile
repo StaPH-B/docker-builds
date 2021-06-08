@@ -8,7 +8,7 @@ ARG PANGOLIN_VER="v3.0.5"
 ARG PANGOLEARN_VER="2021-06-05"
 ARG SCORPIO_VER="v0.3" 
 ARG CONSTELLATIONS_VER="v0.0.4"
-ARG USHER_VER="0.2.1-0"
+ARG USHER_VER="0.3.1-0"
 
 LABEL base.image="ubuntu:xenial"
 LABEL dockerfile.version="1"
