@@ -10,7 +10,7 @@ LABEL software.version="0.4.3"
 LABEL description="Output FASTQ summary statistics in JSON format"
 LABEL website="https://github.com/rpetit3/fastq-scan"
 LABEL license="https://github.com/rpetit3/fastq-scan/blob/master/LICENSE"
-LABEL maintainer="Robert Petit"
+LABEL maintainer="Robert A. Petit III"
 LABEL maintainer.email="robert.petit@wyo.gov"
 
 # install dependencies and cleanup
