@@ -17,6 +17,7 @@ LABEL maintainer.email="robert.petit@wyo.gov"
 RUN apt-get update && apt-get install -y \
  g++ \
  make \
+ jq \
  wget && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
@@ -46,6 +47,10 @@ WORKDIR /data
 ## Example stats for a compressed (gzip) FASTQ
 # $ docker run --rm -u $(id -u):$(id -g) -v ${PWD}:/data staphb/fastq-scan:0.4.3 \
 #   /bin/bash -c "zcat /data/SRX0000000_R1.fastq.gz | fastq-scan"
+
+## Eaxmple using jq to extract the total number of reads in the FASTQ
+# $ docker run --rm -u $(id -u):$(id -g) -v ${PWD}:/data fastq-scan:0.4.3 \
+#   /bin/bash -c "cat /fastq-scan/example.fq | fastq-scan | jq .qc_stats.read_total"
 
 ## View full fastq-scan help options
 # $ docker run --rm -u $(id -u):$(id -g) -v ${PWD}:/data staphb/fastq-scan:0.4.3 fastq-scan -h
