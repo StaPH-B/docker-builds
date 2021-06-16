@@ -24,6 +24,7 @@ The licenses of the open-source software that is contained in these Docker image
 | FastANI | Apache v2.0 | https://github.com/ParBLiSS/FastANI/blob/master/LICENSE |
 | FastTree | GNU GPLv2 | http://www.microbesonline.org/fasttree/ |
 | FastQC | GNU GPLv3 | https://github.com/s-andrews/FastQC/blob/master/LICENSE.txt |
+| fastq-scan | MIT | https://github.com/rpetit3/fastq-scan/blob/master/LICENSE |
 | Filtlong | GNU GPLv3 | https://github.com/rrwick/Filtlong/blob/master/LICENSE |
 | Flye | BSD-3 | https://github.com/fenderglass/Flye/blob/flye/LICENSE |
 | Hmmer | BSD-3 | http://eddylab.org/software/hmmer/Userguide.pdf |
