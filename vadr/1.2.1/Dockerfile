@@ -2,7 +2,7 @@
 FROM ubuntu:xenial
 
 # for easy upgrade later. LC_ALL set for singularity compatibility
-ENV VADR_VERSION="1.2" \
+ENV VADR_VERSION="1.2.1" \
   VADR_SARSCOV2_MODELS_VERSION="1.2-2" \
   LC_ALL=C \
   VADRINSTALLDIR=/opt/vadr
@@ -23,7 +23,7 @@ ENV PERL5LIB=$VADRSCRIPTSDIR:$VADRSEQUIPDIR:$VADRBIOEASELDIR/blib/lib:$VADRBIOEA
 
 # metadata - optional, but highly recommended
 LABEL base.image="ubuntu:xenial"
-LABEL dockerfile.version="2"
+LABEL dockerfile.version="1"
 LABEL software="VADR"
 LABEL software.version=${VADR_VERSION}
 LABEL description="This software does viral annotations"
@@ -44,14 +44,6 @@ RUN apt-get update && apt-get install -y \
  autoconf && \
  apt-get install -y libinline-c-perl liblwp-protocol-https-perl && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/*
-
-### OLD ###
-# install and/or setup more things. Make /data for use as a working dir
-#RUN mkdir -p ${VADRINSTALLDIR} && \
- # cd ${VADRINSTALLDIR} && \
- # wget https://raw.githubusercontent.com/ncbi/vadr/release-${VADR_VERSION}/vadr-install.sh && \
- # bash vadr-install.sh linux && \
- # mkdir /data
 
 # install VADR
 # download entire VADR source code from GitHub release
