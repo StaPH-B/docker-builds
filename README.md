@@ -125,3 +125,4 @@ Each Dockerfile lists the author(s)/maintainer(s) as a metadata `LABEL`, but the
   * [@tgallagh](https://github.com/tgallagh)
   * Kelly Oakeson
   * [@joacjo](https://github.com/joacjo)
+  * [@rpetit3](https://github.com/rpetit3/)
