@@ -126,3 +126,4 @@ Each Dockerfile lists the author(s)/maintainer(s) as a metadata `LABEL`, but the
   * Kelly Oakeson
   * [@joacjo](https://github.com/joacjo)
   * [@rpetit3](https://github.com/rpetit3/)
+  * [@jvhagey](https://github.com/jvhagey)
