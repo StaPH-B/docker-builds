@@ -9,7 +9,7 @@ ARG PANGOLEARN_VER="2021-06-15"
 ARG SCORPIO_VER="v0.3.4" 
 ARG CONSTELLATIONS_VER="v0.0.9"
 ARG USHER_VER="0.3.2-0"
-ARG PANGO_DESTINATION_VER="v1.2.25"
+ARG PANGO_DESIGNATION_VER="v1.2.27"
 
 LABEL base.image="ubuntu:xenial"
 LABEL dockerfile.version="1"
@@ -52,7 +52,7 @@ RUN sed -i "s|usher|usher=${USHER_VER}|" /pangolin/environment.yml && \
  sed -i "s|pangoLEARN.git|pangoLEARN.git@${PANGOLEARN_VER}|" /pangolin/environment.yml && \
  sed -i "s|scorpio.git|scorpio.git@${SCORPIO_VER}|" /pangolin/environment.yml && \
  sed -i "s|constellations.git|constellations.git@${CONSTELLATIONS_VER}|" /pangolin/environment.yml && \
- sed -i "s|pango-designation.git|pango-designation.git@${PANGO_DESTINATION_VER}|" /pangolin/environment.yml && \
+ sed -i "s|pango-designation.git|pango-designation.git@${PANGO_DESIGNATION_VER}|" /pangolin/environment.yml && \
  conda env create -f /pangolin/environment.yml && \
  echo "source activate pangolin" > /etc/bash.bashrc
 ENV PATH /miniconda/envs/pangolin/bin:$PATH
