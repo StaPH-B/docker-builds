@@ -79,7 +79,8 @@ RUN cd /tmp && \
   rm -rf ${VIRALRECON}.tar.gz && \
   chmod 755 viralrecon-${VIRALRECON}/bin/ivar_variants_to_vcf.py && \
   cp viralrecon-${VIRALRECON}/bin/ivar_variants_to_vcf.py /usr/local/bin && \
-  rm -rf viralrecon-${VIRALRECON}/
+  rm -rf viralrecon-${VIRALRECON}/ && \
+  update-alternatives --install /usr/bin/python python /usr/bin/python3 10
 
 # set /data as working directory
 WORKDIR /data
