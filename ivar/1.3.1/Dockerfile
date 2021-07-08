@@ -4,6 +4,7 @@ FROM ubuntu:18.04
 ARG SAMTOOLSVER=1.12
 ARG HTSLIBVER=1.12
 ARG IVARVER=1.3.1
+ARG VIRALRECON=2.1
 
 LABEL base.image="ubuntu:18.04"
 LABEL dockerfile.version="2"
@@ -70,6 +71,15 @@ RUN cd root/ && \
   make && \
   make install && \
   mkdir /data
+  
+# nf-core/viralrecon
+RUN cd /tmp && \
+  wget https://github.com/nf-core/viralrecon/archive/refs/tags/${VIRALRECON}.tar.gz && \
+  tar -xzvf ${VIRALRECON}.tar.gz && \
+  rm -rf ${VIRALRECON}.tar.gz && \
+  chmod 755 viralrecon-${VIRALRECON}/bin/ivar_variants_to_vcf.py && \
+  cp viralrecon-${VIRALRECON}/bin/ivar_variants_to_vcf.py /usr/local/bin && \
+  rm -rf viralrecon-${VIRALRECON}/
 
 # set /data as working directory
 WORKDIR /data
