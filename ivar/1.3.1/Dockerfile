@@ -7,7 +7,7 @@ ARG IVARVER=1.3.1
 ARG VIRALRECON=2.1
 
 LABEL base.image="ubuntu:18.04"
-LABEL dockerfile.version="2"
+LABEL dockerfile.version="3"
 LABEL software="iVar"
 LABEL software.version="1.3.1"
 LABEL description="Computational package that contains functions broadly useful for viral amplicon-based sequencing."
