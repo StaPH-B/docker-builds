@@ -5,14 +5,14 @@ FROM ubuntu:xenial
 # USHER ver is in the conda version style. 
 # thankfully pangolearn github tag is simply a date
 ARG PANGOLIN_VER="v3.1.5"
-ARG PANGOLEARN_VER="2021-06-15"
+ARG PANGOLEARN_VER="2021-07-07-2"
 ARG SCORPIO_VER="v0.3.4" 
-ARG CONSTELLATIONS_VER="v0.0.9"
+ARG CONSTELLATIONS_VER="v0.0.10"
 ARG USHER_VER="0.3.2-0"
-ARG PANGO_DESIGNATION_VER="v1.2.27"
+ARG PANGO_DESIGNATION_VER="v1.2.36"
 
 LABEL base.image="ubuntu:xenial"
-LABEL dockerfile.version="1"
+LABEL dockerfile.version="2"
 LABEL software="pangolin"
 LABEL software.version=${PANGOLIN_VER}
 LABEL description="Conda environment for Pangolin. Pangolin: Software package for assigning SARS-CoV-2 genome sequences to global lineages."
