@@ -2,7 +2,7 @@ FROM staphb/roary:3.12.0
 
 # metadata
 LABEL base.image="staphb/roary:3.12.0"
-LABEL version="1"
+LABEL dockerfile.version="1"
 LABEL software="Piggy"
 LABEL software.version="1.5"
 LABEL description="Pipeline for analysing intergenic regions in bacteria"
