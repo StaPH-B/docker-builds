@@ -35,7 +35,7 @@ RUN wget https://github.com/marbl/canu/releases/download/v2.1.1/canu-2.1.1.Linux
   tar -xvf canu-2.1.1.Linux-amd64.tar.xz && \
   rm canu-2.1.1.Linux-amd64.tar.xz
 
-ENV PATH="/canu-2.1.1/Linux-amd64/bin:${PATH}"
+ENV PATH="/canu-2.1.1/bin:${PATH}"
 
 WORKDIR /data
 
