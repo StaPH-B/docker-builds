@@ -12,6 +12,9 @@ LABEL license="https://github.com/marbl/canu/blob/master/README.license.GPL"
 LABEL maintainer="Thomas A. Christensen II"
 LABEL maintainer.email="25492070+MillironX@users.noreply.github.com"
 
+# version to build with
+ARG CANU_VERSION=2.1.1
+
 # install python
 RUN apt-get update && apt-get install -y \
    perl \
@@ -30,11 +33,11 @@ RUN apt-get update && apt-get install -y \
    mkdir /data
 
 # install canu
-RUN wget https://github.com/marbl/canu/releases/download/v2.1.1/canu-2.1.1.Linux-amd64.tar.xz && \
-  tar -xvf canu-2.1.1.Linux-amd64.tar.xz && \
-  rm canu-2.1.1.Linux-amd64.tar.xz
+RUN wget https://github.com/marbl/canu/releases/download/v${CANU_VERSION}/canu-${CANU_VERSION}.Linux-amd64.tar.xz && \
+  tar -xvf canu-${CANU_VERSION}.Linux-amd64.tar.xz && \
+  rm canu-${CANU_VERSION}.Linux-amd64.tar.xz
 
-ENV PATH="/canu-2.1.1/bin:${PATH}"
+ENV PATH="/canu-${CANU_VERSION}/bin:${PATH}"
 
 WORKDIR /data
 
