@@ -3,7 +3,6 @@ FROM ubuntu:xenial
 
 # metadata
 LABEL base.image="ubuntu:xenial"
-LABEL version="1"
 LABEL software="Canu"
 LABEL software.version="2.1.1"
 LABEL dockerfile.version="1"
