@@ -1,11 +1,11 @@
 # [docker-builds](#)
 This repository contains the Dockerfiles and other assorted files necessary for building Docker images for a variety of programs used by members of the StaPH-B (State Public Health Lab Bioinformatics) consortium. The purpose of this repository is to provide a centralized location for Docker images that is easily accessible for users, with clear documentation on how the containers were built and how to use them.
 
-If you would like to contribute with a Docker image or improve upon the existing images, please fork the repository, make your changes/additions, and submit a pull request. If you are having an issue with an existing image, please submit an issue. We welcome any and all feedback!  
+If you would like to contribute with a Docker image or improve upon the existing images, please fork the repository, make your changes/additions, and submit a pull request. If you are having an issue with an existing image, please submit an issue. We welcome any and all feedback!
 [See more details on how to contribute here](https://staph-b.github.io/docker-builds/contribute/)
 
 ## [Docker User Guide](https://staph-b.github.io/docker-builds/)
-We have also created a user guide that outlines methods and best practices for using and developing docker containers.  
+We have also created a user guide that outlines methods and best practices for using and developing docker containers.
 [Docker User Guide](https://staph-b.github.io/docker-builds/)
 
 ### What about Singularity?
@@ -27,7 +27,7 @@ For many people Docker is not an option, but Singularity is. Most Docker contain
 | [bcftools](https://hub.docker.com/r/staphb/bcftools/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/bcftools.svg?style=popout)](https://hub.docker.com/r/staphb/bcftools) | <ul><li>1.10.2</li><li>1.11</li><li>1.12</li></ul> | https://github.com/samtools/bcftools |
 | [bedtools](https://hub.docker.com/r/staphb/bedtools/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/bedtools.svg?style=popout)](https://hub.docker.com/r/staphb/bedtools) | <ul><li>2.29.2</li><li>2.30.0</li></ul> | https://bedtools.readthedocs.io/en/latest/ <br/>https://github.com/arq5x/bedtools2 |
 | [BWA](https://hub.docker.com/r/staphb/bwa) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/bwa.svg?style=popout)](https://hub.docker.com/r/staphb/bwa) | <ul><li>0.7.17</li></ul> | https://github.com/lh3/bwa |
-| [Canu](https://hub.docker.com/r/staphb/canu) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/canu.svg?style=popout)](https://hub.docker.com/r/staphb/canu)| <ul><li>2.0</li></ul> | https://canu.readthedocs.io/en/latest/ <BR/> https://github.com/marbl/canu |
+| [Canu](https://hub.docker.com/r/staphb/canu) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/canu.svg?style=popout)](https://hub.docker.com/r/staphb/canu)| <ul><li>2.0</li><li>2.1.1</ul> | https://canu.readthedocs.io/en/latest/ <BR/> https://github.com/marbl/canu |
 | [Canu-Racon](https://hub.docker.com/r/staphb/canu-racon/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/canu-racon.svg?style=popout)](https://hub.docker.com/r/staphb/canu-racon) | <ul><li>1.7.1 (Canu), 1.3.1 (Racon), 2.13 (minimap2)</li><li>1.9 (Canu), 1.4.3 (Racon), 2.17 (minimap2)</li><li>1.9i (Canu), 1.4.3 (Racon), 2.17 (minimap2), (+racon_preprocess.py)</li><li>2.0 (Canu), 1.4.3 (Racon), 2.17 (minimap2)</li></ul> | https://canu.readthedocs.io/en/latest/ <br/> https://github.com/lbcb-sci/racon <br/> https://github.com/isovic/racon (ARCHIVED) <br/> https://lh3.github.io/minimap2/ |
 | [centroid](https://hub.docker.com/r/staphb/centroid/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/centroid.svg?style=popout)](https://hub.docker.com/r/staphb/centroid) | <ul><li>1.0.0</li></ul> | https://github.com/stjacqrm/centroid |
 | [CDC-SPN](https://hub.docker.com/r/staphb/cdc-spn/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/cdc-spn.svg?style=popout)](https://hub.docker.com/r/staphb/cdc-spn) | <ul><li>0.1 (no version)</li></ul> | https://github.com/BenJamesMetcalf/Spn_Scripts_Reference |
@@ -131,4 +131,4 @@ Each Dockerfile lists the author(s)/maintainer(s) as a metadata `LABEL`, but the
   * [@rpetit3](https://github.com/rpetit3/)
   * [@jvhagey](https://github.com/jvhagey)
   * [@Antonia-Chalka](https://github.com/Antonia-Chalka)
-
+  * [@MillironX](https://github.com/MillironX)
