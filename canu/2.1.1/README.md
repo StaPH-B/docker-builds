@@ -7,5 +7,5 @@ Canu is a fork of the Celera Assembler, designed for high-noise single-molecule 
 # Example Usage
 
 ```
-canu -p {sample} genomeSize={genome.length} -nanopore-raw {input.fastq}
+canu -p {sample} genomeSize={genome.length} -nanopore {input.fastq}
 ```
