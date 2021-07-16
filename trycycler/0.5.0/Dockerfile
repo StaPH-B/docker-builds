@@ -43,10 +43,10 @@ RUN wget https://github.com/marbl/Mash/releases/download/v${MASH_VER}/mash-Linux
  rm -rf mash-Linux64-v${MASH_VER}.tar
 
 # miniasm
-RUN wget https://github.com/lh3/miniasm/archive/v${miniasmVer}.tar.gz && \
+RUN wget https://github.com/lh3/miniasm/archive/v${MINIASM_VER}.tar.gz && \
  mkdir miniasm && \
- tar -xzvf v${miniasmVer}.tar.gz -C miniasm --strip-components 1 && \
- rm v${miniasmVer}.tar.gz && \
+ tar -xzvf v${MINIASM_VER}.tar.gz -C miniasm --strip-components 1 && \
+ rm v${MINIASM_VER}.tar.gz && \
  cd miniasm && \
  make
 
