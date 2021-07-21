@@ -1,8 +1,8 @@
 # base image
-FROM ubuntu:bionic
+FROM ubuntu:focal
 
 # metadata
-LABEL base.image="ubuntu:bioinic"
+LABEL base.image="ubuntu:focal"
 LABEL dockerfile.version="1"
 LABEL software="raven"
 LABEL software.version="1.5.1"
@@ -14,30 +14,19 @@ LABEL maintainer.email="eriny@utah.gov"
 
 # version to build with
 ARG RAVEN_VERSION=1.5.1
-ARG CMAKE_VERSION=3.21.0
+ARG DEBIAN_FRONTEND=noninteractive
 
 # install dependencies via apt-get or yum if using a centos or fedora base 
 RUN apt-get update && apt-get install -y \
   wget \
   git \
   clang \
-  zlib1g-dev \
   gcc \
+  zlib1g-dev \
   build-essential \
-  libssl-dev \
-  libcurl4-openssl-dev \
   cmake \
   && apt-get autoclean \
   && rm -rf /var/lib/apt/lists/*
-
-# install cmake because raven needs a version greater than 3.11
-RUN wget https://github.com/Kitware/CMake/releases/download/v3.21.0/cmake-${CMAKE_VERSION}.tar.gz && \
-  tar -xvf cmake-${CMAKE_VERSION}.tar.gz && \
-  rm cmake-${CMAKE_VERSION}.tar.gz && \
-  cd cmake-${CMAKE_VERSION} && \
-  ./configure && \
-  make && \
-  make install
 
 # install raven
 RUN wget https://github.com/lbcb-sci/raven/archive/refs/tags/${RAVEN_VERSION}.tar.gz && \
