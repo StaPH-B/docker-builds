@@ -9,9 +9,8 @@ LABEL software.version="1.0.1"
 LABEL description="Pipeline for Salmonella serotype determination from reads or assemblies"
 LABEL website="https://github.com/denglab/SeqSero"
 LABEL license="https://github.com/denglab/SeqSero/blob/master/LICENSE"
-
-# Maintainer
-MAINTAINER Curtis Kapsak <pjx8@cdc.gov>
+LABEL maintainer="Curtis Kapsak"
+LABEL maintainer.email="pjx8@cdc.gov"
 
 # install dependencies using conda
 RUN apt-get update && apt-get -y install python-biopython \

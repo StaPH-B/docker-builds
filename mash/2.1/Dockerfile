@@ -9,8 +9,8 @@ LABEL software.version="2.1.0"
 LABEL description="Fast genome and metagenome distance estimation using MinHash"
 LABEL website="https://mash.readthedocs.io/en/latest/index.html"
 LABEL license="https://github.com/marbl/Mash/blob/master/LICENSE.txt"
-
-MAINTAINER Curtis Kapsak <pjx8@cdc.gov>
+LABEL maintainer="Curtis Kapsak"
+LABEL maintainer.email="pjx8@cdc.gov"
 
 # install dependencies
 RUN apt-get update && \
@@ -28,5 +28,8 @@ RUN wget https://github.com/marbl/Mash/releases/download/v2.1/mash-Linux64-v2.1.
   gunzip RefSeqSketchesDefaults.msh.gz
 
 ENV PATH="${PATH}:/mash-Linux64-v2.1"
+
+# set perl locale settings
+ENV LC_ALL=C
 
 WORKDIR /data

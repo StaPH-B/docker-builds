@@ -9,9 +9,10 @@ LABEL software.version="1.0.0"
 LABEL description="Salmonella serotyping from genome sequencing data"
 LABEL website="https://github.com/denglab/SeqSero2"
 LABEL license="https://github.com/denglab/SeqSero2/blob/master/LICENSE"
-
-# Maintainer
-MAINTAINER Jake Garfin <jake.garfin@state.mn.us>
+LABEL maintainer1="Jake Garfin"
+LABEL maintainer1.email="jake.garfin@state.mn.us"
+LABEL maintainer2="Curtis Kapsak"
+LABEL maintainer2.email="pjx8@cdc.gov"
 
 RUN apt-get update && apt-get install -y \
   python3\
@@ -27,7 +28,7 @@ RUN apt-get update && apt-get install -y \
   build-essential\
   libncurses5-dev
 
-RUN pip3 install biopython
+RUN pip3 install 'biopython == 1.68'
 
 # Install samtools (installing from apt breaks SeqSero2 version check)
 RUN wget 'https://github.com/samtools/samtools/releases/download/1.9/samtools-1.9.tar.bz2' && \
@@ -38,15 +39,14 @@ RUN wget https://github.com/hcdenbakker/SalmID/archive/0.122.tar.gz && \
   tar -xzf 0.122.tar.gz && rm -rf 0.122.tar.gz
 
 # Install SPAdes
-RUN wget http://cab.spbu.ru/files/release3.13.0/SPAdes-3.13.0-Linux.tar.gz && \
-  tar -xzf SPAdes-3.13.0-Linux.tar.gz && \
-  rm -rf SPAdes-3.13.0-Linux.tar.gz
+RUN wget https://github.com/ablab/spades/releases/download/v3.8.2/SPAdes-3.8.2-Linux.tar.gz && \
+  tar -xzf SPAdes-3.8.2-Linux.tar.gz && \
+  rm -rf SPAdes-3.8.2-Linux.tar.gz
 
 # Install SeqSero2
 RUN wget https://github.com/denglab/SeqSero2/archive/v1.0.0.tar.gz && \
   tar -xzf v1.0.0.tar.gz && rm -rf v1.0.0.tar.gz && mkdir /data
 
-
-ENV PATH="${PATH}:/SeqSero2-1.0.0:/SPAdes-3.13.0-Linux/bin:/SalmID-0.122:/samtools-1.9"
+ENV PATH="${PATH}:/SeqSero2-1.0.0:/SPAdes-3.8.2-Linux/bin:/SalmID-0.122:/samtools-1.9"
 
 WORKDIR /data

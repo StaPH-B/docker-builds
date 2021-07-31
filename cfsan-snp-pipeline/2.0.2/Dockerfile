@@ -7,13 +7,15 @@ LABEL software="cfsan_snp_pipeline"
 LABEL software.version="2.0.2"
 LABEL description="A pipeline for the production of SNP matrices from sequence data used in the phylogenetic analysis of pathogenic organisms sequenced from samples of interest to food safety."
 LABEL website="https://github.com/CFSAN-Biostatistics/snp-pipeline"
-LABEL lisence="https://github.com/CFSAN-Biostatistics/snp-pipeline/blob/master/LICENSE.txt"
+LABEL license="https://github.com/CFSAN-Biostatistics/snp-pipeline/blob/master/LICENSE.txt"
+LABEL original.maintainer="Justin Payne"
+LABEL original.maintainer.email="justin.payne@fda.hhs.gov"
+LABEL maintainer="Curtis Kapsak"
+LABEL maintainer.email="pjx8@cdc.gov"
 
 # This Dockerfile is based on a Docker file from Justin Payne which can be found here:
 # https://hub.docker.com/r/crashfrog/snp-pipeline/dockerfile
 # The dockerfile has been modified from it's original form by Curtis Kapsak
-MAINTAINER Justin Payne, <justin.payne@fda.hhs.gov>
-MAINTAINER Curtis Kapsak, <pjx8@cdc.gov>
 
 WORKDIR /tmp/
 RUN apt-get update -y \
