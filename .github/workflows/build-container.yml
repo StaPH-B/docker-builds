@@ -26,14 +26,20 @@ jobs:
         uses: docker/setup-qemu-action@v1
       - name : Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
-      - name: Build
+      - name: Build and export
         id:   docker_build
         uses: docker/build-push-action@v2
         with:
           push: false
           tags: ${{ env.CONTAINER_NAME }}:${{ env.VERSION }}
           context: ${{ env.CONTAINER_NAME }}/${{ env.VERSION }}
-          outputs: type=docker,dest=/tmp/${{ env.CONTAINER_NAME }}.${{ env.VERSION }}.tar
+          outputs: type=docker,dest=/tmp/myimage.tar
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: myimage
+          path: /tmp/myimage.tar
+
   check-the-build:
     runs-on: ubuntu-18.04
     needs: build
@@ -45,7 +51,7 @@ jobs:
         with:
           name: ${{ env.CONTAINER_NAME }}
           run:  |
-            docker load --input /tmp/${{ env.CONTAINER_NAME }}.${{ env.VERSION }}.tar
+            docker load --input /tmp/myimage.tar
             docker image ls -a
 
 
