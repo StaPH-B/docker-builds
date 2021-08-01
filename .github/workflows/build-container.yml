@@ -1,0 +1,26 @@
+# https://docs.github.com/en/actions/reference/encrypted-secrets#using-encrypted-secrets-in-a-workflow
+# https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
+# https://docs.github.com/en/actions/guides/publishing-docker-images
+name: github-docker
+on: 
+  push:
+    branches:
+      - main
+
+
+
+env:      
+  CI_PROJECT_NAME:   container-test
+  tag: fake-tag
+
+jobs:
+  build-mashtree:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: apt-get
+        run:  sudo apt-get install docker ca-certificates
+      - name: Build
+        run:  |
+          cd docker-builds && docker build mashtree/1.2.0 
