@@ -23,4 +23,4 @@ jobs:
         run:  sudo apt-get install docker ca-certificates
       - name: Build
         run:  |
-          cd docker-builds && docker build mashtree/1.2.0 
+          docker build mashtree/1.2.0 
