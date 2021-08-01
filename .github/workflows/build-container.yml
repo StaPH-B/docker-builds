@@ -49,7 +49,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v2
         with:
-          name: ${{ env.CONTAINER_NAME }}
+          name: myimage
           run:  |
             docker load --input /tmp/myimage.tar
             docker image ls -a
