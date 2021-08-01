@@ -5,8 +5,8 @@ on: [push]
 
 
 env:      
-  CI_PROJECT_NAME:   container-test
-  tag: fake-tag
+  CONTAINER_NAME: mashtree
+  VERSION: "1.2.0"
 
 jobs:
   build-mashtree:
@@ -19,8 +19,15 @@ jobs:
           tree -L 2 -d
           pwd -P
           ls -lhS
-      - name: apt-get
-        run:  sudo apt-get install docker ca-certificates
+      - name: install docker
+        run:  |
+          # https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
+          sudo apt-get install apt-transport-https ca-certificates curl gnupg lsb-release
+          curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+          echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+               $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+          sudo apt-get install docker-ce docker-ce-cli containerd.io
       - name: Build
         run:  |
-          docker build mashtree/1.2.0 
+          docker build ${{ env.CONTAINER_NAME }}/${{ env.VERSION }}
+
