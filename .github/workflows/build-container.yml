@@ -1,6 +1,7 @@
 # https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
 # https://docs.github.com/en/actions/guides/publishing-docker-images
-name: github-docker
+# https://github.com/docker/build-push-action/blob/master/docs/advanced/share-image-jobs.md
+name: build-mashtree
 on: [push]
 
 
@@ -9,18 +10,18 @@ env:
   VERSION: "1.2.0"
 
 jobs:
-  build-mashtree:
+  build:
     runs-on: ubuntu-18.04
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
+      - name: literally the command env
+        run:  env
       - name: env
         run:  |
           tree -L 2 -d
           pwd -P
           ls -lhS
-          echo
-          env
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       - name : Set up Docker Buildx
@@ -33,4 +34,19 @@ jobs:
           tags: ${{ env.CONTAINER_NAME }}:${{ env.VERSION }}
           context: ${{ env.CONTAINER_NAME }}/${{ env.VERSION }}
           outputs: type=docker,dest=/tmp/${{ env.CONTAINER_NAME }}.${{ env.VERSION }}.tar
+  check-the-build:
+    runs-on: ubuntu-18.04
+    needs: build
+    steps:
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: ${{ env.CONTAINER_NAME }}
+          run:  |
+            docker load --input /tmp/${{ env.CONTAINER_NAME }}.${{ env.VERSION }}.tar
+            docker image ls -a
+
+
 
