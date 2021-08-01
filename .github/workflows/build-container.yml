@@ -14,6 +14,11 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
+      - name: env
+        run:  |
+          tree -L 2 -d
+          pwd -P
+          ls -lhS
       - name: apt-get
         run:  sudo apt-get install docker ca-certificates
       - name: Build
