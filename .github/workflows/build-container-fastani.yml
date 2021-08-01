@@ -1,0 +1,58 @@
+# https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
+# https://docs.github.com/en/actions/guides/publishing-docker-images
+# https://github.com/docker/build-push-action/blob/master/docs/advanced/share-image-jobs.md
+name: build-fastani
+on: [push]
+
+
+env:      
+  CONTAINER_NAME: fastani
+  VERSION: "1.33"
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: literally the command env
+        run:  env
+      - name: env
+        run:  |
+          tree -L 2 -d
+          pwd -P
+          ls -lhS
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      - name : Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Build and export
+        id:   docker_build
+        uses: docker/build-push-action@v2
+        with:
+          push: false
+          tags: ${{ env.CONTAINER_NAME }}:${{ env.VERSION }}
+          context: ${{ env.CONTAINER_NAME }}/${{ env.VERSION }}
+          outputs: type=docker,dest=/tmp/myimage.tar
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: myimage
+          path: /tmp/myimage.tar
+
+  check-the-build:
+    runs-on: ubuntu-18.04
+    needs: build
+    steps:
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: myimage
+          run:  |
+            docker load --input /tmp/myimage.tar
+            docker image ls -a
+
+
+
