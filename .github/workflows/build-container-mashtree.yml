@@ -33,12 +33,12 @@ jobs:
           push: false
           tags: ${{ env.CONTAINER_NAME }}:${{ env.VERSION }}
           context: ${{ env.CONTAINER_NAME }}/${{ env.VERSION }}
-          outputs: type=docker,dest=/tmp/myimage.tar
+          outputs: type=docker,dest=/tmp/${{ env.CONTAINER_NAME }}.tar
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: myimage
-          path: /tmp/myimage.tar
+          name: ${{ env.CONTAINER_NAME }}
+          path: /tmp/${{ env.CONTAINER_NAME }}.tar
 
   check-the-build:
     runs-on: ubuntu-18.04
@@ -49,9 +49,9 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v2
         with:
-          name: myimage
+          name: ${{ env.CONTAINER_NAME }}
           run:  |
-            docker load --input /tmp/myimage.tar
+            docker load --input /tmp/${{ env.CONTAINER_NAME }}.tar
             docker image ls -a
 
 
