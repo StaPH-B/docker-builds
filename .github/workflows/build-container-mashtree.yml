@@ -4,7 +4,6 @@
 name: build-mashtree
 on: [push]
 
-
 env:      
   CONTAINER_NAME: mashtree
   VERSION: "1.2.0"
