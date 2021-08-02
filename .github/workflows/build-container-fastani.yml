@@ -44,6 +44,10 @@ jobs:
     runs-on: ubuntu-18.04
     needs: build
     steps:
+      - name: directory contents (1)
+        run:  |
+          pwd -P
+          ls -lhA
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       - name: Download artifact
@@ -51,9 +55,9 @@ jobs:
         with:
           name: ${{ env.CONTAINER_NAME }}
           path: /tmp/${{ env.CONTAINER_NAME }}.tar
-      - name: directory contents
+      - name: directory contents (2)
         run:  |
-          #tree -L 2 -d
+          pwd -P
           ls -lhA
       - name: check out container contents
         run:  |
