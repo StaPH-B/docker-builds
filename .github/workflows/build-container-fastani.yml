@@ -70,7 +70,7 @@ jobs:
           #echo "DOCKER EXEC:"
           #docker exec -ti ${{ env.CONTAINER_NAME }}:${{ env.VERSION }} "ls -lhA"
           echo "DOCKER RUN:"
-          docker run ${{ env.CONTAINER_NAME }}:${{ env.VERSION }} "ls -lhA"
+          docker run ${{ env.CONTAINER_NAME }}:${{ env.VERSION }} ls -lhA
 
 
 
