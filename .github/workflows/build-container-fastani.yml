@@ -62,7 +62,8 @@ jobs:
       - name: check out container contents
         run:  |
           docker load --input ./${{ env.CONTAINER_NAME }}.tar
-          docker image ls -AR
+          docker image ls -a
+          docker exec -ti ${{ env.CONTAINER_NAME }} "ls -lhA"
 
 
 
