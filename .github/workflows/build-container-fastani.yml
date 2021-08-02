@@ -58,13 +58,11 @@ jobs:
       - name: directory contents (2)
         run:  |
           pwd -P
-          ls -lhA
-      - name: Display structure of downloaded files
-        run:  ls -R
-      #- name: check out container contents
-      #  run:  |
-      #    docker load --input /tmp/${{ env.CONTAINER_NAME }}.tar
-      #    docker image ls -AR
+          ls -lhAR
+      - name: check out container contents
+        run:  |
+          docker load --input ./${{ env.CONTAINER_NAME }}.tar
+          docker image ls -AR
 
 
 
