@@ -66,9 +66,9 @@ jobs:
           echo
           docker ps --no-trunc --all
           echo "DOCKER START:"
-          docker start ${{ env.CONTAINER_NAME }}
+          docker start ${{ env.CONTAINER_NAME }}:${{ env.VERSION }}
           echo "DOCKER EXEC:"
-          docker exec -ti ${{ env.CONTAINER_NAME }} "ls -lhA"
+          docker exec -ti ${{ env.CONTAINER_NAME }}:${{ env.VERSION }} "ls -lhA"
 
 
 
