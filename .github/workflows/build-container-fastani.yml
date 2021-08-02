@@ -64,7 +64,10 @@ jobs:
           docker load --input ./${{ env.CONTAINER_NAME }}.tar
           docker image ls -a
           echo
+          docker ps --no-trunc --all
+          echo "DOCKER START:"
           docker start ${{ env.CONTAINER_NAME }}
+          echo "DOCKER EXEC:"
           docker exec -ti ${{ env.CONTAINER_NAME }} "ls -lhA"
 
 
