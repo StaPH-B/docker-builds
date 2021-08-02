@@ -54,15 +54,17 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: ${{ env.CONTAINER_NAME }}
-          path: /tmp/${{ env.CONTAINER_NAME }}.tar
+          #path: /tmp/${{ env.CONTAINER_NAME }}.tar
       - name: directory contents (2)
         run:  |
           pwd -P
           ls -lhA
-      - name: check out container contents
-        run:  |
-          docker load --input /tmp/${{ env.CONTAINER_NAME }}.tar
-          docker image ls -AR
+      - name: Display structure of downloaded files
+        run:  ls -R
+      #- name: check out container contents
+      #  run:  |
+      #    docker load --input /tmp/${{ env.CONTAINER_NAME }}.tar
+      #    docker image ls -AR
 
 
 
