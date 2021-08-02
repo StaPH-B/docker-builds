@@ -1,17 +1,17 @@
 # https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
 # https://docs.github.com/en/actions/guides/publishing-docker-images
 # https://github.com/docker/build-push-action/blob/master/docs/advanced/share-image-jobs.md
-name: build-mashtree
+name: build-mentalist
 on: [push]
 
 
 env:      
-  CONTAINER_NAME: mashtree
-  VERSION: "1.2.0"
+  CONTAINER_NAME: mentalist
+  VERSION: "0.2.1"
   # The inspect command will be run inside the container
   # with `docker run` and should have an exit code of 0
   # or an exit code > 0 if the container is somehow bad.
-  INSPECT_CMD: "mashtree -h"
+  INSPECT_CMD: "mentalist -h"
 
 jobs:
   build:
@@ -72,4 +72,6 @@ jobs:
         run:  |
           docker run ${{ env.CONTAINER_NAME }}:${{ env.VERSION }} ls -lh /
           docker run ${{ env.CONTAINER_NAME }}:${{ env.VERSION }} ${{ env.INSPECT_CMD }}
+
+
 
