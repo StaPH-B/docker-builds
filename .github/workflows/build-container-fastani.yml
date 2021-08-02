@@ -8,6 +8,10 @@ on: [push]
 env:      
   CONTAINER_NAME: fastani
   VERSION: "1.33"
+  # The inspect command will be run inside the container
+  # with `docker run` and should have an exit code of 0
+  # or an exit code > 0 if the container is somehow bad.
+  INSPECT_CMD: "fastANI -h"
 
 jobs:
   build:
@@ -59,18 +63,15 @@ jobs:
         run:  |
           pwd -P
           ls -lhAR
-      - name: check out container contents
+      - name: basic docker checks
         run:  |
           docker load --input ./${{ env.CONTAINER_NAME }}.tar
           docker image ls -a
-          echo
           docker ps --no-trunc --all
-          #echo "DOCKER START:"
-          #docker start ${{ env.CONTAINER_NAME }}:${{ env.VERSION }}
-          #echo "DOCKER EXEC:"
-          #docker exec -ti ${{ env.CONTAINER_NAME }}:${{ env.VERSION }} "ls -lhA"
-          echo "DOCKER RUN:"
-          docker run ${{ env.CONTAINER_NAME }}:${{ env.VERSION }} ls -lhA
+      - name: Test the specific container ${{ env.CONTAINER_NAME }}:${{ env.VERSION }}
+        run:  |
+          docker run ${{ env.CONTAINER_NAME }}:${{ env.VERSION }} ls -lh /
+          docker run ${{ env.CONTAINER_NAME }}:${{ env.VERSION }} ${{ env.INSPECT_CMD }}
 
 
 
