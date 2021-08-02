@@ -51,7 +51,7 @@ jobs:
         with:
           name: ${{ env.CONTAINER_NAME }}
       - name: check out container contents
-          run:  |
+        run:  |
             docker load --input /tmp/${{ env.CONTAINER_NAME }}.tar
             docker image ls -a
 
