@@ -64,8 +64,8 @@ jobs:
           docker load --input ./${{ env.CONTAINER_NAME }}.tar
           docker image ls -a
           echo
-          docker start ${{ env.CONTAINER_NAME }}:${{ env.VERSION }}
-          docker exec -ti ${{ env.CONTAINER_NAME }}:${{ env.VERSION }} "ls -lhA"
+          docker start ${{ env.CONTAINER_NAME }}
+          docker exec -ti ${{ env.CONTAINER_NAME }} "ls -lhA"
 
 
 
