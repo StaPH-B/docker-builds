@@ -17,9 +17,7 @@ We host all of our docker images on two different repositories and periodically 
   1. Dockerhub - https://hub.docker.com/r/staphb/
   2. Quay.io - https://quay.io/organization/staphb/
 
-As you may have heard, in Nov. 2020 Docker began implementing docker pull rate limits for images hosted on dockerhub, where users are limited to a certain number of `docker pull`'s per time period (e.g. anonymous users allowed 100 pulls per six hours). This has impacted our users that are frequently downloading docker images through the use of analysis pipelines executed in the cloud (Nextflow, WDL + Cromwell, etc.), where a new image is pulled for every task carried out in the pipeline. 
-
-We have since applied and been approved for Docker's "Open Source Program" which has removed the pull rate limiting for all `staphb` docker images! 🎉 🥳
+In November 2020, Docker began to implement pull rate limits for images hosted on dockerhub. This limits the number of `docker pull`'s per time period (e.g. anonymous users allowed 100 pulls per six hours). We applied and were approved for Docker's "Open Source Program," which should have removed the pull rate limits for all `staphb` docker images! 🎉 🥳 If you encounter an error such as `ERROR: toomanyrequests: Too Many Requests.` or `You have reached your pull rate limit. You may increase the limit by authenticating and upgrading: https://www.docker.com/increase-rate-limits.` , please let us know by [submitting an issue.](https://github.com/StaPH-B/docker-builds/issues)
 
 **A huge thank you goes to the folks at Docker for supporting our efforts to distribute & share critical tools for public health bioinformatics. This has been especially important during the COVID-19 global pandemic, as many of these tools are used to conduct genomic surveillance on the SARS-CoV-2 virus as well as other important pathogens of public health concern.**
 
