@@ -6,6 +6,7 @@ Additional tools (required):
 * [HTSlib](https://github.com/samtools/htslib)
 * [samtools](http://www.htslib.org/)
 * [bwa](http://bio-bwa.sourceforge.net/)
+* [ivar_variants_to_vcf.py](https://github.com/nf-core/viralrecon/blob/master/bin/ivar_variants_to_vcf.py)
 
 Also includes the 
 * [artic primers](https://github.com/artic-network/artic-ncov2019.git) as they were on 2021-05-06 (7e359dae37d894b40ae7e35c3582f14244ef4d36)
@@ -24,4 +25,7 @@ samtools mpileup -A -d 8000 -B -Q 0 --reference {reference.fasta} {bam} | \
 ```
 samtools mpileup -A -d 8000 -B -Q 0 --reference {reference.fasta} {bam} | \
       ivar consensus -t 0.6 -p {sample}.consensus -n N
+```
+```
+ivar_variants_to_vcf.py ivar-variants.tsv ivar-variants.vcf
 ```
