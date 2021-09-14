@@ -1,6 +1,6 @@
-FROM ubuntu:hirsute
+FROM ubuntu:bionic
 
-LABEL base.image="ubuntu:hirsute"
+LABEL base.image="ubuntu:bionic"
 LABEL dockerfile.version="1"
 LABEL software="Trycycler"
 LABEL software.version="0.5.0"
@@ -13,7 +13,7 @@ LABEL maintainer.email="eriny@utah.gov"
 # so apt doesn't ask questions during install
 ARG DEBIAN_FRONTEND=noninteractive
 
-# install prerequisites, cleanup apt garbage 
+# install prerequisites, cleanup apt garbage
 # muscle version: 3.8.31
 RUN apt-get update && apt-get install -y \
  python3 \
@@ -31,7 +31,7 @@ RUN apt-get update && apt-get install -y \
 ARG TRYCYCLER_VER="0.5.0"
 ARG MASH_VER="2.3"
 ARG MINIASM_VER="0.3"
-ARG MINIMAP2_VER="2.21" 
+ARG MINIMAP2_VER="2.21"
 
 # minimap2
 # apt deps: curl bzip2
@@ -50,27 +50,22 @@ RUN wget https://github.com/lh3/miniasm/archive/v${MINIASM_VER}.tar.gz && \
  cd miniasm && \
  make
 
-# install R packages, but quietly
+# install R packages
 RUN R -e "install.packages(c('ape',\
  'phangorn'),\
- repos = 'http://cran.us.r-project.org', quiet = TRUE)"
+ repos = 'http://cran.us.r-project.org')"
 
 # Trycycler
 # apt deps: muscle gcc
-# have to install pillow manually since it's not in setup.py files until after 0.5.0 release of Trycycler
 RUN wget https://github.com/rrwick/Trycycler/archive/v${TRYCYCLER_VER}.tar.gz && \
  tar -xzf v${TRYCYCLER_VER}.tar.gz && \
  rm v${TRYCYCLER_VER}.tar.gz && \
- pip3 install ./Trycycler-${TRYCYCLER_VER} && \
- pip3 install pillow && \
+ pip3 install ./Trycycler-${TRYCYCLER_VER} Pillow && \
  mkdir /data
 
 # set /data as working directory
 WORKDIR /data
 
 # set env path variable for installed programs. LC_ALL for singularity compatibility.
-ENV PATH="/mash-Linux64-v${MASH_VER}:\
-/minimap2-${MINIMAP2_VER}_x64-linux:\
-/miniasm:\
-${PATH}"\
-  LC_ALL=C
+ENV PATH="/mash-Linux64-v${MASH_VER}:/minimap2-${MINIMAP2_VER}_x64-linux:/miniasm:${PATH}"\
+ LC_ALL=C
