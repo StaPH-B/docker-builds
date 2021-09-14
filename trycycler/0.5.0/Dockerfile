@@ -1,6 +1,6 @@
-FROM ubuntu:bionic
+FROM ubuntu:hirsute
 
-LABEL base.image="ubuntu:bionic"
+LABEL base.image="ubuntu:hirsute"
 LABEL dockerfile.version="1"
 LABEL software="Trycycler"
 LABEL software.version="0.5.0"
