@@ -1,6 +1,6 @@
-FROM ubuntu:bionic
+FROM ubuntu:hirsute
 
-LABEL base.image="ubuntu:bionic"
+LABEL base.image="ubuntu:hirsute"
 LABEL dockerfile.version="1"
 LABEL software="Trycycler"
 LABEL software.version="0.5.0"
@@ -50,17 +50,19 @@ RUN wget https://github.com/lh3/miniasm/archive/v${MINIASM_VER}.tar.gz && \
  cd miniasm && \
  make
 
-# install R packages
+# install R packages, but quietly
 RUN R -e "install.packages(c('ape',\
  'phangorn'),\
- repos = 'http://cran.us.r-project.org')"
+ repos = 'http://cran.us.r-project.org', quiet = TRUE)"
 
 # Trycycler
 # apt deps: muscle gcc
+# have to install pillow manually since it's not in setup.py files until after 0.5.0 release of Trycycler
 RUN wget https://github.com/rrwick/Trycycler/archive/v${TRYCYCLER_VER}.tar.gz && \
  tar -xzf v${TRYCYCLER_VER}.tar.gz && \
  rm v${TRYCYCLER_VER}.tar.gz && \
  pip3 install ./Trycycler-${TRYCYCLER_VER} && \
+ pip3 install pillow && \
  mkdir /data
 
 # set /data as working directory
@@ -68,7 +70,7 @@ WORKDIR /data
 
 # set env path variable for installed programs. LC_ALL for singularity compatibility.
 ENV PATH="/mash-Linux64-v${MASH_VER}:\
- /minimap2-${MINIMAP2_VER}_x64-linux:\
- /miniasm:\
- ${PATH}"\
- LC_ALL=C
+/minimap2-${MINIMAP2_VER}_x64-linux:\
+/miniasm:\
+${PATH}"\
+  LC_ALL=C
