@@ -4,14 +4,14 @@ FROM ubuntu:xenial
 # had to include the v for some of these due to GitHub tags. 
 # thankfully pangolearn github tag is simply a date
 ARG PANGOLIN_VER="v3.1.11"
-ARG PANGOLEARN_VER="2021-08-24"
+ARG PANGOLEARN_VER="2021-09-17"
 ARG SCORPIO_VER="v0.3.12" 
 ARG CONSTELLATIONS_VER="v0.0.15"
 ARG USHER_VER="0.4.6"
-ARG PANGO_DESIGNATION_VER="v1.2.73"
+ARG PANGO_DESIGNATION_VER="v1.2.76"
 
 LABEL base.image="ubuntu:xenial"
-LABEL dockerfile.version="2"
+LABEL dockerfile.version="3"
 LABEL software="pangolin"
 LABEL software.version=${PANGOLIN_VER}
 LABEL description="Conda environment for Pangolin. Pangolin: Software package for assigning SARS-CoV-2 genome sequences to global lineages."

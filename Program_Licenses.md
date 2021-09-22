@@ -7,6 +7,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Software | License | Link to license |
 | :--------: | :-------: | -------- |
 | ABRicate | GNU GPLv2 | https://github.com/tseemann/abricate/blob/master/LICENSE |
+| any2fasta | GNU GPLv3 | https://github.com/tseemann/any2fasta/blob/master/LICENSE |
 | ARIBA | GNU GPLv3 | https://github.com/sanger-pathogens/ariba/blob/master/LICENSE |
 | Augur | GNU Affero GPLv3 | https://github.com/nextstrain/augur/blob/master/LICENSE.txt |
 | Auspice | GNU Affero GPLv3 | https://github.com/nextstrain/auspice/blob/master/LICENSE.txt |
@@ -44,6 +45,8 @@ The licenses of the open-source software that is contained in these Docker image
 | Medaka | Mozilla Public License 2.0 | https://github.com/nanoporetech/medaka/blob/master/LICENSE.md |
 | Metaphlan | MIT | https://github.com/biobakery/MetaPhlAn/blob/3.0/license.txt |
 | minimap2 | MIT | https://github.com/lh3/minimap2/blob/master/LICENSE.txt |
+| miniasm | MIT | https://github.com/lh3/miniasm/blob/master/LICENSE.txt |
+| minipolish | GNU GPLv3 | https://github.com/rrwick/Minipolish/blob/main/LICENSE |
 | mlst | GNU GPLv2 | https://github.com/tseemann/mlst/blob/master/LICENSE |
 | Mugsy | Artistic License 2.0 | Archived in: <br/> https://sourceforge.net/projects/mugsy/files/mugsy_x86-64-v1r2.3.tgz |
 | MultiQC | GNU GPLv3 | https://github.com/ewels/MultiQC/blob/master/LICENSE |
@@ -56,6 +59,7 @@ The licenses of the open-source software that is contained in these Docker image
 | PlasmidSeeker | BSD 3-Clause | https://github.com/bioinfo-ut/PlasmidSeeker/blob/master/LICENSE |
 | Prokka | GNU GPLv3 | https://raw.githubusercontent.com/tseemann/prokka/master/doc/LICENSE.Prokka |
 | QUAST | GNU GPLv2 | https://github.com/ablab/quast/blob/master/LICENSE.txt |
+| racon | MIT | https://github.com/isovic/racon/blob/master/LICENSE |
 | rasusa | MIT | https://github.com/mbhall88/rasusa/blob/master/LICENSE |
 | raven | MIT | https://github.com/lbcb-sci/raven/blob/master/LICENSE |
 | RAxML <br/> RAxML Next Generation | GNU GPLv3 (RAxML), <br/> GNU Affero GPLv3 (RAxML Next Generation)| https://github.com/stamatak/standard-RAxML/blob/master/gpl-3.0.txt <br/> https://github.com/amkozlov/raxml-ng/blob/master/LICENSE.txt |
