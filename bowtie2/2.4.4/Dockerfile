@@ -6,7 +6,7 @@ ARG BOWTIE2VER=2.4.4
 
 # metadata (there are a few other labels you can add, these are optional but preferred!)
 LABEL base.image="ubuntu:xenial"
-LABEL version="1"
+LABEL dockerfile.version="1"
 LABEL software="Bowtie2,\n Samtools"
 LABEL software.versions="2.4.4,\n 1.10"
 LABEL description="Bowtie2: Genome assembler using a reference and mapping\n Samtools: a set of tools for interacting with and reformatting sequence data"
@@ -14,15 +14,8 @@ LABEL website="http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml\n https://
 LABEL maintainer="Holly Halstead"
 LABEL maintainer.email="holly.halstead@doh.wa.gov"
 
-ENV ZIP=bowtie2-${BOWTIE2VER}-linux-x86_64.zip
-ENV URL=https://github.com/BenLangmead/bowtie2/releases/download/v${BOWTIE2VER}/
-ENV FOLDER=bowtie2-${BOWTIE2VER}
-ENV DST=/home/dock/bin
-ENV HOME /home/ubuntu
-
 # install dependencies, cleanup apt garbage.
-RUN mkdir -p $DST && \
- apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y \
  build-essential=12.1ubuntu2  \
  autoconf=2.69-9 \
  zlib1g-dev=1:1.2.8.dfsg-2ubuntu4.3  \
