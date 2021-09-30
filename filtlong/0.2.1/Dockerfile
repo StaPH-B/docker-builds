@@ -32,6 +32,7 @@ RUN wget https://github.com/rrwick/Filtlong/archive/v${FILTLONG_VER}.tar.gz && \
  rm -r v${FILTLONG_VER}.tar.gz && \
  cd Filtlong-${FILTLONG_VER}/ && \
  make -j && \
+ sed -i 's/\$hist/\$hist --dot "*"/g' scripts/read_info_histograms.sh && \
  mkdir /data
 
 # required for singularity compatibility; update PATH
