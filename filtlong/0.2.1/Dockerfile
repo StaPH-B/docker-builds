@@ -23,6 +23,7 @@ RUN apt-get update && apt-get install -y \
  pigz \
  less \
  bc && \
+ update-alternatives --install /usr/bin/python python /usr/bin/python3 10 && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # install filtlong; make /data
