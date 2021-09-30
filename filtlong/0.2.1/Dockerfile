@@ -20,7 +20,9 @@ RUN apt-get update && apt-get install -y \
  zlib1g-dev \
  make \
  python3 \
- pigz && \
+ pigz \
+ less \
+ bc && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # install filtlong; make /data
