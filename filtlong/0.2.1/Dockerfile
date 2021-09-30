@@ -4,14 +4,14 @@ FROM ubuntu:xenial
 ARG FILTLONG_VER=0.2.1
 
 LABEL base.image="ubuntu:xenial"
-LABEL dockerfile.version="1"
+LABEL dockerfile.version="2"
 LABEL software="Filtlong"
 LABEL software.version="0.2.1"
 LABEL description="Filter long reads by quality and length. Can use ILMN reads as reference."
 LABEL website="https://github.com/rrwick/Filtlong"
 LABEL license="https://github.com/rrwick/Filtlong/blob/master/LICENSE"
-LABEL maintainer="Curtis Kapsak"
-LABEL maintainer.email="kapsakcj@gmail.com"
+LABEL maintainer="Thomas A. Christensen II"
+LABEL maintainer.email="25492070+MillironX@users.noreply.github.com"
 
 # install deps; cleanup apt garbage
 RUN apt-get update && apt-get install -y \
