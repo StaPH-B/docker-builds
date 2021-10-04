@@ -37,6 +37,6 @@ RUN wget https://github.com/rrwick/Filtlong/archive/v${FILTLONG_VER}.tar.gz && \
 
 # required for singularity compatibility; update PATH
 ENV LC_ALL=C \
- PATH="${PATH}:/Filtlong-${FILTLONG_VER}/bin"
+ PATH="${PATH}:/Filtlong-${FILTLONG_VER}/bin:/Filtlong-${FILTLONG_VER}/scripts"
 
 WORKDIR /data
