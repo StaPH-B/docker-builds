@@ -10,6 +10,8 @@ LABEL software.version="0.2.1"
 LABEL description="Filter long reads by quality and length. Can use ILMN reads as reference."
 LABEL website="https://github.com/rrwick/Filtlong"
 LABEL license="https://github.com/rrwick/Filtlong/blob/master/LICENSE"
+LABEL maintainer="Curtis Kapsak"
+LABEL maintainer.email="kapsakcj@gmail.com"
 LABEL maintainer="Thomas A. Christensen II"
 LABEL maintainer.email="25492070+MillironX@users.noreply.github.com"
 
