@@ -40,7 +40,7 @@ RUN bash ./miniconda.sh -p /miniconda -b  &&\
 RUN /miniconda/bin/conda create -n gambit python=3.9 numpy Cython
 ENV PATH="/miniconda/envs/gambit/bin:/miniconda/bin:$PATH"
 
-# Install GABMIT package; make /data dir; conda clean
+# Install GAMBIT package; make /data dir; conda clean; make gambit db files readable and executable
 RUN pip install git+https://github.com/hesslab-gambit/gambit@v${GAMBIT_SOFTWARE_VERSION} && \
  mkdir /data && \
  conda clean -a -y && \
