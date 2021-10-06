@@ -24,12 +24,13 @@ RUN mkdir $GAMBIT_DB_PATH
 ADD https://storage.googleapis.com/hesslab-gambit-public/databases/refseq-curated/1.0-beta/gambit-genomes-${GAMBIT_DB_VERSION}.db $GAMBIT_DB_PATH/
 ADD https://storage.googleapis.com/hesslab-gambit-public/databases/refseq-curated/1.0-beta/gambit-signatures-${GAMBIT_DB_VERSION}.h5 $GAMBIT_DB_PATH/
 
-# install c compiler & needed software for conda install
+# install c compiler & needed software for conda install; cleanup apt garbage
 RUN apt-get update && apt-get install -y \
   wget \
   gcc \
   git \
-  build-essential
+  build-essential && \
+  apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # get miniconda
 RUN bash ./miniconda.sh -p /miniconda -b  &&\
@@ -37,12 +38,13 @@ RUN bash ./miniconda.sh -p /miniconda -b  &&\
 
 # Create conda environment and add to PATH
 RUN /miniconda/bin/conda create -n gambit python=3.9 numpy Cython
-ENV PATH="/miniconda/envs/gambit/bin:$PATH"
+ENV PATH="/miniconda/envs/gambit/bin:/miniconda/bin:$PATH"
 
-# Install GABMIT package
-RUN pip install git+https://github.com/hesslab-gambit/gambit@v${GAMBIT_SOFTWARE_VERSION}
+# Install GABMIT package; make /data dir; conda clean
+RUN pip install git+https://github.com/hesslab-gambit/gambit@v${GAMBIT_SOFTWARE_VERSION} && \
+ mkdir /data && \
+ conda clean -a -y && \
+ chmod -R a+rx ${GAMBIT_DB_PATH}
 
 # set working directory to /data
-RUN mkdir /data
 WORKDIR /data
-
