@@ -139,3 +139,4 @@ Each Dockerfile lists the author(s)/maintainer(s) as a metadata `LABEL`, but the
   * [@MillironX](https://github.com/MillironX)
   * [@frankambrosio3](https://github.com/frankambrosio3)
   * [@HNHalstead](https://github.com/HNHalstead)
+  * [@fanninpm](https://github.com/fanninpm)
