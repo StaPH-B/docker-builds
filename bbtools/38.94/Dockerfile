@@ -9,6 +9,8 @@ LABEL website="https://jgi.doe.gov/data-and-tools/bbtools/bb-tools-user-guide/"
 LABEL license="https://jgi.doe.gov/disclaimer/"
 LABEL maintainer="Abigail Shockey"
 LABEL maintainer.email="abigail.shockey@slh.wisc.edu"
+LABEL maintainer2="Padraic Fanning"
+LABEL maintainer2.email="faninnpm AT miamioh DOT edu"
 
 RUN apt-get update && apt-get install -y build-essential \
     openjdk-8-jre-headless \
