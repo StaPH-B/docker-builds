@@ -12,7 +12,9 @@ LABEL maintainer.email="abigail.shockey@slh.wisc.edu"
 
 RUN apt-get update && apt-get install -y build-essential \
     openjdk-8-jre-headless \
-    wget
+    wget && \
+    rm -rf /var/lib/apt/lists/* && \
+    apt-get autoclean
 
 # get miniconda and the artic-ncov19 repo
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
@@ -25,7 +27,8 @@ ENV PATH="/miniconda/bin:$PATH"
 RUN conda config --add channels defaults && \
     conda config --add channels conda-forge && \
     conda config --add channels bioconda && \
-    conda install sambamba samtools
+    conda install sambamba samtools && \
+    conda clean -a -y
 
 RUN wget https://sourceforge.net/projects/bbmap/files/BBMap_38.94.tar.gz && \
     tar -xzf BBMap_38.94.tar.gz && \
