@@ -6,12 +6,12 @@ FROM ubuntu:xenial
 ARG PANGOLIN_VER="v3.1.14"
 ARG PANGOLEARN_VER="2021-10-13"
 ARG SCORPIO_VER="v0.3.13"
-ARG CONSTELLATIONS_VER="v0.0.18"
+ARG CONSTELLATIONS_VER="v0.0.19"
 ARG USHER_VER="0.4.8"
 ARG PANGO_DESIGNATION_VER="v1.2.88"
 
 LABEL base.image="ubuntu:xenial"
-LABEL dockerfile.version="2"
+LABEL dockerfile.version="3"
 LABEL software="pangolin"
 LABEL software.version=${PANGOLIN_VER}
 LABEL description="Conda environment for Pangolin. Pangolin: Software package for assigning SARS-CoV-2 genome sequences to global lineages."
