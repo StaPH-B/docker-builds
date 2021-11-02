@@ -8,8 +8,22 @@ If you would like to contribute with a Docker image or improve upon the existing
 We have also created a user guide that outlines methods and best practices for using and developing docker containers.
 [Docker User Guide](https://staph-b.github.io/docker-builds/)
 
-### What about Singularity?
+#### What about Singularity?
 For many people Docker is not an option, but Singularity is. Most Docker containers are compatible with Singularity and can easily be converted to Singularity format. Please see the User Guide linked above to for instructions on how to download docker images from dockerhub and how to run them using Singularity. We've worked hard to ensure that our containers are compatibile with Singularity, but if you find one that isn't, please leave an issue and let us know!
+
+## Docker image repositories & hosting
+We host all of our docker images on two different repositories and periodically sync the images between the two:
+
+  1. Dockerhub - https://hub.docker.com/r/staphb/
+  2. Quay.io - https://quay.io/organization/staphb/
+
+In November 2020, Docker began to implement pull rate limits for images hosted on dockerhub. This limits the number of `docker pull`'s per time period (e.g. anonymous users allowed 100 pulls per six hours). We applied and were approved for Docker's "Open Source Program," which should have removed the pull rate limits for all `staphb` docker images! 🎉 🥳 If you encounter an error such as `ERROR: toomanyrequests: Too Many Requests.` or `You have reached your pull rate limit. You may increase the limit by authenticating and upgrading: https://www.docker.com/increase-rate-limits.` , please let us know by [submitting an issue.](https://github.com/StaPH-B/docker-builds/issues)
+
+**A huge thank you goes to the folks at Docker for supporting our efforts to distribute & share critical tools for public health bioinformatics. This has been especially important during the COVID-19 global pandemic, as many of these tools are used to conduct genomic surveillance on the SARS-CoV-2 virus as well as other important pathogens of public health concern.**
+
+To learn more about the docker pull rate limits and the open source software program, please see these blog posts ([1](https://www.docker.com/blog/docker-hub-image-retention-policy-delayed-and-subscription-updates/), [2](https://www.docker.com/blog/scaling-docker-to-serve-millions-more-developers-network-egress/), and [3](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/)) and Docker documentation ([1](https://docs.docker.com/docker-hub/download-rate-limit/)).
+
+*NOTE: In the table below, we do not provide individual links to the various tools on quay.io, please visit the above quay.io link to find all of our docker images.*
 
 ## [Available Docker images](https://hub.docker.com/r/staphb/)
 
