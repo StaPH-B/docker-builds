@@ -52,6 +52,7 @@ RUN R -e "install.packages(c('cowplot',\
   'sjPlot',\
   'longtable',\
   'dplyr',\
+  'reshape2',\
   'xtable'), repos = 'http://cran.us.r-project.org')"
 
 # install report repository

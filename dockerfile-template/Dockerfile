@@ -1,8 +1,8 @@
 # base image
-FROM ubuntu:xenial
+FROM ubuntu:focal
 
 # metadata - optional, but highly recommended
-LABEL base.image="ubuntu:xenial"
+LABEL base.image="ubuntu:focal"
 LABEL dockerfile.version="1"
 LABEL software="SoftwareName"
 LABEL software.version="1.0.0"

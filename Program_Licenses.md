@@ -14,6 +14,7 @@ The licenses of the open-source software that is contained in these Docker image
 | BBTools | non-standard - see `licence.txt` and `legal.txt` that is included in docker image under `/bbmap/docs/`; Also on sourceforge repo for BBTools | https://jgi.doe.gov/disclaimer/ |
 | bcftools | MIT or **GNU GPLv3** (depends on how bcftools was compiled, I believe GNU GPLv3 applies here) | https://github.com/samtools/bcftools/blob/develop/LICENSE |
 | bedtools | MIT | https://github.com/arq5x/bedtools2/blob/master/LICENSE |
+| bowtie2 | GNU GPLv3 | https://github.com/BenLangmead/bowtie2/blob/master/LICENSE |
 | BWA | GNU GPLv3 | https://github.com/lh3/bwa/blob/master/COPYING |
 | Canu <br/> Racon <br/> Minimap2 | GNU GPLv3 (Canu), <br/> MIT (Racon), <br/> MIT (Minimap2) | https://github.com/marbl/canu/blob/master/README.license.GPL https://github.com/isovic/racon/blob/master/LICENSE https://github.com/lh3/minimap2/blob/master/LICENSE.txt |
 | centroid | GitHub No License | https://github.com/https://github.com/stjacqrm/centroid |
@@ -28,6 +29,7 @@ The licenses of the open-source software that is contained in these Docker image
 | fastq-scan | MIT | https://github.com/rpetit3/fastq-scan/blob/master/LICENSE |
 | Filtlong | GNU GPLv3 | https://github.com/rrwick/Filtlong/blob/master/LICENSE |
 | Flye | BSD-3 | https://github.com/fenderglass/Flye/blob/flye/LICENSE |
+| GAMBIT | GNU aGPLv3 | https://github.com/hesslab-gambit/gambit/blob/master/LICENSE |
 | Hmmer | BSD-3 | http://eddylab.org/software/hmmer/Userguide.pdf |
 | iqtree | GNU GPLv2 | https://github.com/Cibiv/IQ-TREE/blob/master/LICENSE |
 | iqtree2 | GNU GPLv2 | https://github.com/iqtree/iqtree2/blob/master/LICENSE |
