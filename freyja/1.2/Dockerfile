@@ -1,4 +1,4 @@
-FROM continuumio/miniconda
+FROM continuumio/miniconda:4.7.12
 
 # Version arguments
 ARG FREYJA_SOFTWARE_VERSION="1.2.0"
