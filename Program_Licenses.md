@@ -29,6 +29,7 @@ The licenses of the open-source software that is contained in these Docker image
 | fastq-scan | MIT | https://github.com/rpetit3/fastq-scan/blob/master/LICENSE |
 | Filtlong | GNU GPLv3 | https://github.com/rrwick/Filtlong/blob/master/LICENSE |
 | Flye | BSD-3 | https://github.com/fenderglass/Flye/blob/flye/LICENSE |
+| Freyja | BSD-2 | https://github.com/andersen-lab/Freyja/blob/main/LICENSE |
 | GAMBIT | GNU aGPLv3 | https://github.com/hesslab-gambit/gambit/blob/master/LICENSE |
 | Hmmer | BSD-3 | http://eddylab.org/software/hmmer/Userguide.pdf |
 | iqtree | GNU GPLv2 | https://github.com/Cibiv/IQ-TREE/blob/master/LICENSE |
