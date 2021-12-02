@@ -1,9 +1,9 @@
-FROM continuumio/miniconda:4.7.12
+FROM continuumio/miniconda3:4.10.3
 
 # Version arguments
 ARG FREYJA_SOFTWARE_VERSION="1.2.0"
 
-LABEL base.image="continuumio/miniconda"
+LABEL base.image="continuumio/miniconda:4.10.3"
 LABEL dockerfile.version="1"
 LABEL software="Freyja"
 LABEL software.version=${FREYJA_SOFTWARE_VERSION}
