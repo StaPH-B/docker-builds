@@ -8,17 +8,17 @@ layout: page
 In order to build your own docker image you need one file, the `Dockerfile`. This file is basically a set of instructions that are passed to the docker daemon in order to build your image. It is similar to a `.yml` file for making/sharing conda environments, or really any kind of installation script. Docker images need to be built once in order to spin up containers with `docker run`. Here's a simple example, our Dockerfile for SPAdes with some added explanation:
 ```Dockerfile
 # FROM defines the base docker image to start from. This command has to come first in the file
-FROM ubuntu:xenial
+FROM ubuntu:focal
 
 # metadata (there are a few other labels you can add, these are optional but preferred!)
-LABEL base.image="ubuntu:xenial"
-LABEL version="1"
+LABEL base.image="ubuntu:focal"
+LABEL dockerfile.version="1"
 LABEL software="SPAdes"
 LABEL software.version="3.13.0"
 LABEL description="de novo DBG genome assembler"
 LABEL website="http://cab.spbu.ru/files/release3.13.0/manual.html"
 LABEL maintainer="Curtis Kapsak"
-LABEL maintainer.email="pjx8@cdc.gov"
+LABEL maintainer.email="kapsakcj@gmail.com"
 
 # If you're using Ubuntu as the base image, it's best to run apt-get update and install prior to doing anything else
 RUN apt-get update && apt-get install -y python \
@@ -45,7 +45,7 @@ Once you have a `Dockerfile` created, name it as `Dockerfile` and store it in a 
 ```
 docker build --tag your-name-here/name-of-your-program:0.1.0 /path/to/DIR/with/Dockerfile/
 
-# OR if you are in the same directory as where the docker file is located:
+# OR if you are in the same directory as where the dockerfile is located:
 docker build --tag your-name-here/name-of-your-program:0.1.0 .
 ```
 You should then see outputs from the docker daemon, which builds your docker image. If any errors occurred, the build will fail, and you'll need to make changes to your Dockerfile to fix the error before trying to build again.
@@ -58,7 +58,9 @@ Successfully tagged kapsakcj/spades-test-build:3.12.0
 Then, your docker image is ready to be used to spin up containers with `docker run`!
 
 ### Best practices for developing your own docker image
-  * Pick out a base image, and stick with it. We typically use the official docker `ubuntu:xenial` image (Ubuntu 16.04) as our base because it's a reliable and trusted base image and because Ubuntu is the OS we typically work on and are most familiar with. `alpine` is another frequently used image, and has the added benefit of being smaller than the `ubuntu:xenial` image. There are thousands out there to choose from.
+  * Pick out a base image, and stick with it. We typically use the official docker `ubuntu:xenial` image (Ubuntu 16.04) as our base because it's a reliable and trusted base image and because Ubuntu is the OS we typically work on and are most familiar with. 
+    * HOWEVER - Ubuntu Xenial (16.04) is now EOL, so we recommend to use a more recent distro, like Ubuntu Focal (20.04). The offical docker image is called `ubuntu:focal`
+    * `alpine` is another frequently used image, and has the added benefit of being smaller than most other images. 
   * If you're using Ubuntu as the base image, it's best to run `apt-get update` and `apt-get install [packages]` prior to doing anything else
   * Write your Dockerfile with as few layers as possible to reduce the size of the image - combine multiple commands in one RUN command using `&&`. The `\` is used to break a one-line command into multiple lines (for readability).
   * Pin the exact versions of the programs that you download. In your Dockerfile, specify downloading a specific version `wget http://cab.spbu.ru/files/release3.13.0/SPAdes-3.13.0-Linux.tar.gz` instead of cloning the repo `git clone https://github.com/ablab/spades.git`. These docker images are intended to be static (clinical testing validation), and this helps keep them that way.
