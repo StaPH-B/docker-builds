@@ -15,7 +15,7 @@ docker images
 # or
 docker ps
 ```
-If it is not installed, visit: [https://docs.docker.com/install/](https://docs.docker.com/install/) and follow the install instructions according to your operating system. For Ubuntu users, please see my install instructions here: [https://github.com/StaPH-B/scripts/blob/master/image-information.md#docker-ce](https://github.com/StaPH-B/scripts/blob/master/image-information.md#docker-ce)
+If it is not installed, visit: [https://docs.docker.com/install/](https://docs.docker.com/install/) and follow the install instructions according to your operating system. 
 
 Images can be downloaded by running:
 ```bash
