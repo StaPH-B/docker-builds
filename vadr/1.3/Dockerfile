@@ -2,7 +2,7 @@ FROM ubuntu:xenial
 
 # for easy upgrade later. LC_ALL set for singularity compatibility
 ENV VADR_VERSION="1.3" \
-  VADR_SARSCOV2_MODELS_VERSION="1.3-1" \
+  VADR_SARSCOV2_MODELS_VERSION="1.3-2" \
   LC_ALL=C \
   VADRINSTALLDIR=/opt/vadr
 
@@ -22,7 +22,7 @@ ENV PERL5LIB=$VADRSCRIPTSDIR:$VADRSEQUIPDIR:$VADRBIOEASELDIR/blib/lib:$VADRBIOEA
 
 # metadata - optional, but highly recommended
 LABEL base.image="ubuntu:xenial"
-LABEL dockerfile.version="1"
+LABEL dockerfile.version="2"
 LABEL software="VADR"
 LABEL software.version=${VADR_VERSION}
 LABEL description="Classification and annotation of viral sequences based on RefSeq annotation"
