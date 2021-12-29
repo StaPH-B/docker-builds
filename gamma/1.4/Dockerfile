@@ -3,7 +3,7 @@ FROM ubuntu:bionic
 
 # metadata
 LABEL base.image="ubuntu:bionic"
-LABEL dockerfile.version="1"
+LABEL dockerfile.version="2"
 LABEL software="centroid"
 LABEL software.version="v1.4"
 LABEL description="Gene Allele Mutation Microbial Assessment"
@@ -54,9 +54,9 @@ RUN wget http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/blat/blat && \
     mv blat /bin/blat && \
     mkdir /data
 
-# install ARG-ANNOT
-RUN wget https://www.mediterranee-infection.com/wp-content/uploads/2019/03/arg-annot-v4-nt-may2018.txt && \
-    mv arg-annot-v4-nt-may2018.txt arg-annot.fasta
+# download ARG-ANNOT database (https://github.com/rastanton/GAMMA/issues/6)
+RUN wget http://backup.mediterranee-infection.com/arkotheque/client/ihumed/_depot_arko/articles/691/argannot-nt_doc.fasta && \
+ mv -v argannot-nt_doc.fasta arg-annot.fasta
 
 # install RStanton AR Genes Fasta File
 RUN wget https://github.com/stjacqrm/gb_files/archive/988d9c83d055e026ae62c6398ca6b8a3cde46cc0.zip && \
