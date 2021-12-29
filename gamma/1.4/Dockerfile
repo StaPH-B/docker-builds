@@ -3,12 +3,12 @@ FROM ubuntu:bionic
 
 # metadata
 LABEL base.image="ubuntu:bionic"
-LABEL container.version="1"
+LABEL dockerfile.version="1"
 LABEL software="centroid"
 LABEL software.version="v1.4"
 LABEL description="Gene Allele Mutation Microbial Assessment"
-LABEL website="https://github.com/rastanton/GAMMA/tree/v1.4"
-LABEL license=""
+LABEL website="https://github.com/rastanton/GAMMA/"
+LABEL license="Apache 2.0"
 LABEL maintainer="Rachael St. Jacques"
 LABEL maintainer.email="rachael.stjacques@dgs.virginia.gov"
 
@@ -30,11 +30,7 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
     rm -rf /var/lib/apt/lists/*
 
 #install biopython
-RUN pip3 install biopython cgecore
-
-RUN pip3 install tabulate biopython cgecore
-
-RUN pip3 install tabulate biopython
+RUN pip3 install biopython cgecore tabulate
 
 # hmmer 3.3 since amrfinder requires 3.2 or higher (apt version is 3.1)
 # apt dependencies: make, g++
