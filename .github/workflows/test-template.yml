@@ -1,0 +1,19 @@
+# This caller workflow builds an image to the "test" stage.
+# Instructions: replace all the <placeholder> stubs in this template with values for your image.
+# Some explanations come from: https://github.com/actions/starter-workflows/blob/main/automation/manual.yml
+
+name: Test <program name> image
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI or when you submit your pull request
+on: [workflow_dispatch, pull_request]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+
+  # This job calls a workflow to build the image to the 'test' stage 
+  build-to-test:
+    uses: SarahNadeau/bioinf-containers/.github/workflows/test.yml@master  # TODO: change to pull the workflow from StaPH-B as soon as it is available there
+    with:
+      path_to_context: "./<program name>/<program version>"  # Path to directory with Dockerfile and context, e.g. "./spades/3.12.0"
+      dockerfile_name: "Dockerfile"
+      cache: "<program name>"  # Use the program name as a nickname for a GitHub cache of your image's layers, e.g. "spades". The cache will speed up re-running the workflow.
