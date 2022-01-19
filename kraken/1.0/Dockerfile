@@ -1,5 +1,5 @@
 # base image
-FROM ubuntu:xenial
+FROM ubuntu:xenial as app
 
 # metadata
 LABEL base.image="ubuntu:xenial"
@@ -49,3 +49,18 @@ RUN mkdir /kraken-database && \
   tar -zxf minikraken_20171019_4GB.tgz && \
   rm -rf minikraken_20171019_4GB.tgz
 
+FROM app as test
+
+# Get test dependencies
+RUN apt-get update && apt-get install -y python3
+COPY kraken/1.0/tests /tests
+COPY test_data/trim_reads/SRR5481494_sub.extendedFrags.fastq.gz /test_data/trim_reads/
+COPY test_data/trim_reads/SRR5481494_sub.notCombined_*.fastq.gz /test_data/trim_reads/
+
+# Run positive control
+RUN bash /tests/scripts/run_positive_control.sh
+
+# Check output
+RUN python3 -m unittest discover -s /tests
+
+# Test with: docker build --progress=plain --target=test -t kraken-test-image -f kraken/1.0/Dockerfile .
