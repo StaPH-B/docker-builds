@@ -1,5 +1,5 @@
 # base image
-FROM ubuntu:xenial
+FROM ubuntu:xenial as app
 
 # metadata
 LABEL base.image="ubuntu:xenial"
@@ -35,6 +35,22 @@ WORKDIR /data
 # DL MiniKraken2_v1_8GB database. Built from RefSeq bacteria, archaea, and viral libraries. No human.
 RUN mkdir /kraken2-db && \
   cd /kraken2-db && \
-  wget ftp://ftp.ccb.jhu.edu/pub/data/kraken2_dbs/minikraken2_v1_8GB_201904_UPDATE.tgz && \
-  tar -zxf minikraken2_v1_8GB_201904_UPDATE.tgz && \
-  rm -rf minikraken2_v1_8GB_201904_UPDATE.tgz
+  wget https://genome-idx.s3.amazonaws.com/kraken/k2_standard_8gb_20210517.tar.gz && \
+  tar -zxf k2_standard_8gb_20210517.tar.gz && \
+  rm -rf k2_standard_8gb_20210517.tar.gz
+
+FROM app as test
+
+# Get test dependencies
+RUN apt-get update && apt-get install -y python3
+COPY kraken2/2.0.8-beta/tests /tests
+COPY test_data/trim_reads/SRR5481494_sub.extendedFrags.fastq.gz /test_data/trim_reads/
+COPY test_data/trim_reads/SRR5481494_sub.notCombined_*.fastq.gz /test_data/trim_reads/
+
+# Run positive control
+RUN bash /tests/scripts/run_positive_control.sh
+
+# Check output
+RUN python3 -m unittest discover -s /tests
+
+# Test with: docker build --progress=plain --target=test -t kraken2-test-image -f kraken2/2.0.8-beta/Dockerfile .

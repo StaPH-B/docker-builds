@@ -1,0 +1,12 @@
+name: Test Kraken 2 image
+
+on: [workflow_dispatch, pull_request]
+
+jobs:
+
+  build-to-test:
+    uses: SarahNadeau/docker-builds/.github/workflows/build-to-test.yml@sarah-dev  # TODO: change
+    with:
+      path_to_context: "."
+      dockerfile_name: "./kraken2/2.0.8-beta/Dockerfile"
+      cache: "kraken"
