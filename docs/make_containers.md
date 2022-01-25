@@ -66,6 +66,16 @@ Fill in [this template](https://github.com/StaPH-B/docker-builds/blob/master/doc
 
 #### Best-practices checklist
 
+<details>
+  <summary>Include an `app` stage and a `test` stage.</summary>
+
+This requirement is specific to StaPH-B, it enables automated testing and pushing images to Docker Hub.
+The `app` stage should include all the layers for the tool to run. 
+The `test` stage should run a few commands to demonstrate that the program is successfully installed and runs as expected. 
+See the template for test suggestions.
+
+For more information on how these stages are used, see the contribution guide "How to create automated GitHub Actions tests for a Docker image".
+</details>
 
 <details>
   <summary>Use a standard base image.</summary>
