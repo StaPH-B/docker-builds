@@ -1,0 +1,34 @@
+# This caller workflow tests, builds, and pushes the image to Docker Hub.
+# It also tests that a Singularity container can be run from the Docker image.
+
+name: Deploy ParSNP image
+
+on: workflow_dispatch
+
+jobs:
+
+  build-to-test:
+    uses: ./.github/workflows/build-to-test.yml
+    with:
+      path_to_context: "./parsnp/1.5.6"
+      dockerfile_name: "Dockerfile"
+      cache: "parsnp"
+
+  build-to-deploy:
+    needs: build-to-test  # this jobs needs to run serially, after testing succeeds
+    uses: ./.github/workflows/build-to-deploy.yml
+    with:
+      path_to_context: "./parsnp/1.5.6"
+      dockerfile_name: "Dockerfile"
+      cache: "parsnp"
+      container_name: "parsnp"
+      tag: 1.5.6
+    secrets:
+      docker_hub_username: ${{ secrets.DOCKER_HUB_USERNAME }}
+      docker_hub_access_token: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+  run-singularity:
+    needs: build-to-deploy  # test singularity run on newly pushed Docker image
+    uses: ./.github/workflows/run-singularity.yml
+    with:
+      dockerhub_image: "staphb/parsnp:1.5.6"
