@@ -74,7 +74,7 @@ RUN mkdir /edirect && \
 RUN mkdir /home/user/ /home/user/.ncbi/ && printf '/LIBS/GUID = "%s"\n' `uuidgen` > /home/user/.ncbi/user-settings.mkfg
 
 # get datasets-sars-cov-2
-RUN cd /home/user/ && git clone --depth 1 --branch v0.4 https://github.com/CDCgov/datasets-sars-cov-2.git
+RUN cd /home/user/ && git clone --depth 1 --branch v0.6.2 https://github.com/CDCgov/datasets-sars-cov-2.git
 
 ENV HOME /home/user/
 
