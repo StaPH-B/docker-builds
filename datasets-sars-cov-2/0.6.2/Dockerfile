@@ -4,7 +4,7 @@ FROM ubuntu:xenial
 # metadata
 LABEL base.image="ubuntu:xenial"
 LABEL software="datasets-sars-cov-2"
-LABEL software.version="v0.4"
+LABEL software.version="v0.6.2"
 LABEL dockerfile.version="1"
 LABEL description="Benchmark datasets for WGS analysis of SARS-CoV-2."
 LABEL website="https://github.com/CDCgov/datasets-sars-cov-2"
