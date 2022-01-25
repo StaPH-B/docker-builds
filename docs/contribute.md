@@ -10,8 +10,8 @@ So far, we've created a bunch of docker images that we use in our day-to-day act
 Discover a bug or having issues with our images? Do you have a suggestion or advice for improving our docker images? [Please submit an issue under the Issues tab on our github repository](https://github.com/StaPH-B/docker-builds/issues)
 
 ### How to contribute a new Docker image
-1. Build your own docker image using a Dockerfile (information on this in [Develop your own container](https://staph-b.github.io/docker-builds/make_containers/), also see the example [here](../example/3.12.0/Dockerfile))
-2. Write a GitHub actions workflow that shows it works in the way that you intend it to (information on this [below](#how-to-create-automated-github-actions-tests-for-a-docker-image), also see the example [here](../.github/workflows/test-example.yml))
+1. Build your own docker image using a Dockerfile (information on this in [Develop your own container](https://staph-b.github.io/docker-builds/make_containers/))
+2. Write a GitHub actions workflow that shows it works in the way that you intend it to (information on this [below](#how-to-create-automated-github-actions-tests-for-a-docker-image))
 3. Fork this github repository using the fork button at the top right hand of the github page.
 4. Add your Dockerfile (and any other required files required for building) and your GitHub workflow YAML file to your forked repository following these conventions:
     * The first directory should be the name of the program with special characters removed, and it's preferable to remove uppercase - `/spades`
@@ -36,6 +36,6 @@ Discover a bug or having issues with our images? Do you have a suggestion or adv
 ### How to create automated GitHub Actions tests for a Docker image
 
 1. Make sure you have a stage in your Dockerfile named `test`. This stage should run a few commands to demonstrate that the program is successfully installed in your image and runs as expected. Information on this in point 1 above. See the [Dockerfile template](../dockerfile-template/Dockerfile) for test suggestions.
-2. Copy the template GitHub workflow file `.github/workflows/test-template.yml` in the same directory and rename it to `test-<program name>.yml` for your image. 
+2. Copy the template GitHub workflow file `.github/workflow-templates/test-template.yml` and rename it to `.github/workflows/test-<program name>.yml` for your image. 
 3. Overwrite the four instances of `<placeholder text>` in the file with information on your image.
 4. Continue from Step 6 above to run your new test workflow via the GitHub user interface.
