@@ -15,16 +15,16 @@ layout: page
 
 ### Install Docker
 
-Docker can be installed from https://docs.docker.com/get-docker/. 
+Docker can be installed from [https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/). 
 
 ### Create a Dockerfile
 
-In order to build your own docker image you need a `Dockerfile`. 
-This file is basically a set of instructions that are passed to the docker daemon in order to build your image. 
-It is similar to a `.yml` file for making/sharing conda environments, or really any kind of installation script. 
-We recommend a multistage Dockerfile to break the instructions up into different stages. 
+In order to build your own docker image you need a `Dockerfile`.
+This file is basically a set of instructions that are passed to the docker daemon in order to build your image.
+It is similar to a `.yml` file for making/sharing conda environments, or really any kind of installation script.
+We recommend a multistage Dockerfile to break the instructions up into different stages.
 This way, you can keep the instructions for building your production image separate from instructions for testing it.
-Once you have your Dockerfile, your can spin up either your test image or your production image with `docker run`. 
+Once you have your Dockerfile, your can spin up either your test image or your production image with `docker run`.
 
 Here's a working example of a Dockerfile for the SPAdes software:
 ```Dockerfile
@@ -60,7 +60,7 @@ FROM app as test
 
 RUN spades.py --test
 ```
-#### Template 
+#### Template
 
 Fill in [this template](https://github.com/StaPH-B/docker-builds/blob/master/dockerfile-template/Dockerfile) to create your own Dockerfile.
 
@@ -87,11 +87,11 @@ There are two ways to reduce the size of your image.
    You can use the following Dockerfile structure to isolate installation layers in a builder stage. Then, you can copy only the necessary layers into the production image stage, called "app". This keeps the production image small.
    ```Dockerfile
    FROM ubuntu:xenial as builder
-   
+
    # install the program here, using lots of RUN commands
-   
+
    FROM ubuntu:xenial as app
-   
+
    COPY --from=builder /path/to/<program executable> /usr/local/bin/<program executable>
    ```
 
@@ -103,7 +103,7 @@ There are two ways to reduce the size of your image.
        tar -xzf SPAdes-3.13.0-Linux.tar.gz && \
        rm -r SPAdes-3.13.0-Linux.tar.gz && \
        mkdir /data
-      
+
     # ...is much more efficient and will create a smaller docker image than using multiple layers:
     RUN wget http://cab.spbu.ru/files/release3.13.0/SPAdes-3.13.0-Linux.tar.gz
     RUN tar -xzf SPAdes-3.13.0-Linux.tar.gz
@@ -119,7 +119,7 @@ In your Dockerfile, specify downloading a specific version `wget http://cab.spbu
 These docker images are intended to be static (clinical testing validation), and this helps keep them that way.
 
 One way to pin versions is to use the `ARG` command to set a build-time environment variable.
-Note: the scope of ARG variables is the stage in which they are defined. 
+Note: the scope of ARG variables is the stage in which they are defined.
 
 ```Dockerfile
 # For example
@@ -146,8 +146,8 @@ This also makes it easy for mounting a volume when you run a container.
 
 ### Build the image
 
-Once you have a `Dockerfile` created, name it as `Dockerfile` and store it in a empty directory (unless you need files to build the docker image). 
-Note the path to the directory containing your Dockerfile. 
+Once you have a `Dockerfile` created, name it as `Dockerfile` and store it in a empty directory (unless you need files to build the docker image).
+Note the path to the directory containing your Dockerfile.
 Then, to build a test image, run:
 
 ```bash
@@ -172,7 +172,7 @@ The flag `--progress=plain` increases the level of detail in the output to help 
 If the build is successful and the tests pass, you should see all steps completed successfully and the last lines will look similar to this:
 ```
 #10 writing image sha256:dded88a5f25b392a3138a32ca8069c1fa4364af0369e3831594e8421203dcfdf done
-#10 naming to docker.io/kapsakcj/spades-test-build:3.12.0 done 
+#10 naming to docker.io/kapsakcj/spades-test-build:3.12.0 done
 ```
 Then, you can spin up the production image by targeting the `app` stage. Run:
 ```bash

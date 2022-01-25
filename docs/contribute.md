@@ -23,11 +23,13 @@ Discover a bug or having issues with our images? Do you have a suggestion or adv
 6. Open your forked repository in the GitHub user interface and run the workflow "Test \<program name\> image". If it passes, you're ready to submit a pull request!
    <details>
          <summary>How to manually run the GitHub actions workflow.</summary>
-   
+      <br>
       Find the button to manually trigger the workflow for your image:
-      ![trigger_github_actions_workflow](./assets/trigger_github_actions_workflow.png)
+      <img src="../assets/trigger_github_actions_workflow.png">
+      <br>
+      <br>
       Note: if you added your files to a branch, you need to have that branch set as default to be able to manually trigger the workflow:
-      ![set_default_branch](./assets/set_github_default_branch.png)
+      <img src="../assets/set_github_default_branch.png">
    </details>
 7. Visit our docker-builds github repository and a green "Submit Pull Request" button should appear near the top of the page. Click it, and submit a pull request to merge your forked repository into our repository.
 8. We will take a look at your additions/changes, run your test workflow again, and decide on whether or not to incorporate the changes into the master branch. We will most likely accept all new docker images, but if you have a specific change to an existing image we may not accept it. These images were built with the purpose of being used for clinical lab validations, so they should stay static, especially if a particular public health lab has incorporated that image into their clinically validated workflow.
@@ -36,6 +38,6 @@ Discover a bug or having issues with our images? Do you have a suggestion or adv
 ### How to create automated GitHub Actions tests for a Docker image
 
 1. Make sure you have a stage in your Dockerfile named `test`. This stage should run a few commands to demonstrate that the program is successfully installed in your image and runs as expected. Information on this in point 1 above. See the [Dockerfile template](../dockerfile-template/Dockerfile) for test suggestions.
-2. Copy the template GitHub workflow file `.github/workflow-templates/test-template.yml` and rename it to `.github/workflows/test-<program name>.yml` for your image. 
+2. Copy the template GitHub workflow file `.github/workflow-templates/test-template.yml` and rename it to `.github/workflows/test-<program name>.yml` for your image.
 3. Overwrite the four instances of `<placeholder text>` in the file with information on your image.
 4. Continue from Step 6 above to run your new test workflow via the GitHub user interface.
