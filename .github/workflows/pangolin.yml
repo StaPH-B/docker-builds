@@ -12,6 +12,7 @@ on:
         default: 'Yes! Do the work for me!'
 jobs:
   get-version:
+    if: ${{ github.repository == 'StaPH-B/docker-builds' }}
     runs-on: ubuntu-latest
     outputs:
       new-dockerfile: ${{ steps.git-check.outputs.modified }}
@@ -56,7 +57,7 @@ jobs:
           git push
   push_dockerhub:
     needs: get-version
-    if: needs.get-version.outputs.new-dockerfile == 'true'   
+    if: ${{ github.repository == 'StaPH-B/docker-builds' && needs.get-version.outputs.new-dockerfile == 'true' }}  
     name: Push new Docker image to Docker Hub
     runs-on: ubuntu-latest
     env:
