@@ -1,8 +1,8 @@
 # Use ubuntu as base image
-FROM ubuntu:xenial
+FROM ubuntu:focal
 
 # metadata
-LABEL base.image="ubuntu:xenial"
+LABEL base.image="ubuntu:focal"
 LABEL software="datasets-sars-cov-2"
 LABEL software.version="v0.6.2"
 LABEL dockerfile.version="1"
@@ -12,10 +12,9 @@ LABEL license="https://github.com/CDCgov/datasets-sars-cov-2/blob/master/LICENSE
 LABEL maintainer="Kelsey Florek"
 LABEL maintainer.email="kelsey.florek@slh.wisc.edu"
 
-# version to build with
-ARG CANU_VERSION=2.2
-
-# install python
+# install dependencies
+ARG TZ=Etc/UTC
+ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y \
  wget\
  build-essential\
@@ -29,19 +28,15 @@ RUN apt-get update && apt-get install -y \
  apt-transport-https\
  ca-certificates\
  doxygen\
- uuid-runtime
+ uuid-runtime && \
+ apt-get autoclean && \
+ rm -rf /var/lib/apt/lists/*
 
 
 # install latest cmake
 RUN wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null && \
  apt-add-repository "deb https://apt.kitware.com/ubuntu/ $(lsb_release -cs) main" && \
  apt-get update && apt-get install -y cmake
-
-# install newer gcc g++
-RUN add-apt-repository ppa:ubuntu-toolchain-r/test &&\
- apt-get update && apt-get install -y \
- gcc-9 g++-9 && \
- update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 90 --slave /usr/bin/g++ g++ /usr/bin/g++-9 --slave /usr/bin/gcov gcov /usr/bin/gcov-9
 
 # get NCBI SRA Tools
 RUN mkdir /ncbi && cd /ncbi && \
