@@ -1,0 +1,26 @@
+name: Update Container
+description: Request an update for an existing container
+title: "[Request An Update]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for requesting additional functionality for these containers!
+  - type: input
+    id: contact
+    attributes:
+      label: Contact Details
+      description: How can we get in touch with you if we need more info?
+      placeholder: ex. email@example.com
+    validations:
+      required: false
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What container needs an update?
+      description: Also tell us why, please.
+      placeholder: Tell us what container needs an update!
+      value: "I know all of these containers are awesome, but..."
+    validations:
+      required: true

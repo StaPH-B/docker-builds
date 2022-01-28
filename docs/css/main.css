@@ -47,6 +47,24 @@ hr.small {
   border-radius: 3px;
 }
 
+details {
+    padding: 15px;
+    background-color: #f5f5f5;
+    margin-bottom: 20px;
+}
+summary {
+  cursor: pointer;
+}
+summary::-webkit-details-marker {
+    color: #fff;
+    background-color: #000;
+}
+summary:before {
+    content: "\27A4"; /* the new icon */
+    color: #696f7c;
+    margin-right: 5px;
+}
+
 .main-content {
   padding-top: 80px;
 }

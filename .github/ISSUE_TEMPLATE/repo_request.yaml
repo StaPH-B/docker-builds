@@ -1,0 +1,25 @@
+name: Repo Request
+description: Requests for functionality for this github repo including github actions
+title: "[Repo Request]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time to make this repo better!
+  - type: input
+    id: contact
+    attributes:
+      label: Contact Details
+      description: How can we get in touch with you if we need more info?
+      placeholder: ex. email@example.com
+    validations:
+      required: false
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What functionality is this repo missing?
+      description: Also tell us, what did you expect to happen?
+      value: "This github repo is awesome, but..."
+    validations:
+      required: true
