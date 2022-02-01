@@ -1,6 +1,6 @@
 # fastq-scan v0.4.4
 
-Main tool: [fastq-scan](quay.io/biocontainers/fastq-scan:0.4.4--h7d875b9_0)
+Main tool: [fastq-scan](https://github.com/rpetit3/fastq-scan)
 
 In addition to fastq-scan, this docker image contains the CLI json parser [jq](https://stedolan.github.io/jq/). 
 
