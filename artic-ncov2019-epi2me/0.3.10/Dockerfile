@@ -32,11 +32,11 @@ RUN wget "https://github.com/epi2me-labs/wf-artic/archive/refs/tags/v${WF_ARTIC_
  tar -xzf v${WF_ARTIC_VER}.tar.gz && \
  rm v${WF_ARTIC_VER}.tar.gz 
 
-# create the conda environment using environment.yml; clean up garbage; list conda env
+# create the conda environment using environment.yml; clean up garbage
 RUN micromamba create -n wf-artic-epi2me -y -f /wf-artic-${WF_ARTIC_VER}/environment.yaml && \
  micromamba clean -a -y 
 
-# set the environment; set ENV_NAME so micromamba knows to activate this during docker image build
+# set the environment; set ENV_NAME so micromamba knows to activate this env during docker image build
 ENV LC_ALL=C.UTF-8 \
  ENV_NAME="wf-artic-epi2me"
 ARG MAMBA_DOCKERFILE_ACTIVATE=1
