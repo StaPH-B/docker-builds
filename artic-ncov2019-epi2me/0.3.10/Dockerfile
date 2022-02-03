@@ -57,4 +57,7 @@ ARG MAMBA_DOCKERFILE_ACTIVATE=1
 RUN micromamba list && \
  medaka tools download_models --models r941_min_high_g360 
 
+# to ensure the conda environment is active always
+ENV PATH=/opt/conda/envs/wf-artic-epi2me/bin:${PATH}
+
 WORKDIR /data
