@@ -6,7 +6,7 @@ ARG MASH_VERSION="1.1"
 
 # Metadata
 LABEL base.image="ubuntu:focal"
-LABEL dockerfile.version="1
+LABEL dockerfile.version="1"
 LABEL software="pmga"
 LABEL software.version="3.0.1"
 LABEL description="A command-line version of PMGA (PubMLST Genome Annotator) for serotyping, serotyping and MLST of all Neisseria species and Haemophilus influenzae"
