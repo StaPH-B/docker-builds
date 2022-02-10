@@ -65,6 +65,7 @@ To learn more about the docker pull rate limits and the open source software pro
 | [GAMBIT](https://hub.docker.com/r/staphb/gambit) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/gambit.svg?style=popout)](https://hub.docker.com/r/staphb/gambit) | <ul><li>0.3.0</li></ul> | https://github.com/hesslab-gambit/gambit |
 | [GAMMA](https://hub.docker.com/r/staphb/gamma) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/gamma.svg?style=popout)](https://hub.docker.com/r/staphb/gamma) | <ul><li>1.4</li></ul> | https://github.com/rastanton/GAMMA/ |
 | [hmmer](https://hub.docker.com/r/staphb/hmmer) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/hmmer.svg?style=popout)](https://hub.docker.com/r/staphb/hmmer) | <ul><li>3.3</li></ul> | http://hmmer.org/ |
+| [htslib](https://hub.docker.com/r/staphb/htslib) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/htslib.svg?style=popout)](https://hub.docker.com/r/staphb/htslib) | <ul><li>1.14</li></ul> | https://www.htslib.org/ |
 | [iqtree](https://hub.docker.com/r/staphb/iqtree/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/iqtree.svg?style=popout)](https://hub.docker.com/r/staphb/iqtree) | <ul><li>1.6.7</li></ul> | http://www.iqtree.org/ |
 | [iqtree2](https://hub.docker.com/r/staphb/iqtree2/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/iqtree2.svg?style=popout)](https://hub.docker.com/r/staphb/iqtree2) | <ul><li>2.1.2</li></ul> | http://www.iqtree.org/ |
 | [iVar](https://hub.docker.com/r/staphb/ivar/) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/ivar.svg?style=popout)](https://hub.docker.com/r/staphb/ivar) | <ul><li>1.1</li><li>1.1 (+SARS-CoV2 reference)</li><li>1.2.1</li><li>1.2.1 (+SC2 ref)</li><li>1.2.2 (+SC2 ref and artic bedfiles)</li><li>1.3</li><li>1.3.1</li></ul> | https://github.com/andersen-lab/ivar |
@@ -81,7 +82,7 @@ To learn more about the docker pull rate limits and the open source software pro
 | [medaka](https://hub.docker.com/r/staphb/medaka) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/medaka.svg?style=popout)](https://hub.docker.com/r/staphb/medaka) | <ul><li>0.8.1</li><li>1.0.1</li><li>1.2.0</li></ul> | https://github.com/nanoporetech/medaka |
 | [metaphlan](https://hub.docker.com/r/staphb/metaphlan) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/metaphlan.svg?style=popout)](https://hub.docker.com/r/staphb/metaphlan) | <ul><li>3.0.3-no-db (no database)</li><li> 3.0.3 (~3GB db) | https://github.com/biobakery/MetaPhlAn/tree/3.0 |
 | [minimap2](https://hub.docker.com/r/staphb/minimap2) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/minimap2.svg?style=popout)](https://hub.docker.com/r/staphb/minimap2) | <ul><li>2.17</li><li>2.18</li><li>2.21</li><li>2.22</li><li>2.23</li><li>2.24</li></ul> | https://github.com/lh3/minimap2 |
-| [minipolish](https://hub.docker.com/r/staphb/minipolish) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/minipolish.svg?style=popout)](https://hub.docker.com/r/staphb/minipolish) | <ul><li>0.1.3</li></ul> | https://github.com/rrwick/Minipolish | 
+| [minipolish](https://hub.docker.com/r/staphb/minipolish) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/minipolish.svg?style=popout)](https://hub.docker.com/r/staphb/minipolish) | <ul><li>0.1.3</li></ul> | https://github.com/rrwick/Minipolish |
 | [mlst](https://hub.docker.com/r/staphb/mlst) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/mlst.svg?style=popout)](https://hub.docker.com/r/staphb/mlst) | <ul><li>2.16.2</li><li>2.17.6</li><li>2.19.0</li></ul> | https://github.com/tseemann/mlst |
 | [Mugsy](https://hub.docker.com/r/staphb/mugsy) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/mugsy.svg?style=popout)](https://hub.docker.com/r/staphb/mugsy) | <ul><li>1r2.3</li></ul> | http://mugsy.sourceforge.net/ |
 | [MultiQC](https://hub.docker.com/r/staphb/multiqc) <br/> [![docker pulls](https://img.shields.io/docker/pulls/staphb/multiqc.svg?style=popout)](https://hub.docker.com/r/staphb/multiqc) | <ul><li>1.7</li><li>1.8</li></ul> | https://github.com/ewels/MultiQC |
@@ -150,7 +151,7 @@ Each Dockerfile lists the author(s)/maintainer(s) as a metadata `LABEL`, but the
   * [@andersgs](https://github.com/andersgs)
   * [@logan-fink](https://github.com/logan-fink)
   * [@tgallagh](https://github.com/tgallagh)
-  * Kelly Oakeson
+  * [@koakeson](https://github.com/koakeson)
   * [@joacjo](https://github.com/joacjo)
   * [@rpetit3](https://github.com/rpetit3/)
   * [@jvhagey](https://github.com/jvhagey)
