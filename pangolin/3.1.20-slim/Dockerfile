@@ -1,4 +1,4 @@
-FROM mambaorg/micromamba:0.20.0
+FROM mambaorg/micromamba:0.21.0
 
 # build and run as root users since micromamba image has 'mambauser' set as the $USER
 USER root
@@ -8,14 +8,15 @@ WORKDIR /
 # ARG variables only persist during build time
 # had to include the v for some of these due to GitHub tags. 
 # thankfully pangolearn github tag is simply a date
-ARG PANGOLIN_VER="v3.1.19"
-ARG PANGOLEARN_VER="2022-01-20"
+ARG PANGOLIN_VER="v3.1.20"
+ARG PANGOLEARN_VER="2022-02-02"
 ARG SCORPIO_VER="v0.3.16"
-ARG CONSTELLATIONS_VER="v0.1.2"
+ARG CONSTELLATIONS_VER="v0.1.3"
 ARG USHER_VER="0.5.2"
-ARG PANGO_DESIGNATION_VER="v1.2.123"
+ARG PANGO_DESIGNATION_VER="v1.2.127"
 
-LABEL base.image="mambaorg/micromamba:0.20.0"
+# metadata labels
+LABEL base.image="mambaorg/micromamba:0.21.0"
 LABEL dockerfile.version="1"
 LABEL software="pangolin"
 LABEL software.version=${PANGOLIN_VER}
@@ -33,7 +34,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  git && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/* 
 
-# get miniconda and the pangolin repo
+# get the pangolin repo
 RUN wget "https://github.com/cov-lineages/pangolin/archive/${PANGOLIN_VER}.tar.gz" && \
  tar -xf ${PANGOLIN_VER}.tar.gz && \
  rm ${PANGOLIN_VER}.tar.gz && \
@@ -51,18 +52,10 @@ RUN sed -i "s|usher.*|usher=${USHER_VER}|" /pangolin/environment.yml && \
  sed -i "s|constellations.git|constellations.git@${CONSTELLATIONS_VER}|" /pangolin/environment.yml && \
  sed -i "s|pango-designation.git|pango-designation.git@${PANGO_DESIGNATION_VER}|" /pangolin/environment.yml && \
  micromamba create -n pangolin -y -f /pangolin/environment.yml 
-# echo "micromamba activate pangolin" > /etc/bash.bashrc
-
 
 # so that mamba/conda env is active when running below commands
 ENV ENV_NAME="pangolin"
 ARG MAMBA_DOCKERFILE_ACTIVATE=1
-
-# not sure what to do here
-#ENV PATH /miniconda/envs/pangolin/bin:$PATH
-
-# took this out from below step: python setup.py install (seems like the install instructions changed?)
-# replaced with pip install .
 
 WORKDIR /pangolin
 RUN pip install . && \
