@@ -14,7 +14,7 @@ LABEL maintainer="Kevin Libuit"
 LABEL maintainer.email="kevin.libuit@theiagen.com"
 
 # Create Freyja conda environment and add to PATH
-RUN conda create -n freyja-env -c defaults -c bioconda -c conda-forge freyja=${FREYJA_SOFTWARE_VERSION} \
+RUN conda create -n freyja-env -c conda-forge -c bioconda -c defaults freyja=${FREYJA_SOFTWARE_VERSION} \
 && echo "source activate freyja-env" > ~/.bashrc
 
 ENV PATH /opt/conda/envs/freyja-env/bin:/opt/conda/envs/env/bin:$PATH
