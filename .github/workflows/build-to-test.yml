@@ -44,7 +44,6 @@ jobs:
           file: ${{ inputs.path_to_context }}/${{ inputs.dockerfile_name }}
           target: test
           push: false
-          build-args: IS_GITHUB=T
           cache-from: type=local,src=/tmp/.buildx-cache-${{ inputs.cache }}
           cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-${{ inputs.cache }}-new
 
