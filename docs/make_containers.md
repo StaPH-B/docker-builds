@@ -15,7 +15,7 @@ layout: page
 
 ### Install Docker
 
-Docker can be installed from [https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/). 
+Docker can be installed from [https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/).
 
 ### Create a Dockerfile
 
@@ -66,83 +66,74 @@ Fill in [this template](https://github.com/StaPH-B/docker-builds/blob/master/doc
 
 #### Best-practices checklist
 
+- **Use a standard base image**
 
-<details>
-  <summary>Use a standard base image.</summary>
+    We typically use the official docker `ubuntu:xenial` image (Ubuntu 16.04) as our base because it's a reliable and trusted base image and because Ubuntu is the OS we typically work on and are most familiar with.
 
-We typically use the official docker `ubuntu:xenial` image (Ubuntu 16.04) as our base because it's a reliable and trusted base image and because Ubuntu is the OS we typically work on and are most familiar with.
+    HOWEVER - Ubuntu Xenial (16.04) is now EOL, so we recommend to use a more recent distro, like Ubuntu Focal (20.04). The offical docker image is called `ubuntu:focal`
 
-HOWEVER - Ubuntu Xenial (16.04) is now EOL, so we recommend to use a more recent distro, like Ubuntu Focal (20.04). The offical docker image is called `ubuntu:focal`
+    `alpine` is another frequently used image, and has the added benefit of being smaller than most other images.
 
-`alpine` is another frequently used image, and has the added benefit of being smaller than most other images.
-</details>
 
-<details>
-    <summary>Minimize the number of layers.</summary>
+- **Minimize the number of layers**
 
-The dockerfile commands (`FROM`, `RUN`, `CMD`, and `COPY`) will each add an additional layer (everytime you use one), increasing the size of the image.
-There are two ways to reduce the size of your image.
+    The dockerfile commands (`FROM`, `RUN`, `CMD`, and `COPY`) will each add an additional layer (everytime you use one), increasing the size of the image.
+    There are two ways to reduce the size of your image.
 
-1. As recommended in Docker docs: [utilize the features of a multi-stage build](https://docs.docker.com/develop/develop-images/multistage-build/).
-   You can use the following Dockerfile structure to isolate installation layers in a builder stage. Then, you can copy only the necessary layers into the production image stage, called "app". This keeps the production image small.
-   ```Dockerfile
-   FROM ubuntu:xenial as builder
+    1. As recommended in Docker docs: [utilize the features of a multi-stage build](https://docs.docker.com/develop/develop-images/multistage-build/).
+       You can use the following Dockerfile structure to isolate installation layers in a builder stage. Then, you can copy only the necessary layers into the production image stage, called "app". This keeps the production image small.
+       ```Dockerfile
+       FROM ubuntu:xenial as builder
 
-   # install the program here, using lots of RUN commands
+       # install the program here, using lots of RUN commands
 
-   FROM ubuntu:xenial as app
+       FROM ubuntu:xenial as app
 
-   COPY --from=builder /path/to/<program executable> /usr/local/bin/<program executable>
-   ```
+       COPY --from=builder /path/to/<program executable> /usr/local/bin/<program executable>
+       ```
 
-2. Combine multiple commands in one RUN command using `&&` as below. The `\` is used to break a one-line command into multiple lines (for readability).
+    2. Combine multiple commands in one RUN command using `&&` as below. The `\` is used to break a one-line command into multiple lines (for readability).
+
+        ```Dockerfile
+        # Using one layer
+        RUN wget http://cab.spbu.ru/files/release3.13.0/SPAdes-3.13.0-Linux.tar.gz && \
+           tar -xzf SPAdes-3.13.0-Linux.tar.gz && \
+           rm -r SPAdes-3.13.0-Linux.tar.gz && \
+           mkdir /data
+
+        # ...is much more efficient and will create a smaller docker image than using multiple layers:
+        RUN wget http://cab.spbu.ru/files/release3.13.0/SPAdes-3.13.0-Linux.tar.gz
+        RUN tar -xzf SPAdes-3.13.0-Linux.tar.gz
+        RUN rm -r SPAdes-3.13.0-Linux.tar.gz
+        RUN mkdir /data
+        ```
+
+- **Pin program versions**
+
+    In your Dockerfile, specify downloading a specific version `wget http://cab.spbu.ru/files/release3.13.0/SPAdes-3.13.0-Linux.tar.gz` instead of cloning the repo `git clone https://github.com/ablab/spades.git`.
+    These docker images are intended to be static (clinical testing validation), and this helps keep them that way.
+
+    One way to pin versions is to use the `ARG` command to set a build-time environment variable.
+    Note: the scope of ARG variables is the stage in which they are defined.
 
     ```Dockerfile
-    # Using one layer
-    RUN wget http://cab.spbu.ru/files/release3.13.0/SPAdes-3.13.0-Linux.tar.gz && \
-       tar -xzf SPAdes-3.13.0-Linux.tar.gz && \
-       rm -r SPAdes-3.13.0-Linux.tar.gz && \
-       mkdir /data
-
-    # ...is much more efficient and will create a smaller docker image than using multiple layers:
-    RUN wget http://cab.spbu.ru/files/release3.13.0/SPAdes-3.13.0-Linux.tar.gz
-    RUN tar -xzf SPAdes-3.13.0-Linux.tar.gz
-    RUN rm -r SPAdes-3.13.0-Linux.tar.gz
-    RUN mkdir /data
+    # For example
+    ARG SPADES_VER=3.13.0
+    wget http://cab.spbu.ru/files/release${SPADES_VER}/SPAdes-${SPADES_VER}-Linux.tar.gz
     ```
-</details>
 
-<details>
-    <summary>Pin program versions.</summary>
+- **Keep the container directory structure clean**
 
-In your Dockerfile, specify downloading a specific version `wget http://cab.spbu.ru/files/release3.13.0/SPAdes-3.13.0-Linux.tar.gz` instead of cloning the repo `git clone https://github.com/ablab/spades.git`.
-These docker images are intended to be static (clinical testing validation), and this helps keep them that way.
+    Remove as many unnecessary files as possible (tarballs, temporary files, etc.) and don't install unnecessary dependencies/programs.
+    This keeps the container small if you are not utilizing a separate builder/install stage.
+    It also helps with debugging to have a clean filesystem inside containers.
 
-One way to pin versions is to use the `ARG` command to set a build-time environment variable.
-Note: the scope of ARG variables is the stage in which they are defined.
+    Put program executables in /usr/local/bin. This is automatically in the PATH for a container.
 
-```Dockerfile
-# For example
-ARG SPADES_VER=3.13.0
-wget http://cab.spbu.ru/files/release${SPADES_VER}/SPAdes-${SPADES_VER}-Linux.tar.gz
-```
+    Create a `/data` directory, and set it as the working directory with `WORKDIR /data` in your Dockerfile.
+    Sometimes programs don't like it when they are run in the `/` root directory, which is the default working directory.
+    This also makes it easy for mounting a volume when you run a container.
 
-</details>
-
-<details>
-    <summary>Keep the container directory structure clean.</summary>
-
-Remove as many unnecessary files as possible (tarballs, temporary files, etc.) and don't install unnecessary dependencies/programs.
-This keeps the container small if you are not utilizing a separate builder/install stage.
-It also helps with debugging to have a clean filesystem inside containers.
-
-Put program executables in /usr/local/bin. This is automatically in the PATH for a container.
-
-Create a `/data` directory, and set it as the working directory with `WORKDIR /data` in your Dockerfile.
-Sometimes programs don't like it when they are run in the `/` root directory, which is the default working directory.
-This also makes it easy for mounting a volume when you run a container.
-
-</details>
 
 ### Build the image
 
