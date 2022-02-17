@@ -4,6 +4,11 @@ name: Build and deploy image
 
 on:
   workflow_call:
+    secrets:
+      docker_username:
+        required: true
+      docker_access_token:
+        required: true
     inputs:
       path_to_context:
         required: true
@@ -21,14 +26,6 @@ on:
         type: string
       container_name:
         required: true
-        type: string
-      docker_username:
-        default: ${{ secrets.DOCKER_HUB_USERNAME }}
-        required: false
-        type: string
-      docker_access_token:
-        default: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-        required: false
         type: string
       tag:
         required: false
