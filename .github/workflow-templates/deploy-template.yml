@@ -29,9 +29,6 @@ jobs:
       cache: "<program name>"  # Same as above
       container_name: "<program name>"  # The image name for Docker Hub, use the program name in lowercase, e.g. "spades"
       tag: "<program version>"  # The image tag for Docker Hub, use the program version, e.g. "3.12.0"
-    secrets:  # These reference GitHub repository secrets to grant the GitHub action access to a Docker Hub repository to push the image to
-      docker_hub_username: ${{ secrets.DOCKER_HUB_USERNAME }}
-      docker_hub_access_token: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
   # This job calls a workflow to pull the image from Docker Hub and test that it can be run as a Singularity container
   run-singularity:
