@@ -1,6 +1,7 @@
 name: Test htslib image
 
 on:
+  workflow_dispatch:
   pull_request:
     paths:
       - 'htslib/1.14/*'
