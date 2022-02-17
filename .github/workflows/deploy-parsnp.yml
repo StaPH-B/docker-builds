@@ -23,9 +23,6 @@ jobs:
       cache: "parsnp"
       container_name: "parsnp"
       tag: 1.5.6
-    secrets:
-      docker_hub_username: ${{ secrets.DOCKER_HUB_USERNAME }}
-      docker_hub_access_token: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
   run-singularity:
     needs: build-to-deploy  # test singularity run on newly pushed Docker image

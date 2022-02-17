@@ -22,11 +22,6 @@ on:
         required: false
         default: latest
         type: string
-    secrets:
-      docker_hub_username:
-        required: true
-      docker_hub_access_token:
-        required: true
 
 jobs:
 
@@ -56,8 +51,8 @@ jobs:
       - name: Login to Docker Hub
         uses: docker/login-action@v1
         with:
-          username: ${{ secrets.docker_hub_username }}
-          password: ${{ secrets.docker_hub_access_token }}
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
       - name: Build and push
         id: docker_build
@@ -78,4 +73,3 @@ jobs:
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
-
