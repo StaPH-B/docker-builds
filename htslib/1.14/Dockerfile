@@ -58,5 +58,3 @@ ARG HTSLIBVER
 WORKDIR /htslib-${HTSLIBVER}/test
 
 RUN perl /htslib-${HTSLIBVER}/test/test.pl
-
-# comment
