@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   pull_request:
     paths:
-      - 'htslib/1.14/*'
+      - 'htslib/1.14/Dockerfile'
 
 jobs:
   build-to-test:
