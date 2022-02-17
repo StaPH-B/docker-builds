@@ -3,7 +3,7 @@ name: Test ParSNP image
 on:
   pull_request:
     paths:
-      - "./parsnp/1.5.6/Dockerfile"
+      - "./parsnp/1.5.6/*"
 
 jobs:
 

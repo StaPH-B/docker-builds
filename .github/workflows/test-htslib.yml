@@ -3,7 +3,7 @@ name: Test htslib image
 on:
   pull_request:
     paths:
-      - "./htslib/1.14/Dockerfile"
+      - "./htslib/1.14/*"
 
 jobs:
   build-to-test:
