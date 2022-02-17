@@ -1,14 +1,6 @@
 name: Test htslib image
 
-on: workflow_dispatch
-  paths:
-    - "./htslib/1.14/*"
-
-on: push
-  paths:
-    - "./htslib/1.14/*"
-    
-on: pull_request
+on: [workflow_dispatch, push, pull_request]
   paths:
     - "./htslib/1.14/*"
 
