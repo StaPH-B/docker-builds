@@ -28,4 +28,4 @@ jobs:
     needs: build-to-deploy  # test singularity run on newly pushed Docker image
     uses: ./.github/workflows/run-singularity.yml
     with:
-      dockerhub_image: "staphb/parsnp:1.5.6"
+      image_name: "parsnp:1.5.6"

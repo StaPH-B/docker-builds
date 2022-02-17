@@ -35,4 +35,4 @@ jobs:
     needs: build-to-deploy  # test singularity run on newly pushed Docker image
     uses: ./.github/workflows/run-singularity.yml
     with:
-      dockerhub_image: "<docker hub username>/<image name>:<image tag>"  # The image to pull, e.g. "staphb/spades:3.12.0"
+      image_name: "<image name>:<image tag>"  # The image to pull, e.g. "spades:3.12.0"
