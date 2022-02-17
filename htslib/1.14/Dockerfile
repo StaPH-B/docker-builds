@@ -1,7 +1,9 @@
-FROM ubuntu:xenial
-
 # for easy upgrade later. ARG variables only persist during build time
 ARG HTSLIBVER="1.14"
+
+FROM ubuntu:xenial as app
+
+ARG HTSLIBVER
 
 LABEL base.image="ubuntu:xenial"
 LABEL dockerfile.version="1"
@@ -48,7 +50,11 @@ ENV PATH="$PATH" \
 # set working directory
 WORKDIR /data
 
-# Testing the install
-RUN cd /htslib-1.14/test && \
-  perl /htslib-1.14/test/test.pl && \
-  rm *tmp*
+# testing
+FROM app as test
+
+ARG HTSLIBVER
+
+WORKDIR /htslib-${HTSLIBVER}/test
+
+RUN perl /htslib-${HTSLIBVER}/test/test.pl
