@@ -48,6 +48,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Mafft  | BSD | https://mafft.cbrc.jp/alignment/software/license.txt |
 | Mash | non-standard license (see link) | https://github.com/marbl/Mash/blob/master/LICENSE.txt |
 | mashtree | GNU GPLv3 | https://github.com/lskatz/mashtree/blob/master/LICENSE |
+| MaSuRCA | GNU GPLv3 | https://github.com/alekseyzimin/masurca/blob/master/LICENSE.txt
 | Medaka | Mozilla Public License 2.0 | https://github.com/nanoporetech/medaka/blob/master/LICENSE.md |
 | Metaphlan | MIT | https://github.com/biobakery/MetaPhlAn/blob/3.0/license.txt |
 | minimap2 | MIT | https://github.com/lh3/minimap2/blob/master/LICENSE.txt |
