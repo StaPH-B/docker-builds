@@ -5,8 +5,12 @@ name: Build Singularity image
 on:
   workflow_call:
     inputs:
-      dockerhub_image:
+      image_name:
         required: true
+        type: string
+      repositoy_name:
+        default: staphb
+        required: false
         type: string
       command:
         required: false
@@ -27,4 +31,4 @@ jobs:
           singularity-version: 3.8.3
 
       - name: Run a singularity container
-        run: singularity run docker://${{ inputs.dockerhub_image }} ${{ inputs.command }}
+        run: singularity run docker://${{ inputs.repositoy_name }}/${{ inputs.image_name }} ${{ inputs.command }}
