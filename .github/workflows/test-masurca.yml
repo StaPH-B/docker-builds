@@ -8,7 +8,7 @@ on:
 
 jobs:
   build-to-test:
-    uses: .StaPH-B/docker-builds/.github/workflows/build-to-test.yml@master
+    uses: StaPH-B/docker-builds/.github/workflows/build-to-test.yml@master
     with:
       path_to_context: "./masurca/4.0.8"
       dockerfile_name: "Dockerfile"
