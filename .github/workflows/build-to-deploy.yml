@@ -17,7 +17,7 @@ on:
         default: Dockerfile
         required: false
         type: string
-      repositoy_name:
+      repository_name:
         default: staphb
         required: false
         type: string
