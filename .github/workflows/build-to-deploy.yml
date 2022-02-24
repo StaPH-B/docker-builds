@@ -73,7 +73,7 @@ jobs:
           push: true
           cache-from: type=local,src=/tmp/.buildx-cache-${{ inputs.cache }}
           cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-${{ inputs.cache }}-new # mode=max means export layers from all stage to cache
-          tags: ${{ inputs.repositoy_name }}/${{ inputs.container_name }}:${{ inputs.tag }}
+          tags: ${{ inputs.repository_name }}/${{ inputs.container_name }}:${{ inputs.tag }}
 
       - name: Move cache # apparently prevents the cache from growing in size forever
         run: |
