@@ -4,11 +4,11 @@ FROM ubuntu:xenial
 # had to include the v for some of these due to GitHub tags. 
 # thankfully pangolearn github tag is simply a date
 ARG PANGOLIN_VER="v3.1.20"
-ARG PANGOLEARN_VER="2022-02-02"
+ARG PANGOLEARN_VER="2022-02-28"
 ARG SCORPIO_VER="v0.3.16"
 ARG CONSTELLATIONS_VER="v0.1.3"
 ARG USHER_VER="0.5.2"
-ARG PANGO_DESIGNATION_VER="v1.2.127"
+ARG PANGO_DESIGNATION_VER="v1.2.132"
 
 LABEL base.image="ubuntu:xenial"
 LABEL dockerfile.version="1"
