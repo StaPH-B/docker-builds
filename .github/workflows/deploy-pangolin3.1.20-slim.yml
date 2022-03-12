@@ -1,7 +1,7 @@
 # This caller workflow tests, builds, and pushes the image to Docker Hub.
 # It also tests that a Singularity container can be run from the Docker image.
 
-name: Deploy Pangolin 3.1.20-slim image
+name: Deploy Pangolin 3.1.20-pangolearn-2022-02-28-slim image
 
 on: workflow_dispatch
 
@@ -25,10 +25,12 @@ jobs:
       dockerfile_name: "Dockerfile"
       cache: "pangolin"
       container_name: "pangolin"
-      tag: 3.1.20-slim
+      tag: |
+        3.1.20-pangolearn-2022-02-28-slim
+        latest
 
   run-singularity:
     needs: build-to-deploy  # test singularity run on newly pushed Docker image
     uses: StaPH-B/docker-builds/.github/workflows/run-singularity.yml@master
     with:
-      image_name: "pangolin:3.1.20-slim"
+      image_name: "pangolin:3.1.20-pangolearn-2022-02-28-slim"
