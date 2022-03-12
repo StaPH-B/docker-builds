@@ -26,11 +26,11 @@ jobs:
       cache: "pangolin"
       container_name: "pangolin"
       tag: |
-        3.1.20-pangolearn-2022-02-28-slim
+        3.1.20-pangolearn-2022-02-28
         latest
 
   run-singularity:
     needs: build-to-deploy  # test singularity run on newly pushed Docker image
     uses: StaPH-B/docker-builds/.github/workflows/run-singularity.yml@master
     with:
-      image_name: "pangolin:3.1.20-pangolearn-2022-02-28-slim"
+      image_name: "pangolin:3.1.20-pangolearn-2022-02-28"
