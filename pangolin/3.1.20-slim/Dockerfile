@@ -66,6 +66,9 @@ RUN pip install . && \
 
 WORKDIR /data
 
+# hardcode pangolin executable into the PATH variable
+ENV PATH="$PATH:/opt/conda/envs/pangolin/bin/"
+
 # new base for testing
 FROM app as test
 
