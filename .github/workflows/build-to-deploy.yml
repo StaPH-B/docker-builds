@@ -9,6 +9,10 @@ on:
         required: true
       docker_access_token:
         required: true
+      quay_username:
+        required: true
+      quay_access_token:
+        required: true
     inputs:
       path_to_context:
         required: true
