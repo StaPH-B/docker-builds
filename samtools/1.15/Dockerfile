@@ -1,8 +1,8 @@
-FROM ubuntu:impish as app
+FROM ubuntu:focal as app
 
 ARG SAMTOOLSVER=1.15
 
-LABEL base.image="ubuntu:xenial"
+LABEL base.image="ubuntu:focal"
 LABEL dockerfile.version="1"
 LABEL software="Samtools"
 LABEL software.version="${SAMTOOLSVER}"
@@ -11,6 +11,8 @@ LABEL website="https://github.com/samtools/samtools"
 LABEL license="https://github.com/samtools/samtools/blob/develop/LICENSE"
 LABEL maintainer="Erin Young"
 LABEL maintainer.email="eriny@utah.gov"
+
+ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
  libncurses5-dev \
@@ -26,7 +28,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
  bzip2 \
  gnuplot \
  ca-certificates \
- gawk && \
+ gawk \
+ python3 && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 RUN wget https://github.com/samtools/samtools/releases/download/${SAMTOOLSVER}/samtools-${SAMTOOLSVER}.tar.bz2 && \
