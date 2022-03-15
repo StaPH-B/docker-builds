@@ -25,9 +25,7 @@ jobs:
       dockerfile_name: "Dockerfile"
       cache: "pangolin"
       container_name: "pangolin"
-      tag: |
-        3.1.20-pangolearn-2022-02-28,
-        latest
+      tag: "3.1.20-pangolearn-2022-02-28" # only specifying one tag since build-to-deploy assumes pushing "latest" tag
 
   run-singularity:
     needs: build-to-deploy  # test singularity run on newly pushed Docker image
