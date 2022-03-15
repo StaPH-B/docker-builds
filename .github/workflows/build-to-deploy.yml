@@ -63,6 +63,12 @@ jobs:
           username: ${{ secrets.docker_username }}
           password: ${{ secrets.docker_access_token }}
 
+      - name: Login to Quay
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.quay_username }}
+          password: ${{ secrets.quay_access_token }}
+
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
@@ -73,7 +79,11 @@ jobs:
           push: true
           cache-from: type=local,src=/tmp/.buildx-cache-${{ inputs.cache }}
           cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-${{ inputs.cache }}-new # mode=max means export layers from all stage to cache
-          tags: ${{ inputs.repository_name }}/${{ inputs.container_name }}:${{ inputs.tag }}
+          tags: | # pushing to both dockerhub and quay for both latest and user-defined inputs.tag
+            ${{ inputs.repository_name }}/${{ inputs.container_name }}:latest
+            ${{ inputs.repository_name }}/${{ inputs.container_name }}:${{ inputs.tag }}
+            quay.io/${{ inputs.repository_name }}/${{ inputs.container_name }}:latest
+            quay.io/${{ inputs.repository_name }}/${{ inputs.container_name }}:${{ inputs.tag }}
 
       - name: Move cache # apparently prevents the cache from growing in size forever
         run: |
