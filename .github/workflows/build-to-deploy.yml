@@ -11,7 +11,7 @@ on:
         required: true
       quay_username:
         required: true
-      quay_access_token:
+      quay_robot_token:
         required: true
     inputs:
       path_to_context:
