@@ -31,7 +31,8 @@ LABEL maintainer1.email="kapsakcj@gmail.com"
 RUN apt-get update && apt-get install -y --no-install-recommends \
  wget \
  ca-certificates \
- git && \
+ git \
+ procps && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # get the pangolin repo
