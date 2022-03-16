@@ -20,6 +20,8 @@ jobs:
     secrets:
       docker_username: ${{ secrets.DOCKER_HUB_USERNAME }}
       docker_access_token: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      quay_username: ${{ secrets.quay_username }}
+      quay_robot_token: ${{ secrets.quay_robot_token }}
     with:
       path_to_context: "./pangolin/3.1.20-slim/"
       dockerfile_name: "Dockerfile"
