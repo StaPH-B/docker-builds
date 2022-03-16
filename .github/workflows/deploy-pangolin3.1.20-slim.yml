@@ -8,7 +8,7 @@ on: workflow_dispatch
 jobs:
 
   build-to-test:
-    uses: StaPH-B/docker-builds/.github/workflows/build-to-test.yml@master
+    uses: ${{ github.repository_owner }}/docker-builds/.github/workflows/build-to-test.yml@master
     with:
       path_to_context: "./pangolin/3.1.20-slim/"
       dockerfile_name: "Dockerfile"
@@ -16,7 +16,7 @@ jobs:
 
   build-to-deploy:
     needs: build-to-test  # this jobs needs to run serially, after testing succeeds
-    uses: StaPH-B/docker-builds/.github/workflows/build-to-deploy.yml@master
+    uses: ${{ github.repository_owner }}/docker-builds/.github/workflows/build-to-deploy.yml@master
     secrets:
       docker_username: ${{ secrets.DOCKER_HUB_USERNAME }}
       docker_access_token: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
@@ -29,6 +29,6 @@ jobs:
 
   run-singularity:
     needs: build-to-deploy  # test singularity run on newly pushed Docker image
-    uses: StaPH-B/docker-builds/.github/workflows/run-singularity.yml@master
+    uses: ${{ github.repository_owner }}/docker-builds/.github/workflows/run-singularity.yml@master
     with:
       image_name: "pangolin:3.1.20-pangolearn-2022-02-28"
