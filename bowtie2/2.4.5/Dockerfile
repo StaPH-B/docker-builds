@@ -58,9 +58,9 @@ CMD ["bowtie2"]
 
 FROM app as test
 
-RUN mkdir /index
-RUN wget https://raw.githubusercontent.com/BenLangmead/bowtie2/master/example/reads/longreads.fq
-RUN wget https://raw.githubusercontent.com/BenLangmead/bowtie2/master/example/reference/lambda_virus.fa
-RUN bowtie2-build lambda_virus.fa /index/lambda_virus
-RUN bowtie2 -x /index/lambda_virus -U longreads.fq
-RUN bowtie2-inspect --summary /index/lambda_virus
+RUN mkdir /index && \
+ wget https://raw.githubusercontent.com/BenLangmead/bowtie2/master/example/reads/longreads.fq  && \
+ wget https://raw.githubusercontent.com/BenLangmead/bowtie2/master/example/reference/lambda_virus.fa  && \
+ bowtie2-build lambda_virus.fa /index/lambda_virus  && \
+ bowtie2 -x /index/lambda_virus -U longreads.fq && \
+ bowtie2-inspect --summary /index/lambda_virus
