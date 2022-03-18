@@ -11,8 +11,8 @@ LABEL software="Bowtie2,\n Samtools"
 LABEL software.versions="2.4.4,\n 1.10"
 LABEL description="Bowtie2: Genome assembler using a reference and mapping\n Samtools: a set of tools for interacting with and reformatting sequence data"
 LABEL website="http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml\n https://www.htslib.org/"
-LABEL maintainer="Holly Halstead"
-LABEL maintainer.email="holly.halstead@doh.wa.gov"
+LABEL maintainer="John Arnn"
+LABEL maintainer.email="jarnn@utah.gov"
 
 # install dependencies, cleanup apt garbage.
 RUN apt-get update && apt-get install -y \
