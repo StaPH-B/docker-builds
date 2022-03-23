@@ -1,0 +1,32 @@
+
+name: Deploy DSK image
+
+on: workflow_dispatch
+
+jobs:
+
+  build-to-test:
+    uses: StaPH-B/docker-builds/.github/workflows/build-to-test.yml@master
+    with:
+      path_to_context: "./dsk/0.0.100"
+      dockerfile_name: "Dockerfile"
+      cache: "dsk"
+
+  build-to-deploy:
+    needs: build-to-test
+    uses: StaPH-B/docker-builds/.github/workflows/build-to-deploy.yml@master
+    secrets:
+      docker_username: ${{ secrets.DOCKER_HUB_USERNAME }}
+      docker_access_token: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+    with:
+      path_to_context: "./dsk/0.0.100"
+      dockerfile_name: "Dockerfile"
+      cache: "dsk"
+      container_name: "dsk"
+      tag: "0.0.100"
+
+  run-singularity:
+    needs: build-to-deploy
+    uses: StaPH-B/docker-builds/.github/workflows/run-singularity.yml@master
+    with:
+      image_name: "dsk:0.0.100"
