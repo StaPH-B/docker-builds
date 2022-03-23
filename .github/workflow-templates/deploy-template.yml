@@ -26,6 +26,8 @@ jobs:
     secrets: # these are the secret login credientials for pushing the containers to the repository
       docker_username: ${{ secrets.DOCKER_HUB_USERNAME }}
       docker_access_token: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      quay_username: ${{ secrets.quay_username }}
+      quay_robot_token: ${{ secrets.quay_robot_token }}
     with:
       path_to_context: "./<program name>/<program version>"  # Same as above
       dockerfile_name: "Dockerfile"  # Same as above
