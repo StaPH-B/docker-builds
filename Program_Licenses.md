@@ -81,6 +81,7 @@ The licenses of the open-source software that is contained in these Docker image
 | seqtk | MIT | https://github.com/lh3/seqtk/blob/master/LICENSE |
 | Seroba | GNU GPLv3 | https://github.com/sanger-pathogens/seroba/blob/master/LICENSE |
 | SerotypeFinder | Apache 2.0 | https://bitbucket.org/genomicepidemiology/serotypefinder/ |
+| shigatyper | non-standard license see --> | https://github.com/CFSAN-Biostatistics/shigatyper/blob/master/LICENSE |
 | Shovill | GNU GPLv3 | https://github.com/tseemann/shovill/blob/master/LICENSE |
 | SISTR | Apache 2.0 | https://github.com/phac-nml/sistr_cmd/blob/master/LICENSE |
 | SKESA | Public Domain | https://github.com/ncbi/SKESA/blob/master/LICENSE |
