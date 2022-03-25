@@ -3,15 +3,14 @@ FROM ubuntu:xenial
 ARG GAMBIT_SOFTWARE_VERSION="0.4.0"
 ARG GAMBIT_GIT_REF=v${GAMBIT_SOFTWARE_VERSION}
 ARG GAMBIT_GIT_URL=github.com/hesslab-gambit/gambit@${GAMBIT_GIT_REF}
-ARG GAMBIT_DB_VERSION="1.0b1-210719"
 ARG GAMBIT_DB_BASE_URL=https://storage.googleapis.com/hesslab-gambit-public/databases/refseq-curated/1.0-beta
-ARG GAMBIT_DB_GENOMES_URL=$GAMBIT_DB_BASE_URL/gambit-genomes-${GAMBIT_DB_VERSION}.db
-ARG GAMBIT_DB_SIGNATURES_URL=$GAMBIT_DB_BASE_URL/gambit-signatures-${GAMBIT_DB_VERSION}.h5
+ARG GAMBIT_DB_GENOMES_URL=$GAMBIT_DB_BASE_URL/gambit-genomes-1.0b2-rev2-211116.db
+ARG GAMBIT_DB_SIGNATURES_URL=$GAMBIT_DB_BASE_URL/gambit-signatures-1.0b1-210719.h5
 ARG MINICONDA_URL=https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 ARG PYTHON_VERSION=3.9
 
 LABEL base.image="ubuntu:xenial"
-LABEL dockerfile.version="1"
+LABEL dockerfile.version="2"
 LABEL software="GAMBIT"
 LABEL software.version=${GAMBIT_SOFTWARE_VERSION}
 LABEL description="Rapid genomic-distance comparison for taxonomic identification of microbial pathogens"

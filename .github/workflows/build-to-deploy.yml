@@ -9,6 +9,10 @@ on:
         required: true
       docker_access_token:
         required: true
+      quay_username:
+        required: false
+      quay_robot_token:
+        required: false
     inputs:
       path_to_context:
         required: true
@@ -17,7 +21,7 @@ on:
         default: Dockerfile
         required: false
         type: string
-      repositoy_name:
+      repository_name:
         default: staphb
         required: false
         type: string
@@ -31,6 +35,10 @@ on:
         required: false
         default: latest
         type: string
+      push_quay:
+        default: true
+        required: false
+        type: boolean
 
 jobs:
 
@@ -42,6 +50,7 @@ jobs:
         with:
           lfs: true
 
+      # Git LFS not used by StaPH-B but maybe useful in some people's forks
       - name: Checkout LFS objects
         run: git lfs checkout
 
@@ -63,7 +72,15 @@ jobs:
           username: ${{ secrets.docker_username }}
           password: ${{ secrets.docker_access_token }}
 
-      - name: Build and push
+      - name: Login to Quay
+        uses: docker/login-action@v1
+        if: ${{ inputs.push_quay }}
+        with:
+          registry: quay.io
+          username: ${{ secrets.quay_username }}
+          password: ${{ secrets.quay_robot_token }}
+
+      - name: Build and push to DockerHub
         id: docker_build
         uses: docker/build-push-action@v2
         with:
@@ -73,7 +90,24 @@ jobs:
           push: true
           cache-from: type=local,src=/tmp/.buildx-cache-${{ inputs.cache }}
           cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-${{ inputs.cache }}-new # mode=max means export layers from all stage to cache
-          tags: ${{ inputs.repositoy_name }}/${{ inputs.container_name }}:${{ inputs.tag }}
+          tags: | # pushing to dockerhub for both latest and user-defined inputs.tag
+            ${{ inputs.repository_name }}/${{ inputs.container_name }}:latest
+            ${{ inputs.repository_name }}/${{ inputs.container_name }}:${{ inputs.tag }}
+
+      - name: Build and push to Quay
+        id: quay_build
+        uses: docker/build-push-action@v2
+        if: ${{ inputs.push_quay }}
+        with:
+          context: ${{ inputs.path_to_context }}
+          file: ${{ inputs.path_to_context }}/${{ inputs.dockerfile_name }}
+          target: app
+          push: true
+          cache-from: type=local,src=/tmp/.buildx-cache-${{ inputs.cache }}
+          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-${{ inputs.cache }}-new # mode=max means export layers from all stage to cache
+          tags: | # pushing to quay for both latest and user-defined inputs.tag
+            quay.io/${{ inputs.repository_name }}/${{ inputs.container_name }}:latest
+            quay.io/${{ inputs.repository_name }}/${{ inputs.container_name }}:${{ inputs.tag }}
 
       - name: Move cache # apparently prevents the cache from growing in size forever
         run: |

@@ -8,7 +8,7 @@ on:
       image_name:
         required: true
         type: string
-      repositoy_name:
+      repository_name:
         default: staphb
         required: false
         type: string
@@ -31,4 +31,4 @@ jobs:
           singularity-version: 3.8.3
 
       - name: Run a singularity container
-        run: singularity run docker://${{ inputs.repositoy_name }}/${{ inputs.image_name }} ${{ inputs.command }}
+        run: singularity run docker://${{ inputs.repository_name }}/${{ inputs.image_name }} ${{ inputs.command }}
