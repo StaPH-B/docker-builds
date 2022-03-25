@@ -1,11 +1,11 @@
 # for easy upgrade later. ARG variables only persist during build time
 ARG HTSLIBVER="1.15"
 
-FROM ubuntu:impish as app
+FROM ubuntu:focal as app
 
 ARG HTSLIBVER
 
-LABEL base.image="ubuntu:impish"
+LABEL base.image="ubuntu:focal"
 LABEL dockerfile.version="1"
 LABEL software="htslib"
 LABEL software.version="1.15"
