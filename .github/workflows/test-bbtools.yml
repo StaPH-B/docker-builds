@@ -1,0 +1,15 @@
+name: Test BBTools image
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'bbtools/38.96/Dockerfile'
+
+jobs:
+  build-to-test:
+    uses: StaPH-B/docker-builds/.github/workflows/build-to-test.yml@master
+    with:
+      path_to_context: "."
+      dockerfile_name: "bbtools/38.96/Dockerfile"
+      cache: "bbtools"
