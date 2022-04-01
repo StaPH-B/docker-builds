@@ -26,6 +26,6 @@ promer -p promer_100 -c 100  H_pylori26695_Eslice.fasta H_pyloriJ99_Eslice.fasta
 ```
 Better documentation can be found at [https://github.com/mummer4/mummer](https://github.com/mummer4/mummer)
 
-A tutorial can be fount at [https://mummer4.github.io/tutorial/tutorial.html](https://mummer4.github.io/tutorial/tutorial.html)
+A tutorial can be found at [https://mummer4.github.io/tutorial/tutorial.html](https://mummer4.github.io/tutorial/tutorial.html)
 
 And the manual can be found at [http://mummer.sourceforge.net/manual/](http://mummer.sourceforge.net/manual/)
