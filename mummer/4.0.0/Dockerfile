@@ -62,8 +62,8 @@ FROM app as test
 
 RUN nucmer -h && \
   promer -h && \
-  mummerplot -h && \
-  mummer -help && \
+  nucmer -v && \
+  promer -v && \
   wget https://mummer4.github.io/tutorial/exampleFiles/2.1/in/H_pylori26695_Eslice.fasta && \
   wget https://mummer4.github.io/tutorial/exampleFiles/2.1/in/H_pyloriJ99_Eslice.fasta && \
   wget https://mummer4.github.io/tutorial/exampleFiles/2.2/in/B_anthracis_Mslice.fasta && \
