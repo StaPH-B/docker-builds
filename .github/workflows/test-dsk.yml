@@ -1,15 +1,17 @@
-name: Test htslib image
+
+name: Test DSK image
 
 on:
   workflow_dispatch:
   pull_request:
     paths:
-      - 'htslib/*/Dockerfile'
+      - "dsk/0.0.100/Dockerfile"
 
 jobs:
+
   build-to-test:
     uses: ./.github/workflows/build-to-test.yml
     with:
-      path_to_context: "htslib/1.15"
+      path_to_context: "./dsk/0.0.100"
       dockerfile_name: "Dockerfile"
-      cache: "htslib"
+      cache: "dsk"

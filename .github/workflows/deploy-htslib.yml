@@ -3,7 +3,7 @@
 # Instructions: replace all the <placeholder> stubs in this template with values for your image.
 # Some explanations come from: https://github.com/actions/starter-workflows/blob/main/automation/manual.yml
 
-name: Deploy <program name> image
+name: Deploy htslib image
 
 # This workflow should run when manually triggered by StaPH-B repo maintainer
 on: workflow_dispatch
@@ -15,9 +15,9 @@ jobs:
   build-to-test:
     uses: StaPH-B/docker-builds/.github/workflows/build-to-test.yml@master
     with:
-      path_to_context: "./<program name>/<program version>"  # Path to directory with Dockerfile and context, e.g. "./spades/3.12.0"; if you need to have the whole repo as context (e.g. to use files in test_data), use "."
+      path_to_context: "./htslib/1.15"  # Path to directory with Dockerfile and context, e.g. "./spades/3.12.0"; if you need to have the whole repo as context (e.g. to use files in test_data), use "."
       dockerfile_name: "Dockerfile"  # Name of the Dockerfile, should be "Dockerfile"; if you need to have the whole repo as context, use e.g. "./spades/3.12.0/Dockerfile"
-      cache: "<program name>"  # Use the program name as a nickname for a GitHub cache of your image's layers, e.g. "spades". The cache will speed up re-running the workflow.
+      cache: "htslib"  # Use the program name as a nickname for a GitHub cache of your image's layers, e.g. "spades". The cache will speed up re-running the workflow.
 
   # This job calls a workflow to build the image to the 'app' stage and pushes the image to Docker Hub
   build-to-deploy:
@@ -29,15 +29,15 @@ jobs:
       quay_username: ${{ secrets.quay_username }}
       quay_robot_token: ${{ secrets.quay_robot_token }}
     with:
-      path_to_context: "./<program name>/<program version>"  # Same as above
+      path_to_context: "./htslib/1.15"  # Same as above
       dockerfile_name: "Dockerfile"  # Same as above
-      cache: "<program name>"  # Same as above
-      container_name: "<program name>"  # The image name for Docker Hub, use the program name in lowercase, e.g. "spades"
-      tag: "<program version>"  # The image tag for Docker Hub, use the program version, e.g. "3.12.0"
+      cache: "htslib"  # Same as above
+      container_name: "htslib"  # The image name for Docker Hub, use the program name in lowercase, e.g. "spades"
+      tag: "1.15"  # The image tag for Docker Hub, use the program version, e.g. "3.12.0"
 
   # This job calls a workflow to pull the image from Docker Hub and test that it can be run as a Singularity container
   run-singularity:
     needs: build-to-deploy  # test singularity run on newly pushed Docker image
     uses: StaPH-B/docker-builds/.github/workflows/run-singularity.yml@master
     with:
-      image_name: "<image name>:<image tag>"  # The image to pull, e.g. "spades:3.12.0"
+      image_name: "htslib:1.15"  # The image to pull, e.g. "spades:3.12.0"

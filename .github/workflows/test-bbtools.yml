@@ -1,0 +1,29 @@
+name: Test BBTools image
+
+env:
+  TOOL_NAME: bbtools
+  TOOL_VERSION: "38.96"
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'bbtools/38.96/Dockerfile' # cannot use env vars
+
+jobs:
+  params:
+    # see https://github.com/actions/runner/issues/480#issuecomment-1055373623
+    runs-on: ubuntu-latest
+    outputs:
+      params: ${{ steps.env-vars.outputs.params }}
+    steps:
+      - id: env-vars
+        run: echo "::set-output name=params::$(echo $(jq -n 'env'))"
+
+  build-to-test:
+    needs: [params]
+    uses: StaPH-B/docker-builds/.github/workflows/build-to-test.yml@master
+    with:
+      path_to_context: "."
+      dockerfile_name: "${{ fromJson(needs.params.outputs.params).TOOL_NAME }}/${{ fromJson(needs.params.outputs.params).TOOL_VERSION }}/Dockerfile"
+      cache: "${{ fromJson(needs.params.outputs.params).TOOL_NAME }}"
