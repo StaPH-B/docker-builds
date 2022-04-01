@@ -59,16 +59,19 @@ ENV PATH="/usr/local/bin:$PATH" \
 WORKDIR /data
 
 FROM app as test
+
 RUN nucmer -h && \
   promer -h && \
+  mummerplot -h && \
+  mummer -help && \
   wget https://mummer4.github.io/tutorial/exampleFiles/2.1/in/H_pylori26695_Eslice.fasta && \
   wget https://mummer4.github.io/tutorial/exampleFiles/2.1/in/H_pyloriJ99_Eslice.fasta && \
   wget https://mummer4.github.io/tutorial/exampleFiles/2.2/in/B_anthracis_Mslice.fasta && \
   wget https://mummer4.github.io/tutorial/exampleFiles/2.2/in/B_anthracis_contigs.fasta && \
   wget http://mummer.sourceforge.net/examples/data/H_pylori26695_Eslice.fasta && \
-  wget http://mummer.sourceforge.net/examples/data/H_pyloriJ99_Eslice.fasta
-RUN mummer -mum -b -c H_pylori26695_Eslice.fasta H_pyloriJ99_Eslice.fasta > mummer.mums
-RUN mummerplot -x "[0,275287]" -y "[0,265111]" --terminal png -postscript -p mummer mummer.mums
-RUN nucmer  -c 100 -p nucmer B_anthracis_Mslice.fasta B_anthracis_contigs.fasta
-RUN show-snps -C nucmer.delta > nucmer.snps
-RUN promer -p promer_100 -c 100  H_pylori26695_Eslice.fasta H_pyloriJ99_Eslice.fasta
+  wget http://mummer.sourceforge.net/examples/data/H_pyloriJ99_Eslice.fasta && \
+  mummer -mum -b -c H_pylori26695_Eslice.fasta H_pyloriJ99_Eslice.fasta > mummer.mums && \
+  mummerplot -x "[0,275287]" -y "[0,265111]" --terminal png -postscript -p mummer mummer.mums && \
+  nucmer  -c 100 -p nucmer B_anthracis_Mslice.fasta B_anthracis_contigs.fasta && \
+  show-snps -C nucmer.delta > nucmer.snps && \
+  promer -p promer_100 -c 100  H_pylori26695_Eslice.fasta H_pyloriJ99_Eslice.fasta
