@@ -24,6 +24,6 @@ jobs:
     needs: [params]
     uses: ./.github/workflows/build-to-test.yml
     with:
-      path_to_context: "."
-      dockerfile_name: "${{ fromJson(needs.params.outputs.params).TOOL_NAME }}/${{ fromJson(needs.params.outputs.params).TOOL_VERSION }}/Dockerfile"
+      path_to_context: "${{ fromJson(needs.params.outputs.params).TOOL_NAME }}/${{ fromJson(needs.params.outputs.params).TOOL_VERSION }}"
+      dockerfile_name: "Dockerfile"
       cache: "${{ fromJson(needs.params.outputs.params).TOOL_NAME }}"
