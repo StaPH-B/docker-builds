@@ -17,6 +17,13 @@ on:
         default: "htslib"
         required: false
         type: string
+      tool:
+        required: false
+        type: string
+      version:
+        required: false
+        type: string
+        
 
 jobs:
 
