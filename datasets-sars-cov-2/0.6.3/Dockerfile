@@ -84,4 +84,4 @@ ENV LC_ALL=C
 FROM app as test
 
 # download the smallest data set as a test
-RUN GenFSGopher.pl -o vocvoi-output /home/user/datasets-sars-cov-2/datasets/sars-cov-2-voivoc.tsv --numcpus 8 --layout onedir --compressed
+RUN GenFSGopher.pl -o vocvoi-output /home/user/datasets-sars-cov-2/datasets/sars-cov-2-voivoc.tsv --numcpus $(nproc --all) --layout onedir --compressed
