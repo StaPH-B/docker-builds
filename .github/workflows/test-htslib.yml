@@ -1,15 +1,33 @@
 name: Test htslib image
 
+env:
+  tool: "htslib"
+  version: "1.15"
+
 on:
   workflow_dispatch:
   pull_request:
     paths:
-      - 'htslib/1.14/Dockerfile'
+      - 'htslib/1.15/Dockerfile'
 
 jobs:
+  params:
+    runs-on: ubuntu-latest
+    outputs:
+      params: ${{ steps.env-vars.outputs.params }}
+    steps:
+      - id: env-vars
+        run: echo "::set-output name=params::$(echo $(jq -n 'env'))"
+
+  build-to-test:
+    needs: [params]
+    uses: StaPH-B/docker-builds/.github/workflows/build-to-test.yml@master
+    with:
+      tool: "${{ fromJson(needs.params.outputs.params).tool }}"
+      version: "${{ fromJson(needs.params.outputs.params).version }}"
+
   build-to-test:
     uses: ./.github/workflows/build-to-test.yml
     with:
-      path_to_context: "htslib/1.14"
-      dockerfile_name: "Dockerfile"
-      cache: "htslib"
+      tool: "${{ fromJson(needs.params.outputs.params).tool }}"
+      version: "${{ fromJson(needs.params.outputs.params).version }}"
