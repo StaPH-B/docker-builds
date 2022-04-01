@@ -1,5 +1,5 @@
 # Use ubuntu as base image
-FROM ubuntu:focal
+FROM ubuntu:focal as app
 
 ARG DATASETS_SARS_COV_2_VER=0.6.3
 
@@ -80,3 +80,8 @@ WORKDIR /data
 
 # set perl locale settings
 ENV LC_ALL=C
+
+FROM app as test
+
+# download the smallest data set as a test
+RUN GenFSGopher.pl -o vocvoi-output /home/user/datasets-sars-cov-2/datasets/sars-cov-2-voivoc.tsv --numcpus 8 --layout onedir --compressed
