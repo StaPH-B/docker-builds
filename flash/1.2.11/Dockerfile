@@ -12,7 +12,7 @@ RUN wget http://ccb.jhu.edu/software/FLASH/FLASH-$FLASH_VER.tar.gz && \
  tar -xzf FLASH-$FLASH_VER.tar.gz && \
  rm FLASH-$FLASH_VER.tar.gz
 
-WORKDIR FLASH-$FLASH_VER
+WORKDIR /FLASH-$FLASH_VER
 RUN make
 
 FROM ubuntu:focal as app
