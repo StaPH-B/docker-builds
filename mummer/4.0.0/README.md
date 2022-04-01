@@ -3,11 +3,13 @@ Main tool : [mummer](https://github.com/mummer4/mummer)
 # Example Usage
 ```{bash}
 # mummer is a suffix tree algorithm designed to find maximal exact matches of some minimum length between two input sequences.
+
 mummer -mum -b -c H_pylori26695_Eslice.fasta H_pyloriJ99_Eslice.fasta > mummer.mums
 
 # A dotplot of all the MUMs between two sequences can reveal their macroscopic similarity.
 
 # WARNING!!! Unless running the container interactively; you must use the option --terminal png
+
 mummerplot -x "[0,275287]" -y "[0,265111]" --terminal png -postscript -p mummer mummer.mums
 
 # Like mummer, nucmer can handle multiple reference and query sequences, however this example will demonstrate the alignment of multiple query sequences to a single reference.
