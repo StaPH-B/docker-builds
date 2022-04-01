@@ -14,7 +14,10 @@ on:
       quay_robot_token:
         required: false
     inputs:
-      path_to_context:
+      tool:
+        required: true
+        type: string
+      version:
         required: true
         type: string
       dockerfile_name:
@@ -24,12 +27,6 @@ on:
       repository_name:
         default: staphb
         required: false
-        type: string
-      cache:
-        required: true
-        type: string
-      container_name:
-        required: true
         type: string
       tag:
         required: false
@@ -61,10 +58,10 @@ jobs:
       - name: Cache Docker layers  # also need to set up the cache in each job, using the same prefix (here ${{ runner.os }}-buildx) makes it sharable between jobs
         uses: actions/cache@v2
         with:
-          path: /tmp/.buildx-cache-${{ inputs.cache }}
-          key: ${{ runner.os }}-buildx-${{ inputs.cache }}-${{ github.sha }}
+          path: /tmp/.buildx-cache-${{ inputs.tool }}
+          key: ${{ runner.os }}-buildx-${{ inputs.tool }}-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-buildx-${{ inputs.cache }}
+            ${{ runner.os }}-buildx-${{ inputs.tool }}
 
       - name: Login to DockerHub
         uses: docker/login-action@v1
@@ -85,14 +82,14 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ${{ inputs.path_to_context }}
-          file: ${{ inputs.path_to_context }}/${{ inputs.dockerfile_name }}
+          file: ${{ inputs.tool }}/${{ inputs.version }}/${{ inputs.dockerfile_name }}
           target: app
           push: true
-          cache-from: type=local,src=/tmp/.buildx-cache-${{ inputs.cache }}
-          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-${{ inputs.cache }}-new # mode=max means export layers from all stage to cache
+          cache-from: type=local,src=/tmp/.buildx-cache-${{ inputs.tool }}
+          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-${{ inputs.tool }}-new # mode=max means export layers from all stage to cache
           tags: | # pushing to dockerhub for both latest and user-defined inputs.tag
-            ${{ inputs.repository_name }}/${{ inputs.container_name }}:latest
-            ${{ inputs.repository_name }}/${{ inputs.container_name }}:${{ inputs.tag }}
+            ${{ inputs.repository_name }}/${{ inputs.tool }}:latest
+            ${{ inputs.repository_name }}/${{ inputs.tool }}:${{ inputs.version }}
 
       - name: Build and push to Quay
         id: quay_build
@@ -100,19 +97,19 @@ jobs:
         if: ${{ inputs.push_quay }}
         with:
           context: ${{ inputs.path_to_context }}
-          file: ${{ inputs.path_to_context }}/${{ inputs.dockerfile_name }}
+          file: ${{ inputs.tool }}/${{ inputs.version }}/${{ inputs.dockerfile_name }}
           target: app
           push: true
-          cache-from: type=local,src=/tmp/.buildx-cache-${{ inputs.cache }}
-          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-${{ inputs.cache }}-new # mode=max means export layers from all stage to cache
+          cache-from: type=local,src=/tmp/.buildx-cache-${{ inputs.tool }}
+          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-${{ inputs.tool }}-new # mode=max means export layers from all stage to cache
           tags: | # pushing to quay for both latest and user-defined inputs.tag
-            quay.io/${{ inputs.repository_name }}/${{ inputs.container_name }}:latest
-            quay.io/${{ inputs.repository_name }}/${{ inputs.container_name }}:${{ inputs.tag }}
+            quay.io/${{ inputs.repository_name }}/${{ inputs.tool }}:latest
+            quay.io/${{ inputs.repository_name }}/${{ inputs.tool }}:${{ inputs.version }}
 
       - name: Move cache # apparently prevents the cache from growing in size forever
         run: |
-          rm -rf /tmp/.buildx-cache-${{ inputs.cache }}
-          mv /tmp/.buildx-cache-${{ inputs.cache }}-new /tmp/.buildx-cache-${{ inputs.cache }}
+          rm -rf /tmp/.buildx-cache-${{ inputs.tool }}
+          mv /tmp/.buildx-cache-${{ inputs.tool }}-new /tmp/.buildx-cache-${{ inputs.tool }}
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
