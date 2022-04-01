@@ -5,14 +5,16 @@ name: Build to test
 on:
   workflow_call:
     inputs:
-      tool:
-        required: true
-        type: string
-      version:
-        required: true
+      path_to_context:
+        default: "htslib/1.15"
+        required: false
         type: string
       dockerfile_name:
         default: Dockerfile
+        required: false
+        type: string
+      cache:
+        default: "htslib"
         required: false
         type: string
 
@@ -31,26 +33,26 @@ jobs:
       - name: Cache Docker layers
         uses: actions/cache@v2
         with:
-          path: /tmp/.buildx-cache-${{ inputs.tool }}
-          key: ${{ runner.os }}-buildx-${{ inputs.tool }}-${{ github.sha }}
+          path: /tmp/.buildx-cache-${{ inputs.cache }}
+          key: ${{ runner.os }}-buildx-${{ inputs.cache }}-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-buildx-${{ inputs.tool }}
+            ${{ runner.os }}-buildx-${{ inputs.cache }}
 
       - name: Build to test
         id: docker_build_to_test
         uses: docker/build-push-action@v2
         with:
           context: ${{ inputs.path_to_context }}
-          file: ${{ inputs.tool }}/${{ inputs.version }}/${{ inputs.dockerfile_name }}
+          file: ${{ inputs.path_to_context }}/${{ inputs.dockerfile_name }}
           target: test
           push: false
-          cache-from: type=local,src=/tmp/.buildx-cache-${{ inputs.tool }}
-          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-${{ inputs.tool }}-new
+          cache-from: type=local,src=/tmp/.buildx-cache-${{ inputs.cache }}
+          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-${{ inputs.cache }}-new
 
       - name: Move cache # apparently prevents the cache from growing in size forever
         run: |
-          rm -rf /tmp/.buildx-cache-${{ inputs.tool }}
-          mv /tmp/.buildx-cache-${{ inputs.tool }}-new /tmp/.buildx-cache-${{ inputs.tool }}
+          rm -rf /tmp/.buildx-cache-${{ inputs.cache }}
+          mv /tmp/.buildx-cache-${{ inputs.cache }}-new /tmp/.buildx-cache-${{ inputs.cache }}
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
