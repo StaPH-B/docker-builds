@@ -12,7 +12,7 @@ LABEL license="https://github.com/samtools/samtools/blob/develop/LICENSE"
 LABEL maintainer="Erin Young"
 LABEL maintainer.email="eriny@utah.gov"
 
-ENV DEBIAN_FRONTEND noninteractive
+ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
  libncurses5-dev \
