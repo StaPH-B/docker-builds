@@ -1,4 +1,4 @@
-FROM ubuntu:focal
+FROM ubuntu:focal as app
 
 # to make it easier to upgrade for new versions; ARG variables only persist during docker image build time
 ARG SPAdesVer=3.15.4
@@ -32,3 +32,9 @@ ENV LC_ALL=C.UTF-8 \
     PATH="${PATH}:/SPAdes-${SPAdesVer}-Linux/bin"
 
 WORKDIR /data
+
+# test layer
+FROM app as test
+
+# print version and run the supplied test flag
+RUN spades.py --version && spades.py --test
