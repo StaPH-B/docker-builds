@@ -25,9 +25,3 @@ jobs:
     with:
       tool: "${{ fromJson(needs.params.outputs.params).tool }}"
       version: "${{ fromJson(needs.params.outputs.params).version }}"
-
-  build-to-test:
-    uses: ./.github/workflows/build-to-test.yml
-    with:
-      tool: "${{ fromJson(needs.params.outputs.params).tool }}"
-      version: "${{ fromJson(needs.params.outputs.params).version }}"
