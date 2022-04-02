@@ -1,5 +1,5 @@
 #use ubuntu as base image
-FROM ubuntu:xenial
+FROM ubuntu:xenial as app
 
 # metadata
 LABEL base.image="ubuntu:xenial"
@@ -36,3 +36,16 @@ ENV PATH="${PATH}:/Trimmomatic-0.39/"
 # create /data directory and set as working directory
 RUN mkdir /data
 WORKDIR /data
+
+FROM app as test
+
+# Get test dependencies
+RUN apt-get update && apt-get install -y python3
+COPY tests /tests/
+
+# Run program on test data
+RUN bash /tests/scripts/get_data_pos_control.sh
+RUN bash /tests/scripts/run_trimmomatic_pos_control.sh
+
+# Verify output
+RUN python3 -m unittest discover -s /tests
