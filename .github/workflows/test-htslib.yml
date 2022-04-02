@@ -16,3 +16,4 @@ jobs:
     with:
       path_to_context: "htslib/1.15"
       cache: "htslib"
+      dockerfile_name: "Dockerfile"
