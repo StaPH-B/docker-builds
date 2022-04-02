@@ -23,5 +23,5 @@ jobs:
     needs: [params]
     uses: ./.github/workflows/build-to-test.yml
     with:
-      tool: "${{ fromJson(needs.params.outputs.params).tool }}"
-      version: "${{ fromJson(needs.params.outputs.params).version }}"
+      path_to_context: ${{ fromJson(needs.params.outputs.params).tool }}/${{ fromJson(needs.params.outputs.params).version }}
+      cache: ${{ fromJson(needs.params.outputs.params).tool }}
