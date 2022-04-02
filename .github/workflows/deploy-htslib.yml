@@ -4,7 +4,7 @@ on: workflow_dispatch
 
 env:
   tool: "htslib"
-  version: "1.15"
+  tag: "1.15"
 
 jobs:
   params:
@@ -16,20 +16,25 @@ jobs:
         run: echo "::set-output name=params::$(echo $(jq -n 'env'))"
 
   build-to-test:
-    uses: StaPH-B/docker-builds/.github/workflows/build-to-test.yml@master
+    needs: [params]
+    uses: StaPH-B/docker-builds/.github/workflows/build-to-test.yml
     with:
-      tool: "${{ fromJson(needs.params.outputs.params).tool }}"
-      version: "${{ fromJson(needs.params.outputs.params).version }}"
+      path_to_context: "${{ fromJson(needs.params.outputs.params).tool }}/${{ fromJson(needs.params.outputs.params).tag }}"
+      dockerfile_name: "Dockerfile"
+      cache: "${{ fromJson(needs.params.outputs.params).tool }}"
 
   build-to-deploy:
-    needs: build-to-test  # this jobs needs to run serially, after testing succeeds
+    needs: [params, build-to-test]
     uses: StaPH-B/docker-builds/.github/workflows/build-to-deploy.yml@master
     with:
-      tool: "${{ fromJson(needs.params.outputs.params).tool }}"
-      version: "${{ fromJson(needs.params.outputs.params).version }}"
+      path_to_context: "./${{ fromJson(needs.params.outputs.params).tool }}/${{ fromJson(needs.params.outputs.params).tag }}"
+      dockerfile_name: "Dockerfile"
+      cache: "${{ fromJson(needs.params.outputs.params).tool }}"
+      container_name: "${{ fromJson(needs.params.outputs.params).tool }}"
+      tag: ${{ fromJson(needs.params.outputs.params).tag }}
 
   run-singularity:
-    needs: build-to-deploy  # test singularity run on newly pushed Docker image
+    needs: [params, build-to-deploy]  # test singularity run on newly pushed Docker image
     uses: StaPH-B/docker-builds/.github/workflows/run-singularity.yml@master
     with:
-      image_name: "${{ fromJson(needs.params.outputs.params).tool }}:${{ fromJson(needs.params.outputs.params).version }}"
+      image_name: "${{ fromJson(needs.params.outputs.params).tool }}:${{ fromJson(needs.params.outputs.params).tag }}"
