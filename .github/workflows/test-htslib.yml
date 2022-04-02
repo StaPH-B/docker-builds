@@ -23,5 +23,5 @@ jobs:
     needs: [params]
     uses: ./.github/workflows/build-to-test.yml
     with:
-      path_to_context: ${{ fromJson(needs.params.outputs.params).tool }}/${{ fromJson(needs.params.outputs.params).version }}
+      path_to_context: "htslib/1.15"
       cache: ${{ fromJson(needs.params.outputs.params).tool }}
