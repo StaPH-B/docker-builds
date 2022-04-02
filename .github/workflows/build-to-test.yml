@@ -39,7 +39,7 @@ jobs:
         id: docker_build_to_test
         uses: docker/build-push-action@v2
         with:
-          context: ${{ inputs.tool }}/${{ inputs.version }}
+          context: "${{ inputs.tool }}/${{ inputs.version }}"
           file: ${{ inputs.tool }}/${{ inputs.version }}/${{ inputs.dockerfile_name }}
           target: test
           push: false
