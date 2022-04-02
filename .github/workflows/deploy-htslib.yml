@@ -17,7 +17,7 @@ jobs:
 
   build-to-test:
     needs: [params]
-    uses: StaPH-B/docker-builds/.github/workflows/build-to-test.yml
+    uses: StaPH-B/docker-builds/.github/workflows/build-to-test.yml@master
     with:
       path_to_context: "${{ fromJson(needs.params.outputs.params).tool }}/${{ fromJson(needs.params.outputs.params).tag }}"
       dockerfile_name: "Dockerfile"
