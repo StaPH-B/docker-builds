@@ -11,17 +11,8 @@ on:
       - 'htslib/1.15/Dockerfile'
 
 jobs:
-  params:
-    runs-on: ubuntu-latest
-    outputs:
-      params: ${{ steps.env-vars.outputs.params }}
-    steps:
-      - id: env-vars
-        run: echo "::set-output name=params::$(echo $(jq -n 'env'))"
-
   build-to-test:
-    needs: [params]
     uses: ./.github/workflows/build-to-test.yml
     with:
       path_to_context: "htslib/1.15"
-      cache: ${{ fromJson(needs.params.outputs.params).tool }}
+      cache: "htslib"
