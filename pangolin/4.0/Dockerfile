@@ -85,15 +85,11 @@ ARG MAMBA_DOCKERFILE_ACTIVATE=1
 
 # test on test sequences supplied with Pangolin code
 RUN pangolin /pangolin/pangolin/test/test_seqs.fasta --analysis-mode usher -o /data/test_seqs-output-pusher && \
- pangolin /pangolin/pangolin/test/test_seqs.fasta --analysis-mode pangolearn -o /data/test_seqs-output-plearn && \
- cat /data/test_seqs-output-plearn/lineage_report.csv && \ 
- echo && \
- cat /data/test_seqs-output-plearn/lineage_report.csv
+ cat /data/test_seqs-output-pusher/lineage_report.csv 
 
 # download B.1.1.7 genome from Utah
 ADD https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123.consensus.fa /test-data/SRR13957123.consensus.fa
 
-# test on a B.1.1.7 genome from Utah
-RUN pangolin /test-data/SRR13957123.consensus.fa --analysis-mode pangolearn -o /test-data/SRR13957123-plearn && \
- pangolin /test-data/SRR13957123.consensus.fa --analysis-mode usher -o /test-data/SRR13957123-pusher && \
- cat /test-data/SRR13957123-p*/*.csv
+# test on a B.1.1.7 genome
+RUN pangolin /test-data/SRR13957123.consensus.fa --analysis-mode usher -o /test-data/SRR13957123-pusher && \
+ cat /test-data/SRR13957123-pusher/lineage_report.csv
