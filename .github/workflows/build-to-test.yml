@@ -50,7 +50,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ${{ inputs.path_to_context }}
-          file: ${{ inputs.path_to_context }}/${{ inputs.dockerfile_name }}
+          file: ./${{ inputs.path_to_context }}/${{ inputs.dockerfile_name }}
           target: test
           push: false
           cache-from: type=local,src=/tmp/.buildx-cache-${{ inputs.cache }}
