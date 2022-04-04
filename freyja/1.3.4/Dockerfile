@@ -32,6 +32,6 @@ COPY tests/ /data/
 RUN freyja variants /data/Freyja_WWSC2.bam --variants /data/test_variants.tsv --depths /data/test_depths.tsv --ref /data/nCoV-2019.reference.fasta && freyja demix /data/test_variants.tsv /data/test_depths.tsv --output test_demix.tsv
 
 # Check validity of outputs
-RUN cmp /data/test_variants.tsv /data/Freyja_variants.tsv && cmp /data/test_depths.tsv /data/Freyja_depths.tsv && cmp /data/test_demix.tsv /data/Freyja_demix.tsv
+RUN ["/bin/bash", "-c", "cmp /data/test_variants.tsv /data/Freyja_variants.tsv && cmp /data/test_depths.tsv /data/Freyja_depths.tsv && cmp /data/test_demix.tsv /data/Freyja_demix.tsv"]
 
 
