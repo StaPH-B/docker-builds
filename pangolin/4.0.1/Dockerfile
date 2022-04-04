@@ -8,7 +8,7 @@ WORKDIR /
 # ARG variables only persist during build time
 # had to include the v for some of these due to GitHub tags.
 # using pangolin-data github tag, NOT what is in the GH release title "v1.2.133"
-ARG PANGOLIN_VER="v4.1"
+ARG PANGOLIN_VER="v4.0.1"
 ARG PANGOLIN_DATA_VER="v1.2.133.2"
 ARG SCORPIO_VER="v0.3.16"
 ARG CONSTELLATIONS_VER="v0.1.4"
