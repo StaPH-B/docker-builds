@@ -29,9 +29,9 @@ FROM app as test
 COPY tests/ /data/
 
 # Run Freyja
-RUN freyja variants /data/Freyja_WWSC2.bam --variants /data/test_variants.tsv --depths /data/test_depths.tsv --ref /data/nCoV-2019.reference.fasta && freyja demix /data/test_variants.tsv /data/test_depths.tsv --output test_demix.tsv
+RUN freyja variants /data/Freyja_WWSC2.bam --variants /data/test_variants.tsv --depths /data/test_depths.tsv --ref /data/nCoV-2019.reference.fasta && freyja demix /data/test_variants.tsv /data/test_depths.tsv --output /data/test_demix.tsv
 
 # Check validity of outputs
-RUN ["/bin/bash", "-c", "cmp /data/test_variants.tsv /data/Freyja_variants.tsv && cmp /data/test_depths.tsv /data/Freyja_depths.tsv && cmp /data/test_demix.tsv /data/Freyja_demix.tsv"]
+RUN ["/bin/bash", "-c", "cmp /data/test_variants.tsv /data/Freyja_variants.tsv && cmp /data/test_depths.tsv /data/Freyja_depths.tsv && cmp /data/test_demix.tsv /data/Freyja_demix.tsv && echo done"]
 
 
