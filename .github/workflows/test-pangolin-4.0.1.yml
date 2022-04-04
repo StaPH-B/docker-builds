@@ -2,7 +2,7 @@
 # Instructions: replace all the <placeholder> stubs in this template with values for your image.
 # Some explanations come from: https://github.com/actions/starter-workflows/blob/main/automation/manual.yml
 
-name: Test Pangolin v4.0 image
+name: Test Pangolin v4.0.1 image
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI or when you submit your pull request
 on:
