@@ -64,7 +64,10 @@ WORKDIR /pangolin
 ##### NOTE: 'pangolin --all-versions' does not accurately print the pangolin-data or pangolin-assignment version as it prints the version in 
 ##### /pangolin-data/pangolin-data/__init__.py instead of the GH tag (which is actually used for downloading)
 ##### See here for more info/explanation: https://github.com/cov-lineages/pangolin/issues/393
+# TO REMOVE IN NEXT PATCH RELEASE: git-lfs install 
+# See here for more info: https://github.com/cov-lineages/pangolin/issues/403#issuecomment-1089189772
 RUN pip install . && \
+ git-lfs install && \
  pangolin --add-assignment-cache && \
  micromamba clean -a -y && \
  mkdir /data && \
@@ -86,6 +89,9 @@ ARG MAMBA_DOCKERFILE_ACTIVATE=1
 # test on test sequences supplied with Pangolin code
 RUN pangolin /pangolin/pangolin/test/test_seqs.fasta --analysis-mode usher -o /data/test_seqs-output-pusher && \
  cat /data/test_seqs-output-pusher/lineage_report.csv 
+
+# test functionality of assignment-cache option
+RUN pangolin --use-assignment-cache /pangolin/pangolin/test/test_seqs.fasta
 
 # download B.1.1.7 genome from Utah
 ADD https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123.consensus.fa /test-data/SRR13957123.consensus.fa
