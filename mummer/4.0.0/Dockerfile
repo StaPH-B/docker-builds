@@ -1,18 +1,18 @@
 # FROM defines the base docker image. This command has to come first in the file
 # The 'as' keyword lets you name the following stage. We use `app` for the production image
-FROM ubuntu:xenial as app
+FROM ubuntu:focal as app
 
 # ARG sets environment variables during the build stage
 ARG MUMMER_VER="4.0.0"
 
 # LABEL instructions tag the image with metadata that might be important to the user
-LABEL base.image="ubuntu:xenial"
+LABEL base.image="ubuntu:focal"
 LABEL dockerfile.version="1"
 LABEL software="mummer"
 LABEL software.version=$MUMMER_VER
 LABEL description="MUMmer is a versatile alignment tool for DNA and protein sequences."
-LABEL website="https://github.com/StaPH-B/docker-builds"
-LABEL license="https://github.com/StaPH-B/docker-builds/blob/master/LICENSE"
+LABEL website="https://github.com/mummer4/mummer"
+LABEL license="https://github.com/mummer4/mummer/blob/master/LICENSE.md"
 LABEL maintainer="John Arnn"
 LABEL maintainer.email="jarnn@utah.gov"
 
@@ -36,7 +36,6 @@ RUN apt-get update && apt-get install -y \
  gawk \
  curl \
  sed \
- sudo \
  build-essential && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
@@ -48,7 +47,7 @@ RUN wget https://github.com/mummer4/mummer/releases/download/v${MUMMER_VER}rc1/m
   ./configure && \
   make && \
   make install && \
-  sudo ldconfig && \
+  ldconfig && \
   cd .. && \
   mkdir /data
 
