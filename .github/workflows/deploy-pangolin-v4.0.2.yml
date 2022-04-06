@@ -40,4 +40,4 @@ jobs:
     needs: build-to-deploy  # test singularity run on newly pushed Docker image
     uses: StaPH-B/docker-builds/.github/workflows/run-singularity.yml@master
     with:
-      image_name: "pangolin:4.0.2"  # The image to pull, e.g. "spades:3.12.0"
+      image_name: "pangolin:4.0.2-pdata-1.2.133"  # The image to pull, e.g. "spades:3.12.0"
