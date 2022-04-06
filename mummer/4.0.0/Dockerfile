@@ -16,6 +16,10 @@ LABEL license="https://github.com/mummer4/mummer/blob/master/LICENSE.md"
 LABEL maintainer="John Arnn"
 LABEL maintainer.email="jarnn@utah.gov"
 
+# to prevent tzdata from asking for a region during apt updates; ARG so that variable only 
+# persists at buildtime
+ARG DEBIAN_FRONTEND=noninteractive
+
 # RUN executes code during the build
 # Install dependencies via apt-get or yum if using a centos or fedora base
 RUN apt-get update && apt-get install -y \
