@@ -63,6 +63,3 @@ RUN amrfinder --plus -n /amrfinder/test_dna.fa -p /amrfinder/test_prot.fa -g /am
  diff /amrfinder/test_both.expected /amrfinder/test_both.got && \
  echo "exit code for test:" $?
 
-
-
-
