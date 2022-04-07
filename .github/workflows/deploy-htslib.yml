@@ -25,7 +25,7 @@ jobs:
 
   build-to-deploy:
     needs: [params, build-to-test]
-    uses: StaPH-B/docker-builds/.github/workflows/build-to-deploy.yml@master
+    uses: StaPH-B/docker-builds/.github/workflows/build-to-deploy.yml@erin-deploy
     with:
       path_to_context: "./${{ fromJson(needs.params.outputs.params).tool }}/${{ fromJson(needs.params.outputs.params).tag }}"
       dockerfile_name: "Dockerfile"
