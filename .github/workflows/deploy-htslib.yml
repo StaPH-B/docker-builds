@@ -26,6 +26,11 @@ jobs:
   build-to-deploy:
     needs: [params, build-to-test]
     uses: StaPH-B/docker-builds/.github/workflows/build-to-deploy.yml@erin-deploy
+    secrets: # these are the secret login credientials for pushing the containers to the repository
+      docker_username: ${{ secrets.DOCKER_HUB_USERNAME }}
+      docker_access_token: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      quay_username: ${{ secrets.quay_username }}
+      quay_robot_token: ${{ secrets.quay_robot_token }}
     with:
       path_to_context: "./${{ fromJson(needs.params.outputs.params).tool }}/${{ fromJson(needs.params.outputs.params).tag }}"
       dockerfile_name: "Dockerfile"
