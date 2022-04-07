@@ -4,6 +4,15 @@ name: Build and deploy image
 
 on:
   workflow_call:
+    secrets:
+      docker_username:
+        required: true
+      docker_access_token:
+        required: true
+      quay_username:
+        required: false
+      quay_robot_token:
+        required: false
     inputs:
       path_to_context:
         required: true
