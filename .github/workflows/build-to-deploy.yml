@@ -4,15 +4,6 @@ name: Build and deploy image
 
 on:
   workflow_call:
-    secrets:
-      docker_username:
-        required: true
-      docker_access_token:
-        required: true
-      quay_username:
-        required: false
-      quay_robot_token:
-        required: false
     inputs:
       path_to_context:
         required: true
@@ -69,8 +60,8 @@ jobs:
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
-          username: ${{ secrets.docker_username }}
-          password: ${{ secrets.docker_access_token }}
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
       - name: Login to Quay
         uses: docker/login-action@v1
