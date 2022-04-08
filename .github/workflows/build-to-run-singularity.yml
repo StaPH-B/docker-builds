@@ -1,0 +1,33 @@
+# This called workflow runs a Singularity container based on a Docker image pulled from Dockerhub.
+
+name: Build Singularity image
+
+on:
+  workflow_call:
+    inputs:
+      image_name:
+        required: true
+        type: string
+      repository_name:
+        default: staphb
+        required: false
+        type: string
+      command:
+        required: false
+        default: pwd
+        type: string
+
+jobs:
+  build_singularity:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check out Repo
+        uses: actions/checkout@v2
+
+      - name: Set up Singularity
+        uses: eWaterCycle/setup-singularity@v7
+        with:
+          singularity-version: 3.8.3
+
+      - name: Run a singularity container
+        run: singularity run docker://${{ inputs.repository_name }}/${{ inputs.image_name }} ${{ inputs.command }}
