@@ -56,6 +56,6 @@ jobs:
 
   build-to-run-singularity:
     needs: [params, build-to-deploy]  # test singularity run on newly pushed Docker image
-    uses: StaPH-B/docker-builds/.github/workflows/build-to-run-singularity.yml@spring_cleaning
+    uses: StaPH-B/docker-builds/.github/workflows/build-to-run-singularity.yml@master
     with:
       image_name: "${{ fromJson(needs.params.outputs.params).TOOL_NAME }}:${{ fromJson(needs.params.outputs.params).TOOL_VERSION }}"

@@ -1,11 +1,27 @@
+##### --------------------------------------------------------------------------------------------------------- #####
+##### This caller workflow tests, builds, and pushes the image to Docker Hub.                                   #####
+##### It also tests that a Singularity container can be run from the Docker image.                              #####
+##### Instructions: replace all the <placeholder> stubs in this template with values for your image.            #####
+##### Some explanations come from: https://github.com/actions/starter-workflows/blob/main/automation/manual.yml #####
+##### --------------------------------------------------------------------------------------------------------- #####
+
 name: Deploy FLASH image
 
+# This workflow should run when manually triggered by StaPH-B repo maintainer
 on: workflow_dispatch
 
+# set variables for docker container
 env:
   TOOL_NAME: flash
-  TOOL_VERSION: "1.2.11"
+  TOOL_VERSION: 1.2.11
 
+##### ------------------------------------------------------- #####
+##### Does not need to be edited below this line              #####
+##### This calls the jobs for                                 #####
+##### 1) testing the dockerfile (again)                       #####
+##### 2) deploying the docker container to quay and dockerhub #####
+##### 3) testing with singularity                             #####
+##### ------------------------------------------------------- #####
 jobs:
   params:
     runs-on: ubuntu-latest
@@ -19,7 +35,8 @@ jobs:
     needs: [params]
     uses: StaPH-B/docker-builds/.github/workflows/build-to-test.yml@master
     with:
-      path_to_context: "${{ fromJson(needs.params.outputs.params).TOOL_NAME }}/${{ fromJson(needs.params.outputs.params).TOOL_VERSION }}"
+      path_to_context: "./${{ fromJson(needs.params.outputs.params).TOOL_NAME }}/${{ fromJson(needs.params.outputs.params).TOOL_VERSION }}"
+      dockerfile_name: "Dockerfile"
       cache: "${{ fromJson(needs.params.outputs.params).TOOL_NAME }}"
 
   build-to-deploy:
@@ -31,13 +48,14 @@ jobs:
       quay_username: ${{ secrets.quay_username }}
       quay_robot_token: ${{ secrets.quay_robot_token }}
     with:
-      path_to_context: "${{ fromJson(needs.params.outputs.params).TOOL_NAME }}/${{ fromJson(needs.params.outputs.params).TOOL_VERSION }}"
+      path_to_context: "./${{ fromJson(needs.params.outputs.params).TOOL_NAME }}/${{ fromJson(needs.params.outputs.params).TOOL_VERSION }}"
+      dockerfile_name: "Dockerfile"
       cache: "${{ fromJson(needs.params.outputs.params).TOOL_NAME }}"
       container_name: "${{ fromJson(needs.params.outputs.params).TOOL_NAME }}"
       tag: ${{ fromJson(needs.params.outputs.params).TOOL_VERSION }}
 
-  run-singularity:
+  build-to-run-singularity:
     needs: [params, build-to-deploy]  # test singularity run on newly pushed Docker image
-    uses: StaPH-B/docker-builds/.github/workflows/run-singularity.yml@master
+    uses: StaPH-B/docker-builds/.github/workflows/build-to-run-singularity.yml@master
     with:
       image_name: "${{ fromJson(needs.params.outputs.params).TOOL_NAME }}:${{ fromJson(needs.params.outputs.params).TOOL_VERSION }}"
