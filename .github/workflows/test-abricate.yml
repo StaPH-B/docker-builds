@@ -35,7 +35,7 @@ jobs:
 
   build-to-test:
     needs: [params]
-    uses: ./docker-builds/.github/workflows/build-to-test.yml@master
+    uses: .github/workflows/build-to-test.yml@master
     with:
       path_to_context: "${{ fromJson(needs.params.outputs.params).TOOL_NAME }}/${{ fromJson(needs.params.outputs.params).TOOL_VERSION }}"
       dockerfile_name: "Dockerfile"
