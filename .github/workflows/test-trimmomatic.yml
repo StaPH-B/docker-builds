@@ -1,17 +1,42 @@
+##### --------------------------------------------------------------------------------------------------------- #####
+##### This caller workflow builds an image to the "test" stage.                                                 #####
+##### Instructions: replace all the <placeholder> stubs in this template with values for your image.            #####
+##### Some explanations come from: https://github.com/actions/starter-workflows/blob/main/automation/manual.yml #####
+##### --------------------------------------------------------------------------------------------------------- #####
 
 name: Test Trimmomatic image
 
+# Set your variables
+env:
+  TOOL_NAME: trimmomatic
+  TOOL_VERSION: 0.39
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI or when you submit your pull request
 on:
   workflow_dispatch:
   pull_request:
     paths:
-      - "trimmomatic/0.39/Dockerfile"
+      - "trimmomatic/0.39/Dockerfile"  # Dockerfile path, e.g. 'htslib/1.14/Dockerfile' so that only your image is tested
+
+
+##### ------------------------------------------------------- #####
+##### Does not need to be edited below this line              #####
+##### This calls the jobs for testing the dockerfile          #####
+##### ------------------------------------------------------- #####
 
 jobs:
+  params:
+    runs-on: ubuntu-latest
+    outputs:
+      params: ${{ steps.env-vars.outputs.params }}
+    steps:
+      - id: env-vars
+        run: echo "::set-output name=params::$(echo $(jq -n 'env'))"
 
   build-to-test:
+    needs: [params]
     uses: ./.github/workflows/build-to-test.yml
     with:
-      path_to_context: "./trimmomatic/0.39"
+      path_to_context: "${{ fromJson(needs.params.outputs.params).TOOL_NAME }}/${{ fromJson(needs.params.outputs.params).TOOL_VERSION }}"
       dockerfile_name: "Dockerfile"
-      cache: "trimmomatic"
+      cache: "${{ fromJson(needs.params.outputs.params).TOOL_NAME }}"

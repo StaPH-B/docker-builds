@@ -1,18 +1,31 @@
+##### --------------------------------------------------------------------------------------------------------- #####
+##### This caller workflow builds an image to the "test" stage.                                                 #####
+##### Instructions: replace all the <placeholder> stubs in this template with values for your image.            #####
+##### Some explanations come from: https://github.com/actions/starter-workflows/blob/main/automation/manual.yml #####
+##### --------------------------------------------------------------------------------------------------------- #####
+
 name: Test FLASH image
 
+# Set your variables
 env:
   TOOL_NAME: flash
-  TOOL_VERSION: "1.2.11"
+  TOOL_VERSION: 1.2.11
 
+# Controls when the action will run. Workflow runs when manually triggered using the UI or when you submit your pull request
 on:
   workflow_dispatch:
   pull_request:
     paths:
-      - 'flash/1.2.11/Dockerfile' # cannot use env vars
+      - "flash/1.2.11/Dockerfile"  # Dockerfile path, e.g. 'htslib/1.14/Dockerfile' so that only your image is tested
+
+
+##### ------------------------------------------------------- #####
+##### Does not need to be edited below this line              #####
+##### This calls the jobs for testing the dockerfile          #####
+##### ------------------------------------------------------- #####
 
 jobs:
   params:
-    # see https://github.com/actions/runner/issues/480#issuecomment-1055373623
     runs-on: ubuntu-latest
     outputs:
       params: ${{ steps.env-vars.outputs.params }}
