@@ -5,7 +5,7 @@
 ##### Some explanations come from: https://github.com/actions/starter-workflows/blob/main/automation/manual.yml #####
 ##### --------------------------------------------------------------------------------------------------------- #####
 
-name: Deploy htslib image
+name: Deploy samtools image
 
 # This workflow should run when manually triggered by StaPH-B repo maintainer
 on: workflow_dispatch
