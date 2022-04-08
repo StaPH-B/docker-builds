@@ -109,6 +109,14 @@ jobs:
             quay.io/${{ inputs.repository_name }}/${{ inputs.container_name }}:latest
             quay.io/${{ inputs.repository_name }}/${{ inputs.container_name }}:${{ inputs.tag }}
 
+      - name: Docker Hub Description
+        uses: peter-evans/dockerhub-description@v3
+        with:
+          username: ${{ secrets.docker_username }}
+          password: ${{ secrets.docker_access_token }}
+          repository: ${{ inputs.repository_name }}/${{ inputs.container_name }}
+          readme-filepath: ./${{ inputs.container_name }}/${{ inputs.tag }}/README.md
+
       - name: Move cache # apparently prevents the cache from growing in size forever
         run: |
           rm -rf /tmp/.buildx-cache-${{ inputs.cache }}
