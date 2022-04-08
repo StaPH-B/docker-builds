@@ -1,47 +1,26 @@
-# SerotypeFinder Container How-To
+# SerotypeFinder container
 
-### Description
+Main tool : [SerotypeFinder](https://bitbucket.org/genomicepidemiology/serotypefinder/src/master/)
+
+Additional tools:
+- ncbi-blast
+- kma 
+
+Full documentation: https://bitbucket.org/genomicepidemiology/serotypefinder/src/master/
+
 A docker container that contains SerotypeFinder, a tool for serotyping E. coli isolates from reads or assemblies
 
-[Link to DockerHub repository](https://hub.docker.com/r/staphb/serotypefinder)
+# Example Usage
 
-### Version information
-SerotypeFinder version: 2.0.1 https://bitbucket.org/genomicepidemiology/serotypefinder/src/2.0.1/ made on 2019‑01‑28
-
-SerotypeFinder database version: Git commit `39c68c6e1a3d94f823143a2e333019bb3f8dddba` made on 2020‑09‑24. [Link to commit history](https://bitbucket.org/genomicepidemiology/serotypefinder_db/commits/)
-
-You may be familiar with the web version of SerotypeFinder: https://cge.cbs.dtu.dk/services/SerotypeFinder/
-
-## Requirements
-  * Docker or Singularity
-  * E. coli raw reads (fastq.gz) or assembly (fasta)
-    * Illumina, Ion Torrent, Roche 454, SOLiD, Oxford Nanopore, and PacBio reads are supported. (I've only tested Illumina reads)
-
-## Usage
 ```
-usage: serotypefinder.py [-h] -i INFILE [INFILE ...] [-o OUTDIR] [-tmp TMP_DIR] [-mp METHOD_PATH] [-p DB_PATH] [-d DATABASES] [-l MIN_COV] [-t THRESHOLD] [-x] [-q]
+# make an output directory
+mkdir output-dir-reads output-dir-asm
 
-optional arguments:
-  -h, --help            show this help message and exit
-  -i INFILE [INFILE ...], --infile INFILE [INFILE ...]
-                        FASTA or FASTQ input files.
-  -o OUTDIR, --outputPath OUTDIR
-                        Path to blast output
-  -tmp TMP_DIR, --tmp_dir TMP_DIR
-                        Temporary directory for storage of the results from the external software.
-  -mp METHOD_PATH, --methodPath METHOD_PATH
-                        Path to method to use (kma or blastn)
-  -p DB_PATH, --databasePath DB_PATH
-                        Path to the databases
-  -d DATABASES, --databases DATABASES
-                        Databases chosen to search in - if non is specified all is used
-  -l MIN_COV, --mincov MIN_COV
-                        Minimum coverage
-  -t THRESHOLD, --threshold THRESHOLD
-                        Minimum threshold for identity
-  -x, --extented_output
-                        Give extented output with allignment files, template and query hits in fasta and a tab seperated file with gene profile results
-  -q, --quiet
+# query reads
+serotypefinder.py -i /data/E-coli.R1.fastq.gz /data/E-coli.R2.fastq.gz -o /data/output-dir-reads
+
+# query assembly
+serotypefinder.py -i /data/E-coli.skesa.fasta  -o /data/output-dir-asm
 ```
 
 ## Notes and Recommendations
@@ -59,45 +38,3 @@ optional arguments:
   * Querying assemblies:
     * This will run SerotypeFinder with `ncbi-blast+`
     * SerotypeFinder does not clean up after itself. `tmp/out_H_type.xml` and `tmp/out_O_type.xml` will exist in the specified output directory
-
-## Example Usage: Docker
-```bash
-# download the image
-$ docker pull staphb/serotypefinder:2.0.1
-
-# input files are in my PWD
-$ ls
-E-coli.skesa.fasta  E-coli.R1.fastq.gz  E-coli.R2.fastq.gz
-
-# make an output directory
-$ mkdir output-dir-reads output-dir-asm
-
-# query reads, mount PWD to /data inside container (broken into two lines for readabilty)
-$ docker run --rm -u $(id -u):$(id -g) -v $PWD:/data staphb/serotypefinder:2.0.1 \
-    serotypefinder.py -i /data/E-coli.R1.fastq.gz /data/E-coli.R2.fastq.gz -o /data/output-dir-reads
-
-# query assembly
-$ docker run --rm -u $(id -u):$(id -g) -v $PWD:/data staphb/serotypefinder:2.0.1 \
-    serotypefinder.py -i /data/E-coli.skesa.fasta  -o /data/output-dir-asm
-```
-
-## Example Usage: Singularity
-```bash
-# download the image
-$ singularity build serotypefinder.2.0.1.sif docker://staphb/serotypefinder:2.0.1
-
-# files are in my PWD
-$ ls
-E-coli.skesa.fasta  E-coli.R1.fastq.gz  E-coli.R2.fastq.gz
-
-# make an output directory
-$ mkdir output-dir-reads output-dir-asm
-
-# query reads; mount PWD to /data inside container
-$ singularity exec --no-home -B $PWD:/data serotypefinder.2.0.1.sif \
-    serotypefinder.py -i /data/E-coli.R1.fastq.gz /data/E-coli.R2.fastq.gz -o /data/output-dir-reads
-
-# assembly
-$ singularity exec --no-home -B $PWD:/data serotypefinder.2.0.1.sif \
-    serotypefinder.py -i /data/E-coli.skesa.fasta  -o /data/output-dir-asm
-```

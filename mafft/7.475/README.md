@@ -2,6 +2,8 @@
 
 Main tool : [MAFFT](https://mafft.cbrc.jp/alignment/software/)
 
+Full documentation: https://mafft.cbrc.jp/alignment/software/
+
 MAFFT is a multiple sequence alignment program for unix-like operating systems..
 
 # Example Usage

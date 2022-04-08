@@ -2,7 +2,12 @@
 
 Main tool : [MultiQC](https://multiqc.info/)
 
-Aggregate results from bioinformaticcs analyses across many samples into a single report.
+Additional tools:
+- pandoc
+
+Full documentation: https://multiqc.info/
+
+Aggregate results from bioinformatic analyses across many samples into a single report.
 
 # Example Usage
 

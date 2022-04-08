@@ -1,14 +1,31 @@
-# fastq-scan v0.4.4
+# fastq-scan container
 
 Main tool: [fastq-scan](https://github.com/rpetit3/fastq-scan)
 
-In addition to fastq-scan, this docker image contains the CLI json parser [jq](https://stedolan.github.io/jq/). 
+Additional tools:
+- CLI json parser [jq](https://stedolan.github.io/jq/)
 
-## Example commands
-Example stats for a uncompressed FASTQ: `$ docker run --rm -u $(id -u):$(id -g) -v ${PWD}:/data staphb/fastq-scan:0.4.3 /bin/bash -c "cat /fastq-scan/example.fq | fastq-scan"`
+Full documentation: https://github.com/rpetit3/fastq-scan
 
-Example stats for a compressed (gzip) FASTQ: `$ docker run --rm -u $(id -u):$(id -g) -v ${PWD}:/data staphb/fastq-scan:0.4.3 /bin/bash -c "zcat /data/SRX0000000_R1.fastq.gz | fastq-scan"`
+> fastq-scan reads a FASTQ from STDIN and outputs summary statistics (read lengths, per-read qualities, per-base qualities) in JSON format.
 
-Eaxmple using jq to extract the total number of reads in the FASTQ: `$ docker run --rm -u $(id -u):$(id -g) -v ${PWD}:/data fastq-scan:0.4.3 /bin/bash -c "cat /fastq-scan/example.fq | fastq-scan | jq .qc_stats.read_total"`
+# Example Usage
+Example stats for a uncompressed FASTQ:
+```
+cat /fastq-scan/example.fq | fastq-scan
+```
 
-View full fastq-scan help options: `$ docker run --rm -u $(id -u):$(id -g) -v ${PWD}:/data staphb/fastq-scan:0.4.3 fastq-scan -h `
+Example stats for a compressed (gzip) FASTQ:
+```
+zcat /data/SRX0000000_R1.fastq.gz | fastq-scan"
+```
+
+Example using jq to extract the total number of reads in the FASTQ:
+```
+cat /fastq-scan/example.fq | fastq-scan | jq .qc_stats.read_total"
+```
+
+View full fastq-scan help options:
+```
+fastq-scan -h
+````

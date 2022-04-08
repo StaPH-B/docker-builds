@@ -1,11 +1,12 @@
 # bowtie2 container
-Main tool : [bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml)
+Main tool : [bowtie2](https://github.com/BenLangmead/bowtie2)
 
-Required tool : [samtools](https://www.htslib.org/)
+Additional tools:
+- [samtools](https://www.htslib.org/)
 
-Bowtie2 : Genome assembler using a reference and mapping
+Full documentation: http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml
 
-Samtools: a set of tools for interacting with and reformatting sequence data
+> Bowtie 2 is an ultrafast and memory-efficient tool for aligning sequencing reads to long reference sequences. It is particularly good at aligning reads of about 50 up to 100s or 1,000s of characters, and particularly good at aligning to relatively long (e.g. mammalian) genomes. 
 
 # Example Usage
 
@@ -24,4 +25,3 @@ samtools ampliconclip -b bed.file input.bam
 ```
 samtools sort -T /tmp/aln.sorted -o aln.sorted.bam aln.bam
 ```
-Better documentation can be found at [https://github.com/BenLangmead/bowtie2](https://github.com/BenLangmead/bowtie2)

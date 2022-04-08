@@ -1,7 +1,13 @@
-# DSK
+# DSK container
 
-This image implements the k-mer counting software [DSK](https://gatb.inria.fr/software/dsk/).
-Documentation is available at https://github.com/GATB/dsk. 
+Main tool : [<program>](link to program)
+
+Additional tools:
+- GATB
+
+Full documentation: https://github.com/GATB/dsk.
+
+> DSK is a k-mer counting software, similar to Jellyfish.
 
 ## Example usage
 
@@ -19,7 +25,7 @@ dsk2ascii \
   -out my_assembly_7mers.txt
 ```
 
-## Example output 
+## Example output
 
 The output looks like this:
 ```

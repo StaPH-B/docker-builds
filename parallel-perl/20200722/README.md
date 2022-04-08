@@ -1,10 +1,12 @@
-# Basic container with GNU parallel
+# GNU parallel container
 
 Main tool : [GNU parallel](https://www.gnu.org/software/parallel)
 
-Allows easy parallelization of command line. 
+Additional tools:
+- perl
+- will add python3 on request
 
-Container also contains perl functionality for perl scripts.
+Allows easy parallelization of command line.
 
 # Example Usage
 
@@ -24,7 +26,7 @@ And a bunch of fasta files:
 ```
 
 ```
-grep -v "Sample_Id" | parallel --colsep "\t" "cp {1}.fa {2}.fa" 
+grep -v "Sample_Id" | parallel --colsep "\t" "cp {1}.fa {2}.fa"
 ```
 
 Will create the following fasta files:

@@ -1,7 +1,10 @@
-# FLASH
+# FLASH container
+
+Main tool : [FLASH](http://ccb.jhu.edu/software/FLASH)
+
+Full documentation: http://ccb.jhu.edu/software/FLASH/MANUAL
 
 This image implements the software [FLASH](http://ccb.jhu.edu/software/FLASH) for merging overlapping paired-end reads.
-Documentation is available at http://ccb.jhu.edu/software/FLASH/MANUAL.
 
 ## Example usage
 This example useage is adapted from the built-in tests for this image. See [run_flash_pos_control.sh](tests/scripts/run_flash_pos_control.sh).

@@ -8,7 +8,7 @@ Phylogenetic Assignment of Named Global Outbreak LINeages
 
 # Example Usage
 
-```bash
+```
 # run Pangolin in the default mode (usher). Can optionally supply --analysis-mode usher
 pangolin /pangolin/pangolin/test/test_seqs.fasta  -o /data/test_seqs-output-pusher
 

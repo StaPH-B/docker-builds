@@ -1,17 +1,24 @@
-# pmga v3.0.2
+# pmga container
 
-Main tool: [pmga](https://github.com/rpetit3/pmga)
+Main tool : [pmga](https://github.com/rpetit3/pmga)
+
+Additional tools:
+- Mash
+
+Full documentation: https://github.com/rpetit3/pmga
+
+[@rpetit3](https://github.com/rpetit3)'s fork of pgma
+
+PMGA is a tool for serotyping/serogrouping all Neisseria species and Haemophilus influenzae.
 
 In addition to `pmga`, this docker image contains the required databases built by `pmga-build`. The pre-built databases are located in `/pmga/blastdbs`.
 
-## Example commands
+# Example Usage
 
-```{bash}
+```
 # Test H. influenzae genome
-docker run --rm -u $(id -u):$(id -g) -v ${PWD}:/data pmga:latest pmga /data/GCF_900478275.fna --blast /pmga/blastdbs
+pmga /data/GCF_900478275.fna --blast /pmga/blastdbs
 
 # Force H. influenzae genome (via --species)
-docker run --rm -u $(id -u):$(id -g) -v ${PWD}:/data pmga:latest pmga /data/GCF_900478275.fna --blast /pmga/blastdbs --species hinfluenzae
+pmga /data/GCF_900478275.fna --blast /pmga/blastdbs --species hinfluenzae
 ```
-
-View full pmga help options: `docker run --rm -u $(id -u):$(id -g) -v ${PWD}:/data pmga:latest pmga --help `
