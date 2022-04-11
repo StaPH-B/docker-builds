@@ -8,7 +8,7 @@ Full documentation: https://www.sanger.ac.uk/tool/smalt-0/
 
 SMALT aligns DNA sequencing reads with a reference genome.
 
-This cointainer also contains samtools=1.15 as this was needed for a particular workflow. Also, bambamc=0.0.50 was added which allows passing of bam files to smalt see [documentation](https://github.com/rcallahan/smalt).
+This cointainer also contains samtools=1.15 as this was needed for a particular workflow. Also, bambamc=0.0.50 was added which allows passing of bam files to smalt see [documentation](https://sourceforge.net/projects/smalt/files/).
 
 ```
               SMALT - Sequence Mapping and Alignment Tool
