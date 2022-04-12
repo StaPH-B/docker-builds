@@ -33,3 +33,5 @@ Help on individual tasks:
 ```
 smalt index -k 13 -s 6 PhiX174 GCF_000819615.1_ViralProj14015_genomic.fastq
 ```
+
+The output of this line are `PhiX174.sma` and `PhiX174.smi`. These are found in the `tests` directory and are included for testing the docker container during building and aren't needed to run smalt. 
