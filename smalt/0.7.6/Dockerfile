@@ -1,12 +1,11 @@
-FROM continuumio/miniconda:4.7.12 as app
+FROM ubuntu:focal as app
 
 # for easy upgrade later. ARG variables only persist during image build time
 ARG SMALT_VER="0.7.6"
 ARG SAMTOOLSVER="1.15"
-ARG BAMVER="0.0.50"
 
 # metadata
-LABEL base.image="continuumio/miniconda:4.7.12"
+LABEL base.image="ubuntu:focal"
 LABEL dockerfile.version="1"
 LABEL software="Smalt"
 LABEL software.version="0.7.6"
@@ -16,21 +15,69 @@ LABEL license="https://www.sanger.ac.uk/tool/smalt-0/"
 LABEL maintainer1="Jill Hagey"
 LABEL maintainer.email1="jvhagey@gmail.com"
 
-# set the environment
-ENV PATH="/miniconda/bin:$PATH"
+# Install dependencies
+ARG DEBIAN_FRONTEND=noninteractive
+RUN apt-get update &&\
+    apt-get install -y \
+        autoconf \
+        pkg-config \
+        gcc \
+        libtool \
+        libcurl4-openssl-dev \
+        libncurses5-dev \
+        zlib1g-dev \
+        libbz2-dev \
+        liblzma-dev \
+        python \
+        make \
+        gawk \
+        unzip \
+        wget && \
+ rm -rf /var/lib/apt/lists/* && apt-get autoclean
 
-RUN conda config --add channels defaults && \
-    conda config --add channels conda-forge && \
-    conda config --add channels bioconda && \
-    conda install smalt=${SMALT_VER} samtools=${SAMTOOLSVER} bambamc=${BAMVER} && \
-    conda install -c anaconda wget=1.20.1 && \
-    conda clean -a -y
+# Installing samtools
+RUN wget https://github.com/samtools/samtools/releases/download/${SAMTOOLSVER}/samtools-${SAMTOOLSVER}.tar.bz2 && \
+    tar -xjf samtools-${SAMTOOLSVER}.tar.bz2 && \
+    rm samtools-${SAMTOOLSVER}.tar.bz2 && \
+    cd samtools-${SAMTOOLSVER} && \
+    ./configure && \
+    make && \
+    make install
+
+# Installing bambamc
+RUN wget -O bambamc.zip https://github.com/gt1/bambamc/archive/refs/heads/master.zip && \
+    unzip bambamc.zip && \
+    rm bambamc.zip && \
+    cd bambamc-master && \
+    mv configure.in configure.ac && \
+    autoreconf -i -f && \
+    ./configure --prefix=/bambamc && \
+    make && \
+    make install && \
+    make clean
+
+ARG BAMBAMC_INSTALL_DIR="/bambamc"
+ENV LD_LIBRARY_PATH="/bambamc/lib"
+ENV PKG_CONFIG_DIR="/bambamc/lib/pkgconfig/"
+
+# Installing smalt
+RUN wget -O smalt-${SMALT_VER}.tar.gz \
+    http://sourceforge.net/projects/smalt/files/smalt-${SMALT_VER}.tar.gz/download &&\
+    tar -zxvf smalt-${SMALT_VER}.tar.gz && \
+    rm smalt-${SMALT_VER}.tar.gz && \
+    cd smalt-${SMALT_VER} && \
+    ./configure --with-bambamc=yes BAMBAMC_CFLAGS="-I$BAMBAMC_INSTALL_DIR/include" BAMBAMC_LIBS="-L$BAMBAMC_INSTALL_DIR/lib -lbambamc" && \
+    make && \
+    make install && \
+    mkdir /data
 
 # set perl locale settings
 # Required by most tools that use perl with singularity so we can use container with both docker and singularity
 ENV LC_ALL=C
 
-# Add references and entrypoint script
+# Add programs to path
+ENV PATH="${PATH}:/smalt-${SMALT_VER}"
+ENV PATH="${PATH}:/samtools-${SAMTOOLSVER}"
 WORKDIR /data
 
 # new base for testing
