@@ -2,17 +2,14 @@
 
 Main tool : [samtools](https://www.htslib.org/)
 
-Full documentation: https://www.htslib.org/doc/samtools.html
-
-> Utilities for the Sequence Alignment/Map (SAM) format
 
 # Example Usage
 
 ```
-# removing amplicons from aligned reads in bam file
 samtools ampliconclip -b bed.file input.bam
 ```
 ```
-# sorting a bam file
 samtools sort -T /tmp/aln.sorted -o aln.sorted.bam aln.bam
 ```
+
+Better documentation can be found at [https://www.htslib.org/doc/samtools.html](https://www.htslib.org/doc/samtools.html)

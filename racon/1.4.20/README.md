@@ -1,8 +1,6 @@
-# Racon container
+# racon container
 
-Main tool : [Racon](https://github.com/lbcb-sci/racon)
-
-Full documentation: https://github.com/lbcb-sci/racon
+Main tool : [racon](https://github.com/lbcb-sci/racon)
 
 Consensus module for raw de novo DNA assembly of long uncorrected reads.
 

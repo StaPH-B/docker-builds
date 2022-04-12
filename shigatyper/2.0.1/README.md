@@ -1,18 +1,7 @@
-# ShigaTyper container
-
-Main tool : [ShigaTyper](https://github.com/CFSAN-Biostatistics/shigatyper)
-
-Additional tools:
-- MINIMAP2
-- bcftools
-
-Full documentation: https://github.com/CFSAN-Biostatistics/shigatyper
-
-> ShigaTyper is a quick and easy tool designed to determine Shigella serotype using Illumina (single or paired-end) or Oxford Nanopore reads with low computation requirement.
-
+# shigatyper  container
+Main tool : [shigatyper](https://github.com/CFSAN-Biostatistics/shigatyper)
 # Example Usage
-
-```
+```{bash}
 # Paired-end reads
 shigatyper.py --R1 SRX5006488_R1.fastq.gz --R2 SRX5006488_R2.fastq.gz
 sample  prediction      ipaB
@@ -28,3 +17,4 @@ shigatyper.py --SE SRX7050861.fastq.gz --ont
 sample  prediction      ipaB
 SRX7050861-ont  Shigella dysenteriae serotype 3 +
 ```
+Better documentation can be found at [https://github.com/CFSAN-Biostatistics/shigatyper](https://github.com/CFSAN-Biostatistics/shigatyper)

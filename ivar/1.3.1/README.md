@@ -2,13 +2,9 @@
 
 Main tool : [iVar](https://andersen-lab.github.io/ivar/html/manualpage.html)
 
-Additional tools:
+Additional tools (required):
 * [HTSlib](https://github.com/samtools/htslib)
 * [samtools](http://www.htslib.org/)
-
-Full documentation: https://andersen-lab.github.io/ivar/html/manualpage.html
-
-> iVar uses primer positions supplied in a BED file to soft clip primer sequences from an aligned and sorted BAM file.
 
 # Example Usage
 

@@ -2,8 +2,6 @@
 
 Main tool : [any2fasta](https://github.com/tseemann/any2fasta)
 
-Full documentation: https://github.com/tseemann/any2fasta
-
 _"FASTA all the things"_
 
 # Example Usage

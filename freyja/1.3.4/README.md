@@ -11,6 +11,6 @@ Freyja is a tool to recover relative lineage abundances from mixed SARS-CoV-2 sa
 ```bash
 # run freyja variants to call variants from an aligned SC2 bam file
 freyja variants [bamfile] --variants [variant outfile name] --depths [depths outfile name] --ref [reference.fa]
-# run freyja demix to identify lineages based on called variants
+# run freyja demix to identify lineages based on called variants 
 freyja demix [variants-file] [depth-file] --output [output-file]
 ```

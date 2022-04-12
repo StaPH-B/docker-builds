@@ -1,8 +1,6 @@
-# Raven container
+# raven container
 
-Main tool : [Raven](https://github.com/lbcb-sci/raven)
-
-Full documentation: https://github.com/lbcb-sci/raven
+Main tool : [raven](https://github.com/lbcb-sci/raven)
 
 > Raven is a de novo genome assembler for long uncorrected reads.
 

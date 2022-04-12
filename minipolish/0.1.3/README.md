@@ -2,11 +2,9 @@
 
 Main tool : [minipolish](https://github.com/rrwick/Minipolish) and [miniasm](https://github.com/lh3/miniasm)
 
-Additional tools:
-- [racon](https://github.com/isovic/racon)
+Other tools :
+- [racon](https://github.com/isovic/racon) 
 - [minimap2](https://github.com/lh3/minimap2)
-
-Full documentation: https://github.com/rrwick/Minipolish & https://github.com/lh3/miniasm
 
 From minipolish's [readme](https://github.com/rrwick/Minipolish):
 

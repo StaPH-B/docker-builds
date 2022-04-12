@@ -2,15 +2,13 @@
 
 Main tool : [abricate](https://github.com/tseemann/abricate)
 
-Additional tools:
-- [any2fasta](https://github.com/tseemann/any2fasta)
-
-Full documentation: https://github.com/tseemann/abricate
-
-> Mass screening of contigs for antimicrobial resistance or virulence genes.
+Also includes [any2fasta](https://github.com/tseemann/any2fasta)
 
 # Example Usage
 
 ```
-abricate --db card assembly.fa
+# expects 4 genes
+abricate --db card /abricate-1.0.0/test/assembly.fa
 ```
+
+Better documentation can be found at [https://github.com/tseemann/abricate](https://github.com/tseemann/abricate)
