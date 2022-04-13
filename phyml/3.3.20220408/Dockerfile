@@ -48,7 +48,7 @@ WORKDIR /data
 FROM app as test
 
 # Grab test data
-COPY snvAlignment.phy /data/
+COPY /test/snvAlignment.phy /data/
 
 #run test
 RUN phyml -i snvAlignment.phy --datatype nt --model GTR -v 0.0 -s BEST --ts/tv e --nclasses 4 --alpha e --bootstrap -4 --quiet
