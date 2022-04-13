@@ -36,7 +36,7 @@ RUN apt-get update &&\
         wget=1.20.3-1ubuntu2 && \
  rm -rf /var/lib/apt/lists/* && apt-get autoclean
 
-# Build samtools
+# Installing samtools
 RUN wget https://github.com/samtools/samtools/releases/download/${SAMTOOLSVER}/samtools-${SAMTOOLSVER}.tar.bz2 && \
     tar -xjf samtools-${SAMTOOLSVER}.tar.bz2 && \
     rm samtools-${SAMTOOLSVER}.tar.bz2 && \
@@ -45,7 +45,7 @@ RUN wget https://github.com/samtools/samtools/releases/download/${SAMTOOLSVER}/s
     make && \
     make install
 
-# installing bambamc
+# Installing bambamc
 RUN wget -O bambamc.zip https://github.com/gt1/bambamc/archive/refs/heads/master.zip && \
     unzip bambamc.zip && \
     rm bambamc.zip && \
@@ -61,7 +61,7 @@ ARG BAMBAMC_INSTALL_DIR="/bambamc"
 ENV LD_LIBRARY_PATH="/bambamc/lib"
 ENV PKG_CONFIG_DIR="/bambamc/lib/pkgconfig/"
 
-# Build smalt
+# Installing smalt
 RUN wget -O smalt-${SMALT_VER}.tar.gz \
     http://sourceforge.net/projects/smalt/files/smalt-${SMALT_VER}.tar.gz/download &&\
     tar -zxvf smalt-${SMALT_VER}.tar.gz && \
@@ -77,7 +77,6 @@ RUN wget -O smalt-${SMALT_VER}.tar.gz \
 ENV LC_ALL=C
 
 # Add references and entrypoint script
-#ENV PKG_CONFIG_DIR="/bambamc-master"
 ENV PATH="${PATH}:/smalt-${SMALT_VER}"
 ENV PATH="${PATH}:/samtools-${SAMTOOLSVER}"
 WORKDIR /data
