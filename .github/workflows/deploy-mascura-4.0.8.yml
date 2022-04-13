@@ -20,14 +20,15 @@ jobs:
     secrets:
       docker_username: ${{ secrets.DOCKER_HUB_USERNAME }}
       docker_access_token: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      quay_username: ${{ secrets.quay_username }}
+      quay_robot_token: ${{ secrets.quay_robot_token }}
     with:
       path_to_context: "./masurca/4.0.8/"
       dockerfile_name: "Dockerfile"
       cache: "mascura"
       container_name: "mascura"
-      tag: |
-        4.0.8
-        latest
+      tag: "4.0.8" # The image tag for Docker Hub, use the program version, e.g. "3.12.0"
+
   run-singularity:
     needs: build-to-deploy  # test singularity run on newly pushed Docker image
     uses: StaPH-B/docker-builds/.github/workflows/run-singularity.yml@master
