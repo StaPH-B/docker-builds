@@ -2,7 +2,7 @@
 # Instructions: replace all the <placeholder> stubs in this template with values for your image.
 # Some explanations come from: https://github.com/actions/starter-workflows/blob/main/automation/manual.yml
 
-name: Test <program name> image
+name: Test phyml image
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI or when you submit your pull request
 on:
