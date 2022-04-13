@@ -3,7 +3,7 @@
 # Instructions: replace all the <placeholder> stubs in this template with values for your image.
 # Some explanations come from: https://github.com/actions/starter-workflows/blob/main/automation/manual.yml
 
-name: Deploy smalt image
+name: Deploy smalt v0.7.6 image
 
 # This workflow should run when manually triggered by StaPH-B repo maintainer
 on: workflow_dispatch
