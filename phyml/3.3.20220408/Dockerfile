@@ -17,14 +17,15 @@ LABEL maintainer.email="jvhagey@gmail.com"
 # Install dependencies
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update &&\
-    apt-get install -y \
-        pkg-config \
-        automake \
-        autoconf \
-        gcc \
-        texlive-latex-base \
-        build-essential \
-        wget && \
+    apt-get install -y --no-install-recommends \
+        ca-certificates=20210119~20.04.2 \
+        pkg-config=0.29.1-0ubuntu4 \
+        automake=1:1.16.1-4ubuntu6 \
+        autoconf=2.69-11.1 \
+        gcc=4:9.3.0-1ubuntu2 \
+        texlive-latex-base=2019.20200218-1 \
+        build-essential=12.8ubuntu1.1 \
+        wget=1.20.3-1ubuntu2 && \
  rm -rf /var/lib/apt/lists/* && apt-get autoclean
 
 RUN wget https://github.com/stephaneguindon/phyml/archive/refs/tags/v${PHYML_VER}.tar.gz && \
