@@ -76,7 +76,7 @@ RUN wget -O smalt-${SMALT_VER}.tar.gz \
 # Required by most tools that use perl with singularity so we can use container with both docker and singularity
 ENV LC_ALL=C
 
-# Add references and entrypoint script
+# Add path to programs
 ENV PATH="${PATH}:/smalt-${SMALT_VER}"
 ENV PATH="${PATH}:/samtools-${SAMTOOLSVER}"
 WORKDIR /data
