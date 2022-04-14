@@ -2,14 +2,14 @@
 # Instructions: replace all the <placeholder> stubs in this template with values for your image.
 # Some explanations come from: https://github.com/actions/starter-workflows/blob/main/automation/manual.yml
 
-name: Test smalt v0.7.6 image
+name: Test freebayes image
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI or when you submit your pull request
 on:
   workflow_dispatch:
   pull_request:
     paths:
-      - "smalt/0.7.6/Dockerfile"  # Dockerfile path, e.g. 'htslib/1.14/Dockerfile' so that only your image is tested
+      - "freebayes/1.3.6/Dockerfile"  # Dockerfile path, e.g. 'htslib/1.14/Dockerfile' so that only your image is tested
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -18,6 +18,6 @@ jobs:
   build-to-test:
     uses: ./.github/workflows/build-to-test.yml
     with:
-      path_to_context: "./smalt/0.7.6"  # Path to directory with Dockerfile and context, e.g. "./spades/3.12.0"
+      path_to_context: "./freebayes/1.3.6"  # Path to directory with Dockerfile and context, e.g. "./spades/3.12.0"
       dockerfile_name: "Dockerfile"
       cache: "smalt"  # Use the program name as a nickname for a GitHub cache of your image's layers, e.g. "spades". The cache will speed up re-running the workflow.
