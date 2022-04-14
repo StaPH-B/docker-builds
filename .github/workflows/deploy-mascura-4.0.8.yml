@@ -1,7 +1,7 @@
 # This caller workflow tests, builds, and pushes the image to Docker Hub.
 # It also tests that a Singularity container can be run from the Docker image.
 
-name: Deploy Mascura 4.0.8 image
+name: Deploy MaSuRCA 4.0.8 image
 
 on: workflow_dispatch
 
@@ -12,7 +12,7 @@ jobs:
     with:
       path_to_context: "./masurca/4.0.8/"
       dockerfile_name: "Dockerfile"
-      cache: "mascura"
+      cache: "masurca"
 
   build-to-deploy:
     needs: build-to-test  # this jobs needs to run serially, after testing succeeds
@@ -25,12 +25,12 @@ jobs:
     with:
       path_to_context: "./masurca/4.0.8/"
       dockerfile_name: "Dockerfile"
-      cache: "mascura"
-      container_name: "mascura"
+      cache: "masurca"
+      container_name: "masurca"
       tag: "4.0.8" # The image tag for Docker Hub, use the program version, e.g. "3.12.0"
 
   run-singularity:
     needs: build-to-deploy  # test singularity run on newly pushed Docker image
     uses: StaPH-B/docker-builds/.github/workflows/run-singularity.yml@master
     with:
-      image_name: "mascura:4.0.8"
+      image_name: "masurca:4.0.8"
