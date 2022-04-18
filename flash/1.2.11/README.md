@@ -4,16 +4,12 @@ This image implements the software [FLASH](http://ccb.jhu.edu/software/FLASH) fo
 Documentation is available at http://ccb.jhu.edu/software/FLASH/MANUAL.
 
 ## Example usage
-This example useage is adapted from the built-in tests for this image. See [run_flash_pos_control.sh](tests/scripts/run_flash_pos_control.sh).
+This example useage is adapted from the built-in tests for this image. See [test_flash.sh](test_flash.sh).
 
 ```bash
-# Input data are paired-end reads
-R1=/data/R1.fastq.gz
-R2=/data/R2.fastq.gz
-
-# Set up an output directory
-OUTDIR=/test_result
-mkdir -p $OUTDIR
+# Get input data (paired-end reads)
+wget -nv https://github.com/nf-core/test-datasets/raw/mag/test_data/test_minigut_R1.fastq.gz -O R1.fastq.gz
+wget -nv https://github.com/nf-core/test-datasets/raw/mag/test_data/test_minigut_R2.fastq.gz -O R2.fastq.gz
 
 # Define a sensible minimum overlap for merging based on your read lengths
 OVERLAP_LEN=100
@@ -22,11 +18,11 @@ READ_LEN=126
 
 # Run FLASH to merge overlapping reads
 flash \
-  $R1 $R2 \
+  R1.fastq.gz R2.fastq.gz \
   --min-overlap=$OVERLAP_LEN \
   --max-overlap=$READ_LEN \
   --output-prefix=test \
-  --output-directory=$OUTDIR
+  --output-directory=results
 ```
 
 ## Example output
