@@ -35,16 +35,9 @@ WORKDIR /data
 FROM app as test
 ARG FLASH_VER
 
-# Get test dependencies
-RUN apt-get update && apt-get install -y \
-    bc \
-    python3 \
-    wget
-COPY tests /tests
+# Install test dependency
+RUN apt-get update && apt-get install -y wget
 
-# Run positive control
-RUN bash /tests/scripts/get_data_pos_control.sh
-RUN bash /tests/scripts/run_flash_pos_control.sh
-
-# Check output
-RUN python3 -m unittest discover -s /tests
+# Run test script
+COPY test_flash.sh .
+RUN bash test_flash.sh

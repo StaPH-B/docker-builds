@@ -16,9 +16,9 @@ OUTDIR=/test_result
 mkdir -p $OUTDIR
 
 # Define a sensible minimum overlap for merging based on your read lengths
-OVERLAP_LEN=240
+OVERLAP_LEN=100
 # Define read length, will use this to define the maximum overlap
-READ_LEN=300
+READ_LEN=126
 
 # Run FLASH to merge overlapping reads
 flash \
@@ -37,19 +37,19 @@ The on-screen output tells you the parameters FLASH ran with and how many read p
 [FLASH] Fast Length Adjustment of SHort reads
 [FLASH]  
 [FLASH] Input files:
-[FLASH]     /data/R1.fastq.gz
-[FLASH]     /data/R2.fastq.gz
+[FLASH]     R1.fastq.gz
+[FLASH]     R2.fastq.gz
 [FLASH]  
 [FLASH] Output files:
-[FLASH]     /test_result/test.extendedFrags.fastq
-[FLASH]     /test_result/test.notCombined_1.fastq
-[FLASH]     /test_result/test.notCombined_2.fastq
-[FLASH]     /test_result/test.hist
-[FLASH]     /test_result/test.histogram
+[FLASH]     results/test.extendedFrags.fastq
+[FLASH]     results/test.notCombined_1.fastq
+[FLASH]     results/test.notCombined_2.fastq
+[FLASH]     results/test.hist
+[FLASH]     results/test.histogram
 [FLASH]  
 [FLASH] Parameters:
-[FLASH]     Min overlap:           240
-[FLASH]     Max overlap:           300
+[FLASH]     Min overlap:           100
+[FLASH]     Max overlap:           126
 [FLASH]     Max mismatch density:  0.250000
 [FLASH]     Allow "outie" pairs:   false
 [FLASH]     Cap mismatch quals:    false
@@ -60,19 +60,18 @@ The on-screen output tells you the parameters FLASH ran with and how many read p
 [FLASH] Starting reader and writer threads
 [FLASH] Starting 2 combiner threads
 [FLASH] Processed 25000 read pairs
-...
-[FLASH] Processed 830228 read pairs
+[FLASH] Processed 50000 read pairs
 [FLASH]  
 [FLASH] Read combination statistics:
-[FLASH]     Total pairs:      830228
-[FLASH]     Combined pairs:   81862
-[FLASH]     Uncombined pairs: 748366
-[FLASH]     Percent combined: 9.86%
+[FLASH]     Total pairs:      50000
+[FLASH]     Combined pairs:   5
+[FLASH]     Uncombined pairs: 49995
+[FLASH]     Percent combined: 0.01%
 [FLASH]  
 [FLASH] Writing histogram files.
 [FLASH]  
 [FLASH] FLASH v1.2.11 complete!
-[FLASH] 22.683 seconds elapsed
+[FLASH] 0.213 seconds elapsed
 ```
 
 The result files from this command are:
