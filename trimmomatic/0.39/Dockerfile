@@ -1,11 +1,14 @@
+ARG TRIMMOMATIC_VER="0.39"
+
 #use ubuntu as base image
 FROM ubuntu:xenial as app
+ARG TRIMMOMATIC_VER
 
 # metadata
 LABEL base.image="ubuntu:xenial"
 LABEL version="1"
 LABEL software="Trimmomatic"
-LABEL software.version="0.39"
+LABEL software.version=$TRIMMOMATIC_VER
 LABEL description="Trimmomatic: A flexible read trimming tool for Illumina NGS data"
 LABEL website="http://www.usadellab.org/cms/?page=trimmomatic"
 LABEL license="GNU General Public License"
@@ -23,29 +26,23 @@ RUN apt-get update && apt-get install -y software-properties-common &&\
   unzip
 
 #copy the files into the image
-RUN wget http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-0.39.zip &&\
-  unzip Trimmomatic-0.39.zip &&\
-  rm -rf Trimmomatic-0.39.zip &&\
-  chmod +x Trimmomatic-0.39/trimmomatic-0.39.jar &&\
-  echo "#!/bin/bash" >> /Trimmomatic-0.39/trimmomatic &&\
-  echo "exec java -jar /Trimmomatic-0.39/trimmomatic-0.39.jar """"$""@"""" " >> /Trimmomatic-0.39/trimmomatic &&\
-  chmod +x /Trimmomatic-0.39/trimmomatic
+RUN wget http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-${TRIMMOMATIC_VER}.zip &&\
+  unzip Trimmomatic-${TRIMMOMATIC_VER}.zip &&\
+  rm -rf Trimmomatic-${TRIMMOMATIC_VER}.zip &&\
+  chmod +x Trimmomatic-${TRIMMOMATIC_VER}/trimmomatic-${TRIMMOMATIC_VER}.jar &&\
+  echo "#!/bin/bash" >> /Trimmomatic-${TRIMMOMATIC_VER}/trimmomatic &&\
+  echo "exec java -jar /Trimmomatic-${TRIMMOMATIC_VER}/trimmomatic-${TRIMMOMATIC_VER}.jar """"$""@"""" " >> /Trimmomatic-${TRIMMOMATIC_VER}/trimmomatic &&\
+  chmod +x /Trimmomatic-${TRIMMOMATIC_VER}/trimmomatic
 
-ENV PATH="${PATH}:/Trimmomatic-0.39/"
+ENV PATH="${PATH}:/Trimmomatic-${TRIMMOMATIC_VER}/"
 
 # create /data directory and set as working directory
 RUN mkdir /data
 WORKDIR /data
 
 FROM app as test
+ARG TRIMMOMATIC_VER
 
-# Get test dependencies
-RUN apt-get update && apt-get install -y python3
-COPY tests /tests/
-
-# Run program on test data
-RUN bash /tests/scripts/get_data_pos_control.sh
-RUN bash /tests/scripts/run_trimmomatic_pos_control.sh
-
-# Verify output
-RUN python3 -m unittest discover -s /tests
+# Run test script
+COPY test_trimmomatic.sh .
+RUN bash test_trimmomatic.sh $TRIMMOMATIC_VER
