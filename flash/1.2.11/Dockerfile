@@ -40,4 +40,4 @@ RUN apt-get update && apt-get install -y wget
 
 # Run test script
 COPY test_flash.sh .
-RUN bash test_flash.sh
+RUN bash test_flash.sh $FLASH_VER

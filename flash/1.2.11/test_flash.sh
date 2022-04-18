@@ -1,6 +1,8 @@
 #!/bin/bash
 # This script is to test that the program FLASH runs as expected
 
+FLASH_VER=$1
+
 # Check version
 flash -v > version.txt
 if grep -q "FLASH v${FLASH_VER}" version.txt ; then
