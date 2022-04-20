@@ -40,6 +40,7 @@ The licenses of the open-source software that is contained in these Docker image
 | htslib | MIT | https://github.com/samtools/htslib/blob/develop/LICENSE |
 | iqtree | GNU GPLv2 | https://github.com/Cibiv/IQ-TREE/blob/master/LICENSE |
 | iqtree2 | GNU GPLv2 | https://github.com/iqtree/iqtree2/blob/master/LICENSE |
+| IRMA | GNU GPLv3 | https://wonder.cdc.gov/amd/flu/irma/disclaimer.html |
 | iVar | GNU GPLv3 | https://github.com/andersen-lab/ivar/blob/master/LICENSE |
 | Kleborate | GNU GPLv3 | https://github.com/katholt/Kleborate/blob/master/LICENSE |
 | kma | Apache v2.0 | https://bitbucket.org/genomicepidemiology/kma/src/master/ |
