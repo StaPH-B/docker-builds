@@ -4,6 +4,7 @@
 FLASH_VER=$1
 
 # Check version
+FLASH_VER=${FLASH_VER:="no version set"}  # ensure output doesn't match empty value if unset
 flash -v > version.txt
 if grep -q "FLASH v${FLASH_VER}" version.txt ; then
   echo "Correct version"

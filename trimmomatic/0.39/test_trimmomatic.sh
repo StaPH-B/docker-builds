@@ -4,11 +4,12 @@
 TRIMMOMATIC_VER=$1
 
 # Check version
+TRIMMOMATIC_VER=${TRIMMOMATIC_VER:="no version set"}  # ensure output doesn't match empty value if unset
 if [ "$(trimmomatic -version)" == "${TRIMMOMATIC_VER}" ] ; then
   echo "Correct version"
 else
   echo "Version was unexpected:"
-  echo trimmomatic -version
+  trimmomatic -version
   exit 1
 fi
 
