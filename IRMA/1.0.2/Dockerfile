@@ -21,7 +21,7 @@ LABEL maintainer.email="jarnn@utah.gov"
 
 # RUN executes code during the build
 # Install dependencies via apt-get or yum if using a centos or fedora base
-ENV DEBIAN_FRONTEND=noninteractive
+ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends \
  perl \
  default-jre \
@@ -40,14 +40,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN  apt-get update && apt-get -y upgrade && apt-get -y install r-base \
   r-base-dev
 
-RUN ls
-
  # install IRMA
-RUN wget https://wonder.cdc.gov/amd/flu/irma/flu-amd-202103.zip
-
-RUN unzip flu-amd-202103.zip
-
-RUN rm flu-amd-202103.zip && \
+RUN wget https://wonder.cdc.gov/amd/flu/irma/flu-amd-202103.zip && \
+  unzip flu-amd-202103.zip && \
+  rm flu-amd-202103.zip && \
   chmod 755 -R flu-amd && \
   mkdir data
 
