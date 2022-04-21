@@ -1,7 +1,8 @@
-FROM ubuntu:xenial
-
 # to make it easier to upgrade for new versions; ARG variables only persist during docker image build time
 ARG SPAdesVer=3.15.3
+
+FROM ubuntu:xenial as app
+ARG SPAdesVer
 
 LABEL base.image="ubuntu:xenial"
 LABEL dockerfile.version="1"
@@ -30,3 +31,10 @@ ENV LC_ALL=C \
     PATH="${PATH}:/SPAdes-${SPAdesVer}-Linux/bin"
 
 WORKDIR /data
+
+FROM app as test
+ARG SPAdesVer
+
+# Run test script
+COPY test.sh .
+RUN bash test.sh $SPAdesVer
