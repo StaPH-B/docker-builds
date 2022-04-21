@@ -1,11 +1,14 @@
+ARG KRAKEN2_VER="2.0.8-beta"
+
 # base image
 FROM ubuntu:xenial as app
+ARG KRAKEN2_VER
 
 # metadata
 LABEL base.image="ubuntu:xenial"
 LABEL container.version="1"
 LABEL software="Kraken2"
-LABEL software.version="2.0.8-beta"
+LABEL software.version=$KRAKEN2_VER
 LABEL description="Taxonomic sequence classifier"
 LABEL website="https://github.com/DerrickWood/kraken2"
 LABEL license="https://github.com/DerrickWood/kraken2/blob/master/LICENSE"
@@ -20,14 +23,14 @@ RUN apt-get update && apt-get -y install \
   g++
 
 # DL Kraken2, unpack, and install
-RUN wget https://github.com/DerrickWood/kraken2/archive/v2.0.8-beta.tar.gz && \
-  tar -xzf v2.0.8-beta.tar.gz && \
-  rm -rf v2.0.8-beta.tar.gz && \
-  cd kraken2-2.0.8-beta && \
+RUN wget https://github.com/DerrickWood/kraken2/archive/v$KRAKEN2_VER.tar.gz && \
+  tar -xzf v$KRAKEN2_VER.tar.gz && \
+  rm -rf v$KRAKEN2_VER.tar.gz && \
+  cd kraken2-$KRAKEN2_VER && \
   ./install_kraken2.sh . && \
   mkdir /data
 
-ENV PATH="$PATH:/kraken2-2.0.8-beta" \
+ENV PATH="$PATH:/kraken2-$KRAKEN2_VER" \
     LC_ALL=C
 
 WORKDIR /data
@@ -40,17 +43,8 @@ RUN mkdir /kraken2-db && \
   rm -rf k2_standard_8gb_20210517.tar.gz
 
 FROM app as test
+ARG KRAKEN2_VER
 
-# Get test dependencies
-RUN apt-get update && apt-get install -y python3
-COPY kraken2/2.0.8-beta/tests /tests
-COPY test_data/trim_reads/SRR5481494_sub.extendedFrags.fastq.gz /test_data/trim_reads/
-COPY test_data/trim_reads/SRR5481494_sub.notCombined_*.fastq.gz /test_data/trim_reads/
-
-# Run positive control
-RUN bash /tests/scripts/run_positive_control.sh
-
-# Check output
-RUN python3 -m unittest discover -s /tests
-
-# Test with: docker build --progress=plain --target=test -t kraken2-test-image -f kraken2/2.0.8-beta/Dockerfile .
+# Run test script
+COPY test.sh .
+RUN bash test.sh $KRAKEN2_VER

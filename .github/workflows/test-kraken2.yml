@@ -1,12 +1,15 @@
 name: Test Kraken 2 image
 
-on: [workflow_dispatch, pull_request]
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "kraken2/2.0.8-beta/Dockerfile"
 
 jobs:
 
   build-to-test:
-    uses: SarahNadeau/docker-builds/.github/workflows/build-to-test.yml@sarah-dev  # TODO: change
+    uses: ./.github/workflows/build-to-test.yml
     with:
-      path_to_context: "."
-      dockerfile_name: "./kraken2/2.0.8-beta/Dockerfile"
+      path_to_context: "./kraken2/2.0.8-beta"
       cache: "kraken"
