@@ -125,6 +125,7 @@ To learn more about the docker pull rate limits and the open source software pro
 | [Snippy](https://hub.docker.com/r/staphb/snippy) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/snippy)](https://hub.docker.com/r/staphb/snippy) | <ul><li>4.4.5</li><li>4.5.1</li><li>4.6.0</li></ul> | https://github.com/tseemann/snippy |
 | [snp-dists](https://hub.docker.com/r/staphb/snp-dists) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/snp-dists)](https://hub.docker.com/r/staphb/snp-dists) | <ul><li>0.6.2</li><li>0.8.2</li></ul> | https://github.com/tseemann/snp-dists |
 | [SNP-sites](https://hub.docker.com/r/staphb/snp-sites) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/snp-sites)](https://hub.docker.com/r/staphb/snp-sites) | <ul><li>2.3.3</li><li>2.5.1</li></ul> | https://github.com/sanger-pathogens/snp-sites |
+| [SNVPhyl-tools](https://hub.docker.com/r/staphb/snvphyl-tools) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/snvphyl-tools)](https://hub.docker.com/r/staphb/snvphyl-tools) | <ul><li>1.8.2</li></ul> | https://github.com/phac-nml/snvphyl-tools |
 | [SPAdes](https://hub.docker.com/r/staphb/spades/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/spades)](https://hub.docker.com/r/staphb/spades) | <ul><li>3.8.2</li><li>3.12.0</li><li>3.13.0</li><li>3.14.0</li><li>3.14.1</li><li>3.15.0</li><li>3.15.1</li><li>3.15.2</li><li>3.15.3</li><li>3.15.4</li></ul> | https://github.com/ablab/spades </br> http://cab.spbu.ru/software/spades/ |
 | [SRA-toolkit](https://hub.docker.com/r/staphb/sratoolkit/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/sratoolkit)](https://hub.docker.com/r/staphb/sratoolkit) | <ul><li>2.9.2</li></ul> | https://github.com/ncbi/sra-tools |
 | [Staramr](https://hub.docker.com/r/staphb/staramr/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/staramr)](https://hub.docker.com/r/staphb/staramr) | <ul><li>0.5.1</li><li>0.7.1</li></ul> | https://github.com/phac-nml/staramr |
@@ -138,6 +139,7 @@ To learn more about the docker pull rate limits and the open source software pro
 | [VIGOR4](https://hub.docker.com/r/staphb/vigor4/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/vigor4)](https://hub.docker.com/r/staphb/vigor4) | <ul><li>4.1.20190131</li></ul> | https://github.com/JCVenterInstitute/VIGOR4 |
 | [VirSorter2](https://hub.docker.com/r/staphb/virsorter2/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/virsorter2)](https://hub.docker.com/r/staphb/virsorter2/) | <ul><li>2.1</li></ul> | https://github.com/jiarong/VirSorter2 |
 | [wtdbg2](https://hub.docker.com/r/staphb/wtdbg2/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/wtdbg2)](https://hub.docker.com/r/staphb/wtdbg2) | <ul><li>2.5</li></ul> | https://github.com/ruanjue/wtdbg2 |
+
 
 You can also view the list of images on Docker hub here: https://hub.docker.com/r/staphb/
 
