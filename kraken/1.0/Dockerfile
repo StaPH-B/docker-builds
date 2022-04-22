@@ -6,7 +6,7 @@ ARG KRAKEN_VER
 
 # metadata
 LABEL base.image="ubuntu:xenial"
-LABEL container.version="1.1"
+LABEL dockerfile.version="2"
 LABEL software="Kraken"
 LABEL software.version=$KRAKEN_VER
 LABEL description="Taxonomic sequence classifier"
@@ -14,6 +14,8 @@ LABEL website="https://github.com/DerrickWood/kraken"
 LABEL license="https://github.com/DerrickWood/kraken/blob/master/LICENSE"
 LABEL maintainer="Curtis Kapsak"
 LABEL maintainer.email="pjx8@cdc.gov"
+LABEL maintainer2="Sarah Nadeau"
+LABEL maintainer2.email="sarah.nadeau@bsse.ethz.ch"
 
 # install dependencies
 RUN apt-get update && apt-get -y install \
