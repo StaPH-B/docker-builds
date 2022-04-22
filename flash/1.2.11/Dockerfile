@@ -20,12 +20,14 @@ ARG FLASH_VER
 
 # Labels need to go in the production stage
 LABEL base.image="ubuntu:focal"
-LABEL dockerfile.version="1"
+LABEL dockerfile.version="2"
 LABEL software="FLASH"
 LABEL software.version=$FLASH_VER
 LABEL description="FLASH (Fast Length Adjustment of Short Reads): merges overlapping paired-end reads"
 LABEL website="http://ccb.jhu.edu/software/FLASH"
 LABEL license="https://github.com/ebiggers/flash/blob/master/COPYING"
+LABEL maintainer="Sarah Nadeau"
+LABEL maintainer.email="sarah.nadeau@bsse.ethz.ch"
 
 # Copy only executable into production stage to reduce image size
 COPY --from=builder FLASH-$FLASH_VER/flash /usr/local/bin/flash

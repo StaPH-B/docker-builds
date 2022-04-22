@@ -6,16 +6,18 @@ ARG TRIMMOMATIC_VER
 
 # metadata
 LABEL base.image="ubuntu:xenial"
-LABEL version="1"
+LABEL dockerfile.version="2"
 LABEL software="Trimmomatic"
 LABEL software.version=$TRIMMOMATIC_VER
 LABEL description="Trimmomatic: A flexible read trimming tool for Illumina NGS data"
 LABEL website="http://www.usadellab.org/cms/?page=trimmomatic"
-LABEL license="GNU General Public License"
+LABEL license="https://github.com/usadellab/Trimmomatic/blob/main/distSrc/LICENSE"
 LABEL maintainer1="Kelsey Florek"
 LABEL maintainer1.email="kelsey.florek@slh.wisc.edu"
 LABEL maintainer2="Curtis Kapsak"
 LABEL maintainer2.email="pjx8@cdc.gov"
+LABEL maintainer3="Sarah Nadeau"
+LABEL maintainer3.email="sarah.nadeau@bsse.ethz.ch"
 
 #install openjdk-11 jre
 RUN apt-get update && apt-get install -y software-properties-common &&\
