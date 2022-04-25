@@ -1,15 +1,23 @@
+# This caller workflow builds an image to the "test" stage.
+# Instructions: replace all the <placeholder> stubs in this template with values for your image.
+# Some explanations come from: https://github.com/actions/starter-workflows/blob/main/automation/manual.yml
+
 name: Test SPAdes image
 
+# Controls when the action will run. Workflow runs when manually triggered using the UI or when you submit your pull request
 on:
   workflow_dispatch:
   pull_request:
     paths:
-      - "spades/3.15.3/Dockerfile"
+      - "spades/3.15.4/Dockerfile"  # Dockerfile path, e.g. 'htslib/1.14/Dockerfile' so that only your image is tested
 
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
 
+  # This job calls a workflow to build the image to the 'test' stage
   build-to-test:
     uses: ./.github/workflows/build-to-test.yml
     with:
-      path_to_context: "./spades/3.15.3"
-      cache: "spades"
+      path_to_context: "./spades/3.15.4"  # Path to directory with Dockerfile and context, e.g. "./spades/3.12.0"
+      dockerfile_name: "Dockerfile"
+      cache: "spades"  # Use the program name as a nickname for a GitHub cache of your image's layers, e.g. "spades". The cache will speed up re-running the workflow.
