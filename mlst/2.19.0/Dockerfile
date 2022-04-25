@@ -1,14 +1,19 @@
-FROM ubuntu:bionic
+ARG MLST_VER="2.19.0"
+
+FROM ubuntu:bionic as app
+ARG MLST_VER
 
 LABEL base.image="ubuntu:bionic"
-LABEL container.version="1"
+LABEL dockerfile.version="2"
 LABEL software="mlst"
-LABEL software.version="2.19.0"
+LABEL software.version=$MLST_VER
 LABEL description="Scan contig files against PubMLST typing schemes"
 LABEL website="https://github.com/tseemann/mlst"
 LABEL license="https://github.com/tseemann/mlst/blob/master/LICENSE"
 LABEL maintainer="Curtis Kapsak"
 LABEL maintainer.email="pjx8@cdc.gov"
+LABEL maintainer2="Sarah Nadeau"
+LABEL maintainer2.email="sarah.nadeau@bsse.ethz.ch"
 
 RUN apt-get update && apt-get install -y wget \
  libmoo-perl \
@@ -28,12 +33,12 @@ RUN cd /usr/local/bin && \
   chmod +x any2fasta
 
 # get mlst
-RUN wget https://github.com/tseemann/mlst/archive/v2.19.0.tar.gz &&\
- tar -xzf v2.19.0.tar.gz &&\
- rm v2.19.0.tar.gz
+RUN wget https://github.com/tseemann/mlst/archive/v$MLST_VER.tar.gz &&\
+ tar -xzf v$MLST_VER.tar.gz &&\
+ rm v$MLST_VER.tar.gz
 
 # set PATH and perl local settings
-ENV PATH="${PATH}:/mlst-2.19.0/bin:\
+ENV PATH="${PATH}:/mlst-$MLST_VER/bin:\
 /ncbi-blast-2.9.0+/bin" \
     LC_ALL=C
 
@@ -42,7 +47,9 @@ RUN mlst --check && mlst --list
 
 WORKDIR /data
 
-### Example command to run mlst (broken into two lines for readability)
-### If you have an assembly named contigs.fasta in your PWD:
-# $ docker run -v ${PWD}:/data staphb/mlst:2.19.0 \
-#   mlst contigs.fasta >mlst-results.tsv
+FROM app as test
+ARG MLST_VER
+
+# Run test script
+COPY test.sh .
+RUN bash test.sh $MLST_VER
