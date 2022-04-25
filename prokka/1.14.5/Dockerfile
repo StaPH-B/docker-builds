@@ -1,16 +1,19 @@
-FROM ubuntu:xenial
-
 ARG PROKKA_VER="1.14.5"
+
+FROM ubuntu:xenial as app
+ARG PROKKA_VER
 
 LABEL base.image="ubuntu:xenial"
 LABEL dockerfile.version="2"
 LABEL software="Prokka"
-LABEL software.version="1.14.5"
+LABEL software.version=$PROKKA_VER
 LABEL description="Automated prokaryotic genome annotation tool"
 LABEL website="https://github.com/tseemann/prokka"
 LABEL license="https://github.com/tseemann/prokka#licence"
 LABEL maintainer="Curtis Kapsak"
 LABEL maintainer.email="pjx8@cdc.gov"
+LABEL maintainer2="Sarah Nadeau"
+LABEL maintainer2.email="sarah.nadeau@bsse.ethz.ch"
 
 # install dependencies
 RUN apt-get update && apt-get -y --no-install-recommends install \
@@ -82,3 +85,10 @@ ENV LC_ALL=C
 # index dbs and list what dbs were setup; set working dir to /data
 RUN prokka --setupdb && prokka --listdb
 WORKDIR /data
+
+FROM app as test
+ARG PROKKA_VER
+
+# Run test script
+COPY test.sh .
+RUN bash test.sh $PROKKA_VER
