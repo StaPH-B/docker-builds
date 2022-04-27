@@ -94,12 +94,13 @@ The licenses of the open-source software that is contained in these Docker image
 | Snippy | GNU GPLv2 | https://github.com/tseemann/snippy/blob/master/LICENSE |
 | snp-dists | GNU GPLv3 | https://github.com/tseemann/snp-dists/blob/master/LICENSE |
 | SNP-sites | GNU GPLv3 | https://github.com/sanger-pathogens/snp-sites/blob/master/LICENSE |
+| SNVPhyl-tools | Apache 2.0 | https://github.com/phac-nml/snvphyl-tools/blob/master/LICENSE |
 | SPAdes | GNU GPLv2 | https://github.com/ablab/spades/blob/spades_3.13.0/assembler/LICENSE |
 | SRA-toolkit | Public Domain | https://github.com/ncbi/sra-tools/blob/master/LICENSE |
 | Staramr | Apache 2.0 | https://github.com/phac-nml/staramr/blob/master/LICENSE |
 | TipToft | GNU GPLv3 | https://github.com/andrewjpage/tiptoft/blob/master/LICENSE |
 | Treemmer | GNU GPLv3 | https://github.com/fmenardo/Treemmer/blob/master/COPYING |
-| Trimmomatic | GNU GPLv3 | https://academic.oup.com/bioinformatics/article/30/15/2114/2390096 |
+| Trimmomatic | GNU GPLv3 | https://github.com/usadellab/Trimmomatic/blob/main/distSrc/LICENSE |
 | Trycycler | GNU GPLv3 | https://github.com/rrwick/Trycycler/blob/master/LICENSE |
 | Unicycler | GNU GPLv3 | https://github.com/rrwick/Unicycler/blob/master/LICENSE |
 | VADR | Public Domain | https://github.com/nawrockie/vadr/blob/master/LICENSE |
