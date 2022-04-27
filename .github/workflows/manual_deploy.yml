@@ -1,0 +1,55 @@
+# This caller workflow tests, builds, and pushes the image to Docker Hub and optionally Quay
+# It also tests that a Singularity container can be run from the Docker image
+# It takes manual input as to which tool and version to deploy
+
+name: Manual deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      tool:
+        description: "Tool to deploy"
+        required: true
+      version:
+        description: "Version to deploy"
+        required: true
+      push_quay:
+        description: "Deploy to Quay too?"
+        type: boolean
+        default: true
+      repository_name:
+        description: "Repository name"
+        default: "staphb"
+
+jobs:
+
+  # This job calls a workflow to build the image to the 'test' stage
+  build-to-test:
+    uses: StaPH-B/docker-builds/.github/workflows/build-to-test.yml@master
+    with:
+      path_to_context: "./${{ github.event.inputs.tool }}/${{ github.event.inputs.version }}"
+      cache: ${{ github.event.inputs.tool }}
+
+  # This job calls a workflow to build the image to the 'app' stage and pushes the image to Docker Hub
+  build-to-deploy:
+    needs: build-to-test
+    uses: StaPH-B/docker-builds/.github/workflows/build-to-deploy.yml@master
+    secrets: # these are the secret login credientials for pushing the containers to the repository
+      docker_username: ${{ secrets.DOCKER_HUB_USERNAME }}
+      docker_access_token: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      quay_username: ${{ secrets.quay_username }}
+      quay_robot_token: ${{ secrets.quay_robot_token }}
+    with:
+      path_to_context: "./${{ github.event.inputs.tool }}/${{ github.event.inputs.version }}"
+      repository_name: ${{ github.event.inputs.repository_name }}
+      cache: ${{ github.event.inputs.tool }}
+      container_name: ${{ github.event.inputs.tool }}
+      tag: ${{ github.event.inputs.version }}
+      push_quay: ${{ github.event.inputs.push_quay == 'true' }}
+
+  # This job calls a workflow to pull the image from Docker Hub and test that it can be run as a Singularity container
+  run-singularity:
+    needs: build-to-deploy
+    uses: StaPH-B/docker-builds/.github/workflows/run-singularity.yml@master
+    with:
+      image_name: ${{ github.event.inputs.tool }}:${{ github.event.inputs.version }}
