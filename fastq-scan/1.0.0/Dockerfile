@@ -6,14 +6,14 @@ ARG FASTQSCAN_VER="1.0.0"
 
 # metadata
 LABEL base.image="ubuntu:xenial"
-LABEL dockerfile.version="2"
+LABEL dockerfile.version="1"
 LABEL software="fastq-scan"
 LABEL software.version=$FASTQSCAN_VER
 LABEL description="Output FASTQ summary statistics in JSON format"
 LABEL website="https://github.com/rpetit3/fastq-scan"
 LABEL license="https://github.com/rpetit3/fastq-scan/blob/master/LICENSE"
-LABEL maintainer="Robert A. Petit III"
-LABEL maintainer.email="robert.petit@wyo.gov"
+LABEL maintainer="John Arnn"
+LABEL maintainer.email="jarnn@utah.gov"
 
 # install dependencies and cleanup
 RUN apt-get update && apt-get install -y \
