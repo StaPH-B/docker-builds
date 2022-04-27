@@ -88,7 +88,7 @@ WORKDIR /data
 
 # A second FROM insruction creates a new stage
 # We use `test` for the test image
-#FROM app as test
+FROM app as test
 
 # Demonstrate that the program is successfully installed
 
