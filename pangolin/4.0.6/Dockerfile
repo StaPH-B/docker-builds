@@ -12,7 +12,7 @@ ARG PANGOLIN_VER="v4.0.6"
 ARG PANGOLIN_DATA_VER="v1.8"
 ARG SCORPIO_VER="v0.3.17"
 ARG CONSTELLATIONS_VER="v0.1.8"
-ARG USHER_VER="0.5.3"
+ARG USHER_VER="0.5.4"
 
 # metadata labels
 LABEL base.image="mambaorg/micromamba:0.22.0"
