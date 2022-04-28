@@ -3,7 +3,6 @@
 FROM ubuntu:focal as app
 
 # ARG sets environment variables during the build stage
-# USHER ver is in the conda version style.
 ARG IRMA_VER="1.0.2"
 ARG LABEL_VER="0.6.1"
 
@@ -34,7 +33,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  libxml2-dev \
  libncurses5 \
  wget \
- git
+ git && \
+ apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # IRMA Needs R
 RUN  apt-get update && apt-get -y upgrade && apt-get -y install r-base \
