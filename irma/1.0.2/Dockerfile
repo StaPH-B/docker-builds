@@ -69,5 +69,11 @@ RUN wget --output-document sratoolkit.tar.gz http://ftp-trace.ncbi.nlm.nih.gov/s
   rm sratoolkit.tar.gz
 ENV PATH="$PATH:/data/sratoolkit.2.9.2-ubuntu64/bin" \
   LC_ALL=C
-RUN fasterq-dump SRR17940172 &&\
-  IRMA FLU SRR17940172_1.fastq SRR17940172_2.fastq SRR17940172
+RUN fasterq-dump SRR17940172
+
+# IRMA does not like the formatting for SRA paired reads; Expects Illumina Formatting; this line of code will fix this issue
+RUN awk '{if(NR%2==1) $0=sprintf($1); print;}' SRR17940172_1.fastq > SRR17940172_1a.fastq && \
+  awk '{if(NR%4==1) $0=sprintf($1" 1:N:18:NULL"); print;}' SRR17940172_1a.fastq > SRR17940172_1.fastq && \
+  awk '{if(NR%2==1) $0=sprintf($1); print;}' SRR17940172_2.fastq > SRR17940172_2a.fastq && \
+  awk '{if(NR%4==1) $0=sprintf($1" 2:N:18:NULL"); print;}' SRR17940172_2a.fastq > SRR17940172_2.fastq
+RUN IRMA FLU SRR17940172_1.fastq SRR17940172_2.fastq SRR17940172
