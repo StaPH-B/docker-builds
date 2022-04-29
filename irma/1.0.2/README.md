@@ -5,6 +5,16 @@ Main tool: [IRMA](https://wonder.cdc.gov/amd/flu/irma/)
 #Paired-end files:
 #USAGE:	IRMA <MODULE-config> <R1.fastq.gz/R1.fastq> <R2.fastq.gz/R2.fastq> <sample_name>
 
+#WARNING!!!! IRMA expects Illumunia Fastq formatting: 
+@<instrument>:<run number>:<flowcell ID>:<lane>:<tile>:<xpos>:<y-pos> <read>:<is filtered>:<control number>:<index> 
+
+# If you are downloading samples from SRA please use the following code or IRMA's outputs will be empty
+#SRR17940172 is used for an example; replace this with SRR id of fastq files that are needed
+awk '{if(NR%2==1) $0=sprintf($1); print;}' SRR17940172_1.fastq > SRR17940172_1a.fastq && \
+awk '{if(NR%4==1) $0=sprintf($1" 1:N:18:NULL"); print;}' SRR17940172_1a.fastq > SRR17940172_1.fastq && \
+awk '{if(NR%2==1) $0=sprintf($1); print;}' SRR17940172_2.fastq > SRR17940172_2a.fastq && \
+awk '{if(NR%4==1) $0=sprintf($1" 2:N:18:NULL"); print;}' SRR17940172_2a.fastq > SRR17940172_2.fastq
+
 IRMA FLU Sample1_R1.fastq.gz Sample1_R2.fastq.gz Sample1
 
 IRMA EBOLA Patient1_R1.fastq Patient1_R2.fastq MyPatient
