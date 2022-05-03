@@ -143,11 +143,13 @@ WORKDIR /data
 
 FROM app as test
 
-WORKDIR /usr/local/bin/EToKi
+ARG ETOKI_VER
+
+WORKDIR /EToKi-${ETOKI_VER}
 # Get the help menu up
 RUN EToKi.py --help
 # Show the configuration works
 RUN EToKi.py configure  
-#RUN bash -e example.bash
-RUN EToKi.py MLSTdb -i examples/Escherichia.Achtman.alleles.fasta -r examples/Escherichia.Achtman.references.fasta -d examples/Escherichia.Achtman.convert.tab
+RUN bash example.bash
+#RUN EToKi.py MLSTdb -i examples/Escherichia.Achtman.alleles.fasta -r examples/Escherichia.Achtman.references.fasta -d examples/Escherichia.Achtman.convert.tab
 
