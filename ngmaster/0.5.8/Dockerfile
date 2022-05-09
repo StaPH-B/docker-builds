@@ -20,11 +20,17 @@ LABEL maintainer.email="curtis.kapsak@theiagen.com"
 # RUN executes code during the build
 # Install dependencies via apt-get or yum if using a centos or fedora base
 # cleanup apt garbage
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
  python3 \
  python3-biopython \
- python3-pip && \
+ python3-pip \
+ unzip \
+ wget \
+ ca-certificates && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/*
+
+# install isPcr 0.33
+RUN 
 
 # install ngmaster via pypi
 RUN pip3 install ngmaster==${NGMASTER_VER}
