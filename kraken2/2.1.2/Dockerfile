@@ -1,10 +1,10 @@
-FROM ubuntu:xenial
+FROM ubuntu:focal as app
 
 # for easy upgrade later. ARG variables only persist during build time.
 ARG K2VER="2.1.2"
 
-LABEL base.image="ubuntu:xenial"
-LABEL dockerfile.version="1"
+LABEL base.image="ubuntu:focal"
+LABEL dockerfile.version="2"
 LABEL software="Kraken2"
 LABEL software.version="2.1.2"
 LABEL description="Taxonomic sequence classifier"
@@ -21,7 +21,8 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
  make \
  g++ \
  rsync \
- cpanminus && \
+ cpanminus \
+ ncbi-blast+ && \
  rm -rf /var/lib/apt/lists/* && apt-get autoclean
 
 # perl module required for kraken2-build
@@ -39,6 +40,15 @@ ENV PATH="$PATH:/kraken2-${K2VER}" \
     LC_ALL=C
 
 WORKDIR /data
+
+FROM app as test 
+
+RUN kraken2 --help && \
+ kraken2-build --help && \
+ kraken2 --version && \
+ blastn -version && \
+ dustmasker -version && \
+ segmasker -version
 
 ##### NO DATABASE INCLUDED WITH THIS DOCKER IMAGE #####
 ## User will need to mount a directory from their host machine that contains kraken2 database files 
