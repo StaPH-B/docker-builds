@@ -14,18 +14,18 @@ on:
         description: "Version to deploy. Must match filepath: /tool/<version>/Dockerfile"
         required: true
       docker_image_tag:
-        description: "Docker image tag to use: staphb/tool:<tag> (usually matches version)"
+        description: "Docker image tag to use: repository/tool:<tag> (usually matches version)"
         required: true
       push_quay:
-        description: "Deploy to Quay too?"
+        description: "Deploy to Quay too? (repository must first exist on quay)"
         type: boolean
         default: true
       push_latest_tag:
-        description: "Push and overwrite latest docker image tag? staphb/<tool>:latest"
+        description: "Push and overwrite latest docker image tag? repository/tool:latest"
         default: true
         type: boolean
       repository_name:
-        description: "Repository name"
+        description: "Repository name. <repository>/tool:tag"
         default: "staphb"
 
 jobs:
