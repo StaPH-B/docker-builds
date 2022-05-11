@@ -129,8 +129,7 @@ jobs:
       - name: Build and push latest tag to Quay
         id: quay_build_latest_tag
         uses: docker/build-push-action@v2
-        if: ${{ inputs.push_quay }}
-        if: ${{ inputs.push_latest_tag }}
+        if: ${{ inputs.push_quay && inputs.push_latest_tag }}
         with:
           context: ${{ inputs.path_to_context }}
           file: ${{ inputs.path_to_context }}/${{ inputs.dockerfile_name }}
