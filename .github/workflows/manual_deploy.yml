@@ -20,6 +20,10 @@ on:
         description: "Deploy to Quay too?"
         type: boolean
         default: true
+      push_latest_tag:
+        description: "Push and overwrite latest docker image tag? staphb/<tool>:latest"
+        default: true
+        type: boolean
       repository_name:
         description: "Repository name"
         default: "staphb"
@@ -49,6 +53,7 @@ jobs:
       container_name: ${{ github.event.inputs.tool }}
       tag: ${{ github.event.inputs.docker_image_tag }}
       push_quay: ${{ github.event.inputs.push_quay == 'true' }}
+      push_latest_tag: ${{ github.event.inputs.push_latest_tag == 'true' }}
 
   # This job calls a workflow to pull the image from Docker Hub and test that it can be run as a Singularity container
   run-singularity:

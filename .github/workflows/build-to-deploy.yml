@@ -39,6 +39,11 @@ on:
         default: true
         required: false
         type: boolean
+      push_latest_tag:
+        default: true
+        required: false
+        type: boolean
+
 
 jobs:
 
@@ -80,8 +85,8 @@ jobs:
           username: ${{ secrets.quay_username }}
           password: ${{ secrets.quay_robot_token }}
 
-      - name: Build and push to DockerHub
-        id: docker_build
+      - name: Build and push user-defined tag to DockerHub
+        id: docker_build_user_defined_tag
         uses: docker/build-push-action@v2
         with:
           context: ${{ inputs.path_to_context }}
@@ -90,12 +95,25 @@ jobs:
           push: true
           cache-from: type=local,src=/tmp/.buildx-cache-${{ inputs.cache }}
           cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-${{ inputs.cache }}-new # mode=max means export layers from all stage to cache
-          tags: | # pushing to dockerhub for both latest and user-defined inputs.tag
-            ${{ inputs.repository_name }}/${{ inputs.container_name }}:latest
+          tags: | # pushing to dockerhub for only the user-defined inputs.tag
             ${{ inputs.repository_name }}/${{ inputs.container_name }}:${{ inputs.tag }}
 
-      - name: Build and push to Quay
-        id: quay_build
+      - name: Build and push latest tag to DockerHub
+        id: docker_build_latest_tag
+        uses: docker/build-push-action@v2
+        if: ${{ inputs.push_latest_tag }}
+        with:
+          context: ${{ inputs.path_to_context }}
+          file: ${{ inputs.path_to_context }}/${{ inputs.dockerfile_name }}
+          target: app
+          push: true
+          cache-from: type=local,src=/tmp/.buildx-cache-${{ inputs.cache }}
+          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-${{ inputs.cache }}-new # mode=max means export layers from all stage to cache
+          tags: | # pushing to dockerhub for only latest tag
+            ${{ inputs.repository_name }}/${{ inputs.container_name }}:latest
+
+      - name: Build and push user-defined tag to Quay
+        id: quay_build_user_defined_tag
         uses: docker/build-push-action@v2
         if: ${{ inputs.push_quay }}
         with:
@@ -105,9 +123,23 @@ jobs:
           push: true
           cache-from: type=local,src=/tmp/.buildx-cache-${{ inputs.cache }}
           cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-${{ inputs.cache }}-new # mode=max means export layers from all stage to cache
-          tags: | # pushing to quay for both latest and user-defined inputs.tag
-            quay.io/${{ inputs.repository_name }}/${{ inputs.container_name }}:latest
+          tags: | # pushing to quay for only user-defined inputs.tag
             quay.io/${{ inputs.repository_name }}/${{ inputs.container_name }}:${{ inputs.tag }}
+
+      - name: Build and push latest tag to Quay
+        id: quay_build_latest_tag
+        uses: docker/build-push-action@v2
+        if: ${{ inputs.push_quay }}
+        if: ${{ inputs.push_latest_tag }}
+        with:
+          context: ${{ inputs.path_to_context }}
+          file: ${{ inputs.path_to_context }}/${{ inputs.dockerfile_name }}
+          target: app
+          push: true
+          cache-from: type=local,src=/tmp/.buildx-cache-${{ inputs.cache }}
+          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-${{ inputs.cache }}-new # mode=max means export layers from all stage to cache
+          tags: | # pushing to quay for only latest
+            quay.io/${{ inputs.repository_name }}/${{ inputs.container_name }}:latest     
 
       - name: Move cache # apparently prevents the cache from growing in size forever
         run: |
