@@ -1,6 +1,6 @@
 # This caller workflow tests, builds, and pushes the image to Docker Hub and optionally Quay
 # It also tests that a Singularity container can be run from the Docker image
-# It takes manual input as to which tool and version to deploy
+# It takes manual input as to which tool, version, docker image tag, and repository name to deploy
 
 name: Manual deploy
 
@@ -12,6 +12,9 @@ on:
         required: true
       version:
         description: "Version to deploy"
+        required: true
+      docker_image_tag:
+        description: "Docker image tag to use: staphb/tool:<tag> (usually matches version)"
         required: true
       push_quay:
         description: "Deploy to Quay too?"
@@ -44,7 +47,7 @@ jobs:
       repository_name: ${{ github.event.inputs.repository_name }}
       cache: ${{ github.event.inputs.tool }}
       container_name: ${{ github.event.inputs.tool }}
-      tag: ${{ github.event.inputs.version }}
+      tag: ${{ github.event.inputs.docker_image_tag }}
       push_quay: ${{ github.event.inputs.push_quay == 'true' }}
 
   # This job calls a workflow to pull the image from Docker Hub and test that it can be run as a Singularity container
@@ -52,5 +55,5 @@ jobs:
     needs: build-to-deploy
     uses: ./.github/workflows/run-singularity.yml
     with:
-      image_name: ${{ github.event.inputs.tool }}:${{ github.event.inputs.version }}
+      image_name: ${{ github.event.inputs.tool }}:${{ github.event.inputs.docker_image_tag }}
       repository_name: ${{ github.event.inputs.repository_name }}
