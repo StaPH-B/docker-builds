@@ -4,29 +4,25 @@ This image implements the software [FLASH](http://ccb.jhu.edu/software/FLASH) fo
 Documentation is available at http://ccb.jhu.edu/software/FLASH/MANUAL.
 
 ## Example usage
-This example useage is adapted from the built-in tests for this image. See [run_flash_pos_control.sh](tests/scripts/run_flash_pos_control.sh).
+This example useage is adapted from the built-in tests for this image. See [test_flash.sh](test_flash.sh).
 
 ```bash
-# Input data are paired-end reads
-R1=/data/R1.fastq.gz
-R2=/data/R2.fastq.gz
-
-# Set up an output directory
-OUTDIR=/test_result
-mkdir -p $OUTDIR
+# Get input data (paired-end reads)
+wget -nv https://github.com/nf-core/test-datasets/raw/mag/test_data/test_minigut_R1.fastq.gz -O R1.fastq.gz
+wget -nv https://github.com/nf-core/test-datasets/raw/mag/test_data/test_minigut_R2.fastq.gz -O R2.fastq.gz
 
 # Define a sensible minimum overlap for merging based on your read lengths
-OVERLAP_LEN=240
+OVERLAP_LEN=100
 # Define read length, will use this to define the maximum overlap
-READ_LEN=300
+READ_LEN=126
 
 # Run FLASH to merge overlapping reads
 flash \
-  $R1 $R2 \
+  R1.fastq.gz R2.fastq.gz \
   --min-overlap=$OVERLAP_LEN \
   --max-overlap=$READ_LEN \
   --output-prefix=test \
-  --output-directory=$OUTDIR
+  --output-directory=results
 ```
 
 ## Example output
@@ -37,19 +33,19 @@ The on-screen output tells you the parameters FLASH ran with and how many read p
 [FLASH] Fast Length Adjustment of SHort reads
 [FLASH]  
 [FLASH] Input files:
-[FLASH]     /data/R1.fastq.gz
-[FLASH]     /data/R2.fastq.gz
+[FLASH]     R1.fastq.gz
+[FLASH]     R2.fastq.gz
 [FLASH]  
 [FLASH] Output files:
-[FLASH]     /test_result/test.extendedFrags.fastq
-[FLASH]     /test_result/test.notCombined_1.fastq
-[FLASH]     /test_result/test.notCombined_2.fastq
-[FLASH]     /test_result/test.hist
-[FLASH]     /test_result/test.histogram
+[FLASH]     results/test.extendedFrags.fastq
+[FLASH]     results/test.notCombined_1.fastq
+[FLASH]     results/test.notCombined_2.fastq
+[FLASH]     results/test.hist
+[FLASH]     results/test.histogram
 [FLASH]  
 [FLASH] Parameters:
-[FLASH]     Min overlap:           240
-[FLASH]     Max overlap:           300
+[FLASH]     Min overlap:           100
+[FLASH]     Max overlap:           126
 [FLASH]     Max mismatch density:  0.250000
 [FLASH]     Allow "outie" pairs:   false
 [FLASH]     Cap mismatch quals:    false
@@ -60,19 +56,18 @@ The on-screen output tells you the parameters FLASH ran with and how many read p
 [FLASH] Starting reader and writer threads
 [FLASH] Starting 2 combiner threads
 [FLASH] Processed 25000 read pairs
-...
-[FLASH] Processed 830228 read pairs
+[FLASH] Processed 50000 read pairs
 [FLASH]  
 [FLASH] Read combination statistics:
-[FLASH]     Total pairs:      830228
-[FLASH]     Combined pairs:   81862
-[FLASH]     Uncombined pairs: 748366
-[FLASH]     Percent combined: 9.86%
+[FLASH]     Total pairs:      50000
+[FLASH]     Combined pairs:   5
+[FLASH]     Uncombined pairs: 49995
+[FLASH]     Percent combined: 0.01%
 [FLASH]  
 [FLASH] Writing histogram files.
 [FLASH]  
 [FLASH] FLASH v1.2.11 complete!
-[FLASH] 22.683 seconds elapsed
+[FLASH] 0.213 seconds elapsed
 ```
 
 The result files from this command are:

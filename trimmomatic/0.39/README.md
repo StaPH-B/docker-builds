@@ -4,16 +4,12 @@ This image implements the read-trimming software [Trimmomatic](http://www.usadel
 Documentation is available at http://www.usadellab.org/cms/?page=trimmomatic. 
 
 ## Example usage
-This example useage is taken from the built-in tests for this image. See [run_trimmomatic_pos_control.sh](tests/scripts/run_trimmomatic_pos_control.sh).
+This example useage is taken from the built-in tests for this image. See [test_trimmomatic.sh](test_trimmomatic.sh).
 
 ```bash
-# Input data are paired-end reads
-R1=/data/R1.fastq.gz
-R2=/data/R2.fastq.gz
-
-# Set up an output directory
-OUTDIR=/test_result
-mkdir -p $OUTDIR
+# Get input data
+wget -nv https://github.com/nf-core/test-datasets/raw/mag/test_data/test_minigut_R1.fastq.gz -O R1.fastq.gz
+wget -nv https://github.com/nf-core/test-datasets/raw/mag/test_data/test_minigut_R2.fastq.gz -O R2.fastq.gz
 
 # Use adaptor file that comes with the software
 ADAPTERS="/Trimmomatic-0.39/adapters/TruSeq3-PE.fa"  # trimmomatic docs says these are used in HiSeq and MiSeq machines
@@ -22,9 +18,9 @@ ADAPTERS="/Trimmomatic-0.39/adapters/TruSeq3-PE.fa"  # trimmomatic docs says the
 trimmomatic \
   PE \
   -phred33 \
-  $R1 $R2 \
-  $OUTDIR/R1.paired.fq $OUTDIR/R1.unpaired.fq \
-  $OUTDIR/R2.paired.fq $OUTDIR/R2.unpaired.fq \
+  R1.fastq.gz R2.fastq.gz \
+  R1.paired.fq R1.unpaired.fq \
+  R2.paired.fq R2.unpaired.fq \
   ILLUMINACLIP:$ADAPTERS:2:20:10:8:TRUE \
   SLIDINGWINDOW:6:30 LEADING:10 TRAILING:10 MINLEN:50
 ```
@@ -34,11 +30,11 @@ trimmomatic \
 The on-screen output tells you what trimmomatic did and how many reads got filtered out:
 ```
 TrimmomaticPE: Started with arguments:
--phred33 /data/R1.fastq.gz /data/R2.fastq.gz /test_result/R1.paired.fq /test_result/R1.unpaired.fq /test_result/R2.paired.fq /test_result/R2.unpaired.fq ILLUMINACLIP:/Trimmomatic-0.39/adapters/TruSeq3-PE.fa:2:20:10:8:TRUE SLIDINGWINDOW:6:30 LEADING:10 TRAILING:10 MINLEN:50
+ -phred33 R1.fastq.gz R2.fastq.gz R1.paired.fq R1.unpaired.fq R2.paired.fq R2.unpaired.fq ILLUMINACLIP:/Trimmomatic-0.39/adapters/TruSeq3-PE.fa:2:20:10:8:TRUE SLIDINGWINDOW:6:30 LEADING:10 TRAILING:10 MINLEN:50
 Multiple cores found: Using 2 threads
 Using PrefixPair: 'TACACTCTTTCCCTACACGACGCTCTTCCGATCT' and 'GTGACTGGAGTTCAGACGTGTGCTCTTCCGATCT'
 ILLUMINACLIP: Using 1 prefix pairs, 0 forward/reverse sequences, 0 forward only sequences, 0 reverse only sequences
-Input Read Pairs: 830228 Both Surviving: 526702 (63.44%) Forward Only Surviving: 109472 (13.19%) Reverse Only Surviving: 48718 (5.87%) Dropped: 145336 (17.51%)
+Input Read Pairs: 50000 Both Surviving: 37667 (75.33%) Forward Only Surviving: 6949 (13.90%) Reverse Only Surviving: 4543 (9.09%) Dropped: 841 (1.68%)
 TrimmomaticPE: Completed successfully
 ```
 
