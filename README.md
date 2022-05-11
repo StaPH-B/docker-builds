@@ -141,7 +141,6 @@ To learn more about the docker pull rate limits and the open source software pro
 | [VirSorter2](https://hub.docker.com/r/staphb/virsorter2/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/virsorter2)](https://hub.docker.com/r/staphb/virsorter2/) | <ul><li>2.1</li></ul> | https://github.com/jiarong/VirSorter2 |
 | [wtdbg2](https://hub.docker.com/r/staphb/wtdbg2/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/wtdbg2)](https://hub.docker.com/r/staphb/wtdbg2) | <ul><li>2.5</li></ul> | https://github.com/ruanjue/wtdbg2 |
 
-
 You can also view the list of images on Docker hub here: https://hub.docker.com/r/staphb/
 
 ## License
