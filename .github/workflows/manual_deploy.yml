@@ -8,10 +8,10 @@ on:
   workflow_dispatch:
     inputs:
       tool:
-        description: "Tool to deploy"
+        description: "Tool to deploy. Must match filepath: /<tool>/version/Dockerfile"
         required: true
       version:
-        description: "Version to deploy"
+        description: "Version to deploy. Must match filepath: /tool/<version>/Dockerfile"
         required: true
       docker_image_tag:
         description: "Docker image tag to use: staphb/tool:<tag> (usually matches version)"
