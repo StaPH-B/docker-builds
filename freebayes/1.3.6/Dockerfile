@@ -70,7 +70,7 @@ RUN wget https://github.com/freebayes/freebayes/releases/download/v${FREEBAYES_V
 # Required by most tools that use perl with singularity so we can use container with both docker and singularity
 ENV LC_ALL=C
 
-# Add references and entrypoint script
+# Add files paths of software
 ENV PATH="${PATH}:/freebayes/build\
 :/samtools-${SAMTOOLSVER}\
 :/vcftools-${VCFTOOLS_VER}"
