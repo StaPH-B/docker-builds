@@ -76,10 +76,10 @@ jobs:
         uses: docker/metadata-action@v4 # trying this to resolve issues with pushing identical images to quay. info here: https://github.com/docker/build-push-action/issues/452
         with:
           images: |
-          ${{ inputs.repository_name }}/${{ inputs.container_name }}:${{ inputs.tag }}
-          ${{ inputs.repository_name }}/${{ inputs.container_name }}:latest
-          quay.io/${{ inputs.repository_name }}/${{ inputs.container_name }}:${{ inputs.tag }}
-          quay.io/${{ inputs.repository_name }}/${{ inputs.container_name }}:latest
+            ${{ inputs.repository_name }}/${{ inputs.container_name }}:${{ inputs.tag }}
+            ${{ inputs.repository_name }}/${{ inputs.container_name }}:latest
+            quay.io/${{ inputs.repository_name }}/${{ inputs.container_name }}:${{ inputs.tag }}
+            quay.io/${{ inputs.repository_name }}/${{ inputs.container_name }}:latest
 
       - name: Login to DockerHub
         uses: docker/login-action@v1
