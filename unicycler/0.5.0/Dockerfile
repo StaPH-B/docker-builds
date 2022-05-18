@@ -1,4 +1,4 @@
-FROM ubuntu:jammy as app
+FROM ubuntu:focal as app
 
 # for easy upgrade later. ARG variables only persist during image build time
 ARG unicyclerVer="0.5.0"
@@ -7,7 +7,7 @@ ARG blastVer="2.12.0"
 ARG spadesVer="3.15.4"
 ARG raconVer="1.4.3"
 
-LABEL base.image="ubuntu:jammy"
+LABEL base.image="ubuntu:focal"
 LABEL dockerfile.version="1"
 LABEL software="Unicycler"
 LABEL software.version="0.5.0"
@@ -84,11 +84,12 @@ WORKDIR /data
 
 FROM app as test
 
+RUN cd /unicycler && \
+ python -m unittest
+
 RUN wget https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/prokaryotes/bacteroides_fragilis/illumina/fastq/test1_1.fastq.gz &&\
   wget https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/prokaryotes/bacteroides_fragilis/illumina/fastq/test1_2.fastq.gz &&\
   wget https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/prokaryotes/bacteroides_fragilis/nanopore/fastq/test.fastq.gz
-
-RUN spades.py --test
 
 RUN unicycler --version && unicycler --help && \
   unicycler -1 test1_1.fastq.gz -2 test1_2.fastq.gz -l test.fastq.gz --out test
