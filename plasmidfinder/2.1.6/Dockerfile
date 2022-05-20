@@ -47,7 +47,7 @@ RUN wget https://bitbucket.org/genomicepidemiology/kma/get/${KMA_VER}.tar.gz && 
     mv kma* /bin/
 
 RUN wget https://bitbucket.org/genomicepidemiology/plasmidfinder/get/${PLASMIDFINDER_VER}.tar.gz && \
-    mkdir plasmidfinder && tar -xvf 2.1.6.tar.gz -C plasmidfinder --strip-components 1
+    mkdir plasmidfinder && tar -xvf ${PLASMIDFINDER_VER}.tar.gz -C plasmidfinder --strip-components 1
 
 ENV PATH="${PATH}:/plasmidfinder"
 
