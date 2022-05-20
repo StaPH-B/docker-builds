@@ -4,7 +4,9 @@ FROM debian:stretch as app
 
 #https://bitbucket.org/genomicepidemiology/plasmidfinder/issues/10/version-number
 # ARG sets environment variables during the build stage
-ARG PLASMIDFINDER_VER="2.1"
+ARG PLASMIDFINDER_VER="2.1.6"
+ARG PLASMIDFINDER_DB_VER="2.1"
+ARG KMA_VER="1.0.1"
 
 # LABEL instructions tag the image with metadata that might be important to the user
 # Optional, but highly recommended
@@ -13,26 +15,25 @@ LABEL dockerfile.version="1"
 LABEL software="plasmidfinder"
 LABEL software.version=$PLASMIDFINDER_VER
 LABEL description="Identifies plasmids in total or partial sequenced isolates of bacteria."
-LABEL website="https://github.com/StaPH-B/docker-builds"
-LABEL license="https://github.com/StaPH-B/docker-builds/blob/master/LICENSE"
+LABEL website="https://bitbucket.org/genomicepidemiology/plasmidfinder/src/master/"
+LABEL license="https://bitbucket.org/genomicepidemiology/plasmidfinder/src/master/README.md"
 LABEL maintainer="John Arnn"
 LABEL maintainer.email="jarnn@utah.gov"
 
 
-ENV DEBIAN_FRONTEND noninteractive,Teletype
+ENV DEBIAN_FRONTEND noninteractive
 
 # RUN executes code during the build
 # Install dependencies via apt-get or yum if using a centos or fedora base
-RUN set -xe && \
-    apt-get update -y && apt-get install -y \
+RUN apt-get update -y && apt-get install -y \
     git \
     apt-utils \
     wget \
     python3-pip \
     ncbi-blast+ \
     gzip \
-    libz-dev
-    #rm -rf /var/cache/apt/* /var/lib/apt/lists/*
+    libz-dev && \
+    rm -rf /var/lib/apt/lists/* && apt-get autoclean
 
 # Install python dependencies
 RUN pip3 install --upgrade pip && \
@@ -40,31 +41,31 @@ RUN pip3 install --upgrade pip && \
     pip3 install -U biopython==1.73 cgecore
 
 # Install kma
-RUN git clone --branch 1.0.1 --depth 1 https://bitbucket.org/genomicepidemiology/kma.git
-RUN cd kma && make && \
+RUN wget https://bitbucket.org/genomicepidemiology/kma/get/${KMA_VER}.tar.gz && \
+    mkdir kma && \
+    tar -xvf ${KMA_VER}.tar.gz -C kma --strip-components 1 && \
+    cd kma && make && \
     mv kma* /bin/
 
-RUN git clone https://bitbucket.org/genomicepidemiology/plasmidfinder.git && \
-    cp plasmidfinder/plasmidfinder.py /usr/src/plasmidfinder.py && \
-    mv plasmidfinder/test/database/ /database && \
-    mv plasmidfinder/test* /test/
+RUN wget https://bitbucket.org/genomicepidemiology/plasmidfinder/get/${PLASMIDFINDER_VER}.tar.gz && \
+    mkdir plasmidfinder && tar -xvf 2.1.6.tar.gz -C plasmidfinder --strip-components 1
 
-RUN chmod 755 /usr/src/plasmidfinder.py && \
-    chmod 755 test/test.sh
+ENV PATH="${PATH}:/plasmidfinder"
 
-RUN git clone https://bitbucket.org/genomicepidemiology/plasmidfinder_db.git && \
+RUN chmod 755 plasmidfinder/plasmidfinder.py 
+
+RUN wget https://bitbucket.org/genomicepidemiology/plasmidfinder_db/get/${PLASMIDFINDER_DB_VER}.tar.gz && \
+    mkdir plasmidfinder_db && tar -xvf ${PLASMIDFINDER_DB_VER}.tar.gz -C plasmidfinder_db --strip-components 1 && \
     cd plasmidfinder_db && \
     python3 INSTALL.py kma_index && \
     cd .. && \
-    rm -rf database && \
     mv plasmidfinder_db database
 
-ENV PATH $PATH:/usr/src
 
 WORKDIR /data
 
 FROM app as test
 
 RUN wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR193/000/ERR1937840/ERR1937840.fastq.gz
-RUN gzip -d ERR1937840.fastq.gz && chmod 755 ERR1937840.fastq && mkdir test && \
+RUN gzip -d ERR1937840.fastq.gz && mkdir test && \
     plasmidfinder.py -i ERR1937840.fastq -o test
