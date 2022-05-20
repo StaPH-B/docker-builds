@@ -20,7 +20,6 @@ LABEL maintainer.email="jarnn@utah.gov"
 # RUN executes code during the build
 # Install dependencies via apt-get or yum if using a centos or fedora base
 RUN apt-get update -y && apt-get install -y \
-    git \
     apt-utils \
     wget \
     perl \
@@ -36,7 +35,8 @@ RUN apt-get update && apt-get -y upgrade && apt-get -y install r-base \
   r-base-dev
 
 # Download git repository for PlasmidSeeker
-RUN git clone https://github.com/bioinfo-ut/PlasmidSeeker/ && \
+RUN wget https://github.com/bioinfo-ut/PlasmidSeeker/archive/refs/tags/${PLASMIDSEEKER_VER}.tar.gz && \
+    mkdir PlasmidSeeker && tar -xvf ${PLASMIDSEEKER_VER}.tar.gz -C PlasmidSeeker --strip-components 1 && \
     chmod 755 /PlasmidSeeker/plasmidseeker.pl && \
     chmod 755 /PlasmidSeeker/database_builder.pl && \
     chmod 755 /PlasmidSeeker/testfunction.R && \
