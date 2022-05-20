@@ -26,7 +26,6 @@ ENV DEBIAN_FRONTEND noninteractive
 # RUN executes code during the build
 # Install dependencies via apt-get or yum if using a centos or fedora base
 RUN apt-get update -y && apt-get install -y \
-    git \
     apt-utils \
     wget \
     python3-pip \
