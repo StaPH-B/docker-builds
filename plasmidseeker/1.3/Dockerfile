@@ -27,12 +27,10 @@ RUN apt-get update -y && apt-get install -y \
     jq \
     gzip \
     curl \
-    libz-dev && \
+    libz-dev \
+    r-base \
+    r-base-dev&& \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
-
-# Install R
-RUN apt-get update && apt-get -y upgrade && apt-get -y install r-base \
-  r-base-dev
 
 # Download git repository for PlasmidSeeker
 RUN wget https://github.com/bioinfo-ut/PlasmidSeeker/archive/refs/tags/${PLASMIDSEEKER_VER}.tar.gz && \
