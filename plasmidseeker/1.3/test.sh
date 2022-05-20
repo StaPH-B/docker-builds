@@ -24,8 +24,6 @@ wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR193/000/ERR1937840/ERR1937840.fastq.g
 
 gzip -d ERR1937840.fastq.gz
 
-chmod 755 e_coli_sakai_ref.fna
-chmod 755 ERR1937840.fastq
 
 
 plasmidseeker.pl -d plasmid_db -i ERR1937840.fastq -b e_coli_sakai_ref.fna -o EC_1_results.txt
