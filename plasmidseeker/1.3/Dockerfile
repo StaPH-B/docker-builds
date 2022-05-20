@@ -12,8 +12,8 @@ LABEL dockerfile.version="1"
 LABEL software="PlasmidSeeker"
 LABEL software.version=$PLASMIDSEEKER_VER
 LABEL description="A k-mer based program for the identification of known plasmids from bacterial whole genome sequencing reads."
-LABEL website="https://github.com/StaPH-B/docker-builds"
-LABEL license="https://github.com/StaPH-B/docker-builds/blob/master/LICENSE"
+LABEL website="https://github.com/bioinfo-ut/PlasmidSeeker"
+LABEL license="https://github.com/bioinfo-ut/PlasmidSeeker/blob/master/LICENSE"
 LABEL maintainer="John Arnn"
 LABEL maintainer.email="jarnn@utah.gov"
 
