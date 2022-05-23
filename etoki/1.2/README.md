@@ -2,6 +2,8 @@
 
 _note_ this text was lifted from the original repo README
 
+_note_ this is a modified version of EToKi mainly to remove `usearch` and replace it with blast
+
 ### Trim genomic reads
 ~~~~~~~~~~~
 python EToKi.py prepare --pe examples/S_R1.fastq.gz,examples/S_R2.fastq.gz -p examples/prep_out
