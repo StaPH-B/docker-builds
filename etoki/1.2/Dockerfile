@@ -32,7 +32,7 @@ FROM staphb/raxml:${RAXML_VER}              AS raxml
 
 FROM ubuntu:jammy as app
 
-LABEL base.image="ubuntu:focal"
+LABEL base.image="ubuntu:jammy"
 LABEL dockerfile.version="1"
 LABEL software="EToKi"
 LABEL software.version=$ETOKI_VER
