@@ -21,7 +21,6 @@ FROM staphb/shovill:${SHOVILL_VER}          AS shovill
 FROM staphb/kraken2:${KRAKEN2_VER}          AS kraken2
 FROM staphb/bowtie2:${BOWTIE_VER}           AS bowtie2
 FROM staphb/lyveset:${LYVESET_VER}          AS lyveset
-FROM torognes/vsearch:${VSEARCH_VER}        AS vsearch
 FROM staphb/bbtools:${BBTOOLS_VER}          AS bbtools
 FROM staphb/mlst:${MLST_VER}                AS mlst
 FROM staphb/orthofinder:${ORTHOFINDER_VER}  AS orthofinder
@@ -54,6 +53,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  g++ \
  python-setuptools \
  zlib1g-dev \
+ libbz2-dev \
  python-is-python3 \
  python3-pip \
  python3-dev \
@@ -67,12 +67,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  ant \
  libssl-dev \
  python3-venv \
+ autoconf \
+ automake \
+ make \
  wget && \
  apt-get autoclean && \
  rm -rf /var/lib/apt/lists/*
 
-RUN pip3 install ete3 numba pandas scikit-learn psutil click scipy
-RUN pip3 install numpy==1.21.6
+RUN pip3 install ete3 numba pandas scikit-learn psutil click scipy numpy==1.21.6
 
 COPY --from=shovill     /skesa/skesa            /usr/local/bin/
 COPY --from=shovill     /megahit                /megahit
@@ -88,13 +90,12 @@ COPY --from=orthofinder /mmseqs                 /mmseqs
 COPY --from=cfsan       /gatk                   /gatk
 COPY --from=flye        /Flye-*                 /flye
 COPY --from=samtools    /samtools-*             /samtools
-COPY --from=vsearch     /usr/local/bin/vsearch  /usr/local/bin/vsearch
-COPY --from=vsearch     /usr/local/bin/vsearch  /usr/local/bin/usearch
 COPY --from=raxml       /standard-RAxML-8.2.12  /standard-RAxML
 COPY --from=raxml       /raxml_ng               /raxml_ng
 
 ARG DIAMOND_VER
 ARG ETOKI_VER
+ARG VSEARCH_VER
 
 # Diamond
 RUN wget https://github.com/bbuchfink/diamond/releases/download/${DIAMOND_VER}/diamond-linux64.tar.gz && \
@@ -102,6 +103,21 @@ RUN wget https://github.com/bbuchfink/diamond/releases/download/${DIAMOND_VER}/d
  mv -v diamond /usr/local/bin/diamond && \
  chmod +x /usr/local/bin/diamond && \
  rm diamond-linux64.tar.gz
+
+# Vsearch sort of copied from https://github.com/torognes/vsearch/blob/v2.21.1/Dockerfile
+WORKDIR /opt
+RUN git clone https://github.com/torognes/vsearch.git && cd vsearch && git checkout v${VSEARCH_VER}
+WORKDIR /opt/vsearch
+RUN ./autogen.sh && \
+    ./configure CFLAGS="-O3" CXXFLAGS="-O3" && \
+    make clean && \
+    make && \
+    make install && \
+    make clean && \
+    cd .. && \
+    rm -rf /opt/vsearch
+
+WORKDIR /
 
 ## EToKi itself ##
 RUN wget https://github.com/zheminzhou/EToKi/archive/refs/tags/${ETOKI_VER}.tar.gz && \
@@ -137,17 +153,49 @@ RUN EToKi.py configure --path gatk=/gatk/GenomeAnalysisTK-3.8-1-0-gf15c1c3ef/Gen
 RUN EToKi.py configure --path mmseqs=$(which mmseqs) 
 RUN EToKi.py configure --path megahit=$(which megahit) 
 RUN EToKi.py configure --path spades=$(which spades.py) 
-RUN EToKi.py configure --usearch /usr/local/bin/usearch
+RUN EToKi.py configure --usearch /usr/local/bin/vsearch
+
+# Swap out usearch for vsearch in the MLSType code
+RUN sed -i "s/ublast_cmd = .*/ublast_cmd = 'vsearch  --usearch_global {refAA}   --db {qryAA}  --threads {n_thread}  --id 0.8   --maxaccepts 6 --blast6out {aaMatch} --userfields query+target+id+alnlen+mism+opens+qlo+qhi+tlo+thi+evalue+raw+ql+tl+qrow+trow+qstrand'.format(/" /EToKi-${ETOKI_VER}/modules/MLSType.py
+RUN sed -i -e "s/qryAA=qryAA/qryAA=qry/" -e "s/refAA=refAA/refAA=ref/" /EToKi-${ETOKI_VER}/modules/MLSType.py
+RUN sed -i "s/pp.communicate\(\)/ublast_res = pp.communicate(); print(ublast_res[1]);/" /EToKi-${ETOKI_VER}/modules/MLSType.py
+# Show the results of this swap
+RUN grep -n -C 5 [uv]search /EToKi-${ETOKI_VER}/modules/MLSType.py
 
 WORKDIR /data
 
 FROM app as test
 
-WORKDIR /usr/local/bin/EToKi
+ARG ETOKI_VER
+
+WORKDIR /EToKi-${ETOKI_VER}
 # Get the help menu up
 RUN EToKi.py --help
 # Show the configuration works
 RUN EToKi.py configure  
-#RUN bash -e example.bash
-RUN EToKi.py MLSTdb -i examples/Escherichia.Achtman.alleles.fasta -r examples/Escherichia.Achtman.references.fasta -d examples/Escherichia.Achtman.convert.tab
 
+ENV MLSTdb="/EToKi-${ETOKI_VER}/examples/Escherichia.Achtman.alleles.fasta"
+ENV MLSTalleles="/EToKi-${ETOKI_VER}/examples/Escherichia.Achtman.alleles.fasta"
+ENV MLSTtab="/EToKi-${ETOKI_VER}/examples/Escherichia.Achtman.convert.tab"
+ENV ECOLI_assembly="/EToKi-${ETOKI_VER}/examples/GCF_000005845.2_ASM584v2_genomic.fna"
+ENV ECOLI_assembly2="/EToKi-${ETOKI_VER}/examples/GCF_000214765.2_ASM21476v3_genomic.fna"
+ENV ECOLI_assembly3="/EToKi-${ETOKI_VER}/examples/GCF_001566635.1_ASM156663v1_genomic.fna"
+RUN gunzip -vf ${ECOLI_assembly} ${ECOLI_assembly2} ${ECOLI_assembly3}
+
+# Try out MLST
+RUN EToKi.py MLSTdb -i ${MLSTalleles} -r ${MLSTdb} -d ${MLSTtab}
+# Show some results of the database creation
+RUN ls -lh $MLSTdb $MLSTalleles $MLSTtab && head ${MLSTalleles} ${MLSTdb} ${MLSTtab}
+# Run typing
+RUN EToKi.py MLSType -i ${ECOLI_assembly3} -r ${MLSTdb} -k G749 -o stdout -d ${MLSTtab}
+
+# Return the fasta files back to gzip status
+RUN gzip -vf ${ECOLI_assembly} ${ECOLI_assembly2} ${ECOLI_assembly3}
+# Some of this command will appear like it failed because we are lacking lastdb and kraken
+RUN bash example.bash
+
+# Run EToKi uberBlast, the same way that it is called in EToKi mlstDb
+#RUN EToKi.py uberBlast -q ${ECOLI_assembly} -r ${ECOLI_assembly2} -f --blastn --diamondSELF --min_id 0.1 --min_ratio 0.1 -t 2 -p -s 0 -e 0,3 -o /dev/stdout
+# RUN EToKi.py uberBlast -q ${ECOLI_assembly} -r ${ECOLI_assembly2} -f --blastn --diamondSELF --min_id 0.6 --min_ratio 0.7 -t 2 -p -s 1 -e 0,3 -o /dev/stdout
+#RUN bash example.bash
+#RUN EToKi.py MLSTdb -i examples/Escherichia.Achtman.alleles.fasta -r examples/Escherichia.Achtman.references.fasta -d examples/Escherichia.Achtman.convert.tab
