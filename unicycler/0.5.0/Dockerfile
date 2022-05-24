@@ -26,6 +26,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 # install dependencies; cleanup apt garbage
 RUN apt-get update && apt-get install --no-install-recommends -y \
   python3 \
+  python3-pip \
   python3-distutils \
   python-setuptools \
   cmake \
@@ -63,7 +64,7 @@ RUN wget http://cab.spbu.ru/files/release${spadesVer}/SPAdes-${spadesVer}-Linux.
   rm -r SPAdes-${spadesVer}-Linux.tar.gz
 
 # ncbi-blast+
-# apt version of blast is very old (2.2.31)
+# ubuntu:focal apt version of blast is old-ish (2.9.0)
 RUN wget https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/${blastVer}/ncbi-blast-${blastVer}+-x64-linux.tar.gz && \
   tar -xzf ncbi-blast-${blastVer}+-x64-linux.tar.gz && \
   rm ncbi-blast-${blastVer}+-x64-linux.tar.gz
@@ -74,15 +75,22 @@ RUN wget https://github.com/isovic/racon/releases/download/${raconVer}/racon-v${
   tar -xzvf racon-v${raconVer}.tar.gz -C racon --strip-components 1 && \
   rm racon-v${raconVer}.tar.gz && \
   cd racon && \
-    mkdir build && \
-    cd build && \
-# for installing racon tests - keeping as a comment in case needed in the future
-#      cmake -DCMAKE_BUILD_TYPE=Release -Dracon_build_tests=ON ../ && \
-      cmake -DCMAKE_BUILD_TYPE=Release ../ && \
-      make && \
-      make install
+  mkdir build && \
+  cd build && \
+# for installing racon tests
+  cmake -DCMAKE_BUILD_TYPE=Release -Dracon_build_tests=ON ../ && \
+  cmake -DCMAKE_BUILD_TYPE=Release ../ && \
+  make && \
+  make install
 
-# get unicycler
+# LC_ALL for singularity compatibility
+# set PATH so that blast binaries and spades.py are available during unicycler install
+# TERM set so that output is pretty during tests - also ensures unicycler unit tests pass 
+ENV PATH="/SPAdes-${spadesVer}-Linux/bin:/ncbi-blast-${blastVer}+/bin/:${PATH}" \
+ LC_ALL=C.UTF-8 \
+ TERM=xterm-256color
+
+# get unicycler; install
 RUN wget https://github.com/rrwick/Unicycler/archive/v${unicyclerVer}.tar.gz && \
   mkdir unicycler && \
   tar -xzvf v${unicyclerVer}.tar.gz -C unicycler --strip-components 1 && \
@@ -90,26 +98,24 @@ RUN wget https://github.com/rrwick/Unicycler/archive/v${unicyclerVer}.tar.gz && 
   python3 /unicycler/setup.py install && \
   mkdir /data
 
-ENV PATH="/SPAdes-${spadesVer}-Linux/bin:/ncbi-blast-${blastVer}+/bin/:${PATH}" \
- LC_ALL=C
-
-# set PATH and locale settings for singularity
-# ENV LC_ALL=C.UTF-8 \
-#    PATH="${PATH}:/SPAdes-${spadesVer}-Linux/bin"
-
+# final working directory in app layer is /data, as usual
 WORKDIR /data
 
 FROM app as test
 
-# RUN spades.py --test # added in to make sure that spades wasn't an issue
+# test spades and unicycler unit tests
+RUN spades.py --test && \
+  cd /unicycler && python -m unittest
 
-# RUN /racon/build/bin/racon_test # added in to make sure that racon wasn't an issue
+# test racon
+RUN /racon/build/bin/racon_test # added in to make sure that racon wasn't an issue
 
-# RUN cd /unicycler && python -m unittest
+#### COMMENTING OUT FOR NOW - CURTIS ####
+#### HYBRID ASSEMBLY OF THIS DATA RESULTS IN A SPADES ERROR DUE TO UNEVEN KMER COVERAGE ####
+#RUN wget https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/prokaryotes/bacteroides_fragilis/illumina/fastq/test1_1.fastq.gz &&\
+#  wget https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/prokaryotes/bacteroides_fragilis/illumina/fastq/test1_2.fastq.gz &&\
+#  wget https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/prokaryotes/bacteroides_fragilis/nanopore/fastq/test.fastq.gz
 
-RUN wget https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/prokaryotes/bacteroides_fragilis/illumina/fastq/test1_1.fastq.gz &&\
-  wget https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/prokaryotes/bacteroides_fragilis/illumina/fastq/test1_2.fastq.gz &&\
-  wget https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/prokaryotes/bacteroides_fragilis/nanopore/fastq/test.fastq.gz
-
+# testing on the test data (ILMN and ONT) provided with unicycler code
 RUN unicycler --version && unicycler --help && \
-  unicycler -1 test1_1.fastq.gz -2 test1_2.fastq.gz -l test.fastq.gz --out test
+  unicycler -1 /unicycler/sample_data/short_reads_1.fastq.gz -2 /unicycler/sample_data/short_reads_2.fastq.gz -l /unicycler/sample_data/long_reads_high_depth.fastq.gz --out sample_data_hybrid_asm_test
