@@ -16,7 +16,6 @@ LABEL maintainer.email="tiverson@utah.gov"
 
 # Install open using apt 
 RUN apt-get update && apt-get install -y software-properties-common &&\
-  add-apt-repository -y ppa:openjdk-r/ppa &&\
   apt-get update && apt-get install -y \
   openjdk-11-jre \
   wget \
@@ -43,7 +42,7 @@ RUN mkdir /data
 WORKDIR /data
 
 # Run test of annotation
-From app as test
+FROM app as test
 
 COPY test_snpeff_snpsift.sh .
 RUN bash test_snpeff_snpsift.sh 
