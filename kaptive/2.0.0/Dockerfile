@@ -1,10 +1,9 @@
-FROM ubuntu:focal
+FROM ubuntu:focal as app
 
 ARG KAPTIVE_VER="2.0.0"
-ARG DEBIAN_FRONTEND=noninteractive
-
 ARG blastVer="2.3.0"
-ARG kaptiveVer="2.0.0"
+
+ARG DEBIAN_FRONTEND=noninteractive
 
 LABEL base.image="ubuntu:bionic"
 LABEL dockerfile.version="1"
@@ -36,10 +35,10 @@ RUN wget "ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/${blastVer}/ncbi-b
   rm ncbi-blast-${blastVer}+-x64-linux.tar.gz
  
 # kaptive
-RUN wget https://github.com/katholt/Kaptive/archive/refs/tags/v${KAPTIVE_VER}.tar.gz && \
-  tar -xzf v${kaptiveVer}.tar.gz && \
-  rm -f v${kaptiveVer}.tar.gz && \
-  mv /Kaptive-${kaptiveVer} /kaptive
+RUN wget "https://github.com/katholt/Kaptive/archive/refs/tags/v${KAPTIVE_VER}.tar.gz" && \
+  tar -xzf v${KAPTIVE_VER}.tar.gz && \
+  rm -f v${KAPTIVE_VER}.tar.gz && \
+  mv /Kaptive-${KAPTIVE_VER} /kaptive
  
 RUN pip3 install biopython
 
@@ -47,4 +46,7 @@ ENV PATH="/ncbi-blast-${blastVer}+/bin:${PATH}"
 ENV PATH="/kaptive:${PATH}"
 
 WORKDIR /data
+
+# test layer
+FROM app as test
 
