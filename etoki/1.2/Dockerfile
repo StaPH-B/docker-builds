@@ -7,9 +7,9 @@ ARG SHOVILL_VER=1.1.0
 ARG KRAKEN2_VER=2.1.2-no-db
 ARG BOWTIE_VER=2.4.4
 ARG LYVESET_VER=1.1.4f
-ARG VSEARCH_VER=2.21.1
+#ARG VSEARCH_VER=2.21.1
 ARG BBTOOLS_VER=38.96
-ARG MLST_VER=2.19.0
+#ARG MLST_VER=2.19.0
 ARG ORTHOFINDER_VER=2.17
 ARG CFSAN_VER=2.0.2
 ARG FLYE_VER=2.9
@@ -22,8 +22,8 @@ FROM staphb/kraken2:${KRAKEN2_VER}          AS kraken2
 FROM staphb/bowtie2:${BOWTIE_VER}           AS bowtie2
 FROM staphb/lyveset:${LYVESET_VER}          AS lyveset
 FROM staphb/bbtools:${BBTOOLS_VER}          AS bbtools
-FROM staphb/mlst:${MLST_VER}                AS mlst
-FROM staphb/orthofinder:${ORTHOFINDER_VER}  AS orthofinder
+#FROM staphb/mlst:${MLST_VER}                AS mlst
+#FROM staphb/orthofinder:${ORTHOFINDER_VER}  AS orthofinder
 FROM staphb/cfsan-snp-pipeline:${CFSAN_VER} AS cfsan
 FROM staphb/flye:${FLYE_VER}                AS flye
 FROM staphb/samtools:${SAMTOOLS_VER}        AS samtools
@@ -47,7 +47,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  libncurses5-dev \
  libbz2-dev \
  liblzma-dev \
- perl \
+ perl-base \
  libcurl4-gnutls-dev \
  gcc \
  g++ \
@@ -70,7 +70,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  autoconf \
  automake \
  make \
- wget && \
+ wget \
+ mmseqs2 \
+ ncbi-blast+ && \
  apt-get autoclean && \
  rm -rf /var/lib/apt/lists/*
 
@@ -84,9 +86,9 @@ COPY --from=kraken2     /kraken2-2*             /kraken2
 COPY --from=kraken2     /kraken2-db             /kraken2-db
 COPY --from=bowtie2     /opt/bowtie2-*          /opt/bowtie2
 COPY --from=bbtools     /opt/bbmap              /opt/bbmap
-COPY --from=mlst        /ncbi-blast-2.9.0+      /ncbi-blast-2.9.0+
+#COPY --from=mlst        /ncbi-blast-2.9.0+      /ncbi-blast-2.9.0+
 COPY --from=lyveset     /lyve-SET               /lyve-SET
-COPY --from=orthofinder /mmseqs                 /mmseqs
+#COPY --from=orthofinder /mmseqs                 /mmseqs
 COPY --from=cfsan       /gatk                   /gatk
 COPY --from=flye        /Flye-*                 /flye
 COPY --from=samtools    /samtools-*             /samtools
@@ -95,7 +97,7 @@ COPY --from=raxml       /raxml_ng               /raxml_ng
 
 ARG DIAMOND_VER
 ARG ETOKI_VER
-ARG VSEARCH_VER
+#ARG VSEARCH_VER
 
 # Diamond
 RUN wget https://github.com/bbuchfink/diamond/releases/download/${DIAMOND_VER}/diamond-linux64.tar.gz && \
@@ -104,32 +106,49 @@ RUN wget https://github.com/bbuchfink/diamond/releases/download/${DIAMOND_VER}/d
  chmod +x /usr/local/bin/diamond && \
  rm diamond-linux64.tar.gz
 
+# mmseqs
+#RUN wget https://mmseqs.com/latest/mmseqs-linux-avx2.tar.gz && \
+#RUN wget --no-check-certificate --secure-protocol=TLSv1_2 --debug -v --auth-no-challenge http://mmseqs.com/latest/mmseqs-linux-avx2.tar.gz && \
+#  tar -xvf mmseqs-linux-avx2.tar.gz && \
+#  rm -rf mmseqs-linux-avx2.tar.gz && \
+#  /bin/bash -c "source /mmseqs/util/bash-completion.sh"
+
+
+ENV PATH="/usr/local/bin:/EToKi-${ETOKI_VER}:/flye/bin:/megahit:/pilon:/spades/bin:/kraken2:/opt/bowtie2:/opt/bbmap:/ncbi-blast-2.9.0+/bin:/megahit/megahit_v1.1.4_LINUX_CPUONLY_x86_64-bin:/raxml_ng:/standard-RAxML:/lyve-SET:/lyve-SET/scripts:/mmseqs/bin:/mmseqs/util:$PATH" \
+   LC_ALL=C
+
+# Test many executables
+#RUN mmseqs --version
+#RUN flye --version
+#RUN samtools --help
+#RUN diamond --help && diamond --version
+
 # Vsearch sort of copied from https://github.com/torognes/vsearch/blob/v2.21.1/Dockerfile
-WORKDIR /opt
-RUN git clone https://github.com/torognes/vsearch.git && cd vsearch && git checkout v${VSEARCH_VER}
-WORKDIR /opt/vsearch
-RUN ./autogen.sh && \
-    ./configure CFLAGS="-O3" CXXFLAGS="-O3" && \
-    make clean && \
-    make && \
-    make install && \
-    make clean && \
-    cd .. && \
-    rm -rf /opt/vsearch
+#WORKDIR /opt
+#RUN git clone https://github.com/torognes/vsearch.git && cd vsearch && git checkout v${VSEARCH_VER}
+#WORKDIR /opt/vsearch
+#RUN ./autogen.sh && \
+    #./configure CFLAGS="-O3" CXXFLAGS="-O3" && \
+    #make clean && \
+    #make && \
+    #make install && \
+    #make clean && \
+    #cd .. && \
+    #rm -rf /opt/vsearch
 
 WORKDIR /
 
 ## EToKi itself ##
-RUN wget https://github.com/zheminzhou/EToKi/archive/refs/tags/${ETOKI_VER}.tar.gz && \
-  ls / && \
-  tar zxvf ${ETOKI_VER}.tar.gz && \
-  rm ${ETOKI_VER}.tar.gz
-#RUN git clone https://github.com/zheminzhou/EToKi.git -b ${ETOKI_VER} /EToKi-${ETOKI_VER}
+#RUN wget https://github.com/zheminzhou/EToKi/archive/refs/tags/${ETOKI_VER}.tar.gz && \
+#  ls / && \
+#  tar zxvf ${ETOKI_VER}.tar.gz && \
+#  rm ${ETOKI_VER}.tar.gz
+# TODO checkout a specific tag or hashtag
+RUN git clone https://github.com/lskatz/EToKi.git /EToKi-${ETOKI_VER} && \
+ cd /EToKi-${ETOKI_VER} && \
+ cd -
 
 WORKDIR /EToKi-${ETOKI_VER}
-
-ENV PATH="/usr/local/bin:/EToKi-${ETOKI_VER}:/flye/bin:/megahit:/pilon:/spades/bin:/kraken2:/opt/bowtie2:/opt/bbmap:/ncbi-blast-2.9.0+/bin:/megahit/megahit_v1.1.4_LINUX_CPUONLY_x86_64-bin:/raxml_ng:/standard-RAxML:/lyve-SET:/lyve-SET/scripts:/mmseqs/bin:/mmseqs/util:$PATH" \
-   LC_ALL=C
 
 RUN EToKi.py configure --help
 
@@ -147,20 +166,15 @@ RUN EToKi.py configure --path raxml=$(which raxmlHPC)
 RUN EToKi.py configure --path raxml_ng=$(which raxml-ng) 
 RUN EToKi.py configure --path samtools=$(which samtools) 
 RUN EToKi.py configure --path blastn=$(which blastn) 
+RUN EToKi.py configure --path blastp=$(which blastp) 
 RUN EToKi.py configure --path makeblastdb=$(which makeblastdb) 
 RUN EToKi.py configure --path diamond=$(which diamond) 
 RUN EToKi.py configure --path gatk=/gatk/GenomeAnalysisTK-3.8-1-0-gf15c1c3ef/GenomeAnalysisTK.jar 
 RUN EToKi.py configure --path mmseqs=$(which mmseqs) 
 RUN EToKi.py configure --path megahit=$(which megahit) 
 RUN EToKi.py configure --path spades=$(which spades.py) 
-RUN EToKi.py configure --usearch /usr/local/bin/vsearch
-
-# Swap out usearch for vsearch in the MLSType code
-RUN sed -i "s/ublast_cmd = .*/ublast_cmd = 'vsearch  --usearch_global {refAA}   --db {qryAA}  --threads {n_thread}  --id 0.8   --maxaccepts 6 --blast6out {aaMatch} --userfields query+target+id+alnlen+mism+opens+qlo+qhi+tlo+thi+evalue+raw+ql+tl+qrow+trow+qstrand'.format(/" /EToKi-${ETOKI_VER}/modules/MLSType.py
-RUN sed -i -e "s/qryAA=qryAA/qryAA=qry/" -e "s/refAA=refAA/refAA=ref/" /EToKi-${ETOKI_VER}/modules/MLSType.py
-RUN sed -i "s/pp.communicate\(\)/ublast_res = pp.communicate(); print(ublast_res[1]);/" /EToKi-${ETOKI_VER}/modules/MLSType.py
-# Show the results of this swap
-RUN grep -n -C 5 [uv]search /EToKi-${ETOKI_VER}/modules/MLSType.py
+# In the LK version, we are emulating usearch with blastp
+RUN EToKi.py configure --usearch $(which blastp)
 
 WORKDIR /data
 
@@ -194,8 +208,3 @@ RUN gzip -vf ${ECOLI_assembly} ${ECOLI_assembly2} ${ECOLI_assembly3}
 # Some of this command will appear like it failed because we are lacking lastdb and kraken
 RUN bash example.bash
 
-# Run EToKi uberBlast, the same way that it is called in EToKi mlstDb
-#RUN EToKi.py uberBlast -q ${ECOLI_assembly} -r ${ECOLI_assembly2} -f --blastn --diamondSELF --min_id 0.1 --min_ratio 0.1 -t 2 -p -s 0 -e 0,3 -o /dev/stdout
-# RUN EToKi.py uberBlast -q ${ECOLI_assembly} -r ${ECOLI_assembly2} -f --blastn --diamondSELF --min_id 0.6 --min_ratio 0.7 -t 2 -p -s 1 -e 0,3 -o /dev/stdout
-#RUN bash example.bash
-#RUN EToKi.py MLSTdb -i examples/Escherichia.Achtman.alleles.fasta -r examples/Escherichia.Achtman.references.fasta -d examples/Escherichia.Achtman.convert.tab
