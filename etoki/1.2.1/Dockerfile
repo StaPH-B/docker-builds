@@ -146,6 +146,7 @@ WORKDIR /
 # TODO checkout a specific tag or hashtag
 RUN git clone https://github.com/lskatz/EToKi.git /EToKi-${ETOKI_VER} && \
  cd /EToKi-${ETOKI_VER} && \
+ git checkout 1.2.1 && \
  cd -
 
 WORKDIR /EToKi-${ETOKI_VER}
@@ -205,6 +206,11 @@ RUN EToKi.py MLSType -i ${ECOLI_assembly3} -r ${MLSTdb} -k G749 -o stdout -d ${M
 
 # Return the fasta files back to gzip status
 RUN gzip -vf ${ECOLI_assembly} ${ECOLI_assembly2} ${ECOLI_assembly3}
-# Some of this command will appear like it failed because we are lacking lastdb and kraken
-RUN bash example.bash
+
+# Just take the examples of unit tests that are most relevant to MLST
+# from example.bash in the repo
+#RUN python EToKi.py MLSTdb -i examples/Escherichia.Achtman.alleles.fasta -r examples/Escherichia.Achtman.references.fasta -d examples/Escherichia.Achtman.convert.tab
+#RUN gzip -cd examples/GCF_001566635.1_ASM156663v1_genomic.fna.gz > examples/GCF_001566635.1_ASM156663v1_genomic.fna && \
+
+
 

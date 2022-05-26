@@ -2,7 +2,9 @@
 
 _note_ this text was lifted from the original repo README
 
-_note_ this is a modified version of EToKi mainly to remove `usearch` and replace it with blast
+_note_ this is a modified version of EToKi mainly to remove `usearch` and replace it with blast.
+This is noted by using a custom version of EToKi labeled as `1.2.1` by @lskatz.
+Additionally, only MLST methods are tested and there are other modules in EToKi that are not guaranteed to work such as assembly and metagenomics.
 
 ### Trim genomic reads
 ~~~~~~~~~~~
