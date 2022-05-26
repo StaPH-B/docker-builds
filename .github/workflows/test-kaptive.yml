@@ -10,6 +10,6 @@ jobs:
   build-to-test:
     uses: ./.github/workflows/build-to-test.yml
     with:
-      path_to_context: "kaptive/2.0.0"
+      path_to_context: "./kaptive/2.0.0"
       dockerfile_name: "Dockerfile"
       cache: "kaptive"
