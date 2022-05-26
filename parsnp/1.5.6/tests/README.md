@@ -1,0 +1,12 @@
+## About testing
+- The positive and negative control datasets come from https://github.com/WGS-standards-and-analysis
+- The reference tree for the positive control dataset is pulled from https://tree.opentreeoflife.org/curator/study/view/ot_301/?tab=home
+- ParSNP seems to be deterministic when run on the same computer but not between computers, see [this GitHub issue](https://github.com/marbl/parsnp/issues/99)
+  - In GitHub actions workflow only: positive control checks if output from FastTree and (default) RAxML versions is consistent (across runs on the same platform):
+    - Alignment files should be identical and match a reference alignment file generated with version 1.5.6 built in the GitHub actions workflow
+    - Tree files should match tree files generated with version 1.5.6 built in the GitHub actions workflow
+  - Locally and in GitHub actions workflow: positive control checks the [normalized Robinson-Foulds distance](https://rdrr.io/cran/phangorn/man/treedist.html#:~:text=The%20normalized%20Robinson%2DFoulds%20distance,this%20value%20is%202n%2D6.) between outputted trees and the reference tree mentioned above
+    - Basically, a RF distance of 0.28 means 28% of the total splits between the two trees are not shared
+    - I use a heuristic threshold of 0.5 to throw a red flag if any of the trees are _completely_ different
+- The negative control ensures a genome of a different genus than the reference genome is not included in the ParSNP results
+  - (Not included in pushed code) I also checked that adding option '-c' forces ParSNP to include the genome from the different genus, and it does

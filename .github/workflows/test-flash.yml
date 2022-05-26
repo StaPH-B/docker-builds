@@ -1,0 +1,29 @@
+name: Test FLASH image
+
+env:
+  TOOL_NAME: flash
+  TOOL_VERSION: "1.2.11"
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'flash/1.2.11/Dockerfile' # cannot use env vars
+
+jobs:
+  params:
+    # see https://github.com/actions/runner/issues/480#issuecomment-1055373623
+    runs-on: ubuntu-latest
+    outputs:
+      params: ${{ steps.env-vars.outputs.params }}
+    steps:
+      - id: env-vars
+        run: echo "::set-output name=params::$(echo $(jq -n 'env'))"
+
+  build-to-test:
+    needs: [params]
+    uses: ./.github/workflows/build-to-test.yml
+    with:
+      path_to_context: "${{ fromJson(needs.params.outputs.params).TOOL_NAME }}/${{ fromJson(needs.params.outputs.params).TOOL_VERSION }}"
+      dockerfile_name: "Dockerfile"
+      cache: "${{ fromJson(needs.params.outputs.params).TOOL_NAME }}"
