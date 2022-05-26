@@ -1,0 +1,64 @@
+# This caller workflow tests, builds, and pushes the image to Docker Hub and optionally Quay
+# It also tests that a Singularity container can be run from the Docker image
+# It takes manual input as to which tool, version, docker image tag, and repository name to deploy
+
+name: Manual deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      tool:
+        description: "Tool to deploy. Must match filepath: /<tool>/version/Dockerfile"
+        required: true
+      version:
+        description: "Version to deploy. Must match filepath: /tool/<version>/Dockerfile"
+        required: true
+      docker_image_tag:
+        description: "Docker image tag to use: repository/tool:<tag> (Match version unless you require a custom tag)"
+        required: true
+      push_quay:
+        description: "Deploy to Quay too? (repository must first exist on quay)"
+        type: boolean
+        default: true
+      push_latest_tag:
+        description: "Push and overwrite latest docker image tag? repository/tool:latest"
+        default: true
+        type: boolean
+      repository_name:
+        description: "Repository name. <repository>/tool:tag (Usually staphb)"
+        default: "staphb"
+
+jobs:
+
+  # This job calls a workflow to build the image to the 'test' stage
+  build-to-test:
+    uses: ./.github/workflows/build-to-test.yml
+    with:
+      path_to_context: "./${{ github.event.inputs.tool }}/${{ github.event.inputs.version }}"
+      cache: ${{ github.event.inputs.tool }}
+
+  # This job calls a workflow to build the image to the 'app' stage and pushes the image to Docker Hub
+  build-to-deploy:
+    needs: build-to-test
+    uses: ./.github/workflows/build-to-deploy.yml
+    secrets: # these are the secret login credientials for pushing the containers to the repository
+      docker_username: ${{ secrets.DOCKER_HUB_USERNAME }}
+      docker_access_token: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      quay_username: ${{ secrets.quay_username }}
+      quay_robot_token: ${{ secrets.quay_robot_token }}
+    with:
+      path_to_context: "./${{ github.event.inputs.tool }}/${{ github.event.inputs.version }}"
+      repository_name: ${{ github.event.inputs.repository_name }}
+      cache: ${{ github.event.inputs.tool }}
+      container_name: ${{ github.event.inputs.tool }}
+      tag: ${{ github.event.inputs.docker_image_tag }}
+      push_quay: ${{ github.event.inputs.push_quay == 'true' }}
+      push_latest_tag: ${{ github.event.inputs.push_latest_tag == 'true' }}
+
+  # This job calls a workflow to pull the image from Docker Hub and test that it can be run as a Singularity container
+  run-singularity:
+    needs: build-to-deploy
+    uses: ./.github/workflows/run-singularity.yml
+    with:
+      image_name: ${{ github.event.inputs.tool }}:${{ github.event.inputs.docker_image_tag }}
+      repository_name: ${{ github.event.inputs.repository_name }}
