@@ -63,7 +63,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  bioperl \
  hmmer \
  libpath-tiny-perl \
- libmoo-perl && \
+ libmoo-perl \
+ libfile-which-perl \
+ libsvg-perl \
+ libtext-csv-perl \
+ liblist-moreutils-perl \
+ libio-file-withpath-perl && \
  apt-get clean && apt-get autoclean && \
  rm -rf /var/lib/apt/lists/*
 
@@ -94,14 +99,15 @@ RUN wget https://github.com/mourisl/Lighter/archive/v1.1.1.tar.gz && \
   cd Lighter-1.1.1 && \
   make
 
-# trimmomatic 0.38
+# trimmomatic
 RUN wget http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-${TRIMMOMATIC_VER}.zip && \
   unzip Trimmomatic-${TRIMMOMATIC_VER}.zip && \
   rm -rf Trimmomatic-${TRIMMOMATIC_VER}.zip && \
   chmod +x Trimmomatic-${TRIMMOMATIC_VER}/trimmomatic-${TRIMMOMATIC_VER}.jar && \
   echo "#!/bin/bash" >> trimmomatic && \
   echo "exec java -jar /Trimmomatic-${TRIMMOMATIC_VER}/trimmomatic-${TRIMMOMATIC_VER}.jar """"$""@"""" " >> trimmomatic && \
-  chmod +x trimmomatic
+  chmod +x trimmomatic && \
+  mv -v trimmomatic /usr/local/bin
 
 # bwa (mem) 0.7.17
 RUN wget https://github.com/lh3/bwa/releases/download/v0.7.17/bwa-0.7.17.tar.bz2 && \
@@ -247,7 +253,7 @@ shovill-1.1.0/bin:\
 /snippy-${SNIPPY_VER}/bin:\
 /snippy-${SNIPPY_VER}/binaries/linux:\
 /snippy-${SNIPPY_VER}/binaries/noarch"\
- LC_ALL=C.UTF.8
+ LC_ALL=C
 
 FROM app as test 
 
