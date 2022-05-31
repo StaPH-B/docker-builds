@@ -6,7 +6,7 @@ on:
     paths:
       - 'kaptive/2.0.0/Dockerfile'
 
-jobs
+jobs:
   build-to-test:
     uses: ./.github/workflows/build-to-test.yml
     with:
