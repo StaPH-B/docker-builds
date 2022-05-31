@@ -1,4 +1,4 @@
-name: Test kaptive image
+name: Test kaptive v2.0.0 image
 
 on:
   workflow_dispatch:
