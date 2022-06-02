@@ -22,6 +22,7 @@ ARG KRAKEN_VER="1.0"
 ARG MASH_VER="2.1"
 ARG CENTRIFUGE_VER="1.0.4"
 ARG IQTREE_VER="1.6.7"
+ARG KRAKEN2_VER="2.1.2"
 
 
 LABEL base.image="ubuntu:focal"
@@ -40,6 +41,7 @@ ARG DEBIAN_FRONTEND="noninteractive"
 # install dependencies, cleanup apt garbage
 # roary via ubuntu:focal apt is 3.13.0
 RUN apt-get update && apt-get install -y --no-install-recommends \
+ git \
  python \
  wget \
  pigz \
@@ -78,7 +80,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  liblist-moreutils-perl \
  libjson-perl \
  file \
- ncbi-blast+=2.9.0-2 && \
+ ncbi-blast+=2.9.0-2 \
+ autoconf \
+ automake \
+ libtool \
+ flex \
+ bison && \
  apt-get clean && apt-get autoclean && \
  rm -rf /var/lib/apt/lists/*
 
@@ -198,7 +205,6 @@ RUN wget https://github.com/tseemann/snippy/archive/v${SNIPPY_VER}.tar.gz && \
   tar -zxf v${SNIPPY_VER}.tar.gz && \
   rm v${SNIPPY_VER}.tar.gz
 
-
 ## PROKKA ## 
 # bedtools (required by prokka)
 RUN wget https://github.com/arq5x/bedtools2/releases/download/v2.29.0/bedtools-2.29.0.tar.gz && \
@@ -312,6 +318,24 @@ RUN wget https://github.com/khowe/quicktree/archive/refs/tags/v${QUICKTREE_VER}.
  cd /quicktree-${QUICKTREE_VER} && \
  make
 
+# newick_utils
+# no releases or tags, so manually setting to latest commit (da12115) to master branch
+RUN git clone https://github.com/tjunier/newick_utils.git && \
+ cd newick_utils && \
+ git reset --hard da12115 && \
+ autoreconf -fi && \
+ ./configure && \
+ make && \
+ make check	&& \
+ make install
+
+# DL Kraken2, unpack, and install
+RUN wget https://github.com/DerrickWood/kraken2/archive/v${KRAKEN2_VER}.tar.gz && \
+ tar -xzf v${KRAKEN2_VER}.tar.gz && \
+ rm -rf v${KRAKEN2_VER}.tar.gz && \
+ cd kraken2-${KRAKEN2_VER} && \
+ ./install_kraken2.sh .
+
 # nullarbor
 RUN wget https://github.com/tseemann/nullarbor/archive/refs/tags/v${NULLARBOR_VER}.tar.gz && \
  tar -xzf v${NULLARBOR_VER}.tar.gz && \
@@ -347,7 +371,9 @@ ENV PATH="${PATH}:\
 /mash-Linux64-v${MASH_VER}:\
 /iqtree-${IQTREE_VER}-Linux/bin/:\
 /FastTree:\
-/quicktree-${QUICKTREE_VER}"\
+/quicktree-${QUICKTREE_VER}:\
+/opt/kraken:\
+/kraken2-${KRAKEN2_VER}"\
  LC_ALL=C
 
 # test layer; may add more later once everything is installed
