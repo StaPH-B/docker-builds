@@ -15,6 +15,7 @@ The licenses of the open-source software that is contained in these Docker image
 | BBTools | non-standard - see `licence.txt` and `legal.txt` that is included in docker image under `/bbmap/docs/`; Also on sourceforge repo for BBTools | https://jgi.doe.gov/disclaimer/ |
 | bcftools | MIT or **GNU GPLv3** (depends on how bcftools was compiled, I believe GNU GPLv3 applies here) | https://github.com/samtools/bcftools/blob/develop/LICENSE |
 | bedtools | MIT | https://github.com/arq5x/bedtools2/blob/master/LICENSE |
+| blast+ | Public Domain | https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/scripts/projects/blast/LICENSE |
 | bowtie2 | GNU GPLv3 | https://github.com/BenLangmead/bowtie2/blob/master/LICENSE |
 | BWA | GNU GPLv3 | https://github.com/lh3/bwa/blob/master/COPYING |
 | Canu <br/> Racon <br/> Minimap2 | GNU GPLv3 (Canu), <br/> MIT (Racon), <br/> MIT (Minimap2) | https://github.com/marbl/canu/blob/master/README.license.GPL https://github.com/isovic/racon/blob/master/LICENSE https://github.com/lh3/minimap2/blob/master/LICENSE.txt |
@@ -70,7 +71,6 @@ The licenses of the open-source software that is contained in these Docker image
 | Phyml | GNU GPLv3 | https://github.com/stephaneguindon/phyml/blob/master/COPYING |
 | Piggy | GNU GPLv3 | https://github.com/harry-thorpe/piggy/blob/master/LICENSE |
 | Pilon | GNU GPLv2 | https://github.com/broadinstitute/pilon/blob/master/LICENSE |
-| PlasmidFinder | Apache 2.0 | https://bitbucket.org/genomicepidemiology/plasmidfinder/src/master/ |
 | PlasmidSeeker | BSD 3-Clause | https://github.com/bioinfo-ut/PlasmidSeeker/blob/master/LICENSE |
 | pmga | GNU GPLv2 | https://github.com/rpetit3/pmga/blob/master/LICENSE |
 | Prokka | GNU GPLv3 | https://raw.githubusercontent.com/tseemann/prokka/master/doc/LICENSE.Prokka |
