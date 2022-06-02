@@ -8,18 +8,20 @@ ARG MEGAHIT_VER="1.1"
 ARG SKESA_VER="2.3.0"
 ARG SNIPPY_VER="4.2.0"
 ARG PROKKA_VER="1.12"
-ARG QUICKTREE_VER="2.4"
+ARG QUICKTREE_VER="2.5"
 ARG IQTREE_VER="1.6"
-ARG ROARY_VER="3.0"
-ARG MLST_VER="2.10"
-ARG ABRICATE_VER="0.8"
-ARG SNP-DISTS_VER="0.6"
+# roary installed via apt
+#ARG ROARY_VER="3.0"
+ARG MLST_VER="2.22.0"
+ARG ABRICATE_VER="1.0.0"
+ARG SNP_DISTS_VER="0.8.2"
 ARG TRIMMOMATIC_VER="0.36"
 ARG SPADES_VER="3.12.0"
 ARG KRAKEN_VER="1.0"
 # might add kraken2 later?
 ARG MASH_VER="2.1"
-ARG CENTRIFUGE_VER="1.0"
+ARG CENTRIFUGE_VER="1.0.4"
+ARG IQTREE_VER="1.6.7"
 
 
 LABEL base.image="ubuntu:focal"
@@ -27,14 +29,16 @@ LABEL container.version="1"
 LABEL software="Nullarbor"
 LABEL software.version="v2.0.20191013"
 LABEL description="Reads to report for public health and clinical microbiology"
-LABEL website="https://github.com/tseemann/shovill"
-LABEL lisence="https://github.com/tseemann/shovill/blob/master/LICENSE"
+LABEL website="https://github.com/tseemann/nullarbor"
+LABEL lisence="https://github.com/tseemann/nullarbor/blob/master/LICENSE"
 LABEL maintainer="Curtis Kapsak"
 LABEL maintainer.email="kapsakcj@gmail.com"
 
+# to prevent apt from asking for a timezone for locale settings
 ARG DEBIAN_FRONTEND="noninteractive"
 
 # install dependencies, cleanup apt garbage
+# roary via ubuntu:focal apt is 3.13.0
 RUN apt-get update && apt-get install -y --no-install-recommends \
  python \
  wget \
@@ -68,7 +72,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  libsvg-perl \
  libtext-csv-perl \
  liblist-moreutils-perl \
- libio-file-withpath-perl && \
+ libio-file-withpath-perl \
+ roary=3.13.0+dfsg-1 \
+ libmoo-perl \
+ liblist-moreutils-perl \
+ libjson-perl \
+ file \
+ ncbi-blast+=2.9.0-2 && \
  apt-get clean && apt-get autoclean && \
  rm -rf /var/lib/apt/lists/*
 
@@ -180,7 +190,7 @@ RUN mkdir samclip && \
 # create /data for working directory
 RUN wget https://github.com/tseemann/shovill/archive/v${SHOVILL_VER}.tar.gz && \
   tar -xzf v${SHOVILL_VER}.tar.gz && \
-  rm v${SHOVILL_VER}.tar.gz && \
+  rm -v v${SHOVILL_VER}.tar.gz && \
   mkdir /data
 
 # snippy
@@ -223,6 +233,85 @@ RUN wget https://github.com/tseemann/prokka/archive/v${PROKKA_VER}.tar.gz && \
 
 ## END PROKKA ##
 
+## ROARY ##
+# DL Jellyfish, unpack, and install
+RUN wget https://github.com/gmarcais/Jellyfish/releases/download/v1.1.12/jellyfish-1.1.12.tar.gz && \
+ tar -zxf jellyfish-1.1.12.tar.gz && \
+ rm -rf jellyfish-1.1.12.tar.gz && \
+ cd jellyfish-1.1.12 && \
+ ./configure --prefix=/opt/ && \
+ make -j 4 && \
+ make install
+
+# DL Kraken1, unpack, and install
+RUN wget https://github.com/DerrickWood/kraken/archive/v${KRAKEN_VER}.tar.gz && \
+  tar -xzf v${KRAKEN_VER}.tar.gz && \
+  rm -rf v${KRAKEN_VER}.tar.gz && \
+  cd kraken-${KRAKEN_VER} && \
+  mkdir /opt/kraken && \
+  ./install_kraken.sh /opt/kraken/
+
+# roary itself installed via apt
+## END ROARY ##
+
+## MLST ##
+# any2fasta
+RUN cd /usr/local/bin && \
+  wget https://raw.githubusercontent.com/tseemann/any2fasta/master/any2fasta && \
+  chmod +x any2fasta
+
+# get mlst
+RUN wget https://github.com/tseemann/mlst/archive/v${MLST_VER}.tar.gz &&\
+ tar -xzf v${MLST_VER}.tar.gz &&\
+ rm v${MLST_VER}.tar.gz && \
+ /mlst-${MLST_VER}/bin/mlst --check && /mlst-${MLST_VER}/bin/mlst --list
+
+## END MLST ##
+
+# abricate
+RUN wget https://github.com/tseemann/abricate/archive/v${ABRICATE_VER}.tar.gz && \
+    tar -zxvf v${ABRICATE_VER}.tar.gz && \
+    rm -rf v${ABRICATE_VER}.tar.gz
+
+# snp-dists
+RUN wget https://github.com/tseemann/snp-dists/archive/v${SNP_DISTS_VER}.tar.gz && \
+ tar -xzf v${SNP_DISTS_VER}.tar.gz && \
+ rm v${SNP_DISTS_VER}.tar.gz && \
+ cd /snp-dists-${SNP_DISTS_VER} && \
+ make && \
+ make PREFIX=/usr/local install
+
+# download mash binary
+RUN wget https://github.com/marbl/Mash/releases/download/v${MASH_VER}/mash-Linux64-v${MASH_VER}.tar && \
+ tar -xvf mash-Linux64-v${MASH_VER}.tar && \
+ rm -rf mash-Linux64-v${MASH_VER}.tar
+
+# centrifuge
+# this does not include building an index AKA database
+RUN wget https://github.com/DaehwanKimLab/centrifuge/archive/refs/tags/v${CENTRIFUGE_VER}.tar.gz && \
+ tar -xzf v${CENTRIFUGE_VER}.tar.gz && \
+ rm -v v${CENTRIFUGE_VER}.tar.gz && \
+ cd centrifuge-${CENTRIFUGE_VER} && \
+ make && \
+ make install prefix=/usr/local
+
+# iqtree
+RUN wget https://github.com/Cibiv/IQ-TREE/releases/download/v${IQTREE_VER}/iqtree-${IQTREE_VER}-Linux.tar.gz && \
+ tar -xzf iqtree-${IQTREE_VER}-Linux.tar.gz && \
+ rm iqtree-${IQTREE_VER}-Linux.tar.gz
+
+# FastTree binary download; as of 2022-06-01 downloads version 2.1.11
+RUN mkdir -v /FastTree && \
+ wget http://www.microbesonline.org/fasttree/FastTree -P /FastTree && \
+ chmod +x /FastTree/FastTree
+
+# quicktree
+RUN wget https://github.com/khowe/quicktree/archive/refs/tags/v${QUICKTREE_VER}.tar.gz && \
+ tar -xzf v${QUICKTREE_VER}.tar.gz && \
+ rm -v v${QUICKTREE_VER}.tar.gz && \
+ cd /quicktree-${QUICKTREE_VER} && \
+ make
+
 # nullarbor
 RUN wget https://github.com/tseemann/nullarbor/archive/refs/tags/v${NULLARBOR_VER}.tar.gz && \
  tar -xzf v${NULLARBOR_VER}.tar.gz && \
@@ -242,7 +331,7 @@ ENV PATH="${PATH}:\
 /megahit/megahit_v1.1.4_LINUX_CPUONLY_x86_64-bin:\
 /velvet/velvet-1.2.10:\
 /flash/FLASH-1.2.11:\
-shovill-1.1.0/bin:\
+/shovill-${SHOVILL_VER}/bin:\
 /pilon:\
 /samclip:\
 /nullarbor-${NULLARBOR_VER}/bin:\
@@ -252,9 +341,16 @@ shovill-1.1.0/bin:\
 /prokka-${PROKKA_VER}/binaries/common:\
 /snippy-${SNIPPY_VER}/bin:\
 /snippy-${SNIPPY_VER}/binaries/linux:\
-/snippy-${SNIPPY_VER}/binaries/noarch"\
+/snippy-${SNIPPY_VER}/binaries/noarch:\
+/mlst-${MLST_VER}/bin:\
+/abricate-${ABRICATE_VER}/bin:\
+/mash-Linux64-v${MASH_VER}:\
+/iqtree-${IQTREE_VER}-Linux/bin/:\
+/FastTree:\
+/quicktree-${QUICKTREE_VER}"\
  LC_ALL=C
 
+# test layer; may add more later once everything is installed
 FROM app as test 
 
 # print version and check dependencies
