@@ -1,5 +1,10 @@
 # IRMA container
 Main tool: [IRMA](https://wonder.cdc.gov/amd/flu/irma/)
+
+IRMA was designed for the robust assembly, variant calling, and phasing of highly variable RNA viruses. Currently IRMA is deployed with modules for influenza, ebolavirus and coronavirus.
+
+***IRMA developers are aware of a problem with the Sars-Cov-2 module which will cause the software to crash because of an memory issue. This problem will be addressed in the upcoming release of 1.0.3 sometime in the near future. For the time being do not use IRMA for Sars-Cov-2.***
+
 # Example Usage
 ```{bash}
 #Paired-end files:

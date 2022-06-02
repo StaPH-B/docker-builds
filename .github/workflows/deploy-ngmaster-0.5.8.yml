@@ -29,7 +29,7 @@ jobs:
       quay_username: ${{ secrets.quay_username }}
       quay_robot_token: ${{ secrets.quay_robot_token }}
     with:
-      path_to_context: "./<program name>/<program version>"  # Same as above
+      path_to_context: "./ngmaster/0.5.8"  # Same as above
       dockerfile_name: "Dockerfile"  # Same as above
       cache: "ngmaster"  # Same as above
       container_name: "ngmaster"  # The image name for Docker Hub, use the program name in lowercase, e.g. "spades"

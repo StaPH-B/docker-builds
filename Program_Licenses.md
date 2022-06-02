@@ -110,4 +110,3 @@ The licenses of the open-source software that is contained in these Docker image
 | VIGOR4 | GNU GPLv3 | https://github.com/JCVenterInstitute/VIGOR4/blob/master/LICENSE.txt |
 | VirSorter2 | GNU GPLv2 | https://github.com/jiarong/VirSorter2/blob/master/LICENSE |
 | wtdbg2 | GNU GPLv3 | https://github.com/ruanjue/wtdbg2/blob/master/LICENSE.txt |
-
