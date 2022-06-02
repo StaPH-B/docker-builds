@@ -175,3 +175,4 @@ Each Dockerfile lists the author(s)/maintainer(s) as a metadata `LABEL`, but the
   * [@SarahNadeau](https://github.com/SarahNadeau)
   * [@DOH-HNH0303](https://github.com/DOH-HNH0303)
   * [@jwarnn](https://github.com/jwarnn)
+  * [@stitam](https://github.com/stitam)
