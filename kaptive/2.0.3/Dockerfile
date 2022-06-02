@@ -49,3 +49,19 @@ WORKDIR /data
 
 # test layer
 FROM app as test
+
+# test with A. baumannii
+RUN wget "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/016/486/705/GCA_016486705.1_PDT000751301.1/GCA_016486705.1_PDT000751301.1_genomic.fna.gz" && \
+  gunzip GCA_016486705.1_PDT000751301.1_genomic.fna.gz
+# k locus
+RUN kaptive.py -a GCA_016486705.1_PDT000751301.1_genomic.fna -k /kaptive/reference_database/Acinetobacter_baumannii_k_locus_primary_reference.gbk
+# o locus
+RUN kaptive.py -a GCA_016486705.1_PDT000751301.1_genomic.fna -k /kaptive/reference_database/Acinetobacter_baumannii_OC_locus_primary_reference.gbk
+
+# test with K. pneumoniae
+RUN wget "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/022/268/055/GCA_022268055.1_PDT000434809.1/GCA_022268055.1_PDT000434809.1_genomic.fna.gz" && \
+  gunzip GCA_022268055.1_PDT000434809.1_genomic.fna.gz
+# k locus
+RUN kaptive.py -a GCA_022268055.1_PDT000434809.1_genomic.fna -k /kaptive/reference_database/Klebsiella_k_locus_primary_reference.gbk
+# o locus
+RUN kaptive.py -a GCA_022268055.1_PDT000434809.1_genomic.fna -k /kaptive/reference_database/Klebsiella_o_locus_primary_reference.gbk
