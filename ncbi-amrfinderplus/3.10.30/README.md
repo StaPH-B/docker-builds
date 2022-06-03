@@ -11,9 +11,9 @@ Full documentation: https://github.com/ncbi/amr/wiki
 $ amrfinder -l
 Running: amrfinder -l
 Software directory: '/amrfinder/'
-Software version: 3.10.24
-Database directory: '/amrfinder/data/2021-12-21.1'
-Database version: 2021-12-21.1
+Software version: 3.10.30
+Database directory: '/amrfinder/data/2022-05-26.1'
+Database version: 2022-05-26.1
 
 Available --organism options: Acinetobacter_baumannii, Campylobacter, Clostridioides_difficile, Enterococcus_faecalis, 
 Enterococcus_faecium, Escherichia, Klebsiella, Neisseria, Pseudomonas_aeruginosa, Salmonella, Staphylococcus_aureus, 
