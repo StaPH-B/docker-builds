@@ -1,6 +1,8 @@
-# This caller workflow tests, builds, and pushes the image to Docker Hub and optionally Quay
-# It also tests that a Singularity container can be run from the Docker image
-# It takes manual input as to which tool, version, docker image tag, and repository name to deploy
+##### ------------------------------------------------------------------------------------------------ #####
+##### This caller workflow tests, builds, and pushes the image to Docker Hub and optionally Quay       #####
+##### It also tests that a Singularity container can be run from the Docker image                      #####
+##### It takes manual input as to which tool, version, docker image tag, and repository name to deploy #####
+##### ------------------------------------------------------------------------------------------------ #####
 
 name: Manual deploy
 
