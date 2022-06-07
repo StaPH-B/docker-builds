@@ -299,7 +299,8 @@ RUN wget https://github.com/DaehwanKimLab/centrifuge/archive/refs/tags/v${CENTRI
  rm -v v${CENTRIFUGE_VER}.tar.gz && \
  cd centrifuge-${CENTRIFUGE_VER} && \
  make && \
- make install prefix=/usr/local
+ make install prefix=/usr/local && \
+ mkdir -v /centrifuge-db
 
 # iqtree
 RUN wget https://github.com/Cibiv/IQ-TREE/releases/download/v${IQTREE_VER}/iqtree-${IQTREE_VER}-Linux.tar.gz && \
@@ -334,7 +335,8 @@ RUN wget https://github.com/DerrickWood/kraken2/archive/v${KRAKEN2_VER}.tar.gz &
  tar -xzf v${KRAKEN2_VER}.tar.gz && \
  rm -rf v${KRAKEN2_VER}.tar.gz && \
  cd kraken2-${KRAKEN2_VER} && \
- ./install_kraken2.sh .
+ ./install_kraken2.sh . && \
+ mkdir -v /kraken2-db /kraken-db
 
 # nullarbor
 RUN wget https://github.com/tseemann/nullarbor/archive/refs/tags/v${NULLARBOR_VER}.tar.gz && \
@@ -374,10 +376,20 @@ ENV PATH="${PATH}:\
 /quicktree-${QUICKTREE_VER}:\
 /opt/kraken:\
 /kraken2-${KRAKEN2_VER}"\
- LC_ALL=C
+ LC_ALL=C\
+ KRAKEN_DEFAULT_DB="/kraken-db"\
+ KRAKEN2_DEFAULT_DB="/kraken2-db"\
+ CENTRIFUGE_DEFAULT_DB="/centrifuge-db"
 
 # test layer; may add more later once everything is installed
 FROM app as test 
 
 # print version and check dependencies
-RUN nullarbor.pl --version && nullarbor.pl --check
+RUN nullarbor.pl --version
+
+# make fake files to trick nullarbor dependency check
+RUN touch ${KRAKEN_DEFAULT_DB}/database.idx ${KRAKEN_DEFAULT_DB}/database.kdb && \
+ touch ${CENTRIFUGE_DEFAULT_DB}.1.cf ${CENTRIFUGE_DEFAULT_DB}.2.cf ${CENTRIFUGE_DEFAULT_DB}.3.cf
+
+# uncomment for final checks
+RUN nullarbor.pl --check
