@@ -89,7 +89,7 @@ FROM app as test
 #ENV NCBI_API_KEY=""
 
 # download the smallest data set as a test
-RUN GenFSGopher.pl -o vocvoi-output /home/user/datasets-sars-cov-2/datasets/sars-cov-2-voivoc.tsv --numcpus 2 --layout onedir --compressed
+RUN GenFSGopher.pl -o vocvoi-output /home/user/datasets-sars-cov-2/datasets/sars-cov-2-voivoc.tsv --numcpus 1 --layout onedir --compressed
 
 # download a dataset that includes reads and assemblies
-RUN GenFSGopher.pl -o SNF-A-output /home/user/datasets-sars-cov-2/datasets/sars-cov-2-SNF-A.tsv --numcpus 2 --layout onedir --compressed
+RUN GenFSGopher.pl -o SNF-A-output /home/user/datasets-sars-cov-2/datasets/sars-cov-2-SNF-A.tsv --numcpus 1 --layout onedir --compressed
