@@ -11,7 +11,7 @@ ARG KMA_VER="1.0.1"
 # LABEL instructions tag the image with metadata that might be important to the user
 # Optional, but highly recommended
 LABEL base.image="debian:stretch"
-LABEL dockerfile.version="1"
+LABEL dockerfile.version="2"
 LABEL software="plasmidfinder"
 LABEL software.version=$PLASMIDFINDER_VER
 LABEL description="Identifies plasmids in total or partial sequenced isolates of bacteria."
@@ -31,6 +31,7 @@ RUN apt-get update -y && apt-get install -y \
     python3-pip \
     ncbi-blast+ \
     gzip \
+    procps \
     libz-dev && \
     rm -rf /var/lib/apt/lists/* && apt-get autoclean
 
