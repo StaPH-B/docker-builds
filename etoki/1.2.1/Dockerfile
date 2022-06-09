@@ -1,6 +1,6 @@
 # FYI this is a multistage build, which can get very complicated
 
-ARG ETOKI_VER="1.2"
+ARG ETOKI_VER="1.2.1"
 ARG SKESA_VER=2.4.0
 ARG SPADES_VER=3.15.4
 ARG SHOVILL_VER=1.1.0
@@ -144,10 +144,13 @@ WORKDIR /
 #  tar zxvf ${ETOKI_VER}.tar.gz && \
 #  rm ${ETOKI_VER}.tar.gz
 # TODO checkout a specific tag or hashtag
-RUN git clone https://github.com/lskatz/EToKi.git /EToKi-${ETOKI_VER} && \
- cd /EToKi-${ETOKI_VER} && \
- git checkout 1.2.1 && \
- cd -
+RUN wget https://github.com/lskatz/EToKi/archive/refs/tags/${ETOKI_VER}.tar.gz && \
+ tar zxvf 1.2.1.tar.gz
+
+#RUN git clone https://github.com/lskatz/EToKi.git /EToKi-${ETOKI_VER} && \
+# cd /EToKi-${ETOKI_VER} && \
+# git checkout 1.2.1 && \
+# cd -
 
 WORKDIR /EToKi-${ETOKI_VER}
 
