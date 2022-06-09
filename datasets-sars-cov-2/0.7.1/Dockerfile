@@ -1,12 +1,12 @@
 # Use ubuntu as base image
 FROM ubuntu:focal as app
 
-ARG DATASETS_SARS_COV_2_VER="0.7"
+ARG DATASETS_SARS_COV_2_VER="0.7.1"
 
 # metadata
 LABEL base.image="ubuntu:focal"
 LABEL software="datasets-sars-cov-2"
-LABEL software.version="v0.7"
+LABEL software.version="v0.7.1"
 LABEL dockerfile.version="1"
 LABEL description="Benchmark datasets for WGS analysis of SARS-CoV-2."
 LABEL website="https://github.com/CDCgov/datasets-sars-cov-2"
@@ -89,7 +89,7 @@ FROM app as test
 #ENV NCBI_API_KEY=""
 
 # download the smallest data set as a test
-RUN GenFSGopher.pl -o vocvoi-output /home/user/datasets-sars-cov-2/datasets/sars-cov-2-voivoc.tsv --numcpus $(nproc --all) --layout onedir --compressed
+RUN GenFSGopher.pl -o vocvoi-output /home/user/datasets-sars-cov-2/datasets/sars-cov-2-voivoc.tsv --numcpus 2 --layout onedir --compressed
 
 # download a dataset that includes reads and assemblies
-RUN GenFSGopher.pl -o SNF-A-output /home/user/datasets-sars-cov-2/datasets/sars-cov-2-SNF-A.tsv --numcpus $(nproc --all) --layout onedir --compressed
+RUN GenFSGopher.pl -o SNF-A-output /home/user/datasets-sars-cov-2/datasets/sars-cov-2-SNF-A.tsv --numcpus 2 --layout onedir --compressed
