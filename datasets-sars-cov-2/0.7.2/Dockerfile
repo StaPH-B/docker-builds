@@ -95,9 +95,11 @@ FROM app as test
 # can add your own NCBI_API_KEY to allow more requests to go through (only use for local building, do not commit with actual API key)
 #ENV NCBI_API_KEY=""
 
-# download the smallest data set as a test; delete it to save space
-RUN GenFSGopher.pl -o vocvoi-output /home/user/datasets-sars-cov-2/datasets/sars-cov-2-voivoc.tsv --numcpus 2 --layout onedir --compressed && \
- rm -rf vocvoi-output/
+# download the smallest data set as a test
+RUN GenFSGopher.pl -o vocvoi-output /home/user/datasets-sars-cov-2/datasets/sars-cov-2-voivoc.tsv --numcpus 2 --layout onedir --compressed
+
+# delete smallest dataset to save space
+RUN rm -rf vocvoi-output/
 
 # download a dataset that includes reads and assemblies
 RUN GenFSGopher.pl -o SNF-A-output /home/user/datasets-sars-cov-2/datasets/sars-cov-2-SNF-A.tsv --numcpus 2 --layout onedir --compressed
