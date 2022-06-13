@@ -9,7 +9,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # LABEL instructions tag the image with metadata that might be important to the user
 LABEL base.image="ubuntu:focal"
-LABEL dockerfile.version="2"
+LABEL dockerfile.version="3"
 LABEL software="shigatyper"
 LABEL software.version=$SHIGATYPER_VER
 LABEL description="Determine Shigella serotype using Illumina (single or paired-end) or Oxford Nanopore reads!"
@@ -69,7 +69,8 @@ RUN wget https://github.com/CFSAN-Biostatistics/shigatyper/archive/refs/tags/con
  tar -xf conda-package-${SHIGATYPER_VER}.tar.gz && \
  rm conda-package-${SHIGATYPER_VER}.tar.gz && \
  cd shigatyper-conda-package-${SHIGATYPER_VER} && \
- python3 setup.py install
+ python3 setup.py install && \
+ samtools faidx /usr/local/lib/python3.8/dist-packages/ShigaTyper-${SHIGATYPER_VER}-py3.8.egg/shigatyper/resources/ShigellaRef5.fasta
 
 # set the environment
 ENV PATH="${PATH}:/shigatyper-conda-package-${SHIGATYPER_VER}:/minimap2-${MINIMAP2_VER}_x64-linux" \
