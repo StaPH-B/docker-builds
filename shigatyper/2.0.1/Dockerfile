@@ -9,7 +9,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # LABEL instructions tag the image with metadata that might be important to the user
 LABEL base.image="ubuntu:focal"
-LABEL dockerfile.version="2"
+LABEL dockerfile.version="3"
 LABEL software="shigatyper"
 LABEL software.version=$SHIGATYPER_VER
 LABEL description="Determine Shigella serotype using Illumina (single or paired-end) or Oxford Nanopore reads!"
