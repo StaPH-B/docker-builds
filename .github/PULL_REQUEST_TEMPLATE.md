@@ -21,7 +21,7 @@ Pull Request (PR) checklist:
    - [ ] (optional) All test files are located in same directory as the Dockerfile (i.e. `shigatyper/2.0.1/test.sh`)
 - [ ] Create a simple container-specific [README.md](https://github.com/StaPH-B/docker-builds/blob/master/.github/workflow-templates/readme-template.md) in the same directory as the Dockerfile (i.e. `spades/3.12.0/README.md`)
    - [ ] If this README is longer than 30 lines, there is an explanation as to why more detail was needed
-- [ ] Dockerfile includes the recommended [LABELS](https://github.com/StaPH-B/docker-builds/blob/master/dockerfile-template/Dockerfile) 
+- [ ] Dockerfile includes the recommended [LABELS](https://github.com/StaPH-B/docker-builds/blob/master/dockerfile-template/Dockerfile#L8-L18) 
 - [ ] Main [README.md](https://github.com/StaPH-B/docker-builds/blob/master/README.md) has been updated to include the tool and/or version of the dockerfile(s) in this PR
 - [ ] [Program_Licenses.md](https://github.com/StaPH-B/docker-builds/blob/master/Program_Licenses.md) contains the tool(s) used in this PR and has been updated for any missing
 
