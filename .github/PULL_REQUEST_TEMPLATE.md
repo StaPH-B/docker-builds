@@ -10,65 +10,20 @@ Documentation on how to contribute can be found at https://staphb.org/docker-bui
 Documentation for how to create a Dockerfile can be found at https://staph-b.github.io/docker-builds/make_containers
 A recommended Dockerfile template can be found at https://github.com/StaPH-B/docker-builds/blob/master/dockerfile-template/Dockerfile
 
-To reiterate common comments in pull requests : 
 
-Recommended ways to denote software versions
-ARG SOFTWARENAME_VER="1.0.0"
-
-Recommended labels:
-LABEL base.image="ubuntu:focal"
-LABEL dockerfile.version="1"
-LABEL software="SoftwareName"
-LABEL software.version=$SOFTWARENAME_VER
-LABEL description="This software does X, Y, AND Z!"
-LABEL website="https://github.com/StaPH-B/docker-builds"
-LABEL license="https://github.com/StaPH-B/docker-builds/blob/master/LICENSE"
-LABEL maintainer="FirstName LastName"
-LABEL maintainer.email="my.email@email.com"
+Please replace all '[ ]' with '[X]' to demonstrate completion.
 -->
 
+Pull Request (PR) checklist:
+- [ ] Include a description of what is in this pull request in this message.
+- [ ] The dockerfile successfully builds to a test target for the user creating the PR. (i.e. `docker build --tag samtools:1.15test --target test docker-builds/samtools/1.15` )
+- [ ] Directory structure as name of the tool in lower case with special characters removed with a subdirectory of the version number (i.e. `spades/3.12.0/Dockerfile`)
+   - [ ] (optional) All test files are located in same directory as the Dockerfile (i.e. `shigatyper/2.0.1/test.sh`)
+- [ ] Create a simple container-specific [README.md](https://github.com/StaPH-B/docker-builds/blob/master/.github/workflow-templates/readme-template.md) in the same directory as the Dockerfile (i.e. `spades/3.12.0/README.md`)
+   - [ ] If this README is longer than 30 lines, there is an explanation as to why more detail was needed
+- [ ] Dockerfile includes the recommended [LABELS](https://github.com/StaPH-B/docker-builds/blob/master/dockerfile-template/Dockerfile#L8-L18) 
+- [ ] Main [README.md](https://github.com/StaPH-B/docker-builds/blob/master/README.md) has been updated to include the tool and/or version of the dockerfile(s) in this PR
+- [ ] [Program_Licenses.md](https://github.com/StaPH-B/docker-builds/blob/master/Program_Licenses.md) contains the tool(s) used in this PR and has been updated for any missing
 
-- [ ] This comment contains a description of what is in the pull request.
-
-
-<!-- If this PR is to add a dockerfile for a new tool -->
-- [ ] Build your own docker image using a Dockerfile
-  - [ ] Directory structure should be name of the tool in lower case with special characters removed with a subdirectory of the version number (i.e. spades/3.12.0/Dockerfile)
-  - [ ] Includes the recommended LABELS
-- [ ] (Optional) Dockerfile is built with best practices and has been approved by a linter (such as https://hadolint.github.io/hadolint/)
-- [ ] Edit main README.md
-- [ ] Edit Program_Licenses.md
-- [ ] Create a simple container-specific README.md in the same directory as the Dockerfile (i.e. spades/3.12.0/README.md)
-- [ ] Write a GitHub actions workflow
-  - [ ] Should be located in .github/workflows/ and named test-<tool>.yml (i.e. .github/workflows/test-spades.yml)
-  - [ ] Any files required for building are located in the same directory as the Dockerfile (i.e. spades/3.12.0/my_spades_tests.sh)
-  - [ ] Have successfully run the workflow "Test <program name> image" in your forked repository
-
-<!-- If this PR is to add a new version of a tool that already has a dockerfile -->
-- [ ] Build your own docker image using a Dockerfile
-  - [ ] Directory structure should be name of the tool in lower case with special characters removed with a subdirectory of the version number (i.e. spades/3.12.0/Dockerfile)
-  - [ ] Includes the recommended LABELS
-- [ ] (Optional) Dockerfile is built with best practices and has been approved by a linter (such as https://hadolint.github.io/hadolint/)
-- [ ] Edit main README.md
-- [ ] Ensure tool is listed in Program_Licenses.md
-- [ ] Create a simple container-specific README.md in the same directory as the Dockerfile (i.e. spades/3.12.0/README.md)
-- [ ] Update GitHub actions workflow if needed
-- [ ] Any files required for building are located in the same directory as the Dockerfile (i.e. spades/3.12.0/my_spades_tests.sh)
-- [ ] Have successfully run the workflow "Test <program name> image" in your forked repository
-
-<!-- If this PR is to adjust an existing dockerfile  -->
-- [ ] Build your own docker image using a Dockerfile
-  - [ ] Includes the recommended LABELS
-- [ ] (Optional) Dockerfile is built with best practices and has been approved by a linter (such as https://hadolint.github.io/hadolint/)
-- [ ] Ensure tool is listed in Program_Licenses.md
-- [ ] Ensure a simple container-specific README.md exists in the same directory as the Dockerfile (i.e. spades/3.12.0/README.md)
-- [ ] Update GitHub actions workflow if needed
-- [ ] Any files required for building are located in the same directory as the Dockerfile (i.e. spades/3.12.0/my_spades_tests.sh)
-- [ ] Have successfully run the workflow "Test <program name> image" in your forked repository
-
-<!-- If this PR is to adjust an existing GitHub actions workflow or to create one -->
-- [ ] Update relevant GitHub actions workflow files
-- [ ] Any files required for building are located in the same directory as the Dockerfile (i.e. spades/3.12.0/my_spades_tests.sh)
-- [ ] Have successfully run the workflow "Test <program name> image" in your forked repository
 
 <!-- If this PR is for something else, please add extra descriptions -->
