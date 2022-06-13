@@ -1,12 +1,12 @@
 # Use ubuntu as base image
 FROM ubuntu:focal as app
 
-ARG DATASETS_SARS_COV_2_VER="0.7.1"
+ARG DATASETS_SARS_COV_2_VER="0.7.2"
 
 # metadata
 LABEL base.image="ubuntu:focal"
 LABEL software="datasets-sars-cov-2"
-LABEL software.version="v0.7.1"
+LABEL software.version="v0.7.2"
 LABEL dockerfile.version="1"
 LABEL description="Benchmark datasets for WGS analysis of SARS-CoV-2."
 LABEL website="https://github.com/CDCgov/datasets-sars-cov-2"
@@ -68,6 +68,12 @@ RUN mkdir /edirect && \
     gunzip -c edirect.tar.gz | tar xf - && \
     rm edirect.tar.gz
 
+# install missing xtract executable required by efetch
+RUN wget https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/xtract.Linux.gz && \
+ gunzip -f xtract.Linux.gz && \
+ mv -v xtract.Linux /usr/local/bin/xtract && \
+ chmod +x /usr/local/bin/xtract
+
 # vdb-config workaround: https://github.com/ncbi/sra-tools/issues/291
 RUN mkdir /home/user/ /home/user/.ncbi/ && printf '/LIBS/GUID = "%s"\n' `uuidgen` > /home/user/.ncbi/user-settings.mkfg
 
@@ -76,7 +82,8 @@ RUN cd /home/user/ && git clone --depth 1 --branch v${DATASETS_SARS_COV_2_VER} h
 
 ENV HOME /home/user/
 
-ENV PATH=$PATH:/edirect:/usr/local/ncbi/sra-tools/bin:/home/user/datasets-sars-cov-2/scripts
+ENV PATH=$PATH:/edirect:/usr/local/ncbi/sra-tools/bin:/home/user/datasets-sars-cov-2/scripts \
+ TERM=xterm-256color
 
 WORKDIR /data
 
@@ -89,7 +96,7 @@ FROM app as test
 #ENV NCBI_API_KEY=""
 
 # download the smallest data set as a test
-RUN GenFSGopher.pl -o vocvoi-output /home/user/datasets-sars-cov-2/datasets/sars-cov-2-voivoc.tsv --numcpus 1 --layout onedir --compressed
+RUN GenFSGopher.pl -o vocvoi-output /home/user/datasets-sars-cov-2/datasets/sars-cov-2-voivoc.tsv --numcpus 2 --layout onedir --compressed
 
 # download a dataset that includes reads and assemblies
-RUN GenFSGopher.pl -o SNF-A-output /home/user/datasets-sars-cov-2/datasets/sars-cov-2-SNF-A.tsv --numcpus 1 --layout onedir --compressed
+RUN GenFSGopher.pl -o SNF-A-output /home/user/datasets-sars-cov-2/datasets/sars-cov-2-SNF-A.tsv --numcpus 2 --layout onedir --compressed
