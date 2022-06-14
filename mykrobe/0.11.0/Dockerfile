@@ -31,7 +31,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  ca-certificates \
  git \
  procps \
- && \
+ jq && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # get the genotyphi code; make /data
