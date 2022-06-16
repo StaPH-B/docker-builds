@@ -73,7 +73,7 @@ jobs:
         id: docker_build_to_test
         uses: docker/build-push-action@v2
         with:
-          context: ./${{ steps.parse.outputs.tool }}/${{ steps.parse.outputs.version }}/
+          context: ./${{ steps.parse.outputs.tool }}/${{ steps.parse.outputs.version }}
           file: ./${{ steps.parse.outputs.tool }}/${{ steps.parse.outputs.version }}/Dockerfile
           target: test
           push: false
