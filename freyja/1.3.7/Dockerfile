@@ -2,7 +2,7 @@ FROM mambaorg/micromamba:0.22.0 as app
 
 # Version arguments
 # ARG variables only persist during build time
-ARG FREYJA_SOFTWARE_VERSION="1.3.4"
+ARG FREYJA_SOFTWARE_VERSION="1.3.7"
 
 # build and run as root users since micromamba image has 'mambauser' set as the $USER
 USER root
