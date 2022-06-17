@@ -81,32 +81,12 @@ WORKDIR /data
 
 FROM app as test
 
-# install fastq-dl via conda for downloading data
-# instead installing fastq-dl from bioconda and using that to get the fastq files for testing
-RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
-bash Miniconda3-latest-Linux-x86_64.sh -p /miniconda -b && \
-rm Miniconda3-latest-Linux-x86_64.sh
-
-# put miniconda and fastq-dl environment bin in the PATH
-ENV PATH="/miniconda/bin:/miniconda/envs/fastq-dl/bin:${PATH}"
-
-# create the fastq-dl conda environment
-RUN conda create -y -n fastq-dl -c conda-forge -c bioconda -c defaults fastq-dl
-
-# don't know if this is actually needed or not. keeping just in case
-RUN echo "source activate fastq-dl" > /etc/bash.bashrc
-
-# for activating fastq-dl conda environment
-SHELL ["conda", "run", "-n", "fastq-dl", "/bin/bash", "-c"]
-
-# download fastq files; list out files in PWD
-RUN fastq-dl SRR8186675 ENA && \
- fastq-dl SRR7738178 ENA && \
- ls -lh
-
-# revert shell back to default
-SHELL ["/bin/sh", "-c"]
+# fetch test data from ENA FTP
+RUN wget -P /data ftp.sra.ebi.ac.uk/vol1/fastq/SRR818/005/SRR8186675/SRR8186675_1.fastq.gz && \
+wget -P /data ftp.sra.ebi.ac.uk/vol1/fastq/SRR818/005/SRR8186675/SRR8186675_2.fastq.gz && \
+wget -P /data ftp.sra.ebi.ac.uk/vol1/fastq/SRR773/008/SRR7738178/SRR7738178_1.fastq.gz && \
+wget -P /data ftp.sra.ebi.ac.uk/vol1/fastq/SRR773/008/SRR7738178/SRR7738178_2.fastq.gz
 
 # actually run shigatyper on test fastq files
-RUN shigatyper --R1 SRR8186675_1.fastq.gz --R2 SRR8186675_2.fastq.gz --name SRR8186675 && \
- shigatyper --R1 SRR7738178_1.fastq.gz --R2 SRR7738178_2.fastq.gz --name SRR7738178
+RUN shigatyper --R1 /data/SRR8186675_1.fastq.gz --R2 /data/SRR8186675_2.fastq.gz --name SRR8186675 && \
+ shigatyper --R1 /data/SRR7738178_1.fastq.gz --R2 /data/SRR7738178_2.fastq.gz --name SRR7738178
