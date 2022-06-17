@@ -10,7 +10,7 @@ USER root
 WORKDIR /
 
 LABEL base.image="mambaorg/micromamba:0.22.0"
-LABEL dockerfile.version="2"
+LABEL dockerfile.version="1"
 LABEL software="Freyja"
 LABEL software.version=${FREYJA_SOFTWARE_VERSION}
 LABEL description="Freyja is a tool to recover relative lineage abundances from mixed SARS-CoV-2 samples from a sequencing dataset (BAM aligned to the Hu-1 reference)"
@@ -18,7 +18,7 @@ LABEL website="https://github.com/andersen-lab/Freyja"
 LABEL license="https://github.com/andersen-lab/Freyja/blob/main/LICENSE"
 LABEL maintainer1="Kevin Libuit"
 LABEL maintainer1.email="kevin.libuit@theiagen.com"
-LABEL maintainer2="Kevin Libuit"
+LABEL maintainer2="Curtis Kapsak"
 LABEL maintainer2.email="curtis.kapsak@theiagen.com"
 
 # install dependencies; cleanup apt garbage
