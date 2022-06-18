@@ -145,7 +145,7 @@ WORKDIR /
 #  rm ${ETOKI_VER}.tar.gz
 # TODO checkout a specific tag or hashtag
 RUN wget https://github.com/lskatz/EToKi/archive/refs/tags/${ETOKI_VER}.tar.gz && \
- tar zxvf 1.2.1.tar.gz
+ tar zxvf ${ETOKI_VER}.tar.gz
 
 #RUN git clone https://github.com/lskatz/EToKi.git /EToKi-${ETOKI_VER} && \
 # cd /EToKi-${ETOKI_VER} && \
