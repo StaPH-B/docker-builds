@@ -15,6 +15,7 @@ The licenses of the open-source software that is contained in these Docker image
 | BBTools | non-standard - see `licence.txt` and `legal.txt` that is included in docker image under `/bbmap/docs/`; Also on sourceforge repo for BBTools | https://jgi.doe.gov/disclaimer/ |
 | bcftools | MIT or **GNU GPLv3** (depends on how bcftools was compiled, I believe GNU GPLv3 applies here) | https://github.com/samtools/bcftools/blob/develop/LICENSE |
 | bedtools | MIT | https://github.com/arq5x/bedtools2/blob/master/LICENSE |
+| blast+ | Public Domain | https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/scripts/projects/blast/LICENSE |
 | bowtie2 | GNU GPLv3 | https://github.com/BenLangmead/bowtie2/blob/master/LICENSE |
 | BWA | GNU GPLv3 | https://github.com/lh3/bwa/blob/master/COPYING |
 | Canu <br/> Racon <br/> Minimap2 | GNU GPLv3 (Canu), <br/> MIT (Racon), <br/> MIT (Minimap2) | https://github.com/marbl/canu/blob/master/README.license.GPL https://github.com/isovic/racon/blob/master/LICENSE https://github.com/lh3/minimap2/blob/master/LICENSE.txt |
@@ -25,6 +26,7 @@ The licenses of the open-source software that is contained in these Docker image
 | colorid | MIT | https://github.com/hcdenbakker/colorid/blob/master/LICENSE |
 | DSK | GNU Affero GPLv3 | https://github.com/GATB/dsk/blob/master/LICENSE |
 | emm-typing-tool | GNU GPLv3 | https://github.com/phe-bioinformatics/emm-typing-tool/blob/master/LICENCE |
+| EToKi | GNU GPLv3 | https://github.com/zheminzhou/EToKi/blob/master/LICENSE |
 | FastANI | Apache v2.0 | https://github.com/ParBLiSS/FastANI/blob/master/LICENSE |
 | FastTree | GNU GPLv2 | http://www.microbesonline.org/fasttree/ |
 | FastQC | GNU GPLv3 | https://github.com/s-andrews/FastQC/blob/master/LICENSE.txt |
@@ -36,12 +38,14 @@ The licenses of the open-source software that is contained in these Docker image
 | Freyja | BSD-2 | https://github.com/andersen-lab/Freyja/blob/main/LICENSE |
 | GAMBIT | GNU aGPLv3 | https://github.com/hesslab-gambit/gambit/blob/master/LICENSE |
 | GAMMA | Apache 2.0? | Not clearly indicated on: https://github.com/rastanton/GAMMA/ <br> Bioconda lists Apache 2.0: https://bioconda.github.io/recipes/gamma/README.html?highlight=gamma|
+| Genotyphi | GNU GPLv3 | https://github.com/katholt/genotyphi/blob/main/LICENSE |
 | Hmmer | BSD-3 | http://eddylab.org/software/hmmer/Userguide.pdf |
 | htslib | MIT | https://github.com/samtools/htslib/blob/develop/LICENSE |
 | iqtree | GNU GPLv2 | https://github.com/Cibiv/IQ-TREE/blob/master/LICENSE |
 | iqtree2 | GNU GPLv2 | https://github.com/iqtree/iqtree2/blob/master/LICENSE |
 | IRMA | GNU GPLv3 | https://wonder.cdc.gov/amd/flu/irma/disclaimer.html |
 | iVar | GNU GPLv3 | https://github.com/andersen-lab/ivar/blob/master/LICENSE |
+| Kaptive |  GNU GPLv3 | https://github.com/katholt/Kaptive/blob/master/LICENSE |
 | Kleborate | GNU GPLv3 | https://github.com/katholt/Kleborate/blob/master/LICENSE |
 | kma | Apache v2.0 | https://bitbucket.org/genomicepidemiology/kma/src/master/ |
 | Kraken | GNU GPLv3 | https://github.com/DerrickWood/kraken/blob/master/LICENSE |
@@ -62,8 +66,10 @@ The licenses of the open-source software that is contained in these Docker image
 | Mugsy | Artistic License 2.0 | Archived in: <br/> https://sourceforge.net/projects/mugsy/files/mugsy_x86-64-v1r2.3.tgz |
 | MultiQC | GNU GPLv3 | https://github.com/ewels/MultiQC/blob/master/LICENSE |
 | Mummer | The Artistic License 2.0| https://github.com/mummer4/mummer/blob/master/LICENSE.md |
+| Mykrobe | MIT | https://github.com/Mykrobe-tools/mykrobe/blob/master/LICENSE |
 | NanoPlot | GNU GPLv3 | https://github.com/wdecoster/NanoPlot/blob/master/LICENSE |
 | NCBI AMRFinderPlus | Public Domain | https://github.com/ncbi/amr/blob/master/LICENSE |
+| ngmaster | GNU GPLv3 | https://github.com/MDU-PHL/ngmaster/blob/master/LICENSE |
 | OrthoFinder | GNU GPLv3 | https://github.com/davidemms/OrthoFinder/blob/master/License.md |
 | Pangolin | GNU GPLv3 | https://github.com/cov-lineages/pangolin/blob/master/LICENSE.txt |
 | Phyml | GNU GPLv3 | https://github.com/stephaneguindon/phyml/blob/master/COPYING |
