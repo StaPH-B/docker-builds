@@ -18,8 +18,8 @@ LABEL maintainer1="Kelsey Florek"
 LABEL maintainer1.email="kelsey.florek@slh.wisc.edu"
 LABEL maintainer2="Curtis Kapsak"
 LABEL maintainer2.email="kapsakcj@gmail.com"
-LABEL maintainer2="Erin Young"
-LABEL maintainer2.email="eriny@utah.gov"
+LABEL maintainer3="Erin Young"
+LABEL maintainer3.email="eriny@utah.gov"
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -38,25 +38,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   apt-get autoclean && rm -rf /var/lib/apt/lists/* && \
   # python v3.8.10 is installed here; point 'python' to python3
   update-alternatives --install /usr/bin/python python /usr/bin/python3 10
-
-# install prerequisites including openjdk-11. Cleanup apt garbage
-# RUN apt-get update && apt-get install -y software-properties-common && \
-# add-apt-repository -y ppa:openjdk-r/ppa && apt-get update && apt-get install -y \
-# python3 \
-# python3-pip \
-# python3-distutils \
-# libz-dev \
-# bowtie2 \
-# openjdk-11-jre \
-# python-is-python3 \
-# wget \
-# bzip2 \
-# libncurses5-dev \
-# libncursesw5-dev \
-# libbz2-dev \
-# liblzma-dev \
-# cmake && \
-# rm -rf /var/lib/apt/lists/* && apt-get autoclean
 
 # install SPAdes binary
 RUN wget http://cab.spbu.ru/files/release${spadesVer}/SPAdes-${spadesVer}-Linux.tar.gz && \
@@ -107,15 +88,12 @@ FROM app as test
 RUN spades.py --test && \
   cd /unicycler && python -m unittest
 
-# test racon
-RUN /racon/build/bin/racon_test # added in to make sure that racon wasn't an issue
-
-#### COMMENTING OUT FOR NOW - CURTIS ####
-#### HYBRID ASSEMBLY OF THIS DATA RESULTS IN A SPADES ERROR DUE TO UNEVEN KMER COVERAGE ####
-#RUN wget https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/prokaryotes/bacteroides_fragilis/illumina/fastq/test1_1.fastq.gz &&\
-#  wget https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/prokaryotes/bacteroides_fragilis/illumina/fastq/test1_2.fastq.gz &&\
-#  wget https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/prokaryotes/bacteroides_fragilis/nanopore/fastq/test.fastq.gz
+# test racon; added in to make sure that racon wasn't an issue
+RUN /racon/build/bin/racon_test 
 
 # testing on the test data (ILMN and ONT) provided with unicycler code
 RUN unicycler --version && unicycler --help && \
-  unicycler -1 /unicycler/sample_data/short_reads_1.fastq.gz -2 /unicycler/sample_data/short_reads_2.fastq.gz -l /unicycler/sample_data/long_reads_high_depth.fastq.gz --out sample_data_hybrid_asm_test
+  unicycler -1 /unicycler/sample_data/short_reads_1.fastq.gz \
+  -2 /unicycler/sample_data/short_reads_2.fastq.gz \
+  -l /unicycler/sample_data/long_reads_high_depth.fastq.gz \
+  --out sample_data_hybrid_asm_test
