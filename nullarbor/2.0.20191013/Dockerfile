@@ -3,23 +3,23 @@ FROM ubuntu:focal as app
 # pulling a lot of these from the required versions here:
 # https://github.com/tseemann/nullarbor/blob/041ded1748be0c650fb13f6685e205f0f2eef18d/bin/nullarbor.pl#L488
 ARG NULLARBOR_VER="2.0.20191013"
-ARG SHOVILL_VER="1.0.0"
-ARG MEGAHIT_VER="1.1"
-ARG SKESA_VER="2.3.0"
-ARG SNIPPY_VER="4.2.0"
-ARG PROKKA_VER="1.12"
+ARG SHOVILL_VER="1.1.0"
+ARG MEGAHIT_VER="1.2.9"
+ARG SKESA_VER="2.4.0"
+ARG SNIPPY_VER="4.4.3"
+ARG PROKKA_VER="1.14.6"
 ARG QUICKTREE_VER="2.5"
-ARG IQTREE_VER="1.6"
+ARG IQTREE_VER="2.2"
 # roary installed via apt
 #ARG ROARY_VER="3.0"
 ARG MLST_VER="2.22.0"
-ARG ABRICATE_VER="1.0.0"
+ARG ABRICATE_VER="1.0.1"
 ARG SNP_DISTS_VER="0.8.2"
-ARG TRIMMOMATIC_VER="0.36"
-ARG SPADES_VER="3.12.0"
-ARG KRAKEN_VER="1.0"
+ARG TRIMMOMATIC_VER="0.39"
+ARG SPADES_VER="3.15.4"
+ARG KRAKEN_VER="1.1.1"
 # might add kraken2 later?
-ARG MASH_VER="2.1"
+ARG MASH_VER="2.3"
 ARG CENTRIFUGE_VER="1.0.4"
 ARG IQTREE_VER="1.6.7"
 ARG KRAKEN2_VER="2.1.2"
@@ -392,4 +392,4 @@ RUN touch ${KRAKEN_DEFAULT_DB}/database.idx ${KRAKEN_DEFAULT_DB}/database.kdb &&
  touch ${CENTRIFUGE_DEFAULT_DB}.1.cf ${CENTRIFUGE_DEFAULT_DB}.2.cf ${CENTRIFUGE_DEFAULT_DB}.3.cf
 
 # uncomment for final checks
-RUN nullarbor.pl --check
+# RUN nullarbor.pl --check
