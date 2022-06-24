@@ -48,7 +48,7 @@ COPY tests/ /data/
 ENV ENV_NAME="panaroo-env"
 ARG MAMBA_DOCKERFILE_ACTIVATE=1
 
-# Run Freyja
+# Run Panaroo
 RUN mkdir /data/panaroo_results && panaroo -i /data/*.gff -o /data/panaroo_results/ --clean-mode strict
 # Check validity of outputs
 RUN cmp /data/gene_data.csv /data/panaroo_results/gene_data.csv
