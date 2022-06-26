@@ -28,14 +28,13 @@ RUN locale-gen en_US.UTF-8 && update-locale LANG=en_US.UTF-8
 ENV LANG=en_US.UTF-8
 
 # EMBOSS
-RUN wget ftp://emboss.open-bio.org/pub/EMBOSS/EMBOSS-6.6.0.tar.gz && \
-	gunzip EMBOSS-6.6.0.tar.gz && \
-	tar xvf EMBOSS-6.6.0.tar && \
-	cd EMBOSS-6.6.0 && \ 
+RUN wget ftp://emboss.open-bio.org/pub/EMBOSS/EMBOSS-${EMBOSS_VERSION}.tar.gz && \
+	gunzip EMBOSS-${EMBOSS_VERSION}.tar.gz && \
+	tar xvf EMBOSS-${EMBOSS_VERSION}.tar && \
+	cd EMBOSS-${EMBOSS_VERSION} && \ 
 	./configure && \
-	make 
- 
-ENV PATH="/EMBOSS-6.6.0/emboss:${PATH}"
+	make  
+ENV PATH="/EMBOSS-${EMBOSS_VERSION}/emboss:${PATH}"
 WORKDIR /data
 
 
