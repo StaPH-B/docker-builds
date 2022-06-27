@@ -56,6 +56,7 @@ To learn more about the docker pull rate limits and the open source software pro
 | [cutshaw-report-env](https://hub.docker.com/r/staphb/cutshaw-report-env) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/cutshaw-report-env)](https://hub.docker.com/r/staphb/cutshaw-report-env) | <ul><li>1.0.0</li></ul> | https://github.com/VADGS/CutShaw |
 | [datasets-sars-cov-2](https://github.com/CDCgov/datasets-sars-cov-2) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/datasets-sars-cov-2)](https://hub.docker.com/r/staphb/datasets-sars-cov-2) | <ul><li>0.6.2</li><li>0.6.3</li></ul> | https://github.com/CDCgov/datasets-sars-cov-2 |
 | [DSK](https://hub.docker.com/r/staphb/dsk) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/dsk)](https://hub.docker.com/r/staphb/dsk) | <ul><li>0.0.100</li></ul> | https://gatb.inria.fr/software/dsk/ |
+| [emboss](https://hub.docker.com/r/staphb/emboss) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/emboss)](https://hub.docker.com/r/staphb/emboss) | <ul><li>6.6.0 (no version)</li></ul> | http://emboss.sourceforge.net |
 | [emm-typing-tool](https://hub.docker.com/r/staphb/emm-typing-tool) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/emm-typing-tool)](https://hub.docker.com/r/staphb/emm-typing-tool) | <ul><li>0.0.1 (no version)</li></ul> | https://github.com/phe-bioinformatics/emm-typing-tool |
 | [EToKi](https://hub.docker.com/r/staphb/etoki) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/etoki)](https://hub.docker.com/r/staphb/etoki) | <ul><li>1.2.1</li></ul> | https://github.com/zheminzhou/EToKi |
 | [FastANI](https://hub.docker.com/r/staphb/fastani) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/fastani)](https://hub.docker.com/r/staphb/fastani) | <ul><li>1.1</li><li>1.32</li><li>1.33</li></ul> | https://github.com/ParBLiSS/FastANI |
@@ -181,3 +182,4 @@ Each Dockerfile lists the author(s)/maintainer(s) as a metadata `LABEL`, but the
   * [@DOH-HNH0303](https://github.com/DOH-HNH0303)
   * [@jwarnn](https://github.com/jwarnn)
   * [@stitam](https://github.com/stitam)
+  * [@sbthandras](https://github.com/sbthandras) 
