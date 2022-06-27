@@ -243,7 +243,7 @@ dependencies:
 - perl-carp=1.50=pl5321hd8ed1ab_0
 - perl-test-differences=0.69=pl5321hdfd78af_0
 - perl-test-deep=1.130=pl5321hdfd78af_0
-- openssl=3.0.4=h166bdaf_0
+- openssl=3.0.4
 - plotly=5.9.0=pyhd8ed1ab_0
 - perl-xml-regexp=0.04=pl5321hdfd78af_3
 - python=3.9.13=h2660328_0_cpython
