@@ -26,7 +26,7 @@ ARG KRAKEN2_VER="2.1.2"
 
 
 LABEL base.image="ubuntu:focal"
-LABEL container.version="1"
+LABEL dockerfile.version="1"
 LABEL software="Nullarbor"
 LABEL software.version="v2.0.20191013"
 LABEL description="Reads to report for public health and clinical microbiology"
@@ -392,4 +392,4 @@ RUN touch ${KRAKEN_DEFAULT_DB}/database.idx ${KRAKEN_DEFAULT_DB}/database.kdb &&
  touch ${CENTRIFUGE_DEFAULT_DB}.1.cf ${CENTRIFUGE_DEFAULT_DB}.2.cf ${CENTRIFUGE_DEFAULT_DB}.3.cf
 
 # uncomment for final checks
-# RUN nullarbor.pl --check
+#RUN nullarbor.pl --check
