@@ -149,8 +149,8 @@ RUN mkdir samtools && \
 # skesa 2.3.0 (skesa 2.4.0 binary works better on ubuntu:bionic, so not upgrading here)
 RUN mkdir skesa && \
   cd skesa && \
-  wget https://github.com/ncbi/SKESA/releases/download/v${SKESA_VER}/skesa.centos6.10 && \
-  mv skesa.centos6.10 skesa && \
+  https://github.com/ncbi/SKESA/releases/download/${SKESA_VER}/skesa.centos.7.7 && \
+  mv skesa.centos.7.7 skesa && \
   chmod +x skesa
 
 # MEGAHIT 1.1.4 binary (I'm pretty sure these are binaries at this point)
