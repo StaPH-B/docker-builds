@@ -552,7 +552,7 @@
       "image": "docker://staphb/vadr",
       "tag": "latest",
       "help": "-h",
-      "exec": "vadr"
+      "exec": "v-annotate.pl"
     },
     "vigor4": {
       "description": "VIGOR4 (Viral Genome ORF Reader) is a Java application to predict protein sequences encoded in viral genomes",
