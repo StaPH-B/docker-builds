@@ -34,6 +34,8 @@ LABEL website="https://github.com/tseemann/nullarbor"
 LABEL lisence="https://github.com/tseemann/nullarbor/blob/master/LICENSE"
 LABEL maintainer="Curtis Kapsak"
 LABEL maintainer.email="kapsakcj@gmail.com"
+LABEL maintainer2="Frank Ambrosio"
+LABEL maintainer2.email="frank.ambrosio@theiagen.com"
 
 # to prevent apt from asking for a timezone for locale settings
 ARG DEBIAN_FRONTEND="noninteractive"
