@@ -35,11 +35,11 @@ FROM app as test
 RUN fastp --help
 
 # downloading sars-cov-2 fastq test files
-wget https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123_1.fastq.gz
-wget https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123_2.fastq.gz
+RUN wget https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123_1.fastq.gz
+RUN wget https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123_2.fastq.gz
 
 # running fastp on the files
-fastp \
+RUN fastp \
         -i SRR13957123_1.fastq.gz \
         -I SRR13957123_2.fastq.gz \
         -o SRR13957123_PE1.fastq.gz \
