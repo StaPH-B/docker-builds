@@ -1,0 +1,90 @@
+##### --------------------------------------------------------------------------- #####
+##### This workflow looks for new dockefiles and builds them to the test target.  #####
+##### This in intended to start on a pull request (PR)                            #####
+##### Ana06 is being used instead of jitterbit because of the filter option       #####
+##### --------------------------------------------------------------------------- #####
+
+name: Test New Dockerfiles
+
+on: pull_request
+
+jobs:
+
+  find_new_dockerfiles:
+    runs-on: ubuntu-latest
+    outputs:
+      json: ${{ steps.files.outputs.added_modified }}
+    steps:
+      - uses: actions/checkout@v2
+      - id: files
+        uses: Ana06/get-changed-files@v2.1.0
+        with:
+          format: 'json'
+          filter: 'Dockerfile' 
+      - run: "echo ${{ steps.files.outputs.all }}"
+  
+  build_to_test:
+    needs: find_new_dockerfiles
+    if: needs.find_new_dockerfiles.outputs.json != '[]'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        added_modified: ${{ fromJson(needs.find_new_dockerfiles.outputs.json) }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: parse file path
+        id: parse
+        run: |
+          tool=$(echo "${{matrix.added_modified}}" | cut -f 1 -d "/" )
+          version=$(echo "${{matrix.added_modified}}" | cut -f 2 -d "/" )
+          echo "::set-output name=tool::$tool"
+          echo "::set-output name=version::$version"
+
+##### --------------------------------------------------------------------------- #####
+##### Attempted shortcut                                                          #####
+##### --------------------------------------------------------------------------- #####
+
+#       - name: test
+#        uses: ./.github/workflows/build-to-test.yml
+#        with:
+#          path_to_context: "./${{ steps.parse.outputs.tool }}/${{ steps.parse.outputs.version }}"
+#          cache: ${{ steps.parse.outputs.tool }}
+# I think the ideal is to call ./.github/workflows/build-to-test.yml, but I kept getting the error:
+# Can't find 'action.yml', 'action.yaml' or 'Dockerfile' under '/home/runner/work/docker-builds/docker-builds/.github/workflows/build-to-test.yml'. Did you forget to run actions/checkout before running your local action?
+# Instead, I've created a stop-gap by copying the steps from ./.github/workflows/build-to-test.yml to here, which seems to work fine.
+
+##### --------------------------------------------------------------------------- #####
+##### The long way (which works)                                                  #####
+##### --------------------------------------------------------------------------- #####
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Cache Docker layers
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache-${{ steps.parse.outputs.tool }}
+          key: ${{ runner.os }}-buildx-${{ steps.parse.outputs.tool }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-${{ steps.parse.outputs.tool }}
+
+      - name: Build to test
+        id: docker_build_to_test
+        uses: docker/build-push-action@v2
+        with:
+          context: ./${{ steps.parse.outputs.tool }}/${{ steps.parse.outputs.version }}
+          file: ./${{ steps.parse.outputs.tool }}/${{ steps.parse.outputs.version }}/Dockerfile
+          target: test
+          push: false
+          cache-from: type=local,src=/tmp/.buildx-cache-${{ steps.parse.outputs.tool }}
+          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-${{ steps.parse.outputs.tool }}-new
+
+      - name: Move cache # apparently prevents the cache from growing in size forever
+        run: |
+          rm -rf /tmp/.buildx-cache-${{ steps.parse.outputs.tool }}
+          mv /tmp/.buildx-cache-${{ steps.parse.outputs.tool }}-new /tmp/.buildx-cache-${{ steps.parse.outputs.tool }}
+
+      - name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
+  
