@@ -99,7 +99,8 @@ The licenses of the open-source software that is contained in these Docker image
 | Shovill | GNU GPLv3 | https://github.com/tseemann/shovill/blob/master/LICENSE |
 | SISTR | Apache 2.0 | https://github.com/phac-nml/sistr_cmd/blob/master/LICENSE |
 | SKESA | Public Domain | https://github.com/ncbi/SKESA/blob/master/LICENSE |
-| Smalt | GNU GPLv3 | https://www.sanger.ac.uk/tool/smalt-0/ |  
+| Smalt | GNU GPLv3 | https://www.sanger.ac.uk/tool/smalt-0/ |
+| SnpEff | MIT | https://github.com/pcingola/SnpEff/blob/master/LICENSE.md |
 | Snippy | GNU GPLv2 | https://github.com/tseemann/snippy/blob/master/LICENSE |
 | snp-dists | GNU GPLv3 | https://github.com/tseemann/snp-dists/blob/master/LICENSE |
 | SNP-sites | GNU GPLv3 | https://github.com/sanger-pathogens/snp-sites/blob/master/LICENSE |
