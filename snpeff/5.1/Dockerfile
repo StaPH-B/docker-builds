@@ -42,7 +42,7 @@ RUN wget https://github.com/pcingola/SnpEff/archive/refs/tags/v${SNPEFF_VER}.tar
 RUN cd SnpEff-${SNPEFF_VER}/lib && \
   mvn install:install-file -Dfile=antlr-4.5.1-complete.jar -DgroupId=org.antlr -DartifactId=antlr -Dversion=4.5.1 -Dpackaging=jar && \
   mvn install:install-file -Dfile=biojava3-core-3.0.7.jar -DgroupId=org.biojava -DartifactId=biojava3-core -Dversion=3.0.7 -Dpackaging=jar && \
-  mvn install:install-file -Dfile=biojava3-structure-3.0.7.jar -DgroupId=org.biojava -DartifactId=biojava3-structure -Dversion=3.0.7 -Dpackaging=jar
+  mvn install:install-file -Dfile=biojava3-structure-3.0.7.jar -DgroupId=org.biojava -DartifactId=biojava3-structure -Dversion=3.0.7 -Dpackaging=jar && \
   cd ../ && \
   mvn clean compile assembly:single jar:jar && \
   cp target/SnpEff-${SNPEFF_JAR_VER}-jar-with-dependencies.jar /snpEff.jar && \
