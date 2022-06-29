@@ -9,7 +9,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # LABEL instructions tag the image with metadata that might be important to the user
 LABEL base.image="ubuntu:focal"
-LABEL dockerfile.version="3"
+LABEL dockerfile.version="4"
 LABEL software="shigatyper"
 LABEL software.version=$SHIGATYPER_VER
 LABEL description="Determine Shigella serotype using Illumina (single or paired-end) or Oxford Nanopore reads!"
@@ -81,5 +81,12 @@ WORKDIR /data
 
 FROM app as test
 
-COPY test.sh .
-RUN bash test.sh
+# fetch test data from ENA FTP
+RUN wget -P /data ftp.sra.ebi.ac.uk/vol1/fastq/SRR818/005/SRR8186675/SRR8186675_1.fastq.gz && \
+wget -P /data ftp.sra.ebi.ac.uk/vol1/fastq/SRR818/005/SRR8186675/SRR8186675_2.fastq.gz && \
+wget -P /data ftp.sra.ebi.ac.uk/vol1/fastq/SRR773/008/SRR7738178/SRR7738178_1.fastq.gz && \
+wget -P /data ftp.sra.ebi.ac.uk/vol1/fastq/SRR773/008/SRR7738178/SRR7738178_2.fastq.gz
+
+# actually run shigatyper on test fastq files
+RUN shigatyper --R1 /data/SRR8186675_1.fastq.gz --R2 /data/SRR8186675_2.fastq.gz --name SRR8186675 && \
+ shigatyper --R1 /data/SRR7738178_1.fastq.gz --R2 /data/SRR7738178_2.fastq.gz --name SRR7738178
