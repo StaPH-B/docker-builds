@@ -19,8 +19,8 @@ RUN apt-get update && apt-get install -y \
 
 RUN mkdir fastp && \
  cd fastp && \ 
- wget http://opengene.org/fastp/fastp.{FASTP_VER} && \
- mv fastp.{FASTP_VER} fastp && \
+ wget http://opengene.org/fastp/fastp.${FASTP_VER} && \
+ mv fastp.${FASTP_VER} fastp && \
  chmod a+x ./fastp && \
  mkdir /data
  
