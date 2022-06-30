@@ -355,7 +355,7 @@ ENV PATH="${PATH}:\
 /Trimmomatic-${TRIMMOMATIC_VER}:\
 /bwa-0.7.17:\
 /skesa:\
-/megahit/megahit_v1.1.4_LINUX_CPUONLY_x86_64-bin:\
+/megahit/MEGAHIT-${MEGAHIT_VER}-Linux-x86_64-static/bin/:\
 /velvet/velvet-1.2.10:\
 /flash/FLASH-1.2.11:\
 /shovill-${SHOVILL_VER}/bin:\
