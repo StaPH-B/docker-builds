@@ -146,20 +146,19 @@ RUN mkdir samtools && \
   make && \
   make install
 
-# skesa 2.3.0 (skesa 2.4.0 binary works better on ubuntu:bionic, so not upgrading here)
+# skesa
 RUN mkdir skesa && \
   cd skesa && \
-  https://github.com/ncbi/SKESA/releases/download/${SKESA_VER}/skesa.centos.7.7 && \
+  wget https://github.com/ncbi/SKESA/releases/download/${SKESA_VER}/skesa.centos.7.7 && \
   mv skesa.centos.7.7 skesa && \
   chmod +x skesa
 
-# MEGAHIT 1.1.4 binary (I'm pretty sure these are binaries at this point)
 # might have to change this version
 RUN mkdir megahit && \
   cd megahit && \
-  wget https://github.com/voutcn/megahit/releases/download/v1.1.4/megahit_v1.1.4_LINUX_CPUONLY_x86_64-bin.tar.gz && \
-  tar -xzf megahit_v1.1.4_LINUX_CPUONLY_x86_64-bin.tar.gz && \
-  rm megahit_v1.1.4_LINUX_CPUONLY_x86_64-bin.tar.gz
+  wget https://github.com/voutcn/megahit/releases/download/v${MEGAHIT_VER}/MEGAHIT-${MEGAHIT_VER}-Linux-x86_64-static.tar.gz && \
+  tar -xzf MEGAHIT-${MEGAHIT_VER}-Linux-x86_64-static.tar.gz && \
+  rm -v MEGAHIT-${MEGAHIT_VER}-Linux-x86_64-static.tar.gz
 
 # Velvet 1.2.10
 RUN mkdir velvet && \
@@ -394,4 +393,4 @@ RUN touch ${KRAKEN_DEFAULT_DB}/database.idx ${KRAKEN_DEFAULT_DB}/database.kdb &&
  touch ${CENTRIFUGE_DEFAULT_DB}.1.cf ${CENTRIFUGE_DEFAULT_DB}.2.cf ${CENTRIFUGE_DEFAULT_DB}.3.cf
 
 # uncomment for final checks
-#RUN nullarbor.pl --check
+RUN nullarbor.pl --check
