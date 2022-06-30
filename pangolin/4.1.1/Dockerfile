@@ -8,7 +8,7 @@ WORKDIR /
 # ARG variables only persist during build time
 # had to include the v for some of these due to GitHub tags.
 # using pangolin-data github tag, NOT what is in the GH release title "v1.2.133"
-ARG PANGOLIN_VER="v4.1"
+ARG PANGOLIN_VER="v4.1.1"
 ARG PANGOLIN_DATA_VER="v1.11"
 ARG SCORPIO_VER="v0.3.17"
 ARG CONSTELLATIONS_VER="v0.1.10"
@@ -68,7 +68,7 @@ RUN pip install . && \
  pangolin --add-assignment-cache && \
  micromamba clean -a -y && \
  mkdir /data && \
- ####pangolin --all-versions && this isn't working due to new pangolin code\   
+ pangolin --all-versions && \   
  usher --version
 
 WORKDIR /data
