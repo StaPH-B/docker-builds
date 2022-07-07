@@ -89,9 +89,6 @@ RUN wget https://github.com/lskatz/ani-m/archive/refs/tags/v0.1.tar.gz && \
  tar xzf v0.1.tar.gz && \
  rm -v v0.1.tar.gz
 
-# command for comparing one genome to all of RGDv2
-#ani-m.pl my-assembly-of-interest.fasta /RGDv2/*.fasta | tee test-salmonalla-vs-RGDv2.tsv
-
 # LC_ALL for singularity compatibility; set PATH
 ENV LC_ALL=C \
  PATH="${PATH}:/ani-m-0.1:/mash-Linux64-v${MASH_VER}"
