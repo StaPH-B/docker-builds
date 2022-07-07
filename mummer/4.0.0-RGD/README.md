@@ -1,30 +1,58 @@
-# mummer  container
+# mummer + RGDv2 container
 Main tool : [mummer](https://github.com/mummer4/mummer)
-# Example Usage
 
-### mummer is a suffix tree algorithm designed to find maximal exact matches of some minimum length between two input sequences.
-```{bash}
-mummer -mum -b -c H_pylori26695_Eslice.fasta H_pyloriJ99_Eslice.fasta > mummer.mums
-```
-### A dotplot of all the MUMs between two sequences can reveal their macroscopic similarity.
+Additional tools:
+- `mash` v2.3
+- `ani-m.pl` v0.1 from https://github.com/lskatz/ani-m
 
-### <span style="color: red"> WARNING!!! </span> Unless running the container interactively; you must use the option --terminal png
-```{bash}
-mummerplot -x "[0,275287]" -y "[0,265111]" --terminal png -postscript -p mummer mummer.mums
+MUMmer is a versatile alignment tool for DNA and protein sequences.
+
+This docker image contains the **Reference Genome Database version 2 (RGDv2)** from the Enteric Diseases Laboratory Branch at the CDC. It contains the reference genomes of 43 enteric bacterial isolates that are used to for species identification of bacterial isolate WGS data. This database is NOT meant to be comprehensive - it contains the genomes of enteric pathogens commonly sequenced by EDLB and some closely related species.
+
+The FASTA files for RGDv2 can be found within the directory `/RGDv2/` inside the docker image.
+
+The docker image also includes `ani-m.pl`, written by [Lee Katz](@lskatz) and Lori Gladney. This perl script can be used for running the `dnadiff` tool from the Mummer package for performing Average Nucleotide Identity (ANI) analysis to compare genomes.
+
+## Example Usage
+
+Compare one genome against the 43 genomes in RGDv2, writing the output to a TSV file.
+
+This script will automatically use `mash` as quick check to see relatedness between genomes. If the two genomes have less than 0.9 mash distance, then the ANI calculation will be skipped.
+
+The `--symmetric` flag will run ANI comparison on both:
+
+ 1. the query vs the reference genome, followed by...
+ 2. the reference versus the query genome.
+
+ ANI values will likely be nearly identical between the two comparisons, but differences may occur in the `percentAligned` or percent bases aligned value depending on the sequences present in the genome.
+
+```bash
+ani-m.pl --symmetric --mash-filter 0.9 my-assembly-of-interest.fasta /RGDv2/*.fasta | tee output.tsv
 ```
-### Like mummer, nucmer can handle multiple reference and query sequences, however this example will demonstrate the alignment of multiple query sequences to a single reference.
-```{bash}
-nucmer -mumreference -c 100 -p nucmer B_anthracis_Mslice.fasta B_anthracis_contigs.fasta
+
+Example output TSV when comparing a Salmonella enterica serotype Kentucky to RGDv2 using the above command:
+
+```bash
+$ column -t output-with-mash-and-symmetric-flag.tsv 
+reference                                     query                                         ANI      stdev  percentAligned
+GCA_011245895.1_PDT000672941.1_genomic.fna    GCA_000026225.1.Escherichia_fergusonii.fasta  84.7423  3.93   33.1834
+GCA_000026225.1.Escherichia_fergusonii.fasta  GCA_011245895.1_PDT000672941.1_genomic.fna    84.7485  3.97   35.6278
+GCA_011245895.1_PDT000672941.1_genomic.fna    GCA_000512125.1.Escherichia_albertii.fasta    84.8404  3.72   32.5365
+GCA_000512125.1.Escherichia_albertii.fasta    GCA_011245895.1_PDT000672941.1_genomic.fna    84.8391  3.72   34.8883
+GCA_011245895.1_PDT000672941.1_genomic.fna    GCA_002741475.1.Escherichia_coli.fasta        84.7711  3.76   35.5718
+GCA_002741475.1.Escherichia_coli.fasta        GCA_011245895.1_PDT000672941.1_genomic.fna    84.7762  3.76   35.8077
+GCA_011245895.1_PDT000672941.1_genomic.fna    GCA_009665195.1.Vibrio_mimicus.fasta          89.4273  6.41   0.7529
+GCA_009665195.1.Vibrio_mimicus.fasta          GCA_011245895.1_PDT000672941.1_genomic.fna    89.4215  6.40   1.5694
+GCA_011245895.1_PDT000672941.1_genomic.fna    GCA_009665515.2.Vibrio_cholerae.fasta         93.7723  7.47   2.4096
+GCA_009665515.2.Vibrio_cholerae.fasta         GCA_011245895.1_PDT000672941.1_genomic.fna    93.7724  7.52   3.0205
+GCA_011245895.1_PDT000672941.1_genomic.fna    GCA_011388235.1.Salmonella_enterica.fasta     98.7341  3.42   88.7485
+GCA_011388235.1.Salmonella_enterica.fasta     GCA_011245895.1_PDT000672941.1_genomic.fna    98.7335  2.79   94.5892
+GCA_011245895.1_PDT000672941.1_genomic.fna    GCA_013588055.1.Salmonella_bongori.fasta      90.3425  2.99   73.3307
+GCA_013588055.1.Salmonella_bongori.fasta      GCA_011245895.1_PDT000672941.1_genomic.fna    90.3405  2.95   81.9293
+
 ```
-### To view a summary of all the alignments produced by NUCmer, we can run the nucmer.delta file through the show-coords utility.
-```{bash}
-show-coords -r -c -l nucmer.delta > nucmer.coords
-```
-### promer is a close relative to the NUCmer script. It follows the exact same steps as NUCmer and even uses most of the same programs in its pipeline, with one exception - all matching and alignment routines are performed on the six frame amino acid translation of the DNA input sequence.
-```{bash}
-promer -p promer_100 -c 100  H_pylori26695_Eslice.fasta H_pyloriJ99_Eslice.fasta
-```
-Better documentation can be found at [https://github.com/mummer4/mummer](https://github.com/mummer4/mummer)
+
+Better documentation for Mummer can be found at [https://github.com/mummer4/mummer](https://github.com/mummer4/mummer)
 
 A tutorial can be found at [https://mummer4.github.io/tutorial/tutorial.html](https://mummer4.github.io/tutorial/tutorial.html)
 
