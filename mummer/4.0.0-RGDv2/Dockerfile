@@ -115,3 +115,10 @@ RUN nucmer -h && nucmer --version && \
   nucmer  -c 100 -p nucmer B_anthracis_Mslice.fasta B_anthracis_contigs.fasta && \
   show-snps -C nucmer.delta > nucmer.snps && \
   promer -p promer_100 -c 100  H_pylori26695_Eslice.fasta H_pyloriJ99_Eslice.fasta
+
+# testing ani-m.pl (which runs 'dnadiff' and 'mash' under the hood)
+# comparing one of the reference genomes to another
+RUN ani-m.pl --symmetric --mash-filter 0.9 \
+ /RGDv2/GCA_014526935.1.Listeria_monocytogenes.fasta \
+ /RGDv2/GCA_001466295.1.Listeria_monocytogenes.fasta \
+ | tee test-output-ani-m.tsv
