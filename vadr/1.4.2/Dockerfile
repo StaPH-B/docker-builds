@@ -79,5 +79,24 @@ WORKDIR /data
 
 FROM app as test 
 
-# simple test for help options (which prints version at top)
-RUN v-annotate.pl -h
+# download B.1.1.7 genome from Utah
+ADD https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123.consensus.fa /test-data/SRR13957123.consensus.fa
+
+# print help options (which prints version at top)
+# run test script included w VADR
+# test terminal N trimming script
+# run v-annotate.pl on trimmed B.1.1.7 genome
+RUN v-annotate.pl -h && \
+ /opt/vadr/vadr/testfiles/do-install-tests-local.sh && \ 
+ /opt/vadr/vadr/miniscripts/fasta-trim-terminal-ambigs.pl \
+        /test-data/SRR13957123.consensus.fa \
+        --minlen 50 \
+        --maxlen 30000 \
+        > /test-data/SRR13957123.consensus.trimmed.fasta && \
+ v-annotate.pl --noseqnamemax --glsearch -s -r --nomisc \
+       --mkey sarscov2 --lowsim5seq 6 --lowsim3seq 6 --alt_fail lowscore,insertnn,deletinn \
+       "/test-data/SRR13957123.consensus.trimmed.fasta" \
+       "SRR13957123-vadr-outdir" && \
+  ls SRR13957123-vadr-outdir
+
+ 
