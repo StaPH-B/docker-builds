@@ -9,8 +9,8 @@ Full documentation: link to documentation or wiki
 
 <brief description>
 
-# Example Usage
+## Example Usage
 
-```
+```bash
 <how creator uses it>
 ```
