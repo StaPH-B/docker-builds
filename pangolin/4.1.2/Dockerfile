@@ -80,7 +80,21 @@ FROM app as test
 ENV ENV_NAME="pangolin"
 ARG MAMBA_DOCKERFILE_ACTIVATE=1
 
-# install unzip for unzipping zip archive from NCBI
+# test on test sequences supplied with Pangolin code
+RUN pangolin /pangolin/pangolin/test/test_seqs.fasta --analysis-mode usher -o /data/test_seqs-output-pusher && \
+ cat /data/test_seqs-output-pusher/lineage_report.csv 
+
+# test functionality of assignment-cache option
+RUN pangolin --use-assignment-cache /pangolin/pangolin/test/test_seqs.fasta
+
+# download B.1.1.7 genome from Utah
+ADD https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123.consensus.fa /test-data/SRR13957123.consensus.fa
+
+# test on a B.1.1.7 genome
+RUN pangolin /test-data/SRR13957123.consensus.fa --analysis-mode usher -o /test-data/SRR13957123-pusher && \
+ cat /test-data/SRR13957123-pusher/lineage_report.csv
+
+ # install unzip for unzipping zip archive from NCBI
 RUN apt-get update && apt-get install -y --no-install-recommends unzip
 
 # install ncbi datasets tool (pre-compiled binary); place in $PATH
@@ -95,17 +109,3 @@ RUN datasets download virus genome accession ON924087.1 --filename ON924087.1.zi
  mv -v ncbi_dataset/data/genomic.fna ncbi_dataset/data/ON924087.1.genomic.fna && \
  pangolin ncbi_dataset/data/ON924087.1.genomic.fna --analysis-mode usher -o ON924087.1-usher && \
  cat ON924087.1-usher/lineage_report.csv
-
-# test on test sequences supplied with Pangolin code
-RUN pangolin /pangolin/pangolin/test/test_seqs.fasta --analysis-mode usher -o /data/test_seqs-output-pusher && \
- cat /data/test_seqs-output-pusher/lineage_report.csv 
-
-# test functionality of assignment-cache option
-RUN pangolin --use-assignment-cache /pangolin/pangolin/test/test_seqs.fasta
-
-# download B.1.1.7 genome from Utah
-ADD https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123.consensus.fa /test-data/SRR13957123.consensus.fa
-
-# test on a B.1.1.7 genome
-RUN pangolin /test-data/SRR13957123.consensus.fa --analysis-mode usher -o /test-data/SRR13957123-pusher && \
- cat /test-data/SRR13957123-pusher/lineage_report.csv
