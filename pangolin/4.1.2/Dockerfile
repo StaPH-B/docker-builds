@@ -10,6 +10,7 @@ WORKDIR /
 # using pangolin-data github tag, NOT what is in the GH release title "v1.2.133"
 ARG PANGOLIN_VER="v4.1.2"
 ARG PANGOLIN_DATA_VER="v1.12"
+ARG PANGOLIN_ASSIGNMENT_VER="v1.12"
 ARG SCORPIO_VER="v0.3.17"
 ARG CONSTELLATIONS_VER="v0.1.10"
 ARG USHER_VER="0.5.6"
@@ -46,10 +47,14 @@ ENV PATH="$PATH" \
 
 # modify environment.yml to pin specific versions during install
 # create the conda environment using modified environment.yml
+# sed '$d' is to delete the last empty line in the yml
+# echo is to add a new line to pin the pangolin-assignment version (including a newline character)
 RUN sed -i "s|usher.*|usher=${USHER_VER}|" /pangolin/environment.yml && \
  sed -i "s|scorpio.git|scorpio.git@${SCORPIO_VER}|" /pangolin/environment.yml && \
  sed -i "s|pangolin-data.git|pangolin-data.git@${PANGOLIN_DATA_VER}|" /pangolin/environment.yml && \
  sed -i "s|constellations.git|constellations.git@${CONSTELLATIONS_VER}|" /pangolin/environment.yml && \
+ sed -i '$d' /pangolin/environment.yml && \
+ echo -e "    - git+https://github.com/cov-lineages/pangolin-assignment.git@${PANGOLIN_ASSIGNMENT_VER}\n" >> /pangolin/environment.yml && \
  micromamba create -n pangolin -y -f /pangolin/environment.yml
 
 # so that mamba/conda env is active when running below commands
@@ -82,6 +87,22 @@ FROM app as test
 # so that mamba/conda env is active when running below commands
 ENV ENV_NAME="pangolin"
 ARG MAMBA_DOCKERFILE_ACTIVATE=1
+
+# install unzip for unzipping zip archive from NCBI
+RUN apt-get update && apt-get install -y --no-install-recommends unzip
+
+# install ncbi datasets tool (pre-compiled binary); place in $PATH
+RUN wget https://ftp.ncbi.nlm.nih.gov/pub/datasets/command-line/LATEST/linux-amd64/datasets && \
+ chmod +x datasets && \
+ mv -v datasets /usr/local/bin
+
+# download assembly for a BA.1 from Florida (https://www.ncbi.nlm.nih.gov/biosample?term=SAMN29506515 and https://www.ncbi.nlm.nih.gov/nuccore/ON924087)
+# run pangolin in usher analysis mode
+RUN datasets download virus genome accession ON924087.1 --filename ON924087.1.zip && \
+ unzip ON924087.1.zip && rm ON924087.1.zip && \
+ mv -v ncbi_dataset/data/genomic.fna ncbi_dataset/data/ON924087.1.genomic.fna && \
+ pangolin ncbi_dataset/data/ON924087.1.genomic.fna --analysis-mode usher -o ON924087.1-usher && \
+ cat ON924087.1-usher/lineage_report.csv
 
 # test on test sequences supplied with Pangolin code
 RUN pangolin /pangolin/pangolin/test/test_seqs.fasta --analysis-mode usher -o /data/test_seqs-output-pusher && \
