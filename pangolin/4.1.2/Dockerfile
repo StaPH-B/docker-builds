@@ -10,7 +10,6 @@ WORKDIR /
 # using pangolin-data github tag, NOT what is in the GH release title "v1.2.133"
 ARG PANGOLIN_VER="v4.1.2"
 ARG PANGOLIN_DATA_VER="v1.12"
-ARG PANGOLIN_ASSIGNMENT_VER="v1.12"
 ARG SCORPIO_VER="v0.3.17"
 ARG CONSTELLATIONS_VER="v0.1.10"
 ARG USHER_VER="0.5.6"
@@ -47,14 +46,10 @@ ENV PATH="$PATH" \
 
 # modify environment.yml to pin specific versions during install
 # create the conda environment using modified environment.yml
-# sed '$d' is to delete the last empty line in the yml
-# echo is to add a new line to pin the pangolin-assignment version (including a newline character)
 RUN sed -i "s|usher.*|usher=${USHER_VER}|" /pangolin/environment.yml && \
  sed -i "s|scorpio.git|scorpio.git@${SCORPIO_VER}|" /pangolin/environment.yml && \
  sed -i "s|pangolin-data.git|pangolin-data.git@${PANGOLIN_DATA_VER}|" /pangolin/environment.yml && \
  sed -i "s|constellations.git|constellations.git@${CONSTELLATIONS_VER}|" /pangolin/environment.yml && \
- sed -i '$d' /pangolin/environment.yml && \
- echo -e "    - git+https://github.com/cov-lineages/pangolin-assignment.git@${PANGOLIN_ASSIGNMENT_VER}\n" >> /pangolin/environment.yml && \
  micromamba create -n pangolin -y -f /pangolin/environment.yml
 
 # so that mamba/conda env is active when running below commands
@@ -66,14 +61,11 @@ WORKDIR /pangolin
 # run pip install step; download optional pre-computed assignment hashes for UShER (useful for running on large batches of samples)
 # best to skip using the assigment-cache if running on one sample for speed
 # print versions
-##### NOTE: 'pangolin --all-versions' does not accurately print the pangolin-data or pangolin-assignment version as it prints the version in 
-##### /pangolin-data/pangolin-data/__init__.py instead of the GH tag (which is actually used for downloading)
-##### See here for more info/explanation: https://github.com/cov-lineages/pangolin/issues/393
 RUN pip install . && \
  pangolin --add-assignment-cache && \
  micromamba clean -a -y && \
  mkdir /data && \
- pangolin --all-versions && \   
+ pangolin --all-versions && \
  usher --version
 
 WORKDIR /data
