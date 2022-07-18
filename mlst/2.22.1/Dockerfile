@@ -1,6 +1,7 @@
 FROM ubuntu:focal as app
 
 ARG MLST_VER="2.22.1"
+ARG ANY2FASTA_VER="0.4.2"
 
 LABEL base.image="ubuntu:focal"
 LABEL container.version="1"
@@ -25,14 +26,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  ncbi-blast+ && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-# get any2fasta
-RUN cd /usr/local/bin && \
-  wget https://raw.githubusercontent.com/tseemann/any2fasta/master/any2fasta && \
-  chmod +x any2fasta
+# get any2fasta; move binary to /usr/local/bin which is already in $PATH
+RUN wget https://github.com/tseemann/any2fasta/archive/refs/tags/v${ANY2FASTA_VER}.tar.gz && \
+ tar xzf v${ANY2FASTA_VER}.tar.gz && \
+ rm v${ANY2FASTA_VER}.tar.gz && \
+ chmod +x any2fasta-${ANY2FASTA_VER}/any2fasta && \
+ mv -v any2fasta-${ANY2FASTA_VER}/any2fasta /usr/local/bin
 
 # get mlst
-RUN wget https://github.com/tseemann/mlst/archive/v${MLST_VER}.tar.gz &&\
- tar -xzf v${MLST_VER}.tar.gz &&\
+RUN wget https://github.com/tseemann/mlst/archive/v${MLST_VER}.tar.gz && \
+ tar -xzf v${MLST_VER}.tar.gz && \
  rm v${MLST_VER}.tar.gz
 
 # set PATH and perl local settings
