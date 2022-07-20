@@ -3,6 +3,7 @@ FROM ubuntu:xenial as app
 # for easy upgrade later. LC_ALL set for singularity compatibility
 ENV VADR_VERSION="1.4.2" \
   VADR_SARSCOV2_MODELS_VERSION="1.3-2" \
+  VADR_MPXV_MODELS_VERSION="1.4.2-1" \
   LC_ALL=C \
   VADRINSTALLDIR=/opt/vadr
 
@@ -22,7 +23,7 @@ ENV PERL5LIB=$VADRSCRIPTSDIR:$VADRSEQUIPDIR:$VADRBIOEASELDIR/blib/lib:$VADRBIOEA
 
 # metadata - optional, but highly recommended
 LABEL base.image="ubuntu:xenial"
-LABEL dockerfile.version="1"
+LABEL dockerfile.version="2"
 LABEL software="VADR"
 LABEL software.version=${VADR_VERSION}
 LABEL description="Classification and annotation of viral sequences based on RefSeq annotation"
@@ -59,14 +60,18 @@ RUN mkdir -p ${VADRINSTALLDIR} && \
  rm -rf vadr-${VADR_VERSION}/ && \
  mkdir /data
 
-# install the latest sarscov2 models 
+# install the latest sarscov2 and mpxv models 
 # copy calici models into VADRMODELDIR to allow VADR tests to pass completely
 # cleanup duplicate copies of model files
 RUN wget -O vadr-models-sarscov2.tar.gz https://ftp.ncbi.nlm.nih.gov/pub/nawrocki/vadr-models/sarscov2/${VADR_SARSCOV2_MODELS_VERSION}/vadr-models-sarscov2-${VADR_SARSCOV2_MODELS_VERSION}.tar.gz && \
+ wget -O vadr-models-mpxv.tar.gz https://ftp.ncbi.nlm.nih.gov/pub/nawrocki/vadr-models/mpxv/${VADR_MPXV_MODELS_VERSION}/vadr-models-mpxv-${VADR_MPXV_MODELS_VERSION}.tar.gz && \
  tar -xf vadr-models-sarscov2.tar.gz && \
+ tar -xf vadr-models-mpxv.tar.gz && \
  mkdir -vp ${VADRMODELDIR} && \
  cp -nv /vadr-models-sarscov2-${VADR_SARSCOV2_MODELS_VERSION}/* ${VADRMODELDIR} && \
+ cp -nv /vadr-models-mpxv-${VADR_MPXV_MODELS_VERSION}/* ${VADRMODELDIR} && \
  rm -rf /vadr-models-sarscov2* && \
+ rm -rf /vadr-models-mpxv* && \
  cp -nv ${VADRINSTALLDIR}/vadr-models-calici/* ${VADRMODELDIR} && \
  rm -rf ${VADRINSTALLDIR}/vadr-models-calici/
 
@@ -99,4 +104,4 @@ RUN v-annotate.pl -h && \
        "SRR13957123-vadr-outdir" && \
   ls SRR13957123-vadr-outdir
 
- 
+ ## no test for MPXV sequences yet, it would take too long to do via GH actions (can take up to 30min/genome)
