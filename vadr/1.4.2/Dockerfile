@@ -61,7 +61,7 @@ RUN mkdir -p ${VADRINSTALLDIR} && \
  mkdir /data
 
 # install the latest sarscov2 and mpxv models 
-# copy calici models into VADRMODELDIR to allow VADR tests to pass completely
+# copy calici model files into VADRMODELDIR to allow VADR tests to pass completely
 # cleanup duplicate copies of model files
 RUN wget -O vadr-models-sarscov2.tar.gz https://ftp.ncbi.nlm.nih.gov/pub/nawrocki/vadr-models/sarscov2/${VADR_SARSCOV2_MODELS_VERSION}/vadr-models-sarscov2-${VADR_SARSCOV2_MODELS_VERSION}.tar.gz && \
  wget -O vadr-models-mpxv.tar.gz https://ftp.ncbi.nlm.nih.gov/pub/nawrocki/vadr-models/mpxv/${VADR_MPXV_MODELS_VERSION}/vadr-models-mpxv-${VADR_MPXV_MODELS_VERSION}.tar.gz && \
@@ -73,7 +73,7 @@ RUN wget -O vadr-models-sarscov2.tar.gz https://ftp.ncbi.nlm.nih.gov/pub/nawrock
  rm -rf /vadr-models-sarscov2* && \
  rm -rf /vadr-models-mpxv* && \
  cp -nv ${VADRINSTALLDIR}/vadr-models-calici/* ${VADRMODELDIR} && \
- rm -rf ${VADRINSTALLDIR}/vadr-models-calici/
+ rm -rf ${VADRINSTALLDIR}/vadr-models-calici/ 
 
 # Virus model files other than sarscov2 will need to be made available to vadr either in
 # the $VADRMODELDIR or another path can be specified using the 'v-annotate.pl -mdir' option.
