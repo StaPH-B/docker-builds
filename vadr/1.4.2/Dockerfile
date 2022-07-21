@@ -3,6 +3,7 @@ FROM ubuntu:xenial as app
 # for easy upgrade later. LC_ALL set for singularity compatibility
 ENV VADR_VERSION="1.4.2" \
   VADR_SARSCOV2_MODELS_VERSION="1.3-2" \
+  VADR_MPXV_MODELS_VERSION="1.4.2-1" \
   LC_ALL=C \
   VADRINSTALLDIR=/opt/vadr
 
@@ -22,7 +23,7 @@ ENV PERL5LIB=$VADRSCRIPTSDIR:$VADRSEQUIPDIR:$VADRBIOEASELDIR/blib/lib:$VADRBIOEA
 
 # metadata - optional, but highly recommended
 LABEL base.image="ubuntu:xenial"
-LABEL dockerfile.version="1"
+LABEL dockerfile.version="2"
 LABEL software="VADR"
 LABEL software.version=${VADR_VERSION}
 LABEL description="Classification and annotation of viral sequences based on RefSeq annotation"
@@ -59,16 +60,20 @@ RUN mkdir -p ${VADRINSTALLDIR} && \
  rm -rf vadr-${VADR_VERSION}/ && \
  mkdir /data
 
-# install the latest sarscov2 models 
-# copy calici models into VADRMODELDIR to allow VADR tests to pass completely
+# install the latest sarscov2 and mpxv models 
+# copy calici model files into VADRMODELDIR to allow VADR tests to pass completely
 # cleanup duplicate copies of model files
 RUN wget -O vadr-models-sarscov2.tar.gz https://ftp.ncbi.nlm.nih.gov/pub/nawrocki/vadr-models/sarscov2/${VADR_SARSCOV2_MODELS_VERSION}/vadr-models-sarscov2-${VADR_SARSCOV2_MODELS_VERSION}.tar.gz && \
+ wget -O vadr-models-mpxv.tar.gz https://ftp.ncbi.nlm.nih.gov/pub/nawrocki/vadr-models/mpxv/${VADR_MPXV_MODELS_VERSION}/vadr-models-mpxv-${VADR_MPXV_MODELS_VERSION}.tar.gz && \
  tar -xf vadr-models-sarscov2.tar.gz && \
+ tar -xf vadr-models-mpxv.tar.gz && \
  mkdir -vp ${VADRMODELDIR} && \
  cp -nv /vadr-models-sarscov2-${VADR_SARSCOV2_MODELS_VERSION}/* ${VADRMODELDIR} && \
+ cp -nv /vadr-models-mpxv-${VADR_MPXV_MODELS_VERSION}/* ${VADRMODELDIR} && \
  rm -rf /vadr-models-sarscov2* && \
+ rm -rf /vadr-models-mpxv* && \
  cp -nv ${VADRINSTALLDIR}/vadr-models-calici/* ${VADRMODELDIR} && \
- rm -rf ${VADRINSTALLDIR}/vadr-models-calici/
+ rm -rf ${VADRINSTALLDIR}/vadr-models-calici/ 
 
 # Virus model files other than sarscov2 will need to be made available to vadr either in
 # the $VADRMODELDIR or another path can be specified using the 'v-annotate.pl -mdir' option.
@@ -99,4 +104,29 @@ RUN v-annotate.pl -h && \
        "SRR13957123-vadr-outdir" && \
   ls SRR13957123-vadr-outdir
 
- 
+# install ncbi datasets tool (pre-compiled binary); place in $PATH
+RUN wget https://ftp.ncbi.nlm.nih.gov/pub/datasets/command-line/LATEST/linux-amd64/datasets && \
+ chmod +x datasets && \
+ mv -v datasets /usr/local/bin
+
+# download assembly for a MPXV from  (link here)
+# run VADR trimming script and v-annotate.pl
+# link to GenBank accession: https://www.ncbi.nlm.nih.gov/nuccore/OP022171
+ARG GENBANK_ACCESSION="OP022171.1"
+RUN datasets download virus genome accession ${GENBANK_ACCESSION} --filename ${GENBANK_ACCESSION}.zip && \
+ unzip ${GENBANK_ACCESSION}.zip && rm ${GENBANK_ACCESSION}.zip && \
+ mv -v ncbi_dataset/data/genomic.fna ncbi_dataset/data/${GENBANK_ACCESSION}.genomic.fna && \
+ fasta-trim-terminal-ambigs.pl /data/ncbi_dataset/data/${GENBANK_ACCESSION}.genomic.fna \
+    --minlen 50 \
+    --maxlen 210000 \
+    >/data/${GENBANK_ACCESSION}.trimmed.fasta && \
+v-annotate.pl --split --cpu 2 \
+    --glsearch -s -r \
+    --nomisc \
+    --mkey mpxv \
+    --r_lowsimok \
+    --r_lowsimxd 100 \
+    --r_lowsimxl 2000 \
+    --alt_pass discontn,dupregin \
+    /data/${GENBANK_ACCESSION}.trimmed.fasta \
+    ${GENBANK_ACCESSION}-mpxv-vadr-test-output
