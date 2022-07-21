@@ -278,7 +278,10 @@ RUN wget https://github.com/tseemann/mlst/archive/v${MLST_VER}.tar.gz &&\
 # abricate
 RUN wget https://github.com/tseemann/abricate/archive/v${ABRICATE_VER}.tar.gz && \
     tar -zxvf v${ABRICATE_VER}.tar.gz && \
-    rm -rf v${ABRICATE_VER}.tar.gz
+    rm -rf v${ABRICATE_VER}.tar.gz && \
+    /abricate-${ABRICATE_VER}/bin/abricate --check && \
+    /abricate-${ABRICATE_VER}/bin/abricate --setupdb
+
 
 # snp-dists
 RUN wget https://github.com/tseemann/snp-dists/archive/v${SNP_DISTS_VER}.tar.gz && \
