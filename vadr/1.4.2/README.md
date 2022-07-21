@@ -27,6 +27,10 @@ Docs on Coronavirus annotation: https://github.com/ncbi/vadr/wiki/Coronavirus-an
 
 Docs on MPXV annotation: https://github.com/ncbi/vadr/wiki/Monkeypox-virus-annotation
 
+**Note:** Support for MonkeyPox genome annotation was just added in the VADR software (July 2022) and is under active development. Things may change quickly. See the above documentation ^ to see the latest information on the state of MPXV annotation with VADR.
+
+Also be aware that some sequences may take up to **30 minutes** to annotate, depending on how divergent it is from the RefSeq NC_063383 sequence. Some sequences may only take a minute or so.
+
 ## Example Usage
 
 ```bash
