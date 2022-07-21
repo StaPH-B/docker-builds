@@ -104,4 +104,29 @@ RUN v-annotate.pl -h && \
        "SRR13957123-vadr-outdir" && \
   ls SRR13957123-vadr-outdir
 
- ## no test for MPXV sequences yet, it would take too long to do via GH actions (can take up to 30min/genome)
+# install ncbi datasets tool (pre-compiled binary); place in $PATH
+RUN wget https://ftp.ncbi.nlm.nih.gov/pub/datasets/command-line/LATEST/linux-amd64/datasets && \
+ chmod +x datasets && \
+ mv -v datasets /usr/local/bin
+
+# download assembly for a MPXV from  (link here)
+# run VADR trimming script and v-annotate.pl
+# link to GenBank accession: https://www.ncbi.nlm.nih.gov/nuccore/OP022171
+ARG GENBANK_ACCESSION="OP022171.1"
+RUN datasets download virus genome accession ${GENBANK_ACCESSION} --filename ${GENBANK_ACCESSION}.zip && \
+ unzip ${GENBANK_ACCESSION}.zip && rm ${GENBANK_ACCESSION}.zip && \
+ mv -v ncbi_dataset/data/genomic.fna ncbi_dataset/data/${GENBANK_ACCESSION}.genomic.fna && \
+ fasta-trim-terminal-ambigs.pl /data/ncbi_dataset/data/${GENBANK_ACCESSION}.genomic.fna \
+    --minlen 50 \
+    --maxlen 210000 \
+    >/data/${GENBANK_ACCESSION}.trimmed.fasta && \
+v-annotate.pl --split --cpu 2 \
+    --glsearch -s -r \
+    --nomisc \
+    --mkey mpxv \
+    --r_lowsimok \
+    --r_lowsimxd 100 \
+    --r_lowsimxl 2000 \
+    --alt_pass discontn,dupregin \
+    /data/${GENBANK_ACCESSION}.trimmed.fasta \
+    ${GENBANK_ACCESSION}-mpxv-vadr-test-output
