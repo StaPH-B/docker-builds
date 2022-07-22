@@ -20,12 +20,14 @@ ARG FLASH_VER
 
 # Labels need to go in the production stage
 LABEL base.image="ubuntu:focal"
-LABEL dockerfile.version="1"
+LABEL dockerfile.version="2"
 LABEL software="FLASH"
 LABEL software.version=$FLASH_VER
 LABEL description="FLASH (Fast Length Adjustment of Short Reads): merges overlapping paired-end reads"
 LABEL website="http://ccb.jhu.edu/software/FLASH"
 LABEL license="https://github.com/ebiggers/flash/blob/master/COPYING"
+LABEL maintainer="Sarah Nadeau"
+LABEL maintainer.email="sarah.nadeau@bsse.ethz.ch"
 
 # Copy only executable into production stage to reduce image size
 COPY --from=builder FLASH-$FLASH_VER/flash /usr/local/bin/flash
@@ -35,16 +37,9 @@ WORKDIR /data
 FROM app as test
 ARG FLASH_VER
 
-# Get test dependencies
-RUN apt-get update && apt-get install -y \
-    bc \
-    python3 \
-    wget
-COPY tests /tests
+# Install test dependency
+RUN apt-get update && apt-get install -y wget
 
-# Run positive control
-RUN bash /tests/scripts/get_data_pos_control.sh
-RUN bash /tests/scripts/run_flash_pos_control.sh
-
-# Check output
-RUN python3 -m unittest discover -s /tests
+# Run test script
+COPY test_flash.sh .
+RUN bash test_flash.sh $FLASH_VER

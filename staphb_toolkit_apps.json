@@ -1,0 +1,579 @@
+{
+  "apps": {
+    "abricate": {
+      "description": "Abricate - Mass screening of contigs for antimicrobial and virulence genes",
+      "image": "docker://staphb/abricate",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "abricate"
+    },
+    "any2fasta": {
+      "description": "any2fasta - Convert various sequence formats to FASTA",
+      "image": "docker://staphb/any2fasta",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "any2fasta"
+    },
+    "ariba": {
+      "description": "Ariba - Antimicrobial Resistance Identification By Assembly",
+      "image": "docker://staphb/ariba",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "ariba"
+    },
+    "artic-ncov2019": {
+      "description": "ARTIC-ncov2019 - SARS-CoV-2 Workflow",
+      "image": "docker://staphb/artic-ncov2019",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "artic minion"
+    },
+    "augur": {
+      "description": "augur - a bioinformatics toolkit to track evolution from sequence and serological data",
+      "image": "docker://staphb/augur",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "augur"
+    },
+    "auspice": {
+      "description": "auspice - an open-source interactive web app for visualizing phylogenomic data",
+      "image": "docker://staphb/auspice",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "auspice"
+    },
+    "bbtools": {
+      "description": "BBTools - Suite of fast, multithreaded bioinformatics tools for DNA and RNA sequence data",
+      "image": "docker://staphb/bbtools",
+      "tag": "latest",
+      "help": "BBTools shell script must be specified, e.g. staphb-tk bbtools bbmap.sh, staphb-tk bbtools bbduk.sh, etc. \n\nMore info on BBTools at https://jgi.doe.gov/data-and-tools/bbtools/bb-tools-user-guide/."
+    },
+    "bcftools": {
+      "description": "BCFTools - Variant calling and manipulating files in the Variant Call Format (VCF) and its binary counterpart BCF",
+      "image": "docker://staphb/bcftools",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "bcftools"
+    },
+    "bedtools": {
+      "description": "bedtools - a swiss-army knife of tools for a wide-range of genomics analysis tasks",
+      "image": "docker://staphb/bedtools",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "bedtools"
+    },
+    "bwa": {
+      "description": "BWA - mapping low-divergent sequences against a large reference genome",
+      "image": "docker://staphb/bwa",
+      "tag": "latest",
+      "help": "",
+      "exec": "bwa"
+    },
+    "canu": {
+      "description": "Canu - Long read assembly and polishing tools",
+      "image": "docker://staphb/canu",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "canu"
+    },
+    "centroid": {
+      "description": "centroid - a tool for determining an ideal reference genome from a set of fasta files",
+      "image": "docker://staphb/centroid",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "centroid.py"
+    },
+    "cfsan-snp-pipeline": {
+      "description": "CFSAN-SNP - SNP calling pipeline from the FDA CFSAN laboratory",
+      "image": "docker://staphb/cfsan-snp-pipeline",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "cfsan_snp_pipeline"
+    },
+    "circlator": {
+      "description": "Circlator - A tool to circularize genome assemblies",
+      "image": "docker://staphb/circlator",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "circlator"
+    },
+    "clustalo": {
+      "description": "ClustalO - A fast multiple sequence alignment program",
+      "image": "docker://staphb/clustalo",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "clustalo"
+    },
+    "colorid": {
+      "description": "Colorid - Experiments with using BIGSI data structure for metagenomic and QC applications",
+      "image": "docker://staphb/colorid",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "colorid"
+    },
+    "emm-typing-tool": {
+      "description": "Emm-typing-tool - Group A streptococci emm typing tool for NGS data",
+      "image": "docker://staphb/emm-typing-tool",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "emm_typing.py"
+    },
+    "fastani": {
+      "description": "FastANI - Fast whole-genome sequence average nucleotide identity (ANI) estimation",
+      "image": "docker://staphb/fastani",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "fastANI"
+    },
+    "fastqc-scan": {
+      "description": "fastq-scan - reads a FASTQ from STDIN and outputs summary statistics (read lengths, per-read qualities, per-base qualities) in JSON format",
+      "image": "docker://staphb/fastq-scan",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "fastq-scan"
+    },
+    "fastqc": {
+      "description": "FastQC - A quality control tool for high throughput sequence data",
+      "image": "docker://staphb/fastqc",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "fastqc"
+    },
+    "fasttree": {
+      "description": "FastTree - Infers approximately-maximum-likelihood phylogenetic trees from alignments of nucleotide or protein sequences",
+      "image": "docker://staphb/fasttree",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "FastTree"
+    },
+    "filtlong": {
+      "description": "Filtlong - Quality filtering tool for long reads",
+      "image": "docker://staphb/filtlong",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "filtlong"
+    },
+    "flye": {
+      "description": "Flye - De novo assembler for single molecule sequencing reads using repeat graphs",
+      "image": "docker://staphb/flye",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "flye"
+    },
+    "hmmer": {
+      "description": "HMMER - used for searching sequence databases for sequence homologs, and for making sequence alignments. It implements methods using probabilistic models called profile hidden Markov models (profile HMMs)",
+      "image": "docker://staphb/hmmer",
+      "tag": "latest",
+      "help": "HMMER subcommand must be provided: http://eddylab.org/software/hmmer/Userguide.pdf"
+    },
+    "iqtree": {
+      "description": "IQ-TREE - A fast and effective stochastic algorithm to infer phylogenetic trees by maximum likelihood",
+      "image": "docker://staphb/iqtree",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "iqtree"
+    },
+    "iqtree2": {
+      "description": "IQ-TREE2 - A fast and effective stochastic algorithm to infer phylogenetic trees by maximum likelihood",
+      "image": "docker://staphb/iqtree2",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "iqtree"
+    },
+    "ivar": {
+      "description": "iVar - Computational package that contains functions broadly useful for viral amplicon-based sequencing",
+      "image": "docker://staphb/ivar",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "ivar"
+    },
+    "kleborate": {
+      "description": "Kleborate - a tool to screen genome assemblies of Klebsiella pneumoniae and the Klebsiella pneumoniae species complex",
+      "image": "docker://staphb/kleborate",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "kleborate"
+    },
+    "kma": {
+      "description": "KMA - Mapping method designed to map raw reads directly against redundant databases, in an ultra-fast manner using seed and extend",
+      "image": "docker://staphb/kma",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "kma"
+    },
+    "kraken": {
+      "description": "Kraken - Taxonomic sequence classification system",
+      "image": "docker://staphb/kraken",
+      "tag": "latest",
+      "help": "Please specify a Kraken subcommand: kraken-build, kraken"
+    },
+    "kraken2": {
+      "description": "Kraken2 - Taxonomic sequence classification system",
+      "image": "docker://staphb/kraken2",
+      "tag": "latest",
+      "help": "Please specify a Kraken2 subcommand: kraken2-build, kraken2-inspect, kraken2"
+    },
+    "ksnp3": {
+      "description": "kSNP3 - Identifies the pan-genome SNPs in a set of genome sequences, and estimates phylogenetic trees based upon those SNPs",
+      "image": "docker://staphb/ksnp3",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "kSNP3"
+    },
+    "legsta": {
+      "description": "Legsta - In silico Legionella pneumophila Sequence Based Typing",
+      "image": "docker://staphb/legsta",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "legsta"
+    },
+    "lyveset": {
+      "description": "LYVE-SET - a method of using hqSNPs to create a phylogeny",
+      "image": "docker://staphb/lyveset",
+      "tag": "latest",
+      "help": "Lyev-SET perl script must be specified, e.g. staphb-tk lyveset launch_set.pl, staphb-tk lyveset set_manage.pl, staphb-tk lyveset run_assembly_readMeterics.pl. \n\nMore info on Lyve-SET usage at: github.com/lskatz/lyve-SET."
+    },
+    "mafft": {
+      "description": "MAFFT - multiple sequence alignment program for amino acid or nucleotide sequences",
+      "image": "docker://staphb/mafft",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "mafft"
+    },
+    "mash": {
+      "description": "MASH - Fast genome and metagenome distance estimation using MinHash",
+      "image": "docker://staphb/mash",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "mash"
+    },
+    "mashtree": {
+      "description": "MashTree - Create a tree using Mash distances",
+      "image": "docker://staphb/mashtree",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "mashtree"
+    },
+    "medaka": {
+      "description": "Medaka - Sequence correction provided by ONT Research",
+      "image": "docker://staphb/medaka",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "medaka"
+    },
+    "minimap2": {
+      "description": "Minimap2 - a versatile sequence alignment program that aligns DNA or mRNA sequences against a large reference database",
+      "image": "docker://staphb/minimap2",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "minimap2"
+    },
+    "minipolish": {
+      "description": "Minipolish - A tool for Racon polishing of miniasm assemblies",
+      "image": "docker://staphb/minipolish",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "minipolish"
+    },
+    "mlst": {
+      "description": "MLST - Scan contig files against PubMLST typing schemes",
+      "image": "docker://staphb/mlst",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "mlst"
+    },
+    "mugsy": {
+      "description": "Mugsy - A multiple whole genome aligner",
+      "image": "docker://staphb/mugsy",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "mugsy"
+    },
+    "multiqc": {
+      "description": "MultiQC - Aggregate results from bioinformatics analyses across many samples into a single report",
+      "image": "docker://staphb/multiqc",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "multiqc"
+    },
+    "nanoplot": {
+      "description": "NanoPlot - Plotting scripts for long read sequencing data",
+      "image": "docker://staphb/nanoplot",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "nanoplot"
+    },
+    "ncbi-amrfinder-plus": {
+      "description": "NCBI AMRFinderPlus - Designed to find acquired antimicrobial resistance genes and some point mutations in protein or assembled nucleotide sequences",
+      "image": "docker://staphb/ncbi-amrfinder-plus",
+      "tag": "latest",
+      "help": "--help",
+      "exec": "amrfinder"
+    },
+    "orthofinder": {
+      "description": "OrthoFinder - Phylogenetic orthology inference for comparative genomics",
+      "image": "docker://staphb/orthofinder",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "orthofinder"
+    },
+    "pangolin": {
+      "description": "Pangolin - Phylogenetic Assignment of Named Global Outbreak LINeages",
+      "image": "docker://staphb/pangolin",
+      "tag": "latest",
+      "help": "--help",
+      "exec": "pangolin"
+    },
+    "piggy": {
+      "description": "Piggy - a tool for analysing the intergenic component of bacterial genomes. It is designed to be used in conjunction with Roary",
+      "image": "docker://staphb/piggy",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "piggy"
+    },
+    "pilon": {
+      "description": "Pilon - Automated genome assembly improvement and variant detection tool",
+      "image": "docker://staphb/pilon",
+      "tag": "latest",
+      "help": "--help",
+      "exec": "pilon"
+    },
+    "plasmidseeker": {
+      "description": "PlasmidSeeker - A k-mer based program for the identification of known plasmids from whole-genome sequencing reads",
+      "image": "docker://staphb/plasmidseeker",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "plasmidseeker.pl"
+    },
+    "prokka": {
+      "description": "Prokka - Rapid prokaryotic genome annotation",
+      "image": "docker://staphb/prokka",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "prokka"
+    },
+    "quast": {
+      "description": "Quast - Genome assembly evaluation tool",
+      "image": "docker://staphb/quast",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "quast.py"
+    },
+    "quast": {
+      "description": "Quast - Genome assembly evaluation tool",
+      "image": "docker://staphb/quast",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "quast.py"
+    },
+    "racon": {
+      "description": "Racon - Long read assembly and polishing tools",
+      "image": "docker://staphb/racon",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "racon"
+    },
+    "rasusa": {
+      "description": "RASUA - Randomly subsample sequencing reads to a specified coverage",
+      "image": "docker://staphb/rasusa",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "rasusa"
+    },
+    "raven": {
+      "description": "Raven - a de novo genome assembler for long uncorrected reads",
+      "image": "docker://staphb/raven",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "raven"
+    },
+    "raxml": {
+      "description": "RAxML - Maximum likelihood tree builder",
+      "image": "docker://staphb/raxml",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "raxmlHPC"
+    },
+    "roary": {
+      "description": "Roary - Rapid large-scale prokaryote pan genome analysis",
+      "image": "docker://staphb/roary",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "roary"
+    },
+    "salmid": {
+      "description": "SalmID - Rapid confirmation of Salmonella spp. and subspp. from sequence data",
+      "image": "docker://staphb/salmid",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "SalmID.py"
+    },
+    "samtools": {
+      "description": "Samtools - A suite of programs for interacting with high-throughput sequencing data. It consists of three separate repositories",
+      "image": "docker://staphb/samtools",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "samtools"
+    },
+    "seqsero": {
+      "description": "SeqSero - Salmonella serotyping from genome sequencing data",
+      "image": "docker://staphb/seqsero",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "SeqSero.py"
+    },
+    "seqsero2": {
+      "description": "SeqSero2 - Salmonella serotype prediction from genome sequencing data",
+      "image": "docker://staphb/seqsero2",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "SeqSero2_package.py"
+    },
+    "seqtk": {
+      "description": "SeqTK - Toolkit for processing sequences in FASTA/Q formats",
+      "image": "docker://staphb/seqtk",
+      "tag": "latest",
+      "help": "",
+      "exec": "seqtk"
+    },
+    "seqyclean": {
+      "description": "SeqyClean - Pre-process and clean NGS data in order to prepare for downstream analysis",
+      "image": "docker://staphb/seqyclean",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "seqyclean"
+    },
+    "seroba": {
+      "description": "Seroba - k-mer based Pipeline to identify the Serotype from Illumina NGS reads",
+      "image": "docker://staphb/seroba",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "seroba"
+    },
+    "serotypefinder": {
+      "description": "SerotypeFinder - identifies the serotype in total or partial sequenced isolates of E. coli",
+      "image": "docker://staphb/serotypefinder",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "serotypefinder.pl"
+    },
+    "shovill": {
+      "description": "Shovill - Faster SPAdes assembler",
+      "image": "docker://staphb/shovill",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "shovill"
+    },
+    "sistr": {
+      "description": "SISTR - Salmonella in silico typing resource command-line tool",
+      "image": "docker://staphb/sistr",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "sistr"
+    },
+    "skesa": {
+      "description": "SKESA - NCBI's de novo genome assemlber",
+      "image": "docker://staphb/skesa",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "skesa"
+    },
+    "snippy": {
+      "description": "Snippy - Rapid haploid variant calling and core genome alignment",
+      "image": "docker://staphb/snippy",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "snippy"
+    },
+    "snp-dists": {
+      "description": "SNP-dists - Pairwise SNP distance matrix from a FASTA sequence alignment",
+      "image": "docker://staphb/snp-dists",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "snp-dists"
+    },
+    "snp-sites": {
+      "description": "SNP-sites - Finds SNP sites from a multi-FASTA alignment file",
+      "image": "docker://staphb/snp-sites",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "snp-sites"
+    },
+    "spades": {
+      "description": "SPAdes - St. Petersburg genome assembler",
+      "image": "docker://staphb/spades",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "spades"
+    },
+    "sra-toolkit": {
+      "description": "SRA ToolKit - Collection of tools and libraries for using data in the INSDC Sequence Read Archives.",
+      "image": "docker://staphb/sra-toolkit",
+      "tag": "latest",
+      "help": "SRA toolkit tool must be specified, e.g. staphb-tk sra-toolkit fasterq-dump, staphb-tk sra-toolkit sra-pileup, etc. \n\nMore info on SRA Toolkit usage at: https://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?view=toolkit_doc"
+    },
+    "staramr": {
+      "description": "StarAMR - Scans genome contigs against the ResFinder, PlasmidFinder, and PointFinder databases",
+      "image": "docker://staphb/staramr",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "staramr"
+    },
+    "tiptoft": {
+      "description": "TipToft - Predict plasmids from uncorrected long read data",
+      "image": "docker://staphb/tiptoft",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "tiptoft"
+    },
+    "trimmomatic": {
+      "description": "Trimmomatic - Flexible read trimming tool for Illumina NGS data",
+      "image": "docker://staphb/trimmomatic",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "trimmomatic"
+    },
+    "trycycler": {
+      "description": "Trycycler - a tool for generating consensus long-read assemblies for bacterial genomes it can combine multiple long-read assemblies into a single high quality assembly",
+      "image": "docker://staphb/trycycler",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "trycycler"
+    },
+    "unicycler": {
+      "description": "Unicycler - an assembly pipeline for bacterial genomes",
+      "image": "docker://staphb/unicycler",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "unicycler"
+    },
+    "vadr": {
+      "description": "VADR - Software for viral annotations",
+      "image": "docker://staphb/vadr",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "v-annotate.pl"
+    },
+    "vigor4": {
+      "description": "VIGOR4 (Viral Genome ORF Reader) is a Java application to predict protein sequences encoded in viral genomes",
+      "image": "docker://staphb/vigor4",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "vigor4"
+    },
+    "virsorter2": {
+      "description": "VirSorter2 - applies a multi-classifier, expert-guided approach to detect diverse DNA and RNA virus genomes",
+      "image": "docker://staphb/virsorter2",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "virsorter2"
+    },
+    "wtdbg2": {
+      "description": "WTDBG2 - Fuzzy Bruijn graph approach to long noisy reads assembly",
+      "image": "docker://staphb/wtdbg2",
+      "tag": "latest",
+      "help": "-h",
+      "exec": "vadr"
+    }
+  }
+}
