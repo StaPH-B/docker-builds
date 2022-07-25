@@ -39,7 +39,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Flye | BSD-3 | https://github.com/fenderglass/Flye/blob/flye/LICENSE |
 | Freyja | BSD-2 | https://github.com/andersen-lab/Freyja/blob/main/LICENSE |
 | GAMBIT | GNU aGPLv3 | https://github.com/hesslab-gambit/gambit/blob/master/LICENSE |
-| GAMMA | Apache 2.0? | Not clearly indicated on: https://github.com/rastanton/GAMMA/ <br> Bioconda lists Apache 2.0: https://bioconda.github.io/recipes/gamma/README.html?highlight=gamma|
+| GAMMA | Apache 2.0 | https://github.com/rastanton/GAMMA/blob/main/LICENSE |
 | Genotyphi | GNU GPLv3 | https://github.com/katholt/genotyphi/blob/main/LICENSE |
 | Hmmer | BSD-3 | http://eddylab.org/software/hmmer/Userguide.pdf |
 | htslib | MIT | https://github.com/samtools/htslib/blob/develop/LICENSE |
