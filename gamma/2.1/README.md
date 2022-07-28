@@ -10,57 +10,9 @@ GAMMA (Gene Allele Mutation Microbial Assessment) is a command line tool that fi
 
 ## Usage
 
-Basic usage for GAMMA:
-```
-usage: GAMMA.py [-h] [-a] [-e] [-f] [-g] [-n] [-l] [-i PERCENT_IDENTITY]
-                input_fasta database output
-
-This scripts makes annotated gene calls from matches in an assembly using a
-gene database
-
-positional arguments:
-  input_fasta           input fasta
-  database              input database
-  output                output name
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -a, --all             include all gene matches, even overlaps
-  -e, --extended        writes out all protein mutations
-  -f, --fasta           write fasta of gene matches
-  -g, --gff             write gene matches as gff file
-  -n, --name            writes name in front of each gene match line
-  -l, --headless        removes the header from the output gamma file
-  -i PERCENT_IDENTITY, --percent_identity PERCENT_IDENTITY
-                        minimum nucleotide identity for blat search (default = 90)
-```
-
-Basic usage for GAMMA-S:
-```
-usage: GAMMA-S.py [-h] [-a] [-e] [-p] [-m MINIMUM] [-i PERCENT_IDENTITY]
-                  input_fasta database output
-
-This scripts makes sequence (nucleotide or protein) match calls from matches
-in an assembly using a sequence database
-
-positional arguments:
-  input_fasta           input fasta
-  database              input database
-  output                output name
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -a, --all             include all gene matches, even overlaps
-  -e, --extended        writes out all protein mutations
-  -p, --protein         for protein-protein comparisons
-  -m MINIMUM, --minimum MINIMUM
-                        minimum length percent match for output (default = 20)
-  -i PERCENT_IDENTITY, --percent_identity PERCENT_IDENTITY
-                        minimum nucleotide identity for blat search (default = 90)
-```
-
 Example usage:
 ```
+# run GAMMA
 GAMMA-S.py GCF_008632635.1_ASM863263v1_genomic.fna db.fasta GCF_008632635.1
 ```
 
