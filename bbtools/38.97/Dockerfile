@@ -65,8 +65,7 @@ WORKDIR /data
 # testing
 FROM app as test
 
-# get test data
-COPY tests/SARS-CoV-2/ /data/
-
-# test one thing that uses samtools/sambamba
-RUN streamsam.sh in='SRR13957123.primertrim.sorted.bam' out='test_SRR13957123.primertrim.sorted.fastq.gz'
+# get test data and test one thing that uses samtools/sambamba
+RUN wget --progress=dot:giga https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123.primertrim.sorted.bam && \
+    streamsam.sh in='SRR13957123.primertrim.sorted.bam' out='test_SRR13957123.primertrim.sorted.fastq.gz' && \
+    test -f test_SRR13957123.primertrim.sorted.fastq.gz
