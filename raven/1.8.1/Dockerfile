@@ -36,8 +36,6 @@ RUN wget https://github.com/lbcb-sci/raven/archive/refs/tags/${RAVEN_VERSION}.ta
   tar -xvf ${RAVEN_VERSION}.tar.gz && \
   rm ${RAVEN_VERSION}.tar.gz && \
   cd raven-${RAVEN_VERSION} && \
-  mkdir build && \
-  cd build && \
   cmake -S ./ -B ./build -DRAVEN_BUILD_EXE=1 -DCMAKE_BUILD_TYPE=Release && \
   cmake --install ./build
 
