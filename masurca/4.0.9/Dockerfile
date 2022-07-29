@@ -44,7 +44,7 @@ RUN mkdir /data && \
   tar -xvf MaSuRCA-$MASURCA_VER.tar.gz && \
   rm MaSuRCA-$MASURCA_VER.tar.gz && \
   cd /MaSuRCA-$MASURCA_VER && \
-  bash /MaSuRCA-$MASURCA_VER/install.sh 
+  bash /MaSuRCA-$MASURCA_VER/install.sh 2>/dev/null && exit 0
 
 ENV PATH="${PATH}:/MaSuRCA-${MASURCA_VER}/Flye/bin:/MaSuRCA-${MASURCA_VER}/bin:/minimap2-${MINIMAP2_VER}_x64-linux:/bwa/bwa-${BWA_VER}" \
   LC_ALL=C
