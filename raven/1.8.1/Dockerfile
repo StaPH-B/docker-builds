@@ -50,6 +50,8 @@ FROM app as test
 
 WORKDIR /test
 
+RUN ls /raven-*/RavenTest/data/{ERA476754.fastq.gz,NC_001416.fasta.gz}
+
 RUN cp /raven-*/RavenTest/data/{ERA476754.fastq.gz,NC_001416.fasta.gz} . && \
   raven --graphical-fragment-assembly test1.gfa ERA476754.fastq.gz > test1.fasta && \
   raven --graphical-fragment-assembly test2.gfa NC_001416.fasta.gz > test2.fasta && \
