@@ -44,10 +44,8 @@ RUN mkdir -p /masurca /data && \
   wget https://github.com/alekseyzimin/masurca/releases/download/v$MASURCA_VER/MaSuRCA-$MASURCA_VER.tar.gz && \
   tar -xvf MaSuRCA-$MASURCA_VER.tar.gz && \
   rm MaSuRCA-$MASURCA_VER.tar.gz && \
-  cd MaSuRCA-$MASURCA_VER ; \
-  # there is a copy command at the end of the install script see https://github.com/alekseyzimin/masurca/issues/235
-  tail ./install.sh && \
-  bash ./install.sh 2>/dev/null ; exit 0
+  cd MaSuRCA-$MASURCA_VER && \
+  bash ./install.sh 
 
 ENV PATH="${PATH}:/masurca/MaSuRCA-4.0.8/Flye/bin:/masurca/MaSuRCA-4.0.8/bin:/minimap2-${MINIMAP2_VER}_x64-linux:/bwa/bwa-$BWA_VER" \
   LC_ALL=C
