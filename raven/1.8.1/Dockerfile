@@ -41,13 +41,12 @@ RUN wget https://github.com/lbcb-sci/raven/archive/refs/tags/${RAVEN_VERSION}.ta
 WORKDIR raven-${RAVEN_VERSION}
 
 RUN cmake -S ./ -B ./build -DRAVEN_BUILD_EXE=1 -DCMAKE_BUILD_TYPE=Release -Wno-dev && \
+    cmake --build build && \
     cmake --install ./build
 
 # set environmental variables e.g. $PATH and locale settings for singularity compatibility
 ENV PATH="/raven-${RAVEN_VERSION}/:$PATH" \
     LC_ALL=C
-
-RUN raven --help
 
 # set working directory
 WORKDIR /data
@@ -58,8 +57,5 @@ WORKDIR /test
 
 ARG RAVEN_VERSION
 
-RUN cp /raven-${RAVEN_VERSION}/RavenTest/data/ERA476754.fastq.gz . && \
-    cp /raven-${RAVEN_VERSION}/RavenTest/data/NC_001416.fasta.gz . && \
-    raven --graphical-fragment-assembly test1.gfa ERA476754.fastq.gz > test1.fasta && \
-    raven --graphical-fragment-assembly test2.gfa NC_001416.fasta.gz > test2.fasta && \
-    wc -l test*
+RUN raven --graphical-fragment-assembly ERA476754.gfa /raven-${RAVEN_VERSION}/RavenTest/data/ERA476754.fastq.gz > ERA476754.fasta && \
+    test -f ERA476754.gfa && test -f ERA476754.fasta
