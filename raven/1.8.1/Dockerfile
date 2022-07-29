@@ -1,7 +1,7 @@
 # base image
 FROM ubuntu:focal as app
 
-ARG RAVEN_VER=1.8.1
+ARG RAVEN_VERSION=1.8.1
 
 # metadata
 LABEL base.image="ubuntu:focal"
