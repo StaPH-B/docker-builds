@@ -1,7 +1,9 @@
+ARG RAVEN_VERSION=1.8.1
+
 # base image
 FROM ubuntu:focal as app
 
-ARG RAVEN_VERSION=1.8.1
+ARG RAVEN_VERSION
 
 # metadata
 LABEL base.image="ubuntu:focal"
@@ -50,9 +52,12 @@ FROM app as test
 
 WORKDIR /test
 
-RUN ls /raven-*/RavenTest/data/{ERA476754.fastq.gz,NC_001416.fasta.gz}
+ARG RAVEN_VERSION
 
-RUN cp /raven-*/RavenTest/data/{ERA476754.fastq.gz,NC_001416.fasta.gz} . && \
+RUN ls /raven-${RAVEN_VERSION}/RavenTest/data
+
+RUN cp /raven-${RAVEN_VERSION}/RavenTest/data/ERA476754.fastq.gz . && \
+  cp /raven-${RAVEN_VERSION}/RavenTest/data/NC_001416.fasta.gz . && \
   raven --graphical-fragment-assembly test1.gfa ERA476754.fastq.gz > test1.fasta && \
   raven --graphical-fragment-assembly test2.gfa NC_001416.fasta.gz > test2.fasta && \
-  wc -l test*.{gfa,fasta}
+  wc -l test*
