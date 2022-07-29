@@ -41,12 +41,12 @@ RUN mkdir /bwa && \
 # install masurca suite
 RUN mkdir /data && \
   wget https://github.com/alekseyzimin/masurca/releases/download/v$MASURCA_VER/MaSuRCA-$MASURCA_VER.tar.gz && \
-  tar -xvf MaSuRCA-${MASURCA_VER}.tar.gz && \
-  rm MaSuRCA-${MASURCA_VER}.tar.gz && \
-  cd MaSuRCA-${MASURCA_VER} && \
+  tar -xvf MaSuRCA-$MASURCA_VER.tar.gz && \
+  rm MaSuRCA-$MASURCA_VER.tar.gz && \
+  cd MaSuRCA-$MASURCA_VER && \
   bash ./install.sh 
 
-ENV PATH="${PATH}:/MaSuRCA-${MASURCA_VER}/Flye/bin:/MaSuRCA-${MASURCA_VER}/bin:/minimap2-${MINIMAP2_VER}_x64-linux:/bwa/bwa-$BWA_VER" \
+ENV PATH="${PATH}:/MaSuRCA-${MASURCA_VER}/Flye/bin:/MaSuRCA-${MASURCA_VER}/bin:/minimap2-${MINIMAP2_VER}_x64-linux:/bwa/bwa-${BWA_VER}" \
   LC_ALL=C
 
 # WORKDIR sets working directory
