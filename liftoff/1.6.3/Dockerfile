@@ -36,6 +36,7 @@ ARG MAMBA_DOCKERFILE_ACTIVATE=1
 WORKDIR /data
 
 FROM app as test
+ARG MAMBA_DOCKERFILE_ACTIVATE=1
 
 RUN wget https://github.com/agshumate/Liftoff/raw/master/liftoff/tests/GCA_000146045.2_R64_genomic.fna.gz && \
     wget https://github.com/agshumate/Liftoff/raw/master/liftoff/tests/GCA_000146045.2_R64_genomic.gff.gz && \
