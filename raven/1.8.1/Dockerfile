@@ -48,6 +48,7 @@ WORKDIR /data
 
 FROM app as test
 
-RUN wget https://github.com/rrwick/Trycycler/blob/main/test/test_subsample/reads_1.fastq && \
-  raven --graphical-fragment-assembly reads.gfa reads_1.fastq > reads.fasta && \
-  wc -l reads.{gfa,fasta}
+RUN cp raven-*/RavenTest/data/{ERA476754.fastq.gz,NC_001416.fasta.gz} . && \
+  raven --graphical-fragment-assembly test1.gfa ERA476754.fastq.gz > test1.fasta && \
+  raven --graphical-fragment-assembly test2.gfa NC_001416.fasta.gz > test2.fasta && \
+  wc -l test*.{gfa,fasta}
