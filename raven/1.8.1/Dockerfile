@@ -38,8 +38,8 @@ RUN wget https://github.com/lbcb-sci/raven/archive/refs/tags/${RAVEN_VERSION}.ta
   cd raven-${RAVEN_VERSION} && \
   mkdir build && \
   cd build && \
-  cmake -DCMAKE_BUILD_TYPE=Release .. \
-  && make install
+  cmake -S ./ -B ./build -DRAVEN_BUILD_EXE=1 -DCMAKE_BUILD_TYPE=Release && \
+  cmake --install ./build
 
 # set environmental variables e.g. $PATH and locale settings for singularity compatibility
 ENV PATH="/raven-${RAVEN_VERSION}/:$PATH" \
