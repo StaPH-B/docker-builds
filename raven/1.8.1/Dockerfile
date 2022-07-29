@@ -45,6 +45,8 @@ RUN wget https://github.com/lbcb-sci/raven/archive/refs/tags/${RAVEN_VERSION}.ta
 ENV PATH="/raven-${RAVEN_VERSION}/:$PATH" \
  LC_ALL=C
 
+RUN raven --help
+
 # set working directory
 WORKDIR /data
 
@@ -54,7 +56,7 @@ WORKDIR /test
 
 ARG RAVEN_VERSION
 
-RUN ls /raven-${RAVEN_VERSION}/RavenTest/data
+RUN echo $PATH
 
 RUN cp /raven-${RAVEN_VERSION}/RavenTest/data/ERA476754.fastq.gz . && \
   cp /raven-${RAVEN_VERSION}/RavenTest/data/NC_001416.fasta.gz . && \
