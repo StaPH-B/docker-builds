@@ -42,9 +42,12 @@ RUN mkdir /bwa && \
 RUN mkdir /data && \
   wget https://github.com/alekseyzimin/masurca/releases/download/v$MASURCA_VER/MaSuRCA-$MASURCA_VER.tar.gz && \
   tar -xvf MaSuRCA-$MASURCA_VER.tar.gz && \
-  rm MaSuRCA-$MASURCA_VER.tar.gz && \
-  cd /MaSuRCA-$MASURCA_VER && \
-  bash /MaSuRCA-$MASURCA_VER/install.sh 2>/dev/null && exit 0
+  rm MaSuRCA-$MASURCA_VER.tar.gz
+
+WORKDIR /MaSuRCA-$MASURCA_VER
+
+# even in 4.0.9 there's the evil cp at the end of .install.sh
+RUN bash /MaSuRCA-$MASURCA_VER/install.sh 2>/dev/null ; exit 0
 
 ENV PATH="${PATH}:/MaSuRCA-${MASURCA_VER}/Flye/bin:/MaSuRCA-${MASURCA_VER}/bin:/minimap2-${MINIMAP2_VER}_x64-linux:/bwa/bwa-${BWA_VER}" \
   LC_ALL=C
@@ -58,4 +61,4 @@ RUN wget https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SA
   wget https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123_2.fastq.gz && \
   wget https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123.consensus.fa && \
   polca.sh -a SRR13957123.consensus.fa -r 'SRR13957123_1.fastq.gz SRR13957123_2.fastq.gz' && \
-  ls
+  test -f SRR13957123.consensus.fa.PolcaCorrected.fa
