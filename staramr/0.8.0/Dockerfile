@@ -107,4 +107,5 @@ RUN staramr search -o /data/staramrtest-Salmonella \
   column -t /data/staramrtest-Salmonella/pointfinder.tsv && echo && \
   column -t /data/staramrtest-Salmonella/plasmidfinder.tsv && echo && \
   column -t /data/staramrtest-Salmonella/resfinder.tsv && echo && \
+  column -t /data/staramrtest-Salmonella/detailed_summary.tsv && echo && \
   column -t /data/staramrtest-Salmonella/summary.tsv
