@@ -23,6 +23,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y \
     wget \
     clang \
+    git \
     gcc \
     zlib1g-dev \
     build-essential \
