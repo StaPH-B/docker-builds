@@ -22,7 +22,6 @@ ARG DEBIAN_FRONTEND=noninteractive
 # install dependencies via apt-get or yum if using a centos or fedora base 
 RUN apt-get update && apt-get install -y \
     wget \
-    git \
     clang \
     gcc \
     zlib1g-dev \
