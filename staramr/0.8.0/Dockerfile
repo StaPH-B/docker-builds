@@ -82,30 +82,24 @@ FROM app as test
 
 RUN staramr --help && staramr --version
 
-# install "unzip" for unzipping zip archive from NCBI
-# also getting bsdmainutils for installing "column" command
-RUN apt-get update && apt-get install -y --no-install-recommends unzip bsdmainutils
-
-# install ncbi datasets tool (pre-compiled binary); place in $PATH
-RUN wget https://ftp.ncbi.nlm.nih.gov/pub/datasets/command-line/LATEST/linux-amd64/datasets && \
- chmod +x datasets && \
- mv -v datasets /usr/local/bin
-
 # download the FASTA file for ${GENBANK_ACCESSION} 
 # Salmonella Enterica isolate from PHE-UK: https://www.ncbi.nlm.nih.gov/assembly/GCA_010941835.1/
-ARG GENBANK_ACCESSION=GCA_010941835.1
-RUN datasets download genome accession ${GENBANK_ACCESSION} --include-gbff --include-gtf --filename ${GENBANK_ACCESSION}.zip && \
- unzip ${GENBANK_ACCESSION}.zip && rm ${GENBANK_ACCESSION}.zip && \
- mv -v ncbi_dataset/data/${GENBANK_ACCESSION}/${GENBANK_ACCESSION}*.fna ncbi_dataset/data/${GENBANK_ACCESSION}/${GENBANK_ACCESSION}.fna
+RUN wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/010/941/835/GCA_010941835.1_PDT000052640.3/GCA_010941835.1_PDT000052640.3_genomic.fna.gz  && \
+gzip -d GCA_010941835.1_PDT000052640.3_genomic.fna.gz
 
 # run staramr on the second genome mentioned on staramr's documentation; print resulting TSVs
-RUN staramr search -o /data/staramrtest-Salmonella \
+RUN staramr search -o /data/staramr-test-Salmonella \
   --pointfinder-organism salmonella \
   --plasmidfinder-database-type enterobacteriales \
-  /data/ncbi_dataset/data/${GENBANK_ACCESSION}/${GENBANK_ACCESSION}.fna && \
-  column -t /data/staramrtest-Salmonella/mlst.tsv && echo && \
-  column -t /data/staramrtest-Salmonella/pointfinder.tsv && echo && \
-  column -t /data/staramrtest-Salmonella/plasmidfinder.tsv && echo && \
-  column -t /data/staramrtest-Salmonella/resfinder.tsv && echo && \
-  column -t /data/staramrtest-Salmonella/detailed_summary.tsv && echo && \
-  column -t /data/staramrtest-Salmonella/summary.tsv
+  /data/GCA_010941835.1_PDT000052640.3_genomic.fna
+
+# installing bsdmainutils for installing "column" command
+RUN apt-get update && apt-get install -y --no-install-recommends bsdmainutils
+
+# neatly print out resulting/output TSVs
+RUN column -t /data/staramr-test-Salmonella/mlst.tsv && echo && \
+    column -t /data/staramr-test-Salmonella/pointfinder.tsv && echo && \
+    column -t /data/staramr-test-Salmonella/plasmidfinder.tsv && echo && \
+    column -t /data/staramr-test-Salmonella/resfinder.tsv && echo && \
+    column -t /data/staramr-test-Salmonella/detailed_summary.tsv && echo && \
+    column -t /data/staramr-test-Salmonella/summary.tsv
