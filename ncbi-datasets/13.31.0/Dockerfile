@@ -45,6 +45,6 @@ RUN datasets download virus genome accession ON924087.1 --filename ON924087.1.zi
 
 FROM staphb/pangolin:4.1.2-pdata-1.12 as test
 
-COPY --from=pangolin /opt/conda/envs/pangolin/bin /pangolin
+COPY --from=test /opt/conda/envs/pangolin/bin /pangolin
 
 RUN /pangolin/pangolin ON924087.1.fna && cat lineage_report.csv
