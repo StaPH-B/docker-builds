@@ -40,7 +40,6 @@ RUN wget https://github.com/rpetit3/pbptyper/archive/refs/tags/v${PBPTYPER_VERSI
 # set the environment, put new conda env in PATH by default; also add pbptyper bin directory into path
 # set locale settings to UTF-8
 ENV PATH="/opt/conda/envs/pbptyper-env/bin:\
-/opt/conda/envs/env/bin:\
 /pbptyper-${PBPTYPER_VERSION}/bin:${PATH}" \
  LC_ALL=C.UTF-8
 
