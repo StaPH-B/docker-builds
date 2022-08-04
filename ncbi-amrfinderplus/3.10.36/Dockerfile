@@ -45,6 +45,8 @@ WORKDIR /data
 
 FROM app as test
 
+RUN amrfinder -l
+
 # from amrfinder
 RUN amrfinder --plus -p /amrfinder/test_prot.fa -g  /amrfinder/test_prot.gff -O Escherichia > test_prot.got && \
   diff /amrfinder/test_prot.expected test_prot.got && \
@@ -53,6 +55,7 @@ RUN amrfinder --plus -p /amrfinder/test_prot.fa -g  /amrfinder/test_prot.gff -O 
   amrfinder --plus -n /amrfinder/test_dna.fa -p /amrfinder/test_prot.fa -g /amrfinder/test_prot.gff -O Escherichia > test_both.got && \
   diff /amrfinder/test_both.expected test_both.got
 
+# external file
 RUN wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/010/941/835/GCA_010941835.1_PDT000052640.3/GCA_010941835.1_PDT000052640.3_genomic.fna.gz  && \
   gzip -d GCA_010941835.1_PDT000052640.3_genomic.fna.gz && \
   amrfinder --plus --nucleotide GCA_010941835.1_PDT000052640.3_genomic.fna --output test1.txt && \
