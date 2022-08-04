@@ -7,7 +7,7 @@ Main tools:
 - [SAMBA](https://github.com/alekseyzimin/masurca#samba-scaffolder)
 
 Other tools:
-- [bwa](http://bio-bwa.sourceforge.net/) (used by polca)
+- [bwa](https://github.com/lh3/bwa) (used by polca)
 - [minimap2](https://github.com/lh3/minimap2) (used by samba)
 
 # Example Usage
