@@ -12,12 +12,12 @@ $ amrfinder -l
 Running: amrfinder -l
 Software directory: '/amrfinder/'
 Software version: 3.10.36
+The number of threads cannot be greater than 2 on this computer
+The current number of threads is 4, reducing to 2
 Database directory: '/amrfinder/data/2022-05-26.1'
 Database version: 2022-05-26.1
-
-Available --organism options: Acinetobacter_baumannii, Campylobacter, Clostridioides_difficile, Enterococcus_faecalis, 
-Enterococcus_faecium, Escherichia, Klebsiella, Neisseria, Pseudomonas_aeruginosa, Salmonella, Staphylococcus_aureus, 
-Staphylococcus_pseudintermedius, Streptococcus_agalactiae, Streptococcus_pneumoniae, Streptococcus_pyogenes, Vibrio_cholerae
+ 
+Available --organism options: Acinetobacter_baumannii, Campylobacter, Clostridioides_difficile, Enterococcus_faecalis, Enterococcus_faecium, Escherichia, Klebsiella, Neisseria, Pseudomonas_aeruginosa, Salmonella, Staphylococcus_aureus, Staphylococcus_pseudintermedius, Streptococcus_agalactiae, Streptococcus_pneumoniae, Streptococcus_pyogenes, Vibrio_cholerae
 
 # run amrfinder with an genome assembly (FASTA/FNA) as input (nucleotide mode)
 $ amrfinder --plus --name GCA_011245895.1 -n GCA_011245895.1_PDT000672941.1_genomic.fna -O Salmonella -o GCA_011245895.1-amrfinder.tsv
