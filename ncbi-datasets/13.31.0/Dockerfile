@@ -41,10 +41,5 @@ RUN dataformat --help && datasets --help
 RUN datasets download virus genome accession ON924087.1 --filename ON924087.1.zip && \
   unzip ON924087.1.zip && \
   rm ON924087.1.zip && \
-  cp ncbi_dataset/data/genomic.fna ON924087.1.fna
-
-FROM staphb/pangolin:4.1.2-pdata-1.12 as pangolin
-
-COPY --from=pangolin /opt/conda/envs/pangolin/bin /pangolin
-
-RUN /pangolin/pangolin ON924087.1.fna && cat lineage_report.csv
+  cp ncbi_dataset/data/genomic.fna ON924087.1.fna && \
+  wc -c ON924087.1.fna
