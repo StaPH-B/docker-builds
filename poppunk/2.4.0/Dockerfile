@@ -45,4 +45,12 @@ FROM app as test
 ENV ENV_NAME="poppunk-env"
 ARG MAMBA_DOCKERFILE_ACTIVATE=1
 
-RUN poppunk --help && poppunk --version
+# print out various help options and version
+RUN poppunk --help && \
+ poppunk_assign --help && \
+ poppunk_visualise --help && \
+ poppunk_mst --help && \
+ poppunk_prune --help && \
+ poppunk_references --help && \
+ poppunk_tsne --help && \
+ poppunk --version
