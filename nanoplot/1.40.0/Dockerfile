@@ -31,13 +31,24 @@ RUN apt-get update && apt-get install -y zlib1g-dev \
 # for singularity compatibility
 ENV LC_ALL=C
 
-# update pip, install NanoPlot
-# matplotlib 3.1.3 to avoid warnings about some color API that isn't public anymore
+# install NanoPlot via pypi using pip3; make /data directory
 RUN pip3 install matplotlib psutil requests NanoPlot==${NANOPLOT_VER} && \
  mkdir /data
 
 WORKDIR /data
 
+# testing layer
 FROM app as test
 
+# print help options and version
 RUN NanoPlot --help && NanoPlot --version
+
+# install wget for downloading test data
+RUN apt-get update && apt-get install -y wget
+
+# download ONT data for a Salmonella isolate, run NanoPlot on the FASTQ file
+# Go here for more info: https://www.ebi.ac.uk/ena/browser/view/SRR19787768?show=reads
+RUN wget https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR197/068/SRR19787768/SRR19787768_1.fastq.gz && \
+ NanoPlot --fastq SRR19787768_1.fastq.gz --log --N50 -o /data/nanoplot-test && \
+ ls -lh /data/nanoplot-test && \
+ cat /data/nanoplot-test/NanoStats.txt
