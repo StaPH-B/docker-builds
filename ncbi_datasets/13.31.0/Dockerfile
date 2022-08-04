@@ -45,4 +45,4 @@ RUN datasets download virus genome accession ON924087.1 --filename ON924087.1.zi
 
 FROM staphb/pangolin:4.1.2 as test
 
-pangolin ON924087.1.fna && cat lineage_report.csv
+RUN pangolin ON924087.1.fna && cat lineage_report.csv
