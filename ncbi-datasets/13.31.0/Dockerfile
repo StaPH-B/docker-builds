@@ -16,7 +16,7 @@ LABEL maintainer="Erin Young"
 LABEL maintainer.email="eriny@utah.gov"
 
 # unzip isn't needed for datasets/dataformat, but it is often used after downloading files with datasets
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y \
  wget \
  unzip \
  ca-certificates \
