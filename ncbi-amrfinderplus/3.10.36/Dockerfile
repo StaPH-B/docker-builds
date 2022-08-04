@@ -17,7 +17,7 @@ LABEL maintainer3.email="andersgs@gmail.com"
 LABEL maintainer4="Erin Young"
 LABEL maintainer4.meail="eriny@utah.gov"
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y \
  wget \ 
  curl \
  make \
