@@ -50,21 +50,53 @@ WORKDIR /data
 # new base for testing
 FROM app as test
 
-RUN pbptyper --help
+# ARG variables only persist during build time
+ARG PBPTYPER_VERSION="1.0.0"
 
-# # Grab test data
-# RUN wget -O /data/Freyja_WWSC2.bam https://github.com/StaPH-B/docker-builds/blob/master/freyja/1.3.4/tests/Freyja_WWSC2.bam?raw=true -O /data/Freyja_WWSC2.bam && \
-#  wget -P /data https://raw.githubusercontent.com/StaPH-B/docker-builds/master/freyja/1.3.4/tests/Freyja_depths.tsv && \
-#  wget -P /data https://raw.githubusercontent.com/StaPH-B/docker-builds/master/freyja/1.3.4/tests/Freyja_variants.tsv && \
-#  wget -P /data https://raw.githubusercontent.com/StaPH-B/docker-builds/master/freyja/1.3.4/tests/nCoV-2019.reference.fasta
+# so that mamba/conda env is active when running below commands
+ENV ENV_NAME="pbptyper-env"
+ARG MAMBA_DOCKERFILE_ACTIVATE=1
 
-# # so that mamba/conda env is active when running below commands
-# ENV ENV_NAME="freyja-env"
-# ARG MAMBA_DOCKERFILE_ACTIVATE=1
+# so that all test outputs are kept in /test
+WORKDIR /test
 
-# # Run Freyja
-# RUN freyja variants /data/Freyja_WWSC2.bam --variants /data/test_variants.tsv --depths /data/test_depths.tsv --ref /data/nCoV-2019.reference.fasta && freyja demix /data/test_variants.tsv /data/test_depths.tsv --output /data/test_demix.tsv
+# shamelessly stolen and modified from https://github.com/rpetit3/pbptyper/blob/main/.github/workflows/test-pbptyper.yml
+RUN echo "SRR2912551" && \
+    pbptyper --assembly /pbptyper-${PBPTYPER_VERSION}/test/SRR2912551.fna.gz --prefix SRR2912551 --db /pbptyper-${PBPTYPER_VERSION}/db/ && \
+    cat SRR2912551.tsv && \
+    head SRR2912551-1A.tblastn.tsv && \
+    head SRR2912551-2B.tblastn.tsv && \
+    head SRR2912551-2X.tblastn.tsv && \
+    echo "SRR8654742" && \
+    pbptyper --assembly /pbptyper-${PBPTYPER_VERSION}/test/SRR8654742.fna --prefix SRR8654742 --outdir /test/SRR8654742 && \
+    cat SRR8654742/SRR8654742.tsv && \
+    head SRR8654742/SRR8654742-1A.tblastn.tsv && \
+    head SRR8654742/SRR8654742-2B.tblastn.tsv && \
+    head SRR8654742/SRR8654742-2X.tblastn.tsv && \
+    echo "not-spn" && \
+    pbptyper --assembly /pbptyper-${PBPTYPER_VERSION}/test/not-spn.fna.gz --prefix not-spn && \
+    cat not-spn.tsv && \
+    head not-spn-1A.tblastn.tsv && \
+    head not-spn-2B.tblastn.tsv && \
+    head not-spn-2X.tblastn.tsv && \
+    echo "empty" && \
+    pbptyper --assembly /pbptyper-${PBPTYPER_VERSION}/test/empty.fasta --prefix empty && \
+    cat empty.tsv && \
+    head empty-1A.tblastn.tsv && \
+    head empty-2B.tblastn.tsv && \
+    head empty-2X.tblastn.tsv && \
+    echo "not-a-fasta" && \
+    pbptyper --assembly /pbptyper-${PBPTYPER_VERSION}/test/not-a-fasta.fasta --prefix not-a-fasta && \
+    cat not-a-fasta.tsv && \
+    head not-a-fasta-1A.tblastn.tsv && \
+    head not-a-fasta-2B.tblastn.tsv && \
+    head not-a-fasta-2X.tblastn.tsv && \
+    echo "poor" && \
+    pbptyper --assembly /pbptyper-${PBPTYPER_VERSION}/test/poor.fasta --prefix poor --outdir poor && \
+    cat poor/poor.tsv && \
+    head poor/poor-1A.tblastn.tsv && \
+    head poor/poor-2B.tblastn.tsv && \
+    head poor/poor-2X.tblastn.tsv
 
-# # Check validity of outputs
-# RUN cmp /data/test_variants.tsv /data/Freyja_variants.tsv && cmp /data/test_depths.tsv /data/Freyja_depths.tsv
-# RUN grep "Omicron" /data/test_demix.tsv && echo done
+# print help and version info
+RUN pbptyper --help && pbptyper --version
