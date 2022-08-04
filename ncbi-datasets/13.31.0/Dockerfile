@@ -1,10 +1,10 @@
-FROM ubuntu:focal as app
+FROM ubuntu:jammy as app
 
 # As of 2022-08-04, there's not a way to specify a version for datasets at https://ftp.ncbi.nlm.nih.gov/pub/datasets/command-line/
 # They have a github repo at https://github.com/ncbi/datasets
 ARG DATASETS_VER="13.31.0"
 
-LABEL base.image="ubuntu:focal"
+LABEL base.image="ubuntu:jammy"
 LABEL dockerfile.version="1"
 LABEL software="NCBI's datasets and dataformat"
 LABEL software.version="${DATASETS_VER}"
