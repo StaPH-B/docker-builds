@@ -14,7 +14,9 @@ LABEL license="https://github.com/alekseyzimin/masurca/blob/master/LICENSE.txt"
 LABEL maintainer="Erin Young"
 LABEL maintainer.email="eriny@utah.gov"
 
-RUN apt-get update && apt-get install -y python \
+RUN apt-get update && apt-get install -y --no-install-recommends \
+  ca-certificates \
+  python \
   build-essential \
   curl \
   wget \
