@@ -34,7 +34,7 @@ ENV LC_ALL=C
 
 WORKDIR /data
 
-FROM app as pretest
+FROM app as test
 
 RUN dataformat --help && datasets --help
 
@@ -43,8 +43,8 @@ RUN datasets download virus genome accession ON924087.1 --filename ON924087.1.zi
   rm ON924087.1.zip && \
   cp ncbi_dataset/data/genomic.fna ON924087.1.fna
 
-FROM staphb/pangolin:4.1.2-pdata-1.12 as test
+FROM staphb/pangolin:4.1.2-pdata-1.12 as pangolin
 
-COPY --from=test /opt/conda/envs/pangolin/bin /pangolin
+COPY --from=pangolin /opt/conda/envs/pangolin/bin /pangolin
 
 RUN /pangolin/pangolin ON924087.1.fna && cat lineage_report.csv
