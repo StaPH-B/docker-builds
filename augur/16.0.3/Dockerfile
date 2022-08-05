@@ -36,6 +36,11 @@ RUN apt-get update && apt-get install -y \
   pkg-config \
   libpng-dev \
   libfreetype6-dev \
+  mafft python2.7- \
+  iqtree \
+  raxml \
+  fasttree  \
+  vcftools \
   git && \
   apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
@@ -61,6 +66,8 @@ WORKDIR /data
 
 FROM app as test
 
-RUN wget https://raw.githubusercontent.com/nextstrain/zika-tutorial/master/data/metadata.tsv && \
-    wget https://raw.githubusercontent.com/nextstrain/zika-tutorial/master/data/sequences.fasta && \
-    augur index --sequences sequences.fasta --output sequence_index.tsv
+RUN pip3 install snakemake
+
+RUN git clone https://github.com/nextstrain/zika-tutorial && \
+    cd zika-tutorial && \
+    snakemake --cores 1
