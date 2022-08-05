@@ -35,6 +35,7 @@ FROM app as test
 
 RUN dataformat --help && datasets --help
 
+# stolen from Curtis at https://github.com/StaPH-B/docker-builds/blob/master/pangolin/4.1.2/Dockerfile
 RUN datasets download virus genome accession ON924087.1 --filename ON924087.1.zip && \
   unzip ON924087.1.zip && \
   rm ON924087.1.zip && \
