@@ -66,7 +66,7 @@ WORKDIR /data
 
 FROM app as test
 
-RUN pip3 install snakemake
+RUN git clone https://github.com/snakemake/snakemake && cd snakemake && python3.8 setup.py install
 
 RUN git clone https://github.com/nextstrain/zika-tutorial && \
     cd zika-tutorial && \
