@@ -12,7 +12,7 @@ WORKDIR /
 LABEL base.image="mambaorg/micromamba:0.24.0"
 LABEL dockerfile.version="1"
 LABEL software="PopPUNK"
-LABEL software.version=${FREYJA_SOFTWARE_VERSION}
+LABEL software.version=${POPPUNK_VERSION}
 LABEL description="POPulation Partitioning Using Nucleotide Kmers"
 LABEL website="https://github.com/bacpop/PopPUNK"
 LABEL license="https://github.com/bacpop/PopPUNK/blob/master/LICENSE"
