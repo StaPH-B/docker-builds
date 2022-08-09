@@ -9,7 +9,7 @@ WORKDIR /
 # had to include the v for some of these due to GitHub tags.
 # using pangolin-data github tag, NOT what is in the GH release title "v1.2.133"
 ARG PANGOLIN_VER="v4.1.2"
-ARG PANGOLIN_DATA_VER="v1.12"
+ARG PANGOLIN_DATA_VER="v1.13"
 ARG SCORPIO_VER="v0.3.17"
 ARG CONSTELLATIONS_VER="v0.1.10"
 ARG USHER_VER="0.5.6"
