@@ -20,6 +20,7 @@ LABEL maintainer4.meail="eriny@utah.gov"
 # ncbi-blast+ installed via apt is v2.12.0
 # hmmer installed via apt is v3.3.2
 RUN apt-get update && apt-get install -y --no-install-recommends \
+ ca-certificates \
  wget \ 
  curl \
  make \
