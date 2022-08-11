@@ -5,7 +5,7 @@ ARG AMRFINDER_VER="3.10.36"
 LABEL base.image="ubuntu:jammy"
 LABEL dockerfile.version="1"
 LABEL software="NCBI AMRFinderPlus"
-LABEL software.version="3.10.5"
+LABEL software.version="AMRFINDER_VER"
 LABEL description="NCBI resistance gene detection tool"
 LABEL website="https://github.com/ncbi/amr"
 LABEL maintainer1="Kelsey Florek"
@@ -17,7 +17,9 @@ LABEL maintainer3.email="andersgs@gmail.com"
 LABEL maintainer4="Erin Young"
 LABEL maintainer4.meail="eriny@utah.gov"
 
-RUN apt-get update && apt-get install -y \
+# ncbi-blast+ installed via apt is v2.12.0
+# hmmer installed via apt is v3.3.2
+RUN apt-get update && apt-get install -y --no-install-recommends \
  wget \ 
  curl \
  make \
