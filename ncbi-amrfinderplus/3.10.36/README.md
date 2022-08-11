@@ -2,6 +2,15 @@
 
 Main tool : [NCBI AMRFinderPlus](https://github.com/ncbi/amr)
 
+Additional tools:
+
+- hmmer v3.3.2
+- ncbi-blast+ v2.12.0
+
+## Database information:
+
+The database included at time of docker image build is **`2022-08-09.1`**. More information can be found in the changes.txt on [NCBI's FTP](https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/Data/2022-08-09.1/changes.txt).
+
 Full documentation: https://github.com/ncbi/amr/wiki
 
 # Example Usage
@@ -14,10 +23,10 @@ Software directory: '/amrfinder/'
 Software version: 3.10.36
 The number of threads cannot be greater than 2 on this computer
 The current number of threads is 4, reducing to 2
-Database directory: '/amrfinder/data/2022-05-26.1'
-Database version: 2022-05-26.1
- 
-Available --organism options: Acinetobacter_baumannii, Campylobacter, Clostridioides_difficile, Enterococcus_faecalis, Enterococcus_faecium, Escherichia, Klebsiella, Neisseria, Pseudomonas_aeruginosa, Salmonella, Staphylococcus_aureus, Staphylococcus_pseudintermedius, Streptococcus_agalactiae, Streptococcus_pneumoniae, Streptococcus_pyogenes, Vibrio_cholerae
+Database directory: '/amrfinder/data/2022-08-09.1'
+Database version: 2022-08-09.1
+
+Available --organism options: Acinetobacter_baumannii, Burkholderia_cepacia, Burkholderia_pseudomallei, Campylobacter, Clostridioides_difficile, Enterococcus_faecalis, Enterococcus_faecium, Escherichia, Klebsiella, Neisseria, Pseudomonas_aeruginosa, Salmonella, Staphylococcus_aureus, Staphylococcus_pseudintermedius, Streptococcus_agalactiae, Streptococcus_pneumoniae, Streptococcus_pyogenes, Vibrio_cholerae
 
 # run amrfinder with an genome assembly (FASTA/FNA) as input (nucleotide mode)
 $ amrfinder --plus --name GCA_011245895.1 -n GCA_011245895.1_PDT000672941.1_genomic.fna -O Salmonella -o GCA_011245895.1-amrfinder.tsv
