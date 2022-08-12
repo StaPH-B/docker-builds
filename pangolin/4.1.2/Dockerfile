@@ -16,7 +16,7 @@ ARG USHER_VER="0.5.6"
 
 # metadata labels
 LABEL base.image="mambaorg/micromamba:0.24.0"
-LABEL dockerfile.version="1"
+LABEL dockerfile.version="2"
 LABEL software="pangolin"
 LABEL software.version=${PANGOLIN_VER}
 LABEL description="Conda environment for Pangolin. Pangolin: Software package for assigning SARS-CoV-2 genome sequences to global lineages."
