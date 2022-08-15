@@ -21,11 +21,26 @@ Listeria_monocytogenes	GCA_013625895.1
 Listeria_monocytogenes	GCA_013625995.1
 Listeria_monocytogenes	GCA_013626145.1
 Listeria_monocytogenes	GCA_014526935.1
+Listeria_monocytogenes_lineage_I	GCA_013282705.1
+Listeria_monocytogenes_lineage_II	GCA_013282685.1
+Listeria monocytogenes lineage_III	GCA_013282645.1
+Listeria_monocytogenes_lineage_IV	GCA_013282665.1
 Listeria_seeligeri	GCA_017363605.1
 Listeria_welshimeri	GCA_002489005.1
 Photobacterium_damselae	GCA_009665375.1
 Salmonella_bongori	GCA_013588055.1
 Salmonella_enterica	GCA_011388235.1
+Salmonella_enterica_salamae_II	GCA_006051055.2
+Salmonella_enterica_salamae_II	GCA_013161625.1
+Salmonella_arizonae_IIIa	GCA_013162485.1
+Salmonella_enterica_diarizonae_IIIb	GCA_013162305.1
+Salmonella_enterica_houtenae_IV 	GCA_013161805.1
+Salmonella_enterica_houtenae_IV	GCA_900706745.1
+Salmonella_enterica_indica_VI 	GCA_006051135.2
+Salmonella_enterica_londinensis_VII 	GCA_013162165.1
+Salmonella_enterica_brasiliensis_VIII	GCA_013138165.1
+Salmonella_enterica_hibernicus_IX	GCA_013348865.1
+Salmonella_enterica_essexiensis_X	GCA_013162025.1
 Vibrio_alginolyticus	GCA_009665435.1
 Vibrio_cholerae	GCA_009665515.2
 Vibrio_cidicii	GCA_009665415.1
