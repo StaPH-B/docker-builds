@@ -4,7 +4,8 @@ FROM --platform=linux/x86_64 mambaorg/micromamba:0.24.0 as app
 
 USER root
 WORKDIR /
-ARG TBPROFILER_VER="4.3"
+ARG TBPROFILER_VER="4.3.0"
+ARG TBDB_VER="4738132"
 
 # LABEL instructions tag the image with metadata that might be important to the user
 # Optional, but highly recommended
@@ -28,8 +29,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
  RUN micromamba install --yes --name base --channel conda-forge --channel bioconda  \
-     tb-profiler && \
-     micromamba clean --all --yes
+     tb-profiler=${TBPROFILER_VER} && \
+    micromamba clean --all --yes
+
+
+ARG MAMBA_DOCKERFILE_ACTIVATE=1
+# Version of database can be confirmed at ./TBProfiler-${TBPROFILER_VER}/db/tbdb.version.json
+RUN tb-profiler update_tbdb
 
 ARG MAMBA_DOCKERFILE_ACTIVATE=1
 WORKDIR /data
