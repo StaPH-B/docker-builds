@@ -44,4 +44,8 @@ FROM app as test
 
 ARG MAMBA_DOCKERFILE_ACTIVATE=1
 
-RUN tb-profiler version
+RUN mkdir test_run && \
+    cd test_run && \
+    wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR166/009/ERR1664619/ERR1664619_1.fastq.gz && \
+    wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR166/009/ERR1664619/ERR1664619_2.fastq.gz && \
+    tb-profiler profile -1 ERR1664619_1.fastq.gz -2 ERR1664619_2.fastq.gz -t 4 -p ERR1664619 --txt
