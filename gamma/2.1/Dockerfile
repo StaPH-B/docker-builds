@@ -17,11 +17,12 @@ LABEL maintainer.email="jvhagey@gmail.com"
 
 # install dependencies
 RUN apt-get update && apt-get -y --no-install-recommends install \
-    rsync \
     bc \
+    locales \
+    rsync \
     unzip \
     tar \
-    python3.7 \
+    python3.8 \
     python3-pip \
     gzip \
     wget \
@@ -52,7 +53,11 @@ RUN wget https://github.com/rastanton/GAMMA/archive/refs/tags/v${GAMMA_VER}.tar.
     chmod +x GAMMA.py && \
     chmod +x GAMMA-S.py
 
-ENV PATH="${PATH}:/bin/blat:/GAMMA:/GAMMA/GAMMA.py:/GAMMA/GAMMA-S.py" LC_ALL=C
+ENV PATH="${PATH}:/bin/blat:/GAMMA:/GAMMA/GAMMA.py:/GAMMA/GAMMA-S.py" 
+ENV LC_ALL=C
+
+# fixing encoding errors
+RUN locale-gen en_US.UTF-8
 
 WORKDIR /data
 
