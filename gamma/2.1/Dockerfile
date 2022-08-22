@@ -18,7 +18,6 @@ LABEL maintainer.email="jvhagey@gmail.com"
 # install dependencies
 RUN apt-get update && apt-get -y --no-install-recommends install \
     bc \
-    locales \
     rsync \
     unzip \
     tar \
@@ -36,7 +35,7 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
     rm -rf /var/lib/apt/lists/*
 
 #install biopython
-RUN pip3 install biopython cgecore tabulate
+RUN pip3 install biopython cgecore tabulate unidecode
 
 # install blat
 RUN wget http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/blat/blat && \
@@ -53,11 +52,7 @@ RUN wget https://github.com/rastanton/GAMMA/archive/refs/tags/v${GAMMA_VER}.tar.
     chmod +x GAMMA.py && \
     chmod +x GAMMA-S.py
 
-ENV PATH="${PATH}:/bin/blat:/GAMMA:/GAMMA/GAMMA.py:/GAMMA/GAMMA-S.py" 
-ENV LC_ALL=C
-
-# fixing encoding errors
-RUN locale-gen en_US.UTF-8
+ENV PATH="${PATH}:/bin/blat:/GAMMA:/GAMMA/GAMMA.py:/GAMMA/GAMMA-S.py" LC_ALL=C
 
 WORKDIR /data
 
