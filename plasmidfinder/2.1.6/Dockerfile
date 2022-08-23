@@ -11,20 +11,21 @@ ARG KMA_VER="1.0.1"
 # LABEL instructions tag the image with metadata that might be important to the user
 # Optional, but highly recommended
 LABEL base.image="debian:stretch"
-LABEL dockerfile.version="2"
+LABEL dockerfile.version="3"
 LABEL software="plasmidfinder"
-LABEL software.version=$PLASMIDFINDER_VER
+LABEL software.version="${PLASMIDFINDER_VER}"
 LABEL description="Identifies plasmids in total or partial sequenced isolates of bacteria."
 LABEL website="https://bitbucket.org/genomicepidemiology/plasmidfinder/src/master/"
 LABEL license="https://bitbucket.org/genomicepidemiology/plasmidfinder/src/master/README.md"
 LABEL maintainer="John Arnn"
 LABEL maintainer.email="jarnn@utah.gov"
 
-
-ENV DEBIAN_FRONTEND noninteractive
+# ARG so that this variable only persists at image build time
+ARG DEBIAN_FRONTEND noninteractive
 
 # RUN executes code during the build
 # Install dependencies via apt-get or yum if using a centos or fedora base
+# ncbi-blast v2.6.0 via debian:stretch apt
 RUN apt-get update -y && apt-get install -y \
     apt-utils \
     wget \
@@ -44,28 +45,32 @@ RUN pip3 install --upgrade pip && \
 RUN wget https://bitbucket.org/genomicepidemiology/kma/get/${KMA_VER}.tar.gz && \
     mkdir kma && \
     tar -xvf ${KMA_VER}.tar.gz -C kma --strip-components 1 && \
+    rm ${KMA_VER}.tar.gz && \
     cd kma && make && \
     mv kma* /bin/
 
 RUN wget https://bitbucket.org/genomicepidemiology/plasmidfinder/get/${PLASMIDFINDER_VER}.tar.gz && \
-    mkdir plasmidfinder && tar -xvf ${PLASMIDFINDER_VER}.tar.gz -C plasmidfinder --strip-components 1
+    mkdir plasmidfinder && \
+    tar -xvf ${PLASMIDFINDER_VER}.tar.gz -C plasmidfinder --strip-components 1 && \
+    rm ${PLASMIDFINDER_VER}.tar.gz
 
 ENV PATH="${PATH}:/plasmidfinder"
 
 RUN chmod 755 plasmidfinder/plasmidfinder.py 
 
 RUN wget https://bitbucket.org/genomicepidemiology/plasmidfinder_db/get/${PLASMIDFINDER_DB_VER}.tar.gz && \
-    mkdir plasmidfinder_db && tar -xvf ${PLASMIDFINDER_DB_VER}.tar.gz -C plasmidfinder_db --strip-components 1 && \
+    mkdir plasmidfinder_db && \
+    tar -xvf ${PLASMIDFINDER_DB_VER}.tar.gz -C plasmidfinder_db --strip-components 1 && \
+    rm ${PLASMIDFINDER_DB_VER}.tar.gz && \
     cd plasmidfinder_db && \
     python3 INSTALL.py kma_index && \
     cd .. && \
     mv plasmidfinder_db database
 
-
 WORKDIR /data
 
 FROM app as test
 
-RUN wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR193/000/ERR1937840/ERR1937840.fastq.gz
-RUN gzip -d ERR1937840.fastq.gz && mkdir test && \
+RUN wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR193/000/ERR1937840/ERR1937840.fastq.gz && \
+    gzip -d ERR1937840.fastq.gz && mkdir test && \
     plasmidfinder.py -i ERR1937840.fastq -o test
