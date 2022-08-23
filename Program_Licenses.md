@@ -77,11 +77,13 @@ The licenses of the open-source software that is contained in these Docker image
 | OrthoFinder | GNU GPLv3 | https://github.com/davidemms/OrthoFinder/blob/master/License.md |
 | Panaroo | MIT | https://github.com/gtonkinhill/panaroo/blob/master/LICENSE |
 | Pangolin | GNU GPLv3 | https://github.com/cov-lineages/pangolin/blob/master/LICENSE.txt |
+| pbptyper | MIT | https://github.com/rpetit3/pbptyper/blob/main/LICENSE |
 | Phyml | GNU GPLv3 | https://github.com/stephaneguindon/phyml/blob/master/COPYING |
 | Piggy | GNU GPLv3 | https://github.com/harry-thorpe/piggy/blob/master/LICENSE |
 | Pilon | GNU GPLv2 | https://github.com/broadinstitute/pilon/blob/master/LICENSE |
 | PlasmidSeeker | BSD 3-Clause | https://github.com/bioinfo-ut/PlasmidSeeker/blob/master/LICENSE |
 | pmga | GNU GPLv2 | https://github.com/rpetit3/pmga/blob/master/LICENSE |
+| PopPUNK | Apache 2.0 | https://github.com/bacpop/PopPUNK/blob/master/LICENSE |
 | Prokka | GNU GPLv3 | https://raw.githubusercontent.com/tseemann/prokka/master/doc/LICENSE.Prokka |
 | QUAST | GNU GPLv2 | https://github.com/ablab/quast/blob/master/LICENSE.txt |
 | racon | MIT | https://github.com/isovic/racon/blob/master/LICENSE |
@@ -111,6 +113,7 @@ The licenses of the open-source software that is contained in these Docker image
 | SPAdes | GNU GPLv2 | https://github.com/ablab/spades/blob/spades_3.13.0/assembler/LICENSE |
 | SRA-toolkit | Public Domain | https://github.com/ncbi/sra-tools/blob/master/LICENSE |
 | Staramr | Apache 2.0 | https://github.com/phac-nml/staramr/blob/master/LICENSE |
+| TBProfiler | GNU GPLv3 | https://github.com/jodyphelan/TBProfiler/blob/master/LICENSE |
 | TipToft | GNU GPLv3 | https://github.com/andrewjpage/tiptoft/blob/master/LICENSE |
 | Treemmer | GNU GPLv3 | https://github.com/fmenardo/Treemmer/blob/master/COPYING |
 | Trimmomatic | GNU GPLv3 | https://github.com/usadellab/Trimmomatic/blob/main/distSrc/LICENSE |
