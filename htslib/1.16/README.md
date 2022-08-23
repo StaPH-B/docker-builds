@@ -18,6 +18,9 @@ tests/SARS-CoV-2/SRR13957123.primertrim.sorted.bam:     BAM version 1 compressed
 
 $ htsfile ce_tag_padded.sam
 ce_tag_padded.sam:      SAM version 1.4 sequence text
+
+# compresses sample.fastq to sample.fastq.gz in BGZF format (blocked GNU Zip Format)
+$ bgzip sample.fastq
 ```
 
 Better documentation can be found at [https://www.htslib.org/doc/samtools.html](https://www.htslib.org/doc/samtools.html)
