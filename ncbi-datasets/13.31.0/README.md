@@ -4,7 +4,7 @@ Main tool : [datasets](https://www.ncbi.nlm.nih.gov/datasets/docs/v1/download-an
 
 Full documentation: [https://www.ncbi.nlm.nih.gov/datasets/docs/v1/how-tos/](https://www.ncbi.nlm.nih.gov/datasets/docs/v1/how-tos/)
 
-| Use NCBI Datasets to gather metadata, download data packages, view reports and more
+> Use NCBI Datasets to gather metadata, download data packages, view reports and more
 
 ## Example Usage
 
