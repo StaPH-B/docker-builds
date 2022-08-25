@@ -49,11 +49,6 @@ RUN wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/${BLAST_VER}/ncbi-b
  tar -xzf ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz && \
  rm ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz
 
-# kaptive
-# RUN wget https://github.com/katholt/Kaptive/archive/refs/tags/v${KAPTIVE_VER}.tar.gz && \
-#  tar -xzf v${KAPTIVE_VER}.tar.gz && \
-#  rm -f v${KAPTIVE_VER}.tar.gz
-
 # set PATH and TERM to avoid warnings
 ENV PATH="/mash-Linux64-v${MASH_VER}:\
 /ncbi-blast-${BLAST_VER}+/bin/:\
