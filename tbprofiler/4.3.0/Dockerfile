@@ -37,12 +37,13 @@ ARG MAMBA_DOCKERFILE_ACTIVATE=1
 # Version of database can be confirmed at ./TBProfiler-${TBPROFILER_VER}/db/tbdb.version.json
 RUN tb-profiler update_tbdb
 
-ARG MAMBA_DOCKERFILE_ACTIVATE=1
+ENV MAMBA_DOCKERFILE_ACTIVATE=1
 WORKDIR /data
 
-FROM app as test
+ENV PATH="/opt/conda/bin/:${PATH}"
 
-ARG MAMBA_DOCKERFILE_ACTIVATE=1
+
+FROM app as test
 
 RUN mkdir test_run && \
     cd test_run && \
