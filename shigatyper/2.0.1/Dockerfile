@@ -9,7 +9,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # LABEL instructions tag the image with metadata that might be important to the user
 LABEL base.image="ubuntu:focal"
-LABEL dockerfile.version="4"
+LABEL dockerfile.version="5"
 LABEL software="shigatyper"
 LABEL software.version=$SHIGATYPER_VER
 LABEL description="Determine Shigella serotype using Illumina (single or paired-end) or Oxford Nanopore reads!"
@@ -20,7 +20,7 @@ LABEL maintainer.email="jarnn@utah.gov"
 
 # RUN executes code during the build
 # Install dependencies via apt-get or yum if using a centos or fedora base
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install --no-install-recommends -y \
  wget \
  git \
  libncurses5-dev \
@@ -38,6 +38,7 @@ RUN apt-get update && apt-get install -y \
  ca-certificates \
  gawk \
  curl \
+ procps \
  build-essential && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
