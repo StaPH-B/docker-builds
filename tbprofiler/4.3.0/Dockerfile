@@ -40,7 +40,7 @@ RUN tb-profiler update_tbdb
 ENV MAMBA_DOCKERFILE_ACTIVATE=1
 WORKDIR /data
 
-ENV PATH="/opt/conda/bin/:${PATH}"
+ENV PATH="/opt/conda/bin:${PATH}"
 
 
 FROM app as test
