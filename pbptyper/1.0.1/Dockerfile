@@ -26,7 +26,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  procps && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-# Create pbptyper conda environment called pbptyper-env; manually install dependencies
+# Install pbptyper into the base conda/micromamba environment, pinning the version
 # clean up conda garbage
 RUN micromamba install --name base -c conda-forge -c bioconda -c defaults pbptyper=${PBPTYPER_VERSION} && \
  micromamba clean -a -y
