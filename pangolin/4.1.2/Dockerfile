@@ -9,14 +9,14 @@ WORKDIR /
 # had to include the v for some of these due to GitHub tags.
 # using pangolin-data github tag, NOT what is in the GH release title "v1.2.133"
 ARG PANGOLIN_VER="v4.1.2"
-ARG PANGOLIN_DATA_VER="v1.13"
+ARG PANGOLIN_DATA_VER="v1.14"
 ARG SCORPIO_VER="v0.3.17"
 ARG CONSTELLATIONS_VER="v0.1.10"
 ARG USHER_VER="0.5.6"
 
 # metadata labels
 LABEL base.image="mambaorg/micromamba:0.24.0"
-LABEL dockerfile.version="2"
+LABEL dockerfile.version="3"
 LABEL software="pangolin"
 LABEL software.version=${PANGOLIN_VER}
 LABEL description="Conda environment for Pangolin. Pangolin: Software package for assigning SARS-CoV-2 genome sequences to global lineages."

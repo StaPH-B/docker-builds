@@ -10,7 +10,7 @@ ARG TBDB_VER="4738132"
 # LABEL instructions tag the image with metadata that might be important to the user
 # Optional, but highly recommended
 LABEL base.image="micromamba:0.24.0"
-LABEL dockerfile.version="1"
+LABEL dockerfile.version="2"
 LABEL software="tbprofiler"
 LABEL software.version=$TBPROFILER_VER
 LABEL description="The pipeline aligns reads to the H37Rv reference using bowtie2, BWA or minimap2 and then calls variants using bcftools. These variants are then compared to a drug-resistance database."
@@ -37,12 +37,13 @@ ARG MAMBA_DOCKERFILE_ACTIVATE=1
 # Version of database can be confirmed at ./TBProfiler-${TBPROFILER_VER}/db/tbdb.version.json
 RUN tb-profiler update_tbdb
 
-ARG MAMBA_DOCKERFILE_ACTIVATE=1
+ENV MAMBA_DOCKERFILE_ACTIVATE=1
 WORKDIR /data
 
-FROM app as test
+ENV PATH="/opt/conda/bin:${PATH}"
 
-ARG MAMBA_DOCKERFILE_ACTIVATE=1
+
+FROM app as test
 
 RUN mkdir test_run && \
     cd test_run && \
