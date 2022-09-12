@@ -23,7 +23,7 @@ ENV PERL5LIB=$VADRSCRIPTSDIR:$VADRSEQUIPDIR:$VADRBIOEASELDIR/blib/lib:$VADRBIOEA
 
 # metadata - optional, but highly recommended
 LABEL base.image="ubuntu:xenial"
-LABEL dockerfile.version="2"
+LABEL dockerfile.version="3"
 LABEL software="VADR"
 LABEL software.version=${VADR_VERSION}
 LABEL description="Classification and annotation of viral sequences based on RefSeq annotation"
@@ -43,7 +43,9 @@ RUN apt-get update && apt-get install -y \
  build-essential \
  autoconf \
  libinline-c-perl \
- liblwp-protocol-https-perl && \
+ liblwp-protocol-https-perl \
+ zip \
+ unzip && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # install VADR
