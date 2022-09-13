@@ -10,7 +10,7 @@ ARG MINICONDA_URL=https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x8
 ARG PYTHON_VERSION=3.9
 
 LABEL base.image="ubuntu:xenial"
-LABEL dockerfile.version="2"
+LABEL dockerfile.version="3"
 LABEL software="GAMBIT"
 LABEL software.version=${GAMBIT_SOFTWARE_VERSION}
 LABEL description="Rapid genomic-distance comparison for taxonomic identification of microbial pathogens"
