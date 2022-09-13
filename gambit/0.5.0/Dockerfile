@@ -46,7 +46,7 @@ RUN bash ./miniconda.sh -p /miniconda -b && \
   rm miniconda.sh
 
 # Create conda environment and add to PATH
-RUN /miniconda/bin/conda create -n gambit python=$PYTHON_VERSION numpy Cython
+RUN /miniconda/bin/conda create -n gambit python=$PYTHON_VERSION numpy=1.23.1 Cython=0.29.30 pandas=1.4.3
 ENV PATH="/miniconda/envs/gambit/bin:/miniconda/bin:$PATH"
 
 # Install GAMBIT package
