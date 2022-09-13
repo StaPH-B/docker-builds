@@ -193,3 +193,4 @@ Each Dockerfile lists the author(s)/maintainer(s) as a metadata `LABEL`, but the
   * [@tiverson](https://github.com/tives82)
   * [@sbthandras](https://github.com/sbthandras) 
   * [@idolawoye](https://github.com/idolawoye)
+  * [@michellescribner](https://github.com/michellescribner)
