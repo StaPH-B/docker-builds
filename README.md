@@ -69,7 +69,7 @@ To learn more about the docker pull rate limits and the open source software pro
 | [FLASH](https://hub.docker.com/r/staphb/flash) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/flash)](https://hub.docker.com/r/staphb/flash) | <ul><li>1.2.11</li></ul> | http://ccb.jhu.edu/software/FLASH | 
 | [Flye](https://hub.docker.com/r/staphb/flye) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/flye)](https://hub.docker.com/r/staphb/flye) | <ul><li>2.5</li><li>2.7</li><li>2.8</li><li>2.9</li></ul> | https://github.com/fenderglass/Flye |
 | [Freyja](https://hub.docker.com/r/staphb/freyja) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/freyja)](https://hub.docker.com/r/staphb/freyja) | <ul><li>1.2</li><li>1.2.1</li><li>1.3.1</li><li>1.3.2</li><li>1.3.4</li><li>1.3.7</li><li>1.3.8</li><li>1.3.9</li><li>1.3.10</li></ul> | https://github.com/andersen-lab/Freyja |
-| [GAMBIT](https://hub.docker.com/r/staphb/gambit) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/gambit)](https://hub.docker.com/r/staphb/gambit) | <ul><li>0.3.0</li><li>0.4.0</li></ul> | https://github.com/hesslab-gambit/gambit |
+| [GAMBIT](https://hub.docker.com/r/staphb/gambit) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/gambit)](https://hub.docker.com/r/staphb/gambit) | <ul><li>0.3.0</li><li>0.4.0</li><li>0.5.0</li></ul> | https://github.com/hesslab-gambit/gambit |
 | [GAMMA](https://hub.docker.com/r/staphb/gamma) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/gamma)](https://hub.docker.com/r/staphb/gamma) | <ul><li>1.4</li><li>2.1</li><li>2.2</li></ul> | https://github.com/rastanton/GAMMA/ |
 | [hmmer](https://hub.docker.com/r/staphb/hmmer) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/hmmer)](https://hub.docker.com/r/staphb/hmmer) | <ul><li>3.3</li></ul> | http://hmmer.org/ |
 | [htslib](https://hub.docker.com/r/staphb/htslib) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/htslib)](https://hub.docker.com/r/staphb/htslib) | <ul><li>1.14</li><li>1.15</li><li>1.16</li></ul> | https://www.htslib.org/ |
@@ -194,3 +194,4 @@ Each Dockerfile lists the author(s)/maintainer(s) as a metadata `LABEL`, but the
   * [@tiverson](https://github.com/tives82)
   * [@sbthandras](https://github.com/sbthandras) 
   * [@idolawoye](https://github.com/idolawoye)
+  * [@michellescribner](https://github.com/michellescribner)
