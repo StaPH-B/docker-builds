@@ -1,6 +1,6 @@
-FROM ubuntu:xenial
+FROM ubuntu:xenial as app
 
-ARG GAMBIT_SOFTWARE_VERSION="0.5.1"
+ARG GAMBIT_SOFTWARE_VERSION="0.5.0"
 ARG GAMBIT_GIT_REF=v${GAMBIT_SOFTWARE_VERSION}
 ARG GAMBIT_GIT_URL=github.com/hesslab-gambit/gambit@${GAMBIT_GIT_REF}
 ARG GAMBIT_DB_BASE_URL=https://storage.googleapis.com/theiagen-public-files/terra/gambit_files/1.0b2
@@ -56,3 +56,8 @@ RUN pip install git+https://${GAMBIT_GIT_URL} && \
 # Working directory
 RUN mkdir /data
 WORKDIR /data
+
+FROM app as test
+
+# print version info
+RUN gambit --version
