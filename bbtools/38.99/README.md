@@ -8,6 +8,10 @@ This image implements Brian Bushnell's [BBTools](https://jgi.doe.gov/data-and-to
 - [BBMerge](https://jgi.doe.gov/data-and-tools/software-tools/bbtools/bb-tools-user-guide/bbmerge-guide/): `bbmerge.sh`
 - [Reformat](https://jgi.doe.gov/data-and-tools/software-tools/bbtools/bb-tools-user-guide/reformat-guide/): `reformat.sh`
 
+In addition to the BBTools, this container also provides the following pieces of software to enhance the BBTools:
+- [Samtools](https://github.com/samtools/samtools) v1.16.1 (although without gnuplot)
+- [Sambamba](https://github.com/biod/sambamba) v0.8.2
+
 To see all of the executables in this image, run the following command inside a container:
 
 ```text
