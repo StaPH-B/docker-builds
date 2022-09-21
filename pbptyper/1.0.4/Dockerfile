@@ -2,7 +2,7 @@ FROM mambaorg/micromamba:0.24.0 as app
 
 # Version arguments
 # ARG variables only persist during build time
-ARG PBPTYPER_VERSION="1.0.3"
+ARG PBPTYPER_VERSION="1.0.4"
 
 # build and run as root users since micromamba image has 'mambauser' set as the $USER
 USER root
@@ -66,11 +66,11 @@ RUN echo "SRR2912551" && \
     head SRR2912551-2B.tblastn.tsv && \
     head SRR2912551-2X.tblastn.tsv && \
     echo "SRR8654742" && \
-    pbptyper --assembly /test/SRR8654742.fna --prefix SRR8654742 --outdir /test/SRR8654742 && \
-    cat SRR8654742/SRR8654742.tsv && \
-    head SRR8654742/SRR8654742-1A.tblastn.tsv && \
-    head SRR8654742/SRR8654742-2B.tblastn.tsv && \
-    head SRR8654742/SRR8654742-2X.tblastn.tsv && \
+    pbptyper --assembly /test/SRR8654742.fna --prefix SRR8654742 && \
+    cat SRR8654742.tsv && \
+    head SRR8654742-1A.tblastn.tsv && \
+    head SRR8654742-2B.tblastn.tsv && \
+    head SRR8654742-2X.tblastn.tsv && \
     echo "not-spn" && \
     pbptyper --assembly /test/not-spn.fna.gz --prefix not-spn && \
     cat not-spn.tsv && \
@@ -90,13 +90,13 @@ RUN echo "SRR2912551" && \
     head not-a-fasta-2B.tblastn.tsv && \
     head not-a-fasta-2X.tblastn.tsv && \
     echo "poor" && \
-    pbptyper --assembly /test/poor.fasta --prefix poor --outdir poor && \
-    cat poor/poor.tsv && \
-    head poor/poor-1A.tblastn.tsv && \
-    head poor/poor-2B.tblastn.tsv && \
-    head poor/poor-2X.tblastn.tsv
+    pbptyper --assembly /test/poor.fasta --prefix poor && \
+    cat poor.tsv && \
+    head poor-1A.tblastn.tsv && \
+    head poor-2B.tblastn.tsv && \
+    head poor-2X.tblastn.tsv
 
 # print help and version info; check dependencies
 RUN pbptyper --help && \
- pbptyper --check --assembly . && \
+ pbptyper --check && \
  pbptyper --version
