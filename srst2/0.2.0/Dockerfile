@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:xenial
 
 # for easy upgrade later. ARG variables only persist at build time
 ARG SRST2_VER=0.2.0
@@ -54,3 +54,8 @@ mkdir /data
 
 # set working directory
 WORKDIR /data
+
+FROM app as test
+
+RUN srst2 --version && \
+getmlst.py -h 
