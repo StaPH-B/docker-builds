@@ -1,4 +1,4 @@
-FROM ubuntu:xenial
+FROM ubuntu:xenial as app
 
 # for easy upgrade later. ARG variables only persist at build time
 ARG SRST2_VER=0.2.0
