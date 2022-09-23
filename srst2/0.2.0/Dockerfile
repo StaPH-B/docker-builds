@@ -30,7 +30,7 @@ libx11-dev \
 xutils-dev \
 zlib1g-dev \
 python-pip \
-bowtie2 \
+bowtie2=2.2.6-2 \
 curl \
 libncurses5-dev \
 unzip \
@@ -58,4 +58,4 @@ WORKDIR /data
 FROM app as test
 
 RUN srst2 --version && \
-getmlst.py -h 
+getmlst.py -h
