@@ -1,6 +1,8 @@
+ARG FLYE_VER="2.9.1"
+
 FROM ubuntu:bionic as app
 
-ARG FLYE_VER="2.9.1"
+ARG FLYE_VER
 
 LABEL base.image="ubuntu:bionic"
 LABEL dockerfile.version="1"
@@ -37,10 +39,15 @@ ENV LC_ALL=C
 
 FROM app as test
 
+ARG FLYE_VER
+
+RUN python Flye-${FLYE_VER}/tests/test_toy.py
+
+# the following takes too long, but this would be the test I would recommend if testing this locally.
 # from https://github.com/fenderglass/Flye/blob/flye/docs/USAGE.md
-RUN wget https://zenodo.org/record/1172816/files/E.coli_PacBio_40x.fasta && \
-    flye --pacbio-raw E.coli_PacBio_40x.fasta --out-dir out_pacbio --threads 4 && \
-    wget https://zenodo.org/record/1172816/files/Loman_E.coli_MAP006-1_2D_50x.fasta && \
-    flye --nano-raw Loman_E.coli_MAP006-1_2D_50x.fasta --out-dir out_nano --threads 4
+# RUN wget https://zenodo.org/record/1172816/files/E.coli_PacBio_40x.fasta && \
+#    flye --pacbio-raw E.coli_PacBio_40x.fasta --out-dir out_pacbio --threads 4 && \
+#    wget https://zenodo.org/record/1172816/files/Loman_E.coli_MAP006-1_2D_50x.fasta && \
+#    flye --nano-raw Loman_E.coli_MAP006-1_2D_50x.fasta --out-dir out_nano --threads 4
 
 
