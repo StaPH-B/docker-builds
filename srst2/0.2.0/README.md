@@ -7,7 +7,7 @@ Additional tools:
 - Biopython 1.76
 - [Bowtie2](https://github.com/BenLangmead/bowtie2) 2.2.6-2
 - python 2.7
--[SAMtools](https://github.com/samtools/samtools) 0.1.18
+- [SAMtools](https://github.com/samtools/samtools) 0.1.18
 - SciPy 0.16
 
 Full documentation: [https://github.com/katholt/srst2](https://github.com/katholt/srst2)
