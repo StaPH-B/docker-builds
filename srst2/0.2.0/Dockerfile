@@ -1,7 +1,14 @@
 FROM ubuntu:xenial as app
 
 # for easy upgrade later. ARG variables only persist at build time
+# Main package version
 ARG SRST2_VER=0.2.0
+
+# Dependency versions
+ARG BOWTIE2_VER=2.2.6-2
+ARG SAMTOOLS_VER=0.1.18
+
+
 
 LABEL base.image="ubuntu:xenial"
 LABEL dockerfile.version="1"
@@ -28,7 +35,7 @@ git \
 libx11-dev \
 xutils-dev \
 zlib1g-dev \
-bowtie2=2.2.6-2 \
+bowtie2=${BOWTIE2_VER} \
 curl \
 libncurses5-dev \
 unzip \
@@ -39,14 +46,11 @@ python-pip && \
 apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # download pre-compiled binary; unzip; put binary in /usr/bin; make /data
-RUN curl -O -L https://sourceforge.net/projects/samtools/files/samtools/0.1.18/samtools-0.1.18.tar.bz2 && \
-tar xvfj samtools-0.1.18.tar.bz2 && \
-cd samtools-0.1.18 && \
+RUN curl -O -L https://sourceforge.net/projects/samtools/files/samtools/${SAMTOOLS_VER}/samtools-${SAMTOOLS_VER}.tar.bz2 && \
+tar xvfj samtools-${SAMTOOLS_VER}.tar.bz2 && \
+cd samtools-${SAMTOOLS_VER} && \
 make && \
 cp samtools /usr/local/bin && \
-cp bcftools/bcftools /usr/local/bin && \
-# cd misc/ &&  \
-# cp *.pl maq2sam-long maq2sam-short md5fa md5sum-lite wgsim /usr/local/bin/ && \
 cd
 
 # Install SRST2
@@ -67,6 +71,6 @@ wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR024/ERR024070/ERR024070_1.fastq.gz &&
 wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR024/ERR024070/ERR024070_2.fastq.gz && \
 srst2 --input_pe ERR024070*.fastq.gz --output shigella1 --log --save_scores --mlst_db Escherichia_coli#1.fasta --mlst_definitions profiles_csv  --mlst_delimiter '_'  && \
 ls shigella1__ERR024070.Escherichia_coli#1.pileup \
-	shigella1__ERR024070.Escherichia_coli#1.scores \
-  shigella1__ERR024070.Escherichia_coli#1.sorted.bam \
-  shigella1__mlst__Escherichia_coli#1__results.txt \
+shigella1__ERR024070.Escherichia_coli#1.scores \
+shigella1__ERR024070.Escherichia_coli#1.sorted.bam \
+shigella1__mlst__Escherichia_coli#1__results.txt \
