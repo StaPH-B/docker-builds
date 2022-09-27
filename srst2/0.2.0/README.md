@@ -26,4 +26,4 @@ srst2 --input_pe strainA_1.fastq.gz strainA_2.fastq.gz --output strainA_test --l
 ```
 
 #### 3 - Check the outputs
-(i) MLST results are output in: `strainA_test__mlst__Escherichia_coli#1__results.txt`
+MLST results are output in: `strainA_test__mlst__Escherichia_coli#1__results.txt`
