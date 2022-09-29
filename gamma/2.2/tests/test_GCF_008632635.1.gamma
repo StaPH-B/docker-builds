@@ -1,0 +1,2 @@
+Gene	Contig	Start	Stop	Match_Type	Description	Mismatches	Transversions	Insertions	Insertion_BP	Deletions	Deletions_BP	Unweighted_Match_Percent	Match_Percent	Length_Percent	Target_Length	Strand
+182__BlaA2__BlaA2_NC_010410__03950__Beta-Lactamase__ARGANNOT	NZ_CP043953.1	2562966	2564236	Partial (Mutant)	21 mutations for bp 5-1275 of 1275	21	5	0	0	0	0	0.9835	0.9796	0.9961	1275	+
