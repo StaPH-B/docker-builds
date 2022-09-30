@@ -32,6 +32,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  libxml2-dev \
  libncurses5 \
  wget \
+ gzip \
  git && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
@@ -61,8 +62,9 @@ FROM app as test
 RUN cd /flu-amd/tests && \
   ./test_run.sh
 
-RUN wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR179/072/SRR17940172/SRR17940172_1.fastq.gz && \
-    wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR179/072/SRR17940172/SRR17940172_2.fastq.gz
+RUN wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR179/072/SRR17940172/SRR17940172_1.fastq.gz && gzip -d SRR17940172_1.fastq.gz && \
+    wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR179/072/SRR17940172/SRR17940172_2.fastq.gz && gzip -d SRR17940172_2.fastq.gz
+    
 
 #IRMA does not like the formatting for SRA paired reads; Expects Illumina Formatting; this line of code will fix this issue
 RUN awk '{if(NR%2==1) $0=sprintf($1); print;}' SRR17940172_1.fastq > SRR17940172_1a.fastq && \
