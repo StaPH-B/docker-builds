@@ -56,25 +56,18 @@ ENV PATH="${PATH}:/flu-amd"
 WORKDIR /data
 
 
-
-#This software takes fastq files which may to large for the git repository; would like guidance here.
 FROM app as test
 
 RUN cd /flu-amd/tests && \
   ./test_run.sh
 
-ENV PATH="$PATH:/data/sratoolkit.2.9.2-ubuntu64/bin" \
-    LC_ALL=C
-
-RUN wget --output-document sratoolkit.tar.gz http://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/2.9.2/sratoolkit.2.9.2-ubuntu64.tar.gz && \
-  tar -vxzf sratoolkit.tar.gz && \
-  rm sratoolkit.tar.gz && \
-  wget https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR17940172/SRR17940172 && \
-  fastq-dump --split-files SRR17940172
+RUN wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR179/072/SRR17940172/SRR17940172_1.fastq.gz && \
+    wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR179/072/SRR17940172/SRR17940172_2.fastq.gz
 
 #IRMA does not like the formatting for SRA paired reads; Expects Illumina Formatting; this line of code will fix this issue
 RUN awk '{if(NR%2==1) $0=sprintf($1); print;}' SRR17940172_1.fastq > SRR17940172_1a.fastq && \
   awk '{if(NR%4==1) $0=sprintf($1" 1:N:18:NULL"); print;}' SRR17940172_1a.fastq > SRR17940172_1.fastq && \
   awk '{if(NR%2==1) $0=sprintf($1); print;}' SRR17940172_2.fastq > SRR17940172_2a.fastq && \
   awk '{if(NR%4==1) $0=sprintf($1" 2:N:18:NULL"); print;}' SRR17940172_2a.fastq > SRR17940172_2.fastq
+  
 RUN IRMA FLU SRR17940172_1.fastq SRR17940172_2.fastq SRR17940172
