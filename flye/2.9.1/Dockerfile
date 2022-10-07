@@ -41,7 +41,7 @@ FROM app as test
 
 ARG FLYE_VER
 
-RUN python Flye-${FLYE_VER}/tests/test_toy.py
+RUN python /Flye-${FLYE_VER}/flye/tests/test_toy.py
 
 # the following takes too long, but this would be the test I would recommend if testing this locally.
 # from https://github.com/fenderglass/Flye/blob/flye/docs/USAGE.md
@@ -49,5 +49,4 @@ RUN python Flye-${FLYE_VER}/tests/test_toy.py
 #    flye --pacbio-raw E.coli_PacBio_40x.fasta --out-dir out_pacbio --threads 4 && \
 #    wget https://zenodo.org/record/1172816/files/Loman_E.coli_MAP006-1_2D_50x.fasta && \
 #    flye --nano-raw Loman_E.coli_MAP006-1_2D_50x.fasta --out-dir out_nano --threads 4
-
 
