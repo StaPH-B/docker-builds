@@ -2,7 +2,7 @@ FROM mambaorg/micromamba:0.24.0 as app
 
 # Version arguments
 # ARG variables only persist during build time
-ARG FREYJA_SOFTWARE_VERSION="1.3.10"
+ARG FREYJA_SOFTWARE_VERSION="1.3.11"
 
 # build and run as root users since micromamba image has 'mambauser' set as the $USER
 USER root
@@ -20,6 +20,8 @@ LABEL maintainer1="Kevin Libuit"
 LABEL maintainer1.email="kevin.libuit@theiagen.com"
 LABEL maintainer2="Curtis Kapsak"
 LABEL maintainer2.email="curtis.kapsak@theiagen.com"
+LABEL maintainer3="Erin Young"
+LABEL maintainer3.email="eriny@utah.gov"
 
 # install dependencies; cleanup apt garbage
 RUN apt-get update && apt-get install -y --no-install-recommends \
