@@ -1,7 +1,7 @@
 FROM ubuntu:xenial as app
 
 # for easy upgrade later. LC_ALL set for singularity compatibility
-ENV VADR_VERSION="1.4.2" \
+ENV VADR_VERSION="1.5" \
   VADR_SARSCOV2_MODELS_VERSION="1.3-2" \
   VADR_MPXV_MODELS_VERSION="1.4.2-1" \
   LC_ALL=C \
@@ -16,14 +16,15 @@ ENV VADRSCRIPTSDIR=$VADRINSTALLDIR/vadr \
  VADRBIOEASELDIR=$VADRINSTALLDIR/Bio-Easel \
  VADRSEQUIPDIR=$VADRINSTALLDIR/sequip \
  VADRBLASTDIR=$VADRINSTALLDIR/ncbi-blast/bin \
- VADRFASTADIR=$VADRINSTALLDIR/fasta/bin
+ VADRFASTADIR=$VADRINSTALLDIR/fasta/bin \
+ VADRMINIMAP2DIR=$VADRINSTALLDIR/minimap2
 
 ENV PERL5LIB=$VADRSCRIPTSDIR:$VADRSEQUIPDIR:$VADRBIOEASELDIR/blib/lib:$VADRBIOEASELDIR/blib/arch:$PERL5LIB \
  PATH=$VADRSCRIPTSDIR:$VADRMINISCRIPTSDIR:$PATH
 
 # metadata - optional, but highly recommended
 LABEL base.image="ubuntu:xenial"
-LABEL dockerfile.version="3"
+LABEL dockerfile.version="1"
 LABEL software="VADR"
 LABEL software.version=${VADR_VERSION}
 LABEL description="Classification and annotation of viral sequences based on RefSeq annotation"
@@ -35,8 +36,9 @@ LABEL maintainer2="Curtis Kapsak"
 LABEL maintainer2.email="curtis.kapsak@theiagen.com"
 
 # install dependencies via apt-get. Clean up apt garbage 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
  wget \
+ ca-certificates \
  perl \
  curl \
  unzip \
@@ -45,7 +47,9 @@ RUN apt-get update && apt-get install -y \
  libinline-c-perl \
  liblwp-protocol-https-perl \
  zip \
- unzip && \
+ unzip \
+ procps \
+ zlib1g-dev && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # install VADR
@@ -111,7 +115,7 @@ RUN wget https://ftp.ncbi.nlm.nih.gov/pub/datasets/command-line/LATEST/linux-amd
  chmod +x datasets && \
  mv -v datasets /usr/local/bin
 
-# download assembly for a MPXV from  (link here)
+# download assembly for a MPXV from the UK
 # run VADR trimming script and v-annotate.pl
 # link to GenBank accession: https://www.ncbi.nlm.nih.gov/nuccore/OP022171
 ARG GENBANK_ACCESSION="OP022171.1"
@@ -130,5 +134,7 @@ v-annotate.pl --split --cpu 2 \
     --r_lowsimxd 100 \
     --r_lowsimxl 2000 \
     --alt_pass discontn,dupregin \
+    --minimap2 \
+    --s_overhang 150 \
     /data/${GENBANK_ACCESSION}.trimmed.fasta \
     ${GENBANK_ACCESSION}-mpxv-vadr-test-output
