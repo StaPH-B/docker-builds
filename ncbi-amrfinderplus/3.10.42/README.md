@@ -7,24 +7,22 @@ Additional tools:
 - hmmer v3.3.2
 - ncbi-blast+ v2.12.0
 
-## Database information:
+## Database information
 
-The database included at time of docker image build is **`2022-08-09.1`**. More information can be found in the changes.txt on [NCBI's FTP](https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/Data/2022-08-09.1/changes.txt).
+The database included at time of docker image build is **`2022-10-11.2`**. More information can be found in the changes.txt on [NCBI's FTP](https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/Data/2022-10-11.2/changes.txt).
 
-Full documentation: https://github.com/ncbi/amr/wiki
+Full documentation: [https://github.com/ncbi/amr/wiki](https://github.com/ncbi/amr/wiki)
 
-# Example Usage
+## Example Usage
 
 ```bash
 # list out the available organisms for the -O/--organism flag
 $ amrfinder -l
 Running: amrfinder -l
 Software directory: '/amrfinder/'
-Software version: 3.10.36
-The number of threads cannot be greater than 2 on this computer
-The current number of threads is 4, reducing to 2
-Database directory: '/amrfinder/data/2022-08-09.1'
-Database version: 2022-08-09.1
+Software version: 3.10.42
+Database directory: '/amrfinder/data/2022-10-11.2'
+Database version: 2022-10-11.2
 
 Available --organism options: Acinetobacter_baumannii, Burkholderia_cepacia, Burkholderia_pseudomallei, Campylobacter, Clostridioides_difficile, Enterococcus_faecalis, Enterococcus_faecium, Escherichia, Klebsiella, Neisseria, Pseudomonas_aeruginosa, Salmonella, Staphylococcus_aureus, Staphylococcus_pseudintermedius, Streptococcus_agalactiae, Streptococcus_pneumoniae, Streptococcus_pyogenes, Vibrio_cholerae
 
@@ -43,5 +41,4 @@ GCA_011245895.1  NA                  AAPPHT010000010.1  173540  176173  +       
 GCA_011245895.1  NA                  AAPPHT010000010.1  173540  176173  +       gyrA_S83F    Salmonella quinolone/triclosan resistant GyrA                      core   AMR           POINT            QUINOLONE/TRICLOSAN  QUINOLONE/TRICLOSAN          POINTX   878            878                        100.00                            99.77                             878               WP_001281271.1                 DNA gyrase subunit A GyrA                                          NA      NA
 GCA_011245895.1  NA                  AAPPHT010000014.1  51361   52473   +       iroB         salmochelin biosynthesis C-glycosyltransferase IroB                plus   VIRULENCE     VIRULENCE        NA                   NA                           BLASTX   371            371                        100.00                            86.52                             371               EOW04219.1                     salmochelin biosynthesis C-glycosyltransferase IroB                NA      NA
 GCA_011245895.1  NA                  AAPPHT010000014.1  52557   56183   +       iroC         salmochelin/enterobactin export ABC transporter IroC               plus   VIRULENCE     VIRULENCE        NA                   NA                           BLASTX   1209           1219                       98.85                             80.18                             1211              AUH19662.1                     salmochelin/enterobactin export ABC transporter IroC               NA      NA
-
 ```
