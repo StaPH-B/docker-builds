@@ -44,7 +44,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     bzip2 \
     gawk \
     gnuplot \
-    ncbi-blast+ && \
+    ncbi-blast+ \
+    unzip && \
     rm -rf /var/lib/apt/lists/* && apt-get autoclean
 
 # install bwa
@@ -85,7 +86,30 @@ FROM app as test
 
 ARG SHIGEIFINDER_VER
 
+# install ncbi datasets tool (pre-compiled binary); place in $PATH
+RUN wget https://ftp.ncbi.nlm.nih.gov/pub/datasets/command-line/LATEST/linux-amd64/datasets && \
+ chmod +x datasets && \
+ mv -v datasets /usr/local/bin
+
 RUN shigeifinder --check && \
     shigeifinder --help
 
-# insert test here for downloading a couple of representative genomes and run them through ShigEiFinder
+# insert test here for downloading a couple of representative genomes (FASTA) and run them through ShigEiFinder
+# Shigella sonnei ref genome: https://www.ncbi.nlm.nih.gov/data-hub/genome/GCF_013374815.1/
+ARG GENBANK_ACCESSION="GCF_013374815.1"
+RUN datasets download genome accession ${GENBANK_ACCESSION} --filename ${GENBANK_ACCESSION}.zip && \
+ mkdir -v ${GENBANK_ACCESSION}-download && \
+ unzip ${GENBANK_ACCESSION}.zip -d ${GENBANK_ACCESSION}-download && \
+ rm ${GENBANK_ACCESSION}.zip && \
+ mv -v ${GENBANK_ACCESSION}-download/ncbi_dataset/data/${GENBANK_ACCESSION}/${GENBANK_ACCESSION}*.fna ${GENBANK_ACCESSION}-download/ncbi_dataset/data/${GENBANK_ACCESSION}/${GENBANK_ACCESSION}.genomic.fna 
+
+# Shigella flexneri 2a str. 301
+# https://www.ncbi.nlm.nih.gov/data-hub/taxonomy/198214/
+ARG GENBANK_ACCESSION="GCF_000006925.2"
+RUN datasets download genome accession ${GENBANK_ACCESSION} --filename ${GENBANK_ACCESSION}.zip && \
+ mkdir -v ${GENBANK_ACCESSION}-download && \
+ unzip ${GENBANK_ACCESSION}.zip -d ${GENBANK_ACCESSION}-download && \
+ rm ${GENBANK_ACCESSION}.zip && \
+ mv -v ${GENBANK_ACCESSION}-download/ncbi_dataset/data/${GENBANK_ACCESSION}/${GENBANK_ACCESSION}*.fna ${GENBANK_ACCESSION}-download/ncbi_dataset/data/${GENBANK_ACCESSION}/${GENBANK_ACCESSION}.genomic.fna
+
+# insert test here for downloading FASTQs for 1 sample and run through ShigEiFinder (test bwa & samtools)
