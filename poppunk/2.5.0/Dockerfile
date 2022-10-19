@@ -27,8 +27,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # Create PopPUNK conda environment called poppunk-env from bioconda recipe
+# Force joblib version 1.1.0. https://github.com/StaPH-B/docker-builds/pull/469
 # clean up conda garbage
-RUN micromamba create -n poppunk-env -c conda-forge -c bioconda -c defaults poppunk=${POPPUNK_VERSION} && \
+RUN micromamba create -n poppunk-env -c conda-forge -c bioconda -c defaults poppunk=${POPPUNK_VERSION} joblib==1.1.0 && \
  micromamba clean -a -y
 
 # set the environment, put new conda env in PATH by default; set locales to UTF-8
