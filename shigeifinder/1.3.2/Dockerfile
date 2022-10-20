@@ -23,7 +23,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # install dependencies via apt; cleanup apt garbage
 # ncbi-blast+ from apt is v2.9.0 (min ver requirement for ShigEiFinder)
-# python version is 
+# python version is 3.8.10
 RUN apt-get update && apt-get install --no-install-recommends -y \
     make \
     gcc \
