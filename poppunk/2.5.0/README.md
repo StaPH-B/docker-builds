@@ -6,9 +6,9 @@ Additional tools:
 
 - none
 
-Full documentation: [<https://poppunk.readthedocs.io/en/latest/](https://poppunk.readthedocs.io/en/latest/>)
+Full documentation: [https://poppunk.readthedocs.io/en/latest/](https://poppunk.readthedocs.io/en/latest/)
 
-PopPUNK is also available as a webtool: [<https://www.poppunk.net/](https://www.poppunk.net/>)
+PopPUNK is also available as a webtool: [https://www.poppunk.net/](https://www.poppunk.net/)
 
 PopPUNK is a tool for clustering genomes.
 
