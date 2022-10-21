@@ -13,24 +13,22 @@ LABEL maintainer.email="christopher.jossart@slh.wisc.edu"
 RUN apt-get update && apt-get install -y \
   python3 \
   python3-pip \
-  wget && \
-  pip install --no-cache-dir --upgrade pip && \
-  pip install --no-cache-dir \
-  pandas==1.4.3 \
-  numpy==1.22.4 \
-  scikit-bio==0.5.7 \
-  scipy==1.8
+  git
 
-RUN wget https://raw.githubusercontent.com/k-florek/QuickSNP/main/QuickSNP.py -O /bin/QuickSNP.py && \
-  chmod +x /bin/QuickSNP.py && \
-  mkdir /data && \
-  mkdir /test
+RUN git clone https://github.com/k-florek/QuickSNP.git && \
+  cd QuickSNP && \
+  pip install --no-cache-dir --upgrade pip && \
+  pip install --no-cache-dir -r requirements.txt && \
+  mkdir /data
+
+ENV PATH="/QuickSNP:${PATH}"
 
 WORKDIR /data
 
-
 FROM app as test
 
-RUN mkdir test && \
-  cd test && \
-  quicksnp_test.sh
+COPY quicksnp_test.sh .
+
+COPY test_data ./test_data
+
+RUN bash quicksnp_test.sh
