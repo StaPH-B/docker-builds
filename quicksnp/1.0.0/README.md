@@ -1,6 +1,8 @@
 # QuickSNP
 A python script to quickly build a Neighbor Joining tree using only a SNP distance matrix.
 
+This image implements Kelsey Florek's [QuickSNP](https://github.com/k-florek/QuickSNP).
+
 ```
 usage: QuickSNP <dm> <outtree>
 
@@ -18,4 +20,4 @@ optional arguments:
 - pandas==1.4.3 
 - numpy==1.22.4
 - scikit-bio==0.5.7
-- scipy==1.8
+- scipy==1.8.0
