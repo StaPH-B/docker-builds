@@ -87,6 +87,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Prokka | GNU GPLv3 | https://raw.githubusercontent.com/tseemann/prokka/master/doc/LICENSE.Prokka |
 | pyGenomeViz | MIT | https://github.com/moshi4/pyGenomeViz/blob/main/LICENSE |
 | QUAST | GNU GPLv2 | https://github.com/ablab/quast/blob/master/LICENSE.txt |
+| QuickSNP | GNU GPLv3 | https://github.com/k-florek/QuickSNP/blob/main/LICENSE |
 | racon | MIT | https://github.com/isovic/racon/blob/master/LICENSE |
 | rasusa | MIT | https://github.com/mbhall88/rasusa/blob/master/LICENSE |
 | raven | MIT | https://github.com/lbcb-sci/raven/blob/master/LICENSE |
