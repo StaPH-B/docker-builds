@@ -1,6 +1,6 @@
 FROM ubuntu:focal as app
 
-ARG QUICKSNP_VER="1.0.0"
+ARG QUICKSNP_VER="1.0.1"
 
 LABEL base.image="ubuntu:focal"
 LABEL dockerfile.version="1"
@@ -24,8 +24,6 @@ RUN wget https://github.com/k-florek/QuickSNP/archive/refs/tags/${QUICKSNP_VER}.
   pip install --no-cache-dir --upgrade pip && \
   pip install --no-cache-dir -r requirements.txt && \
   mkdir /data
-
-RUN pip install --no-cache-dir scipy==1.8.0
 
 ENV PATH="/QuickSNP-${QUICKSNP_VER}:${PATH}"
 

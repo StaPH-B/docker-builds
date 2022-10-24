@@ -1,4 +1,4 @@
-# QuickSNP
+# QuickSNP 1.0.1
 A python script to quickly build a Neighbor Joining tree using only a SNP distance matrix.
 
 ```

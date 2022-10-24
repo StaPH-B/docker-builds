@@ -1,5 +1,5 @@
 #!/bin/bash
-# tests for QuickSNP 1.0.0
+# tests for QuickSNP 1.0.1
 
 #Exit immediately if a command exits with a non-zero status
 set -e
