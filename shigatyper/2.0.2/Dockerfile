@@ -62,7 +62,7 @@ RUN wget https://github.com/samtools/bcftools/releases/download/${BCFTOOLSVER}/b
   cd ..
 
 # shigatyper depends on MINIMAP2
-RUN curl -L https://github.com/lh3/minimap2/releases/download/v${MINIMAP2_VER}/minimap2-${MINIMAP2_VER}_x64-linux.tar.bz2 | tar -jxvf -
+RUN curl -L https://github.com/lh3/minimap2/releases/download/v${MINIMAP2_VER}/minimap2-${MINIMAP2_VER}_x64-linux.tar.bz2 | tar -jxf -
 
 # get shigatyper repo
 # RUN git clone -b conda-package-${SHIGATYPER_VER} https://github.com/CFSAN-Biostatistics/shigatyper && \
