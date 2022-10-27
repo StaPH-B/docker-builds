@@ -6,7 +6,7 @@ Additional tools:
 - samtools 1.9
 - bcftools 1.9
 - minimap2 2.24
-- python 3.x.x
+- python 3.8.10
 
 ## Example Usage
 
