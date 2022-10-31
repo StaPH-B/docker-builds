@@ -8,7 +8,6 @@ WORKDIR /
 # ARG variables only persist during build time
 ARG PIRANHA_VER="1.0.4"
 
-
 # metadata labels
 LABEL base.image="mambaorg/micromamba:0.27.0"
 LABEL dockerfile.version="1"
@@ -32,7 +31,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  build-essential && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-# get the piranha repo
+# get the piranha code repo; creating conda environment using environment.yml supplied w/ Piranha code
 RUN wget "https://github.com/polio-nanopore/piranha/archive/refs/tags/${PIRANHA_VER}.tar.gz" && \
  tar -xf ${PIRANHA_VER}.tar.gz && \
  rm ${PIRANHA_VER}.tar.gz && \
@@ -62,13 +61,14 @@ WORKDIR /data
 # hardcode piranha executable into the PATH variable
 ENV PATH="${PATH}:/opt/conda/envs/piranha/bin/"
 
-# new base for testing
+# new base image for testing
 FROM app as test
 
 # # so that mamba/conda env is active when running below commands
 ENV ENV_NAME="piranha"
 ARG MAMBA_DOCKERFILE_ACTIVATE=1
 
+# print help and version 
 RUN piranha --help && piranha --version
 
 # set up testing environment
