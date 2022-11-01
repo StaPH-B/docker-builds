@@ -17,8 +17,8 @@ This docker image was created with the intention of running `genotyphi` on FASTQ
 The docker image for Mykrobe was built on 2022-11-01, and thus contains the most recent database that was available at the time.
 
 ```bash
- ### OUTPUT FROM mykrobe panels describe run on 2022-11-01: ###
- $ mykrobe panels describe
+### OUTPUT FROM mykrobe panels describe run on 2022-11-01: ###
+$ mykrobe panels describe
 # Species summary:
 
 # Species Update_available        Installed_version       Installed_url   Latest_version  Latest_url
