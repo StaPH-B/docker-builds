@@ -7,21 +7,25 @@ WORKDIR /
 
 # ARG variables only persist during build time
 ARG MYKROBE_VER="0.12.1"
+ARG SONNEITYPING_VER="20210201"
 # see below for why we aren't using this. Keeping as a comment for when we can switch to versioned releases
 #ARG GENOTYPHI_VER="1.9.1"
 
 # metadata labels
 LABEL base.image="mambaorg/micromamba:0.27.0"
 LABEL dockerfile.version="1"
-LABEL software="Mykrobe & Genotyphi"
+LABEL software="Mykrobe & Genotyphi & Sonneityping"
 LABEL software.version=${MYKROBE_VER}
 LABEL description="Conda environment for Mykrobe, particularly for Genotyphi"
-LABEL website="https://github.com/Mykrobe-tools/mykrobe"
-LABEL license="MIT"
-LABEL license.url="https://github.com/Mykrobe-tools/mykrobe/blob/master/LICENSE"
+LABEL website1="https://github.com/Mykrobe-tools/mykrobe"
+LABEL license1="MIT"
+LABEL license1.url="https://github.com/Mykrobe-tools/mykrobe/blob/master/LICENSE"
 LABEL website2="https://github.com/katholt/genotyphi"
 LABEL license2="GNU General Public License v3.0"
 LABEL license2.url="https://github.com/katholt/genotyphi/blob/main/LICENSE"
+LABEL website3="https://github.com/katholt/sonneityping/"
+LABEL license3="GNU General Public License v3.0"
+LABEL license3.url="https://github.com/katholt/sonneityping/blob/master/LICENSE.txt"
 LABEL maintainer1="Curtis Kapsak"
 LABEL maintainer1.email="kapsakcj@gmail.com"
 
@@ -44,15 +48,24 @@ RUN git clone https://github.com/katholt/genotyphi.git && \
  chmod +x /genotyphi/parse_typhi_mykrobe.py && \
  mkdir -v /data
 
+# Get the sonneityping code
+RUN wget https://github.com/katholt/sonneityping/archive/refs/tags/v${SONNEITYPING_VER}.tar.gz && \
+ tar -xzf v${SONNEITYPING_VER}.tar.gz && \
+ rm -vf v${SONNEITYPING_VER}.tar.gz && \
+ mv -v sonneityping-${SONNEITYPING_VER}/ /sonneityping/ && \
+ chmod +x /sonneityping/parse_mykrobe_predict.py
+
 # set the PATH and LC_ALL for singularity compatibility
-ENV PATH="${PATH}:/opt/conda/envs/mykrobe/bin/:/genotyphi" \
+ENV PATH="${PATH}:/opt/conda/envs/mykrobe/bin/:/genotyphi:/sonneityping" \
  LC_ALL=C.UTF-8
 
 # create the conda environment, install mykrobe via bioconda package; cleanup conda garbage
+# INSTALL PANDAS HERE INSTEAD
 RUN micromamba create -n mykrobe -y -c conda-forge -c bioconda -c defaults \
  mykrobe=${MYKROBE_VER} \
  python \ 
- pip && \
+ pip \
+ pandas && \
  micromamba clean -a -y
 
 # so that mamba/conda env is active when running below commands
@@ -64,9 +77,6 @@ RUN mykrobe panels update_metadata && \
  mykrobe panels update_species all && \
  mykrobe panels describe
 
-# install pandas using pip installed via conda/micromamba
-RUN pip install pandas
-
 WORKDIR /data
 
 # new base for testing
@@ -76,6 +86,7 @@ FROM app as test
 ENV ENV_NAME="mykrobe"
 ARG MAMBA_DOCKERFILE_ACTIVATE=1
 
+# test with TB FASTQs
 RUN wget -O test_reads.fq.gz https://ndownloader.figshare.com/files/21059229 && \
  mykrobe predict -s SAMPLE -S tb -o out.json --format json -i test_reads.fq.gz && \
  cat out.json && \
