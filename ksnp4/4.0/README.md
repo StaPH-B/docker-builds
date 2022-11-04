@@ -1,9 +1,8 @@
 # kSNP4 container
 
-Main tool : kSNP4 https://sourceforge.net/projects/ksnp/files/
+Main tool: kSNP4 https://sourceforge.net/projects/ksnp/files/
 
-Additional tools:
- * standard-RAxML-8.2.12
+Additional tools: None
 
 Full documentation: https://sourceforge.net/projects/ksnp/files/kSNP4%20User%20Guide.pdf/download
 
