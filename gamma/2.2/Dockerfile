@@ -2,13 +2,13 @@
 FROM ubuntu:bionic as app
 
 # for easy upgrade later. ARG variables only persist during image build time
-ARG GAMMA_VER="2.1"
+ARG GAMMA_VER="2.2"
 
 # metadata
 LABEL base.image="ubuntu:bionic"
 LABEL dockerfile.version="1"
 LABEL software="GAMMA"
-LABEL software.version="v2.1"
+LABEL software.version="v2.2"
 LABEL description="Gene Allele Mutation Microbial Assessment"
 LABEL website="https://github.com/rastanton/GAMMA/"
 LABEL license="Apache 2.0"
@@ -35,7 +35,7 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
     rm -rf /var/lib/apt/lists/*
 
 #install biopython
-RUN pip3 install biopython cgecore tabulate
+RUN pip3 install biopython cgecore tabulate unidecode
 
 # install blat
 RUN wget http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/blat/blat && \
