@@ -96,6 +96,7 @@ RUN wget https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/${BLAST_VER}/ncbi
 ENV PATH="${PATH}:/ncbi-blast-${BLAST_VER}+/bin/:\
 /prokka-${PROKKA_VER}/bin:\
 /prokka-${PROKKA_VER}/binaries/common:\
+/prokka-${PROKKA_VER}/binaries/linux:\
 /barrnap-${BARRNAP_VER}/bin"\
  LC_ALL=C
 
