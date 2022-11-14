@@ -16,7 +16,7 @@ Additional tools:
 ## Example Usage
 
 ```bash
-$ ngmaster gono.fasta
-ID         NG-MAST    POR    TBPB
-gono.fa    10699      6277   4
+$ ngmaster /opt/conda/envs/ngmaster-env/lib/python3.7/site-packages/ngmaster/test/test.fa
+FILE    SCHEME  NG-MAST/NG-STAR porB_NG-MAST    tbpB    penA    mtrR    porB_NG-STAR    ponA    gyrA    parC    23S
+/opt/conda/envs/ngmaster-env/lib/python3.7/site-packages/ngmaster/test/test.fa  ngmaSTar        4186/231        2569    241     23      42      100     100     10      2       100
 ```
