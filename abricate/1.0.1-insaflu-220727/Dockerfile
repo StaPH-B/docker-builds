@@ -69,6 +69,9 @@ WORKDIR /data
 # testing layer starts here
 FROM app as test
 
+# Grab test data
+COPY tests/ /data/
+
 # to ensure this env variable is set in test layer
 ARG ABRICATE_VER
 
@@ -102,3 +105,7 @@ abricate-get_db --help && \
 abricate-get_db --db ncbi --dbdir . && \
 ! grep 'FUSIDIC ACID' ncbi/sequences && \
 abricate --threads `nproc` --fofn test/fofn.txt
+
+# flu-specific abricate test
+RUN abricate --db insaflu /data/SRR10013255.irma.consensus.fasta > /data/abricate_flu.tsv
+RUN grep "Type_B" /data/abricate_flu.tsv && echo done
