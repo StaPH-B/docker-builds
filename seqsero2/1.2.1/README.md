@@ -54,9 +54,14 @@ $ SeqSero2_package.py \
       -d GCA_007765495.1-seqsero2-assembly-kmer-mode \
       -n GCA_007765495.1 \
       -p 2
-
-
-
-
-
+Sample name:    GCA_007765495.1
+Output directory:       /test/GCA_007765495.1-seqsero2-assembly-kmer-mode
+Input files:    GCA_007765495.1.genomic.fna
+O antigen prediction:   7
+H1 antigen prediction(fliC):    r
+H2 antigen prediction(fljB):    1,5
+Predicted identification:       Salmonella enterica subspecies enterica (subspecies I)
+Predicted antigenic profile:    7:r:1,5
+Predicted serotype:     Infantis
+Note:
 ```
