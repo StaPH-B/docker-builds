@@ -114,10 +114,10 @@ RUN wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR608/003/SRR6082043/SRR6082043_1.f
       -i SRR6082043_1.fastq.gz SRR6082043_2.fastq.gz \
       -t 2 \
       -m a \
-      -d ${GENBANK_ACCESSION}-seqsero2-reads-allele-mode \
-      -n ${GENBANK_ACCESSION} \
+      -d SRR6082043-seqsero2-reads-allele-mode \
+      -n SRR6082043 \
       -p 2 && \
-    grep 'Infantis' ${GENBANK_ACCESSION}-seqsero2-reads-allele-mode/SeqSero_result.txt
+    grep 'Infantis' SRR6082043-seqsero2-reads-allele-mode/SeqSero_result.txt
 
 # print help options, check dependencies, print version
 RUN SeqSero2_package.py --help && SeqSero2_package.py --check && SeqSero2_package.py --version
