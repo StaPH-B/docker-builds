@@ -9,14 +9,14 @@ WORKDIR /
 # had to include the v for some of these due to GitHub tags.
 # using pangolin-data github tag, NOT what is in the GH release title "v1.2.133"
 ARG PANGOLIN_VER="v4.1.3"
-ARG PANGOLIN_DATA_VER="v1.15.1"
+ARG PANGOLIN_DATA_VER="v1.16"
 ARG SCORPIO_VER="v0.3.17"
 ARG CONSTELLATIONS_VER="v0.1.10"
-ARG USHER_VER="0.5.6"
+ARG USHER_VER="0.6.0"
 
 # metadata labels
 LABEL base.image="mambaorg/micromamba:0.27.0"
-LABEL dockerfile.version="1"
+LABEL dockerfile.version="2"
 LABEL software="pangolin"
 LABEL software.version=${PANGOLIN_VER}
 LABEL description="Conda environment for Pangolin. Pangolin: Software package for assigning SARS-CoV-2 genome sequences to global lineages."
@@ -31,7 +31,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  wget \
  ca-certificates \
  git \
- procps && \
+ procps \
+ bsdmainutils && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # get the pangolin repo
@@ -82,7 +83,7 @@ ARG MAMBA_DOCKERFILE_ACTIVATE=1
 
 # test on test sequences supplied with Pangolin code
 RUN pangolin /pangolin/pangolin/test/test_seqs.fasta --analysis-mode usher -o /data/test_seqs-output-pusher && \
- cat /data/test_seqs-output-pusher/lineage_report.csv 
+ column -t -s, /data/test_seqs-output-pusher/lineage_report.csv 
 
 # test functionality of assignment-cache option
 RUN pangolin --use-assignment-cache /pangolin/pangolin/test/test_seqs.fasta
@@ -92,7 +93,7 @@ ADD https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-Co
 
 # test on a B.1.1.7 genome
 RUN pangolin /test-data/SRR13957123.consensus.fa --analysis-mode usher -o /test-data/SRR13957123-pusher && \
- cat /test-data/SRR13957123-pusher/lineage_report.csv
+ column -t -s, /test-data/SRR13957123-pusher/lineage_report.csv
 
  # install unzip for unzipping zip archive from NCBI
 RUN apt-get update && apt-get install -y --no-install-recommends unzip
@@ -108,4 +109,4 @@ RUN datasets download virus genome accession ON924087.1 --filename ON924087.1.zi
  unzip ON924087.1.zip && rm ON924087.1.zip && \
  mv -v ncbi_dataset/data/genomic.fna ncbi_dataset/data/ON924087.1.genomic.fna && \
  pangolin ncbi_dataset/data/ON924087.1.genomic.fna --analysis-mode usher -o ON924087.1-usher && \
- cat ON924087.1-usher/lineage_report.csv
+ column -t -s, ON924087.1-usher/lineage_report.csv
