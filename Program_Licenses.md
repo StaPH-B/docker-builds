@@ -38,7 +38,7 @@ The licenses of the open-source software that is contained in these Docker image
 | FLASH | GNU GPLv3 | https://github.com/ebiggers/flash/blob/master/COPYING |
 | Flye | BSD-3 | https://github.com/fenderglass/Flye/blob/flye/LICENSE |
 | Freyja | BSD-2 | https://github.com/andersen-lab/Freyja/blob/main/LICENSE |
-| GAMBIT | GNU aGPLv3 | https://github.com/hesslab-gambit/gambit/blob/master/LICENSE |
+| GAMBIT | GNU aGPLv3 | https://github.com/jlumpe/gambit/blob/master/LICENSE |
 | GAMMA | Apache 2.0 | https://github.com/rastanton/GAMMA/blob/main/LICENSE |
 | Genotyphi | GNU GPLv3 | https://github.com/katholt/genotyphi/blob/main/LICENSE |
 | Hmmer | BSD-3 | http://eddylab.org/software/hmmer/Userguide.pdf |
