@@ -107,11 +107,8 @@ WORKDIR /data
 
 FROM app as test
 
-# re-instantiating for the test build layer
+# re-instantiating for the test layer
 ARG PROKKA_VER
-ARG BEDTOOLS_VER
-ARG BARRNAP_VER
-ARG BLAST_VER
 
 WORKDIR /prokka-${PROKKA_VER}
 
