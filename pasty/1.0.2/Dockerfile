@@ -1,4 +1,4 @@
-ARG PASTY_VERSION="1.0.1"
+ARG PASTY_VERSION="1.0.2"
 # formatted for apt version syntax
 ARG BLAST_VERSION="2.12.0+ds-3build1" 
 

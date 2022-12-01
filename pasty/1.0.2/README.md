@@ -18,8 +18,8 @@ A tool easily taken advantage of for in silico serogrouping of Pseudomonas aerug
 # visit here to see more information: https://github.com/rpetit3/pasty/tree/main/test
 
 # run pasty via docker container
-$ docker run --rm -v $PWD:/data -u $(id -u):$(id -g) staphb/pasty:1.0.1 \
-    pasty --assembly /pasty-1.0.1/test/O1-GCF_000504045.fna.gz --prefix O1-GCF_000504045
+$ docker run --rm -v $PWD:/data -u $(id -u):$(id -g) staphb/pasty:1.0.2 \
+    pasty --assembly /pasty-1.0.2/test/O1-GCF_000504045.fna.gz --prefix O1-GCF_000504045
 Running pasty with following parameters:
     --assembly /pasty-1.0.1/test/O1-GCF_000504045.fna.gz
     --db /pasty-1.0.1/db/OSAdb.fasta
