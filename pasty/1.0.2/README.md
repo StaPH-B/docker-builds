@@ -14,7 +14,7 @@ A tool easily taken advantage of for in silico serogrouping of Pseudomonas aerug
 ## Example Usage
 
 ```bash
-# test genome assemblies are included in the docker image at /pasty-1.0.1/test/
+# test genome assemblies are included in the docker image at /pasty-1.0.2/test/
 # visit here to see more information: https://github.com/rpetit3/pasty/tree/main/test
 
 # run pasty via docker container (command broken into 2 lines for readability)
