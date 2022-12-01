@@ -51,11 +51,20 @@ jobs:
 
 ##### --------------------------------------------------------------------------- #####
 ##### The steps of ./.github/workflows/build-to-test.yml are copied here.         #####
-##### Steps have been added that further check the dockerfile and image.          #####
 ##### --------------------------------------------------------------------------- ##### 
 
       - name: Checkout
         uses: actions/checkout@v3
+        
+      - name: Layer check
+        run: |
+          #checking layers
+          warning=''
+          app_layer=$(grep FROM ./${{ steps.parse.outputs.tool }}/${{ steps.parse.outputs.version }}/Dockerfile | grep "as app")
+          tst_layer=$(grep FROM ./${{ steps.parse.outputs.tool }}/${{ steps.parse.outputs.version }}/Dockerfile | grep "as test")
+          if [ -z "$app_layer" ] ; then echo "FATAL : app layer is missing" ; warning='warning' ; fi
+          if [ -z "$tst_layer" ] ; then echo "FATAL : test layer is missing" ; warning='warning' ; fi
+          if [ -n "$warning" ] ; then echo "Please see template for recommended format https://github.com/StaPH-B/docker-builds/blob/master/dockerfile-template/Dockerfile" ; exit 1 ; fi
       
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -84,14 +93,10 @@ jobs:
           push: false
           cache-from: type=local,src=/tmp/.buildx-cache-${{ steps.parse.outputs.tool }}
           cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-${{ steps.parse.outputs.tool }}-new
-        
-      - name: Check commonly overlooked commands
-        run: |
-          docker run ${{ steps.parse.outputs.tool }}:${{ steps.parse.outputs.version }} ps --help
-          docker run ${{ steps.parse.outputs.tool }}:${{ steps.parse.outputs.version }} update-ca-certificates -h
-          
+
       - name: Check labels
         run: |
+          # checking labels
           warning=''
           for label in base.image dockerfile.version software software.version description website maintainer maintainer.email
           do
@@ -106,6 +111,12 @@ jobs:
           fi
           
           if [ -n "$warning" ] ; then echo "Please see template for recommended format https://github.com/StaPH-B/docker-builds/blob/master/dockerfile-template/Dockerfile" ; exit 1 ; fi 
+
+      - name: Check commonly overlooked commands
+        run: |
+          # checking commands
+          docker run ${{ steps.parse.outputs.tool }}:${{ steps.parse.outputs.version }} ps --help
+          docker run ${{ steps.parse.outputs.tool }}:${{ steps.parse.outputs.version }} update-ca-certificates -h
 
       - name: Move cache # apparently prevents the cache from growing in size forever
         run: |
