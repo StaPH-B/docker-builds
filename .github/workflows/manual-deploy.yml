@@ -30,6 +30,8 @@ on:
         description: "Repository name. <repository>/tool:tag (Usually staphb)"
         default: "staphb"
 
+run-name: Deploy ${{ github.event.inputs.tool }} version ${{ github.event.inputs.version }}
+
 jobs:
 
   # This job calls a workflow to build the image to the 'test' stage
