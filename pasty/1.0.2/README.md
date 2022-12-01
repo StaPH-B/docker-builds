@@ -17,7 +17,7 @@ A tool easily taken advantage of for in silico serogrouping of Pseudomonas aerug
 # test genome assemblies are included in the docker image at /pasty-1.0.1/test/
 # visit here to see more information: https://github.com/rpetit3/pasty/tree/main/test
 
-# run pasty via docker container
+# run pasty via docker container (command broken into 2 lines for readability)
 $ docker run --rm -v $PWD:/data -u $(id -u):$(id -g) staphb/pasty:1.0.2 \
     pasty --assembly /pasty-1.0.2/test/O1-GCF_000504045.fna.gz --prefix O1-GCF_000504045
 Running pasty with following parameters:
