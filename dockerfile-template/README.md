@@ -9,7 +9,7 @@ Please edit this readme with some basic information about the tool and how to us
 
 Main tool: [<program>](link to program)
   
-Github repository:
+Code repository:
 
 Additional tools:
 - list: version
@@ -38,7 +38,7 @@ Full documentation: link to documentation or wiki
 
 Main tool: [pasty](https://github.com/rpetit3/pasty)
 
-Github repository: https://github.com/rpetit3/pasty
+Code repository: https://github.com/rpetit3/pasty
 
 Additional tools:
 - ncbi-blast+: 2.12.0
