@@ -32,7 +32,7 @@ graph TD
 We have also created a user guide that outlines methods and best practices for using and developing docker containers.
 [Docker User Guide](https://staph-b.github.io/docker-builds/)
 
-### [Templates]()
+### Templates
 Several template files are provided. These are intended to be copied and edited by contributors.
 1. [dockerfile-template/Dockerfile](./dockerfile-template/Dockerfile) is the basic template useful for most images
 2. [dockerfile-template/Dockerfile_mamba](./dockerfile-template/Dockerfile_mamba) is a basic template for using the micromamba base
