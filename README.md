@@ -2,7 +2,15 @@
 This repository contains the Dockerfiles and other assorted files necessary for building Docker images for a variety of tools used by members of the StaPH-B (State Public Health Lab Bioinformatics) consortium. The purpose of this repository is to provide a centralized location for Docker images that is easily accessible for users, with clear documentation on how the containers were built and how to use them.
 
 This is a community resource, built and maintined by users from varied backgrounds and expertise levels. As such, we have provided some [templates for contributing to this repository](./dockerfile-template). If **you** would like to add a Docker image or improve upon the existing images, please fork the repository, make your changes/additions, and submit a pull request. If you are having an issue with an existing image, please submit an issue. We welcome any and all feedback!
+
+
 [See more details on how to contribute here](https://staph-b.github.io/docker-builds/contribute/)
+
+## Docker image repositories & hosting
+We host all of our docker images on two different repositories:
+
+  1. [Dockerhub](https://hub.docker.com/r/staphb/) - https://hub.docker.com/r/staphb/
+  2. [Quay.io](https://quay.io/organization/staphb/) - https://quay.io/organization/staphb/
 
 The development process of creating a new image is summarized as follows:
 
@@ -12,8 +20,6 @@ graph TD
      B-->C[create readme]
      B-->D[create dockerfile]
      D-->G[create app and test layers]
-     
-     
      A-->E[add License to Program_Licenses.md]
      A-->F[add tool to list in this readme]
      E-->H[submit PR]
@@ -22,15 +28,35 @@ graph TD
      C-->H
      H-->I{build to test}
      I--success-->J[merged and pushed to dockerhub and quay]
-     I--failure-->H
-     
-      
-
+     I--failure-->K[edit dockerfile]
+     K-->I
 ```
 
 ## [Docker User Guide](https://staph-b.github.io/docker-builds/)
-We have also created a user guide that outlines methods and best practices for using and developing docker containers.
-[Docker User Guide](https://staph-b.github.io/docker-builds/)
+The [STaPH-B User Guide](https://staphb.org/docker-builds/) was created to outline methods and best practices for using and developing docker containers. There are chapters for 
+- [Contributing](https://staphb.org/docker-builds/contribute/)
+- [Downloading Docker images](https://staphb.org/docker-builds/get_containers/)
+- [Running Docker containers](https://staphb.org/docker-builds/run_containers/)
+- [Developing Docker images](https://staphb.org/docker-builds/make_containers/)
+- [Useful links](https://staphb.org/docker-builds/useful_links/)
+
+### Summarized usage guide for docker
+
+```
+# Building a container to the 'test' layer
+docker build --tag tool:test --target test <directory to Dockerfile>
+docker build --tag samtools:test --target test samtools/1.15
+
+# Pulling a container from dockerhub (most tools have a 'latest' tag)
+docker pull staphb/tool:version
+docker pull staphb/shigatyper:2.0.2
+
+# Running the container (don't forget to mount your volumes!)
+docker run -v <local directory>:/data tool:version <command>
+docker run -v $(pwd)/amrfinder_test_files:/data amrfinder:3.10 amrfinder --nucleotide 2021CK-01854_contigs.fa --threads 20 --name 2021CK-01854 --output /data/2021CK-01854.txt --organism Klebsiella
+```
+
+Further documentation can be found at [docs.docker.com](https://docs.docker.com/engine/reference/run/)
 
 ### Templates
 Several template files are provided. These are intended to be copied and edited by contributors.
@@ -38,14 +64,24 @@ Several template files are provided. These are intended to be copied and edited 
 2. [dockerfile-template/Dockerfile_mamba](./dockerfile-template/Dockerfile_mamba) is a basic template for using the micromamba base
 3. [dockerfile-template/README.md](./dockerfile-template/README.md) is a basic readme file template to assist others in using the image
 
-#### What about Singularity?
-For many people Docker is not an option, but Singularity is. Most Docker containers are compatible with Singularity and can easily be converted to Singularity format. Please see the User Guide linked above to for instructions on how to download docker images from dockerhub and how to run them using Singularity. We've worked hard to ensure that our containers are compatibile with Singularity, but if you find one that isn't, please leave an issue and let us know!
+### What about Singularity?
+For many people Docker is not an option, but Singularity is. Most Docker containers are compatible with Singularity and can easily be converted to Singularity format. Please see the [User Guide](https://staphb.org/docker-builds/) for instructions on how to download docker images from dockerhub and how to run them using Singularity. We've worked hard to ensure that our containers are compatibile with Singularity, but if you find one that isn't, please leave an issue and let us know!
 
-## Docker image repositories & hosting
-We host all of our docker images on two different repositories and periodically sync the images between the two:
+### Summarized usage guide for singularity
 
-  1. [Dockerhub](https://hub.docker.com/r/staphb/) - https://hub.docker.com/r/staphb/
-  2. [Quay.io](https://quay.io/organization/staphb/) - https://quay.io/organization/staphb/
+```
+# Pulling a container from dockerhub (creates a file)
+singularity pull --name <name of singularity file> docker://staphb/bbtools:38.96
+singularity pull --name staphb-bbtools-38.96.simg docker://staphb/bbtools:38.96
+
+# Running the container (don't forget to mount your volumes!)
+singularity exec --bind <local directory>:/data <name of singularity file> <command>
+singularity exec --bind $(pwd)/fastq:/data staphb-bbtools-38.96.simg bbduk.sh in1=sample1_R1.fastq.gz in2=sample1_R2.fastq.gz out1=bbduk/sample1_rmphix_R1.fastq.gz out2=bbduk/sample1_rmphix_R2.fastq.gz outm=bbduk/sample1.matched_phix.fq ref=/opt/bbmap/resources/phix174_ill.ref.fa.gz stats=bbduk/sample1.phix.stats.txt threads=4
+```
+
+Further documentation can be found at [docs.sylabs.io](https://docs.sylabs.io/guides/3.1/user-guide/cli.html)
+
+## Logs
 
 In November 2020, Docker began to implement pull rate limits for images hosted on dockerhub. This limits the number of `docker pull`'s per time period (e.g. anonymous users allowed 100 pulls per six hours). We applied and were approved for Docker's "Open Source Program," which should have removed the pull rate limits for all `staphb` docker images! 🎉 🥳 If you encounter an error such as `ERROR: toomanyrequests: Too Many Requests.` or `You have reached your pull rate limit. You may increase the limit by authenticating and upgrading: https://www.docker.com/increase-rate-limits.` , please let us know by [submitting an issue.](https://github.com/StaPH-B/docker-builds/issues)
 
