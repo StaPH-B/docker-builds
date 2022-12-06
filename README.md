@@ -52,8 +52,8 @@ docker pull staphb/tool:version
 docker pull staphb/shigatyper:2.0.2
 
 # Running the container (don't forget to mount your volumes!)
-docker run -v <local directory>:/data tool:version <command>
-docker run -v $(pwd)/amrfinder_test_files:/data amrfinder:3.10 amrfinder --nucleotide 2021CK-01854_contigs.fa --threads 20 --name 2021CK-01854 --output /data/2021CK-01854.txt --organism Klebsiella
+docker run --rm -u $(id -u):$(id -g) -v <local directory>:/data tool:version <command>
+docker run --rm -u $(id -u):$(id -g) -v $(pwd)/amrfinder_test_files:/data amrfinder:3.10 amrfinder --nucleotide 2021CK-01854_contigs.fa --threads 20 --name 2021CK-01854 --output /data/2021CK-01854.txt --organism Klebsiella
 ```
 
 Further documentation can be found at [docs.docker.com](https://docs.docker.com/engine/reference/run/)
