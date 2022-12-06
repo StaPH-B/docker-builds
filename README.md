@@ -34,9 +34,9 @@ We have also created a user guide that outlines methods and best practices for u
 
 ### [Templates]()
 Several template files are provided. These are intended to be copied and edited by contributors.
-1. [dockerfile-template/version/Dockerfile](./dockerfile-template/version/Dockerfile) is the basic template useful for most images
-2. [dockerfile-template/version/Dockerfile_mamba](./dockerfile-template/version/Dockerfile_mamba) is a basic template for using the micromamba base
-3. [dockerfile-template/version/README.md](./dockerfile-template/version/README.md) is a basic readme file template to assist others in using the image
+1. [dockerfile-template/Dockerfile](./dockerfile-template/Dockerfile) is the basic template useful for most images
+2. [dockerfile-template/Dockerfile_mamba](./dockerfile-template/Dockerfile_mamba) is a basic template for using the micromamba base
+3. [dockerfile-template/README.md](./dockerfile-template/README.md) is a basic readme file template to assist others in using the image
 
 #### What about Singularity?
 For many people Docker is not an option, but Singularity is. Most Docker containers are compatible with Singularity and can easily be converted to Singularity format. Please see the User Guide linked above to for instructions on how to download docker images from dockerhub and how to run them using Singularity. We've worked hard to ensure that our containers are compatibile with Singularity, but if you find one that isn't, please leave an issue and let us know!
