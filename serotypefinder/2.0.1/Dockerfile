@@ -78,7 +78,7 @@ FROM app as test
 WORKDIR /test
 
 # download an example assembly; test with SerotypeFinder
-# Escherichia coli complete genome (Unicycler assembly): https://www.ncbi.nlm.nih.gov/data-hub/genome/GCA_007765495.1/
+# Escherichia coli complete genome (Unicycler assembly)
 # GenBank Nucleotide entry: https://www.ncbi.nlm.nih.gov/nuccore/CP113091.1/
 # BioSample:SAMN08799860
 # expect O1:H7

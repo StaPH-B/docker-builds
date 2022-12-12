@@ -4,9 +4,16 @@ A docker container that contains SerotypeFinder, a tool for serotyping E. coli i
 
 [Link to DockerHub repository](https://hub.docker.com/r/staphb/serotypefinder)
 
+Additional tools:
+
+- python 3.8.10
+- biopython 1.73
+- [kma](https://bitbucket.org/genomicepidemiology/kma/src/master/) 1.0.0
+- ncbi-blast+ 2.9.0
+
 ## Version information
 
-SerotypeFinder version: 2.0.1 https://bitbucket.org/genomicepidemiology/serotypefinder/src/2.0.1/ made on 2019‑01‑28
+SerotypeFinder version: 2.0.1 [https://bitbucket.org/genomicepidemiology/serotypefinder/src/2.0.1/](https://bitbucket.org/genomicepidemiology/serotypefinder/src/2.0.1/) made on 2019‑01‑28
 
 SerotypeFinder database version: Git commit `ada62c62a7fa74032448bb2273d1f7045c59fdda` made on 2022‑05‑16. [Link to commit history](https://bitbucket.org/genomicepidemiology/serotypefinder_db/commits/)
 
