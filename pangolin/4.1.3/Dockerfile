@@ -1,4 +1,4 @@
-FROM mambaorg/micromamba:1.0.0 as app
+FROM mambaorg/micromamba:1.1.0 as app
 
 # build and run as root users since micromamba image has 'mambauser' set as the $USER
 USER root
@@ -15,7 +15,7 @@ ARG CONSTELLATIONS_VER="v0.1.10"
 ARG USHER_VER="0.6.1"
 
 # metadata labels
-LABEL base.image="mambaorg/micromamba:1.0.0"
+LABEL base.image="mambaorg/micromamba:1.1.0"
 LABEL dockerfile.version="3"
 LABEL software="pangolin"
 LABEL software.version=${PANGOLIN_VER}
