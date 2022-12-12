@@ -101,9 +101,4 @@ RUN mkdir -p /test/serotypefinder-test-fsa && \
  serotypefinder.py -i /serotypefinder/test.fsa -x -o /test/serotypefinder-test-fsa && \
  cat /test/serotypefinder-test-fsa/results_tab.tsv
 
-
-
-
 RUN serotypefinder.py --help
-
-# download an E. coli genome or a few and check usage with both reads and assembly as inputser
