@@ -1,20 +1,23 @@
-# NCBI datasets and dataformat container
+# NCBI table2asn
 
-Main tool : [datasets](https://www.ncbi.nlm.nih.gov/datasets/docs/v1/download-and-install/#use-the-datasets-tool-to-download-biological-data) and [dataformat](https://www.ncbi.nlm.nih.gov/datasets/docs/v1/download-and-install/#use-the-dataformat-tool-to-convert-data-reports-to-other-formats)
+Main tool : [table2asn](https://www.ncbi.nlm.nih.gov/genbank/table2asn/)
 
-Full documentation: [https://www.ncbi.nlm.nih.gov/datasets/docs/v1/how-tos/](https://www.ncbi.nlm.nih.gov/datasets/docs/v1/how-tos/)
+Full documentation: [README](https://ftp.ncbi.nlm.nih.gov/asn1-converters/by_program/table2asn/DOCUMENTATION/table2asn_readme.txt)
 
-> Use NCBI Datasets to gather metadata, download data packages, view reports and more
+> table2asn is a command-line program that creates sequence records for submission to GenBank
 
 ## Example Usage
 
 ```bash
-# will download the fasta for ON924087.1 in a zipped directory
-datasets download virus genome accession ON924087.1 --filename ON924087.1.zip
+# Single non-genome submission: a particular .fsa file, and only 1 sequence in the .fsa file and the source information is in the definition line of the .fsa file:
+table2asn -t template.sbt -i x.fsa -V v
 
-# unzipping the directory and the fasta file will be located at ncbi_dataset/data/genomic.fna
-unzip ON924087.1.zip 
+# Batch non-genome submission: a directory that contains .fsa files, and multiple sequences per file, and the source information is in the definition line of the .fsa files:
+table2asn -t template.sbt -indir path_to_files -a s -V v
 
-# copying the file into something with a better name
-cp ncbi_dataset/data/genomic.fna ncbi_dataset/data/ON924087.1.genomic.fna
+# Genome submission: a directory that contains multiple .fsa files of a single genome, and one or more sequences per file and the source information is in the definition line of the .fsa files:
+table2asn -t template.sbt -indir path_to_files -M n -Z
+
+# Genome submission for the most common gapped situation (= runs of 10 or more Ns represent a gap, and there are no gaps of completely unknown size, and the evidence for linkage across the gaps is "paired-ends"), and the source information is in the definition line of the .fsa files:
+table2asn -t template -indir path_to_files -M n -Z -gaps-min 10 -l paired-ends
 ```
