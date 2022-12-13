@@ -74,6 +74,7 @@ The licenses of the open-source software that is contained in these Docker image
 | NanoPlot | GNU GPLv3 | https://github.com/wdecoster/NanoPlot/blob/master/LICENSE |
 | NCBI AMRFinderPlus | Public Domain | https://github.com/ncbi/amr/blob/master/LICENSE |
 | NCBI Datasets | Public Domain | https://github.com/ncbi/datasets/blob/master/pkgs/ncbi-datasets-cli/LICENSE.md |
+| NCBI table2asn | Public Domain | unknown |
 | ngmaster | GNU GPLv3 | https://github.com/MDU-PHL/ngmaster/blob/master/LICENSE |
 | OrthoFinder | GNU GPLv3 | https://github.com/davidemms/OrthoFinder/blob/master/License.md |
 | Panaroo | MIT | https://github.com/gtonkinhill/panaroo/blob/master/LICENSE |
