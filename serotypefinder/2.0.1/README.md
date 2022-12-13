@@ -1,8 +1,13 @@
-# SerotypeFinder Container How-To
+# SerotypeFinder Container
 
 A docker container that contains SerotypeFinder, a tool for serotyping E. coli isolates from reads or assemblies
 
-[Link to DockerHub repository](https://hub.docker.com/r/staphb/serotypefinder)
+[Link to StaPH-B DockerHub repository](https://hub.docker.com/r/staphb/serotypefinder)
+
+Main tool:
+
+- Main Code Repo: [https://bitbucket.org/genomicepidemiology/serotypefinder/src/master/](https://bitbucket.org/genomicepidemiology/serotypefinder/src/master/)
+- You may be familiar with the web version of SerotypeFinder: [https://cge.cbs.dtu.dk/services/SerotypeFinder/](https://cge.cbs.dtu.dk/services/SerotypeFinder/)
 
 Additional tools:
 
@@ -16,8 +21,6 @@ Additional tools:
 SerotypeFinder version: 2.0.1 [https://bitbucket.org/genomicepidemiology/serotypefinder/src/2.0.1/](https://bitbucket.org/genomicepidemiology/serotypefinder/src/2.0.1/) made on 2019‑01‑28
 
 SerotypeFinder database version: Git commit `ada62c62a7fa74032448bb2273d1f7045c59fdda` made on 2022‑05‑16. [Link to commit history](https://bitbucket.org/genomicepidemiology/serotypefinder_db/commits/)
-
-You may be familiar with the web version of SerotypeFinder: [https://cge.cbs.dtu.dk/services/SerotypeFinder/](https://cge.cbs.dtu.dk/services/SerotypeFinder/)
 
 ## Requirements
 
