@@ -1,15 +1,21 @@
 FROM nfcore/base:1.13.3 as app
 
+ARG TOSTADAS_VER="1.0.0"
+
 LABEL authors="Cole and Ankush Gupta"
 LABEL base.image="nfcore/base:1.13.3"
 LABEL dockerfile.version="1"
 LABEL software="tostadas"
-LABEL software.version=$SOFTWARENAME_VER
+LABEL software.version=$TOSTADAS_VER
 LABEL description="Image for the TOSTADAS: Toolkit for Open Sequence Triage, Annotation and DAtabase Submission pipeline"
 LABEL website="https://github.com/CDCgov/tostadas"
 LABEL license="https://github.com/CDCgov/tostadas/LICENSE"
-LABEL maintainer="Ankush Gupta, Kyle O'Connell, and Cole Tindall"
+LABEL maintainer="Ankush Gupta"
 LABEL maintainer.email="ankushkgupta@deloitte.com"
+LABEL maintainer2="Kyle O'Connell"
+LABEL maintainer2.email=""
+LABEL maintainer3="Cole Tindall"
+LABEL maintainer3.email=""
 
 ARG ENV_YML=environment.yml
 
