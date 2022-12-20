@@ -14,7 +14,8 @@ ARG SKESA_VER="2.3.0"
 ARG MEGAHIT_VER="1.1.4"
 ARG VELVET_VER="1.2.10"
 ARG FLASH_VER="1.2.11"
-ARG PILON_VER="1.22"
+# also not sure if this upgraded pilon version is compatible, previously used 1.22
+ARG PILON_VER="1.24"
 
 LABEL base.image="ubuntu:xenial"
 LABEL dockerfile.version="3"
