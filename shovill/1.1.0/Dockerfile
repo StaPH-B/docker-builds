@@ -1,5 +1,3 @@
-FROM ubuntu:xenial as app
-
 # ephemeral environmental variables that go away after building the image
 ARG SHOVILL_VER="1.1.0"
 ARG SPADES_VER="3.15.5"
@@ -16,6 +14,23 @@ ARG VELVET_VER="1.2.10"
 ARG FLASH_VER="1.2.11"
 # also not sure if this upgraded pilon version is compatible, previously used 1.22
 ARG PILON_VER="1.24"
+
+FROM ubuntu:xenial as app
+
+# reinstantiating variables so they are available in app FROM layer
+ARG SHOVILL_VER
+ARG SPADES_VER
+ARG SEQTK_VER
+ARG KMC_VER
+ARG LIGHTER_VER
+ARG TRIMMOMATIC_VER
+ARG BWA_VER
+ARG SAMTOOLS_VER
+ARG SKESA_VER
+ARG MEGAHIT_VER
+ARG VELVET_VER
+ARG FLASH_VER
+ARG PILON_VER
 
 LABEL base.image="ubuntu:xenial"
 LABEL dockerfile.version="3"
@@ -188,5 +203,30 @@ ENV PATH="${PATH}:\
 
 # test layer
 FROM app as test
+
+# reinstantiating variable so it's available for cd cmd below
+ARG SHOVILL_VER
+
+# so that the below commands are run with /bin/bash shell and not /bin/sh - needed for bash-specific tricks below
+SHELL ["/bin/bash", "-c"]
+
+# test shamelessly stolen & modified from: https://github.com/tseemann/shovill/blob/master/.travis.yml
+RUN cd /shovill/shovill-${SHOVILL_VER}/ && \
+kmc && \
+skesa --version && \
+shovill --version && \
+! shovill --doesnotexist && \
+echo "TESTING SHOVILL + SPADES" && \
+shovill --outdir out.spades --assembler spades --R1 test/R1.fq.gz --R2 test/R2.fq.gz --nostitch --noreadcorr --nocorr && \
+grep '>' out.spades/contigs.fa && \
+echo "TESTING SHOVILL + MEGAHIT" && \
+shovill --outdir out.megahit --assembler megahit --R1 test/R1.fq.gz --R2 test/R2.fq.gz --trim && \
+grep '>' out.megahit/contigs.fa && \
+echo "TESTING SHOVILL + VELVET" && \
+shovill --outdir out.velvet --assembler velvet --R1 test/R1.fq.gz --R2 test/R2.fq.gz --ram 4 --noreadcorr --nocorr && \
+grep '>' out.velvet/contigs.fa && \
+echo "TESTING SHOVILL + SKESA" && \
+shovill --outdir out.skesa --assembler skesa --R1 test/R1.fq.gz --R2 test/R2.fq.gz --ram 4 --noreadcorr --nocorr && \
+grep '>' out.velvet/contigs.fa
 
 RUN shovill --help && shovill --check
