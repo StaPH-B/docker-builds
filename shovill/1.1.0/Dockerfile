@@ -214,7 +214,6 @@ SHELL ["/bin/bash", "-c"]
 RUN cd /shovill/shovill-${SHOVILL_VER}/ && \
 kmc && \
 skesa --version && \
-shovill --version && \
 ! shovill --doesnotexist && \
 echo "TESTING SHOVILL + SPADES" && \
 shovill --outdir out.spades --assembler spades --R1 test/R1.fq.gz --R2 test/R2.fq.gz --nostitch --noreadcorr --nocorr && \
@@ -229,4 +228,4 @@ echo "TESTING SHOVILL + SKESA" && \
 shovill --outdir out.skesa --assembler skesa --R1 test/R1.fq.gz --R2 test/R2.fq.gz --ram 4 --noreadcorr --nocorr && \
 grep '>' out.velvet/contigs.fa
 
-RUN shovill --help && shovill --check
+RUN shovill --help && shovill --check && shovill --version
