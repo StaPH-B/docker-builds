@@ -97,7 +97,7 @@ jobs:
 
       - name: Build and push user-defined tag to DockerHub
         id: docker_build_user_defined_tag
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: ${{ inputs.path_to_context }}
           file: ${{ inputs.path_to_context }}/${{ inputs.dockerfile_name }}
@@ -111,7 +111,7 @@ jobs:
 
       - name: Build and push latest tag to DockerHub
         id: docker_build_latest_tag
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         if: ${{ inputs.push_latest_tag }}
         with:
           context: ${{ inputs.path_to_context }}
@@ -126,7 +126,7 @@ jobs:
 
       - name: Build and push user-defined tag to Quay
         id: quay_build_user_defined_tag
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         if: ${{ inputs.push_quay }}
         with:
           context: ${{ inputs.path_to_context }}
@@ -141,7 +141,7 @@ jobs:
 
       - name: Build and push latest tag to Quay
         id: quay_build_latest_tag
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         if: ${{ inputs.push_quay && inputs.push_latest_tag }}
         with:
           context: ${{ inputs.path_to_context }}
