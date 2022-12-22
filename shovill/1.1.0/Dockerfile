@@ -4,7 +4,7 @@ ARG SPADES_VER="3.15.5"
 ARG SEQTK_VER="1.3"
 ARG KMC_VER="3.1.1"
 ARG LIGHTER_VER="1.1.1"
-ARG TRIMMOMATIC_VER="0.38"
+ARG TRIMMOMATIC_VER="0.39"
 ARG BWA_VER="0.7.17"
 # not sure if a more recent samtools is compatible or not, previously used samtools 1.10
 ARG SAMTOOLS_VER="1.16.1"
@@ -175,9 +175,7 @@ RUN mkdir samclip && \
 # aaannnddd finally install shovill v1.1.0 itself
 # extra perl module I had to install via apt-get: libfindbin-libs-perl
 # create /data for working directory
-RUN mkdir shovill && \
-  cd shovill && \
-  wget https://github.com/tseemann/shovill/archive/v${SHOVILL_VER}.tar.gz && \
+RUN wget https://github.com/tseemann/shovill/archive/v${SHOVILL_VER}.tar.gz && \
   tar -xzf v${SHOVILL_VER}.tar.gz && \
   rm v${SHOVILL_VER}.tar.gz && \
   mkdir /data
@@ -196,7 +194,7 @@ ENV PATH="${PATH}:\
 /megahit/megahit_v${MEGAHIT_VER}_LINUX_CPUONLY_x86_64-bin:\
 /velvet/velvet-${VELVET_VER}:\
 /flash/FLASH-${FLASH_VER}:\
-/shovill/shovill-${SHOVILL_VER}/bin:\
+/shovill-${SHOVILL_VER}/bin:\
 /pilon:\
 /samclip"\
      LC_ALL=C
@@ -211,7 +209,7 @@ ARG SHOVILL_VER
 SHELL ["/bin/bash", "-c"]
 
 # test shamelessly stolen & modified from: https://github.com/tseemann/shovill/blob/master/.travis.yml
-RUN cd /shovill/shovill-${SHOVILL_VER}/ && \
+RUN cd /shovill-${SHOVILL_VER}/ && \
 kmc && \
 skesa --version && \
 ! shovill --doesnotexist && \
