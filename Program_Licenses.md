@@ -29,6 +29,7 @@ The licenses of the open-source software that is contained in these Docker image
 | emboss | GNU GPLv3 | http://emboss.sourceforge.net/licence/ |
 | EToKi | GNU GPLv3 | https://github.com/zheminzhou/EToKi/blob/master/LICENSE |
 | FastANI | Apache v2.0 | https://github.com/ParBLiSS/FastANI/blob/master/LICENSE |
+| Fastp | MIT | https://github.com/OpenGene/fastp/blob/master/LICENSE |
 | FastTree | GNU GPLv2 | http://www.microbesonline.org/fasttree/ |
 | FastQC | GNU GPLv3 | https://github.com/s-andrews/FastQC/blob/master/LICENSE.txt |
 | fastq-scan | MIT | https://github.com/rpetit3/fastq-scan/blob/master/LICENSE |
@@ -37,8 +38,8 @@ The licenses of the open-source software that is contained in these Docker image
 | FLASH | GNU GPLv3 | https://github.com/ebiggers/flash/blob/master/COPYING |
 | Flye | BSD-3 | https://github.com/fenderglass/Flye/blob/flye/LICENSE |
 | Freyja | BSD-2 | https://github.com/andersen-lab/Freyja/blob/main/LICENSE |
-| GAMBIT | GNU aGPLv3 | https://github.com/hesslab-gambit/gambit/blob/master/LICENSE |
-| GAMMA | Apache 2.0? | Not clearly indicated on: https://github.com/rastanton/GAMMA/ <br> Bioconda lists Apache 2.0: https://bioconda.github.io/recipes/gamma/README.html?highlight=gamma|
+| GAMBIT | GNU aGPLv3 | https://github.com/jlumpe/gambit/blob/master/LICENSE |
+| GAMMA | Apache 2.0 | https://github.com/rastanton/GAMMA/blob/main/LICENSE |
 | Genotyphi | GNU GPLv3 | https://github.com/katholt/genotyphi/blob/main/LICENSE |
 | Hmmer | BSD-3 | http://eddylab.org/software/hmmer/Userguide.pdf |
 | htslib | MIT | https://github.com/samtools/htslib/blob/develop/LICENSE |
@@ -52,7 +53,9 @@ The licenses of the open-source software that is contained in these Docker image
 | Kraken | GNU GPLv3 | https://github.com/DerrickWood/kraken/blob/master/LICENSE |
 | Kraken2 | MIT | https://github.com/DerrickWood/kraken2/blob/master/LICENSE |
 | kSNP3 | BSD | available in zipped kSNP archive on sourceforge or in docker image under `/kSNP3.1_Linux_package/THE BSD OPENSOURCE LICENSE.pdf` |
+| kSNP4 | BSD | available in zipped kSNP archive on sourceforge or in docker image under `/opt/kSNP4 Linux package/Documentation/THE BSD OPENSOURCE LICENSE.pdf` |
 | legsta | GNU GPLv3 | https://github.com/tseemann/legsta/blob/master/LICENSE |
+| liftoff | GNU GPLv3 | https://github.com/agshumate/Liftoff/blob/master/LICENSE.md |
 | Lyve-SET  | MIT | https://github.com/lskatz/lyve-SET/blob/master/LICENSE |
 | Mafft  | BSD | https://mafft.cbrc.jp/alignment/software/license.txt |
 | Mash | non-standard license (see link) | https://github.com/marbl/Mash/blob/master/LICENSE.txt |
@@ -70,21 +73,30 @@ The licenses of the open-source software that is contained in these Docker image
 | Mykrobe | MIT | https://github.com/Mykrobe-tools/mykrobe/blob/master/LICENSE |
 | NanoPlot | GNU GPLv3 | https://github.com/wdecoster/NanoPlot/blob/master/LICENSE |
 | NCBI AMRFinderPlus | Public Domain | https://github.com/ncbi/amr/blob/master/LICENSE |
+| NCBI Datasets | Public Domain | https://github.com/ncbi/datasets/blob/master/pkgs/ncbi-datasets-cli/LICENSE.md |
+| NCBI table2asn | Public Domain | unknown |
 | ngmaster | GNU GPLv3 | https://github.com/MDU-PHL/ngmaster/blob/master/LICENSE |
 | OrthoFinder | GNU GPLv3 | https://github.com/davidemms/OrthoFinder/blob/master/License.md |
 | Panaroo | MIT | https://github.com/gtonkinhill/panaroo/blob/master/LICENSE |
 | Pangolin | GNU GPLv3 | https://github.com/cov-lineages/pangolin/blob/master/LICENSE.txt |
+| pasty | Apache 2.0 | https://github.com/rpetit3/pasty/blob/main/LICENSE |
+| pbptyper | MIT | https://github.com/rpetit3/pbptyper/blob/main/LICENSE |
 | Phyml | GNU GPLv3 | https://github.com/stephaneguindon/phyml/blob/master/COPYING |
 | Piggy | GNU GPLv3 | https://github.com/harry-thorpe/piggy/blob/master/LICENSE |
 | Pilon | GNU GPLv2 | https://github.com/broadinstitute/pilon/blob/master/LICENSE |
+| Piranha | GNU GPLv3 | https://github.com/polio-nanopore/piranha/blob/main/LICENSE |
 | PlasmidSeeker | BSD 3-Clause | https://github.com/bioinfo-ut/PlasmidSeeker/blob/master/LICENSE |
 | pmga | GNU GPLv2 | https://github.com/rpetit3/pmga/blob/master/LICENSE |
+| PopPUNK | Apache 2.0 | https://github.com/bacpop/PopPUNK/blob/master/LICENSE |
 | Prokka | GNU GPLv3 | https://raw.githubusercontent.com/tseemann/prokka/master/doc/LICENSE.Prokka |
+| pyGenomeViz | MIT | https://github.com/moshi4/pyGenomeViz/blob/main/LICENSE |
 | QUAST | GNU GPLv2 | https://github.com/ablab/quast/blob/master/LICENSE.txt |
+| QuickSNP | GNU GPLv3 | https://github.com/k-florek/QuickSNP/blob/main/LICENSE |
 | racon | MIT | https://github.com/isovic/racon/blob/master/LICENSE |
 | rasusa | MIT | https://github.com/mbhall88/rasusa/blob/master/LICENSE |
 | raven | MIT | https://github.com/lbcb-sci/raven/blob/master/LICENSE |
 | RAxML <br/> RAxML Next Generation | GNU GPLv3 (RAxML), <br/> GNU Affero GPLv3 (RAxML Next Generation)| https://github.com/stamatak/standard-RAxML/blob/master/gpl-3.0.txt <br/> https://github.com/amkozlov/raxml-ng/blob/master/LICENSE.txt |
+| ResFinder | Apache 2.0 | https://bitbucket.org/genomicepidemiology/resfinder/src/master/ |
 | Roary | GNU GPLv3 | https://github.com/sanger-pathogens/Roary/blob/master/GPL-LICENSE |
 | SalmID| MIT | https://github.com/hcdenbakker/SalmID/blob/master/LICENSE |
 | Samtools | GNU GPLv3 | https://github.com/samtools/samtools/blob/develop/LICENSE |
@@ -95,17 +107,22 @@ The licenses of the open-source software that is contained in these Docker image
 | Seroba | GNU GPLv3 | https://github.com/sanger-pathogens/seroba/blob/master/LICENSE |
 | SerotypeFinder | Apache 2.0 | https://bitbucket.org/genomicepidemiology/serotypefinder/ |
 | shigatyper | non-standard license see --> | https://github.com/CFSAN-Biostatistics/shigatyper/blob/master/LICENSE |
+| ShigEiFinder | GNU GPLv3 | https://github.com/LanLab/ShigEiFinder/blob/main/LICENSE |
 | Shovill | GNU GPLv3 | https://github.com/tseemann/shovill/blob/master/LICENSE |
 | SISTR | Apache 2.0 | https://github.com/phac-nml/sistr_cmd/blob/master/LICENSE |
+| SKA | MIT | https://github.com/simonrharris/SKA/blob/master/LICENSE |
 | SKESA | Public Domain | https://github.com/ncbi/SKESA/blob/master/LICENSE |
-| Smalt | GNU GPLv3 | https://www.sanger.ac.uk/tool/smalt-0/ |  
+| Smalt | GNU GPLv3 | https://www.sanger.ac.uk/tool/smalt-0/ |
+| SnpEff | MIT | https://github.com/pcingola/SnpEff/blob/master/LICENSE.md |
 | Snippy | GNU GPLv2 | https://github.com/tseemann/snippy/blob/master/LICENSE |
 | snp-dists | GNU GPLv3 | https://github.com/tseemann/snp-dists/blob/master/LICENSE |
 | SNP-sites | GNU GPLv3 | https://github.com/sanger-pathogens/snp-sites/blob/master/LICENSE |
 | SNVPhyl-tools | Apache 2.0 | https://github.com/phac-nml/snvphyl-tools/blob/master/LICENSE |
 | SPAdes | GNU GPLv2 | https://github.com/ablab/spades/blob/spades_3.13.0/assembler/LICENSE |
 | SRA-toolkit | Public Domain | https://github.com/ncbi/sra-tools/blob/master/LICENSE |
+| SRST2 | BSD | https://github.com/katholt/srst2/blob/master/LICENSE.txt |
 | Staramr | Apache 2.0 | https://github.com/phac-nml/staramr/blob/master/LICENSE |
+| TBProfiler | GNU GPLv3 | https://github.com/jodyphelan/TBProfiler/blob/master/LICENSE |
 | TipToft | GNU GPLv3 | https://github.com/andrewjpage/tiptoft/blob/master/LICENSE |
 | Treemmer | GNU GPLv3 | https://github.com/fmenardo/Treemmer/blob/master/COPYING |
 | Trimmomatic | GNU GPLv3 | https://github.com/usadellab/Trimmomatic/blob/main/distSrc/LICENSE |
