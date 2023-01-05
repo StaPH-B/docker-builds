@@ -50,6 +50,8 @@ WORKDIR /data
 
 FROM app as test
 
+RUN mamba list && conda list
+
 RUN liftoff --version && \
     samtools --version && \
     python --version
