@@ -23,9 +23,9 @@ LABEL license="https://github.com/CDCgov/tostadas/LICENSE"
 LABEL maintainer="Ankush Gupta"
 LABEL maintainer.email="ankushkgupta@deloitte.com"
 LABEL maintainer2="Kyle O'Connell"
-LABEL maintainer2.email=""
+LABEL maintainer2.email="kyoconnell@deloitte.com"
 LABEL maintainer3="Cole Tindall"
-LABEL maintainer3.email=""
+LABEL maintainer3.email="ctindall@deloitte.com"
 
 # download tostadas repo, move to /tostadas, and create /data
 RUN wget https://github.com/CDCgov/tostadas/archive/refs/tags/v${TOSTADAS_VER}.tar.gz && \
