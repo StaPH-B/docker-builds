@@ -29,7 +29,7 @@ GCF_000006925   +       38      C3      SF2a    SF1-5
 
 ##############################################################
 
-# paired end Illumina reads FASTQs as input
+# paired end Illumina read FASTQs as input
 $ shigeifinder -r \
       -i SRR21205791_1.fastq.gz  SRR21205791_2.fastq.gz \
       --hits \
@@ -40,4 +40,17 @@ $ shigeifinder -r \
 $ head -n 2 shigeifinder.SRR21205791.out
 #SAMPLE ipaH    VIRULENCE_PLASMID       CLUSTER SEROTYPE        O_ANTIGEN       H_ANTIGEN       NOTES
 SRR21205791     +       38      CSS     SS      SS
+
+# single end Illumina read FASTQs as input
+$ shigeifinder -r \
+      -i SRR21205791_1.fastq.gz  \
+      --hits \
+      --dratio \
+      --single_end \
+      -t 2 \
+      --output shigeifinder.SRR21205791.single-end.out
+
+$ head -n 2 shigeifinder.SRR21205791.single-end.out
+#SAMPLE ipaH    VIRULENCE_PLASMID       CLUSTER SEROTYPE        O_ANTIGEN       H_ANTIGEN       NOTES
+SRR21205791_1   +       38      CSS     SS      SS
 ```
