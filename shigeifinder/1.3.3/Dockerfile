@@ -15,8 +15,8 @@ LABEL software.version=${SHIGEIFINDER_VER}
 LABEL description="Cluster informed Shigella and EIEC serotyping tool from Illumina reads and assemblies"
 LABEL website="https://github.com/LanLab/ShigEiFinder"
 LABEL license="https://github.com/LanLab/ShigEiFinder/blob/main/LICENSE"
-LABEL maintainer1="Curtis Kapsak"
-LABEL maintainer1.email="curtis.kapsak@theiagen.com"
+LABEL maintainer="Curtis Kapsak"
+LABEL maintainer.email="curtis.kapsak@theiagen.com"
 
 # so that apt/tzdata doesn't ask for a timezone during build. Variable will not be in environment after building
 ARG DEBIAN_FRONTEND=noninteractive
