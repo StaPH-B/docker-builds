@@ -7,6 +7,7 @@ Additional tools:
 - bwa 0.7.17
 - samtools 1.10
 - python 3.8.10
+- ncbi-blast+ 2.9.0
 
 Full documentation: https://github.com/LanLab/ShigEiFinder
 
