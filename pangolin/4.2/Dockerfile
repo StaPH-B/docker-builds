@@ -23,8 +23,8 @@ LABEL description="Conda environment for Pangolin. Pangolin: Software package fo
 LABEL website="https://github.com/cov-lineages/pangolin"
 LABEL license="GNU General Public License v3.0"
 LABEL license.url="https://github.com/cov-lineages/pangolin/blob/master/LICENSE.txt"
-LABEL maintainer1="Curtis Kapsak"
-LABEL maintainer1.email="kapsakcj@gmail.com"
+LABEL maintainer="Curtis Kapsak"
+LABEL maintainer.email="kapsakcj@gmail.com"
 
 # install dependencies; cleanup apt garbage
 RUN apt-get update && apt-get install -y --no-install-recommends \
