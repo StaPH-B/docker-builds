@@ -2,7 +2,7 @@ FROM mambaorg/micromamba:1.2.0 as app
 
 # build and run as root users since micromamba image has 'mambauser' set as the $USER
 USER root
-# set workdir to default for building; set to /data at the end
+# set workdir to default for building; set to /data at the end of app layer
 WORKDIR /
 
 # ARG variables only persist during build time
@@ -29,38 +29,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  bsdmainutils && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-# commenting out for now since using bioconda/micromamba to install env
-# # get the dragonflye repo
-# RUN wget "https://github.com/cov-lineages/pangolin/archive/${DRAGONFLYE_VER}.tar.gz" && \
-#  tar -xf ${DRAGONFLYE_VER}.tar.gz && \
-#  rm ${DRAGONFLYE_VER}.tar.gz && \
-#  mv -v pangolin-* pangolin
-
-# modify environment.yml to pin specific versions during install
-# create the conda environment using modified environment.yml
+# create the conda environment; install dragonflye and dependencies based on bioconda package; cleanup conda garbage
 RUN micromamba install -n base -c conda-forge -c bioconda -c defaults -y dragonflye=${DRAGONFLYE_VER} && \
  micromamba clean -a -y && \
  mkdir /data
 
-# so that mamba/conda env is active when running below commands
-ENV ENV_NAME="base"
-ARG MAMBA_DOCKERFILE_ACTIVATE=1
-
-# WORKDIR /pangolin
-
-# run pip install step; download optional pre-computed assignment hashes for UShER (useful for running on large batches of samples)
-# best to skip using the assigment-cache if running on one sample for speed
-# print versions
-# RUN pip install . && \
-#  pangolin --add-assignment-cache && \
-#  micromamba clean -a -y && \
-#  mkdir /data && \
-#  pangolin --all-versions && \
-#  usher --version
-
 WORKDIR /data
 
-# hardcode pangolin executable into the PATH variable
+# hardcode base conda environment into the PATH variable; LC_ALL for singularity compatibility
 ENV PATH="$PATH:/opt/conda/bin/" \
  LC_ALL=C.UTF-8
 
@@ -71,6 +47,7 @@ FROM app as test
 ENV ENV_NAME="base"
 ARG MAMBA_DOCKERFILE_ACTIVATE=1
 
+# show help options and check dependencies
 RUN dragonflye --help && \
  dragonflye --check
 
@@ -78,16 +55,16 @@ RUN dragonflye --help && \
 WORKDIR /test
 
 # download test data (ONT and ILMN FASTQs)
-# modified code from here: https://github.com/rpetit3/dragonflye/blob/main/.github/workflows/test-dragonflye.yml
 RUN echo "downloading ILMN and ONT test data from bactopia/bactopia-tests on GitHub..." && \
     wget https://raw.githubusercontent.com/bactopia/bactopia-tests/main/data/species/portiera/nanopore/ERR3772599.fastq.gz && \
     wget https://raw.githubusercontent.com/bactopia/bactopia-tests/main/data/species/portiera/illumina/SRR2838702_R1.fastq.gz && \
     wget https://raw.githubusercontent.com/bactopia/bactopia-tests/main/data/species/portiera/illumina/SRR2838702_R2.fastq.gz
 
 # test assembly and polishing algorithms with test data
+# modified code from here: https://github.com/rpetit3/dragonflye/blob/main/.github/workflows/test-dragonflye.yml
 RUN echo "Testing Raven Assembler (quality filtered)..." && \
 dragonflye --reads /test/ERR3772599.fastq.gz --prefix ERR3772599 --cpus 0 --nopolish --outdir raven-minquality --gsize 300000 --assembler raven --minquality 8 && \
-echo "Test Raven Assembler (quality filtered, no length filter)..." \
+echo "Test Raven Assembler (quality filtered, no length filter)..." && \
 dragonflye --reads /test/ERR3772599.fastq.gz --cpus 0 --nopolish --outdir raven-minquality-nominreadlen --gsize 300000 --assembler raven --minquality 6 --minreadlen 0 && \
 echo "Test Raven Assembler (quality filtered, no length filter, trimming)" && \
 dragonflye --reads /test/ERR3772599.fastq.gz --cpus 0 --nopolish --outdir raven-minquality-nominreadlen-trim --gsize 300000 --assembler raven --minquality 6 --minreadlen 0 --trim && \
