@@ -19,7 +19,8 @@ LABEL maintainer.email="henrykunerth@gmail.com"
 
 # Install dependences (update as needed)
 RUN apt-get update && apt-get install -y --no-install-recommends \
- wget && \
+ wget \
+ ca-certificates && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # download SEQKIT and organize directories
