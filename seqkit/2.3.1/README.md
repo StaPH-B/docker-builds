@@ -16,3 +16,21 @@ W Shen, S Le, Y Li*, F Hu*. SeqKit: a cross-platform and ultrafast toolkit for F
 and 
 [**Benchmark**](http://bioinf.shenwei.me/seqkit/benchmark/))
 
+## Example Usage
+
+```bash
+# get simple statistics from FASTA/Q files
+
+seqkit stats <file name(s)>
+
+# or with flags
+
+seqkit stats --all --tabular <file name(s)>
+
+# conversion from FASTA to FASTQ
+
+seqkit fa2fq <file name(s)>
+
+
+
+```
