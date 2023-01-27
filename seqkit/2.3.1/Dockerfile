@@ -18,8 +18,9 @@ LABEL maintainer="Henry Kunerth"
 LABEL maintainer.email="henrykunerth@gmail.com"
 
 # Install dependences (update as needed)
-RUN apt-get update && apt-get install -y \
-	wget
+RUN apt-get update && apt-get install -y --no-install-recommends \
+ wget && \
+ apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # download SEQKIT and organize directories
 RUN wget https://github.com/shenwei356/seqkit/releases/download/v${SEQKIT_VER}/seqkit_linux_amd64.tar.gz && \
