@@ -28,7 +28,7 @@ graph TD
      G-->H
      C-->H
      H-->I{build to test}
-     I--success-->J[PR merged and pushed to dockerhub and quay]
+     I--success-->J[PR merged and docker image pushed to dockerhub and quay]
      I--failure-->K[edit dockerfile]
      K-->I
 ```
