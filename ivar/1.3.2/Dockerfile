@@ -86,14 +86,16 @@ RUN ivar version && samtools --version
 # getting files
 RUN wget https://github.com/StaPH-B/docker-builds/blob/master/tests/SARS-CoV-2/SRR13957123.sorted.bam?raw=true && mv SRR13957123.sorted.bam?raw=true SRR13957123.sorted.bam && \
   samtools index SRR13957123.sorted.bam && \
-  wget https://www.ebi.ac.uk/ena/browser/api/fasta/MN908947.3 && mv MN908947.3 MN908947.3.fasta && \
+  wget https://raw.githubusercontent.com/UPHL-BioNGS/Cecret/master/configs/MN908947.3.fasta?raw=true && mv MN908947.3.fasta?raw=true MN908947.3.fasta && \
   wget https://raw.githubusercontent.com/artic-network/artic-ncov2019/master/primer_schemes/nCoV-2019/V3/nCoV-2019.primer.bed && \
   ls
 
 # primer trimming
-RUN ivar trim -e -i SRR13957123.sorted.bam -b nCoV-2019.primer.bed -p SRR13957123.primertrim
+RUN ivar trim -e -i SRR13957123.sorted.bam -b nCoV-2019.primer.bed -p SRR13957123.primertrim && ls
 
 # creating a consensus - using smaller -d for github actions
 RUN samtools mpileup -A -d 40 -B -Q 0 --reference MN908947.3.fasta SRR13957123.primertrim.bam | \
   ivar consensus -q 20 -t 0.6 -n N -m 20 -p consensus/SRR13957123.consensus && \
+  ls && \
   wc -c consensus/SRR13957123.consensus.fasta
+
