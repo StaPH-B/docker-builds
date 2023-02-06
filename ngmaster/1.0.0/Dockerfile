@@ -67,6 +67,7 @@ RUN apt-get update && apt-get install unzip curl ca-certificates -y --no-install
 WORKDIR /test
 
 # test with an actual assembly downloaded from RefSeq
+# more info on this genome here: https://www.ncbi.nlm.nih.gov/labs/data-hub/genome/GCF_013030075.1/
 RUN curl -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_013030075.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT&filename=GCF_013030075.1.zip" \
  -H "Accept: application/zip" && \
  unzip GCF_013030075.1.zip && \
