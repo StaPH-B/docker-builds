@@ -9,9 +9,9 @@ Additional tools:
 - any2fasta 0.4.2
 - mlst 2.23.0
 - python 3.9.0
-- biopython 1.79
+- biopython 1.80
 - perl 5.32.1
-- bioperl 1.80
+- bioperl 1.7.9
 
 ## Example Usage
 
