@@ -1,4 +1,4 @@
-FROM mambaorg/micromamba:1.2.0 as app
+FROM mambaorg/micromamba:1.3.0 as app
 
 # build and run as root users since micromamba image has 'mambauser' set as the $USER
 USER root
@@ -10,7 +10,7 @@ ARG NGMASTER_VER="1.0.0"
 ARG MLST_VER="2.23.0"
 ARG ANY2FASTA_VER="0.4.2"
 
-LABEL base.image="mambaorg/micromamba:1.2.0"
+LABEL base.image="mambaorg/micromamba:1.3.0"
 LABEL dockerfile.version="2"
 LABEL software="ngmaster"
 LABEL software.version=${NGMASTER_VER}
@@ -42,7 +42,7 @@ ENV ENV_NAME="base"
 ARG MAMBA_DOCKERFILE_ACTIVATE=1
 
 # hardcode conda env into the PATH; set locale settings
-ENV PATH="${PATH}:/opt/conda/bin" \
+ENV PATH="/opt/conda/bin:${PATH}" \
  LC_ALL=C.UTF-8
 
 # set final & default working dir to /data
