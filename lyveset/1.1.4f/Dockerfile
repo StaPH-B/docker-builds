@@ -1,4 +1,4 @@
-FROM ubuntu:xenial
+FROM ubuntu:xenial as app
 
 LABEL base.image="ubuntu:xenial"
 LABEL version="3"
@@ -11,47 +11,60 @@ LABEL maintainer1="Kelsey Florek"
 LABEL maintainer1.email="kelsey.florek@slh.wisc.edu"
 LABEL maintainer2="Curtis Kapsak"
 LABEL maintainer2.email="pjx8@cdc.gov"
+LABEL maintainer3="Erik Wolfsohn"
+LABEL maintainer3.email="erik.wolfsohn@cchealth.org"
 
-# install dependencies
-RUN apt-get update && apt-get install -y\
- perl\
- libfile-slurp-perl\
- openjdk-9-jre\
- bioperl\
- wget\
- libz-dev\
- git\
- libncurses5-dev\
- libncursesw5-dev\
- build-essential\
- ncbi-blast+\
- libsvn-perl\
- subversion\
- libsvn1\
- automake1.11\
- libpthread-stubs0-dev\
- cpanminus\
- mpich\
- clang\
- smalt && \
- apt-get clean && apt-get autoclean && \
- rm -rf /var/lib/apt/lists/*
+#run apt in noninteractive mode so it can't prompt for input
+ENV DEBIAN_FRONTEND noninteractive
 
-# install edirect
-RUN wget ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/edirect.tar.gz &&\
-    tar -xzvf edirect.tar.gz &&\
-    rm edirect.tar.gz &&\
-    cd edirect &&\
-    ./setup.sh
+#update apt from closest mirrors
+RUN echo 'deb mirror://mirrors.ubuntu.com/mirrors.txt xenial-security main restricted universe multiverse'  | cat - /etc/apt/sources.list > temp && mv temp /etc/apt/sources.list &&\
+    echo 'deb mirror://mirrors.ubuntu.com/mirrors.txt xenial-backports main restricted universe multiverse'  | cat - /etc/apt/sources.list > temp && mv temp /etc/apt/sources.list &&\
+    echo 'deb mirror://mirrors.ubuntu.com/mirrors.txt xenial-updates main restricted universe multiverse'  | cat - /etc/apt/sources.list > temp && mv temp /etc/apt/sources.list &&\
+    echo 'deb mirror://mirrors.ubuntu.com/mirrors.txt xenial main restricted universe multiverse'  | cat - /etc/apt/sources.list > temp && mv temp /etc/apt/sources.list &&\
+    apt update
 
-#install smalt (at the time of this build lyve-SET was not building correctly)
-#RUN wget --max-redirect 50 --continue 'https://downloads.sourceforge.net/project/smalt/smalt-0.7.6-static.tar.gz' -O smalt-0.7.6-static.tar.gz &&\
-#    tar -zxvf smalt-0.7.6-static.tar.gz &&\
-#    rm smalt-0.7.6-static.tar.gz &&\
-#    cd smalt-0.7.6 &&\
-#    ./configure &&\
-#    make &&\
-#    make install
+RUN apt-get install -y \
+    curl \
+    perl \
+    libfile-slurp-perl \
+    default-jre \
+    bioperl \
+    wget \
+    libz-dev \
+    git \
+    libncurses5-dev \
+    libncursesw5-dev \
+    build-essential \
+    ncbi-blast+ \
+    libsvn-perl \
+    subversion \
+    libsvn1 \
+    automake1.11 \
+    libpthread-stubs0-dev \
+    cpanminus \
+    mpich \
+    clang \
+    libssl-dev \
+    libio-socket-ssl-perl \
+    libxml-simple-perl \
+    unzip \
+    smalt 
+
+RUN apt-get clean && apt-get autoclean && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN mkdir /edirect && \
+    perl -MNet::FTP -e '$ftp = new Net::FTP("ftp.ncbi.nlm.nih.gov", Passive => 1);$ftp->login; $ftp->binary;$ftp->get("/entrez/entrezdirect/edirect.tar.gz");' && \
+    gunzip -c edirect.tar.gz | tar xf - && \
+    mv -v /edirect/* /usr/local/bin && \
+    rm edirect.tar.gz
+
+# install missing xtract executable required by efetch
+RUN wget https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/xtract.Linux.gz && \
+    gunzip -f xtract.Linux.gz && \
+    mv -v xtract.Linux /usr/local/bin/xtract && \
+    chmod +x /usr/local/bin/xtract
 
 #get lyveset files
 RUN wget https://github.com/lskatz/lyve-SET/archive/v1.1.4f.tar.gz &&\
@@ -64,6 +77,8 @@ RUN cpanm Test::Most Bio::FeatureIO String::Escape File::Slurp URI::Escape Math:
 RUN make -C /lyve-SET install -e PREFIX=/lyve-SET &&\
     make -C /lyve-SET env -e PREFIX=/lyve-SET
 
+RUN make -C /lyve-SET clean-edirect
+
 # set PATH and locale settings for singularity compatibility
 ENV PATH="/lyve-SET:\
 /lyve-SET/scripts:\
@@ -72,3 +87,7 @@ ${PATH}"\
     LC_ALL=C
 
 WORKDIR /data
+
+FROM app as test
+
+RUN set_test.pl --numcpus 4 lambda lambda
