@@ -1,0 +1,1 @@
+Builds docker image containing Lyve-SET 1.1.4f hqSNP pipeline. Updated 2023-02-07 to restore eutils functionality & use optimal apt mirrors for package installation.
