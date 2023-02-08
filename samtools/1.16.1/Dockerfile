@@ -9,8 +9,8 @@ LABEL software.version="${SAMTOOLSVER}"
 LABEL description="Tools (written in C using htslib) for manipulating next-generation sequencing data"
 LABEL website="https://github.com/samtools/samtools"
 LABEL license="https://github.com/samtools/samtools/blob/develop/LICENSE"
-LABEL maintainer1="Shelby Bennett"
-LABEL maintainer1.email="shelby.bennett@dgs.virginia.gov"
+LABEL maintainer="Shelby Bennett"
+LABEL maintainer.email="shelby.bennett@dgs.virginia.gov"
 
 
 ARG DEBIAN_FRONTEND=noninteractive
