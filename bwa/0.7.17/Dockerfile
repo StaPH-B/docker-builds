@@ -27,3 +27,9 @@ RUN mkdir bwa &&\
 
 ENV PATH="${PATH}:/bwa/bwa-0.7.17"
 WORKDIR /data
+
+FROM app as test
+
+RUN wget "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nucleotide&id=5&rettype=fasta" \
+    -o "sequence.fasta" &&\
+    bwa index "sequence.fasta"
