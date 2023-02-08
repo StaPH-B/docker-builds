@@ -20,7 +20,8 @@ LABEL maintainer.email="henrykunerth@gmail.com"
 
 # install dependencies; cleanup apt garbage
 RUN apt-get update && apt-get install -y --no-install-recommends \
- wget && \
+ wget \
+ procps && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/*
  
 # set the environment
@@ -31,7 +32,8 @@ ENV PATH="$PATH" \
 RUN micromamba create -n emmtyper && \
     eval "$(micromamba shell hook --shell=bash)" && \
     micromamba activate emmtyper && \
-    micromamba install --yes --name emmtyper -c conda-forge -c bioconda -c defaults emmtyper && \
+    micromamba install --yes --name emmtyper -c conda-forge -c bioconda -c defaults emmtyper \
+    emmtyper=${EMMTYPER_VER} && \
     micromamba clean --all --yes
 
 
