@@ -131,7 +131,7 @@ To learn more about the docker pull rate limits and the open source software pro
 | [ResFinder](https://hub.docker.com/r/staphb/resfinder/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/resfinder)](https://hub.docker.com/r/staphb/resfinder) | <ul><li>4.1.1</li></ul> | https://bitbucket.org/genomicepidemiology/resfinder/src/master/ |
 | [Roary](https://hub.docker.com/r/staphb/roary/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/roary)](https://hub.docker.com/r/staphb/roary) | <ul><li>3.12.0</li><li>3.13.0</li></ul> | https://github.com/sanger-pathogens/Roary |
 | [SalmID](https://hub.docker.com/r/staphb/salmid) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/salmid)](https://hub.docker.com/r/staphb/salmid) | <ul><li>0.1.23</li></ul> | https://github.com/hcdenbakker/SalmID |
-| [Samtools](https://hub.docker.com/r/staphb/samtools) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/samtools)](https://hub.docker.com/r/staphb/samtools) | <ul><li>1.9</li><li>1.10</li><li>1.11</li><li>1.12</li><li>1.13</li><li>1.14</li><li>1.15</li><li>1.16</li></ul> | https://github.com/samtools/samtools |
+| [Samtools](https://hub.docker.com/r/staphb/samtools) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/samtools)](https://hub.docker.com/r/staphb/samtools) | <ul><li>1.9</li><li>1.10</li><li>1.11</li><li>1.12</li><li>1.13</li><li>1.14</li><li>1.15</li><li>1.16</li><li>1.16.1</li></ul> | https://github.com/samtools/samtools |
 | [SeqKit](https://hub.docker.com/r/staphb/SeqKit) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/seqkit)](https://hub.docker.com/r/staphb/seqkit) | <ul><li>2.3.1</li></ul> | https://github.com/shenwei356/seqkit |
 | [SeqSero](https://hub.docker.com/r/staphb/seqsero/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/seqsero)](https://hub.docker.com/r/staphb/seqsero) | <ul><li>1.0.1</li></ul> | https://github.com/denglab/SeqSero |
 | [SeqSero2](https://hub.docker.com/r/staphb/seqsero2/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/seqsero2)](https://hub.docker.com/r/staphb/seqsero2) | <ul><li>0.1.0</li><li>1.0.0</li><li>1.0.2</li><li>1.1.0</li><li>1.1.1</li><li>1.2.1</li></ul> | https://github.com/denglab/SeqSero2/ |
@@ -214,3 +214,4 @@ Each Dockerfile lists the author(s)/maintainer(s) as a metadata `LABEL`, but the
   * [@kyleoconnell](https://github.com/kyleoconnell)
   * [@CTindall-1](https://github.com/CTindall-1)
   * [@hkunerth](https://github.com/hkunerth)
+  * [@shelby-bennett] (https://github.com/shelby-bennett)
