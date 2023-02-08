@@ -1,5 +1,5 @@
 # base image
-FROM ubuntu:focal
+FROM ubuntu:focal as app
 
 # metadata
 LABEL base.image="ubuntu:focal"
@@ -32,3 +32,59 @@ ENV PATH="/any2fasta-${ANY2FASTA_VERSION}:$PATH" \
 
 # set working directory
 WORKDIR /data
+
+#######################
+##### NEXT STAGE! #####
+#######################
+
+# running a 'test' in the 'test' stage
+FROM app as test
+
+# install zip unzip via apt-get or yum if using a centos or fedora base
+RUN apt-get update && apt-get install -y zip unzip && \
+    apt-get autoclean && rm -rf /var/lib/apt/lists/*
+
+# check version and print help options
+RUN any2fasta -v && \
+    any2fasta -h && \
+    any2fasta -h | grep github
+
+WORKDIR /test
+
+RUN echo "downloading test data..." && \
+    wget https://github.com/tseemann/any2fasta/raw/master/test.clw && \
+    wget https://github.com/tseemann/any2fasta/raw/master/test.embl && \
+    wget https://github.com/tseemann/any2fasta/raw/master/test.fna && \
+    wget https://github.com/tseemann/any2fasta/raw/master/test.fq && \
+    wget https://github.com/tseemann/any2fasta/raw/master/test.gbk && \
+    wget https://github.com/tseemann/any2fasta/raw/master/test.gfa && \
+    wget https://github.com/tseemann/any2fasta/raw/master/test.gff && \
+    wget https://github.com/tseemann/any2fasta/raw/master/test.noseq.gff && \
+    wget https://github.com/tseemann/any2fasta/raw/master/test.sth
+
+RUN echo "running any2fasta on test data..." && \
+    any2fasta /dev/null 2>&1 | grep 'ERROR' && \
+    any2fasta test.noseq.gff 2>&1 | grep 'ERROR' && \
+    any2fasta test.gbk | grep -m 3 '^>' && \
+    any2fasta test.gff | grep -m 3 '^>' && \
+    any2fasta test.fna | grep -m 3 '^>' && \
+    any2fasta test.gfa | grep -m 3 '^>' && \
+    any2fasta test.fq  | grep -m 3 '^>' && \
+    any2fasta test.embl | grep -m 3 '^>' && \
+    any2fasta test.clw  | grep -m 3 '^>' && \
+    any2fasta test.sth  | grep -m 3 '^>' && \
+    any2fasta test.fna | grep 'CRYANT' && \
+    any2fasta -n test.fna | grep 'CNNANT' && \
+    any2fasta test.gfa | grep '^>24292$' && \
+    any2fasta test.fq | grep '^>ERR1163317.999' && \
+    any2fasta test.sth | grep '^>O83071' && \
+    any2fasta test.clw | grep '^>gene03' && \
+    any2fasta -l test.gbk | grep 'taagaatgagtagaaggttttga' && \
+    any2fasta -u test.gbk | grep 'TAAGAATGAGTAGAAGGTTTTGA' && \
+    any2fasta -u test.embl | grep 'K02675' && \
+    any2fasta -q -l -n test.fq | wc -l | grep '^2000$' && \
+    any2fasta - < test.gbk  | grep -m 1 -F 'NZ_AHMY02000074' && \
+    gzip -c test.gbk | any2fasta - | grep -m 1 -F 'NZ_AHMY02000074' && \
+    bzip2 -c test.gbk | any2fasta - | grep -m 1 -F 'NZ_AHMY02000074' && \
+    zip test.gbk.zip test.gbk && \
+    any2fasta test.gbk.zip | grep -m 1 -F 'NZ_AHMY02000074'
