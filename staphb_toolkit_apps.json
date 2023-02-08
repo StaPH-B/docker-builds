@@ -305,7 +305,7 @@
     },
     "ncbi-amrfinder-plus": {
       "description": "NCBI AMRFinderPlus - Designed to find acquired antimicrobial resistance genes and some point mutations in protein or assembled nucleotide sequences",
-      "image": "docker://staphb/ncbi-amrfinder-plus",
+      "image": "docker://staphb/ncbi-amrfinderplus",
       "tag": "latest",
       "help": "--help",
       "exec": "amrfinder"
