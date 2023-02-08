@@ -1,4 +1,4 @@
-FROM ubuntu:xenial
+FROM ubuntu:xenial as app
 
 LABEL base.image="ubuntu:xenial"
 LABEL version="1"
