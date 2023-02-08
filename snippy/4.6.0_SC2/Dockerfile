@@ -1,4 +1,4 @@
-FROM ubuntu:bionic
+FROM ubuntu:bionic as app
 
 LABEL base.image="ubuntu:bionic"
 LABEL container.version="1.0.0"
@@ -93,3 +93,20 @@ ENV PATH="${PATH}:\
     LC_ALL=C
 
 WORKDIR /data
+
+FROM app as test
+
+# run tests from https://github.com/tseemann/snippy/blob/master/.travis.yml
+RUN realpath . && \
+  snippy --version && \
+  snippy --check && \
+  snippy-core --version && \
+  snippy-core --check && \
+  cd /snippy-4.6.0 && \
+  make -C test
+
+WORKDIR /test
+# Download SC2 fastqs for test, run Snippy 4.6.0
+RUN wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR918/006/ERR9187736/ERR9187736_1.fastq.gz && \
+  wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR918/006/ERR9187736/ERR9187736_2.fastq.gz && \
+  snippy --cpus 2 --outdir results --ref /reference/MN908947_SC2_reference.fasta --R1 ERR9187736_1.fastq.gz --R2 ERR9187736_2.fastq.gz
