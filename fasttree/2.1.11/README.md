@@ -9,7 +9,9 @@ The small sequence alignment (covid_alignment.fasta) also in the container is us
 **Usage for FastTree version 2.1.11**
 
 FastTree infers approximately-maximum-likelihood phylogenetic trees from alignments of nucleotide or protein sequences. 
+
 FastTree can handle alignments with up to a million of sequences in a reasonable amount of time and memory. 
+
 FastTree accepts alignments in fasta or phylip interleaved formats
 
 FastTree protein_alignment > tree
