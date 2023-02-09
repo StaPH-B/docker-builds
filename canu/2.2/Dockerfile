@@ -24,7 +24,6 @@ RUN apt-get update && apt-get install -y \
    libgomp1 \
    maven \
    git \
-   curl \
    wget \
    python3 \
    build-essential \
