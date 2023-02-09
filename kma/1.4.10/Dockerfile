@@ -5,15 +5,17 @@ ARG KMAVER="1.4.10"
 
 # metadata
 LABEL base.image="ubuntu:jammy"
-LABEL container.version="2"
+LABEL dockerfile.version="2"
 LABEL software="kma"
 LABEL software.version="$KMAVER"
 LABEL description="K-mer alignment of raw reads against a database"
 LABEL website="https://bitbucket.org/genomicepidemiology/kma/src/master/"
 LABEL license="https://bitbucket.org/genomicepidemiology/kma/src/master/"
 LABEL license.type="Apache License, V2.0"
-LABEL maintainer="Eetu Eklund"
-LABEL maintainer.email="eetu.eklund@maryland.gov"
+LABEL maintainer="Curtis Kapsak"
+LABEL maintainer.email="kapsakcj@gmail.com"
+LABEL maintainer2="Eetu Eklund"
+LABEL maintainer2.email="eetu.eklund@maryland.gov"
 
 # install dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
