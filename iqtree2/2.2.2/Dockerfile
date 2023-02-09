@@ -33,4 +33,7 @@ ENV PATH="/iqtree-${IQTREE2_VER}-Linux/bin:${PATH}"\
 WORKDIR /data
 
 FROM app as test
+###TEST PATH
 RUN iqtree2 --version
+###TEST TREE TOPOLOGY
+RUN iqtree2 -s example.phy -z example.treels -m GTR+G
