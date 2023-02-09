@@ -3,7 +3,7 @@ FROM ubuntu:xenial as app
 
 # Metadata
 LABEL base.image="ubuntu:xenial"
-LABEL version="2"
+LABEL docker.version="2"
 LABEL software="emm-typing-tool"
 LABEL software.version="0.0.1"
 LABEL description="Assign emm type and subtype by querying the CDC M-type specific database "
@@ -48,7 +48,9 @@ RUN wget 'ftp://emboss.open-bio.org/pub/EMBOSS/EMBOSS-6.6.0.tar.gz' && \
 RUN python -m pip install pyyaml==5.1.2 numpy==1.16.4 lxml==4.4.1 biopython==1.74
 
 # Install PHE emm-typing-tool
-RUN git clone https://github.com/phe-bioinformatics/emm-typing-tool.git
+RUN git clone https://github.com/phe-bioinformatics/emm-typing-tool.git &&\
+cd emm-typing-tool && \
+git checkout 500d048ee49006d7aa3245fa4ee4ae7f99c398b4
 
 # Setup emm database
 RUN mkdir /db && cd /db && \
@@ -88,4 +90,4 @@ WORKDIR /data
 
 # Run emmtypingtool on test files
 RUN mkdir /data/test && \
-python /emm-typing-tool/emm_typing.py -m /db -i /test/raw_reads -o /data/test
+emm_typing.py -m /db -i /test/raw_reads -o /data/test
