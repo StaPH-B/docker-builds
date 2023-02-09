@@ -1,6 +1,7 @@
 FROM ubuntu:bionic as app
 
 LABEL base.image="ubuntu:bionic"
+LABEL dockerfile.version="2"
 LABEL container.version="1.0.0"
 LABEL software="Snippy"
 LABEL software.version="4.6.0"
