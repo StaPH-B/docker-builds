@@ -12,7 +12,7 @@ FastTree infers approximately-maximum-likelihood phylogenetic trees from alignme
 FastTree can handle alignments with up to a million of sequences in a reasonable amount of time and memory. 
 FastTree accepts alignments in fasta or phylip interleaved formats
 
-  FastTree protein_alignment > tree
+FastTree protein_alignment > tree
   FastTree < protein_alignment > tree
   FastTree -out tree protein_alignment
   FastTree -nt nucleotide_alignment > tree
