@@ -3,7 +3,7 @@ FROM ubuntu:xenial as app
 
 # Metadata
 LABEL base.image="ubuntu:xenial"
-LABEL docker.version="2"
+LABEL dockerfile.version="2"
 LABEL software="emm-typing-tool"
 LABEL software.version="0.0.1"
 LABEL description="Assign emm type and subtype by querying the CDC M-type specific database "
