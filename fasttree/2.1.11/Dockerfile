@@ -12,8 +12,9 @@ LABEL software.version="2.1.11"
 LABEL description="Infers approximately-maximum-likelihood phylogenetic trees from alignments of nucleotide or protein sequences"
 LABEL website="http://www.microbesonline.org/fasttree/"
 LABEL license="http://www.microbesonline.org/fasttree/"
-LABEL maintainer="Abigail Shockey"
-LABEL maintainer.email="abigail.shockey@slh.wisc.edu"
+LABEL dockerfile.version="1"
+LABEL maintainer="Daniel Evans"
+LABEL maintainer.email="evansdr95@gmail.com"
 
 # install ubuntu dependencies
 RUN apt-get update && \
@@ -48,10 +49,6 @@ FastTree -log fasttree_test_log -nt /data/covid_alignment.fasta > fasttree_test_
 echo "Printing FastTree output tree..." && \
 sleep 3s && \
 cat fasttree_test_tree && \
-sleep 3s && \
-echo "Printing FastTree log file..." && \
-sleep 3s && \
-cat fasttree_test_log && \
 sleep 3s && \
 echo "Dockerfile test complete!" && \
 sleep 2s
