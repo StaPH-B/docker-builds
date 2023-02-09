@@ -1,9 +1,14 @@
+ARG ANY2FASTA_VERSION=0.4.2
+
 # base image
 FROM ubuntu:focal as app
 
+# version to build with
+ARG ANY2FASTA_VERSION
+
 # metadata
 LABEL base.image="ubuntu:focal"
-LABEL dockerfile.version="1"
+LABEL dockerfile.version="2"
 LABEL software="any2fasta"
 LABEL software.version="0.4.2"
 LABEL description="Turns files into fastas."
@@ -12,11 +17,14 @@ LABEL license="https://github.com/tseemann/any2fasta/blob/master/LICENSE"
 LABEL maintainer="Erin Young"
 LABEL maintainer.email="eriny@utah.gov"
 
-# version to build with
-ARG ANY2FASTA_VERSION=0.4.2
-
 # install dependencies via apt-get or yum if using a centos or fedora base
-RUN apt-get update && apt-get install -y wget perl && \
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    wget \
+    ca-certificates \
+    procps \
+    perl \
+    zip \
+    unzip && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # install any2fasta
@@ -40,9 +48,7 @@ WORKDIR /data
 # running a 'test' in the 'test' stage
 FROM app as test
 
-# install zip unzip via apt-get or yum if using a centos or fedora base
-RUN apt-get update && apt-get install -y zip unzip && \
-    apt-get autoclean && rm -rf /var/lib/apt/lists/*
+ARG ANY2FASTA_VERSION
 
 # check version and print help options
 RUN any2fasta -v && \
@@ -51,16 +57,8 @@ RUN any2fasta -v && \
 
 WORKDIR /test
 
-RUN echo "downloading test data..." && \
-    wget https://github.com/tseemann/any2fasta/raw/master/test.clw && \
-    wget https://github.com/tseemann/any2fasta/raw/master/test.embl && \
-    wget https://github.com/tseemann/any2fasta/raw/master/test.fna && \
-    wget https://github.com/tseemann/any2fasta/raw/master/test.fq && \
-    wget https://github.com/tseemann/any2fasta/raw/master/test.gbk && \
-    wget https://github.com/tseemann/any2fasta/raw/master/test.gfa && \
-    wget https://github.com/tseemann/any2fasta/raw/master/test.gff && \
-    wget https://github.com/tseemann/any2fasta/raw/master/test.noseq.gff && \
-    wget https://github.com/tseemann/any2fasta/raw/master/test.sth
+RUN echo "move test data here..." && \
+    mv /any2fasta-${ANY2FASTA_VERSION}/test.* .
 
 RUN echo "running any2fasta on test data..." && \
     any2fasta /dev/null 2>&1 | grep 'ERROR' && \
