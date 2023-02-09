@@ -1,13 +1,13 @@
 FROM ubuntu:xenial as app
 
 # for easy upgrade later. ARG variables only persist during build time.
-ARG IQTREE2_VER="2.2.2"
+ARG IQTREE2_VER="2.2.2.2"
 
 # metadata
 LABEL base.image="ubuntu:xenial"
 LABEL dockerfile.version="1"
 LABEL software="IQ-Tree2"
-LABEL software.version="2.2.2"
+LABEL software.version="2.2.2.2"
 LABEL description="Efficient software for phylogenomic inference"
 LABEL website="http://www.iqtree.org/"
 LABEL source.code.website="https://github.com/iqtree/iqtree2"
