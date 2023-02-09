@@ -34,7 +34,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  pigz \
  less \
  bc  \
- gzip && \
+ gzip \
+ ca-certificates \
+ procps && \
  update-alternatives --install /usr/bin/python python /usr/bin/python3 10 && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
