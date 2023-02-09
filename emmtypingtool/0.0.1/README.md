@@ -20,8 +20,8 @@ Additional tools:
 
 ```bash
 # Running emmtypingtool on /raw_reads directory containing fastq files (.fastq.gz)
-python emm_typing.py -m /db -i /raw_reads -o /output_directory
+emm_typing.py -m /db -i /raw_reads -o /output_directory
 
 # Running emmtypingtool on specified fastq files (sample1)
-python emm_typing.py -m /db -1 sample1.R1.fastq.gz -2 sample1.R2.fastq.gz -o /output_directory
+emm_typing.py -m /db -1 sample1.R1.fastq.gz -2 sample1.R2.fastq.gz -o /output_directory
 ```
