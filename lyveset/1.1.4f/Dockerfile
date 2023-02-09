@@ -1,18 +1,18 @@
 FROM ubuntu:xenial as app
 
 LABEL base.image="ubuntu:xenial"
-LABEL version="3"
+LABEL dockerfile.version="4"
 LABEL software="Lyve-SET"
 LABEL software.version="1.1.4f"
 LABEL description="LYVE-SET, a method of using hqSNPs to create a phylogeny, especially for outbreak investigations"
 LABEL website="https://github.com/lskatz/lyve-SET"
 LABEL license="https://github.com/lskatz/lyve-SET/blob/master/LICENSE"
-LABEL maintainer1="Kelsey Florek"
-LABEL maintainer1.email="kelsey.florek@slh.wisc.edu"
+LABEL maintainer="Kelsey Florek"
+LABEL maintainer.email="kelsey.florek@slh.wisc.edu"
 LABEL maintainer2="Curtis Kapsak"
-LABEL maintainer2.email="pjx8@cdc.gov"
+LABEL maintainer2.email="kapsakcj@gmail.com"
 LABEL maintainer3="Erik Wolfsohn"
-LABEL maintainer3.email="erik.wolfsohn@cchealth.org"
+LABEL maintainer3.email="ewolfsohn@gmail.com"
 
 #run apt in noninteractive mode so it can't prompt for input
 ENV DEBIAN_FRONTEND noninteractive
@@ -49,9 +49,8 @@ RUN apt-get install -y \
     libio-socket-ssl-perl \
     libxml-simple-perl \
     unzip \
-    smalt 
-
-RUN apt-get clean && apt-get autoclean && \
+    smalt &&\
+    apt-get clean && apt-get autoclean && \
     rm -rf /var/lib/apt/lists/*
 
 RUN mkdir /edirect && \
