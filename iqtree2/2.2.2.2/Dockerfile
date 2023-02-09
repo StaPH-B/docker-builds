@@ -17,7 +17,7 @@ LABEL maintainer.email="jwang7@health.nyc.gov"
 
 #install dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
- wget && \
+ wget ca-certificates procps && \
  apt-get autoclean && \
  rm -rf /var/lib/apt/lists/*
 
@@ -36,4 +36,4 @@ FROM app as test
 ###TEST PATH
 RUN iqtree2 --version
 ###TEST TREE TOPOLOGY
-RUN iqtree2 -s example.phy -z example.treels -m GTR+G
+RUN iqtree2 -s /iqtree-${IQTREE2_VER}-Linux/example.phy --rate
