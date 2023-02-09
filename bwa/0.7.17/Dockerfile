@@ -9,12 +9,15 @@ LABEL website="https://github.com/lh3/bwa"
 LABEL license="https://github.com/lh3/bwa/blob/master/COPYING"
 LABEL maintainer="Curtis Kapsak"
 LABEL maintainer.email="pjx8@cdc.gov"
+LABEL dockerfile.version="2"
 
-RUN apt-get update && apt-get install -y make \
-  wget \
-  gcc \
-  zlib1g-dev \
-  bzip2
+RUN apt-get update && apt-get install -y --no-install-recommends \
+ wget \
+ make \
+ gcc \
+ zlib1g-dev \
+ bzip2 && \
+ apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir bwa &&\
   mkdir /data &&\
