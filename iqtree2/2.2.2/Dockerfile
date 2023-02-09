@@ -16,8 +16,10 @@ LABEL maintainer="Jade Wang"
 LABEL maintainer.email="jwang7@health.nyc.gov"
 
 #install dependencies
-RUN apt-get update && apt-get install -y \
- wget
+RUN apt-get update && apt-get install -y --no-install-recommends \
+ wget && \
+ apt-get autoclean && \
+ rm -rf /var/lib/apt/lists/*
 
 # download, uncompress iqtree2 tarball; make /data
 RUN wget https://github.com/iqtree/iqtree2/releases/download/v${IQTREE2_VER}/iqtree-${IQTREE2_VER}-Linux.tar.gz && \
