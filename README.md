@@ -219,3 +219,9 @@ Each Dockerfile lists the author(s)/maintainer(s) as a metadata `LABEL`, but the
   * [@jcw349](https://github.com/jcw349)
   * [@wchen190](https://github.com/wchen190)
   * [@shelby-bennett](https://github.com/shelby-bennett)
+  * [@mndoucette](https://github.com/mndoucette)
+  * [@jcw349](https://github.com/jcw349)
+  * [@wchen190](https://github.com/wchen190)
+  * [@shelby-bennett](https://github.com/shelby-bennett)
+  * [@poojasgupta](https://github.com/poojasgupta)
+
