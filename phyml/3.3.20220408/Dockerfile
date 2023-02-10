@@ -5,7 +5,7 @@ ARG PHYML_VER="3.3.20220408"
 
 # metadata
 LABEL base.image="ubuntu:focal"
-LABEL dockerfile.version="1"
+LABEL dockerfile.version="2"
 LABEL software="Phyml"
 LABEL software.version="3.3.20220408"
 LABEL description="PhyML estimates maximum likelihood phylogenies from alignments of nucleotide or amino acid sequences."
