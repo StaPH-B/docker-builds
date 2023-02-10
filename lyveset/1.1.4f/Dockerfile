@@ -1,5 +1,5 @@
 FROM ubuntu:xenial as app
-
+ARG LYVESET_VER="1.1.4f"
 LABEL base.image="ubuntu:xenial"
 LABEL dockerfile.version="4"
 LABEL software="Lyve-SET"
@@ -21,10 +21,9 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN echo 'deb mirror://mirrors.ubuntu.com/mirrors.txt xenial-security main restricted universe multiverse'  | cat - /etc/apt/sources.list > temp && mv temp /etc/apt/sources.list &&\
     echo 'deb mirror://mirrors.ubuntu.com/mirrors.txt xenial-backports main restricted universe multiverse'  | cat - /etc/apt/sources.list > temp && mv temp /etc/apt/sources.list &&\
     echo 'deb mirror://mirrors.ubuntu.com/mirrors.txt xenial-updates main restricted universe multiverse'  | cat - /etc/apt/sources.list > temp && mv temp /etc/apt/sources.list &&\
-    echo 'deb mirror://mirrors.ubuntu.com/mirrors.txt xenial main restricted universe multiverse'  | cat - /etc/apt/sources.list > temp && mv temp /etc/apt/sources.list &&\
-    apt update
+    echo 'deb mirror://mirrors.ubuntu.com/mirrors.txt xenial main restricted universe multiverse'  | cat - /etc/apt/sources.list > temp && mv temp /etc/apt/sources.list
 
-RUN apt-get install -y \
+RUN apt update && apt-get install -y \
     curl \
     perl \
     libfile-slurp-perl \
@@ -66,10 +65,10 @@ RUN wget https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/xtract.Linux.gz && \
     chmod +x /usr/local/bin/xtract
 
 #get lyveset files
-RUN wget https://github.com/lskatz/lyve-SET/archive/v1.1.4f.tar.gz &&\
-    tar -xzvf v1.1.4f.tar.gz &&\
-    rm v1.1.4f.tar.gz &&\
-    mv lyve-SET-1.1.4f lyve-SET
+RUN wget https://github.com/lskatz/lyve-SET/archive/v${LYVESET_VER}.tar.gz &&\
+    tar -xzvf v${LYVESET_VER}.tar.gz &&\
+    rm v${LYVESET_VER}.tar.gz &&\
+    mv lyve-SET-${LYVESET_VER} lyve-SET
 
 # download perl modules, setup the lyveset filesystem
 RUN cpanm Test::Most Bio::FeatureIO String::Escape File::Slurp URI::Escape Math::Round Schedule::SGE --force
