@@ -46,18 +46,18 @@ WORKDIR /data
 FROM app as test
 
 # Grab test data
-RUN wget -O /data/Freyja_WWSC2.bam https://github.com/StaPH-B/docker-builds/blob/master/freyja/1.3.4/tests/Freyja_WWSC2.bam?raw=true -O /data/Freyja_WWSC2.bam && \
- wget -P /data https://raw.githubusercontent.com/StaPH-B/docker-builds/master/freyja/1.3.4/tests/Freyja_depths.tsv && \
- wget -P /data https://raw.githubusercontent.com/StaPH-B/docker-builds/master/freyja/1.3.4/tests/Freyja_variants.tsv && \
- wget -P /data https://raw.githubusercontent.com/StaPH-B/docker-builds/master/freyja/1.3.4/tests/nCoV-2019.reference.fasta
+RUN wget -O /data/Freyja_WWSC2.bam https://github.com/StaPH-B/docker-builds/blob/master/freyja/${FREYJA_SOFTWARE_VERSION}/tests/Freyja_WWSC2.bam?raw=true -O /data/test.bam && \
+ wget -P /data https://raw.githubusercontent.com/StaPH-B/docker-builds/master/freyja/${FREYJA_SOFTWARE_VERSION}/tests/test.tsv && \
+ wget -P /data https://raw.githubusercontent.com/StaPH-B/docker-builds/master/freyja/${FREYJA_SOFTWARE_VERSION}/tests/test.depth && \
+ wget -P /data https://raw.githubusercontent.com/StaPH-B/docker-builds/master/freyja/${FREYJA_SOFTWARE_VERSION}/tests/NC_045512_Hu-1.fasta
 
 # so that mamba/conda env is active when running below commands
 ENV ENV_NAME="freyja-env"
 ARG MAMBA_DOCKERFILE_ACTIVATE=1
 
 # Run Freyja
-RUN freyja variants /data/Freyja_WWSC2.bam --variants /data/test_variants.tsv --depths /data/test_depths.tsv --ref /data/nCoV-2019.reference.fasta && freyja demix /data/test_variants.tsv /data/test_depths.tsv --output /data/test_demix.tsv
+RUN freyja variants /data/test.bam --variants /data/test_variants.tsv --depths /data/test_depths.tsv --ref /data/NC_045512_Hu-1.fasta && freyja demix /data/test_variants.tsv /data/test_depths.tsv --output /data/test_demix.tsv
 
 # Check validity of outputs
-RUN cmp /data/test_variants.tsv /data/Freyja_variants.tsv && cmp /data/test_depths.tsv /data/Freyja_depths.tsv
+RUN cmp /data/test_variants.tsv /data/test.tsv && cmp /data/test_depths.tsv /data/test.depth
 RUN grep "Omicron" /data/test_demix.tsv && echo done
