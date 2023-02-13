@@ -2,6 +2,12 @@
 
 Main tool: [Kaptive](https://github.com/katholt/Kaptive)
 
+Additionall tools:
+
+- ncbi-blast+ 2.3.0
+- python 3.8.10
+- biopython 1.81
+
 ## Example Usage
 
 ```bash
