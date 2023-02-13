@@ -158,5 +158,6 @@ fasta-trim-terminal-ambigs.pl rsv.r10.fa \
 v-annotate.pl --split --cpu 2 \
     -r \
     -xnocomp \
+    -mkey rsv \
     /data/rsv.r10.trimmed.fasta \
-    ${GENBANK_ACCESSION}-rsv-vadr-test-output
+    rsv-vadr-test-output
