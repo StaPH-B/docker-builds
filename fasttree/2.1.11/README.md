@@ -15,7 +15,6 @@ FastTree can handle alignments with up to a million of sequences in a reasonable
 FastTree accepts alignments in fasta or phylip interleaved formats
 
 ```
-
 FastTree protein_alignment > tree
 
 FastTree < protein_alignment > tree
@@ -73,8 +72,13 @@ Common options (must be before the alignment file):
   
   -constraints constraintAlignment to constrain the topology search constraintAlignment should have 1s or 0s to indicates splits
   
-  -expert -- see more options
-  
+  -expert -- see more options  
+```
+
+**Example command-line input for basic FastTree phylogeny**
+
+```
+FastTree -log fasttree_test_log -nt sample.fasta > fasttree_test.nwk
 ```
   
   For more information, see http://www.microbesonline.org/fasttree/
