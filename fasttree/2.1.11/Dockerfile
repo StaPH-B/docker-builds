@@ -17,10 +17,11 @@ LABEL maintainer="Daniel Evans"
 LABEL maintainer.email="evansdr95@gmail.com"
 
 # install ubuntu dependencies
-RUN apt-get update && \
-    apt-get install -y build-essential\
-    wget && \
-    apt-get autoclean && rm -rf /var/lib/apt/lists
+RUN apt-get update && apt-get install -y --no-install-recommends \
+ wget \
+ ca-certificates \
+ procps && \
+ apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # install fasttree
 RUN wget http://www.microbesonline.org/fasttree/FastTree && \
