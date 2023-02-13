@@ -105,8 +105,12 @@ ENV CLASSPATH /usr/bin/VarScan.jar:/picard/picard.jar:/gatk/GenomeAnalysisTK-3.8
 # not sure why this is here, or what program uses NUMCORES, but I'm going to leave it for now.
 ENV NUMCORES 1
 
+# make a DIR called /data for running cfsan-snp-pipeline in
+WORKDIR /data
+
 # Test snp_pipeline (code originally from Justin). Running copy_snppipeline_data.py generates an message the the script is deprecated
 # but I figured I would leave it since the below commands test that the image runs properly.
+FROM app as test
 WORKDIR /test/
 RUN copy_snppipeline_data.py lambdaVirusInputs testLambdaVirus \
 	&& cd testLambdaVirus \
@@ -116,6 +120,3 @@ RUN copy_snppipeline_data.py lambdaVirusInputs testLambdaVirus \
 	&& diff -q snpma.fasta expectedResults/snpma.fasta \
 	&& diff -q referenceSNP.fasta expectedResults/referenceSNP.fasta
 
-# make a DIR called /data for running cfsan-snp-pipeline in
-RUN mkdir /data
-WORKDIR /data
