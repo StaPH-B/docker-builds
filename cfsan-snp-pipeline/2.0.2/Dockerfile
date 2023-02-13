@@ -78,8 +78,8 @@ RUN mkdir /picard &&\
 # get GATK 3.8-1-0 jar flie
 RUN mkdir /gatk &&\
     cd /gatk &&\
-    wget -O ./gatk.tar.bz2 'https://software.broadinstitute.org/gatk/download/auth?package=GATK-archive&version=3.8-1-0-gf15c1c3ef' &&\
-    tar -xjf gatk.tar.bz2 &&\
+    wget -O ./gatk.tar.bz2 'https://storage.googleapis.com/gatk-software/package-archive/gatk/GenomeAnalysisTK-3.8-1-0-gf15c1c3ef.tar.bz2' &&\
+    tar -xjvf gatk.tar.bz2 &&\
     rm gatk.tar.bz2
 
 # get VarScan and SRA-toolkit
