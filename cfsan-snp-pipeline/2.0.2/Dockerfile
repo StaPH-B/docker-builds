@@ -45,7 +45,7 @@ RUN apt-get update -y \
 	&& apt-get clean
 
 # install pip (code originally from Justin)
-RUN wget https://bootstrap.pypa.io/get-pip.py -q \
+RUN wget https://bootstrap.pypa.io/pip/2.7/get-pip.py  -q \
 	&& python get-pip.py
 
 # install samtools, since the version in apt-get is too far out-of-date
