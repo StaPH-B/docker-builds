@@ -27,7 +27,7 @@ ENV PERL5LIB=$VADRSCRIPTSDIR:$VADRSEQUIPDIR:$VADRBIOEASELDIR/blib/lib:$VADRBIOEA
 LABEL base.image="ubuntu:focal"
 LABEL dockerfile.version="1"
 LABEL software="VADR"
-LABEL software.version=${VADR_VERSION}
+LABEL software.version="${VADR_VERSION}"
 LABEL description="Classification and annotation of viral sequences based on RefSeq annotation"
 LABEL website="https://github.com/ncbi/vadr"
 LABEL license="https://github.com/ncbi/vadr/blob/master/LICENSE"
@@ -161,3 +161,4 @@ v-annotate.pl --split --cpu 2 \
     -mkey rsv \
     /data/rsv.r10.trimmed.fasta \
     rsv-vadr-test-output
+    
