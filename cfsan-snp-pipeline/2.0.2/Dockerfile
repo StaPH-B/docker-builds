@@ -1,4 +1,4 @@
-FROM ubuntu:xenial
+FROM ubuntu:xenial as app
 
 # metadata
 LABEL base.image="ubuntu:xenial"
