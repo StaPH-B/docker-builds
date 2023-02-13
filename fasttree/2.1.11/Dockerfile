@@ -37,19 +37,19 @@ RUN mkdir /data
 WORKDIR /data
 
 # test layer
+# run FastTree on a two-genome alignment, then print the tree
+
 FROM app as test
 
 ARG fasttree_ver="2.1.11"
 
-# HELP FOR OFFICE HOURS HERE!!
 COPY covid_alignment.fasta /data/covid_alignment.fasta
 
-# run FastTree on a two-genome alignment, and print the tree and log file to confirm
-RUN echo "Running command: $ FastTree -log fasttree_test_log -nt /data/covid_alignment.fasta > fasttree_test_tree" && \
-FastTree -log fasttree_test_log -nt /data/covid_alignment.fasta > fasttree_test_tree && \
+RUN echo "Running command: $ FastTree -log fasttree_test_log -nt /data/covid_alignment.fasta > fasttree_test_tree.nwk" && \
+FastTree -log fasttree_test_log -nt /data/covid_alignment.fasta > fasttree_test_tree.nwk && \
 echo "Printing FastTree output tree..." && \
 sleep 3s && \
-cat fasttree_test_tree && \
+cat fasttree_test_tree.nwk && \
 sleep 3s && \
 echo "Dockerfile test complete!" && \
 sleep 2s
