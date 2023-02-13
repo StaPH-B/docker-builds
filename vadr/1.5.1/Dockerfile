@@ -31,8 +31,8 @@ LABEL software.version=${VADR_VERSION}
 LABEL description="Classification and annotation of viral sequences based on RefSeq annotation"
 LABEL website="https://github.com/ncbi/vadr"
 LABEL license="https://github.com/ncbi/vadr/blob/master/LICENSE"
-LABEL maintainer1="Anders Goncalves da Silva"
-LABEL maintainer1.email="andersgs@gmail.com"
+LABEL maintainer="Anders Goncalves da Silva"
+LABEL maintainer.email="andersgs@gmail.com"
 LABEL maintainer2="Curtis Kapsak"
 LABEL maintainer2.email="curtis.kapsak@theiagen.com"
 
