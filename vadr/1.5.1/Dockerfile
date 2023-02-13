@@ -155,7 +155,7 @@ fasta-trim-terminal-ambigs.pl rsv.r10.fa \
     --minlen 50 \
     --maxlen 15500 \
     >/data/rsv.r10.trimmed.fasta && \
-v-annotate.pl --split --cpu 2 \
+v-annotate.pl --split \
     -r \
     -xnocomp \
     -mkey rsv \
