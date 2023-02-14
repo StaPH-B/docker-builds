@@ -83,14 +83,9 @@ RUN mkdir /gatk &&\
     rm gatk.tar.bz2
 
 # get VarScan and SRA-toolkit
+# removed 
 RUN wget http://downloads.sourceforge.net/project/varscan/VarScan.v2.3.7.jar -q \
 	&& cp VarScan.v2.3.7.jar /usr/bin/VarScan.jar \
-	&& wget http://www.niehs.nih.gov/research/resources/assets/docs/artsrcchocolatecherrycake031915linuxtgz.tgz -q \
-	&& tar -zxf /tmp/artsrcchocolatecherrycake031915linuxtgz.tgz \
-	&& cd /tmp/art_src_ChocolateCherryCake_Linux \
-	&& ./configure \
-	&& make \
-	&& make install \
 	&& cd /tmp/ \
 	&& wget http://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/2.3.5-2/sratoolkit.2.3.5-2-ubuntu64.tar.gz -q \
 	&& tar -zxf /tmp/sratoolkit.2.3.5-2-ubuntu64.tar.gz \
