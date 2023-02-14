@@ -26,11 +26,15 @@ Database version: 2022-12-19.1
 Available --organism options: Acinetobacter_baumannii, Burkholderia_cepacia, Burkholderia_pseudomallei, Campylobacter, Clostridioides_difficile, Enterococcus_faecalis, Enterococcus_faecium, Escherichia, Klebsiella_oxytoca, Klebsiella_pneumoniae, Neisseria_gonorrhoeae, Neisseria_meningitidis, Pseudomonas_aeruginosa, Salmonella, Staphylococcus_aureus, Staphylococcus_pseudintermedius, Streptococcus_agalactiae, Streptococcus_pneumoniae, Streptococcus_pyogenes, Vibrio_cholerae
 
 
-# run amrfinder with an genome assembly (FASTA/FNA) as input (nucleotide mode)
+# download Klebsiella oxytoca genome FASTA/FNA to use as a test
 $ wget "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/003/812/925/GCA_003812925.1_ASM381292v1/GCA_003812925.1_ASM381292v1_genomic.fna.gz" 
-gzip -d GCA_003812925.1_ASM381292v1_genomic.fna.gz  
 
+# uncompress the FNA file
+$ gzip -d GCA_003812925.1_ASM381292v1_genomic.fna.gz  
+
+# run amrfinder (nucleotide mode) on the uncompressed FNA file
 $ amrfinder --plus --name GCA_003812925.1 -n GCA_003812925.1_ASM381292v1_genomic.fna -O Klebsiella_oxytoca -o GCA_003812925.1-amrfinder.tsv
+
 
 # part of output TSV
 
