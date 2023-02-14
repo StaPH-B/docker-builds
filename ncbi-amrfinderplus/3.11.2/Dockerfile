@@ -8,8 +8,8 @@ LABEL software="NCBI AMRFinderPlus"
 LABEL software.version="${AMRFINDER_VER}"
 LABEL description="NCBI resistance gene detection tool"
 LABEL website="https://github.com/ncbi/amr"
-LABEL maintainer1="Kelsey Florek"
-LABEL maintainer1.email="kelsey.florek@slh.wisc.edu"
+LABEL maintainer="Kelsey Florek"
+LABEL maintainer.email="kelsey.florek@slh.wisc.edu"
 LABEL maintainer2="Curtis Kapsak"
 LABEL maintainer2.email="kapsakcj@gmail.com"
 LABEL maintainer3="Anders Goncalves da Silva"
@@ -62,11 +62,11 @@ RUN amrfinder --plus -p /amrfinder/test_prot.fa -g  /amrfinder/test_prot.gff -O 
   diff /amrfinder/test_both.expected test_both.got
 
 # external file
-# RUN wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/010/941/835/GCA_010941835.1_PDT000052640.3/GCA_010941835.1_PDT000052640.3_genomic.fna.gz  && \
-#   gzip -d GCA_010941835.1_PDT000052640.3_genomic.fna.gz && \
-#   amrfinder --plus --nucleotide GCA_010941835.1_PDT000052640.3_genomic.fna --output test1.txt && \
-#   amrfinder --plus --nucleotide GCA_010941835.1_PDT000052640.3_genomic.fna --organism Salmonella --output test2.txt && \
-#   cat test1.txt test2.txt
+RUN wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/010/941/835/GCA_010941835.1_PDT000052640.3/GCA_010941835.1_PDT000052640.3_genomic.fna.gz  && \
+  gzip -d GCA_010941835.1_PDT000052640.3_genomic.fna.gz && \
+  amrfinder --plus --nucleotide GCA_010941835.1_PDT000052640.3_genomic.fna --output test1.txt && \
+  amrfinder --plus --nucleotide GCA_010941835.1_PDT000052640.3_genomic.fna --organism Salmonella --output test2.txt && \
+  cat test1.txt test2.txt
 
 RUN wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/003/812/925/GCA_003812925.1_ASM381292v1/GCA_003812925.1_ASM381292v1_genomic.fna.gz &&\
   gzip -d GCA_003812925.1_ASM381292v1_genomic.fna.gz && \
