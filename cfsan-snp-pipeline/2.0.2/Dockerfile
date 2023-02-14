@@ -45,7 +45,7 @@ RUN apt-get update -y \
 	&& apt-get clean
 
 ARG SNP_PIPELINE_VER
-ENV SNP_PIPELINE_VER=${SNP_PIPELINE_VER:-2.2.1}
+ENV SNP_PIPELINE_VER=${SNP_PIPELINE_VER:-2.0.2}
 
 # install pip (code originally from Justin)
 RUN wget https://bootstrap.pypa.io/pip/2.7/get-pip.py  -q \
@@ -95,7 +95,7 @@ RUN wget http://downloads.sourceforge.net/project/varscan/VarScan.v2.3.7.jar -q 
 	&& rm -r /tmp/*
 
 #install snp-pipeline and snp-mutator
-RUN pip install numpy snp-pipeline==2.0.2 biopython==1.68 snp-mutator
+RUN pip install numpy snp-pipeline==$SNP_PIPELINE_VER biopython==1.68 snp-mutator
 
 # set java CLASSPATH variables
 ENV CLASSPATH /usr/bin/VarScan.jar:/picard/picard.jar:/gatk/GenomeAnalysisTK-3.8-1-0-gf15c1c3ef/GenomeAnalysisTK.jar
