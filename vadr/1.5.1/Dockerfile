@@ -147,18 +147,21 @@ v-annotate.pl --split --cpu 2 \
     /data/${GENBANK_ACCESSION}.trimmed.fasta \
     ${GENBANK_ACCESSION}-mpxv-vadr-test-output
 
+### COMMENTING OUT RSV TEST BELOW SINCE THIS TEST CAN CONSUME UPWARDS OF 30GB RAM ###
+### it runs fine when you have that much RAM available, but not in GHActions runners that are limited to 7GB RAM ###
+
 # download a test RSV genome, run through VADR using RSV models
 # example commands taken from VADR RSV guide: https://github.com/ncbi/vadr/wiki/RSV-annotation
-RUN echo "testing RSV functionality..." && \
- wget https://ftp.ncbi.nlm.nih.gov/pub/nawrocki/vadr-models/rsv/rsv.r10.fa && \
-fasta-trim-terminal-ambigs.pl rsv.r10.fa \
-    --minlen 50 \
-    --maxlen 15500 \
-    >/data/rsv.r10.trimmed.fasta && \
-v-annotate.pl --split \
-    -r \
-    -xnocomp \
-    -mkey rsv \
-    /data/rsv.r10.trimmed.fasta \
-    rsv-vadr-test-output
+# RUN echo "testing RSV functionality..." && \
+#  wget https://ftp.ncbi.nlm.nih.gov/pub/nawrocki/vadr-models/rsv/rsv.r10.fa && \
+# fasta-trim-terminal-ambigs.pl rsv.r10.fa \
+#     --minlen 50 \
+#     --maxlen 15500 \
+#     >/data/rsv.r10.trimmed.fasta && \
+# v-annotate.pl --split \
+#     -r \
+#     -xnocomp \
+#     -mkey rsv \
+#     /data/rsv.r10.trimmed.fasta \
+#     rsv-vadr-test-output
     
