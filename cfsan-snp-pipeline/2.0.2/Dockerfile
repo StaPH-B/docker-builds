@@ -83,7 +83,6 @@ RUN mkdir /gatk &&\
     rm gatk.tar.bz2
 
 # get VarScan and SRA-toolkit
-# removed 
 RUN wget http://downloads.sourceforge.net/project/varscan/VarScan.v2.3.7.jar -q \
 	&& cp VarScan.v2.3.7.jar /usr/bin/VarScan.jar \
 	&& cd /tmp/ \
