@@ -15,11 +15,11 @@ LABEL maintainer.email="pjx8@cdc.gov"
 
 # This Dockerfile is based on a Docker file from Justin Payne which can be found here:
 # https://hub.docker.com/r/crashfrog/snp-pipeline/dockerfile
-# The dockerfile has been modified from it's original form by Curtis Kapsak
+# The dockerfile has been modified from it's original form by Curtis Kapsak and Sam Baird
 
 WORKDIR /tmp/
 RUN apt-get update -y \
-	&& apt-get install -y \
+	&& apt-get install -y --no-install-recommends \
 		bowtie2 \
 		openjdk-8-jre \
 		g++ \
