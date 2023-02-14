@@ -17,7 +17,8 @@ LABEL maintainer.email="kapsakcj@gmail.com"
 # python v3.8.10 is installed here; point 'python' to python3
 RUN apt-get update && apt-get install --no-install-recommends -y python3 \
  python3-distutils \
- wget && \
+ wget \
+ pigz && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/* && \
  update-alternatives --install /usr/bin/python python /usr/bin/python3 10
 
