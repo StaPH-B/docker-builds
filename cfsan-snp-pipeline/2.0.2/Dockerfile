@@ -93,7 +93,7 @@ RUN wget http://downloads.sourceforge.net/project/varscan/VarScan.v2.3.7.jar -q 
 	&& rm -r /tmp/*
 
 #install snp-pipeline and snp-mutator
-RUN pip install numpy snp-pipeline biopython snp-mutator
+RUN pip install numpy snp-pipeline biopython==1.68 snp-mutator
 
 # set java CLASSPATH variables
 ENV CLASSPATH /usr/bin/VarScan.jar:/picard/picard.jar:/gatk/GenomeAnalysisTK-3.8-1-0-gf15c1c3ef/GenomeAnalysisTK.jar
