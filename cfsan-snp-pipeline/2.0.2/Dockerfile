@@ -103,7 +103,7 @@ ENV NUMCORES 1
 # make a DIR called /data for running cfsan-snp-pipeline in
 WORKDIR /data
 
-# Test snp_pipeline (code originally from Justin). Running copy_snppipeline_data.py generates an message the the script is deprecated
+# Test snp_pipeline (code modified from Justin). Running copy_snppipeline_data.py generates an message the the script is deprecated
 # but I figured I would leave it since the below commands test that the image runs properly.
 FROM app as test
 WORKDIR /test/
@@ -111,7 +111,8 @@ RUN copy_snppipeline_data.py lambdaVirusInputs testLambdaVirus \
 	&& cd testLambdaVirus \
 	&& run_snp_pipeline.sh -s samples reference/lambda_virus.fasta \
 	&& copy_snppipeline_data.py lambdaVirusExpectedResults expectedResults \
-	&& diff -q snplist.txt expectedResults/snplist.txt \
-	&& diff -q snpma.fasta expectedResults/snpma.fasta \
-	&& diff -q referenceSNP.fasta expectedResults/referenceSNP.fasta
+	&& diff -q snplist.txt expectedResults/snplist.txt >> diffOuput.txt \
+	&& diff -q snpma.fasta expectedResults/snpma.fasta >> diffOutput.txt \
+	&& diff -q referenceSNP.fasta expectedResults/referenceSNP.fasta >> diffOutput.txt \
+    && if [ -s diffOutput.txt ]; then echo "testLambdaVirus failed"; else echo "testLambdaVirus passed"; fi
 
