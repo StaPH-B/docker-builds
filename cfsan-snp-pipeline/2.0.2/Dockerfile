@@ -44,6 +44,9 @@ RUN apt-get update -y \
                 libperl-dev \
 	&& apt-get clean
 
+ARG SNP_PIPELINE_VER
+ENV SNP_PIPELINE_VER=${SNP_PIPELINE_VER:-2.2.1}
+
 # install pip (code originally from Justin)
 RUN wget https://bootstrap.pypa.io/pip/2.7/get-pip.py  -q \
 	&& python get-pip.py
@@ -115,3 +118,4 @@ RUN copy_snppipeline_data.py lambdaVirusInputs testLambdaVirus \
 	&& diff -q referenceSNP.fasta expectedResults/referenceSNP.fasta >> diffOutput.txt \
     && if [ -s diffOutput.txt ]; then echo "testLambdaVirus failed"; else echo "testLambdaVirus passed"; fi
 
+WORKDIR /data
