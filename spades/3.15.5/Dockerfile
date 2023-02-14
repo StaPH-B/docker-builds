@@ -4,7 +4,7 @@ FROM ubuntu:focal as app
 ARG SPADES_VER="3.15.5"
 
 LABEL base.image="ubuntu:focal"
-LABEL dockerfile.version="1"
+LABEL dockerfile.version="2"
 LABEL software="SPAdes"
 LABEL software.version="${SPADES_VER}"
 LABEL description="de novo DBG genome assembler"
