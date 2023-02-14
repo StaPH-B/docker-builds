@@ -110,7 +110,7 @@ RUN copy_snppipeline_data.py lambdaVirusInputs testLambdaVirus \
 	&& cd testLambdaVirus \
 	&& run_snp_pipeline.sh -s samples reference/lambda_virus.fasta \
 	&& copy_snppipeline_data.py lambdaVirusExpectedResults expectedResults \
-	&& diff -q snplist.txt expectedResults/snplist.txt >> diffOuput.txt \
+	&& diff -q snplist.txt expectedResults/snplist.txt >> diffOutput.txt \
 	&& diff -q snpma.fasta expectedResults/snpma.fasta >> diffOutput.txt \
 	&& diff -q referenceSNP.fasta expectedResults/referenceSNP.fasta >> diffOutput.txt \
     && if [ -s diffOutput.txt ]; then echo "testLambdaVirus failed"; else echo "testLambdaVirus passed"; fi
