@@ -87,7 +87,7 @@ RUN wget https://ftp.ncbi.nlm.nih.gov/pub/nawrocki/vadr-models/rsv/${VADR_RSV_MO
  tar -xf /vadr-models-rsv-${VADR_RSV_MODELS_VER}.tar.gz && \
  rm -v /vadr-models-rsv-${VADR_RSV_MODELS_VER}.tar.gz && \
  cp -nvr /vadr-models-rsv-${VADR_RSV_MODELS_VER}/* ${VADRMODELDIR} && \
- rm -rfv /vadr-models-rsv-${VADR_RSV_MODELS_VER}/*
+ rm -rfv /vadr-models-rsv-${VADR_RSV_MODELS_VER}
 
 # Virus model files other than sarscov2 will need to be made available to vadr either in
 # the $VADRMODELDIR or another path can be specified using the 'v-annotate.pl -mdir' option.
