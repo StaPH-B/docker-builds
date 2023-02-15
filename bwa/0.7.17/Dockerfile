@@ -16,7 +16,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  make \
  gcc \
  zlib1g-dev \
- bzip2 && \
+ bzip2 
+ ca-certificates \
+ procps && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir bwa &&\
