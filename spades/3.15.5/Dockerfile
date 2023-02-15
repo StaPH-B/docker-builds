@@ -4,7 +4,7 @@ FROM ubuntu:focal as app
 ARG SPADES_VER="3.15.5"
 
 LABEL base.image="ubuntu:focal"
-LABEL dockerfile.version="1"
+LABEL dockerfile.version="2"
 LABEL software="SPAdes"
 LABEL software.version="${SPADES_VER}"
 LABEL description="de novo DBG genome assembler"
@@ -17,7 +17,9 @@ LABEL maintainer.email="kapsakcj@gmail.com"
 # python v3.8.10 is installed here; point 'python' to python3
 RUN apt-get update && apt-get install --no-install-recommends -y python3 \
  python3-distutils \
- wget && \
+ wget \
+ pigz \
+ ca-certificates && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/* && \
  update-alternatives --install /usr/bin/python python /usr/bin/python3 10
 

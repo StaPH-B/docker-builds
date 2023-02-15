@@ -5,7 +5,7 @@ ARG PHYML_VER="3.3.20220408"
 
 # metadata
 LABEL base.image="ubuntu:focal"
-LABEL dockerfile.version="1"
+LABEL dockerfile.version="2"
 LABEL software="Phyml"
 LABEL software.version="3.3.20220408"
 LABEL description="PhyML estimates maximum likelihood phylogenies from alignments of nucleotide or amino acid sequences."
@@ -18,7 +18,7 @@ LABEL maintainer.email="jvhagey@gmail.com"
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update &&\
     apt-get install -y --no-install-recommends \
-        ca-certificates=20210119~20.04.2 \
+        ca-certificates \
         pkg-config=0.29.1-0ubuntu4 \
         automake=1:1.16.1-4ubuntu6 \
         autoconf=2.69-11.1 \
