@@ -63,7 +63,7 @@ RUN wget https://github.com/samtools/samtools/releases/download/${SAMTOOLSVER}/s
   
 # installing iVar; make /data
 RUN wget https://github.com/andersen-lab/ivar/archive/v${IVARVER}.tar.gz && \
-  tar -xvf v${IVARVER}.tar.gz && \
+  tar -xf v${IVARVER}.tar.gz && \
   rm -rf v${IVARVER}.tar.gz && \
   cd ivar-${IVARVER} && \
   ./autogen.sh && \
