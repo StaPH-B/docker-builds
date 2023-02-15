@@ -48,8 +48,5 @@ COPY covid_alignment.fasta /data/covid_alignment.fasta
 RUN echo "Running command: $ FastTree -log fasttree_test_log -nt /data/covid_alignment.fasta > fasttree_test_tree.nwk" && \
 FastTree -log fasttree_test_log -nt /data/covid_alignment.fasta > fasttree_test_tree.nwk && \
 echo "Printing FastTree output tree..." && \
-sleep 3s && \
 cat fasttree_test_tree.nwk && \
-sleep 3s && \
-echo "Dockerfile test complete!" && \
-sleep 2s
+echo "Dockerfile test complete!"
