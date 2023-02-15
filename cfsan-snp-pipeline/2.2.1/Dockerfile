@@ -61,6 +61,8 @@ ARG SRATOOLKIT_VER
 ENV SRATOOLKIT_VER=${SRATOOLKIT_VER:-2.8.1}
 ARG VARSCAN_VER
 ENV VARSCAN_VER=${VARSCAN_VER:-2.3.9}
+ARG NUMPY_VER
+ENV NUMPY_VER=${NUMPY_VER:-1.16.6}
 ARG BIOPYTHON_VER
 ENV BIOPYTHON_VER=${BIOPYTHON_VER:-1.68}
 
@@ -91,7 +93,9 @@ RUN wget https://github.com/broadinstitute/picard/releases/download/$PICARD_VER/
 	&& cp picard.jar /usr/bin/picard.jar
 
 #install snp-pipeline and snp-mutator
-RUN pip install numpy snp-pipeline==$SNP_PIPELINE_VER biopython==$BIOPYTHON_VER
+RUN pip install numpy==$NUMPY_VER \
+	snp-pipeline==$SNP_PIPELINE_VER \
+	biopython==$BIOPYTHON_VER
 
 
 ENV PATH "$PATH:/tmp/samtools-$SAMTOOLS_VER/bin:/tmp/bcftools-$BCFTOOLS_VER/bin:/tmp/bowtie2-$BOWTIE2_VER/bin"
