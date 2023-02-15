@@ -36,16 +36,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  update-alternatives --install /usr/bin/python python /usr/bin/python3 10 && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-ENV PATH="$PATH"
-
-# set workdir to /opt for installing Filtlong; set to /data at the end for testing
-WORKDIR /opt
-
 # installing filtlong
 RUN wget https://github.com/rrwick/Filtlong/archive/v${FILTLONG_VER}.tar.gz && \
  tar -xzf v${FILTLONG_VER}.tar.gz && \
  rm -r v${FILTLONG_VER}.tar.gz && \
- cd Filtlong-${FILTLONG_VER}/ && \
+ cd /Filtlong-${FILTLONG_VER}/ && \
  make -j && \
  sed -i 's/\$hist/\$hist --dot "*"/g' scripts/read_info_histograms.sh && \
  mkdir /data
@@ -63,8 +58,7 @@ ARG FILTLONG_VER
 RUN filtlong -h && filtlong --version
 
 # unittest
-WORKDIR /Filtlong-${FILTLONG_VER}
-RUN python3 -m unittest -h
+RUN cd /Filtlong-${FILTLONG_VER} && python3 -m unittest -h
 
 WORKDIR /test
 RUN wget --no-verbose "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR190/056/SRR19008456/SRR19008456_1.fastq.gz" && \
