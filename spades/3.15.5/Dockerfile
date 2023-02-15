@@ -18,7 +18,8 @@ LABEL maintainer.email="kapsakcj@gmail.com"
 RUN apt-get update && apt-get install --no-install-recommends -y python3 \
  python3-distutils \
  wget \
- pigz && \
+ pigz \
+ ca-certificates && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/* && \
  update-alternatives --install /usr/bin/python python /usr/bin/python3 10
 
