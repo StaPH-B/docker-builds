@@ -44,8 +44,11 @@ WORKDIR /opt
 # installing filtlong
 RUN wget https://github.com/rrwick/Filtlong/archive/v${FILTLONG_VER}.tar.gz && \
  tar -xzf v${FILTLONG_VER}.tar.gz && \
- rm -rf v${FILTLONG_VER}.tar.gz && \
- chmod +x /Filtlong-${FILTLONG_VER}/bin/filtlong
+ rm -r v${FILTLONG_VER}.tar.gz && \
+ cd Filtlong-${FILTLONG_VER}/ && \
+ make -j && \
+ sed -i 's/\$hist/\$hist --dot "*"/g' scripts/read_info_histograms.sh && \
+ mkdir /data
 
 ENV PATH="$PATH:/Filtlong-$FILTLONG_VER/bin:/Filtlong-$FILTLONG_VER/scripts:/Filtlong-$FILTLONG_VER/test" LC_ALL=C 
 
