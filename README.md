@@ -78,7 +78,7 @@ To learn more about the docker pull rate limits and the open source software pro
 | [iqtree](https://hub.docker.com/r/staphb/iqtree/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/iqtree)](https://hub.docker.com/r/staphb/iqtree) | <ul><li>1.6.7</li></ul> | http://www.iqtree.org/ |
 | [iqtree2](https://hub.docker.com/r/staphb/iqtree2/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/iqtree2)](https://hub.docker.com/r/staphb/iqtree2) | <ul><li>2.1.2</li><li>2.2.2.2</li></ul> | http://www.iqtree.org/ |
 | [IRMA](https://hub.docker.com/r/staphb/irma/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/irma)](https://hub.docker.com/r/staphb/irma) | <ul><li>1.0.2</li><li>1.0.3</li></ul> | https://wonder.cdc.gov/amd/flu/irma/|
-| [iVar](https://hub.docker.com/r/staphb/ivar/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/ivar)](https://hub.docker.com/r/staphb/ivar) | <ul><li>1.1</li><li>1.1 (+SARS-CoV2 reference)</li><li>1.2.1</li><li>1.2.1 (+SC2 ref)</li><li>1.2.2 (+SC2 ref and artic bedfiles)</li><li>1.3</li><li>1.3.1</li></ul> | https://github.com/andersen-lab/ivar |
+| [iVar](https://hub.docker.com/r/staphb/ivar/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/ivar)](https://hub.docker.com/r/staphb/ivar) | <ul><li>1.1</li><li>1.1 (+SARS-CoV2 reference)</li><li>1.2.1</li><li>1.2.1 (+SC2 ref)</li><li>1.2.2 (+SC2 ref and artic bedfiles)</li><li>1.3</li><li>1.3.1</li><li>1.3.2</li></ul> | https://github.com/andersen-lab/ivar |
 | [Kaptive](https://hub.docker.com/r/staphb/kaptive/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/kaptive)](https://hub.docker.com/r/staphb/kaptive) | <ul><li>2.0.0</li><li>2.0.3</li><li>2.0.5</li></ul> | https://github.com/katholt/Kaptive/ <br/> https://github.com/katholt/Kaptive/ |
 | [Kleborate](https://hub.docker.com/r/staphb/kleborate/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/kleborate)](https://hub.docker.com/r/staphb/kleborate) | <ul><li>2.0.4</li><li>2.1.0</li><li>2.2.0</li></ul> | https://github.com/katholt/Kleborate/ <br/> https://github.com/katholt/Kaptive/ |
 | [kma](https://hub.docker.com/r/staphb/kma/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/kma)](https://hub.docker.com/r/staphb/kma) | <ul><li>1.2.21</li></ul> <ul><li>1.4.10 (no database)</li></ul> | https://bitbucket.org/genomicepidemiology/kma/ |
@@ -216,13 +216,11 @@ Each Dockerfile lists the author(s)/maintainer(s) as a metadata `LABEL`, but the
   * [@CTindall-1](https://github.com/CTindall-1)
   * [@hkunerth](https://github.com/hkunerth)
   * [@eetueklund] (https://github.com/eetueklund)
-  * [@jcw349](https://github.com/jcw349)
   * [@wchen190](https://github.com/wchen190)
   * [@shelby-bennett](https://github.com/shelby-bennett)
+  * [@cjalcorta](https://github.com/cjalcorta)
   * [@mndoucette](https://github.com/mndoucette)
   * [@jcw349](https://github.com/jcw349)
-  * [@wchen190](https://github.com/wchen190)
-  * [@shelby-bennett](https://github.com/shelby-bennett)
   * [@poojasgupta](https://github.com/poojasgupta)
   * [@hollygene](https://github.com/hollygene)
 
