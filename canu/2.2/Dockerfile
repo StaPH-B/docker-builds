@@ -58,5 +58,6 @@ RUN wget https://raw.githubusercontent.com/bactopia/bactopia-tests/main/data/spe
 RUN canu \
     -p portiera -d portiera-nanopore \
     genomeSize=0.3m \
-    -nanopore ERR3772599.fastq.gz
+    -nanopore ERR3772599.fastq.gz \
+   corThreads=3
 
