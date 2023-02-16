@@ -54,5 +54,5 @@ RUN wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR690/006/SRR6903006/SRR6903006_1.f
   wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR690/006/SRR6903006/SRR6903006_2.fastq.gz && \
   kma -ipe SRR6903006_1.fastq.gz SRR6903006_2.fastq.gz -o test_output -t_db database
 
-RUN kma -v && ls -l .
+RUN kma -v
 
