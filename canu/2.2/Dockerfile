@@ -56,12 +56,13 @@ RUN wget https://raw.githubusercontent.com/bactopia/bactopia-tests/main/data/spe
 
 # testing analysis RUN, canu need to know approx genome size (for coverage calculation) and sequencing platform
 RUN canu \
-    -p portiera -d portiera-nanopore \
-    genomeSize=0.3m \
-    -nanopore ERR3772599.fastq.gz \
-    maxThreads=2 \
-    maxMemory=7 \
-    redMemory=7 \
-    redThreads=2 \
-    corThreads=2 
+   -p portiera -d portiera-nanopore \
+   genomeSize=0.3m \
+   -nanopore ERR3772599.fastq.gz \
+   maxMemory=7 maxThreads=2 \
+   redMemory=7 redThreads=2 \
+   corMemory=7 corThreads=2 \
+   oeaMemory=7 oeaThreads=2 \
+   batMemory=7 batThreads=2 \
+   cnsMemory=7 cnsThreads=2 
 
