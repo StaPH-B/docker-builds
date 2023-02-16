@@ -56,7 +56,7 @@ ENV ENV_NAME="freyja-env"
 ARG MAMBA_DOCKERFILE_ACTIVATE=1
 
 # Run Freyja
-RUN freyja variants /data/test.bam --variants /data/test_variants.tsv --depths /data/test_depths.tsv --ref /data/NC_045512_Hu-1.fasta && \
+RUN freyja variants /data/Freyja_WWSC2.bam --variants /data/test_variants.tsv --depths /data/test_depths.tsv --ref /data/NC_045512_Hu-1.fasta && \
  freyja demix /data/test_variants.tsv /data/test_depths.tsv --output /data/test_demix.tsv
 
 # Check validity of outputs
