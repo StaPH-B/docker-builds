@@ -18,7 +18,10 @@ Given the following example directory structure for the inputs:
 ...
 ```
 
-In the `example` directory, run the pipeline: `cfsan_snp_pipeline run -s samples reference/reference.fasta`
+In the `example` directory, run the pipeline: 
+```
+bashcfsan_snp_pipeline run -s samples reference/reference.fasta
+```
 
 Full documentation for the pipeline can be found here: https://snp-pipeline.readthedocs.io/en/latest/readme.html
 
