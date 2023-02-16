@@ -52,6 +52,7 @@ RUN wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/012/224/845/GCA_012224845.
 # Downloads read files and uses them for kma mapping against database
 RUN wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR690/006/SRR6903006/SRR6903006_1.fastq.gz && \
   wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR690/006/SRR6903006/SRR6903006_2.fastq.gz && \
-  kma -ipe SRR6903006_*.fastq.gz -o test_output -t_db database
+  kma -ipe SRR6903006_1.fastq.gz SRR6903006_2.fastq.gz -o test_output -t_db database
 
-RUN kma -v
+RUN kma -v && ls -l .
+
