@@ -2,7 +2,7 @@ FROM ubuntu:xenial as app
 
 # metadata
 LABEL base.image="ubuntu:xenial"
-LABEL version="1"
+LABEL dockerfile.version="1"
 LABEL software="cfsan_snp_pipeline"
 LABEL software.version="2.2.1"
 LABEL description="A pipeline for the production of SNP matrices from sequence data used in the phylogenetic analysis of pathogenic organisms sequenced from samples of interest to food safety."
