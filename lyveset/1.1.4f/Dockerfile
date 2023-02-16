@@ -48,7 +48,8 @@ RUN apt update && apt-get install -y \
     libio-socket-ssl-perl \
     libxml-simple-perl \
     unzip \
-    smalt &&\
+    smalt \
+    python3 &&\
     apt-get clean && apt-get autoclean && \
     rm -rf /var/lib/apt/lists/*
 
