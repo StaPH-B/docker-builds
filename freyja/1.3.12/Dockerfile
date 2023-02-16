@@ -60,9 +60,7 @@ RUN freyja variants /data/Freyja_WWSC2.bam --variants /data/test_variants.tsv --
  freyja demix /data/test_variants.tsv /data/test_depths.tsv --output /data/test_demix.tsv
 
 # Check validity of outputs
-RUN ls /data 
-
-RUN head /data/test.tsv && \
- head /data/test.depth && \
+RUN head /data/test_variants.tsv && \
+ head /data/test_depths.tsv && \
  head /data/test_demix.tsv && \
  grep "Omicron" /data/test_demix.tsv
