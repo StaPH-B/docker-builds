@@ -59,6 +59,7 @@ RUN canu \
     -p portiera -d portiera-nanopore \
     genomeSize=0.3m \
     -nanopore ERR3772599.fastq.gz \
-   maxThreads=4 \
-   maxMemory=7
+    corThreads=2 \
+    maxThreads=2 \
+    maxMemory=7
 
