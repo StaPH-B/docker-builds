@@ -3,8 +3,10 @@
 Main tool: [Lyve-SET](https://github.com/lskatz/Lyve-SET)
 
 Additional tools:
+
 - ncbi-blast+ 2.2.31
 - python 2.7.12
+- python 3.5.2
 - bioperl 1.6.924
 - cpanminus 1.7040
 - NCBI E-utilities
