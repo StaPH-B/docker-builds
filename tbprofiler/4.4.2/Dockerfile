@@ -6,7 +6,8 @@ USER root
 WORKDIR /
 ARG TBPROFILER_VER="4.4.2"
 # this version is the shortened commit hash on the `master` branch here https://github.com/jodyphelan/tbdb/
-ARG TBDB_VER="c2fb9a2"
+# this was the latest commit as of 2023-02-17
+ARG TBDB_VER="5f3c51e"
 
 # LABEL instructions tag the image with metadata that might be important to the user
 # Optional, but highly recommended
@@ -22,7 +23,7 @@ LABEL maintainer.email="jarnn@utah.gov"
 LABEL maintainer2="Curtis kapsak"
 LABEL maintainer2.email="kapsakcj@gmail.com"
 
-# Install dependencies via apt-get
+# Install dependencies via apt-get; cleanup apt garbage
 RUN apt-get update && apt-get install -y --no-install-recommends \
  wget \
  ca-certificates \
@@ -36,9 +37,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # this ARG is so that the conda env is activated for running the following command
 ARG MAMBA_DOCKERFILE_ACTIVATE=1
-# Version of database can be confirmed at ./TBProfiler-${TBPROFILER_VER}/db/tbdb.version.json
+# Version of database can be confirmed at /opt/conda/share/tbprofiler/tbdb.version.json
+# can also run 'tb-profiler list_db' to find the same version info
 RUN tb-profiler update_tbdb --commit ${TBDB_VER}
 
+# ensure conda environment is always active for the user
 ENV MAMBA_DOCKERFILE_ACTIVATE=1
 WORKDIR /data
 
