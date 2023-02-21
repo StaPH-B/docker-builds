@@ -1,6 +1,6 @@
 # Kleborate container
 
-Main tool : [Kleborate](https://github.com/katholt/Kleborate) 2.2.0
+Main tool : [Kleborate](https://github.com/katholt/Kleborate) 2.3.1
 
 Additional tools:
 
