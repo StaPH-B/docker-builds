@@ -16,8 +16,8 @@ LABEL software.version=${POPPUNK_VERSION}
 LABEL description="POPulation Partitioning Using Nucleotide Kmers"
 LABEL website="https://github.com/bacpop/PopPUNK"
 LABEL license="https://github.com/bacpop/PopPUNK/blob/master/LICENSE"
-LABEL maintainer1="Curtis Kapsak"
-LABEL maintainer1.email="curtis.kapsak@theiagen.com"
+LABEL maintainer="Curtis Kapsak"
+LABEL maintainer.email="curtis.kapsak@theiagen.com"
 
 # install dependencies; cleanup apt garbage
 RUN apt-get update && apt-get install -y --no-install-recommends \
