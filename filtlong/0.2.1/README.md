@@ -3,7 +3,7 @@
 Main tool : [filtlong](https://github.com/rrwick/Filtlong)
 
 Additional tools:
-- list
+- python 3.10.6
 
 Full documentation: [https://github.com/rrwick/Filtlong](https://github.com/rrwick/Filtlong)
 
