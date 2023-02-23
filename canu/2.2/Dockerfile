@@ -1,5 +1,5 @@
 # Use ubuntu as base image
-FROM ubuntu:xenial
+FROM ubuntu:xenial as app
 
 # metadata
 LABEL base.image="ubuntu:xenial"
@@ -43,3 +43,26 @@ WORKDIR /data
 
 # set perl locale settings
 ENV LC_ALL=C
+
+# ======== Adding a test layer ========
+
+FROM app as test
+
+# creating test working DIR.  
+WORKDIR /test_canu
+
+# download test input file into /test_canu/ directory
+RUN wget https://raw.githubusercontent.com/bactopia/bactopia-tests/main/data/species/portiera/nanopore/ERR3772599.fastq.gz
+
+# testing analysis RUN, canu need to know approx genome size (for coverage calculation) and sequencing platform
+RUN canu \
+   -p portiera -d portiera-nanopore \
+   genomeSize=0.3m \
+   -nanopore ERR3772599.fastq.gz \
+   maxMemory=7 maxThreads=2 \
+   redMemory=7 redThreads=2 \
+   corMemory=7 corThreads=2 \
+   oeaMemory=7 oeaThreads=2 \
+   batMemory=7 batThreads=2 \
+   cnsMemory=7 cnsThreads=2 
+
