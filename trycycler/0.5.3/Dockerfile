@@ -20,7 +20,7 @@ LABEL maintainer.email="eriny@utah.gov"
 # install prerequisites, cleanup apt garbage
 # muscle version: 3.8.31
 ARG DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
  python3 \
  python3-pip \
  gcc \
@@ -28,6 +28,9 @@ RUN apt-get update && apt-get install -y \
  curl \
  bzip2 \
  build-essential \
+ procps \
+ ca-certificates \
+ libz-dev \
  muscle \
  r-base && \
  apt-get clean && apt-get autoclean && rm -rf /var/lib/apt/lists/*
