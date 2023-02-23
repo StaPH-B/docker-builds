@@ -8,16 +8,20 @@ Phylogenetic Assignment of Named Global Outbreak LINeages
 
 Additional tools:
 
-- [pangolin-data](https://github.com/cov-lineages/pangolin-data) 1.18
-- [pangolin-assignment](https://github.com/cov-lineages/pangolin-assignment)  1.18
+- [pangolin-data](https://github.com/cov-lineages/pangolin-data) 1.18.1
+- [pangolin-assignment](https://github.com/cov-lineages/pangolin-assignment)  1.18.1
 - [minimap2](https://github.com/lh3/minimap2) 2.24-r1122
 - [usher](https://github.com/yatisht/usher) 0.6.2
 - [faToVcf](https://github.com/yatisht/usher) 426
 - [scorpio](https://github.com/cov-lineages/scorpio) 0.3.17
 - [constellations](https://github.com/cov-lineages/constellations) 0.1.10
-- [gofasta](https://github.com/virus-evolution/gofasta) 1.1.0
+- [gofasta](https://github.com/virus-evolution/gofasta) 1.2.0
 - [mafft](https://mafft.cbrc.jp/alignment/software/) 7.508
 - python 3.8.15
+
+## Warning
+
+This docker image contains `pangolin-data` v1.18.1. The upgrade from 1.18 to 1.18.1 ONLY updated the underlying UShER tree/protobuf file. It did NOT update the pangoLEARN model, so please use the UShER mode of pangolin if you want to stay up-to-date with the most recent lineages. [See pangolin-data release notes here for more details](https://github.com/cov-lineages/pangolin-data/releases/tag/v1.18.1)
 
 ## Example Usage
 
