@@ -32,7 +32,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  ca-certificates \
  libz-dev \
  muscle \
- r-base && \
+ r-base \
+ gfortran \
+ libblas-dev \
+ liblapack-dev && \
  apt-get clean && apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # minimap2
