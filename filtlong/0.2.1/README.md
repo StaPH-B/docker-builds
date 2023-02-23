@@ -7,7 +7,7 @@ Additional tools:
 
 Full documentation: [https://github.com/rrwick/Filtlong](https://github.com/rrwick/Filtlong)
 
-Filtlong filters long-read fastq files by quality.
+Filtlong filters long-read fastq files by quality & read lengths.
 
 ## Example Usage
 
