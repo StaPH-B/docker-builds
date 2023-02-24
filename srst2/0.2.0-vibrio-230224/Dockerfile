@@ -61,7 +61,9 @@ WORKDIR /data
 # add custom database to /data directory, make readable to all
 ADD vibrio_230224.fasta .
 
-## insert steps for index custom DB here
+# index custom database in /data directory
+RUN bowtie2-build vibrio_230224.fasta vibrio_230224.fasta
+RUN samtools faidx vibrio_230224.fasta
 
 # test layer
 FROM app as test
@@ -82,4 +84,10 @@ shigella1__ERR024070.Escherichia_coli#1.scores \
 shigella1__ERR024070.Escherichia_coli#1.sorted.bam \
 shigella1__mlst__Escherichia_coli#1__results.txt 
 
-## add test for vibrio here (preferably download reads from SRA, run with custom DB, print output summary)
+# test for vibrio custom DB, print output summary
+# https://www.ebi.ac.uk/ena/browser/view/SRR7062495
+RUN wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR706/005/SRR7062495/SRR7062495_1.fastq.gz &&\
+wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR706/005/SRR7062495/SRR7062495_2.fastq.gz &&\
+srst2 --input_pe SRR7062495*.fastq.gz --gene_db vibrio_230224.fasta --output SRR7062495 &&\
+ls SRR7062495__genes__vibrio_230224__results.txt &&\
+cat SRR7062495__genes__vibrio_230224__results.txt
