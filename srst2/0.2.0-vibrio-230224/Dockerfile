@@ -8,8 +8,6 @@ ARG SRST2_VER=0.2.0
 ARG BOWTIE2_VER=2.2.6-2
 ARG SAMTOOLS_VER=0.1.18
 
-
-
 LABEL base.image="ubuntu:xenial"
 LABEL dockerfile.version="1"
 LABEL software="SRST2"
@@ -21,7 +19,6 @@ LABEL maintainer="Holly Halstead"
 LABEL maintainer.email="holly.halstead@doh.wa.gov"
 LABEL maintainer2="Inês Mendes"
 LABEL maintainer2.email="ines.mendes@theiagen.com"
-
 
 # install dependencies; cleanup apt garbage
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -42,35 +39,40 @@ curl \
 libncurses5-dev \
 unzip \
 wget  \
-locate && \
-apt-get install -y \
-python-pip && \
+locate \
+python-pip \
+python-setuptools && \
 apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-# download pre-compiled binary; unzip; put binary in /usr/bin; make /data
+# download samtools source code; unzip; compile; put executable in /usr/local/bin
 RUN curl -O -L https://sourceforge.net/projects/samtools/files/samtools/${SAMTOOLS_VER}/samtools-${SAMTOOLS_VER}.tar.bz2 && \
-tar xvfj samtools-${SAMTOOLS_VER}.tar.bz2 && \
+tar -xjf samtools-${SAMTOOLS_VER}.tar.bz2 && \
 cd samtools-${SAMTOOLS_VER} && \
 make && \
-cp samtools /usr/local/bin && \
-cd
+cp -v samtools /usr/local/bin 
 
-# Install SRST2
+# Install SRST2; make /data
 RUN pip install biopython git+https://github.com/katholt/srst2.git@v${SRST2_VER} && \
 mkdir /data
 
 # set working directory
 WORKDIR /data
 
-# add custom database
+# add custom database to /data directory, make readable to all
 ADD vibrio_230224.fasta .
 
+## insert steps for index custom DB here
+
+# test layer
 FROM app as test
 
+# check help options
 RUN srst2 --version && \
 getmlst.py -h && \
 slurm_srst2.py -h
 
+# test getmlst.py script as well as usage of srst2 for calling the ST on a Shigella sonnei isolate
+# https://www.ebi.ac.uk/ena/browser/view/ERR024070
 RUN getmlst.py --species "Escherichia coli#1" && \
 wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR024/ERR024070/ERR024070_1.fastq.gz && \
 wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR024/ERR024070/ERR024070_2.fastq.gz && \
@@ -78,4 +80,6 @@ srst2 --input_pe ERR024070*.fastq.gz --output shigella1 --log --save_scores --ml
 ls shigella1__ERR024070.Escherichia_coli#1.pileup \
 shigella1__ERR024070.Escherichia_coli#1.scores \
 shigella1__ERR024070.Escherichia_coli#1.sorted.bam \
-shigella1__mlst__Escherichia_coli#1__results.txt \
+shigella1__mlst__Escherichia_coli#1__results.txt 
+
+## add test for vibrio here (preferably download reads from SRA, run with custom DB, print output summary)
