@@ -47,6 +47,7 @@ apt-get autoclean && rm -rf /var/lib/apt/lists/*
 # download samtools source code; unzip; compile; put executable in /usr/local/bin
 RUN curl -O -L https://sourceforge.net/projects/samtools/files/samtools/${SAMTOOLS_VER}/samtools-${SAMTOOLS_VER}.tar.bz2 && \
 tar -xjf samtools-${SAMTOOLS_VER}.tar.bz2 && \
+rm samtools-${SAMTOOLS_VER}.tar.bz2 && \
 cd samtools-${SAMTOOLS_VER} && \
 make && \
 cp -v samtools /usr/local/bin 
@@ -55,15 +56,16 @@ cp -v samtools /usr/local/bin
 RUN pip install biopython git+https://github.com/katholt/srst2.git@v${SRST2_VER} && \
 mkdir /data
 
-# set working directory
+# add custom database to /vibrio-cholerae-db directory, make readable to all
+ADD vibrio_230224.fasta /vibrio-cholerae-db/
+
+# index custom database in /vibrio-cholerae-db directory; ensure files are readable to all users
+RUN bowtie2-build /vibrio-cholerae-db/vibrio_230224.fasta /vibrio-cholerae-db/vibrio_230224.fasta && \
+  samtools faidx /vibrio-cholerae-db/vibrio_230224.fasta && \
+  chmod -R 755 /vibrio-cholerae-db
+
+# set final working directory
 WORKDIR /data
-
-# add custom database to /data directory, make readable to all
-ADD vibrio_230224.fasta .
-
-# index custom database in /data directory
-RUN bowtie2-build vibrio_230224.fasta vibrio_230224.fasta
-RUN samtools faidx vibrio_230224.fasta
 
 # test layer
 FROM app as test
@@ -86,8 +88,8 @@ shigella1__mlst__Escherichia_coli#1__results.txt
 
 # test for vibrio custom DB, print output summary
 # https://www.ebi.ac.uk/ena/browser/view/SRR7062495
-RUN wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR706/005/SRR7062495/SRR7062495_1.fastq.gz &&\
-wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR706/005/SRR7062495/SRR7062495_2.fastq.gz &&\
-srst2 --input_pe SRR7062495*.fastq.gz --gene_db vibrio_230224.fasta --output SRR7062495 &&\
-ls SRR7062495__genes__vibrio_230224__results.txt &&\
+RUN wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR706/005/SRR7062495/SRR7062495_1.fastq.gz && \
+wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR706/005/SRR7062495/SRR7062495_2.fastq.gz && \
+srst2 --input_pe SRR7062495*.fastq.gz --gene_db /vibrio-cholerae-db/vibrio_230224.fasta --output SRR7062495 && \
+ls SRR7062495__genes__vibrio_230224__results.txt && \
 cat SRR7062495__genes__vibrio_230224__results.txt
