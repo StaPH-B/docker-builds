@@ -31,3 +31,13 @@ srst2 --input_pe strainA_1.fastq.gz strainA_2.fastq.gz --output strainA_test --l
 
 #### 3 - Check the outputs
 MLST results are output in: `strainA_test__mlst__Escherichia_coli#1__results.txt`
+
+## Basic usage - Vibrio characterization
+
+#### 1 - Run srst2
+```
+srst2 --input_pe strainA_1.fastq.gz strainA_2.fastq.gz --gene_db vibrio_230224.fasta --output strainA_test
+```
+
+#### 2 - Check the outputs
+MLST results are output in: `strainA_test__genes__vibrio_230224__results.txt`
