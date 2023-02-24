@@ -12,7 +12,7 @@ Additional tools:
 
 Full documentation: [https://github.com/katholt/srst2](https://github.com/katholt/srst2)
 
-SRST2 performs short read sequence typing for bacterial pathogens when given Illumina sequence data, a MLST database, and/or a database of gene sequences  such as resistance genes, virulence genes, etc.)
+SRST2 performs short read sequence typing for bacterial pathogens when given Illumina sequence data, a MLST database, and/or a database of gene sequences  such as resistance genes, virulence genes, etc.
 
 ## Custom *Vibrio cholerae* database info
 
@@ -53,9 +53,25 @@ MLST results are output in: `strainA_test__mlst__Escherichia_coli#1__results.txt
 ### 1 - Run srst2
 
 ```bash
-srst2 --input_pe strainA_1.fastq.gz strainA_2.fastq.gz --gene_db /vibrio-cholerae-db/vibrio_230224.fasta --output strainA_test
+srst2 --input_pe SRR7062495_1.fastq.gz SRR7062495_2.fastq.gz --gene_db /vibrio-cholerae-db/vibrio_230224.fasta --output SRR7062495_test
 ```
 
 ### 2 - Check the outputs
 
-MLST results are output in: `strainA_test__genes__vibrio_230224__results.txt`
+Summary results are output in: `SRR7062495_test__genes__vibrio_230224__results.txt` and detailed results are found in `SRR7062495_test__fullgenes__vibrio_230224__results.txt`
+
+```bash
+# summary
+$ column -t -s $'\t' -n SRR7062495_test__genes__vibrio_230224__results.txt 
+Sample      ctxA       ompW        tcpA_ElTor         toxR        wbeN_O1
+SRR7062495  ctxA_O395  ompW_O395*  tcpA_ElTor_C6706*  toxR_O395*  wbeN_O1_INDRE
+
+# detailed results
+$ column -t -s $'\t' -n SRR7062495_test__fullgenes__vibrio_230224__results.txt
+Sample      DB             gene        allele            coverage  depth    diffs  uncertainty  divergence  length  maxMAF  clusterid  seqid  annotation
+SRR7062495  vibrio_230224  ctxA        ctxA_O395         100.0     103.877                      0.0         777     0.063   1          1      CP000627.1
+SRR7062495  vibrio_230224  ompW        ompW_O395         100.0     78.414   6snp                0.917       654     0.04    2          3      CP000626.1
+SRR7062495  vibrio_230224  toxR        toxR_O395         100.0     74.081   14snp               1.582       885     0.053   5          6      CP000627.1
+SRR7062495  vibrio_230224  tcpA_ElTor  tcpA_ElTor_C6706  100.0     82.698   1snp                0.148       675     0.046   4          5      CP064350.1
+SRR7062495  vibrio_230224  wbeN_O1     wbeN_O1_INDRE     100.0     112.119                      0.0         2478    0.091   6          7      
+```
