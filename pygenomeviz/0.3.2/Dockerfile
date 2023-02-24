@@ -29,8 +29,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 RUN pip install pygenomeviz==$PYGENOMEVIZ_VER 
 
-RUN which pgv-download-dataset
-
 ENV LC_ALL=C.UTF-8 
 
 WORKDIR /data
