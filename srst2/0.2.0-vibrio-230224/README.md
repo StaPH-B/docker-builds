@@ -19,25 +19,31 @@ SRST2  performs short read sequence typing for bacterial pathogens when given Il
 The vibrio_230224 database included in this docker build is manually curated and includes toxR,26 rstC,27 rtxA,28 and hlyA.12 Primer sets ctxB,11 hlyA,12 rstC,27 rstR,29 rtxC,28 and tcpA12 were used to detect classical and El Tor biotype specific alleles in the strains.
 
 ## Basic usage - MLST
-#### 1 - Gather your input files
-```
+
+### 1 - Gather your input files
+
+```bash
 getmlst.py --species 'Escherichia coli#1'
 ```
 
-#### 2 - Run MLST
-```
+### 2 - Run MLST
+
+```bash
 srst2 --input_pe strainA_1.fastq.gz strainA_2.fastq.gz --output strainA_test --log --mlst_db Escherichia_coli#1.fasta --mlst_definitions profiles_csv --mlst_delimiter _
 ```
 
-#### 3 - Check the outputs
+### 3 - Check the outputs
+
 MLST results are output in: `strainA_test__mlst__Escherichia_coli#1__results.txt`
 
 ## Basic usage - Vibrio characterization
 
-#### 1 - Run srst2
-```
+### 1 - Run srst2
+
+```bash
 srst2 --input_pe strainA_1.fastq.gz strainA_2.fastq.gz --gene_db vibrio_230224.fasta --output strainA_test
 ```
 
-#### 2 - Check the outputs
+### 2 - Check the outputs
+
 MLST results are output in: `strainA_test__genes__vibrio_230224__results.txt`
