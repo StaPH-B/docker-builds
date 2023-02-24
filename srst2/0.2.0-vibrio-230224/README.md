@@ -12,11 +12,23 @@ Additional tools:
 
 Full documentation: [https://github.com/katholt/srst2](https://github.com/katholt/srst2)
 
-SRST2  performs short read sequence typing for bacterial pathogens when given Illumina sequence data, a MLST database, and/or a database of gene sequences  such as resistance genes, virulence genes, etc.)
+SRST2 performs short read sequence typing for bacterial pathogens when given Illumina sequence data, a MLST database, and/or a database of gene sequences  such as resistance genes, virulence genes, etc.)
 
-## Custom database info
+## Custom *Vibrio cholerae* database info
 
-The vibrio_230224 database included in this docker build is manually curated and includes toxR,26 rstC,27 rtxA,28 and hlyA.12 Primer sets ctxB,11 hlyA,12 rstC,27 rstR,29 rtxC,28 and tcpA12 were used to detect classical and El Tor biotype specific alleles in the strains.
+This docker image includes a *Vibrio cholerae-specific* database of gene targets (traditionally used in PCR methods) for detecting O1 & O139 serotypes, toxin-production markers, and Biotype markers within the O1 serogroup ("El Tor" or "Classical" biotypes). These sequences were shared via personal communication with Dr. Christine Lee, of the National Listeria, Yersinia, Vibrio and Enterobacterales Reference Laboratory within the Enteric Diseases Laboratory Branch at CDC.
+
+The genes included (and their purpose) included in the database are as follows:
+
+- `ctxA` - Cholera toxin, an indication of toxigenic cholerae
+- `ompW` - outer membrane protein, a *V. cholerae* species marker (alleles distinguishes *V. cholerae* from *V. parahaemolyticus* and *V. vulnificus*)
+- `tcpA` - toxin co-pilus A, used to infer Biotype, either "El Tor" or "Clasical"
+  - database includes an allele for each Biotype. `tcpA_classical` and `tcpA_ElTor`
+- `toxR` - transcriptional activator (controls cholera toxin, pilus, and outer-membrane protein expression) - Species marker (allele distinguishes *V. cholerae* from *V. parahaemolyticus* and *V. vulnificus*)
+- `wbeN` - O antigen encoding region - used to identify the O1 serogroup
+- `wbfR` - O antigen encoding region - used to identify the O139 serogroup
+
+The database's FASTA file & index files are located within `/vibrio-cholerae-db/` in the container's file system and can be utilized via the example command below.
 
 ## Basic usage - MLST
 
@@ -41,7 +53,7 @@ MLST results are output in: `strainA_test__mlst__Escherichia_coli#1__results.txt
 ### 1 - Run srst2
 
 ```bash
-srst2 --input_pe strainA_1.fastq.gz strainA_2.fastq.gz --gene_db vibrio_230224.fasta --output strainA_test
+srst2 --input_pe strainA_1.fastq.gz strainA_2.fastq.gz --gene_db /vibrio-cholerae-db/vibrio_230224.fasta --output strainA_test
 ```
 
 ### 2 - Check the outputs
