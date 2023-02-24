@@ -18,7 +18,9 @@ LABEL description="Short Read Sequence Typing for Bacterial Pathogens"
 LABEL website="https://github.com/katholt/srst2"
 LABEL license="https://github.com/katholt/srst2/blob/master/LICENSE.txt"
 LABEL maintainer="Holly Halstead"
-LABEL maintainer1.email="holly.halstead@doh.wa.gov"
+LABEL maintainer.email="holly.halstead@doh.wa.gov"
+LABEL maintainer2="Inês Mendes"
+LABEL maintainer2.email="ines.mendes@theiagen.com"
 
 
 # install dependencies; cleanup apt garbage
