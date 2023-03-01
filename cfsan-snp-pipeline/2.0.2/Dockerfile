@@ -1,8 +1,8 @@
-FROM ubuntu:xenial
+FROM ubuntu:xenial as app
 
 # metadata
 LABEL base.image="ubuntu:xenial"
-LABEL version="1"
+LABEL dockerfile.version="2"
 LABEL software="cfsan_snp_pipeline"
 LABEL software.version="2.0.2"
 LABEL description="A pipeline for the production of SNP matrices from sequence data used in the phylogenetic analysis of pathogenic organisms sequenced from samples of interest to food safety."
@@ -15,11 +15,11 @@ LABEL maintainer.email="pjx8@cdc.gov"
 
 # This Dockerfile is based on a Docker file from Justin Payne which can be found here:
 # https://hub.docker.com/r/crashfrog/snp-pipeline/dockerfile
-# The dockerfile has been modified from it's original form by Curtis Kapsak
+# The dockerfile has been modified from it's original form by Curtis Kapsak and Sam Baird
 
 WORKDIR /tmp/
 RUN apt-get update -y \
-	&& apt-get install -y \
+	&& apt-get install -y --no-install-recommends \
 		bowtie2 \
 		openjdk-8-jre \
 		g++ \
@@ -44,8 +44,11 @@ RUN apt-get update -y \
                 libperl-dev \
 	&& apt-get clean
 
+ARG SNP_PIPELINE_VER
+ENV SNP_PIPELINE_VER=${SNP_PIPELINE_VER:-2.0.2}
+
 # install pip (code originally from Justin)
-RUN wget https://bootstrap.pypa.io/get-pip.py -q \
+RUN wget https://bootstrap.pypa.io/pip/2.7/get-pip.py  -q \
 	&& python get-pip.py
 
 # install samtools, since the version in apt-get is too far out-of-date
@@ -78,19 +81,13 @@ RUN mkdir /picard &&\
 # get GATK 3.8-1-0 jar flie
 RUN mkdir /gatk &&\
     cd /gatk &&\
-    wget -O ./gatk.tar.bz2 'https://software.broadinstitute.org/gatk/download/auth?package=GATK-archive&version=3.8-1-0-gf15c1c3ef' &&\
-    tar -xjf gatk.tar.bz2 &&\
+    wget -O ./gatk.tar.bz2 'https://storage.googleapis.com/gatk-software/package-archive/gatk/GenomeAnalysisTK-3.8-1-0-gf15c1c3ef.tar.bz2' &&\
+    tar -xjvf gatk.tar.bz2 &&\
     rm gatk.tar.bz2
 
 # get VarScan and SRA-toolkit
 RUN wget http://downloads.sourceforge.net/project/varscan/VarScan.v2.3.7.jar -q \
 	&& cp VarScan.v2.3.7.jar /usr/bin/VarScan.jar \
-	&& wget http://www.niehs.nih.gov/research/resources/assets/docs/artsrcchocolatecherrycake031915linuxtgz.tgz -q \
-	&& tar -zxf /tmp/artsrcchocolatecherrycake031915linuxtgz.tgz \
-	&& cd /tmp/art_src_ChocolateCherryCake_Linux \
-	&& ./configure \
-	&& make \
-	&& make install \
 	&& cd /tmp/ \
 	&& wget http://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/2.3.5-2/sratoolkit.2.3.5-2-ubuntu64.tar.gz -q \
 	&& tar -zxf /tmp/sratoolkit.2.3.5-2-ubuntu64.tar.gz \
@@ -98,24 +95,27 @@ RUN wget http://downloads.sourceforge.net/project/varscan/VarScan.v2.3.7.jar -q 
 	&& rm -r /tmp/*
 
 #install snp-pipeline and snp-mutator
-RUN pip install numpy snp-pipeline biopython snp-mutator
+RUN pip install numpy snp-pipeline==$SNP_PIPELINE_VER biopython==1.68 snp-mutator
 
 # set java CLASSPATH variables
 ENV CLASSPATH /usr/bin/VarScan.jar:/picard/picard.jar:/gatk/GenomeAnalysisTK-3.8-1-0-gf15c1c3ef/GenomeAnalysisTK.jar
 # not sure why this is here, or what program uses NUMCORES, but I'm going to leave it for now.
 ENV NUMCORES 1
 
-# Test snp_pipeline (code originally from Justin). Running copy_snppipeline_data.py generates an message the the script is deprecated
+# make a DIR called /data for running cfsan-snp-pipeline in
+WORKDIR /data
+
+# Test snp_pipeline (code modified from Justin). Running copy_snppipeline_data.py generates an message the the script is deprecated
 # but I figured I would leave it since the below commands test that the image runs properly.
+FROM app as test
 WORKDIR /test/
 RUN copy_snppipeline_data.py lambdaVirusInputs testLambdaVirus \
 	&& cd testLambdaVirus \
 	&& run_snp_pipeline.sh -s samples reference/lambda_virus.fasta \
 	&& copy_snppipeline_data.py lambdaVirusExpectedResults expectedResults \
-	&& diff -q snplist.txt expectedResults/snplist.txt \
-	&& diff -q snpma.fasta expectedResults/snpma.fasta \
-	&& diff -q referenceSNP.fasta expectedResults/referenceSNP.fasta
+	&& diff -q snplist.txt expectedResults/snplist.txt >> diffOutput.txt \
+	&& diff -q snpma.fasta expectedResults/snpma.fasta >> diffOutput.txt \
+	&& diff -q referenceSNP.fasta expectedResults/referenceSNP.fasta >> diffOutput.txt \
+    && if [ -s diffOutput.txt ]; then echo "testLambdaVirus failed"; else echo "testLambdaVirus passed"; fi
 
-# make a DIR called /data for running cfsan-snp-pipeline in
-RUN mkdir /data
 WORKDIR /data
