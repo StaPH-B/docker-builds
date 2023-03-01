@@ -1,10 +1,14 @@
 # PopPUNK container
 
-Main tool : [PopPUNK](https://github.com/bacpop/PopPUNK)
+Main tool : 
+- [PopPUNK](https://github.com/bacpop/PopPUNK)
 
 Additional tools:
-
-- none
+- biopython 1.81
+- pp-sketchlib 2.1.1
+- python 3.10.9
+- rapidnj 2.3.2
+- treeswift 1.1.33
 
 Full documentation: [https://poppunk.readthedocs.io/en/latest/](https://poppunk.readthedocs.io/en/latest/)
 
