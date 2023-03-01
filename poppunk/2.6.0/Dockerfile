@@ -1,4 +1,4 @@
-FROM mambaorg/micromamba:0.24.0 as app
+FROM mambaorg/micromamba:1.3.1 as app
 
 # Version arguments
 # ARG variables only persist during build time
@@ -9,7 +9,7 @@ USER root
 # set workdir to default for building; set to /data at the end
 WORKDIR /
 
-LABEL base.image="mambaorg/micromamba:0.24.0"
+LABEL base.image="mambaorg/micromamba:1.3.1"
 LABEL dockerfile.version="1"
 LABEL software="PopPUNK"
 LABEL software.version=${POPPUNK_VERSION}
@@ -18,6 +18,8 @@ LABEL website="https://github.com/bacpop/PopPUNK"
 LABEL license="https://github.com/bacpop/PopPUNK/blob/master/LICENSE"
 LABEL maintainer="Curtis Kapsak"
 LABEL maintainer.email="curtis.kapsak@theiagen.com"
+LABEL maintainer2="Harry Hung"
+LABEL maintainer2.email="ch31@sanger.ac.uk"
 
 # install dependencies; cleanup apt garbage
 RUN apt-get update && apt-get install -y --no-install-recommends \
