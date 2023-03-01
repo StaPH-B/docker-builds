@@ -120,7 +120,7 @@ To learn more about the docker pull rate limits and the open source software pro
 | [PlasmidFinder](https://hub.docker.com/r/staphb/plasmidfinder) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/plasmidfinder)](https://hub.docker.com/r/staphb/plasmidfinder) | <ul><li>2.1.6</li></ul> | https://bitbucket.org/genomicepidemiology/plasmidfinder/src/master/ |
 | [PlasmidSeeker](https://hub.docker.com/r/staphb/plasmidseeker) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/plasmidseeker)](https://hub.docker.com/r/staphb/plasmidseeker) | <ul><li>1.0</li><li>1.3</li></ul> | https://github.com/bioinfo-ut/PlasmidSeeker |
 | [pmga](https://hub.docker.com/r/staphb/pmga/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/pmga)](https://hub.docker.com/r/staphb/pmga) | <ul><li>3.0.2</li></ul> | https://github.com/rpetit3/pmga |
-| [PopPUNK](https://hub.docker.com/r/staphb/poppunk/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/poppunk)](https://hub.docker.com/r/staphb/poppunk) | <ul><li>2.4.0</li><li>2.5.0</li></ul> | https://github.com/bacpop/PopPUNK |
+| [PopPUNK](https://hub.docker.com/r/staphb/poppunk/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/poppunk)](https://hub.docker.com/r/staphb/poppunk) | <ul><li>2.4.0</li><li>2.5.0</li><li>2.6.0</li></ul> | https://github.com/bacpop/PopPUNK |
 | [Prokka](https://hub.docker.com/r/staphb/prokka/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/prokka)](https://hub.docker.com/r/staphb/prokka) | <ul><li>1.13.4</li><li>1.14.0</li><li>1.14.5</li><li>1.14.6</li></ul> | https://github.com/tseemann/prokka |
 | [pyGenomeViz](https://hub.docker.com/r/staphb/pygenomeviz/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/pygenomeviz)](https://hub.docker.com/r/staphb/pygenomeviz) | <ul><li>0.2.2</li></ul> | https://github.com/moshi4/pyGenomeViz |
 | [QUAST](https://hub.docker.com/r/staphb/quast/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/quast)](https://hub.docker.com/r/staphb/quast) | <ul><li>5.0.0</li><li>5.0.2</li></ul> | https://github.com/ablab/quast |
@@ -222,5 +222,6 @@ Each Dockerfile lists the author(s)/maintainer(s) as a metadata `LABEL`, but the
   * [@shelby-bennett](https://github.com/shelby-bennett)
   * [@poojasgupta](https://github.com/poojasgupta)
   * [@hollygene](https://github.com/hollygene)
+  * [@HarryHung](https://github.com/HarryHung)
   * [@sam-baird](https://github.com/sam-baird)
   * [@eproctor118](https://github.com/eproctor118)
