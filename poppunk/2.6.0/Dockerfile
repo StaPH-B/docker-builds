@@ -61,5 +61,5 @@ RUN poppunk --help && \
 # Build PopPUNK database from the assemblies
 # Assign clusters on the same assemblies using the built database
 # Compare the database clusters and assigned clusters of the assemblies
-COPY tests /data
+COPY test.sh ftps.txt /data/
 RUN bash test.sh
