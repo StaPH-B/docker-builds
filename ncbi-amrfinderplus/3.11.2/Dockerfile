@@ -1,13 +1,14 @@
-FROM ubuntu:focal as app
+FROM ubuntu:jammy as app
 
 ARG AMRFINDER_VER="3.11.2"
 
-LABEL base.image="ubuntu:focal"
-LABEL dockerfile.version="1"
+LABEL base.image="ubuntu:jammy"
+LABEL dockerfile.version="2"
 LABEL software="NCBI AMRFinderPlus"
 LABEL software.version="${AMRFINDER_VER}"
 LABEL description="NCBI resistance gene detection tool"
 LABEL website="https://github.com/ncbi/amr"
+LABEL license="https://github.com/ncbi/amr/blob/master/LICENSE"
 LABEL maintainer="Kelsey Florek"
 LABEL maintainer.email="kelsey.florek@slh.wisc.edu"
 LABEL maintainer2="Curtis Kapsak"
@@ -28,10 +29,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  make \
  g++ \
  ncbi-blast+ \
- hmmer && \
+ hmmer \
+ procps && \
  apt-get autoclean && \
  rm -rf /var/lib/apt/lists/*
 
+# download and install amrfinderplus pre-compiled binaries; make /data
 RUN mkdir amrfinder && cd /amrfinder && \
  wget https://github.com/ncbi/amr/releases/download/amrfinder_v${AMRFINDER_VER}/amrfinder_binaries_v${AMRFINDER_VER}.tar.gz && \
  tar zxf amrfinder_binaries_v${AMRFINDER_VER}.tar.gz && \
@@ -46,14 +49,16 @@ ENV PATH="${PATH}:\
 # download databases
 RUN cd /amrfinder && amrfinder -u
 
+# set final working directory
 WORKDIR /data
 
 ## Test layer
 FROM app as test
 
+# list database version and available --organism options
 RUN amrfinder -l
 
-# from amrfinder
+# run recommended tests from amrfinder
 RUN amrfinder --plus -p /amrfinder/test_prot.fa -g  /amrfinder/test_prot.gff -O Escherichia > test_prot.got && \
   diff /amrfinder/test_prot.expected test_prot.got && \
   amrfinder --plus -n /amrfinder/test_dna.fa -O Escherichia > test_dna.got && \
@@ -61,13 +66,14 @@ RUN amrfinder --plus -p /amrfinder/test_prot.fa -g  /amrfinder/test_prot.gff -O 
   amrfinder --plus -n /amrfinder/test_dna.fa -p /amrfinder/test_prot.fa -g /amrfinder/test_prot.gff -O Escherichia > test_both.got && \
   diff /amrfinder/test_both.expected test_both.got
 
-# external file
+# run amrfinder on Salmonella, without and with --organism option
 RUN wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/010/941/835/GCA_010941835.1_PDT000052640.3/GCA_010941835.1_PDT000052640.3_genomic.fna.gz  && \
   gzip -d GCA_010941835.1_PDT000052640.3_genomic.fna.gz && \
   amrfinder --plus --nucleotide GCA_010941835.1_PDT000052640.3_genomic.fna --output test1.txt && \
   amrfinder --plus --nucleotide GCA_010941835.1_PDT000052640.3_genomic.fna --organism Salmonella --output test2.txt && \
   cat test1.txt test2.txt
 
-RUN wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/003/812/925/GCA_003812925.1_ASM381292v1/GCA_003812925.1_ASM381292v1_genomic.fna.gz &&\
+# run amrfinder on Klebesiella oxytoca
+RUN wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/003/812/925/GCA_003812925.1_ASM381292v1/GCA_003812925.1_ASM381292v1_genomic.fna.gz && \
   gzip -d GCA_003812925.1_ASM381292v1_genomic.fna.gz && \
   amrfinder --plus --name GCA_003812925.1 -n GCA_003812925.1_ASM381292v1_genomic.fna -O Klebsiella_oxytoca -o GCA_003812925.1-amrfinder.tsv 
