@@ -57,9 +57,9 @@ RUN poppunk --help && \
  poppunk_mandrake --help && \
  poppunk --version
 
-# Download 100 S. Pneumo assmeblies from GPS Public Data on ENA
-# Build PopPUNK database from the assmeblies
-# Assign clusters on the same assmeblies using the built database
+# Download 100 S. Pneumo assemblies from GPS Public Data on ENA
+# Build PopPUNK database from the assemblies
+# Assign clusters on the same assemblies using the built database
 # Compare the database clusters and assigned clusters of the assemblies
 COPY tests /data
 RUN bash test.sh
