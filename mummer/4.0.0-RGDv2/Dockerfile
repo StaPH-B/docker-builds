@@ -5,7 +5,7 @@ ARG MUMMER_VER="4.0.0"
 ARG MASH_VER="2.3"
 
 LABEL base.image="ubuntu:focal"
-LABEL dockerfile.version="1"
+LABEL dockerfile.version="2"
 LABEL software="mummer"
 LABEL software.version=${MUMMER_VER}
 LABEL description="MUMmer is a versatile alignment tool for DNA and protein sequences."
