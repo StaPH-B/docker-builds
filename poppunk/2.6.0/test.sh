@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euxo pipefail
 
 # Download 100 S. Pneumo assemblies from GPS Public Data on ENA
 mkdir assemblies
