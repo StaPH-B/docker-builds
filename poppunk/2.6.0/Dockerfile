@@ -10,7 +10,7 @@ USER root
 WORKDIR /
 
 LABEL base.image="mambaorg/micromamba:1.3.1"
-LABEL dockerfile.version="1"
+LABEL dockerfile.version="2"
 LABEL software="PopPUNK"
 LABEL software.version=${POPPUNK_VERSION}
 LABEL description="POPulation Partitioning Using Nucleotide Kmers"
@@ -56,3 +56,10 @@ RUN poppunk --help && \
  poppunk_info --help && \
  poppunk_mandrake --help && \
  poppunk --version
+
+# Download 100 S. Pneumo assemblies from GPS Public Data on ENA
+# Build PopPUNK database from the assemblies
+# Assign clusters on the same assemblies using the built database
+# Compare the database clusters and assigned clusters of the assemblies
+COPY test.sh ftps.txt /data/
+RUN bash test.sh
