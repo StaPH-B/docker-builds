@@ -10,7 +10,7 @@ USER root
 WORKDIR /
 
 LABEL base.image="mambaorg/micromamba:1.3.1"
-LABEL dockerfile.version="1"
+LABEL dockerfile.version="2"
 LABEL software="PopPUNK"
 LABEL software.version=${POPPUNK_VERSION}
 LABEL description="POPulation Partitioning Using Nucleotide Kmers"
