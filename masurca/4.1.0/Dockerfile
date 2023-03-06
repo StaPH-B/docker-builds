@@ -25,7 +25,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   bzip2 \
   libboost-dev \
   libbz2-dev \
-  liblzma-dev && \
+  liblzma-dev \
+  numactl && \
   apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # install minimap2
@@ -59,8 +60,15 @@ WORKDIR /data
 
 FROM app as test
 
+# testing POLCA
 RUN wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123_1.fastq.gz && \
   wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123_2.fastq.gz && \
   wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123.consensus.fa && \
   polca.sh -a SRR13957123.consensus.fa -r 'SRR13957123_1.fastq.gz SRR13957123_2.fastq.gz' && \
   test -f SRR13957123.consensus.fa.PolcaCorrected.fa
+
+# testing hybrid assembly
+RUN wget -q https://github.com/rrwick/Unicycler/raw/69e712eb95c4b9f8a46aade467260260a9ce7a91/sample_data/short_reads_1.fastq.gz && \
+  wget -q https://github.com/rrwick/Unicycler/raw/69e712eb95c4b9f8a46aade467260260a9ce7a91/sample_data/short_reads_2.fastq.gz && \
+  wget -q https://github.com/rrwick/Unicycler/raw/69e712eb95c4b9f8a46aade467260260a9ce7a91/sample_data/long_reads_low_depth.fastq.gz && \
+  masurca -t 2 -i short_reads_1.fastq.gz,short_reads_2.fastq.gz -r long_reads_low_depth.fastq.gz
