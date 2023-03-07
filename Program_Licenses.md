@@ -44,7 +44,9 @@ The licenses of the open-source software that is contained in these Docker image
 | GAMBIT | GNU aGPLv3 | https://github.com/jlumpe/gambit/blob/master/LICENSE |
 | GAMMA | Apache 2.0 | https://github.com/rastanton/GAMMA/blob/main/LICENSE |
 | Genotyphi | GNU GPLv3 | https://github.com/katholt/genotyphi/blob/main/LICENSE |
+| gfastats | MIT | https://github.com/vgl-hub/gfastats/blob/main/LICENSE |
 | Hmmer | BSD-3 | http://eddylab.org/software/hmmer/Userguide.pdf |
+| homopolish | GNU GPLv3 | https://github.com/ythuang0522/homopolish/blob/master/LICENSE |
 | htslib | MIT | https://github.com/samtools/htslib/blob/develop/LICENSE |
 | iqtree | GNU GPLv2 | https://github.com/Cibiv/IQ-TREE/blob/master/LICENSE |
 | iqtree2 | GNU GPLv2 | https://github.com/iqtree/iqtree2/blob/master/LICENSE |
