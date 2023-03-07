@@ -3,7 +3,7 @@
 Main tool : [porechop](https://github.com/rrwick/Porechop)
 
 Additional tools:
-- python3
+- python3 3.10.6
 
 Full documentation: https://github.com/rrwick/Porechop
 
