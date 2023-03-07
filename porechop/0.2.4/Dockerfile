@@ -41,5 +41,8 @@ WORKDIR /test
 
 RUN porechop --help && porechop --version
 
-RUN wget -q ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR225/094/SRR22580994/SRR22580994_1.fastq.gz && \
-    porechop -i SRR22580994_1.fastq.gz -o SRR22580994_chopped.fastq.gz && wc -l *fastq.gz
+# DL small ONT FASTQ files, run through porechop as a test, print number of lines in each (expect less lines in the .chopped.fastq.gz file)
+RUN echo "downloading ONT test data from bactopia/bactopia-tests on GitHub and running porechop on them..." && \
+    wget -q https://raw.githubusercontent.com/bactopia/bactopia-tests/main/data/species/portiera/nanopore/ERR3772599.fastq.gz && \
+    porechop -i ERR3772599.fastq.gz -o ERR3772599.chopped.fastq.gz && \
+    wc -l *fastq.gz
