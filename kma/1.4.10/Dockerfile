@@ -5,7 +5,7 @@ ARG KMAVER="1.4.10"
 
 # metadata
 LABEL base.image="ubuntu:jammy"
-LABEL dockerfile.version="2"
+LABEL dockerfile.version="1"
 LABEL software="kma"
 LABEL software.version="$KMAVER"
 LABEL description="K-mer alignment of raw reads against a database"
