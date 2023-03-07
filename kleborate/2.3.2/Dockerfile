@@ -1,10 +1,10 @@
 FROM ubuntu:focal as app
 
 # for easy upgrade later. ARG variables only persist during image build time
-ARG KLEBORATE_VER="2.3.1"
+ARG KLEBORATE_VER="2.3.2"
 ARG BLAST_VER="2.9.0"
 ARG MASH_VER="2.3"
-ARG KAPTIVE_VER="2.0.3"
+ARG KAPTIVE_VER="2.0.6"
 
 LABEL base.image="ubuntu:focal"
 LABEL dockerfile.version="1"

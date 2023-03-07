@@ -1,10 +1,10 @@
 # Kleborate container
 
-Main tool : [Kleborate](https://github.com/katholt/Kleborate) 2.3.1
+Main tool : [Kleborate](https://github.com/katholt/Kleborate) 2.3.2
 
 Additional tools:
 
-- [kaptive](https://github.com/katholt/Kaptive) 2.0.3
+- [kaptive](https://github.com/katholt/Kaptive) 2.0.6
 - ncbi-blast+ 2.9.0
 - [mash](https://github.com/marbl/Mash) 2.3
 - python 3.8.2
