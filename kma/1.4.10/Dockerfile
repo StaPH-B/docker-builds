@@ -42,17 +42,16 @@ WORKDIR data
 # test stage
 FROM app as test 
 
-WORKDIR test 
+# set /test as working directory for test below
+WORKDIR /test 
 
 # Downloads E.coli genome and runs kma index on it
 RUN wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/012/224/845/GCA_012224845.2_ASM1222484v2/GCA_012224845.2_ASM1222484v2_genomic.fna.gz && \
   gunzip GCA_012224845.2_ASM1222484v2_genomic.fna.gz && \
-  kma index -i GCA_012224845.2_ASM1222484v2_genomic.fna -o database
+  kma index -i GCA_012224845.2_ASM1222484v2_genomic.fna -o /test/database
 
-# Downloads read files and uses them for kma mapping against database
+# Downloads read files and uses them for kma mapping against database; print kma version
 RUN wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR690/006/SRR6903006/SRR6903006_1.fastq.gz && \
   wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR690/006/SRR6903006/SRR6903006_2.fastq.gz && \
-  kma -ipe SRR6903006_1.fastq.gz SRR6903006_2.fastq.gz -o test_output -t_db database
-
-RUN kma -v
-
+  kma -ipe SRR6903006_1.fastq.gz SRR6903006_2.fastq.gz -o /test/test_output -t_db /test/database -tmp /tmp/ && \
+  kma -v
