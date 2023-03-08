@@ -7,10 +7,10 @@ ARG MASH_VER=2.3
 ARG MINIASM_VER=0.3
 ARG MINIMAP2_VER=2.24
 
-LABEL base.image="ubuntu:hirsute"
+LABEL base.image="ubuntu:jammy"
 LABEL dockerfile.version="1"
 LABEL software="Trycycler"
-LABEL software.version=$TRYCYCLER_VER
+LABEL software.version="${TRYCYCLER_VER}"
 LABEL description="A tool for generating consensus long-read assemblies for bacterial genomes"
 LABEL website="https://github.com/rrwick/Trycycler"
 LABEL license="https://github.com/rrwick/Trycycler/blob/master/LICENSE"
