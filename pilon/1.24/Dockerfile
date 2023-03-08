@@ -7,7 +7,7 @@ ARG JAVAVER="11"
 LABEL base.image="ubuntu:jammy"
 LABEL dockerfile.version="1"
 LABEL software="pilon"
-LABEL software.version=$PILONVER
+LABEL software.version="${PILONVER}"
 LABEL description="Automatically improve draft assemblies and find variation among strains"
 LABEL website="https://github.com/broadinstitute/pilon"
 LABEL license="https://github.com/broadinstitute/pilon/blob/master/LICENSE"
@@ -26,7 +26,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN mkdir pilon && \
   cd pilon && \
   wget -q https://github.com/broadinstitute/pilon/releases/download/v${PILONVER}/pilon-${PILONVER}.jar && \
-  cp pilon-${PILONVER}.jar pilon.jar && ls && pwd
+  mv -v pilon-${PILONVER}.jar pilon.jar && ls && pwd
 
 WORKDIR /data
 
