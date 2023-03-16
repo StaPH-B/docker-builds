@@ -1,6 +1,6 @@
 FROM ubuntu:jammy as app
 
-ARG PYGENOMEVIZ_VER="0.2.2"
+ARG PYGENOMEVIZ_VER="0.3.2"
 
 LABEL base.image="mambaorg/jammy"
 LABEL dockerfile.version="1"
