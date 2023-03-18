@@ -7,7 +7,7 @@ ARG BWA_VER="0.7.17"
 LABEL base.image="ubuntu:focal"
 LABEL dockerfile.version="1"
 LABEL software="masurca"
-LABEL software.version=$MASURCA_VER
+LABEL software.version="${MASURCA_VER}"
 LABEL description="Genome Assembly and Analysis"
 LABEL website="https://github.com/alekseyzimin/masurca"
 LABEL license="https://github.com/alekseyzimin/masurca/blob/master/LICENSE.txt"
@@ -26,7 +26,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libboost-dev \
   libbz2-dev \
   liblzma-dev \
-  numactl && \
+  numactl \
+  procps && \
   apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # install minimap2
