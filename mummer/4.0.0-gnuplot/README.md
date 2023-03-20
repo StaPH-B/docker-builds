@@ -1,9 +1,11 @@
 # mummer + RGDv2 container
+
 Main tool : [mummer](https://github.com/mummer4/mummer)
 
 Additional tools:
+
 - `mash` v2.3
-- `ani-m.pl` v0.1 from https://github.com/lskatz/ani-m
+- `ani-m.pl` v0.1 from [https://github.com/lskatz/ani-m](https://github.com/lskatz/ani-m)
 - `gnu-plot` v5.2 patchlevel 8
 - `datasets` 14.17.0
 
@@ -51,7 +53,6 @@ GCA_011245895.1_PDT000672941.1_genomic.fna    GCA_011388235.1.Salmonella_enteric
 GCA_011388235.1.Salmonella_enterica.fasta     GCA_011245895.1_PDT000672941.1_genomic.fna    98.7335  2.79   94.5892
 GCA_011245895.1_PDT000672941.1_genomic.fna    GCA_013588055.1.Salmonella_bongori.fasta      90.3425  2.99   73.3307
 GCA_013588055.1.Salmonella_bongori.fasta      GCA_011245895.1_PDT000672941.1_genomic.fna    90.3405  2.95   81.9293
-
 ```
 
 Better documentation for Mummer can be found at [https://github.com/mummer4/mummer](https://github.com/mummer4/mummer)
