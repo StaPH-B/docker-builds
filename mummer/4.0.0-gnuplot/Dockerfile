@@ -22,6 +22,7 @@ LABEL maintainer3.email="eriny@utah.gov"
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Install dependencies via apt; clean up apt garbage
+# gnuplot version 5.2 patchlevel 8
 RUN apt-get update && apt-get install -y --no-install-recommends \
   wget \
   git \
@@ -57,7 +58,7 @@ RUN wget https://github.com/mummer4/mummer/releases/download/v${MUMMER_VER}rc1/m
   cd .. && \
   mkdir /data
 
-# install ncbi datasets tool (pre-compiled binary); place in $PATH
+# install ncbi datasets tool (pre-compiled binary) version 14.17.0; place in $PATH
 RUN wget https://ftp.ncbi.nlm.nih.gov/pub/datasets/command-line/LATEST/linux-amd64/datasets && \
   chmod +x datasets && \
   mv -v datasets /usr/local/bin
