@@ -77,6 +77,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Mummer | The Artistic License 2.0| https://github.com/mummer4/mummer/blob/master/LICENSE.md |
 | Mykrobe | MIT | https://github.com/Mykrobe-tools/mykrobe/blob/master/LICENSE |
 | NanoPlot | GNU GPLv3 | https://github.com/wdecoster/NanoPlot/blob/master/LICENSE |
+| ncov-recombinant | MIT | https://github.com/ktmeaton/ncov-recombinant/blob/master/LICENSE |
 | NCBI AMRFinderPlus | Public Domain | https://github.com/ncbi/amr/blob/master/LICENSE |
 | NCBI Datasets | Public Domain | https://github.com/ncbi/datasets/blob/master/pkgs/ncbi-datasets-cli/LICENSE.md |
 | NCBI table2asn | Public Domain | unknown |
