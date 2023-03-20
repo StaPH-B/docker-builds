@@ -71,9 +71,12 @@ RUN wget https://github.com/rrwick/Trycycler/archive/v${TRYCYCLER_VER}.tar.gz &&
 # set /data as working directory
 WORKDIR /data
 
-# set env path variable for installed programs. LC_ALL for singularity compatibility.
+# set env PATH variable for installed programs
+# LC_ALL for singularity compatibility
+# TERM set so that output is pretty during tests and so warnings about TERM not being set are silenced
 ENV PATH="/mash-Linux64-v${MASH_VER}:/minimap2-${MINIMAP2_VER}_x64-linux:/miniasm:${PATH}"\
- LC_ALL=C
+ LC_ALL=C \
+ TERM=xterm-256color
 
 FROM app as test
 
