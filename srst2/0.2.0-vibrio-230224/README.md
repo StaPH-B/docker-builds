@@ -21,7 +21,7 @@ This docker image includes a *Vibrio cholerae-specific* database of gene targets
 The genes included (and their purpose) included in the database are as follows:
 
 - `ctxA` - Cholera toxin, an indication of toxigenic cholerae
-- `ompW` - outer membrane protein, a *V. cholerae* species marker (alleles distinguishes *V. cholerae* from *V. parahaemolyticus* and *V. vulnificus*)
+- `ompW` - outer membrane protein, a *V. cholerae* species marker (presence of any allele of this gene distinguishes *V. cholerae* from *V. parahaemolyticus* and *V. vulnificus*)
 - `tcpA` - toxin co-pilus A, used to infer Biotype, either "El Tor" or "Clasical"
   - database includes an allele for each Biotype. `tcpA_classical` and `tcpA_ElTor`
 - `toxR` - transcriptional activator (controls cholera toxin, pilus, and outer-membrane protein expression) - Species marker (allele distinguishes *V. cholerae* from *V. parahaemolyticus* and *V. vulnificus*)
