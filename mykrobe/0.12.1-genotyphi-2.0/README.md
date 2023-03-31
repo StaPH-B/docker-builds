@@ -76,7 +76,7 @@ $ python /genotyphi/parse_typhi_mykrobe.py --jsons SRR3277297.genotyphi.json --p
 SRR3277297
 
 # print out results TSV
-$ column -t -s $'\t' -n mykrobe_out_predictResults.tsv
+$ column -t -s $'\t' mykrobe_out_predictResults.tsv
 genome      species  spp_percent  final genotype  confidence  acrB_R717L  acrB_R717Q  num QRDR  lowest support for genotype marker  poorly supported markers  max support for additional markers  additional markers  node support                                                                                  parC_S80R  parC_S80I  parC_E84G  parC_E84K  gyrA_S83F  gyrA_S83Y  gyrA_D87G  gyrA_D87N  gyrA_D87V  gyrA_D87Y  gyrB_S464F  gyrB_S464Y  catA1  dfrA7  sul1  sul2  strA  strB  mphA  TEM1  qnrS1  ermB  CTXM15  tetB  tetA  dfrA5  dfrA15  IncFIAHI1  IncHI1A  IncHI1BR27  IncHI1_ST6  IncY  z66
 SRR3277297  typhi    91.715       2.3.1           strong      0           0           1                                                                                                                               1 (1; 0/69); 2 (1; 0/102); 2.2 (1; 134/0); 2.3 (1; 110/0); 2.3.2 (1; 82/0); 2.3.1 (1; 106/0)  0          0          0          0          0          0          0          0          0          0          1           0           0      0      0     0     0     0     0     0     0      0     0       0     0     0      0       0          0        0           0           0     0
 ```
@@ -92,10 +92,10 @@ $ mykrobe predict --sample Ssonnei --species sonnei --format json_and_csv --out 
 
 # parse mykrobe output JSON with helper script from sonneityping; must use alleles.txt file found inside docker container
 # generate TSV output
-$ python /sonneityping/parse_mykrobe_predict.py --jsons Ssonnei.json --alleles /sonneityping/alleles.txt --prefix sonneitypping-results
+$ python /sonneityping/parse_mykrobe_predict.py --jsons Ssonnei.json --alleles /sonneityping/alleles.txt --prefix sonneityping
 
 # print out results TSV
-$ column -t -s $'\t' -n sonneitypping-results.tsv
+$ column -t -s $'\t' sonneityping_predictResults.tsv
 genome     species    final genotype  name       confidence  num QRDR  parC_S80I  gyrA_S83L  gyrA_S83A  gyrA_D87G  gyrA_D87N  gyrA_D87Y  lowest support for genotype marker  poorly supported markers  max support for additional markers  additional markers  node support
 Ssonnei    S. sonnei  3.6.1.1.2       CipR.MSM5  strong      3         1          1          0          1          0          0                                                                                                                                lineage3 (1; 65/0); lineage3.6 (1; 94/0); lineage3.6.1 (1; 59/0); lineage3.6.1.1 (1; 74/0); lineage3.6.1.1.2 (1; 65/0)
 ```
