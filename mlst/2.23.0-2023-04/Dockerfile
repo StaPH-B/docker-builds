@@ -27,7 +27,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  ncbi-blast+ \
  libfile-which-perl \
  curl \
- parallel && \
+ parallel \
+ procps && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # get any2fasta; move binary to /usr/local/bin which is already in $PATH
