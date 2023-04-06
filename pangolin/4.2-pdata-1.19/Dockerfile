@@ -107,6 +107,18 @@ RUN wget https://ftp.ncbi.nlm.nih.gov/pub/datasets/command-line/LATEST/linux-amd
 # run pangolin in usher analysis mode
 RUN datasets download virus genome accession ON924087.1 --filename ON924087.1.zip && \
  unzip ON924087.1.zip && rm ON924087.1.zip && \
- mv -v ncbi_dataset/data/genomic.fna ncbi_dataset/data/ON924087.1.genomic.fna && \
- pangolin ncbi_dataset/data/ON924087.1.genomic.fna --analysis-mode usher -o ON924087.1-usher && \
+ mv -v ncbi_dataset/data/genomic.fna ON924087.1.genomic.fna && \
+ rm -vr ncbi_dataset/ README.md && \
+ pangolin ON924087.1.genomic.fna --analysis-mode usher -o ON924087.1-usher && \
  column -t -s, ON924087.1-usher/lineage_report.csv
+
+# test specific for new lineage, XBB.1.16, introduced in pangolin-data v1.19
+# using this assembly: https://www.ncbi.nlm.nih.gov/nuccore/2440446687
+# biosample here: https://www.ncbi.nlm.nih.gov/biosample?term=SAMN33060589
+# one of the sample included in initial pango-designation here: https://github.com/cov-lineages/pango-designation/issues/1723
+RUN datasets download virus genome accession OQ381818.1 --filename OQ381818.1.zip && \
+ unzip OQ381818.1.zip && rm OQ381818.1.zip && \
+ mv -v ncbi_dataset/data/genomic.fna OQ381818.1.genomic.fna && \
+ rm -vr ncbi_dataset/ README.md && \
+ pangolin OQ381818.1.genomic.fna --analysis-mode usher -o OQ381818.1-usher && \
+ column -t -s, OQ381818.1-usher/lineage_report.csv
