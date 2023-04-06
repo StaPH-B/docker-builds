@@ -16,14 +16,12 @@ Additional tools:
 - [scorpio](https://github.com/cov-lineages/scorpio) 0.3.17
 - [constellations](https://github.com/cov-lineages/constellations) 0.1.10
 - [gofasta](https://github.com/virus-evolution/gofasta) 1.2.0
-- [mafft](https://mafft.cbrc.jp/alignment/software/) 7.508
+- [mafft](https://mafft.cbrc.jp/alignment/software/) 7.520
 - python 3.8.15
 
 ## Warning
 
-NEED TO ADJUST THIS BLOCK DEPENDING ON WHAT HAPPENS W PANGOLEARN MODEL FILES:
-
-This docker image contains `pangolin-data` v1.19. The upgrade from 1.18 to 1.18.1 ONLY updated the underlying UShER tree/protobuf file. It did NOT update the pangoLEARN model, so please use the UShER mode of pangolin if you want to stay up-to-date with the most recent lineages. [See pangolin-data release notes here for more details](https://github.com/cov-lineages/pangolin-data/releases/tag/v1.18.1)
+This docker image contains `pangolin-data` v1.19. The upgrade from 1.18 to 1.18.1 and from 1.18.1 to 1.19 ONLY updated the underlying UShER tree/protobuf file. It did NOT update the pangoLEARN model, so please use the UShER mode of pangolin if you want to stay up-to-date with the most recent lineages. [See pangolin-data release notes here for more details](https://github.com/cov-lineages/pangolin-data/releases/tag/v1.19)
 
 ## Example Usage
 
