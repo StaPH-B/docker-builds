@@ -221,7 +221,7 @@ Each Dockerfile lists the author(s)/maintainer(s) as a metadata `LABEL`, but the
   * [@kyleoconnell](https://github.com/kyleoconnell)
   * [@CTindall-1](https://github.com/CTindall-1)
   * [@hkunerth](https://github.com/hkunerth)
-  * [@eetueklund] (https://github.com/eetueklund)
+  * [@eetueklund](https://github.com/eetueklund)
   * [@wchen190](https://github.com/wchen190)
   * [@shelby-bennett](https://github.com/shelby-bennett)
   * [@cjalcorta](https://github.com/cjalcorta)
@@ -232,3 +232,4 @@ Each Dockerfile lists the author(s)/maintainer(s) as a metadata `LABEL`, but the
   * [@HarryHung](https://github.com/HarryHung)
   * [@sam-baird](https://github.com/sam-baird)
   * [@eproctor118](https://github.com/eproctor118)
+  * [@cimendes](https://github.com/cimendes)
