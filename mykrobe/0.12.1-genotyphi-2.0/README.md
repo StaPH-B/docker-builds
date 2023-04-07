@@ -18,7 +18,7 @@ The docker image was also created with the intention of running Mykrobe on Shige
 
 ## Included Mykrobe databases (AKA panels)
 
-The docker image for Mykrobe was built on YYYY-MM-DD, and thus contains the most recent database that was available at the time.
+The docker image for Mykrobe was built on 2023-04-17, and thus contains the most recent database that was available at the time.
 
 ```bash
 ### OUTPUT FROM mykrobe panels describe run on 2023-03-30: ###
