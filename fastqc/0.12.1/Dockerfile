@@ -1,12 +1,8 @@
-ARG FASTQC_VER="0.12.1"
-
 # FROM defines the base docker image. 
 # The 'as' keyword lets you name the following stage. We use `app` for the production image
-
 FROM ubuntu:focal as app
 
-#re-instantiate these variables
-ARG FASTQC_VER
+ARG FASTQC_VER="0.12.1"
 
 # metadata
 LABEL base.image="ubuntu:focal"
@@ -58,9 +54,6 @@ RUN fasterq-dump --threads 4 -A SRR6082043 && \
 
 # new base for testing
 FROM app as test
-
-#re-instantiate these variables
-ARG FASTQC_VER
 
 # set working directory to /test
 WORKDIR /test
