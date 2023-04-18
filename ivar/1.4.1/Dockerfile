@@ -21,7 +21,7 @@ LABEL original.maintainer="Kathik G"
 LABEL original.maintainer.email="gkarthik@scripps.edu"
 
 # install dependencies, cleanup apt garbage.
-# bedtools version=2.26.0
+# bedtools version=2.30.0
 # bwa version=0.7.17-6
 # minimap2 version=2.24+dfsg-2
 # keeping vim and nano for legacy reasons
@@ -40,11 +40,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libncurses-dev \
   git \
   bedtools \
-  python3-pip \
-  vim \
-  nano \
-  bwa \
-  minimap2 && \
+  python3-pip && \
   apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # installing htslib
@@ -103,10 +99,3 @@ RUN ivar trim -e -i SRR13957123.subsampled.bam -b nCoV-2019.primer.bed -p SRR139
 RUN samtools mpileup -A -d 40 -B -Q 0 --reference MN908947.3.fasta SRR13957123.primertrim.sorted.bam | \
   ivar consensus -q 20 -t 0.6 -n N -m 20 -p SRR13957123.consensus && \
   wc -c SRR13957123.consensus*
-
-# piping into ivar takes too long, but here's what the test would be
-# RUN bwa index MN908947.3.fasta && \
-#  bwa mem MN908947.3.fasta SRR13957123_1.fastq.gz SRR13957123_2.fastq.gz | \
-#  ivar trim -b nCoV-2019.primer.bed -x 3 -m 30 | \
-#  samtools sort | samtools mpileup -aa -A -Q 0 -B -d 200 --reference MN908947.3.fasta - | \
-#  ivar consensus -p test_consensus -m 10 -n N -t 0.5
