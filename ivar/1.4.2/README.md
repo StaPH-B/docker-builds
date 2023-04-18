@@ -8,7 +8,7 @@ Additional tools (required):
 
 * [HTSlib](https://github.com/samtools/htslib) 1.17
 * [samtools](http://www.htslib.org/) 1.17
-* [bedtools](https://bedtools.readthedocs.io/en/latest/) 2.26.0
+* [bedtools](https://bedtools.readthedocs.io/en/latest/) 2.30.0
 * python 3.10.6
 
 Additional tools (optional):
