@@ -21,7 +21,7 @@ LABEL original.maintainer="Kathik G"
 LABEL original.maintainer.email="gkarthik@scripps.edu"
 
 # install dependencies, cleanup apt garbage.
-# bedtools version=2.26.0
+# bedtools version=2.30.0
 # bwa version=0.7.17-6
 # minimap2 version=2.24+dfsg-2
 # keeping vim and nano for legacy reasons
@@ -41,8 +41,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   git \
   bedtools \
   python3-pip \
-  vim \
-  nano \
   bwa \
   minimap2 && \
   apt-get autoclean && rm -rf /var/lib/apt/lists/*
