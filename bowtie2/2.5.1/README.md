@@ -18,10 +18,4 @@ bowtie2 -x /index/lambda_virus -U longreads.fq
 ```
 bowtie2-inspect --summary /index/lambda_virus
 ```
-```
-samtools ampliconclip -b bed.file input.bam
-```
-```
-samtools sort -T /tmp/aln.sorted -o aln.sorted.bam aln.bam
-```
 Better documentation can be found at [https://github.com/BenLangmead/bowtie2](https://github.com/BenLangmead/bowtie2)
