@@ -88,7 +88,7 @@ RUN ivar version && samtools --version
 # getting files
 RUN wget -q https://github.com/StaPH-B/docker-builds/blob/master/tests/SARS-CoV-2/SRR13957123.sorted.bam?raw=true -O SRR13957123.sorted.bam && \
   samtools view -s 0.25 -b SRR13957123.sorted.bam | samtools sort -o SRR13957123.subsampled.bam - && samtools index SRR13957123.subsampled.bam && \
-  wget -q https://raw.githubusercontent.com/UPHL-BioNGS/Cecret/master/configs/MN908947.3.fasta?raw=true -O MN908947.3.fasta && \
+  wget -q https://raw.githubusercontent.com/artic-network/artic-ncov2019/master/primer_schemes/nCoV-2019/V3/nCoV-2019.reference.fasta -O MN908947.3.fasta && \
   wget -q https://raw.githubusercontent.com/artic-network/artic-ncov2019/master/primer_schemes/nCoV-2019/V3/nCoV-2019.primer.bed && \
   wget -q https://github.com/StaPH-B/docker-builds/blob/83ee344304794f4ffa162d1c082bb35f916badcf/tests/SARS-CoV-2/SRR13957123_1.fastq.gz?raw=true -O SRR13957123_1.fastq.gz && \
   wget -q https://github.com/StaPH-B/docker-builds/blob/83ee344304794f4ffa162d1c082bb35f916badcf/tests/SARS-CoV-2/SRR13957123_2.fastq.gz?raw=true -O SRR13957123_2.fastq.gz
