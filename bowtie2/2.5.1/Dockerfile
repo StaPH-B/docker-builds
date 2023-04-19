@@ -6,8 +6,8 @@ ARG BOWTIE2VER=2.5.1
 
 # metadata (there are a few other labels you can add, these are optional but preferred!)
 LABEL base.image="ubuntu:xenial"
-LABEL dockerfile.version="3"
-LABEL software="Bowtie2,\n Samtools"
+LABEL dockerfile.version="1"
+LABEL software="Bowtie2"
 LABEL software.version=$BOWTIE2VER
 LABEL description="Bowtie2: Genome assembler using a reference and mapping\n Samtools: a set of tools for interacting with and reformatting sequence data"
 LABEL website="http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml\n https://www.htslib.org/"
@@ -15,7 +15,7 @@ LABEL maintainer="Holly Halstead"
 LABEL maintainer.email="holly.halstead@doh.wa.gov"
 
 # install dependencies, cleanup apt garbage.
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends\
  build-essential=12.1ubuntu2  \
  autoconf=2.69-9 \
  zlib1g-dev=1:1.2.8.dfsg-2ubuntu4.3  \
@@ -24,12 +24,9 @@ RUN apt-get update && apt-get install -y \
  libbz2-dev=1.0.6-8ubuntu0.2 \
  liblzma-dev=5.1.1alpha+20120614-2ubuntu2 \
  libncurses5-dev=6.0+20160213-1ubuntu1 \
- git=1:2.7.4-0ubuntu1.10 \
  bedtools=2.25.0-1 \
  python3-pip=8.1.1-2ubuntu0.6 \
- vim=2:7.4.1689-3ubuntu1.5 \
- unzip=6.0-20ubuntu1.1  \
- nano=2.5.3-2ubuntu2 && \
+ unzip=6.0-20ubuntu1.1  && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # download, unpack Bowtie2 and Samtools
@@ -52,11 +49,9 @@ RUN wget https://github.com/samtools/samtools/releases/download/${SAMTOOLSVER}/s
 # set working directory
 WORKDIR /data
 
-CMD ["bowtie2"]
-
 FROM app as test
 
 RUN wget https://raw.githubusercontent.com/BenLangmead/bowtie2/master/example/reads/longreads.fq && \
-wget https://raw.githubusercontent.com/BenLangmead/bowtie2/master/example/reference/lambda_virus.fa &&  \
-bowtie2-build lambda_virus.fa lambda_virus && \
-bowtie2 -x lambda_virus -U longreads.fq
+ wget https://raw.githubusercontent.com/BenLangmead/bowtie2/master/example/reference/lambda_virus.fa &&  \
+ bowtie2-build lambda_virus.fa lambda_virus && \
+ bowtie2 -x lambda_virus -U longreads.fq
