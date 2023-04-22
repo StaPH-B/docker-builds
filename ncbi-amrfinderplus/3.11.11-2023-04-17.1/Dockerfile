@@ -73,21 +73,21 @@ FROM app as test
 RUN amrfinder -l
 
 # run recommended tests from amrfinder
-RUN amrfinder --plus -p /amrfinder/test_prot.fa -g  /amrfinder/test_prot.gff -O Escherichia > test_prot.got && \
+RUN amrfinder --threads 1 --plus -p /amrfinder/test_prot.fa -g  /amrfinder/test_prot.gff -O Escherichia > test_prot.got && \
   diff /amrfinder/test_prot.expected test_prot.got && \
-  amrfinder --plus -n /amrfinder/test_dna.fa -O Escherichia > test_dna.got && \
+  amrfinder --threads 1 --plus -n /amrfinder/test_dna.fa -O Escherichia > test_dna.got && \
   diff /amrfinder/test_dna.expected test_dna.got && \
-  amrfinder --plus -n /amrfinder/test_dna.fa -p /amrfinder/test_prot.fa -g /amrfinder/test_prot.gff -O Escherichia > test_both.got && \
+  amrfinder --threads 1 --plus -n /amrfinder/test_dna.fa -p /amrfinder/test_prot.fa -g /amrfinder/test_prot.gff -O Escherichia > test_both.got && \
   diff /amrfinder/test_both.expected test_both.got
 
 # run amrfinder on Salmonella, without and with --organism option
 RUN wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/010/941/835/GCA_010941835.1_PDT000052640.3/GCA_010941835.1_PDT000052640.3_genomic.fna.gz  && \
   gzip -d GCA_010941835.1_PDT000052640.3_genomic.fna.gz && \
-  amrfinder --plus --nucleotide GCA_010941835.1_PDT000052640.3_genomic.fna --output test1.txt && \
-  amrfinder --plus --nucleotide GCA_010941835.1_PDT000052640.3_genomic.fna --organism Salmonella --output test2.txt && \
+  amrfinder --threads 1 --plus --nucleotide GCA_010941835.1_PDT000052640.3_genomic.fna --output test1.txt && \
+  amrfinder --threads 1 --plus --nucleotide GCA_010941835.1_PDT000052640.3_genomic.fna --organism Salmonella --output test2.txt && \
   cat test1.txt test2.txt
 
 # run amrfinder on Klebesiella oxytoca using --organism/-O flag
 RUN wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/003/812/925/GCA_003812925.1_ASM381292v1/GCA_003812925.1_ASM381292v1_genomic.fna.gz && \
   gzip -d GCA_003812925.1_ASM381292v1_genomic.fna.gz && \
-  amrfinder --plus --name GCA_003812925.1 -n GCA_003812925.1_ASM381292v1_genomic.fna  -O Klebsiella_oxytoca -o GCA_003812925.1-amrfinder.tsv 
+  amrfinder --threads 1 --plus --name GCA_003812925.1 -n GCA_003812925.1_ASM381292v1_genomic.fna  -O Klebsiella_oxytoca -o GCA_003812925.1-amrfinder.tsv 
