@@ -11,10 +11,6 @@ Additional tools (required):
 * [bedtools](https://bedtools.readthedocs.io/en/latest/) 2.30.0
 * python 3.10.6
 
-Additional tools (optional):
-* [minimap2](https://github.com/lh3/minimap2) 2.24+dfsg-2
-* [bwa](https://bio-bwa.sourceforge.net/) 0.7.17-6
-
 ## Example Usage
 
 ```bash
