@@ -24,7 +24,6 @@ LABEL original.maintainer.email="gkarthik@scripps.edu"
 # bedtools version=2.30.0
 # bwa version=0.7.17-6
 # minimap2 version=2.24+dfsg-2
-# keeping vim and nano for legacy reasons
 RUN apt-get update && apt-get install -y --no-install-recommends \
   build-essential \
   ca-certificates \
