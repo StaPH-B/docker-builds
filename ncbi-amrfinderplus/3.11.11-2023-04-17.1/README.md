@@ -31,17 +31,18 @@ You can view all available docker images on [dockerhub](https://hub.docker.com/r
 
 ```bash
 # list out the available organisms for the -O/--organism flag
-$ amrfinder -l            
+$ amrfinder -l
 Running: amrfinder -l
 Software directory: '/amrfinder/'
-Software version: 3.11.4
-Database directory: '/amrfinder/data/2023-02-23.1'
-Database version: 2023-02-23.1
+Software version: 3.11.11
+Database directory: '/amrfinder/data/2023-04-17.1'
+Database version: 2023-04-17.1
 
-Available --organism options: Acinetobacter_baumannii, Burkholderia_cepacia, Burkholderia_pseudomallei, Campylobacter, 
-Clostridioides_difficile, Enterococcus_faecalis, Enterococcus_faecium, Escherichia, Klebsiella_oxytoca, Klebsiella_pneumoniae, 
-Neisseria_gonorrhoeae, Neisseria_meningitidis, Pseudomonas_aeruginosa, Salmonella, Staphylococcus_aureus, 
-Staphylococcus_pseudintermedius, Streptococcus_agalactiae, Streptococcus_pneumoniae, Streptococcus_pyogenes, Vibrio_cholerae
+Available --organism options: Acinetobacter_baumannii, Burkholderia_cepacia, Burkholderia_pseudomallei, Campylobacter,
+Citrobacter_freundii, Clostridioides_difficile, Enterobacter_cloacae, Enterococcus_faecalis, Enterococcus_faecium,
+Escherichia, Klebsiella_aerogenes, Klebsiella_oxytoca, Klebsiella_pneumoniae, Neisseria_gonorrhoeae, Neisseria_meningitidis,
+Pseudomonas_aeruginosa, Salmonella, Serratia_marcescens, Staphylococcus_aureus, Staphylococcus_pseudintermedius,
+Streptococcus_agalactiae, Streptococcus_pneumoniae, Streptococcus_pyogenes, Vibrio_cholerae
 
 # download Klebsiella oxytoca genome FASTA/FNA to use as a test
 $ wget "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/003/812/925/GCA_003812925.1_ASM381292v1/GCA_003812925.1_ASM381292v1_genomic.fna.gz" 
