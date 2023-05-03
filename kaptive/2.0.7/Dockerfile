@@ -1,0 +1,87 @@
+FROM ubuntu:focal as app
+
+ARG KAPTIVE_VER="2.0.7"
+ARG blastVer="2.3.0"
+ARG VP_GENOMOSEROTYPING_VER="1.0"
+# so that apt doesn't try to ask for user input
+ARG DEBIAN_FRONTEND=noninteractive
+
+LABEL base.image="ubuntu:focal"
+LABEL dockerfile.version="1"
+LABEL software="Kaptive"
+LABEL software.version="${KAPTIVE_VER}"
+LABEL description="Report information about surface polysaccharide loci for Klebsiella pneumoniae species complex and Acinetobacter baumannii genome assemblies"
+LABEL website="https://github.com/klebgenomics/Kaptive/"
+LABEL license="https://github.com/klebgenomics/Kaptive/blob/master/LICENSE"
+LABEL website.VPdatabase="https://github.com/aldertzomer/vibrio_parahaemolyticus_genomoserotyping"
+LABEL license.VPdatabase="https://github.com/aldertzomer/vibrio_parahaemolyticus_genomoserotyping/blob/main/LICENSE"
+LABEL maintainer="Tamas Stirling"
+LABEL maintainer.email="stirling.tamas@gmail.com"
+LABEL maintainer2="Curtis Kapsak"
+LABEL maintainer2.email="kapsakcj@gmail.com"
+
+# install some dependencies via apt; cleanup apt garbage
+RUN apt-get update && apt-get install -y --no-install-recommends \
+  locales \
+  python3 \
+  python3-pip \
+  python3-setuptools \
+  software-properties-common \
+  wget \
+  ca-certificates \
+  procps && \
+  rm -rf /var/lib/apt/lists/* && apt-get autoclean
+
+# set locale
+RUN locale-gen en_US.UTF-8 && update-locale LANG=en_US.UTF-8
+ENV LANG=en_US.UTF-8
+
+# ncbi-blast+
+RUN wget "ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/${blastVer}/ncbi-blast-${blastVer}+-x64-linux.tar.gz" && \
+  tar zxvpf ncbi-blast-${blastVer}+-x64-linux.tar.gz && \
+  rm -v ncbi-blast-${blastVer}+-x64-linux.tar.gz
+ 
+# kaptive
+RUN wget "https://github.com/katholt/Kaptive/archive/refs/tags/v${KAPTIVE_VER}.tar.gz" && \
+  tar -xzf v${KAPTIVE_VER}.tar.gz && \
+  rm -vf v${KAPTIVE_VER}.tar.gz && \
+  mv -v /Kaptive-${KAPTIVE_VER} /kaptive
+ 
+# install biopython globally via system pip
+RUN pip3 install biopython
+
+# download Vibrio parahemolyticus database; rename directory to static location
+RUN wget https://github.com/aldertzomer/vibrio_parahaemolyticus_genomoserotyping/archive/refs/tags/${VP_GENOMOSEROTYPING_VER}.tar.gz && \
+tar xzf ${VP_GENOMOSEROTYPING_VER}.tar.gz && \
+rm -v ${VP_GENOMOSEROTYPING_VER}.tar.gz && \
+mv -v vibrio_parahaemolyticus_genomoserotyping-${VP_GENOMOSEROTYPING_VER} /vibrio_parahaemolyticus_genomoserotyping
+
+# set $PATH, with /kaptive at the highest priority
+ENV PATH="/kaptive:/ncbi-blast-${blastVer}+/bin:${PATH}"
+
+# final working directory is /data
+WORKDIR /data
+
+# test layer
+FROM app as test
+
+# test with A. baumannii
+RUN wget "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/016/486/705/GCA_016486705.1_PDT000751301.1/GCA_016486705.1_PDT000751301.1_genomic.fna.gz" && \
+  gunzip GCA_016486705.1_PDT000751301.1_genomic.fna.gz
+# k locus
+RUN kaptive.py -a GCA_016486705.1_PDT000751301.1_genomic.fna -k /kaptive/reference_database/Acinetobacter_baumannii_k_locus_primary_reference.gbk
+# o locus
+RUN kaptive.py -a GCA_016486705.1_PDT000751301.1_genomic.fna -k /kaptive/reference_database/Acinetobacter_baumannii_OC_locus_primary_reference.gbk
+
+# test with K. pneumoniae
+RUN wget "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/022/268/055/GCA_022268055.1_PDT000434809.1/GCA_022268055.1_PDT000434809.1_genomic.fna.gz" && \
+  gunzip GCA_022268055.1_PDT000434809.1_genomic.fna.gz
+# k locus
+RUN kaptive.py -a GCA_022268055.1_PDT000434809.1_genomic.fna -k /kaptive/reference_database/Klebsiella_k_locus_primary_reference.gbk
+# o locus
+RUN kaptive.py -a GCA_022268055.1_PDT000434809.1_genomic.fna -k /kaptive/reference_database/Klebsiella_o_locus_primary_reference.gbk
+
+### TODO add test with at least one Vibrio parahaemolyticus with a known serotype ###
+# download genome from NCBI or ENA FTP
+# run kaptive with custom database files
+# cat output kaptive file to view results
