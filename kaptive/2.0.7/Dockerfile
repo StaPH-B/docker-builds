@@ -42,7 +42,7 @@ RUN wget "ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/${blastVer}/ncbi-b
   rm -v ncbi-blast-${blastVer}+-x64-linux.tar.gz
  
 # kaptive
-RUN wget "https://github.com/katholt/Kaptive/archive/refs/tags/v${KAPTIVE_VER}.tar.gz" && \
+RUN wget "https://github.com/klebgenomics/Kaptive/archive/refs/tags/v${KAPTIVE_VER}.tar.gz" && \
   tar -xzf v${KAPTIVE_VER}.tar.gz && \
   rm -vf v${KAPTIVE_VER}.tar.gz && \
   mv -v /Kaptive-${KAPTIVE_VER} /kaptive
@@ -65,23 +65,41 @@ WORKDIR /data
 # test layer
 FROM app as test
 
-# test with A. baumannii
-RUN wget "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/016/486/705/GCA_016486705.1_PDT000751301.1/GCA_016486705.1_PDT000751301.1_genomic.fna.gz" && \
-  gunzip GCA_016486705.1_PDT000751301.1_genomic.fna.gz
-# k locus
-RUN kaptive.py -a GCA_016486705.1_PDT000751301.1_genomic.fna -k /kaptive/reference_database/Acinetobacter_baumannii_k_locus_primary_reference.gbk
-# o locus
-RUN kaptive.py -a GCA_016486705.1_PDT000751301.1_genomic.fna -k /kaptive/reference_database/Acinetobacter_baumannii_OC_locus_primary_reference.gbk
+# set working directory as /test for test stage
+WORKDIR /test
 
-# test with K. pneumoniae
-RUN wget "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/022/268/055/GCA_022268055.1_PDT000434809.1/GCA_022268055.1_PDT000434809.1_genomic.fna.gz" && \
-  gunzip GCA_022268055.1_PDT000434809.1_genomic.fna.gz
-# k locus
-RUN kaptive.py -a GCA_022268055.1_PDT000434809.1_genomic.fna -k /kaptive/reference_database/Klebsiella_k_locus_primary_reference.gbk
-# o locus
-RUN kaptive.py -a GCA_022268055.1_PDT000434809.1_genomic.fna -k /kaptive/reference_database/Klebsiella_o_locus_primary_reference.gbk
+# install curl and unzip for downloading and unzipping genomes from NCBI
+RUN apt-get update && apt-get install --no-install-recommends -y curl unzip
 
-### TODO add test with at least one Vibrio parahaemolyticus with a known serotype ###
-# download genome from NCBI or ENA FTP
-# run kaptive with custom database files
-# cat output kaptive file to view results
+# test with A. baumannii; testing both k and o locus
+RUN echo "downloading an A. baumannii genome & testing Kaptive..." && \
+mkdir /test/Abaum && \
+wget -q -P /test/Abaum "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/016/486/705/GCA_016486705.1_PDT000751301.1/GCA_016486705.1_PDT000751301.1_genomic.fna.gz" && \
+gunzip -qc /test/Abaum/GCA_016486705.1_PDT000751301.1_genomic.fna.gz > /test/Abaum/GCA_016486705.1_PDT000751301.1_genomic.fna && \
+kaptive.py -a /test/Abaum/GCA_016486705.1_PDT000751301.1_genomic.fna -k /kaptive/reference_database/Acinetobacter_baumannii_k_locus_primary_reference.gbk -o /test/Abaum && \
+kaptive.py -a /test/Abaum/GCA_016486705.1_PDT000751301.1_genomic.fna -k /kaptive/reference_database/Acinetobacter_baumannii_OC_locus_primary_reference.gbk -o /test/Abaum
+
+# test with K. pneumoniae; testing both k and o locus
+RUN echo "downloading an K. pneumoniae genome & testing Kaptive..." && \
+mkdir /test/Kpneumo && \
+wget -q -P /test/Kpneumo "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/022/268/055/GCA_022268055.1_PDT000434809.1/GCA_022268055.1_PDT000434809.1_genomic.fna.gz" && \
+gunzip -qc /test/Kpneumo/GCA_022268055.1_PDT000434809.1_genomic.fna.gz >/test/Kpneumo/GCA_022268055.1_PDT000434809.1_genomic.fna && \
+kaptive.py -a /test/Kpneumo/GCA_022268055.1_PDT000434809.1_genomic.fna -k /kaptive/reference_database/Klebsiella_k_locus_primary_reference.gbk -o /test/Kpneumo && \
+kaptive.py -a /test/Kpneumo/GCA_022268055.1_PDT000434809.1_genomic.fna -k /kaptive/reference_database/Klebsiella_o_locus_primary_reference.gbk -o /test/Kpneumo
+
+### test with at 2 Vibrio parahaemolyticus genomes with a known serotype. These 2 are pulled from the publication describing custom database ##
+# GCA_001558495.2 - expect OL1 and KL1
+# GCA_001728135.1 - expect OL4 KL53
+# more info on test genome here: https://www.ncbi.nlm.nih.gov/data-hub/genome/GCF_001558495.2/
+# strain: ATCC17802
+# more info on 2nd test genome here: https://www.ncbi.nlm.nih.gov/data-hub/genome/GCF_001728135.1/
+# strain: CDC_K5009W
+RUN echo "downloading an 2 V. parahaemolyticus genomes & testing Kaptive..." && \
+curl --silent -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_001558495.2/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT&filename=GCF_001558495.2.zip" -H "Accept: application/zip" && \
+curl --silent -OJX GET "https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_001728135.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT&filename=GCF_001728135.1.zip" -H "Accept: application/zip" && \
+unzip -q GCF_001558495.2.zip -d GCF_001558495.2 && \
+unzip -q GCF_001728135.1.zip -d GCF_001728135.1 && \
+mkdir -v /test/Vparahaemolyticus && \
+mv -v GCF*/*/*/*/GCF*_genomic.fna /test/Vparahaemolyticus && \
+kaptive.py -a /test/Vparahaemolyticus/*.fna -k /vibrio_parahaemolyticus_genomoserotyping/VibrioPara_Kaptivedb_K.gbk -o /test/Vparahaemolyticus && \
+kaptive.py -a /test/Vparahaemolyticus/*.fna -k /vibrio_parahaemolyticus_genomoserotyping/VibrioPara_Kaptivedb_O.gbk -o /test/Vparahaemolyticus
