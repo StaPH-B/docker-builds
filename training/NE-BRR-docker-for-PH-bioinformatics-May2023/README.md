@@ -15,7 +15,17 @@
   - In GitPod environment (VSCode interface), click on gear icon in bottom left corner. Select "Stop Workspace"
   - OR you can navigate to https://gitpod.io/, find your workspace in the list, click on the three-dot button, and select "Stop"
 
-## Exercise Week 1
+## Week 1 Exercise 1
+
+Goal: Use NCBI `datasets` to download a genome FASTA file - Klebsiella pneumoniae
 
 ### Docker basics
 
+```bash
+docker run hello-world
+```
+
+
+## Week 1 Exercise 2
+
+Goal: Run `kleborate` on FASTA file for subtyping, serotyping, virulence and AMR prediction
