@@ -65,7 +65,7 @@ QUIZ: What command would I use to download the StaPH-B docker image for the `mls
 
 </details>
 
-### images vs containers
+### Docker images vs containers
 
 When you ran the command `docker run hello-world` earlier, docker started a container using the docker image called `hello-world`, ran some things, and then the container automatically exited. The container did not delete itself, and we can see that by running the command `docker ps --all`. Run the command:
 
