@@ -139,6 +139,9 @@ To avoid these issues, you can pass in your linux user ID (UID) and group ID (GI
 To test let's run the StaPH-B NCBI `datasets` docker container and create some files. Run the following commands:
 
 ```bash
+# change directories so that we have a relatively clean working environment
+cd training/
+
 # launch the container in interactive mode
 docker run -it staphb/ncbi-datasets:14.20.0
 
@@ -159,7 +162,6 @@ Now let's launch the container in interactive mode, but pass in our user and gro
 
 ```bash
 # launch the container in interactive mode again, but this time pass in our user and group IDs
-# launch the container in interactive mode
 docker run -u $(id -u):$(id -g) -it staphb/ncbi-datasets:14.20.0
 
 # change to /tmp
