@@ -37,6 +37,9 @@ WORKDIR /data
 # We use `test` for the test image
 FROM app as test
 
+# getting all the exectubles in bin
+RUN ls /ncbi-blast-*/bin/
+
 # getting a genome
 RUN mkdir db && \
   wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/005/845/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.fna.gz -P db && \

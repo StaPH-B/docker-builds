@@ -6,35 +6,37 @@ Main tools:
 This is meant to assist in local blast searches. No blast databases will be maintained in this container. Be sure to mount your relevant Volumes with `--volumes` or `-v` when using the command line.
 
 
-blast+ is actually a suite of tools. blast+ v.2.13.0 includes:
+blast+ is actually a suite of tools. blast+ v.2.14.0 includes:
 ```
-ls /ncbi-blast-2.13.0+/bin/
+$ ls /ncbi-blast-2.14.0+/bin
 blast_formatter
-blastdb_aliastool  
-blastn      
-blastx                      
-deltablast             
-legacy_blast.pl  
-makeprofiledb  
-rpstblastn  
-tblastn_vdb        
-windowmasker
-blast_formatter_vdb  
-blastdbcheck       
-blastn_vdb  
-cleanup-blastdb-volumes.py  
-dustmasker             
-makeblastdb      
-psiblast       
-segmasker   
+blast_formatter_vdb
+blast_vdb_cmd
+blastdb_aliastool
+blastdbcheck
+blastdbcmd
+blastn
+blastn_vdb
+blastp
+blastx
+cleanup-blastdb-volumes.py
+convert2blastmask
+deltablast
+dustmasker
+get_species_taxids.sh
+legacy_blast.pl
+makeblastdb
+makembindex
+makeprofiledb
+psiblast
+rpsblast
+rpstblastn
+segmasker
+tblastn
+tblastn_vdb
 tblastx
-blast_vdb_cmd        
-blastdbcmd         
-blastp      
-convert2blastmask           
-makembindex      
-rpsblast       
-tblastn     
+update_blastdb.pl
+windowmasker 
 ```
 Currently not supported, but could be:
 
