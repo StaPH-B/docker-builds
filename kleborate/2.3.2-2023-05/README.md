@@ -21,7 +21,7 @@ Kleborate is a tool to screen genome assemblies of Klebsiella pneumoniae and the
 - antimicrobial resistance determinants: acquired genes, SNPs, gene truncations and intrinsic β-lactamases
 - K (capsule) and O antigen (LPS) serotype prediction, via wzi alleles and Kaptive
 
-## Why is there `staphb/kleborate:2.3.2` and `staphb/kleborate:2.3.2-2022-05`? What is the difference?
+## Why is there `staphb/kleborate:2.3.2` and `staphb/kleborate:2.3.2-2023-05`? What is the difference?
 
 A small change was made to the Kleborate v2.3.2 dockerfile to account for an odd UID (1081147385) and GID (1360859114) that owns the `mash` executable and license file. This can cause problems in "rootless" environments or environments where `docker` is run inside of a docker container such as in GitPod. These environments have more limits placed on UIDs and GIDs than your typical linux computers. Error shown below:
 
@@ -41,7 +41,7 @@ failed to register layer: ApplyLayer exit status 1 stdout:  stderr: failed to Lc
 
 The dockerfile now has a step to `chown` these files so that the `root` user owns them, which prevents these odd errors.
 
-The updated docker image is available under the docker image name: `staphb/kleborate:2.3.2-2022-05`
+The updated docker image is available under the docker image name: `staphb/kleborate:2.3.2-2023-05`
 
 ## Example Usage
 
