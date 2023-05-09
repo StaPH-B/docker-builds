@@ -258,7 +258,7 @@ Now that we have downloaded our FASTA file, let's launch into the container in i
 
 ```bash
 # download the docker image "staphb/kleborate:2.3.2" and launch interactive mode
-docker run --rm -v $PWD:/data -u $(id -u):$(id -g) -it staphb/kleborate:2.3.2
+docker run --rm -v $PWD:/data -u $(id -u):$(id -g) -it staphb/kleborate:2.3.2-2023-05
 
 # run kleborate using the FASTA file as input (be patient, this step may take a few minutes to run....)
 kleborate --all -o results.tsv -a ncbi_dataset/data/GCF_000240185.1/GCF_000240185.1_ASM24018v2_genomic.fna
