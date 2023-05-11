@@ -12,7 +12,7 @@
   - Set the "Context URL": `https://github.com/theiagen/docker-builds`
   - Select the default Editor and default Class, click "Continue"
 - :rotating_light: Once you're finished working, make sure to shut down your workspace to save your allotted free hours in GitPod :rotating_light:. There are a few ways to stop your workspace from running:
-  - In GitPod environment (VSCode interface), click on gear icon in bottom left corner. Select "Stop Workspace"
+  - In GitPod environment (VSCode interface), click on the orange Gidpod icon in bottom left corner. Select "Stop Workspace"
   - OR you can navigate to https://gitpod.io/, find your workspace in the list, click on the three-dot button, and select "Stop"
 
 ## Week 1 Exercise 1
