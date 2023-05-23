@@ -14,7 +14,7 @@ LABEL base.image="ubuntu:focal"
 LABEL dockerfile.version="1"
 LABEL software="VirulenceFinder"
 LABEL software.version="${VIRULENCEFINDER_VER}"
-LABEL description="Tool for identifying the serotype of E. coli from reads or assemblies"
+LABEL description="Tool for identifying the virulence genes in E. coli, Enterococcus, Staphylococcus aureus, & Listeria from reads or assemblies"
 LABEL website="https://bitbucket.org/genomicepidemiology/virulencefinder/src/master/"
 LABEL license="https://bitbucket.org/genomicepidemiology/virulencefinder/src/master/"
 LABEL maintainer="Curtis Kapsak"
@@ -53,7 +53,7 @@ RUN git clone --branch 1.0.1 --depth 1 https://bitbucket.org/genomicepidemiology
 # download VIRULENCEFINDER database using a specific commit hash to aid in reproducibility
 # index database w/ kma
 # NOTE: files HAVE to go into '/database' since that is the default location expected by serotyperfinder.py
-# dos2unix on the FASTA files to ensure they have LF line endings (there's CRLF somewhere in those files despite the last commit to the db)
+# dos2unix on the FASTA files to ensure they have LF line endings
 RUN mkdir /database && \
  git clone https://bitbucket.org/genomicepidemiology/virulencefinder_db.git /database && \
  cd /database && \
@@ -82,23 +82,21 @@ WORKDIR /test
 # Escherichia coli complete genome (Unicycler assembly)
 # GenBank Nucleotide entry: https://www.ncbi.nlm.nih.gov/nuccore/CP113091.1/
 # BioSample:SAMN08799860
-# expect O1:H7
-RUN mkdir -v /test/asm-input-O1-H7 && \
+RUN mkdir -v /test/asm-input && \
  wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/012/224/845/GCA_012224845.2_ASM1222484v2/GCA_012224845.2_ASM1222484v2_genomic.fna.gz && \
  gunzip GCA_012224845.2_ASM1222484v2_genomic.fna.gz && \
- virulencefinder.py -i /test/GCA_012224845.2_ASM1222484v2_genomic.fna -x -o /test/asm-input-O1-H7 && \
- cat /test/asm-input-O1-H7/results_tab.tsv
+ virulencefinder.py -i /test/GCA_012224845.2_ASM1222484v2_genomic.fna -x -o /test/asm-input && \
+ cat /test/asm-input/results_tab.tsv
 
 # download Illumina reads for the same sample ^ and test reads as input into VirulenceFinder
-RUN mkdir /test/reads-input-O1-H7 && \
+RUN mkdir /test/reads-input && \
  wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR690/006/SRR6903006/SRR6903006_1.fastq.gz && \
- wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR690/006/SRR6903006/SRR6903006_2.fastq.gz && \
- virulencefinder.py -i SRR6903006_1.fastq.gz -x -o /test/reads-input-O1-H7 && \
- cat /test/reads-input-O1-H7/results_tab.tsv
+ virulencefinder.py -i SRR6903006_1.fastq.gz -mp kma -x -o /test/reads-input && \
+ cat /test/reads-input/results_tab.tsv
 
 # test using FASTA supplied with VirulenceFinder code; print help options
-# expect ??
-#  diff results_tab.tsv test_results.tsv && \
+# expect to see hits to astA and 2 stx genes; unfortunately it finds astA and 3 stx genes (that don't match)
+# issue created here: https://bitbucket.org/genomicepidemiology/virulencefinder/issues/11/test-results-do-not-match-expected-results
 RUN cd /virulencefinder/test && \
  virulencefinder.py -i test.fsa -o . -mp blastn -x -q && \
  virulencefinder.py --help
