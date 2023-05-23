@@ -174,6 +174,7 @@ To learn more about the docker pull rate limits and the open source software pro
 | [VIBRANT](https://hub.docker.com/r/staphb/vibrant/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/vibrant)](https://hub.docker.com/r/staphb/vibrant) | <ul><li>1.2.1</li></ul> | https://github.com/AnantharamanLab/VIBRANT |
 | [VIGOR4](https://hub.docker.com/r/staphb/vigor4/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/vigor4)](https://hub.docker.com/r/staphb/vigor4) | <ul><li>4.1.20190131</li></ul> | https://github.com/JCVenterInstitute/VIGOR4 |
 | [VirSorter2](https://hub.docker.com/r/staphb/virsorter2/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/virsorter2)](https://hub.docker.com/r/staphb/virsorter2/) | <ul><li>2.1</li></ul> | https://github.com/jiarong/VirSorter2 |
+| [VirulenceFinder](https://hub.docker.com/r/staphb/virulencefinder/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/virulencefinder)](https://hub.docker.com/r/staphb/virulencefinder/) | <ul><li>[2.1.4](virulencefinder/2.0.4/)</li></ul> | https://bitbucket.org/genomicepidemiology/virulencefinder/src/master/ <br/> https://bitbucket.org/genomicepidemiology/virulencefinder_db/src/master/ |
 | [wtdbg2](https://hub.docker.com/r/staphb/wtdbg2/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/wtdbg2)](https://hub.docker.com/r/staphb/wtdbg2) | <ul><li>2.5</li></ul> | https://github.com/ruanjue/wtdbg2 |
 
 You can also view the list of images on Docker hub here: https://hub.docker.com/r/staphb/
