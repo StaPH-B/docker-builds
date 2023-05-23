@@ -72,6 +72,9 @@ ENV PATH="/virulencefinder:${PATH}" \
 # set final working directory for production docker image (app layer only)
 WORKDIR /data
 
+# default command is to pull up help options for virulencefinder
+CMD [ "virulencefinder.py", "-h"]
+
 ### START OF TEST STAGE ###
 FROM app as test
 
