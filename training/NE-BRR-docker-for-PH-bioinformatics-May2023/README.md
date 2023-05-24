@@ -1,5 +1,20 @@
 # Intro To Docker for Public Health Bioinformatics Training
 
+## Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [Prerequisites](#prerequisites)
+- [Docker basics](#docker-basics)
+  - [Downloading docker images](#downloading-docker-images)
+  - [Docker images vs containers](#docker-images-vs-containers)
+  - [Running docker images](#running-docker-images)
+  - [File permissions \& passing files in and out of containers](#file-permissions--passing-files-in-and-out-of-containers)
+    - [File permissions](#file-permissions)
+    - [Passing files in and out of containers](#passing-files-in-and-out-of-containers)
+- [Week 1 Exercise 1](#week-1-exercise-1)
+- [Week 1 Exercise 2](#week-1-exercise-2)
+- [Resources](#resources)
+
 ## Prerequisites
 
 - GitHub Account
