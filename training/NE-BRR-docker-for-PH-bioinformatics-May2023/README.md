@@ -2,7 +2,6 @@
 
 ## Table of Contents
 
-- [Table of Contents](#table-of-contents)
 - [Prerequisites](#prerequisites)
 - [Docker basics](#docker-basics)
   - [Downloading docker images](#downloading-docker-images)
@@ -13,6 +12,10 @@
     - [Passing files in and out of containers](#passing-files-in-and-out-of-containers)
 - [Week 1 Exercise 1](#week-1-exercise-1)
 - [Week 1 Exercise 2](#week-1-exercise-2)
+- [Week 2 Exercises](#week-2-exercises)
+  - [NCBI `datasets`](#ncbi-datasets)
+  - [SPAdes](#spades)
+  - [Experiment](#experiment)
 - [Resources](#resources)
 
 ## Prerequisites
