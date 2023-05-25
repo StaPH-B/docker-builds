@@ -330,7 +330,7 @@ That command finished running almost instantaneously, why?
 **Answer: The image has already been built previously (with last `docker build` command we ran) and thus the layers are "cached" or stored locally to be re-used. No need to spend time & resources building an image when it has already been built!**
 
 </details>
-
+</br>
 Now lets build to only the `app` stage, as this will be the final docker image that we share via dockerhub, quay, whatever container registry. This means we will use `--target app` which will skip building the layers in the `test` stage:
 
 ```bash
@@ -409,7 +409,7 @@ Steps:
 # run SPAdes on FASTQ files
 RUN wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR690/006/SRR6903006/SRR6903006_1.fastq.gz && \
 wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR690/006/SRR6903006/SRR6903006_2.fastq.gz && \
-
+spades.py -t 4 --isolate --only-assembler -1 SRR6903006_1.fastq.gz -2 SRR6903006_2.fastq.gz -o spades-output
 ```
 
 3. Once added, save the file (CTRL + S) and let's rebuild the image:
