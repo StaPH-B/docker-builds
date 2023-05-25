@@ -285,7 +285,141 @@ exit
 cat results.tsv
 ```
 
+## Week 2 Exercises
+
+Let's build some docker images! In today's exercise we are going to practice building docker image in various ways. Let's tweak the dockerfiles and see how those changes impact the final docker image.
+
+### NCBI `datasets`
+
+Let's build the most recent version of NCBI `datasets` using the dockerfile located here: `ncbi-datasets/14.20.0/Dockerfile`
+
+Reminder - the basic `docker build` command structure:
+
+```bash
+docker build --tag <name>:<tag> <directory-with-dockerfile>
+```
+
+Now with real values filled in, run the following command:
+
+```bash
+docker build --tag ncbi-datasets:14.20.0 ncbi-datasets/14.20.0/
+```
+
+What happened when we ran this command?
+
+- Docker daemon read & interpreted the dockerfile. It also ensured correct syntax & format.
+- The base image `ubuntu:jammy` was downloaded if not already present on computer.
+- Daemon began running subsequent Dockerfile instructions (`RUN`, `WORKDIR`, etc) in order through to the end of the dockerfile.
+- Docker image was given a sha256 hash & we received a message saying docker image was named & built successfully.
+
+When we ran the previous command, it built all stages of the dockerfile. BUT we can tell `docker` to build to a specific stage using `docker build --target <stage>`. Let's try building to the `test` stage specifically:
+
+```bash
+# note the new option '--target test'
+docker build --target test --tag ncbi-datasets:14.20.0 ncbi-datasets/14.20.0/
+```
+
+That command finished running almost instantaneously, why?
+
+<details>
+  <summary>Answer can be found here. Click to show answer:</summary>
+
+**Answer: The image has already been built previously (with last `docker build` command we ran) and thus the layers are "cached" or stored locally to be re-used. No need to spend time & resources building an image when it has already been built!**
+
+</details>
+
+Now lets build to only the `app` stage, as this will be the final docker image that we share via dockerhub, quay, whatever container registry. This means we will use `--target app` which will skip building the layers in the `test` stage:
+
+```bash
+# note the new option '--target app'
+docker build --target app --tag ncbi-datasets:14.20.0 ncbi-datasets/14.20.0/
+```
+
+### SPAdes
+
+The SPAdes dockerfile is a bit more complex as it's test stage runs the SPAdes software on a toy dataset and assembles a plasmid sequence.
+
+Let's build the most recent version of SPAdes, but this time start with only building the `app` stage. We are going to use the dockerfile located at `spades/3.15.5/Dockerfile`:
+
+```bash
+# note the new option '--target app'
+docker build --target app --tag spades:3.15.5 spades/3.15.5/
+```
+
+Now let's build all the way through the `test` stage and see the test assembly process run:
+
+```bash
+# note the new option '--target test'
+docker build --target test --tag spades:3.15.5 spades/3.15.5/
+```
+
+### Experiment
+
+Let's try changing a few things in the dockerfile to see the effect of the changes.
+
+_Hypothetical (& false) scenario 1 - SPAdes produced a `.zip` output file and my bioinformatics pipeline needs to `unzip` this file to extract the contents. I have to install the `unzip` software in the SPAdes docker image to accomplish this_
+
+Steps:
+
+1. Open up the SPAdes dockerfile in the GitPod/VSCode editor
+2. Navigate to the top of dockerfile and look for the `apt-get install` step on lines 18-22.
+3. Add a return and `unzip \` after line 21. The entire `RUN` layer should look like this:
+```Dockerfile
+RUN apt-get update && apt-get install --no-install-recommends -y python3 \
+ python3-distutils \
+ wget \
+ pigz \
+ unzip \
+ ca-certificates && \
+ apt-get autoclean && rm -rf /var/lib/apt/lists/* && \
+ update-alternatives --install /usr/bin/python python /usr/bin/python3 10
+```
+
+4. Once added, save the file (CTRL + S) and let's rebuild the image:
+
+```bash
+# same command as before, but now with an updated dockerfile
+docker build --target test --tag spades:3.15.5 spades/3.15.5/
+```
+
+5. Launch an interactive container to see if `unzip` is actually installed:
+
+```bash
+# launch into interactive mode in container
+docker run -ti spades:3.15.5
+
+# pull up unzip help options
+unzip --help
+```
+
+_Hypothetical scenario 2 - I don't think the SPAdes test (`spades.py --test`) is good enough, I want to make sure it works on some real data. Let's try using SPAdes to assemble some real bacterial WGS data_
+
+The current test is sufficient, but let's add another layer to the dockerfile to bolster the `test` stage. We are going to add some lines to download some real bacterial WGS data and assemble in the test stage. We are going to download some E. coli WGS data, Illumina paired-end, and assemble the genome with SPAdes. Here's the dataset on ENA: [https://www.ebi.ac.uk/ena/browser/view/SRR6903006](https://www.ebi.ac.uk/ena/browser/view/SRR6903006)
+
+Steps:
+
+1. Open up the SPAdes dockerfile in the GitPod/VSCode editor
+2. Navigate to bottom of dockerfile and add these lines of code:
+
+```Dockerfile
+# download test FASTQ files from ENA
+# run SPAdes on FASTQ files
+RUN wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR690/006/SRR6903006/SRR6903006_1.fastq.gz && \
+wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR690/006/SRR6903006/SRR6903006_2.fastq.gz && \
+
+```
+
+3. Once added, save the file (CTRL + S) and let's rebuild the image:
+
+```bash
+# same command as before, but now with an updated dockerfile
+docker build --target test --tag spades:3.15.5 spades/3.15.5/
+```
+
+Adding this test will ensure the robustness of the docker image, but the tradeoff is that it takes longer to run the test. The assembly process can take a while (5-15 min or longer), especially if the input dataset is large.
+
 ## Resources
 
 - You can find all of StaPH-B's dockerfiles & documentation here: https://github.com/StaPH-B/docker-builds
-- You can find all of StaPH-B's docker images on dockerhub here: https://hub.docker.com/u/staphb
+- StaPH-B's docker images on dockerhub here: https://hub.docker.com/u/staphb
+- StaPH-B's docker image on quay.io here: https://quay.io/organization/staphb
