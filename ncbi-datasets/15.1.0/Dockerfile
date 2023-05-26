@@ -31,6 +31,9 @@ ENV LC_ALL=C
 
 WORKDIR /data
 
+# datasets is generally datasets <subcommand> --help, but just typing in 'datasets' should bring up a help menu
+CMD [ "datasets"]
+
 FROM app as test
 
 RUN dataformat --help && datasets --help
