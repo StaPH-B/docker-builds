@@ -74,6 +74,9 @@ WORKDIR /data
 # hardcode pangolin executable into the PATH variable
 ENV PATH="${PATH}:/opt/conda/envs/pangolin/bin/"
 
+# default command is to pull up help options for virulencefinder; can be overridden of course
+CMD ["pangolin", "-h"]
+
 # new base for testing
 FROM app as test
 
