@@ -33,6 +33,10 @@ ENV PATH="/ncbi-blast-${BLAST_VER}+/bin:$PATH" \
 # WORKDIR sets working directory
 WORKDIR /data
 
+# default command is to pull up help options for virulencefinder
+# yes, there are more tools than blastn, but it's likely the most common one used
+CMD [ "blastn", "-help" ]
+
 # A second FROM insruction creates a new stage
 # We use `test` for the test image
 FROM app as test
