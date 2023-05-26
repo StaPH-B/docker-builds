@@ -44,6 +44,9 @@ RUN freyja update
 # set working directory to /data
 WORKDIR /data
 
+# default command is to pull up help options
+CMD [ "freyja", "--help" ]
+
 # new base for testing
 FROM app as test
 
