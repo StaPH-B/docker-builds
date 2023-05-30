@@ -1,6 +1,6 @@
 FROM ubuntu:jammy as app
 
-ARG FASTP_VER="0.23.3"
+ARG FASTP_VER="0.23.4"
 
 LABEL base.image="ubuntu:jammy"
 LABEL dockerfile.version="1"
