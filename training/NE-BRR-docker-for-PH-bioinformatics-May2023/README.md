@@ -319,7 +319,7 @@ When we ran the previous command, it built all stages of the dockerfile. BUT we 
 
 ```bash
 # note the new option '--target test'
-docker build --target test --tag ncbi-datasets:14.20.0 ncbi-datasets/14.20.0/
+docker build --target test --tag ncbi-datasets:14.20.0-test-stage ncbi-datasets/14.20.0/
 ```
 
 That command finished running almost instantaneously, why?
@@ -335,7 +335,7 @@ Now lets build to only the `app` stage, as this will be the final docker image t
 
 ```bash
 # note the new option '--target app'
-docker build --target app --tag ncbi-datasets:14.20.0 ncbi-datasets/14.20.0/
+docker build --target app --tag ncbi-datasets:14.20.0-app-stage ncbi-datasets/14.20.0/
 ```
 
 ### SPAdes
@@ -346,14 +346,14 @@ Let's build the most recent version of SPAdes, but this time start with only bui
 
 ```bash
 # note the new option '--target app'
-docker build --target app --tag spades:3.15.5 spades/3.15.5/
+docker build --target app --tag spades:3.15.5-app-stage spades/3.15.5/
 ```
 
 Now let's build all the way through the `test` stage and see the test assembly process run:
 
 ```bash
 # note the new option '--target test'
-docker build --target test --tag spades:3.15.5 spades/3.15.5/
+docker build --target test --tag spades:3.15.5-test-stage spades/3.15.5/
 ```
 
 ### Experiment
@@ -378,18 +378,18 @@ RUN apt-get update && apt-get install --no-install-recommends -y python3 \
  update-alternatives --install /usr/bin/python python /usr/bin/python3 10
 ```
 
-4. Once added, save the file (CTRL + S) and let's rebuild the image:
+4. Once added, save the file (CTRL + S) and let's rebuild the image with a new tag (`spades:3.15.5-test-unzip-added`):
 
 ```bash
 # same command as before, but now with an updated dockerfile
-docker build --target test --tag spades:3.15.5 spades/3.15.5/
+docker build --target test --tag spades:3.15.5-test-stage-unzip-added spades/3.15.5/
 ```
 
 5. Launch an interactive container to see if `unzip` is actually installed:
 
 ```bash
 # launch into interactive mode in container
-docker run -ti spades:3.15.5
+docker run -ti spades:3.15.5-test-stage-unzip-added
 
 # pull up unzip help options
 unzip --help
@@ -416,7 +416,7 @@ spades.py -t 4 --isolate --only-assembler -1 SRR6903006_1.fastq.gz -2 SRR6903006
 
 ```bash
 # same command as before, but now with an updated dockerfile
-docker build --target test --tag spades:3.15.5 spades/3.15.5/
+docker build --target test --tag spades:3.15.5-test-stage-added-test spades/3.15.5/
 ```
 
 Adding this test will ensure the robustness of the docker image, but the tradeoff is that it takes longer to run the test. The assembly process can take a while (5-15 min or longer), especially if the input dataset is large.
