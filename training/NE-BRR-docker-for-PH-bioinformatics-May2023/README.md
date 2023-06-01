@@ -421,6 +421,45 @@ docker build --target test --tag spades:3.15.5-test-stage-added-test spades/3.15
 
 Adding this test will ensure the robustness of the docker image, but the tradeoff is that it takes longer to run the test. The assembly process can take a while (5-15 min or longer), especially if the input dataset is large.
 
+## Week 3 Exercises
+
+Currently in this repository, the latest available version of NCBI `datasets` is 14.20.0 (located at `ncbi-datasets/14.20.0/Dockerfile`). As of today 2023-06-01, more versions have been released, up to 15.2.0 and the repository is out of date. Let's change that and create another dockerfile for version 15.2.0.
+
+Let's navigate to the `datasets` GitHub & documentation to ensure that the installation process is still the same as before. We don't want to be caught by any surprises.
+
+- [https://github.com/ncbi/datasets/releases](https://github.com/ncbi/datasets/releases)
+- [https://www.ncbi.nlm.nih.gov/datasets/docs/v2/download-and-install/](https://www.ncbi.nlm.nih.gov/datasets/docs/v2/download-and-install/)
+
+:warning: **Spoiler alert!** Installation has not changed from previous versions. We will continue using the current installation method from the 14.20.0 dockerfile. This installation method downloads a pre-compiled binary (AKA executable file) that requires little-to-no setup.
+
+Steps:
+
+1. In the file explorer on the left-hand side, right-click on the directory `ncbi-datasets/14.20.0/` and select Copy.
+2. Create a copy by pressing CTRL + V to paste the directory.
+3. Rename the directory (F2 or right-click on copied directory and select rename) to the new version `15.2.0`.
+4. Open the Dockerfile located at `ncbi-datasets/15.2.0/Dockerfile` in the editor.
+5. On line 3, replace the old version `14.20.0` with the new version `15.2.0`. Do not change anything else!
+6. Save the file by pressing CTRL + S, or selecting File :arrow_right: Save
+7. Open a terminal if one isn't already open by navigating to the hamburger menu in the top left, select Terminal, and then select New Terminal.
+8. Build your new docker image by using `docker build` in the terminal. You can use the following command:
+
+```bash
+docker build -t ncbi-datasets:15.2.0 ncbi-datasets/15.2.0/
+```
+
+9. Verify that the new version has been installed by running the `datasets --version` command inside the container:
+
+```bash
+# non-interactive mode:
+docker run ncbi-datasets:15.2.0 datasets --version
+
+# interactive mode:
+docker run -it ncbi-datasets:15.2.0
+
+# once interactive container is launched, run the same command:
+datasets --version
+```
+
 ## Resources
 
 - You can find all of StaPH-B's dockerfiles & documentation here: https://github.com/StaPH-B/docker-builds
