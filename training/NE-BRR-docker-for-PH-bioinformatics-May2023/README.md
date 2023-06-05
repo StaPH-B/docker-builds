@@ -16,6 +16,7 @@
   - [NCBI `datasets`](#ncbi-datasets)
   - [SPAdes](#spades)
   - [Experiment](#experiment)
+- [Week 3 Exercises](#week-3-exercises)
 - [Resources](#resources)
 
 ## Prerequisites
