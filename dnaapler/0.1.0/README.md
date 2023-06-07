@@ -1,15 +1,17 @@
 # dnaapler container
 
-Main tool : [dnappler](https://github.com/gbouras13/dnaapler) 
+Main tool : [dnappler](https://github.com/gbouras13/dnaapler)
 
-Additional tools :
-- [blast](https://blast.ncbi.nlm.nih.gov/Blast.cgi)
+Additional tools:
+
+- [blast](https://blast.ncbi.nlm.nih.gov/Blast.cgi) 2.14.0
 
 Full documentation: [https://github.com/gbouras13/dnaapler](https://github.com/gbouras13/dnaapler)
 
 > `dnaapler` is a simple python program that takes a single nucleotide input sequence (in FASTA format), finds the desired start gene using blastx against an amino acid sequence database, checks that the start codon of this gene is found, and if so, then reorients the chromosome to begin with this gene on the forward strand.
 
 dnaapler has several commands for chromosomes, plasmids, and more.
+
 ```
 Usage: dnaapler [OPTIONS] COMMAND [ARGS]...
 
