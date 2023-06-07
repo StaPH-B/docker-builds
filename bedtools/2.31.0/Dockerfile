@@ -54,12 +54,12 @@ FROM builder as test
 # re-instantiate variable so we can use it again in the test stage
 ARG BEDTOOLS_VER
 
-# test scripts expect to be run from the test/ subdirectory
-WORKDIR /bedtools2-${BEDTOOLS_VER}/test
+# test scripts expect to be run from the bedtools root dir
+WORKDIR /bedtools2-${BEDTOOLS_VER}
 
-# getting rid of ulimit (gitpod complains)
+# commenting out ulimit command in test/test.sh (gitpod complains)
 # run tests included with bedtools code
-RUN sed -i 's/ulimit/#ulimit/g' test.sh && \
+RUN sed -i 's/ulimit/#ulimit/g' test/test.sh && \
 make test
 
 ### final app stage ###
