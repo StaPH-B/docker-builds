@@ -9,7 +9,7 @@ ARG DNAAPLER_VER="0.1.0"
 # metadata labels
 LABEL base.image="mambaorg/micromamba:1.4.1"
 LABEL dockerfile.version="1"
-LABEL software="DNAAPLER_VER"
+LABEL software="dnaapler"
 LABEL software.version="${DNAAPLER_VER}"
 LABEL description="Rotates chromosomes and more"
 LABEL website="https://github.com/gbouras13/dnaapler"
@@ -30,7 +30,7 @@ RUN micromamba create -n dnaapler -y -c bioconda -c defaults -c conda-forge dnaa
     micromamba clean -a -y
 
 # set the PATH and LC_ALL for singularity compatibility
-ENV PATH="/opt/conda/envs/dnaapler/bin/:$PATH" \
+ENV PATH="/opt/conda/envs/dnaapler/bin/:${PATH}" \
     LC_ALL=C.UTF-8
 
 # so that mamba/conda env is active when running below commands
@@ -40,6 +40,7 @@ ARG MAMBA_DOCKERFILE_ACTIVATE=1
 # set final working directory as /data
 WORKDIR /data
 
+# default command is to print help options
 CMD [ "dnaapler", "--help" ]
 
 # new base for testing
@@ -52,7 +53,7 @@ WORKDIR /test
 ENV ENV_NAME="dnaapler"
 ARG MAMBA_DOCKERFILE_ACTIVATE=1
 
-# downloads genome sequence and then extracs the last plasmid in the laziest way possible
+# downloads genome sequence and then extracts the last plasmid in the laziest way possible
 RUN wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/025/259/185/GCA_025259185.1_ASM2525918v1/GCA_025259185.1_ASM2525918v1_genomic.fna.gz && \
     gunzip GCA_025259185.1_ASM2525918v1_genomic.fna.gz && \
     grep "CP104365.1" GCA_025259185.1_ASM2525918v1_genomic.fna -A 50000 > CP104365.1.fasta && \
