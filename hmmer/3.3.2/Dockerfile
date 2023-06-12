@@ -3,7 +3,7 @@
 # v3.3
 
 # base image: Ubuntu
-FROM ubuntu:xenial
+FROM ubuntu:xenial as app
 
 # File Author / Maintainer
 LABEL base.image="ubuntu:xenial"
@@ -13,11 +13,11 @@ LABEL software.version="3.3"
 LABEL description="This software provides HMMer for hmmsearch etc.!"
 LABEL website="http://hmmer.org/"
 LABEL license="http://eddylab.org/software/hmmer/Userguide.pdf"
-LABEL maintainer="Joachim Johansen"
-LABEL maintainer.email="joacjohansen@gmail.com"
+LABEL maintainer="Neranjan Perera"
+LABEL maintainer.email="neranjan007@gmail.com"
 
 
-ENV HMMERVERSION="3.3"
+ENV HMMERVERSION="3.3.2"
 
 
 RUN apt-get update --fix-missing \
@@ -41,3 +41,17 @@ ENV PATH="/hmmer-${HMMERVERSION}/src:$PATH" \
 
 # set working directory
 WORKDIR /data 
+
+# test layer
+FROM app as test
+
+RUN apt-get update && \
+    apt-get install make gcc perl python3 -y 
+ 
+
+# print version and run help flag
+RUN hmmbuild -h
+
+WORKDIR /hmmer-${HMMERVERSION}
+
+RUN make check
