@@ -13,7 +13,7 @@ LABEL maintainer="Neranjan Perera"
 LABEL maintainer.email="neranjan007@gmail.com"
 
 
-ENV HMMERVERSION="3.3.2"
+ARG HMMERVERSION="3.3.2"
 
 
 RUN apt-get update --fix-missing \
@@ -32,11 +32,14 @@ RUN apt-get update --fix-missing \
     && mkdir data
 
 # set environmental variables e.g. $PATH and locale settings for singularity compatibility
-ENV PATH="/hmmer-${HMMERVERSION}/src:$PATH" \
+ENV PATH="$PATH:/hmmer-${HMMERVERSION}/src" \
  LC_ALL=C
 
 # set working directory
 WORKDIR /data 
+
+# default command is to print help options
+CMD [ "hmmscan", "-h" ]
 
 # test layer
 FROM app as test
@@ -46,9 +49,7 @@ RUN apt-get update && \
  
 
 # print version and run help flag
-RUN hmmscan -h
-
-RUN hmmbuild -h
+RUN hmmscan -h && hmmbuild -h
 
 WORKDIR /hmmer-${HMMERVERSION}
 
