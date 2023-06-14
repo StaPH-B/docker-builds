@@ -76,7 +76,7 @@ To learn more about the docker pull rate limits and the open source software pro
 | [GAMBIT](https://hub.docker.com/r/staphb/gambit) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/gambit)](https://hub.docker.com/r/staphb/gambit) | <ul><li>0.3.0</li><li>0.4.0</li><li>0.5.0</li><li>1.0.0</li></ul> | https://github.com/jlumpe/gambit |
 | [GAMMA](https://hub.docker.com/r/staphb/gamma) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/gamma)](https://hub.docker.com/r/staphb/gamma) | <ul><li>1.4</li><li>2.1</li><li>2.2</li></ul> | https://github.com/rastanton/GAMMA/ |
 | [gfastats](https://hub.docker.com/r/staphb/gfastats) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/gfastats)](https://hub.docker.com/r/staphb/gfastats) | <ul><li>1.3.6</li></ul> | https://github.com/vgl-hub/gfastats |
-| [hmmer](https://hub.docker.com/r/staphb/hmmer) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/hmmer)](https://hub.docker.com/r/staphb/hmmer) | <ul><li>3.3.2</li></ul> | http://hmmer.org/ |
+| [hmmer](https://hub.docker.com/r/staphb/hmmer) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/hmmer)](https://hub.docker.com/r/staphb/hmmer) | <ul><li>[3.3](hmmer/3.3/)</li><li>[3.3.2](hmmer/3.3.2/)</li></ul> | http://hmmer.org/ |
 | [homopolish](https://hub.docker.com/r/staphb/homopolish) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/homopolish)](https://hub.docker.com/r/staphb/homopolish) | <ul><li>0.4.1</li></ul> | https://github.com/ythuang0522/homopolish/ |
 | [htslib](https://hub.docker.com/r/staphb/htslib) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/htslib)](https://hub.docker.com/r/staphb/htslib) | <ul><li>1.14</li><li>1.15</li><li>1.16</li><li>1.17</li></ul> | https://www.htslib.org/ |
 | [iqtree](https://hub.docker.com/r/staphb/iqtree/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/iqtree)](https://hub.docker.com/r/staphb/iqtree) | <ul><li>1.6.7</li></ul> | http://www.iqtree.org/ |
@@ -234,3 +234,4 @@ Each Dockerfile lists the author(s)/maintainer(s) as a metadata `LABEL`, but the
   * [@sam-baird](https://github.com/sam-baird)
   * [@eproctor118](https://github.com/eproctor118)
   * [@cimendes](https://github.com/cimendes)
+  * [@golden75](https://github.com/golden75)
