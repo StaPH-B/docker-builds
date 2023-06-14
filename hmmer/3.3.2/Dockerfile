@@ -1,15 +1,11 @@
-# hmmer
-# http://hmmer.org/
-# v3.3
-
 # base image: Ubuntu
-FROM ubuntu:xenial as app
+FROM ubuntu:jammy as app
 
 # File Author / Maintainer
-LABEL base.image="ubuntu:xenial"
+LABEL base.image="ubuntu:jammy"
 LABEL dockerfile.version="1"
 LABEL software="hmmer"
-LABEL software.version="3.3"
+LABEL software.version="3.3.2"
 LABEL description="This software provides HMMer for hmmsearch etc.!"
 LABEL website="http://hmmer.org/"
 LABEL license="http://eddylab.org/software/hmmer/Userguide.pdf"
@@ -50,8 +46,11 @@ RUN apt-get update && \
  
 
 # print version and run help flag
+RUN hmmscan -h
+
 RUN hmmbuild -h
 
 WORKDIR /hmmer-${HMMERVERSION}
 
+# compile and run a test suite
 RUN make check
