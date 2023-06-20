@@ -58,6 +58,9 @@ ln -s /amrfinder/data/${AMRFINDER_DB_VER} /amrfinder/data/latest
 # set final working directory
 WORKDIR /data
 
+# default command is to print help options
+CMD [ "amrfinder", "--help" ]
+
 ## Test stage
 FROM app as test
 
