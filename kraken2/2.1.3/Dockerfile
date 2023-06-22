@@ -46,8 +46,10 @@ CMD [ "kraken2", "--help" ]
 
 WORKDIR /data
 
+### start of test stage ###
 FROM app as test 
 
+# print help and versions
 RUN kraken2 --help && \
     kraken2-build --help && \
     kraken2 --version && \
@@ -55,13 +57,15 @@ RUN kraken2 --help && \
     dustmasker -version && \
     segmasker -version
 
+# set working dir and download test k2 database inside
 WORKDIR /kraken2-db
-
 RUN wget https://genome-idx.s3.amazonaws.com/kraken/k2_viral_20230605.tar.gz && \
     tar -zxf k2_viral_20230605.tar.gz
 
+# set working dir for running test commands below
 WORKDIR /test
 
+# download and classify SARS-CoV-2 reads
 RUN wget -q https://github.com/StaPH-B/docker-builds/blob/83ee344304794f4ffa162d1c082bb35f916badcf/tests/SARS-CoV-2/SRR13957123_1.fastq.gz?raw=true -O SRR13957123_1.fastq.gz && \
     wget -q https://github.com/StaPH-B/docker-builds/blob/83ee344304794f4ffa162d1c082bb35f916badcf/tests/SARS-CoV-2/SRR13957123_2.fastq.gz?raw=true -O SRR13957123_2.fastq.gz && \
     kraken2 --paired --classified-out cseqs#.fq --db /kraken2-db SRR13957123_1.fastq.gz SRR13957123_2.fastq.gz --report kraken2_report.txt && \
