@@ -7,7 +7,9 @@ Full documentation: [https://github.com/rrwick/Polypolish/wiki](http://www.iqtre
 | Efficient and versatile phylogenomic software by maximum likelihood
 
 ## Example Usage
+
 An example phylip file (IQ-TREE2 also supports other file formats such as FASTA, NEXUS, CLUSTALW)
+
 ```
 7 28
 Frog       AAATTTGGTCCTGTGATTCAGCAGTGAT
@@ -20,6 +22,7 @@ Mouse      CTACCACACCCCAGGACTCAGCAGTGAT
 ```
 
 Can be aligned with the following command:
-```
-iqtree -s example.phy
+
+```bash
+iqtree2 -s /iqtree-2.2.2.6-Linux/example.phy --redo
 ```

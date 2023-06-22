@@ -35,6 +35,7 @@ RUN wget https://github.com/iqtree/iqtree2/releases/download/v${IQTREE2_VER}/iqt
 ENV PATH="/iqtree-${IQTREE2_VER}-Linux/bin:${PATH}"\
     LC_ALL=C
 
+# final working directory is /data
 WORKDIR /data
 
 # default command is to pull up help options
@@ -44,7 +45,7 @@ FROM app as test
 
 ARG IQTREE2_VER
 
-###TEST PATH
+# print version
 RUN iqtree2 --version
 
 ###TEST TREE TOPOLOGY
