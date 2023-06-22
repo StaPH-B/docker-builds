@@ -39,6 +39,8 @@ RUN micromamba create -n freyja-env -c conda-forge -c bioconda -c defaults freyj
 ENV PATH="/opt/conda/envs/freyja-env/bin:/opt/conda/envs/env/bin:${PATH}" \
     LC_ALL=C.UTF-8
 
+# update barcodes
+# NOTE: this will download the latest version of the `freyja/data/usher_barcodes.csv` file from GitHub
 RUN freyja update
 
 # set working directory to /data
@@ -51,7 +53,7 @@ CMD [ "freyja", "--help" ]
 FROM app as test
 
 # Grab test data from Freyja version 1.3.4
-RUN wget -O /data/Freyja_WWSC2.bam https://github.com/StaPH-B/docker-builds/blob/master/freyja/1.3.4/tests/Freyja_WWSC2.bam?raw=true -O /data/Freyja_WWSC2.bam && \
+RUN wget -O /data/Freyja_WWSC2.bam https://github.com/StaPH-B/docker-builds/blob/master/freyja/1.3.4/tests/Freyja_WWSC2.bam?raw=true && \
     wget -P /data https://raw.githubusercontent.com/StaPH-B/docker-builds/master/freyja/1.3.4/tests/Freyja_depths.tsv && \
     wget -P /data https://raw.githubusercontent.com/StaPH-B/docker-builds/master/freyja/1.3.4/tests/Freyja_variants.tsv && \
     wget -P /data https://raw.githubusercontent.com/StaPH-B/docker-builds/master/freyja/1.3.4/tests/nCoV-2019.reference.fasta
@@ -70,5 +72,5 @@ RUN head /data/test_variants.tsv && \
     head /data/test_demix.tsv && \
     grep "Omicron" /data/test_demix.tsv
 
-# test new Freyja demix version option
+# print barcode version and freyja version
 RUN freyja demix --version && freyja --version
