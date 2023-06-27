@@ -26,12 +26,13 @@ LABEL maintainer5.email="holly.c.mcqueary@mass.gov"
 # see here for reason why I'm manualy installing 2.13.0 instead of using apt-get: https://github.com/ncbi/amr/releases/tag/amrfinder_v3.11.8
 
 # hmmer installed via apt is v3.3.2
+# removed because likely unnecessary since we are not compiling from source: make g++
+# libgomp1 required for makeblastdb
 RUN apt-get update && apt-get install -y --no-install-recommends \
   ca-certificates \
   wget \ 
   curl \
-  make \
-  g++ \
+  libgomp1 \
   hmmer \
   procps \
   gzip && \
@@ -93,3 +94,6 @@ RUN wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/010/941/835/GCA_010941835.
 RUN wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/003/812/925/GCA_003812925.1_ASM381292v1/GCA_003812925.1_ASM381292v1_genomic.fna.gz && \
   gzip -d GCA_003812925.1_ASM381292v1_genomic.fna.gz && \
   amrfinder --threads 1 --plus --name GCA_003812925.1 -n GCA_003812925.1_ASM381292v1_genomic.fna  -O Klebsiella_oxytoca -o GCA_003812925.1-amrfinder.tsv 
+
+# test that gunzip is installed
+RUN gunzip --help
