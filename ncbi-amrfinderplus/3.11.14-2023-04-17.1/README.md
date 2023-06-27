@@ -34,7 +34,7 @@ You can view all available docker images on [dockerhub](https://hub.docker.com/r
 $ amrfinder -l
 Running: amrfinder -l
 Software directory: '/amrfinder/'
-Software version: 3.11.11
+Software version: 3.11.14
 Database directory: '/amrfinder/data/2023-04-17.1'
 Database version: 2023-04-17.1
 
