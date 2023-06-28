@@ -24,9 +24,7 @@ LABEL maintainer.email="curtis.kapsak@theiagen.com"
 # so that apt/tzdata doesn't ask for a timezone during build. Variable will not be in environment after building
 ARG DEBIAN_FRONTEND=noninteractive
 
-# install dependencies via apt; cleanup apt garbage
-# ncbi-blast+ from apt is v2.9.0 (min ver requirement for ShigEiFinder)
-# python version is 3.8.10
+# install dependencies via apt (a lot of this is for compiling C code); cleanup apt garbage
 RUN apt-get update && apt-get install --no-install-recommends -y \
     make \
     gcc \
@@ -80,8 +78,8 @@ COPY --from=builder /usr/local/bin/* /usr/local/bin
 COPY --from=builder /bwa/bwa-${BWA_VER}/bwa /usr/local/bin
 
 # install dependencies via apt; cleanup apt garbage
-# ncbi-blast+ from apt is v2.12.0 (min ver requirement for ShigEiFinder is 2.9.0)
-# python version is 3.8.10???CHECK THIS
+# ncbi-blast+ from apt is v2.9.0 (min ver requirement for ShigEiFinder)
+# python version is 3.8.10
 RUN apt-get update && apt-get install --no-install-recommends -y \
     python3 \
     python3-pip \
