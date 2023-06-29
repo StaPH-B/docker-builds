@@ -56,6 +56,11 @@ RUN wget https://github.com/samtools/samtools/releases/download/${SAMTOOLS_VER}/
 # using fresh ubuntu:jammy image as base for app stage
 FROM ubuntu:focal as app
 
+# re-instantiate these variables
+ARG SHIGEIFINDER_VER
+ARG SAMTOOLS_VER
+ARG BWA_VER
+
 LABEL base.image="ubuntu:focal"
 LABEL dockerfile.version="1"
 LABEL software="ShigEiFinder"
@@ -65,11 +70,6 @@ LABEL website="https://github.com/LanLab/ShigEiFinder"
 LABEL license="https://github.com/LanLab/ShigEiFinder/blob/main/LICENSE"
 LABEL maintainer="Curtis Kapsak"
 LABEL maintainer.email="curtis.kapsak@theiagen.com"
-
-# re-instantiate these variables
-ARG SHIGEIFINDER_VER
-ARG SAMTOOLS_VER
-ARG BWA_VER
 
 # copy in samtools executables into app stage
 COPY --from=builder /usr/local/bin/* /usr/local/bin
