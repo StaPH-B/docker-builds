@@ -11,16 +11,6 @@ ARG SHIGEIFINDER_VER
 ARG SAMTOOLS_VER
 ARG BWA_VER
 
-LABEL base.image="ubuntu:focal"
-LABEL dockerfile.version="1"
-LABEL software="ShigEiFinder"
-LABEL software.version="${SHIGEIFINDER_VER}"
-LABEL description="Cluster informed Shigella and EIEC serotyping tool from Illumina reads and assemblies"
-LABEL website="https://github.com/LanLab/ShigEiFinder"
-LABEL license="https://github.com/LanLab/ShigEiFinder/blob/main/LICENSE"
-LABEL maintainer="Curtis Kapsak"
-LABEL maintainer.email="curtis.kapsak@theiagen.com"
-
 # so that apt/tzdata doesn't ask for a timezone during build. Variable will not be in environment after building
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -65,6 +55,16 @@ RUN wget https://github.com/samtools/samtools/releases/download/${SAMTOOLS_VER}/
 ### start of app stage ###
 # using fresh ubuntu:jammy image as base for app stage
 FROM ubuntu:focal as app
+
+LABEL base.image="ubuntu:focal"
+LABEL dockerfile.version="1"
+LABEL software="ShigEiFinder"
+LABEL software.version="${SHIGEIFINDER_VER}"
+LABEL description="Cluster informed Shigella and EIEC serotyping tool from Illumina reads and assemblies"
+LABEL website="https://github.com/LanLab/ShigEiFinder"
+LABEL license="https://github.com/LanLab/ShigEiFinder/blob/main/LICENSE"
+LABEL maintainer="Curtis Kapsak"
+LABEL maintainer.email="curtis.kapsak@theiagen.com"
 
 # re-instantiate these variables
 ARG SHIGEIFINDER_VER
