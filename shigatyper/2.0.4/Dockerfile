@@ -115,6 +115,9 @@ RUN wget https://github.com/CFSAN-Biostatistics/shigatyper/archive/refs/tags/con
 # ensuring final working directory is /data
 WORKDIR /data
 
+# default command is to pull up help options; can be overridden of course
+CMD ["shigatyper", "--help"]
+
 ### start of test stage ###
 # using app stage as base image for test stage
 FROM app as test

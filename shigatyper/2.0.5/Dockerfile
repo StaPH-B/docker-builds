@@ -119,6 +119,9 @@ WORKDIR /data
 # using app stage as base image for test stage
 FROM app as test
 
+# default command is to pull up help options; can be overridden of course
+CMD ["shigatyper", "--help"]
+
 # fetch test data from ENA FTP
 # SRR8186675 = https://www.ncbi.nlm.nih.gov/biosample/SAMN10040549 , expect Shigella boydii serotype 12
 # SRR7738178 = https://www.ncbi.nlm.nih.gov/biosample/SAMN09878976 , expect Shigella sonnei (I think Form II?)
