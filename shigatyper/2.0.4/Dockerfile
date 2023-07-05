@@ -16,19 +16,6 @@ ARG MINIMAP2_VER
 # so that apt doesn't ask for input
 ARG DEBIAN_FRONTEND=noninteractive
 
-# LABEL instructions tag the image with metadata that might be important to the user
-LABEL base.image="ubuntu:jammy"
-LABEL dockerfile.version="1"
-LABEL software="shigatyper"
-LABEL software.version="${SHIGATYPER_VER}"
-LABEL description="Determine Shigella serotype using Illumina (single or paired-end) or Oxford Nanopore reads!"
-LABEL website="https://github.com/CFSAN-Biostatistics/shigatyper"
-LABEL license="https://github.com/CFSAN-Biostatistics/shigatyper/blob/master/LICENSE"
-LABEL maintainer="John Arnn"
-LABEL maintainer.email="jarnn@utah.gov"
-LABEL maintainer2="Curtis Kapsak"
-LABEL maintainer2.email="curtis.kapsak@theiagen.com"
-
 # Install dependencies via apt-get; cleanup apt garbage
 RUN apt-get update && apt-get install -y --no-install-recommends \
  wget \
@@ -82,6 +69,19 @@ FROM ubuntu:jammy as app
 # re-instantiate thes variables
 ARG SHIGATYPER_VER
 ARG MINIMAP2_VER
+
+# LABELS must be contained in `app` stage to pass the GHActions checks
+LABEL base.image="ubuntu:jammy"
+LABEL dockerfile.version="1"
+LABEL software="shigatyper"
+LABEL software.version="${SHIGATYPER_VER}"
+LABEL description="Determine Shigella serotype using Illumina (single or paired-end) or Oxford Nanopore reads!"
+LABEL website="https://github.com/CFSAN-Biostatistics/shigatyper"
+LABEL license="https://github.com/CFSAN-Biostatistics/shigatyper/blob/master/LICENSE"
+LABEL maintainer="John Arnn"
+LABEL maintainer.email="jarnn@utah.gov"
+LABEL maintainer2="Curtis Kapsak"
+LABEL maintainer2.email="curtis.kapsak@theiagen.com"
 
 # copy in samtools and bcftools executables into app stage
 COPY --from=builder /usr/local/bin/* /usr/local/bin
