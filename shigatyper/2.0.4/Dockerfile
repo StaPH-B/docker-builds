@@ -122,16 +122,19 @@ FROM app as test
 # fetch test data from ENA FTP
 # SRR8186675 = https://www.ncbi.nlm.nih.gov/biosample/SAMN10040549 , expect Shigella boydii serotype 12
 # SRR7738178 = https://www.ncbi.nlm.nih.gov/biosample/SAMN09878976 , expect Shigella sonnei (I think Form II?)
-##TODO ADD TEST FOR SHIGELLA FLEXNERI##
-RUN wget -P /data ftp.sra.ebi.ac.uk/vol1/fastq/SRR818/005/SRR8186675/SRR8186675_1.fastq.gz && \
-  wget -P /data ftp.sra.ebi.ac.uk/vol1/fastq/SRR818/005/SRR8186675/SRR8186675_2.fastq.gz && \
-  wget -P /data ftp.sra.ebi.ac.uk/vol1/fastq/SRR773/008/SRR7738178/SRR7738178_1.fastq.gz && \
-  wget -P /data ftp.sra.ebi.ac.uk/vol1/fastq/SRR773/008/SRR7738178/SRR7738178_2.fastq.gz
+# SRR8186651 = https://www.ncbi.nlm.nih.gov/biosample/SAMN10052840 , expect Shigella flexneri serotype 3a
+RUN  echo "downloading test FASTQ files from ENA's FTP, please be patient..." && \
+  wget -q -P /data ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR818/005/SRR8186675/SRR8186675_1.fastq.gz && \
+  wget -q -P /data ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR818/005/SRR8186675/SRR8186675_2.fastq.gz && \
+  wget -q -P /data ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR773/008/SRR7738178/SRR7738178_1.fastq.gz && \
+  wget -q -P /data ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR773/008/SRR7738178/SRR7738178_2.fastq.gz && \
+  wget -q -P /data ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR818/001/SRR8186651/SRR8186651_1.fastq.gz && \
+  wget -q -P /data/ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR818/001/SRR8186651/SRR8186651_2.fastq.gz
 
 # actually run shigatyper on test fastq files; ls to see output filenames
 RUN shigatyper --R1 /data/SRR8186675_1.fastq.gz --R2 /data/SRR8186675_2.fastq.gz --name SRR8186675 && \
   shigatyper --R1 /data/SRR7738178_1.fastq.gz --R2 /data/SRR7738178_2.fastq.gz --name SRR7738178 && \
+  shigatyper --R1 /data/SRR8186651_1.fastq.gz --R2 /data/SRR8186651_2.fastq.gz --name SRR8186651 && \
   echo && \
   ls -lh && \
   shigatyper --version
-
