@@ -14,7 +14,7 @@ LABEL maintainer="Curtis Kapsak"
 LABEL maintainer.email="kapsakcj@gmail.com"
 
 # install dependencies via apt; cleanup apt garbage
-# blast from ubuntu:focal is v2.9.0 (as of 2022-05-09)
+# blast from ubuntu:jammy is v2.12.0 (as of 2023-07-05)
 # deps needed specifically for db download scripts: libfile-which-perl, curl, parallel
 RUN apt-get update && apt-get install -y --no-install-recommends \
  wget \
