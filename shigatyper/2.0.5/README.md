@@ -1,4 +1,4 @@
-# Shigatyper 2.0.4 container
+# Shigatyper 2.0.5 container
 
 Main tool : [shigatyper](https://github.com/CFSAN-Biostatistics/shigatyper)
 
