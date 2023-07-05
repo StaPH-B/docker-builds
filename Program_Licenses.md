@@ -25,6 +25,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Circlator | GNU GPLv3 | https://github.com/sanger-pathogens/circlator/blob/master/LICENSE |
 | colorid | MIT | https://github.com/hcdenbakker/colorid/blob/master/LICENSE |
 | datasets-sars-cov-2 | Apache 2.0 | https://github.com/CDCgov/datasets-sars-cov-2/blob/master/LICENSE |
+| dnaapler | MIT | https://github.com/gbouras13/dnaapler/blob/main/LICENSE |
 | dragonflye | GNU GPLv3 | https://github.com/rpetit3/dragonflye/blob/main/LICENSE |
 | DSK | GNU Affero GPLv3 | https://github.com/GATB/dsk/blob/master/LICENSE |
 | emboss | GNU GPLv3 | http://emboss.sourceforge.net/licence/ |
@@ -141,4 +142,5 @@ The licenses of the open-source software that is contained in these Docker image
 | VIBRANT | GNU GPLv3 | https://github.com/AnantharamanLab/VIBRANT/blob/master/LICENSE |
 | VIGOR4 | GNU GPLv3 | https://github.com/JCVenterInstitute/VIGOR4/blob/master/LICENSE.txt |
 | VirSorter2 | GNU GPLv2 | https://github.com/jiarong/VirSorter2/blob/master/LICENSE |
+| VirulenceFinder | Apache 2.0 | https://bitbucket.org/genomicepidemiology/virulencefinder/src/master/ |
 | wtdbg2 | GNU GPLv3 | https://github.com/ruanjue/wtdbg2/blob/master/LICENSE.txt |
