@@ -1,9 +1,9 @@
-FROM ubuntu:focal as app
+FROM ubuntu:jammy as app
 
 ARG MLST_VER="2.23.0"
 ARG ANY2FASTA_VER="0.4.2"
 
-LABEL base.image="ubuntu:focal"
+LABEL base.image="ubuntu:jammy"
 LABEL dockerfile.version="1"
 LABEL software="mlst"
 LABEL software.version="${MLST_VER}"
@@ -11,7 +11,7 @@ LABEL description="Scan contig files against PubMLST typing schemes"
 LABEL website="https://github.com/tseemann/mlst"
 LABEL license="https://github.com/tseemann/mlst/blob/master/LICENSE"
 LABEL maintainer="Curtis Kapsak"
-LABEL maintainer.email="curtis.kapsak@theiagen.com"
+LABEL maintainer.email="kapsakcj@gmail.com"
 
 # install dependencies via apt; cleanup apt garbage
 # blast from ubuntu:focal is v2.9.0 (as of 2022-05-09)
