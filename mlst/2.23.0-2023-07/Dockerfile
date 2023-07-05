@@ -62,6 +62,9 @@ RUN cd /mlst-${MLST_VER}/scripts && \
 
 WORKDIR /data
 
+# default command is to pull up help options; can be overridden of course
+CMD ["mlst", "--help"]
+
 FROM app as test
 
 # copy in test script; run script
