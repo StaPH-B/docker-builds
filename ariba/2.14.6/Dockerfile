@@ -1,5 +1,10 @@
 FROM ubuntu:bionic as app
 
+# for easy upgrade later. ARG variables only persist during build time
+# ARIBA=2.14.6, pysam=0.15.4; pysam=0.16.0 breaks ariba 2.14.4 (June 2020)
+ARG PYSAM_VER="1.17"
+ARG ARIBA_VER="2.14.6"
+
 LABEL base.image="ubuntu:bionic"
 LABEL dockerfile.version="2"
 LABEL software="ARIBA"
@@ -13,7 +18,7 @@ LABEL maintainer2="Harry Hung"
 LABEL maintainer2.email="ch31@sanger.ac.uk"
 
 # prevents having to enter commands during apt-get install
-ENV DEBIAN_FRONTEND=noninteractive
+ARG DEBIAN_FRONTEND=noninteractive
 
 # dependencies
 RUN apt-get update && apt-get install --no-install-recommends -y \
@@ -56,9 +61,7 @@ RUN wget https://github.com/ablab/spades/releases/download/v3.15.5/SPAdes-3.15.5
 # https://github.com/sanger-pathogens/ariba/blob/b1b524c9d9588cba9d998c9121bd74c63856526/Dockerfile#L49
 ENV MPLBACKEND="agg"
 
-# ARIBA=2.14.6
-# pysam=0.15.4; pysam=0.16.0 breaks ariba 2.14.4 (June 2020)
-RUN pip3 install pysam==0.15.4 ariba==2.14.6
+RUN pip3 install pysam==${PYSAM_VER} ariba==${ARIBA_VER}
 
 # set $PATH and locale settings for singularity compatibility
 ENV PATH="$PATH:/SPAdes-3.15.5-Linux/bin" \
