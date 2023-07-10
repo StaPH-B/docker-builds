@@ -69,6 +69,8 @@ ENV PATH="$PATH:/SPAdes-${SPADES_VER}-Linux/bin" \
 
 WORKDIR /data
 
+CMD ["ariba", "--help"]
+
 # new base for testing
 FROM app as test
 
