@@ -2,7 +2,7 @@ FROM ubuntu:bionic as app
 
 # for easy upgrade later. ARG variables only persist during build time
 # ARIBA=2.14.6, pysam=0.15.4; pysam=0.16.0 breaks ariba 2.14.4 (June 2020)
-ARG PYSAM_VER="1.17"
+ARG PYSAM_VER="0.15.4"
 ARG ARIBA_VER="2.14.6"
 
 LABEL base.image="ubuntu:bionic"
