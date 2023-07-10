@@ -1,6 +1,10 @@
 # ARIBA container
 
-GitHub Repo: [ARIBA](https://github.com/sanger-pathogens/ariba)
+Main tool: [ARIBA](https://github.com/sanger-pathogens/ariba)
+
+Additional tools:
+- [pysam](https://github.com/pysam-developers/pysam) 0.15.4
+- [SPAdes](https://github.com/ablab/spades) 3.15.5
 
 Full documentation: [https://github.com/sanger-pathogens/ariba/wiki](https://github.com/sanger-pathogens/ariba/wiki)
 
@@ -12,27 +16,17 @@ The input is a FASTA file of reference sequences (can be a mix of genes and nonc
 
 ## Example Usage
 
-```
-usage: ariba <command> <options>
+```bash
+# Get reference data, for instance from CARD
+ariba getref ncbi out.ncbi
 
-optional arguments:
-  -h, --help      show this help message and exit
+# Prepare reference data for ARIBA
+ariba prepareref -f out.ncbi.fa -m out.ncbi.tsv out.ncbi.prepareref
 
-Available commands:
+# Run local assemblies and call variants
+ariba run out.ncbi.prepareref reads1.fastq reads2.fastq out.run
 
-aln2meta      Converts multi-aln fasta and SNPs to metadata
-expandflag    Expands flag column of report file
-flag          Translate the meaning of a flag
-getref        Download reference data
-micplot       Make violin/dot plots using MIC data
-prepareref    Prepare reference data for input to "run"
-pubmlstget    Download species from PubMLST and make db
-pubmlstspecies
-	      Get list of available species from PubMLST
-refquery      Get cluster or sequence info from prepareref output
-run           Run the local assembly pipeline
-summary       Summarise multiple reports made by "run"
-test          Run small built-in test dataset
-version       Get versions and exit
+#Summarise data from several runs
+ariba summary out.summary out.run1/report1.tsv out.run2/report2.tsv out.run3/report3.tsv
 ```
 Please read the [ARIBA wiki page](https://github.com/sanger-pathogens/ariba/wiki) for full usage instructions.
