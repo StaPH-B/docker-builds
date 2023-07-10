@@ -4,6 +4,7 @@ FROM ubuntu:bionic as app
 # ARIBA=2.14.6, pysam=0.15.4; pysam=0.16.0 breaks ariba 2.14.4 (June 2020)
 ARG PYSAM_VER="0.15.4"
 ARG ARIBA_VER="2.14.6"
+ARG SPADES_VER="3.15.5"
 
 LABEL base.image="ubuntu:bionic"
 LABEL dockerfile.version="2"
@@ -50,11 +51,10 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 ENV LANG=en_US.UTF-8 \
     LANGUAGE=en_US:en 
 
-# SPAdes 3.15.5
 # optional installation to enable the usage of SPAdes assembler
-RUN wget https://github.com/ablab/spades/releases/download/v3.15.5/SPAdes-3.15.5-Linux.tar.gz && \
-  tar -xzf SPAdes-3.15.5-Linux.tar.gz && \
-  rm -r SPAdes-3.15.5-Linux.tar.gz && \
+RUN wget https://github.com/ablab/spades/releases/download/v${SPADES_VER}/SPAdes-${SPADES_VER}-Linux.tar.gz && \
+  tar -xzf SPAdes-${SPADES_VER}-Linux.tar.gz && \
+  rm -r SPAdes-${SPADES_VER}-Linux.tar.gz && \
   mkdir /data
 
 # needed to avoid a matplotlib error
@@ -64,7 +64,7 @@ ENV MPLBACKEND="agg"
 RUN pip3 install pysam==${PYSAM_VER} ariba==${ARIBA_VER}
 
 # set $PATH and locale settings for singularity compatibility
-ENV PATH="$PATH:/SPAdes-3.15.5-Linux/bin" \
+ENV PATH="$PATH:/SPAdes-${SPADES_VER}-Linux/bin" \
  LC_ALL=C
 
 WORKDIR /data
