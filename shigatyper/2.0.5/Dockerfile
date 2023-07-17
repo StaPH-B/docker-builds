@@ -115,12 +115,12 @@ RUN wget https://github.com/CFSAN-Biostatistics/shigatyper/archive/refs/tags/${S
 # ensuring final working directory is /data
 WORKDIR /data
 
+# default command is to pull up help options; can be overridden of course
+CMD ["shigatyper", "--help"]
+
 ### start of test stage ###
 # using app stage as base image for test stage
 FROM app as test
-
-# default command is to pull up help options; can be overridden of course
-CMD ["shigatyper", "--help"]
 
 # fetch test data from ENA FTP
 # SRR8186675 = https://www.ncbi.nlm.nih.gov/biosample/SAMN10040549 , expect Shigella boydii serotype 12
