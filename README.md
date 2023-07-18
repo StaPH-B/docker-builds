@@ -1,6 +1,6 @@
 # docker-builds
 
-This repository contains the Dockerfiles and other assorted files necessary for building Docker images for a variety of tools used by members of the StaPH-B (State Public Health Lab Bioinformatics) consortium. The purpose of this repository is to provide a centralized location for Docker images that is easily accessible for users, with clear documentation on how the containers were built and how to use them.
+There are several community projects that create and share containers for bioinformatic tools. This repository contains the Dockerfiles and other assorted files necessary for building Docker images for a variety of tools used by members of the StaPH-B (State Public Health Lab Bioinformatics) consortium. The purpose of this repository is to provide a centralized location for Docker images that is easily accessible for users, with clear documentation on how the containers were built and how to use them.
 
 This is a community resource, built and maintined by users from varied backgrounds and expertise levels. As such, we have provided some [templates for contributing to this repository](./dockerfile-template). If **you** would like to add a Docker image or improve upon the existing images, please fork the repository, make your changes/additions, and submit a pull request. If you are having an issue with an existing image, please submit an issue. We welcome any and all feedback!
 
@@ -50,7 +50,7 @@ The [StaPH-B Docker User Guide](https://staphb.org/docker-builds/) was created t
 docker build --tag tool:test --target test <directory to Dockerfile>
 docker build --tag samtools:test --target test samtools/1.15
 
-# Download a docker image from dockerhub (most tools have a 'latest' tag)
+# Download a docker image from dockerhub (most tools have a 'latest' version tag)
 docker pull staphb/tool:version
 docker pull staphb/shigatyper:2.0.2
 
@@ -71,7 +71,7 @@ Several template files are provided. These are intended to be copied and edited 
 
 ### What about Singularity?
 
-For many people Docker is not an option, but Singularity is. Most Docker containers are compatible with Singularity and can easily be converted to Singularity format. Please see the [User Guide](https://staphb.org/docker-builds/) for instructions on how to download docker images from dockerhub and how to run them using Singularity. We've worked hard to ensure that our containers are compatibile with Singularity, but if you find one that isn't, please leave an issue and let us know!
+For many people, Docker is not an option, but Singularity is. Most Docker containers are compatible with Singularity and can easily be converted to Singularity format. Please see the [User Guide](https://staphb.org/docker-builds/) for instructions on how to download docker images from dockerhub and how to run them using Singularity. We've worked hard to ensure that our containers are compatibile with Singularity, but if you find one that isn't, please leave an issue and let us know!
 
 ### Summarized usage guide for singularity
 
