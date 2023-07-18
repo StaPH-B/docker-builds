@@ -1,7 +1,7 @@
 <!-- 
 Please edit this readme with some basic information about the tool and how to use this container. 
 - Include information about databases and additional files that are included.
-- Keep it short. 
+- Keep it short - you don't need to recreate the documentation from the creators.
 - Do not just copy and paste the readme or help for the tool. 
 -->
 
