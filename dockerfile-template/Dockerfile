@@ -1,9 +1,16 @@
 ##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
+##### Thank you for using this Dockerfile template!                     #####
+##### This is an outline for the flow of building a docker image.       #####
 ##### The docker image is built to the 'app' stage on dockerhub/quay.   #####
 ##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
 
-# 'FROM' defines the base docker image. This command has to come first in the file
+##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
+##### Step 1. Set up the base image in the first stage.                 #####
+##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
+
+# 'FROM' defines where the Dockerfile is starting to build from. This command has to come first in the file
 # The 'as' keyword lets you name the folowing stage. The production image uses everything to the 'app' stage.
+
 FROM ubuntu:focal as app
 
 # List all software versions are ARGs near the top of the dockerfile
@@ -34,22 +41,28 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # For readability, limit one install per 'RUN' statement.
 
 # Example: install ncbi-blast+ 2.9.0 pre-compiled linux binaries
-RUN wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.9.0/ncbi-blast-2.9.0+-x64-linux.tar.gz && \
- tar -xzf ncbi-blast-2.9.0+-x64-linux.tar.gz && \
- rm ncbi-blast-2.9.0+-x64-linux.tar.gz && \
+ARG BLAST_VER=2.9.0
+
+RUN wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/${BLAST_VER}/ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz && \
+ tar -xzf ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz && \
+ rm ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz && \
  mkdir /data
 
 # 'ENV' instructions set environment variables that persist from the build into the resulting image
 # Use for e.g. $PATH and locale settings for compatibility with Singularity
-ENV PATH="/ncbi-blast-2.9.0+/bin:$PATH" \
+ENV PATH="/software-${SOFTWARENAME_VER}/bin:$PATH" \
  LC_ALL=C
+
+# 'CMD' instructions set a default command when the container is run. This is typically 'tool --help.'
+CMD [ "tool", "--help" ]
 
 # 'WORKDIR' sets working directory
 WORKDIR /data
 
 ##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
-##### The docker image is built to the 'test' stage before merging.     #####
-##### Anything after 'app' will be lost.                                #####
+##### Step 2. Set up the testing stage.                                 #####
+##### The docker image is built to the 'test' stage before merging, but #####
+##### the test stage (or any stage after 'app') will be lost.           #####
 ##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
 
 # A second FROM insruction creates a new stage
@@ -58,7 +71,7 @@ FROM app as test
 # set working directory so that all test inputs & outputs are kept in /test
 WORKDIR /test
 
-# Demonstrate that the program is successfully installed
+# Demonstrate that the program is successfully installed - which is highly dependant on what the tool is.
 
 # Run the program's internal tests if available, for example with SPAdes:
 RUN spades.py --test
