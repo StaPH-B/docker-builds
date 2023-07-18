@@ -11,7 +11,7 @@
 # 'FROM' defines where the Dockerfile is starting to build from. This command has to come first in the file
 # The 'as' keyword lets you name the folowing stage. The production image uses everything to the 'app' stage.
 
-FROM ubuntu:focal as app
+FROM ubuntu:jammy as app
 
 # List all software versions are ARGs near the top of the dockerfile
 # 'ARG' sets environment variables during the build stage
@@ -19,7 +19,7 @@ FROM ubuntu:focal as app
 ARG SOFTWARENAME_VER="1.0.0"
 
 # 'LABEL' instructions tag the image with metadata that might be important to the user
-LABEL base.image="ubuntu:focal"
+LABEL base.image="ubuntu:jammy"
 LABEL dockerfile.version="1"
 LABEL software="SoftwareName"
 LABEL software.version="${SOFTWARENAME_VER}"
