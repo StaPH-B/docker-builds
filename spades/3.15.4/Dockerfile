@@ -17,12 +17,13 @@ LABEL maintainer.email="kapsakcj@gmail.com"
 # python v3.8.10 is installed here; point 'python' to python3
 RUN apt-get update && apt-get install --no-install-recommends -y python3 \
  python3-distutils \
- wget && \
+ wget \
+ ca-certificates && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/* && \
  update-alternatives --install /usr/bin/python python /usr/bin/python3 10
 
 # install SPAdes binary; make /data
-RUN wget http://cab.spbu.ru/files/release${SPAdesVer}/SPAdes-${SPAdesVer}-Linux.tar.gz && \
+RUN wget https://github.com/ablab/spades/releases/download/v${SPAdesVer}/SPAdes-${SPAdesVer}-Linux.tar.gz && \
   tar -xzf SPAdes-${SPAdesVer}-Linux.tar.gz && \
   rm -r SPAdes-${SPAdesVer}-Linux.tar.gz && \
   mkdir /data
