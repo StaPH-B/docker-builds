@@ -30,12 +30,15 @@ To run a staphb image you simply name the image you want to use.
 ```
 docker run staphb/trimmomatic
 ```
-The previous command did not give any instructions to the container so the container simply started and then exited.
+The previous command did not give any instructions to the container so the container simply started and then exited. Many images have a 'CMD' instruction that prints the help command for the main tool of the image, but some do not.
 
 To see an executed command run the following command.
 ```
 docker run staphb/trimmomatic sh -c "echo Hello from inside the trimmomatic container"
 ```
+
+
+
 There are a number of options you can also supply to the run command. We have found the following command is useful for running containers:
 ```
 docker run --rm=True -v $PWD:/data -u $(id -u):$(id -g) staphb/<name-of-docker-image>:<tag> <command> <--flags --go --here>
@@ -67,6 +70,8 @@ Here is a description of each of the flags we used in the previous command.
      the local user will not be able to do much with them. The -u flag sets the container's user and group
      based on the user and group from the local machine, resulting in the correct file ownership.
 ```
+
+By design, containers only interact with the directories given to them. If you cannot see your files in the container or the result files after running something in a container, please check which dictories are mounted with `-v`.
 
 ##### NOTE: This can be incorporated into a bash function by including the following into your .bashrc
 ```
