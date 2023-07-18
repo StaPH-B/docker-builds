@@ -71,6 +71,12 @@ FROM app as test
 # set working directory so that all test inputs & outputs are kept in /test
 WORKDIR /test
 
+# print help and version info; check dependencies (not all software has these options available)
+# Mostly this ensures the tool of choice is in path and is executable
+RUN softwarename --help && \
+ softwarename --check && \
+ softwarename --version
+
 # Demonstrate that the program is successfully installed - which is highly dependant on what the tool is.
 
 # Run the program's internal tests if available, for example with SPAdes:
