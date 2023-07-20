@@ -14,7 +14,7 @@ LABEL description="ARIBA: Antimicrobial Resistance Identification By Assembly"
 LABEL website="https://github.com/sanger-pathogens/ariba"
 LABEL license="https://github.com/sanger-pathogens/ariba/blob/master/LICENSE"
 LABEL maintainer="Curtis Kapsak"
-LABEL maintainer.email="pjx8@cdc.gov"
+LABEL maintainer.email="kapsakcj@gmail.com"
 LABEL maintainer2="Harry Hung"
 LABEL maintainer2.email="ch31@sanger.ac.uk"
 
