@@ -7,7 +7,7 @@ ARG ARIBA_VER="2.14.6"
 ARG SPADES_VER="3.15.5"
 
 LABEL base.image="ubuntu:bionic"
-LABEL dockerfile.version="2"
+LABEL dockerfile.version="1"
 LABEL software="ARIBA"
 LABEL software.version="2.14.6"
 LABEL description="ARIBA: Antimicrobial Resistance Identification By Assembly"
@@ -46,7 +46,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
  perl \
  libcurl4-gnutls-dev \
  libssl-dev && \
- rm -rf /var/lib/apt/lists/*
+ apt-get autoclean && rm -rf /var/lib/apt/lists/* 
 
 ENV LANG=en_US.UTF-8 \
     LANGUAGE=en_US:en 
@@ -69,6 +69,7 @@ ENV PATH="$PATH:/SPAdes-${SPADES_VER}-Linux/bin" \
 
 WORKDIR /data
 
+# default command is to pull up help options
 CMD ["ariba", "--help"]
 
 # new base for testing
@@ -78,8 +79,8 @@ FROM app as test
 RUN ariba version
 
 # run built-in test and confirm files are successfully created
-RUN ariba test out
-RUN ls out/OUT/assemblies.fa.gz && \
+RUN ariba test out && \
+    ls out/OUT/assemblies.fa.gz && \
     ls out/OUT/assembled_genes.fa.gz && \
     ls out/OUT/assembled_seqs.fa.gz && \
     ls out/OUT/log.clusters.gz && \
