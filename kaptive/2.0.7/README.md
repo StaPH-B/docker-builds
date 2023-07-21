@@ -10,7 +10,7 @@ Additional tools:
 
 ## Kaptive databases
 
-There are few databases include in this docker image for Kaptive v2.0.7:
+There are few databases included in this docker image for Kaptive v2.0.7:
 
 - Klebsiella pneumoniae species complex
   - included w/ Kaptive
