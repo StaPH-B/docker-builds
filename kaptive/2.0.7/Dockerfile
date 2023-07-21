@@ -38,7 +38,7 @@ ENV LANG=en_US.UTF-8
 
 # ncbi-blast+
 RUN wget "ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/${blastVer}/ncbi-blast-${blastVer}+-x64-linux.tar.gz" && \
-  tar zxvpf ncbi-blast-${blastVer}+-x64-linux.tar.gz && \
+  tar -zxpf ncbi-blast-${blastVer}+-x64-linux.tar.gz && \
   rm -v ncbi-blast-${blastVer}+-x64-linux.tar.gz
  
 # kaptive
@@ -52,7 +52,7 @@ RUN pip3 install biopython
 
 # download Vibrio parahemolyticus database; rename directory to static location
 RUN wget https://github.com/aldertzomer/vibrio_parahaemolyticus_genomoserotyping/archive/refs/tags/${VP_GENOMOSEROTYPING_VER}.tar.gz && \
-tar xzf ${VP_GENOMOSEROTYPING_VER}.tar.gz && \
+tar -xzf ${VP_GENOMOSEROTYPING_VER}.tar.gz && \
 rm -v ${VP_GENOMOSEROTYPING_VER}.tar.gz && \
 mv -v vibrio_parahaemolyticus_genomoserotyping-${VP_GENOMOSEROTYPING_VER} /vibrio_parahaemolyticus_genomoserotyping
 
