@@ -5,7 +5,7 @@ FROM ubuntu:jammy as app
 
 ARG HTSLIBVER
 
-LABEL base.image="ubuntu:focal"
+LABEL base.image="ubuntu:jammy"
 LABEL dockerfile.version="1"
 LABEL software="htslib"
 LABEL software.version="${HTSLIBVER}"
