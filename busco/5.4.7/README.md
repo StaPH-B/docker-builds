@@ -18,7 +18,7 @@ Additional tools:
 
 Full documentation: https://busco.ezlab.org/busco_userguide.html
 
-<brief description>
+This is a complete docker image where you can use all the functions of the BUSCO program. All additional tools were added to satisfy the requirements of those functions. The usage options are given below. Please refer to the BUSCO manual for further information. 
 
 ## Example Usage
 ```bash
