@@ -33,20 +33,26 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     && rm -rf /var/lib/apt/lists/* && apt-get autoclean \
     && ln -s /usr/bin/python3 /usr/bin/python
 
-# install blast, bbtools, sepp, metaeuk, and busco
+# install other necessary tools 
+# blast
 RUN wget https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.14.0/ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz &&\
-    tar -xvf ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz && rm ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz &&\
-    wget https://raw.github.com/smirarab/sepp-refs/master/gg/sepp-package.tar.bz &&\
+    tar -xvf ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz && rm ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz
+# sepp (greengenes version)
+RUN wget https://raw.github.com/smirarab/sepp-refs/master/gg/sepp-package.tar.bz &&\
     tar xvfj sepp-package.tar.bz && rm sepp-package.tar.bz &&\
     cd sepp-package/sepp &&\
-    python setup.py config -c && chmod 755 run_* && cd / &&\
-    wget https://sourceforge.net/projects/bbmap/files/BBMap_${BBMAP_VER}.tar.gz &&\
+    python setup.py config -c && chmod 755 run_*
+# bbtools
+RUN wget https://sourceforge.net/projects/bbmap/files/BBMap_${BBMAP_VER}.tar.gz &&\
     tar -xvf BBMap_${BBMAP_VER}.tar.gz && rm BBMap_${BBMAP_VER}.tar.gz &&\    
-    mv /bbmap/* /usr/local/bin/ &&\
-    wget https://mmseqs.com/metaeuk/metaeuk-linux-sse41.tar.gz &&\
+    mv /bbmap/* /usr/local/bin/
+# metaeuk
+RUN wget https://github.com/soedinglab/metaeuk/releases/download/6-a5d39d9/metaeuk-linux-sse41.tar.gz &&\
     tar -xvf metaeuk-linux-sse41.tar.gz && rm metaeuk-linux-sse41.tar.gz &&\
-    mv  /metaeuk/bin/* /usr/local/bin/ &&\
-    wget https://gitlab.com/ezlab/busco/-/archive/${BUSCO_VER}/busco-${BUSCO_VER}.tar.gz &&\
+    mv  /metaeuk/bin/* /usr/local/bin/
+
+# and finally busco
+RUN wget https://gitlab.com/ezlab/busco/-/archive/${BUSCO_VER}/busco-${BUSCO_VER}.tar.gz &&\
     tar -xvf busco-${BUSCO_VER}.tar.gz && \
     rm busco-${BUSCO_VER}.tar.gz &&\
     cd busco-${BUSCO_VER} && \
