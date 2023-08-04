@@ -8,7 +8,7 @@ Additional tools:
 - Prodigal 2.6.3
 - BLAST+ 2.14.0
 - AUGUSTUS 3.3.3
-- MetaEuk (30-May-2023)
+- MetaEuk (Release 6-a5d39d9)
 - SEPP 4.5.1
 - Python 3.8.10
 - BioPython 1.76
