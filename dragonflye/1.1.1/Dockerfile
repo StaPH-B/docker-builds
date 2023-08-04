@@ -1,4 +1,4 @@
-FROM mambaorg/micromamba:1.2.0 as app
+FROM mambaorg/micromamba:1.4.4 as app
 
 # build and run as root users since micromamba image has 'mambauser' set as the $USER
 USER root
@@ -9,7 +9,7 @@ WORKDIR /
 ARG DRAGONFLYE_VER="1.1.1"    
 
 # metadata labels
-LABEL base.image="mambaorg/micromamba:1.2.0"
+LABEL base.image="mambaorg/micromamba:1.4.4"
 LABEL dockerfile.version="1"
 LABEL software="dragonflye"
 LABEL software.version=${DRAGONFLYE_VER}
@@ -19,12 +19,13 @@ LABEL license="GNU General Public License v3.0"
 LABEL license.url="https://github.com/rpetit3/dragonflye/blob/main/LICENSE"
 LABEL maintainer="Curtis Kapsak"
 LABEL maintainer.email="kapsakcj@gmail.com"
+LABEL maintainer1="Erin Young"
+LABEL maintainer1.email="eriny@utah.gov"
 
 # install dependencies; cleanup apt garbage
 RUN apt-get update && apt-get install -y --no-install-recommends \
  wget \
  ca-certificates \
- git \
  procps \
  bsdmainutils && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/*
@@ -39,6 +40,8 @@ WORKDIR /data
 # hardcode base conda environment into the PATH variable; LC_ALL for singularity compatibility
 ENV PATH="$PATH:/opt/conda/bin/" \
  LC_ALL=C.UTF-8
+
+CMD dragonflye --help
 
 # new base for testing
 FROM app as test
