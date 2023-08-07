@@ -38,7 +38,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 RUN wget https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.14.0/ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz &&\
     tar -xvf ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz && rm ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz
 # sepp (greengenes version)
-RUN wget https://raw.github.com/smirarab/sepp-refs/master/gg/sepp-package.tar.bz &&\
+RUN wget https://raw.githubusercontent.com/smirarab/sepp-refs/54415e8905c5fa26cdd631c526b21f2bcdba95b5/gg/sepp-package.tar.bz &&\  
     tar xvfj sepp-package.tar.bz && rm sepp-package.tar.bz &&\
     cd sepp-package/sepp &&\
     python setup.py config -c && chmod 755 run_*
