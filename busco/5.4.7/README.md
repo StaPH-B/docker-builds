@@ -18,13 +18,21 @@ Additional tools:
 
 Full documentation: https://busco.ezlab.org/busco_userguide.html
 
-This is a complete docker image where you can use all the functions of the BUSCO program. All additional tools were added to satisfy the requirements of those functions. The usage options are given below. Please refer to the BUSCO manual for further information. 
-
+This fully functional BUSCO docker image allows you to use all the program options. All additional tools were added to satisfy the requirements of those functions. This image does not contain any lineage dataset. BUSCO downloads the passed dataset name automatically while running. If a full path is given as lineage, this automated management will be disabled. The usage options are given below. Please refer to the BUSCO manual for further information.
 ## Example Usage
+### Specific lineage
 ```bash
-busco -i [SEQUENCE_FILE] -l [LINEAGE] -o [OUTPUT_NAME] -m [MODE] [OTHER OPTIONS]
+busco -i assembly.fasta -l bacteria_odb10 -o output -m genome
 ```
-Additional options:
+or
+```bash
+busco -i assembly.fasta -l /path/to/folder/bacteria_odb10 -o output -m genome
+```
+### Auto lineage selection:
+```bash
+busco -i assembly.fasta -o output -m genome --auto-lineage-prok
+```
+### Additional options:
 ```bash
   -i FASTA FILE, --in FASTA FILE
                         Input sequence file in FASTA format. Can be an assembled genome or transcriptome (DNA), or protein sequences from an annotated gene set.
@@ -72,6 +80,15 @@ Additional options:
   --list-datasets       Print the list of available BUSCO datasets
 ```
 ### Plot
+Example usage of plotting script:
 ```bash
-python3 generate_plot.py -wd [WORKING_DIRECTORY] [OTHER OPTIONS]
+# collect short summaries
+mkdir my_summaries
+cp SPEC1/short_summary.generic.lineage1_odb10.SPEC1.txt my_summaries/.
+cp SPEC2/short_summary.generic.lineage2_odb10.SPEC2.txt my_summaries/.
+cp SPEC3/short_summary.specific.lineage2_odb10.SPEC3.txt my_summaries/.
+cp SPEC4/short_summary.generic.lineage3_odb10.SPEC4.txt my_summaries/.
+cp SPEC5/short_summary.generic.lineage4_odb10.SPEC5.txt my_summaries/.
+# plot via script
+python3 scripts/generate_plot.py –wd my_summaries
 ```
