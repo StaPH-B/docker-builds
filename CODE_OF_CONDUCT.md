@@ -77,7 +77,7 @@ This code of conduct and its related procedures also applies to unacceptable beh
 
 ## 10. Contact info
 
-
+If somebody is observed to be in breach of this code of conduct, please contact Curtis (kapsakcj@gmail.com) and Erin (eriny@utah.gov) privately via email.
 
 ## 11. License and attribution
 
