@@ -34,12 +34,6 @@ RUN wget -q https://github.com/samtools/htslib/releases/download/${HTSLIB_VER}/h
     make install && \
     make test
 
-# set locale settings for singularity compatibility
-ENV LC_ALL=C
-
-# set working directory
-WORKDIR /data
-
 ### start of app stage ###
 FROM ubuntu:jammy as app 
 
@@ -69,6 +63,12 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 
 # copy in htslib executables from builder stage
 COPY --from=builder /usr/local/bin/* /usr/local/bin/
+
+# set locale settings for singularity compatibility
+ENV LC_ALL=C
+
+# set working directory
+WORKDIR /data
 
 # default command is to show help options
 CMD ["htsfile", "--help"]
