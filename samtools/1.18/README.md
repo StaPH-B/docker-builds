@@ -7,8 +7,7 @@ Main tool:
 
 Additional tools:
 
-* python 3.8.10
-* perl 5.30.0
+* perl 5.34.0
 
 ## Example Usage
 

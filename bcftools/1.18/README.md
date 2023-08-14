@@ -7,7 +7,7 @@ Main tool:
 
 Additional tools:
 
-* perl 5.30.0
+* perl 5.34.0
 
 ## Example Usage
 
