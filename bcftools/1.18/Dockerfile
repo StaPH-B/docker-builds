@@ -67,7 +67,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     && apt-get autoclean && rm -rf /var/lib/apt/lists/* && \
     mkdir /data
 
-# copy in samtools executables from builder stage
+# copy in bcftools executables from builder stage
 COPY --from=builder /usr/local/bin/* /usr/local/bin/
 
 # set locale settings for singularity compatibility
