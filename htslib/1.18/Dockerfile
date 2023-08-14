@@ -59,6 +59,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
  libbz2-dev \
  liblzma-dev \
  libcurl4-gnutls-dev \
+ ca-certificates \ 
  && apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # copy in htslib executables from builder stage
