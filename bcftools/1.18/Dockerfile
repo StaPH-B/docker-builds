@@ -1,20 +1,10 @@
-FROM ubuntu:jammy as app
-
 # for easy upgrade later. ARG variables only persist during build time
-ARG bcftoolsVer="1.18"
+ARG BCFTOOLS_VER="1.18"
 
-# putting the labels in
-LABEL base.image="ubuntu:jammy"
-LABEL dockerfile.version="1"
-LABEL software="bcftools"
-LABEL software.version="${bcftoolsVer}"
-LABEL description="Variant calling and manipulating files in the Variant Call Format (VCF) and its binary counterpart BCF"
-LABEL website="https://github.com/samtools/bcftools"
-LABEL license="https://github.com/samtools/bcftools/blob/develop/LICENSE"
-LABEL maintainer="Erin Young"
-LABEL maintainer.email="eriny@utah.gov"
-LABEL maintainer2="Curtis Kapsak"
-LABEL maintainer2.email="kapsakcj@gmail.com"
+FROM ubuntu:jammy as builder
+
+# re-instantiate variable
+ARG BCFTOOLS_VER
 
 # install dependencies, cleanup apt garbage
 RUN apt-get update && apt-get install --no-install-recommends -y \
@@ -36,27 +26,72 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   procps && \
   rm -rf /var/lib/apt/lists/* && apt-get autoclean
 
-# get bcftools and make /data
-RUN wget https://github.com/samtools/bcftools/releases/download/${bcftoolsVer}/bcftools-${bcftoolsVer}.tar.bz2 && \
-  tar -vxjf bcftools-${bcftoolsVer}.tar.bz2 && \
-  rm bcftools-${bcftoolsVer}.tar.bz2 && \
-  cd bcftools-${bcftoolsVer} && \
+# download, compile, and install bcftools
+RUN wget https://github.com/samtools/bcftools/releases/download/${BCFTOOLS_VER}/bcftools-${BCFTOOLS_VER}.tar.bz2 && \
+  tar -xjf bcftools-${BCFTOOLS_VER}.tar.bz2 && \
+  rm -v bcftools-${BCFTOOLS_VER}.tar.bz2 && \
+  cd bcftools-${BCFTOOLS_VER} && \
   make && \
   make install && \
-  mkdir /data
+  make test 
+
+### start of app stage ###
+FROM ubuntu:jammy as app
+
+# re-instantiate variable
+ARG BCFTOOLS_VER
+
+# putting the labels in
+LABEL base.image="ubuntu:jammy"
+LABEL dockerfile.version="1"
+LABEL software="bcftools"
+LABEL software.version="${BCFTOOLS_VER}"
+LABEL description="Variant calling and manipulating files in the Variant Call Format (VCF) and its binary counterpart BCF"
+LABEL website="https://github.com/samtools/bcftools"
+LABEL license="https://github.com/samtools/bcftools/blob/develop/LICENSE"
+LABEL maintainer="Erin Young"
+LABEL maintainer.email="eriny@utah.gov"
+LABEL maintainer2="Curtis Kapsak"
+LABEL maintainer2.email="kapsakcj@gmail.com"
+
+# install dependencies required for running bcftools
+# https://github.com/samtools/bcftools/blob/develop/INSTALL#L29
+RUN apt-get update && apt-get install --no-install-recommends -y \
+    perl \
+    zlib1g \
+    libncurses5 \
+    bzip2 \
+    liblzma-dev \
+    libcurl4-gnutls-dev \
+    procps \
+    && apt-get autoclean && rm -rf /var/lib/apt/lists/* && \
+    mkdir /data
+
+# copy in samtools executables from builder stage
+COPY --from=builder /usr/local/bin/* /usr/local/bin/
 
 # set locale settings for singularity compatibility
 ENV LC_ALL=C
 
-# set working directory
+# set final working directory
 WORKDIR /data
 
-# set CMD
+# default command is to pull up help optoins
 CMD ["bcftools", "--help"]
 
+### start of test stage ###
 FROM app as test
 
-RUN wget https://raw.githubusercontent.com/artic-network/artic-ncov2019/master/primer_schemes/nCoV-2019/V4/SARS-CoV-2.reference.fasta && \
-  wget https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123.primertrim.sorted.bam && \
+# install wget for downloading test files
+RUN apt-get update && apt-get install --no-install-recommends -y wget \
+ ca-certificates
+
+RUN echo "downloading test SC2 BAM and FASTA and running bcftools mpileup and bcftools call test commands..." && \
+  wget -q https://raw.githubusercontent.com/artic-network/artic-ncov2019/master/primer_schemes/nCoV-2019/V4/SARS-CoV-2.reference.fasta && \
+  wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123.primertrim.sorted.bam && \
   bcftools mpileup -A -d 200 -B -Q 0 -f SARS-CoV-2.reference.fasta SRR13957123.primertrim.sorted.bam | \
   bcftools call -mv -Ov -o SRR13957123.vcf
+
+# FYI Test suite "make test" is performed in the builder stage since app and
+# test stages do not include bcftools source code.
+# This is to avoid having to re-download source code simply to run test suite
