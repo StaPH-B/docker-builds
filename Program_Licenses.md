@@ -17,6 +17,7 @@ The licenses of the open-source software that is contained in these Docker image
 | bedtools | MIT | https://github.com/arq5x/bedtools2/blob/master/LICENSE |
 | blast+ | Public Domain | https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/scripts/projects/blast/LICENSE |
 | bowtie2 | GNU GPLv3 | https://github.com/BenLangmead/bowtie2/blob/master/LICENSE |
+| BUSCO | MIT | https://gitlab.com/ezlab/busco/-/raw/master/LICENSE |
 | BWA | GNU GPLv3 | https://github.com/lh3/bwa/blob/master/COPYING |
 | Canu <br/> Racon <br/> Minimap2 | GNU GPLv3 (Canu), <br/> MIT (Racon), <br/> MIT (Minimap2) | https://github.com/marbl/canu/blob/master/README.license.GPL https://github.com/isovic/racon/blob/master/LICENSE https://github.com/lh3/minimap2/blob/master/LICENSE.txt |
 | centroid | GitHub No License | https://github.com/https://github.com/stjacqrm/centroid |
