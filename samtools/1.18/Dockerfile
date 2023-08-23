@@ -78,7 +78,7 @@ CMD ["samtools", "--help"]
 FROM app as test
 
 # install wget for downloading test files
-RUN apt-get update && apt-get install --no-install-recommends -y wget
+RUN apt-get update && apt-get install --no-install-recommends -y wget ca-certificates
 
 RUN wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123.consensus.fa && \
   wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123.primertrim.sorted.bam && \
