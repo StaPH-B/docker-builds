@@ -98,7 +98,7 @@ RUN wget -q ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR224/050/SRR22452250/SRR2245225
     wget https://raw.githubusercontent.com/artic-network/primer-schemes/master/nCoV-2019/V5.3.2/SARS-CoV-2.primer.bed      -O dir/name/v5/name.primer.bed && \
     wget https://raw.githubusercontent.com/artic-network/primer-schemes/master/nCoV-2019/V5.3.2/SARS-CoV-2.reference.fasta -O dir/name/v5/name.reference.fasta && \
     wget https://raw.githubusercontent.com/artic-network/primer-schemes/master/nCoV-2019/V5.3.2/SARS-CoV-2.scheme.bed      -O dir/name/v5/name.scheme.bed && \
-    samtools faidx directory/nCoV-2019/v5.3.2/SARS-CoV-2.reference.fasta && \
+    samtools faidx dir/name/v5/name.scheme.bed && \
     artic minion --normalise 200 --skip-nanopolish --medaka --medaka-model r941_min_high_g360 --threads 4 --read-file SRR22452250_1_filtered.fastq.gz --scheme-directory dir --scheme-version 5 name final && \
     ls final*
 
