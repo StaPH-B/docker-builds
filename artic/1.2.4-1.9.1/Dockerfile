@@ -93,12 +93,12 @@ WORKDIR /test
 
 # using on "real" data (sample files were not sequenced with version 5.3.2 primers)
 RUN wget -q ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR224/050/SRR22452250/SRR22452250_1.fastq.gz && \
-    artic guppyplex --min-length 400 --max-length 700  --directory . --prefix SRR22452250_1.fastq.gz --output SRR22452250_1_filtered.fastq.gz && \
-    mkdir -p dir/name/v5 && \
-    wget https://raw.githubusercontent.com/artic-network/primer-schemes/master/nCoV-2019/V5.3.2/SARS-CoV-2.primer.bed      -O dir/name/v5/name.primer.bed && \
-    wget https://raw.githubusercontent.com/artic-network/primer-schemes/master/nCoV-2019/V5.3.2/SARS-CoV-2.reference.fasta -O dir/name/v5/name.reference.fasta && \
-    wget https://raw.githubusercontent.com/artic-network/primer-schemes/master/nCoV-2019/V5.3.2/SARS-CoV-2.scheme.bed      -O dir/name/v5/name.scheme.bed && \
-    samtools faidx dir/name/v5/name.scheme.bed && \
-    artic minion --normalise 200 --skip-nanopolish --medaka --medaka-model r941_min_high_g360 --threads 4 --read-file SRR22452250_1_filtered.fastq.gz --scheme-directory dir --scheme-version 5 name final && \
+    artic guppyplex --min-length 400 --max-length 700  --directory . --prefix SRR22452250_1.fastq.gz --output SRR22452250_1_filtered.fastq.gz && \ 
+    mkdir -p dir/name/V5 && \
+    wget -q https://raw.githubusercontent.com/artic-network/primer-schemes/master/nCoV-2019/V5.3.2/SARS-CoV-2.primer.bed      -O dir/name/V5/name.primer.bed && \
+    wget -q https://raw.githubusercontent.com/artic-network/primer-schemes/master/nCoV-2019/V5.3.2/SARS-CoV-2.reference.fasta -O dir/name/V5/name.reference.fasta  && \
+    wget -q https://raw.githubusercontent.com/artic-network/primer-schemes/master/nCoV-2019/V5.3.2/SARS-CoV-2.scheme.bed      -O dir/name/V5/name.scheme.bed && \
+    samtools faidx dir/name/V5/name.reference.fasta && \
+    artic minion --normalise 200 --skip-nanopolish --medaka --medaka-model r941_min_high_g360 --threads 4 --read-file SRR22452250_1_filtered.fastq.gz --scheme-directory ./dir --scheme-version 5 name final && \
     ls final*
 
