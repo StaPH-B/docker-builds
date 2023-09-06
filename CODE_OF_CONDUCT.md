@@ -14,8 +14,6 @@ A supplemental goal of this Code of Conduct is to increase open [source/culture/
 
 Communities mirror the societies in which they exist and positive action is essential to counteract the many forms of inequality and abuses of power that exist in society.
 
-If you see someone who is making an extra effort to ensure our community is welcoming, friendly, and encourages all participants to contribute to the fullest extent, we want to know.
-
 ## 3. Expected Behavior
 
 The following behaviors are expected and requested of all community members:
@@ -57,9 +55,12 @@ If a community member engages in unacceptable behavior, the community organizers
 
 ## 7. Reporting Guidelines
 
-If you are subject to or witness unacceptable behavior, or have any other concerns, please notify a community organizer as soon as possible. .
+If you are subject to or witness unacceptable behavior, or have any other concerns, please notify a community organizer as soon as possible. 
 
-
+A community organizer includes
+- [Erin Young](eriny@utah.gov)
+- [Curtis Kapsak](kapsakcj@gmail.com)
+- Anyone on the StaPH-B steering committee
 
 Additionally, community organizers are available to help community members engage with local law enforcement or to otherwise help those experiencing unacceptable behavior feel safe. In the context of in-person events, organizers will also provide escorts as desired by the person experiencing distress.
 
