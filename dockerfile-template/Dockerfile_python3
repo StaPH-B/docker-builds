@@ -41,6 +41,7 @@ LABEL maintainer.email="my.email@email.com"
 # 'RUN' executes code during the build
 # Install dependencies via apt-get or yum if using a centos or fedora base
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    procps \
     dependency_a \
     dependency_b \
     dependency_c && \
