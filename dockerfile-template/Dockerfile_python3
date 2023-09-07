@@ -49,13 +49,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Install and/or setup more things. Make /data for use as a working dir
 # For readability, limit one install per 'RUN' statement.
-RUN pip install software==${SOFTWARENAME_VER}
+RUN pip install --no-cache software==${SOFTWARENAME_VER}
 
 
 # Example: install pygenomeviz 0.3.2
 ARG PYGENOMEVIZ_VER="0.3.2"
 
-RUN pip install pygenomeviz==$PYGENOMEVIZ_VER 
+RUN pip install --no-cache pygenomeviz==$PYGENOMEVIZ_VER 
 
 # 'ENV' instructions set environment variables that persist from the build into the resulting image
 # Use for e.g. $PATH and locale settings for compatibility with Singularity
