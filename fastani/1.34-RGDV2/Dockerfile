@@ -1,5 +1,5 @@
 ## build RGDv2 ##
-FROM staphb/ncbi-datasets:latest as stage
+FROM staphb/ncbi-datasets:15.11.0 as stage
 
 # copy in list of NCBI accessions and species list
 COPY RGDv2-NCBI-assembly-accessions.txt /RGDv2/RGDv2-NCBI-assembly-accessions.txt
@@ -42,14 +42,15 @@ LABEL maintainer3="Kutluhan Incekara"
 LABEL maintainer3.email="kutluhan.incekara@ct.gov"
 
 # install dependencies; cleanup apt garbage
-RUN apt-get update && apt-get install -y wget \
+RUN apt-get update && apt-get install --no-install-recommends -y \
+ wget \
  unzip \
  libgomp1 && \
  apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # download pre-compiled binary; unzip; put binary in /usr/local/bin
 # apt dependencies: libgomp1 unzip wget
-RUN wget https://github.com/ParBLiSS/FastANI/releases/download/${FASTANI_VER}/fastANI-Linux64-${FASTANI_VER}.zip && \
+RUN wget --no-check-certificate https://github.com/ParBLiSS/FastANI/releases/download/${FASTANI_VER}/fastANI-Linux64-${FASTANI_VER}.zip && \
  unzip fastANI-Linux64-${FASTANI_VER}.zip -d /usr/local/bin && \
  rm fastANI-Linux64-${FASTANI_VER}.zip
  
@@ -69,7 +70,7 @@ WORKDIR /data
 FROM app as test
 
 # test against RGDv2
-RUN wget -P /data https://github.com/ParBLiSS/FastANI/raw/master/tests/data/Escherichia_coli_str_K12_MG1655.fna && \
+RUN wget --no-check-certificate -P /data https://github.com/ParBLiSS/FastANI/raw/master/tests/data/Escherichia_coli_str_K12_MG1655.fna && \
  fastANI -t 8 -q /data/Escherichia_coli_str_K12_MG1655.fna --rl /RGDv2/FOFN-RGDv2.txt -o fastANI.RGDv2.out.tsv &&\
  echo "output TSV from fastANI test:" && \
  cat fastANI.RGDv2.out.tsv 
