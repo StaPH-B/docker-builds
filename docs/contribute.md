@@ -7,7 +7,7 @@ layout: page
 ## Contributing
 Discover a bug or having issues with our images? Do you have a suggestion or advice for improving our docker images? [Please submit an issue under the Issues tab on our github repository](https://github.com/StaPH-B/docker-builds/issues)
 
-Regardless of how many docker images are available via staphb/Dockerbuilds or other efforts, there are still tools that are not available in a container. We would welcome your contribution if you do not see a tool on our list and would like to add your own docker image.
+Regardless of how many docker images are available via staphb/docker-builds or other efforts, there are still tools that are not available in a container. We would welcome your contribution if you do not see a tool on our list and would like to add your own docker image.
 
 ### How to contribute a new Docker image
 1. Build your own docker image using a Dockerfile (information on this in [Develop your own container](https://staph-b.github.io/docker-builds/make_containers/))
