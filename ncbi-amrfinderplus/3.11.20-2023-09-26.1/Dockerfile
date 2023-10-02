@@ -76,7 +76,12 @@ FROM app as test
 RUN amrfinder -l
 
 # run recommended tests from amrfinder
-RUN amrfinder --threads 1 --plus -p /amrfinder/test_prot.fa -g  /amrfinder/test_prot.gff -O Escherichia > test_prot.got && \
+# NOTICE 2023-10-02: The expected test results that were updated for db 2023-09-26.1 did not make it into the 3.11.20 release of amrfinder.
+# So due to this, I'm pulling these files manually, and using them for the tests below.
+# for the next dockerfile release, I will update the lines below to use the test files included in the version release.
+RUN wget -O /amrfinder/test_both.expected https://raw.githubusercontent.com/ncbi/amr/185a69f541016cf05df8c88f0e1d2ed84db81927/test_both.expected && \
+  wget -O /amrfinder/test_dna.expected https://raw.githubusercontent.com/ncbi/amr/185a69f541016cf05df8c88f0e1d2ed84db81927/test_dna.expected && \
+  amrfinder --threads 1 --plus -p /amrfinder/test_prot.fa -g  /amrfinder/test_prot.gff -O Escherichia > test_prot.got && \
   diff /amrfinder/test_prot.expected test_prot.got && \
   amrfinder --threads 1 --plus -n /amrfinder/test_dna.fa -O Escherichia > test_dna.got && \
   diff /amrfinder/test_dna.expected test_dna.got && \
