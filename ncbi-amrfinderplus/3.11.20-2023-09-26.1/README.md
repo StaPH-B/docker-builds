@@ -9,7 +9,7 @@ Additional tools:
 
 ## Database information
 
-The database included at time of docker image build is **`2023-08-08.2`**. More information can be found in the changes.txt on [NCBI's FTP](https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/3.11/2023-08-08.2/changelog.txt).
+The database included at time of docker image build is **`2023-09-26.1`**. More information can be found in the changes.txt on [NCBI's FTP](https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/3.11/2023-09-26.1/changelog.txt).
 
 Full documentation: [https://github.com/ncbi/amr/wiki](https://github.com/ncbi/amr/wiki)
 
@@ -34,9 +34,9 @@ You can view all available docker images on [dockerhub](https://hub.docker.com/r
 $ amrfinder -l
 Running: amrfinder -l
 Software directory: '/amrfinder/'
-Software version: 3.11.18
-Database directory: '/amrfinder/data/2023-08-08.2'
-Database version: 2023-08-08.2
+Software version: 3.11.20
+Database directory: '/amrfinder/data/2023-09-26.1'
+Database version: 2023-09-26.1
 
 Available --organism options: Acinetobacter_baumannii, Burkholderia_cepacia, Burkholderia_pseudomallei, Campylobacter,
 Citrobacter_freundii, Clostridioides_difficile, Enterobacter_asburiae, Enterobacter_cloacae, Enterococcus_faecalis, 
