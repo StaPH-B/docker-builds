@@ -21,50 +21,44 @@ LABEL maintainer.email="eriny@utah.gov"
 USER root
 WORKDIR /
 
-# Example apt-get command for commonly-missing dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
     ca-certificates \
     procps \
     gcc \
-    libcurl3-gnutls \
+    make \
+    pkg-config \
+    zlib1g-dev \
+    libbz2-dev \
+    liblzma-dev \
+    libcurl4-gnutls-dev \
     libssl-dev \
     python3-dev \
     python3-pip \
     python-is-python3 && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-# install medaka with pip
-RUN pip install --upgrade pip setuptools==57.5.0 && \
-    pip install medaka==${MEDAKA_VER} && \
-    medaka --version
-
-# install artic and make /data to use as a working directory
-# WARNING : On 2023-09-01, medaka's README had this quote : "The bioconda releases lag behind the source code and PyPI releases."
-# Also, the bioconda version of artic also seemed to lag behind the github release
 RUN wget -q https://github.com/artic-network/fieldbioinformatics/archive/refs/tags/v${ARTIC_VER}.tar.gz && \
     tar -xzf v${ARTIC_VER}.tar.gz && \
-    cat fieldbioinformatics-${ARTIC_VER}/environment.yml | grep -v medaka > /environment.yml && \
-    micromamba env create -y -f /environment.yml && \
+    micromamba env create -y -f /fieldbioinformatics-${ARTIC_VER}/environment.yml && \
     rm v${ARTIC_VER}.tar.gz && \
     cd fieldbioinformatics-${ARTIC_VER} && \
     python setup.py install && \
     artic -v && \
     mkdir /data
-    
+
 ENV ENV_NAME="artic"
 ARG MAMBA_DOCKERFILE_ACTIVATE=1
 
-# 'ENV' instructions set environment variables that persist from the build into the resulting image
-# set the environment, add base conda/micromamba bin directory into path
-# set locale settings to UTF-8
-ENV PATH="/opt/conda/envs/artic/bin/:${PATH}" \
+RUN /opt/conda/envs/artic/bin/pip install setuptools wheel cython medaka==${MEDAKA_VER} && \
+    medaka --version && \
+    /opt/conda/envs/artic/bin/pip install pyabpoa==1.2.4
+
+ENV PATH="${PATH}:/opt/conda/envs/artic/bin/" \
     LC_ALL=C.UTF-8
 
-# 'CMD' instructions set a default command when the container is run. This is typically 'tool --help.'
 CMD artic --help
 
-# set final working directory to /data
 WORKDIR /data
 
 ##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
