@@ -3,7 +3,7 @@ ARG ARTIC_VER=1.2.4
 FROM mambaorg/micromamba:1.4.9 as app
 
 ARG ARTIC_VER
-ARG MEDAKA_VER=1.9.1
+ARG MEDAKA_VER=1.11.1
 
 LABEL base.image="ubuntu:jammy"
 LABEL dockerfile.version="1"
