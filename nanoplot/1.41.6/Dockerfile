@@ -12,8 +12,8 @@ LABEL website="https://github.com/wdecoster/NanoPlot"
 LABEL license="https://github.com/wdecoster/NanoPlot/blob/master/LICENSE"
 LABEL maintainer="Curtis Kapsak"
 LABEL maintainer.email="kapsakcj@gmail.com"
-LABEL maintainer="Kate Prussing"
-LABEL maintainer.email="catharine.prussing@health.ny.gov"
+LABEL maintainer2="Kate Prussing"
+LABEL maintainer2.email="catharine.prussing@health.ny.gov"
 
 # install dependencies via apt; cleanup apt garbage; set locale to en_US.UTF-8
 RUN apt-get update && apt-get install -y zlib1g-dev \
