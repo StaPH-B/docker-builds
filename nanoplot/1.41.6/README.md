@@ -4,8 +4,8 @@ Main tool : [NanoPlot](https://github.com/wdecoster/NanoPlot)
 
 Additional tools:
 
-- nanomath 1.2.1
-- nanoget 1.16.1
+- nanomath 1.3.0
+- nanoget 1.19.3
 
 Full documentation: [https://github.com/wdecoster/NanoPlot](https://github.com/wdecoster/NanoPlot)
 
