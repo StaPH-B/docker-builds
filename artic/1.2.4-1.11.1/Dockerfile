@@ -76,6 +76,9 @@ ARG ARTIC_VER
 # Mostly this ensures the tool of choice is in path and is executable
 RUN artic --help && \
     artic --version
+    
+# listing available models
+RUN medaka tools list\_models
 
 # set working directory so that all test inputs & outputs are kept in /test
 WORKDIR /fieldbioinformatics-${ARTIC_VER}
