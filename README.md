@@ -117,7 +117,7 @@ To learn more about the docker pull rate limits and the open source software pro
 | [bcftools](https://hub.docker.com/r/staphb/bcftools/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/bcftools)](https://hub.docker.com/r/staphb/bcftools) | <ul><li>1.10.2</li><li>1.11</li><li>1.12</li><li>1.13</li><li>1.14</li><li>1.15</li><li>1.16</li><li>1.17</li><li>[1.18](bcftools/1.18/)</li></ul> | https://github.com/samtools/bcftools |
 | [bedtools](https://hub.docker.com/r/staphb/bedtools/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/bedtools)](https://hub.docker.com/r/staphb/bedtools) | <ul><li>2.29.2</li><li>2.30.0</li><li>[2.31.0](bedtools/2.31.0/)</li></ul> | https://bedtools.readthedocs.io/en/latest/ <br/>https://github.com/arq5x/bedtools2 |
 | [berrywood-report-env](https://hub.docker.com/r/staphb/berrywood-report-env/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/berrywood-report-env)](https://hub.docker.com/r/staphb/berrywood-report-env) | <ul><li>1.0</li></ul> | none |
-| [blast+](https://hub.docker.com/r/staphb/blast/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/blast)](https://hub.docker.com/r/staphb/blast) | <ul><li>2.13.0</li><li>[2.14.0](blast/2.14.0/)</li></ul> | https://www.ncbi.nlm.nih.gov/books/NBK279690/ |
+| [blast+](https://hub.docker.com/r/staphb/blast/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/blast)](https://hub.docker.com/r/staphb/blast) | <ul><li>2.13.0</li><li>[2.14.0](blast/2.14.0/)</li><li>[2.14.1](blast/2.14.1/)</li></ul> | https://www.ncbi.nlm.nih.gov/books/NBK279690/ |
 | [bowtie2](https://hub.docker.com/r/staphb/bowtie2/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/bowtie2)](https://hub.docker.com/r/staphb/bowtie2) | <ul><li>2.4.4</li><li>2.4.5</li><li>2.5.1</li></ul> | http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml <br/>https://github.com/BenLangmead/bowtie2 |
 | [BUSCO](https://hub.docker.com/r/staphb/busco/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/busco)](https://hub.docker.com/r/staphb/busco) | <ul><li>5.4.7</li></ul> | https://busco.ezlab.org/busco_userguide.html <br/>https://gitlab.com/ezlab/busco |
 | [BWA](https://hub.docker.com/r/staphb/bwa) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/bwa)](https://hub.docker.com/r/staphb/bwa) | <ul><li>0.7.17</li></ul> | https://github.com/lh3/bwa |
@@ -313,3 +313,4 @@ Each Dockerfile lists the author(s)/maintainer(s) as a metadata `LABEL`, but the
   * [@cimendes](https://github.com/cimendes)
   * [@golden75](https://github.com/golden75)
   * [@Kincekara](https://github.com/Kincekara)
+  * [@Haikelnb](https://github.com/Haikelnb)
