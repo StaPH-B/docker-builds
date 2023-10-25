@@ -313,3 +313,4 @@ Each Dockerfile lists the author(s)/maintainer(s) as a metadata `LABEL`, but the
   * [@cimendes](https://github.com/cimendes)
   * [@golden75](https://github.com/golden75)
   * [@Kincekara](https://github.com/Kincekara)
+  * [@kprus](https://github.com/kprus)
