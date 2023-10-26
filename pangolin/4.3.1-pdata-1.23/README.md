@@ -11,13 +11,21 @@ Additional tools:
 - [pangolin-data](https://github.com/cov-lineages/pangolin-data) 1.23
 - [pangolin-assignment](https://github.com/cov-lineages/pangolin-assignment) 1.23
 - [minimap2](https://github.com/lh3/minimap2) 2.26-r1175
-- [usher](https://github.com/yatisht/usher) 0.6.3
+- [usher](https://github.com/yatisht/usher) 0.6.2
 - [faToVcf](https://github.com/yatisht/usher) 448
 - [scorpio](https://github.com/cov-lineages/scorpio) 0.3.19
 - [constellations](https://github.com/cov-lineages/constellations) 0.1.12
 - [gofasta](https://github.com/virus-evolution/gofasta) 1.2.1
 - [mafft](https://mafft.cbrc.jp/alignment/software/) 7.520
 - python 3.8.18
+
+## Rare bug warning :warning:
+
+This docker image contains `usher` version 0.6.2. This version of usher has a bug that can cause some lineage A samples to be assigned to A.* sublineages or even B or B.* sublineages.
+
+If you are running `pangolin` on early 2020 sequences that may be lineage A, it is highly recommended to use the assignment cache (and upgrade to usher 0.6.3 when it is available) [See the pangolin-assignment v1.23 release page for more details](https://github.com/cov-lineages/pangolin-assignment/releases/tag/v1.23
+
+We plan to upgrade `usher` to >=0.6.3 in the next release of this docker image.
 
 ## pangoLEARN deprecation
 
