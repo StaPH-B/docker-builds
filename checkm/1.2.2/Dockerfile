@@ -44,7 +44,6 @@ RUN wget https://data.ace.uq.edu.au/public/CheckM_databases/checkm_data_2015_01_
     mkdir checkm_db && tar -C checkm_db -xvf checkm_data_2015_01_16.tar.gz &&\
     checkm data setRoot checkm_db 
 
-# run an internal test
-RUN checkm test ./checkm_test_results &&\
-    tail -n2 ./checkm_test_results/checkm.log &&\
-    head ./checkm_test_results/results/qa_test.tsv
+# run test with internal test data
+RUN checkm lineage_wf -r ./checkm_db/test_data/ ./checkm_test_results
+
