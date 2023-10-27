@@ -4,6 +4,10 @@
 
 Main Tool: FreeBayes - [Haplotype-based variant detection from short-read sequencing](https://arxiv.org/abs/1207.3907)
 
+Additional tools:
+- vcftools version is 0.1.16
+- samtools version is 1.13
+
 Full documentation: https://github.com/freebayes/freebayes 
 
 FreeBayes is a haplotype-based variant detector and is a great tool for calling variants from a population.
