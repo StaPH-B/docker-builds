@@ -1,11 +1,45 @@
-FROM ubuntu:focal as app
+FROM ubuntu:jammy as builder
 
-# for easy upgrade later. ARG variables only persist during image build time
 ARG FREEBAYES_VER="1.3.7"
-ARG SAMTOOLSVER="1.14"
-ARG VCFTOOLS_VER="0.1.16"
 
-# metadata
+ARG DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    build-essential \
+    pkg-config \
+    meson \
+    cmake \
+    zlib1g-dev \
+    liblzma-dev \
+    libbz2-dev \
+    libncurses5-dev \
+    libc6 \
+    libgcc-s1 \
+    libstdc++6 \
+    libvcflib1 \
+    libvcflib-tools \
+    libseqlib-dev \
+    libvcflib-dev \
+    bc \
+    parallel \
+    ninja-build \
+    wget \
+    samtools \
+    vcftools && \
+    rm -rf /var/lib/apt/lists/* && apt-get autoclean
+
+RUN wget https://github.com/freebayes/freebayes/archive/refs/tags/v${FREEBAYES_VER}.tar.gz && \
+    tar -xvzf v${FREEBAYES_VER}.tar.gz && \
+    mv freebayes-${FREEBAYES_VER} /freebayes && \
+    cd /freebayes && \
+    meson build/ && \
+    cd build && \
+    ninja
+
+RUN /freebayes/build/freebayes --help
+
+FROM ubuntu:jammy as app
+
 LABEL base.image="ubuntu:focal"
 LABEL dockerfile.version="1"
 LABEL software="FreeBayes"
@@ -15,72 +49,40 @@ LABEL website="https://github.com/freebayes/freebayes"
 LABEL license="https://github.com/freebayes/freebayes/blob/master/LICENSE"
 LABEL maintainer="Kitty Chase"
 LABEL maintainer.email="kitty.chase@dhhs.nc.gov"
+LABEL maintainer2="Jill Hagey"
+LABEL maintainer2.email="jvhagey@gmail.com"
 
-# Install dependencies
+COPY --from=builder /freebayes/build/* /usr/local/bin/
+
+# vcftools version is 0.1.16
+# samtools version is 1.13
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        ca-certificates \
-        build-essential \
-        pkg-config \
-        meson \
-        zlib1g-dev \
-        liblzma-dev \
-        libbz2-dev \
-        libncurses5-dev \
-        libc6 \
-        libgcc-s1 \
-        libstdc++6 \
-        libvcflib1 \
-        libvcflib-tools \
-        bc \
-        parallel \
-        ninja-build \
-        wget && \
- rm -rf /var/lib/apt/lists/* && apt-get autoclean
+    bc \
+    ca-certificates \
+    libseqlib-dev \
+    libvcflib-tools \
+    parallel \
+    procps \
+    samtools \
+    vcftools \
+    wget && \
+    rm -rf /var/lib/apt/lists/* && apt-get autoclean
 
-# Build and install samtools
-RUN wget https://github.com/samtools/samtools/releases/download/${SAMTOOLSVER}/samtools-${SAMTOOLSVER}.tar.bz2 && \
-    tar -xjf samtools-${SAMTOOLSVER}.tar.bz2 && \
-    rm samtools-${SAMTOOLSVER}.tar.bz2 && \
-    cd samtools-${SAMTOOLSVER} && \
-    ./configure && \
-    make && \
-    make install
-  
-# Build and install vcftools
-RUN wget https://github.com/vcftools/vcftools/releases/download/v${VCFTOOLS_VER}/vcftools-${VCFTOOLS_VER}.tar.gz && \
-    tar -vxzf vcftools-${VCFTOOLS_VER}.tar.gz && \
-    rm vcftools-${VCFTOOLS_VER}.tar.gz && \
-    cd vcftools-${VCFTOOLS_VER} && \
-    ./configure && \
-    make && \
-    make install
+RUN freebayes --help && vcftools --help && samtools --help
 
-# Build and install freebayes
-RUN wget https://github.com/freebayes/freebayes/archive/refs/tags/v${FREEBAYES_VER}.tar.gz && \
-    tar -xvzf v${FREEBAYES_VER}.tar.gz && \
-    rm v${FREEBAYES_VER}.tar.gz && \
-    cd freebayes-v${FREEBAYES_VER} && \
-    meson build/ --buildtype debug && \
-    cd build && \
-    ninja && \
-    mkdir /data
-
-# set perl locale settings
-# Required by most tools that use perl with singularity so we can use container with both docker and singularity
 ENV LC_ALL=C
 
-# Add files paths of software
-ENV PATH="${PATH}:/freebayes-v${FREEBAYES_VER}/build\
-:/samtools-${SAMTOOLSVER}\
-:/vcftools-${VCFTOOLS_VER}"
-
-# Add references and entrypoint script
 WORKDIR /data
+
+CMD freebayes --help
 
 # new base for testing
 FROM app as test
 
-# Run test
-RUN cd /freebayes/build && \
-    ninja test
+RUN freebayes --help && vcftools --help && samtools --help
+
+RUN wget -q https://github.com/StaPH-B/docker-builds/raw/master/tests/SARS-CoV-2/SRR13957123.sorted.bam && \
+    wget -q https://raw.githubusercontent.com/UPHL-BioNGS/Cecret/master/genomes/MN908947.3.fasta && \
+    freebayes -f MN908947.3.fasta SRR13957123.sorted.bam > var.vcf && \
+    head var.vcf
