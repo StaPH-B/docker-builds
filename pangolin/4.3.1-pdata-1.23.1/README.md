@@ -23,7 +23,7 @@ Additional tools:
 
 This docker image contains `usher` version 0.6.2. This version of usher has a bug that can cause some lineage A samples to be assigned to A.* sublineages or even B or B.* sublineages.
 
-If you are running `pangolin` on early 2020 sequences that may be lineage A, it is highly recommended to use the assignment cache (and upgrade to usher 0.6.3 when it is available) [See the pangolin-assignment v1.23 release page for more details](https://github.com/cov-lineages/pangolin-assignment/releases/tag/v1.23
+If you are running `pangolin` on early 2020 sequences that may be lineage A, it is highly recommended to use the assignment cache (and upgrade to usher 0.6.3 when it is available) [See the pangolin-assignment v1.23 release page for more details](https://github.com/cov-lineages/pangolin-assignment/releases/tag/v1.23)
 
 We plan to upgrade `usher` to >=0.6.3 in the next release of this docker image.
 
