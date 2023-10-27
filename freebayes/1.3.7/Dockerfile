@@ -58,9 +58,9 @@ RUN wget https://github.com/vcftools/vcftools/releases/download/v${VCFTOOLS_VER}
 
 # Build and install freebayes
 RUN wget https://github.com/freebayes/freebayes/archive/refs/tags/v${FREEBAYES_VER}.tar.gz && \
-    tar -xvzf freebayes-${FREEBAYES_VER}-src.tar.gz && \
-    rm freebayes-${FREEBAYES_VER}-src.tar.gz && \
-    cd freebayes && \
+    tar -xvzf v${FREEBAYES_VER}.tar.gz && \
+    rm v${FREEBAYES_VER}.tar.gz && \
+    cd freebayes-v${FREEBAYES_VER} && \
     meson build/ --buildtype debug && \
     cd build && \
     ninja && \
@@ -71,7 +71,7 @@ RUN wget https://github.com/freebayes/freebayes/archive/refs/tags/v${FREEBAYES_V
 ENV LC_ALL=C
 
 # Add files paths of software
-ENV PATH="${PATH}:/freebayes/build\
+ENV PATH="${PATH}:/freebayes-v${FREEBAYES_VER}/build\
 :/samtools-${SAMTOOLSVER}\
 :/vcftools-${VCFTOOLS_VER}"
 
