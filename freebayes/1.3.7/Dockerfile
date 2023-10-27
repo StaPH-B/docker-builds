@@ -57,7 +57,7 @@ RUN wget https://github.com/vcftools/vcftools/releases/download/v${VCFTOOLS_VER}
     make install
 
 # Build and install freebayes
-RUN wget https://github.com/freebayes/freebayes/releases/download/v${FREEBAYES_VER}/freebayes-${FREEBAYES_VER}-src.tar.gz && \
+RUN wget https://github.com/freebayes/freebayes/archive/refs/tags/v${FREEBAYES_VER}.tar.gz && \
     tar -xvzf freebayes-${FREEBAYES_VER}-src.tar.gz && \
     rm freebayes-${FREEBAYES_VER}-src.tar.gz && \
     cd freebayes && \
