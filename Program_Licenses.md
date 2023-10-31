@@ -24,6 +24,7 @@ The licenses of the open-source software that is contained in these Docker image
 | centroid | GitHub No License | https://github.com/https://github.com/stjacqrm/centroid |
 | CDC-SPN | GitHub No License | https://github.com/BenJamesMetcalf/Spn_Scripts_Reference |
 | cfsan-snp-pipeline | non-standard license see --> | https://github.com/CFSAN-Biostatistics/snp-pipeline/blob/master/LICENSE.txt |
+| CheckM | GNU GPLv3 | https://github.com/Ecogenomics/CheckM/blob/master/LICENSE |
 | Circlator | GNU GPLv3 | https://github.com/sanger-pathogens/circlator/blob/master/LICENSE |
 | colorid | MIT | https://github.com/hcdenbakker/colorid/blob/master/LICENSE |
 | datasets-sars-cov-2 | Apache 2.0 | https://github.com/CDCgov/datasets-sars-cov-2/blob/master/LICENSE |
