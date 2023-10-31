@@ -45,5 +45,5 @@ RUN wget https://data.ace.uq.edu.au/public/CheckM_databases/checkm_data_2015_01_
     checkm data setRoot checkm_db 
 
 # run test with internal test data
-RUN checkm lineage_wf -r ./checkm_db/test_data/ ./checkm_test_results
+RUN checkm taxonomy_wf species "Escherichia coli" ./checkm_db/test_data/ ./checkm_test_results
 
