@@ -2,9 +2,19 @@
 
 Main tool : [longshot](https://github.com/pjedge/longshot)
 
-Full documentation: [https://github.com/artic-network/fieldbioinformatics](https://github.com/artic-network/fieldbioinformatics)
+Code repository: https://github.com/pjedge/longshot
 
-> Longshot is a variant calling tool for diploid genomes using long error prone reads such as Pacific Biosciences (PacBio) SMRT and Oxford Nanopore Technologies (ONT). It takes as input an aligned BAM/CRAM file and outputs a phased VCF file with variants and haplotype information. It can also genotype and phase input VCF files. It can output haplotype-separated BAM files that can be used for downstream analysis. Currently, it only calls single nucleotide variants (SNVs), but it can genotype indels if they are given in an input VCF.
+Basic information on how to use this tool:
+- executable: longshot
+- help: <--help>
+- version: <--version>
+- description: Longshot is a variant calling tool for diploid genomes using long error-prone reads such as Pacific Biosciences (PacBio) SMRT and Oxford Nanopore Technologies (ONT).
+
+Additional information: 
+
+Longshot takes as input an aligned BAM/CRAM file and outputs a phased VCF file with variants and haplotype information. It can also genotype and phase input VCF files. It can output haplotype-separated BAM files that can be used for downstream analysis. Currently, it only calls single nucleotide variants (SNVs), but it can genotype indels if they are given in an input VCF.
+
+Full documentation: [https://github.com/artic-network/fieldbioinformatics](https://github.com/artic-network/fieldbioinformatics)
 
 ## Example Usage
 
