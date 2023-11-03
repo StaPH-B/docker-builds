@@ -1,7 +1,7 @@
 # IRMA container
 Main tool: [IRMA](https://wonder.cdc.gov/amd/flu/irma/)
 
-IRMA was designed for the robust assembly, variant calling, and phasing of highly variable RNA viruses. Currently IRMA is deployed with modules for influenza, ebolavirus and coronavirus.
+IRMA was designed for the robust assembly, variant calling, and phasing of highly variable RNA viruses. Currently IRMA is deployed with modules for influenza, ebolavirus and coronavirus. The IRMA team at the CDC maintain a docker image as well at https://hub.docker.com/r/cdcgov/irma. The StaPH-B docker image is not maintained by IRMA developers at the CDC, so if users encounter issues with this docker image specifically they should file an issue on this github repo and do not contact CDC for support.
 
 # Example Usage
 ```{bash}
