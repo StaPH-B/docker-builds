@@ -19,7 +19,9 @@ Full documentation: https://github.com/fbreitwieser/pavian
 ## Example Usage
 You should publish a container's port(s) to the host while running pavian.
 ```bash
+# run as root
 docker run --rm -p 3838:3838 staphb/pavian:1.2.1
+# non-root
+docker run --rm --user shiny -p 3838:3838 staphb/pavian:1.2.1
 ```
 Pavian will then be available at http://127.0.0.1:3838 in your web browser
-  
