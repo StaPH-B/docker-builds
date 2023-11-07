@@ -52,6 +52,8 @@ ENV PATH="/raven-${RAVEN_VERSION}/:$PATH" \
 # set working directory
 WORKDIR /data
 
+CMD raven --help
+
 FROM app as test
 
 WORKDIR /test
