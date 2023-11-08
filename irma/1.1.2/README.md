@@ -24,6 +24,6 @@ IRMA FLU-pacbio ccs_reads.fastq MyPacBioSample
 IRMA FLU-pgm pgm_reads.fastq MyIonTorrentSample
 
 ```
-Better documentation can be found at [https://wonder.cdc.gov/amd/flu/irma/](https://wonder.cdc.gov/amd/flu/irma/)
+Better documentation can be found at https://wonder.cdc.gov/amd/flu/irma/](https://wonder.cdc.gov/amd/flu/irma/
 
 The manuscript can be found at [https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-016-3030-6](https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-016-3030-6)
