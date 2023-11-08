@@ -31,9 +31,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  libxml2 \
  libxml2-dev \
  libncurses5 \
- wget \
- gzip \
- git && \
+ wget && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # IRMA Needs R
@@ -58,7 +56,7 @@ FROM app as test
 RUN cd /flu-amd/tests && \
   ./test_run.sh
 
-RUN wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR179/072/SRR17940172/SRR17940172_1.fastq.gz && gzip -d SRR17940172_1.fastq.gz && \
-    wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR179/072/SRR17940172/SRR17940172_2.fastq.gz && gzip -d SRR17940172_2.fastq.gz
+RUN wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR179/072/SRR17940172/SRR17940172_1.fastq.gz && \
+    wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR179/072/SRR17940172/SRR17940172_2.fastq.gz 
   
-RUN IRMA FLU SRR17940172_1.fastq SRR17940172_2.fastq SRR17940172
+RUN IRMA FLU SRR17940172_1.fastq.gz SRR17940172_2.fastq.gz SRR17940172
