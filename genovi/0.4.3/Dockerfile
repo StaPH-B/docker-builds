@@ -3,6 +3,17 @@ FROM python:3.7-slim as app
 ARG GENOVI_VER="0.4.3"
 ARG CIRCOS_VER="0.69-9"
 
+LABEL base.image="python:3.7-slim"
+LABEL dockerfile.version="1"
+LABEL software="GenoVi"
+LABEL software.version="${GENOVI_VER}"
+LABEL description="Visualizing circos plots"
+LABEL website="https://github.com/robotoD/GenoVi"
+LABEL license="https://github.com/robotoD/GenoVi/blob/main/LICENSE.txt"
+LABEL maintainer="Erin Young"
+LABEL maintainer.email="eriny@utah.gov"
+
+# most of this is for circos. cairo is for genovi.
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     wget \
