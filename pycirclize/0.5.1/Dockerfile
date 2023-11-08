@@ -5,7 +5,7 @@ ARG PYCIRCLIZE_VER="0.5.1"
 # 'LABEL' instructions tag the image with metadata that might be important to the user
 LABEL base.image="python:3.9.17-slim"
 LABEL dockerfile.version="1"
-LABEL software="SoftwareName"
+LABEL software="pyCirclize"
 LABEL software.version="${PYCIRCLIZE_VER}"
 LABEL description="Circular visualization in Python"
 LABEL website="https://github.com/moshi4/pyCirclize"
