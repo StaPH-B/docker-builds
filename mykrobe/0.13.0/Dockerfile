@@ -29,7 +29,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 
 # set the PATH and LC_ALL for singularity compatibility
-ENV PATH="${PATH}:/opt/conda/envs/mykrobe/bin/:/genotyphi:/sonneityping" \
+ENV PATH="${PATH}:/opt/conda/envs/mykrobe/bin/" \
  LC_ALL=C.UTF-8
 
 # create the conda environment, install mykrobe via bioconda package; cleanup conda garbage
