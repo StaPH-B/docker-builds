@@ -4,7 +4,7 @@ Main tool : [Mykrobe](https://github.com/Mykrobe-tools/mykrobe)
 
 Additional tools:
 
-- [genotyphi](https://github.com/katholt/genotyphi) 1.9.1
+- [genotyphi](https://github.com/katholt/genotyphi) 2.0
 - [sonneityping](https://github.com/katholt/sonneityping) v20210201
 - python 3.10.6
 - biopython 1.79
