@@ -95,6 +95,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Pavian | GNU GPLv3 | https://github.com/fbreitwieser/pavian/blob/master/DESCRIPTION |
 | pbptyper | MIT | https://github.com/rpetit3/pbptyper/blob/main/LICENSE |
 | Phyml | GNU GPLv3 | https://github.com/stephaneguindon/phyml/blob/master/COPYING |
+| phyTreeViz | MIT | https://github.com/moshi4/phyTreeViz/blob/main/LICENSE |
 | Piggy | GNU GPLv3 | https://github.com/harry-thorpe/piggy/blob/master/LICENSE |
 | Pilon | GNU GPLv2 | https://github.com/broadinstitute/pilon/blob/master/LICENSE |
 | Piranha | GNU GPLv3 | https://github.com/polio-nanopore/piranha/blob/main/LICENSE |
