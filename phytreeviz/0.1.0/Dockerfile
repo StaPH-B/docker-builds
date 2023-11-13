@@ -20,7 +20,8 @@ LABEL maintainer.email="eriny@utah.gov"
 # Install dependencies via apt-get or yum if using a centos or fedora base
 RUN apt-get update && apt-get install -y --no-install-recommends \
     procps \
-    ca-certificates && \
+    ca-certificates \
+    wget && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # Install and/or setup more things. Make /data for use as a working dir
