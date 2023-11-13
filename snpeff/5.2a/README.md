@@ -1,6 +1,9 @@
 # snpeff container
 Main tool: [snpeff](https://pcingola.github.io/SnpEff/)
 
+Additional tools:
+SNPSift version 5.1
+
 Command line options: [https://pcingola.github.io/SnpEff/se_commandline/](https://pcingola.github.io/SnpEff/se_commandline/)
 # Example Usage
 ### This example was taken from the test written for this image using human reference genome HG-19 and demo.1kg.vcf.
