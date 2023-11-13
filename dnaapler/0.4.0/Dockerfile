@@ -4,7 +4,7 @@ USER root
 
 WORKDIR /
 
-ARG DNAAPLER_VER="0.2.0"
+ARG DNAAPLER_VER="0.4.0"
 
 # metadata labels
 LABEL base.image="mambaorg/micromamba:1.4.1"
