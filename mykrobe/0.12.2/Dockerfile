@@ -17,17 +17,17 @@ LABEL dockerfile.version="1"
 LABEL software="Mykrobe & Genotyphi & Sonneityping"
 LABEL software.version=${MYKROBE_VER}
 LABEL description="Conda environment for Mykrobe, particularly for Genotyphi"
-LABEL website1="https://github.com/Mykrobe-tools/mykrobe"
-LABEL license1="MIT"
-LABEL license1.url="https://github.com/Mykrobe-tools/mykrobe/blob/master/LICENSE"
+LABEL website="https://github.com/Mykrobe-tools/mykrobe"
+LABEL license="MIT"
+LABEL license.url="https://github.com/Mykrobe-tools/mykrobe/blob/master/LICENSE"
 LABEL website2="https://github.com/katholt/genotyphi"
 LABEL license2="GNU General Public License v3.0"
 LABEL license2.url="https://github.com/katholt/genotyphi/blob/main/LICENSE"
 LABEL website3="https://github.com/katholt/sonneityping/"
 LABEL license3="GNU General Public License v3.0"
 LABEL license3.url="https://github.com/katholt/sonneityping/blob/master/LICENSE.txt"
-LABEL maintainer1="Curtis Kapsak"
-LABEL maintainer1.email="kapsakcj@gmail.com"
+LABEL maintainer="Curtis Kapsak"
+LABEL maintainer.email="kapsakcj@gmail.com"
 
 # install dependencies; cleanup apt garbage
 RUN apt-get update && apt-get install -y --no-install-recommends \
