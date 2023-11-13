@@ -1,6 +1,6 @@
 FROM python:3.9.17-slim as app
 
-ARG PYCIRCLIZE_VER="0.5.1"
+ARG PYCIRCLIZE_VER="1.0.0"
 
 # 'LABEL' instructions tag the image with metadata that might be important to the user
 LABEL base.image="python:3.9.17-slim"
