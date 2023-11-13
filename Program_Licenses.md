@@ -7,6 +7,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Software | License | Link to license |
 | :--------: | :-------: | -------- |
 | ABRicate | GNU GPLv2 | https://github.com/tseemann/abricate/blob/master/LICENSE |
+| artic | MIT | https://github.com/artic-network/fieldbioinformatics/blob/master/LICENSE |
 | artic-ncov2019-epi2me | MPL 2.0 | https://github.com/epi2me-labs/wf-artic/blob/master/LICENSE |
 | any2fasta | GNU GPLv3 | https://github.com/tseemann/any2fasta/blob/master/LICENSE |
 | ARIBA | GNU GPLv3 | https://github.com/sanger-pathogens/ariba/blob/master/LICENSE |
@@ -17,12 +18,14 @@ The licenses of the open-source software that is contained in these Docker image
 | bedtools | MIT | https://github.com/arq5x/bedtools2/blob/master/LICENSE |
 | blast+ | Public Domain | https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/scripts/projects/blast/LICENSE |
 | bowtie2 | GNU GPLv3 | https://github.com/BenLangmead/bowtie2/blob/master/LICENSE |
+| Bracken | GNU GPLv3 | https://github.com/jenniferlu717/Bracken/blob/master/LICENSE |
 | BUSCO | MIT | https://gitlab.com/ezlab/busco/-/raw/master/LICENSE |
 | BWA | GNU GPLv3 | https://github.com/lh3/bwa/blob/master/COPYING |
 | Canu <br/> Racon <br/> Minimap2 | GNU GPLv3 (Canu), <br/> MIT (Racon), <br/> MIT (Minimap2) | https://github.com/marbl/canu/blob/master/README.license.GPL https://github.com/isovic/racon/blob/master/LICENSE https://github.com/lh3/minimap2/blob/master/LICENSE.txt |
 | centroid | GitHub No License | https://github.com/https://github.com/stjacqrm/centroid |
 | CDC-SPN | GitHub No License | https://github.com/BenJamesMetcalf/Spn_Scripts_Reference |
 | cfsan-snp-pipeline | non-standard license see --> | https://github.com/CFSAN-Biostatistics/snp-pipeline/blob/master/LICENSE.txt |
+| CheckM | GNU GPLv3 | https://github.com/Ecogenomics/CheckM/blob/master/LICENSE |
 | Circlator | GNU GPLv3 | https://github.com/sanger-pathogens/circlator/blob/master/LICENSE |
 | colorid | MIT | https://github.com/hcdenbakker/colorid/blob/master/LICENSE |
 | datasets-sars-cov-2 | Apache 2.0 | https://github.com/CDCgov/datasets-sars-cov-2/blob/master/LICENSE |
@@ -63,6 +66,7 @@ The licenses of the open-source software that is contained in these Docker image
 | kSNP4 | BSD | available in zipped kSNP archive on sourceforge or in docker image under `/opt/kSNP4 Linux package/Documentation/THE BSD OPENSOURCE LICENSE.pdf` |
 | legsta | GNU GPLv3 | https://github.com/tseemann/legsta/blob/master/LICENSE |
 | liftoff | GNU GPLv3 | https://github.com/agshumate/Liftoff/blob/master/LICENSE.md |
+| longshot | MIT | https://github.com/pjedge/longshot/blob/master/LICENSE |
 | Lyve-SET  | MIT | https://github.com/lskatz/lyve-SET/blob/master/LICENSE |
 | Mafft  | BSD | https://mafft.cbrc.jp/alignment/software/license.txt |
 | Mash | non-standard license (see link) | https://github.com/marbl/Mash/blob/master/LICENSE.txt |
@@ -88,6 +92,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Panaroo | MIT | https://github.com/gtonkinhill/panaroo/blob/master/LICENSE |
 | Pangolin | GNU GPLv3 | https://github.com/cov-lineages/pangolin/blob/master/LICENSE.txt |
 | pasty | Apache 2.0 | https://github.com/rpetit3/pasty/blob/main/LICENSE |
+| Pavian | GNU GPLv3 | https://github.com/fbreitwieser/pavian/blob/master/DESCRIPTION |
 | pbptyper | MIT | https://github.com/rpetit3/pbptyper/blob/main/LICENSE |
 | Phyml | GNU GPLv3 | https://github.com/stephaneguindon/phyml/blob/master/COPYING |
 | Piggy | GNU GPLv3 | https://github.com/harry-thorpe/piggy/blob/master/LICENSE |
