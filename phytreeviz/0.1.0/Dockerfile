@@ -20,8 +20,7 @@ LABEL maintainer.email="eriny@utah.gov"
 # Install dependencies via apt-get or yum if using a centos or fedora base
 RUN apt-get update && apt-get install -y --no-install-recommends \
     procps \
-    ca-certificates \
-    wget && \
+    ca-certificates && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # Install and/or setup more things. Make /data for use as a working dir
@@ -45,6 +44,8 @@ WORKDIR /data
 
 # A second FROM insruction creates a new stage
 FROM app as test
+
+RUN apt-get update && apt-get install -y --no-install-recommends wget unzip
 
 # set working directory so that all test inputs & outputs are kept in /test
 WORKDIR /test
