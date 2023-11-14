@@ -15,8 +15,8 @@ LABEL software.version="${PASTY_VERSION}"
 LABEL description="In silico serogrouping of Pseudomonas aeruginosa isolates from genome assemblies"
 LABEL website="https://github.com/rpetit3/pasty"
 LABEL license="https://github.com/rpetit3/pasty/blob/main/LICENSE"
-LABEL maintainer1="Curtis Kapsak"
-LABEL maintainer1.email="curtis.kapsak@theiagen.com"
+LABEL maintainer="Curtis Kapsak"
+LABEL maintainer.email="curtis.kapsak@theiagen.com"
 
 # install dependencies
 # ncbi-blast+ version in apt for ubuntu:jammy = v2.12.0 
