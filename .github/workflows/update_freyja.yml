@@ -45,38 +45,36 @@ jobs:
           version=$(echo $file | cut -f 2 -d "/" | cut -f 1 -d "_")
           echo "the latest version is $version"
           echo "version=$version" >> $GITHUB_OUTPUT      
-
-      - name: Set up Docker Buildx
-        id: buildx
-        uses: docker/setup-buildx-action@v2
-
-      - name: Cache Docker layers
-        uses: actions/cache@v3
-        with:
-          path: /tmp/.buildx-cache-${{ inputs.cache }}
-          key: ${{ runner.os }}-buildx-freyja-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-buildx-freyja
-
-      - name: Build to test
-        id: docker_build_to_test
-        uses: docker/build-push-action@v3
-        with:
-          file: ${{ steps.get_latest_version.outputs.file }}
-          target: test
-          load: true
-          push: false
-          cache-from: type=local,src=/tmp/.buildx-cache-freyja
-          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-freyja-new
-          tags: freyja:update
-
-      - name: Get database version
-        id: db_version
-        run: |
-          docker run freyja:update freyja demix --version
-          version=$(docker run freyja:update freyja demix --version | grep . | grep -v Barcode | head -n 1)
-          echo "the latest version is $version"
-          echo "version=$version" >> $GITHUB_OUTPUT  
-          
-
-
+#
+#      - name: Set up Docker Buildx
+#        id: buildx
+#        uses: docker/setup-buildx-action@v2
+#
+#      - name: Cache Docker layers
+#        uses: actions/cache@v3
+ #       with:
+ #         path: /tmp/.buildx-cache-${{ inputs.cache }}
+ #         key: ${{ runner.os }}-buildx-freyja-${{ github.sha }}
+ #         restore-keys: |
+ #           ${{ runner.os }}-buildx-freyja
+#
+#      - name: Build to test
+#        id: docker_build_to_test
+#        uses: docker/build-push-action@v3
+#        with:
+#          file: ${{ steps.get_latest_version.outputs.file }}
+#          target: test
+#          load: true
+#          push: false
+#          cache-from: type=local,src=/tmp/.buildx-cache-freyja
+#          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-freyja-new
+#          tags: freyja:update
+#
+#      - name: Get database version
+#        id: db_version
+#        run: |
+#          docker run freyja:update freyja demix --version
+#          version=$(docker run freyja:update freyja demix --version | grep . | grep -v Barcode | head -n 1)
+#          echo "the latest version is $version"
+#          echo "version=$version" >> $GITHUB_OUTPUT  
+#          
