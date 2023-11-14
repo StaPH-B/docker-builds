@@ -5,7 +5,7 @@ Main tool : [pasty](https://github.com/rpetit3/pasty)
 Additional tools:
 
 - ncbi-blast+ 2.12.0
-- python 3.10.6
+- python 3.10.12
 
 Full documentation: [https://github.com/rpetit3/pasty](https://github.com/rpetit3/pasty)
 
