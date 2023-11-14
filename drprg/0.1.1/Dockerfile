@@ -1,6 +1,6 @@
 ARG DRPRG_VER="0.1.1"
 
-FROM ubuntu:jammy AS builder
+FROM staphb/bcftools:1.18 AS builder
 # "inspired" by https://github.com/mbhall88/drprg/blob/main/Dockerfile
 
 ARG DRPRG_VER
@@ -48,11 +48,11 @@ RUN drprg --help && \
     seqfu version && \
     rasusa --version
 
-FROM staphb/bcftools:1.18 AS builder2
-
 FROM ubuntu:jammy AS app
 
+ARG DRPRG_VER
 ARG MAFFT_VER="7.505"
+ARG MTB_VER="20230308"
 
 LABEL base.image="ubuntu:jammy"
 LABEL dockerfile.version="1"
@@ -64,8 +64,8 @@ LABEL license="https://github.com/mbhall88/drprg/blob/main/LICENSE"
 LABEL maintainer="Erin Young"
 LABEL maintainer.email="eriny@utah.gov"
 
-COPY --from=builder  /usr/bin/*       /usr/local/bin/
-COPY --from=builder2 /usr/local/bin/* /usr/local/bin/
+COPY --from=builder /usr/bin/*       /usr/local/bin/
+COPY --from=builder /usr/local/bin/* /usr/local/bin/
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
     wget \
@@ -82,20 +82,15 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 
 # install mafft
 RUN wget -q https://mafft.cbrc.jp/alignment/software/mafft_${MAFFT_VER}-1_amd64.deb && \
-    dpkg -i mafft_${MAFFT_VER}-1_amd64.deb
-
-# test dependencies before moving on
-RUN drprg --help && \
-    pandora --help && \
-    make_prg --help && \
-    mafft --version && \
-    bcftools --version && \
-    seqfu version && \
-    rasusa --version
+    dpkg -i mafft_${MAFFT_VER}-1_amd64.deb && \
+    rm mafft_${MAFFT_VER}-1_amd64.deb && \
+    mafft --version
 
 ENV PATH="$PATH" \
     LC_ALL=C
 
+RUN drprg index --download mtb@${MTB_VER}
+    
 CMD drprg --help
 
 WORKDIR /data
@@ -105,19 +100,12 @@ FROM app AS test
 WORKDIR /test
 
 # test dependencies
-RUN drprg --help && \
-    pandora --help && \
-    make_prg --help && \
-    mafft --version && \
-    bcftools --version && \
-    seqfu version && \
-    rasusa --version
+RUN drprg --help && pandora --help && make_prg --help && mafft --version && bcftools --version && rasusa --version
 
-# testing index and prediction
-RUN drprg index --download mtb@latest && \
-    drprg index --list && \
-    wget -q ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR230/005/SRR23086705/SRR23086705_1.fastq.gz && \
-    wget -q ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR230/005/SRR23086705/SRR23086705_2.fastq.gz && \
-    cat SRR23086705_1.fastq.gz SRR23086705_2.fastq.gz > test.fastq.gz && \
-    drprg predict -x mtb -i test.fastq.gz --illumina -o outdir/ && \
+# testing prediction
+RUN wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR230/005/SRR23086705/SRR23086705_1.fastq.gz && \
+    drprg predict -x mtb -i SRR23086705_1.fastq.gz --illumina -o outdir/ && \
     ls outdir/*
+
+# list available databases for download
+RUN drprg index --list

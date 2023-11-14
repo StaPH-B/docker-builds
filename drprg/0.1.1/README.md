@@ -5,58 +5,41 @@ Please edit this readme with some basic information about the tool and how to us
 - Do not just copy and paste the readme or help for the tool. 
 -->
 
-# <program> container
+# Dr. PRG - Drug resistance Prediction with Reference Graphs️ container
 
-Main tool: [<program>](link to program)
+Main tool: [Dr. PRG](https://mbh.sh/drprg/)
   
-Code repository:
+Code repository: https://github.com/mbhall88/drprg
 
 Additional tools:
-- list: version
+- mafft version 7.505
+- rasusa version 0.7.0
+- seqfu version 1.16.0
+- makeprg version 0.3.0
+- pandora version 0.9.2
 
 Basic information on how to use this tool:
-- executable: <tool>
-- help: <-h>
-- version: <-v>
-- description: <tool does something>
+- executable: drprg
+- help: --help
+- version: --version  
+- description: Drug Resistance Prediction with Reference Graphs
 
 Additional information:
 
-<Container contains X database at Y>
-  
-Full documentation: link to documentation or wiki
+Imagine contains the mtb@20230308 database. 
+
+Full documentation: https://mbh.sh/drprg/guide/download.html
 
 ## Example Usage
 
 ```bash
-<how creator of the dockerfile uses it>
+# download latest TB database
+drprg index --download mtb
+
+# list available indices
+drprg index --list
+
+# prediction (paired-end fastq files much be contatenated together into one)
+drprg predict -x mtb -i input.fastq.gz --illumina -o outdir/
 ```
 
-  
-<!-- Example README
-# pasty container
-
-Main tool: [pasty](https://github.com/rpetit3/pasty)
-
-Code repository: https://github.com/rpetit3/pasty
-
-Additional tools:
-- ncbi-blast+: 2.12.0
-- python: 3.10.6
-
-Basic information on how to use this tool:
-- executable: pasty
-- help: --help
-- version: --version
-- description: "A tool easily taken advantage of for in silico serogrouping of Pseudomonas aeruginosa isolates from genome assemblies"
-
-Additional information:  
-  
-Full documentation: [https://github.com/rpetit3/pasty](https://github.com/rpetit3/pasty)
-
-## Example Usage
-
-```bash
-pasty --assembly /pasty-1.0.2/test/O1-GCF_000504045.fna.gz --prefix O1-GCF_000504045
-``` 
--->
