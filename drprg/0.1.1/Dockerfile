@@ -54,7 +54,7 @@ CMD drprg --help
 
 WORKDIR /data
 
-FROM app AS test
+FROM app as test
 
 WORKDIR /test
 
