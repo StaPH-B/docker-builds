@@ -1,5 +1,7 @@
 ARG DRPRG_VER="0.1.1"
 
+FROM staphb/htslib:1.18 AS htslib
+
 FROM staphb/bcftools:1.18 AS builder
 # "inspired" by https://github.com/mbhall88/drprg/blob/main/Dockerfile
 
@@ -66,11 +68,19 @@ LABEL maintainer.email="eriny@utah.gov"
 
 COPY --from=builder /usr/bin/*       /usr/local/bin/
 COPY --from=builder /usr/local/bin/* /usr/local/bin/
+COPY --from=htslib  /usr/local/bin/* /usr/local/bin/
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
     wget \
     ca-certificates \
     unzip \
+    perl \
+    zlib1g \
+    libncurses5 \
+    bzip2 \
+    liblzma-dev \
+    libcurl4-gnutls-dev \
+    procps \
     perl \
     zlib1g \
     libncurses5 \
@@ -101,6 +111,26 @@ WORKDIR /test
 
 # test dependencies
 RUN drprg --help && pandora --help && make_prg --help && mafft --version && bcftools --version && rasusa --version
+
+# test rasusa
+RUN wget https://github.com/StaPH-B/docker-builds/raw/master/tests/SARS-CoV-2/SRR13957123_1.fastq.gz && \
+ wget https://github.com/StaPH-B/docker-builds/raw/master/tests/SARS-CoV-2/SRR13957123_2.fastq.gz && \
+ rasusa -i SRR13957123_1.fastq.gz SRR13957123_2.fastq.gz -n 40434 -s 1 -O g -o SRR13957123_downsampled_1.fastq.gz SRR13957123_downsampled_2.fastq.gz && \
+ ls -lh
+
+# test pandora
+# test make_prg
+# test seqfu
+# test mafft
+
+# test bcftools
+RUN echo "downloading test SC2 BAM and FASTA and running bcftools mpileup and bcftools call test commands..." && \
+  wget -q https://raw.githubusercontent.com/artic-network/artic-ncov2019/master/primer_schemes/nCoV-2019/V4/SARS-CoV-2.reference.fasta && \
+  wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123.primertrim.sorted.bam && \
+  bcftools mpileup -A -d 200 -B -Q 0 -f SARS-CoV-2.reference.fasta SRR13957123.primertrim.sorted.bam | \
+  bcftools call -mv -Ov -o SRR13957123.vcf
+
+RUN echo $PATH && ls /usr/local/bin && echo whatever
 
 # testing prediction
 RUN wget -q ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR230/005/SRR23086705/SRR23086705_1.fastq.gz && \
