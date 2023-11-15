@@ -4,11 +4,16 @@ Main tool: [snpeff](https://pcingola.github.io/SnpEff/)
 Additional tools:
 SNPSift version 5.1
 
+> Genomic variant annotations, and functional effect prediction toolbox.
+
+This Dockerfile has made an attempt to allow uses to use the scripts included with SnpEff. Not all the scripts are tested before deployment, so please [submit an issue](https://github.com/StaPH-B/docker-builds/issues) for any use-cases that aren't working with the corresponding error message.
+
 Command line options: [https://pcingola.github.io/SnpEff/se_commandline/](https://pcingola.github.io/SnpEff/se_commandline/)
 # Example Usage
 ### This example was taken from the test written for this image using human reference genome HG-19 and demo.1kg.vcf.
 
 ```{bash}
+
 # To view the list of available SnpEff databases that may be used for annotation.
 snpeff databases
 
@@ -33,6 +38,7 @@ cat annotated.vcf | snpsift filter "(QUAL>=30)" > filtered.vcf
 
 # Inspect the first five lines of the filtered.vcf file. 
 grep -v "^#"  filtered.vcf | head -5 | tr "\t" "\ " | sed -e "s/.\{75\}/&\n/g"
+
 ```
 
 Additional usage examples are available at [https://pcingola.github.io/SnpEff/examples/](https://pcingola.github.io/SnpEff/examples/)

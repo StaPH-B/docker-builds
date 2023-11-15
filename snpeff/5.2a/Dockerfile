@@ -42,7 +42,8 @@ RUN wget https://github.com/pcingola/SnpEff/archive/refs/tags/v${SNPEFF_VER}.tar
   # skipping scripts_build/make.sh and instead putting relevant commands here
   mvn clean compile assembly:single jar:jar && \
   cp /SnpEff-${SNPEFF_VER}/target/SnpEff-${SNPEFF_JAR_VER}-jar-with-dependencies.jar /snpEff.jar && \
-  mvn install:install-file -Dfile=/SnpEff-${SNPEFF_VER}/target/SnpEff-${SNPEFF_JAR_VER}.jar -DgroupId=org.snpeff -DartifactId=SnpEff -Dversion=${SNPEFF_JAR_VER} -Dpackaging=jar -DgeneratePom=true --quiet && \
+  # The version for the dependencies matches that of SNPSIFT
+  mvn install:install-file -Dfile=/SnpEff-${SNPEFF_VER}/target/SnpEff-${SNPEFF_JAR_VER}.jar -DgroupId=org.snpeff -DartifactId=SnpEff -Dversion=${SNPSIFT_VER} -Dpackaging=jar -DgeneratePom=true --quiet && \
   mkdir /data
 
 # Install dependencies and SnpSift executables from the source code using Maven.
@@ -66,6 +67,11 @@ RUN mv SnpEff-${SNPEFF_VER} snpEff && \
   chmod +x /snpEff/snpeff && \
   echo "exec java -jar /snpEff/SnpSift.jar """"$""@"""" " >> /snpEff/snpsift && \
   chmod +x /snpEff/snpsift
+
+# Modify scripts to jar location
+RUN for file in $(grep -iw "snpEff.jar" /snpEff/scripts/*sh | cut -f 1 -d ":" ) ; do cat $file | sed 's/snpEff.jar/\/snpEff\/snpEff.jar/g' > $file.tmp ; mv $file.tmp $file  ; done && \
+  for file in $(grep -iw "SnpSift.jar" /snpEff/scripts/*sh | cut -f 1 -d ":" ) ; do cat $file | sed 's/snpEff.jar/\/snpEff\/SnpSift.jar/g' > $file.tmp ; mv $file.tmp $file  ; done && \
+  chmod +x /snpEff/scripts/*sh
 
 ENV PATH="${PATH}:/snpEff:/snpEff/scripts" 
 
