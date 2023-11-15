@@ -89,7 +89,7 @@ RUN wget -q https://mafft.cbrc.jp/alignment/software/mafft_${MAFFT_VER}-1_amd64.
 ENV PATH="$PATH" \
     LC_ALL=C
 
-RUN drprg index --download mtb@${MTB_VER}
+RUN mkdir /drprg && drprg index --download mtb@${MTB_VER} --outdir /drprg && ls /drprg/ && mv /drprg/mtb/mtb-${MTB_VER} /drprg/mtb/mtb
     
 CMD drprg --help
 
@@ -103,8 +103,8 @@ WORKDIR /test
 RUN drprg --help && pandora --help && make_prg --help && mafft --version && bcftools --version && rasusa --version
 
 # testing prediction
-RUN wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR230/005/SRR23086705/SRR23086705_1.fastq.gz && \
-    drprg predict -x mtb -i SRR23086705_1.fastq.gz --illumina -o outdir/ && \
+RUN wget -q ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR230/005/SRR23086705/SRR23086705_1.fastq.gz && \
+    drprg predict -x /drprg/mtb/mtb -i SRR23086705_1.fastq.gz --illumina -o outdir/ && \
     ls outdir/*
 
 # list available databases for download
