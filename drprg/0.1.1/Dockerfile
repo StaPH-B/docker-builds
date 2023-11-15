@@ -1,62 +1,20 @@
+# 'FROM' defines the base docker image. This command has to come first in the file
+# The 'as' keyword lets you name the folowing stage. The production image uses everything to the 'app' stage.
+FROM mambaorg/micromamba:1.5.1 as app
+
+# List all software versions are ARGs near the top of the dockerfile
+# 'ARG' sets environment variables during the build stage
 ARG DRPRG_VER="0.1.1"
-
-FROM staphb/htslib:1.18 AS htslib
-
-FROM staphb/bcftools:1.18 AS builder
-# "inspired" by https://github.com/mbhall88/drprg/blob/main/Dockerfile
-
-ARG DRPRG_VER
-ARG RASUSA_VER="0.7.0"
-ARG SEQFU_VER="1.16.0"
-ARG PANDORA_VER="0.9.2"
-ARG MAKEPRG_VER="0.3.0"
-
-RUN apt-get update && apt-get install --no-install-recommends -y \
-    wget \
-    ca-certificates \
-    unzip && \
-    rm -rf /var/lib/apt/lists/* && apt-get autoclean
-
-# download drprg source code from github
-RUN wget -q https://github.com/mbhall88/drprg/releases/download/${DRPRG_VER}/drprg-${DRPRG_VER}-x86_64-unknown-linux-gnu.tar.gz && \
-    tar -xvf drprg-${DRPRG_VER}-x86_64-unknown-linux-gnu.tar.gz && \
-    cp drprg-${DRPRG_VER}-x86_64-unknown-linux-gnu/drprg /usr/bin/drprg && \
-    chmod +x /usr/bin/drprg    
-
-# download makeprg
-RUN wget -q https://github.com/leoisl/make_prg/releases/download/v${MAKEPRG_VER}/make_prg_${MAKEPRG_VER} && \
-    cp make_prg_${MAKEPRG_VER} /usr/bin/make_prg && \
-    chmod +x /usr/bin/make_prg
-
-# downloading pandora
-RUN wget -q https://github.com/rmcolq/pandora/releases/download/${PANDORA_VER}/pandora-linux-precompiled-v${PANDORA_VER} && \
-    cp pandora-linux-precompiled-v${PANDORA_VER} /usr/bin/pandora && \
-    chmod +x /usr/bin/pandora
-
-# install rasusa
-RUN wget -q https://github.com/mbhall88/rasusa/releases/download/${RASUSA_VER}/rasusa-${RASUSA_VER}-x86_64-unknown-linux-musl.tar.gz && \
-    tar -xvf rasusa-${RASUSA_VER}-x86_64-unknown-linux-musl.tar.gz && \
-    cp rasusa-${RASUSA_VER}-x86_64-unknown-linux-musl/rasusa /usr/bin/rasusa && \
-    chmod +x /usr/bin/rasusa
-
-# install seqfu
-RUN wget -q https://github.com/telatin/seqfu2/releases/download/v${SEQFU_VER}/SeqFu-v${SEQFU_VER}-Linux-x86_64.zip && \
-    unzip -d /usr/bin SeqFu-v${SEQFU_VER}-Linux-x86_64.zip
-
-# test dependencies before moving on
-RUN drprg --help && \
-    pandora --help && \
-    make_prg --help && \
-    seqfu version && \
-    rasusa --version
-
-FROM ubuntu:jammy AS app
-
-ARG DRPRG_VER
-ARG MAFFT_VER="7.505"
 ARG MTB_VER="20230308"
 
-LABEL base.image="ubuntu:jammy"
+# build and run as root users since micromamba image has 'mambauser' set as the $USER
+USER root
+# set workdir to default for building; set to /data at the end
+WORKDIR /
+
+# 'LABEL' instructions tag the image with metadata that might be important to the user
+
+LABEL base.image="mambaorg/micromamba:1.4.9"
 LABEL dockerfile.version="1"
 LABEL software="Dr. PRG"
 LABEL software.version="${DRPRG_VER}"
@@ -66,40 +24,31 @@ LABEL license="https://github.com/mbhall88/drprg/blob/main/LICENSE"
 LABEL maintainer="Erin Young"
 LABEL maintainer.email="eriny@utah.gov"
 
-COPY --from=builder /usr/bin/*       /usr/local/bin/
-COPY --from=builder /usr/local/bin/* /usr/local/bin/
-COPY --from=htslib  /usr/local/bin/* /usr/local/bin/
-
+# 'RUN' executes code during the build
+# Install dependencies via apt-get or yum if using a centos or fedora base
 RUN apt-get update && apt-get install --no-install-recommends -y \
     wget \
     ca-certificates \
-    unzip \
-    perl \
-    zlib1g \
-    libncurses5 \
-    bzip2 \
-    liblzma-dev \
-    libcurl4-gnutls-dev \
-    procps \
-    perl \
-    zlib1g \
-    libncurses5 \
-    bzip2 \
-    liblzma-dev \
-    libcurl4-gnutls-dev \
     procps && \
     rm -rf /var/lib/apt/lists/* && apt-get autoclean
 
-# install mafft
-RUN wget -q https://mafft.cbrc.jp/alignment/software/mafft_${MAFFT_VER}-1_amd64.deb && \
-    dpkg -i mafft_${MAFFT_VER}-1_amd64.deb && \
-    rm mafft_${MAFFT_VER}-1_amd64.deb && \
-    mafft --version
+# Install your desired software into the base conda/micromamba environment, pinning the version
+# clean up conda garbage
+# make /data to use as a working directory
+RUN micromamba install --name base -c conda-forge -c bioconda -c defaults drprg=${DRPRG_VER} && \
+    micromamba clean -a -y && \
+    mkdir /data
 
-ENV PATH="$PATH" \
-    LC_ALL=C
+# 'ENV' instructions set environment variables that persist from the build into the resulting image
+# set the environment, add base conda/micromamba bin directory into path
+# set locale settings to UTF-8
+ENV PATH="/opt/conda/bin/:${PATH}" \
+    LC_ALL=C.UTF-8
 
-RUN mkdir /drprg && drprg index --download mtb@${MTB_VER} --outdir /drprg && ls /drprg/ && mv /drprg/mtb/mtb-${MTB_VER} /drprg/mtb/mtb
+# download MTB index and change the name
+RUN mkdir /drprg && \
+    drprg index --download mtb@${MTB_VER} --outdir /drprg && \
+    mv /drprg/mtb/mtb-${MTB_VER} /drprg/mtb/mtb
     
 CMD drprg --help
 
@@ -109,28 +58,7 @@ FROM app AS test
 
 WORKDIR /test
 
-# test dependencies
-RUN drprg --help && pandora --help && make_prg --help && mafft --version && bcftools --version && rasusa --version
-
-# test rasusa
-RUN wget https://github.com/StaPH-B/docker-builds/raw/master/tests/SARS-CoV-2/SRR13957123_1.fastq.gz && \
- wget https://github.com/StaPH-B/docker-builds/raw/master/tests/SARS-CoV-2/SRR13957123_2.fastq.gz && \
- rasusa -i SRR13957123_1.fastq.gz SRR13957123_2.fastq.gz -n 40434 -s 1 -O g -o SRR13957123_downsampled_1.fastq.gz SRR13957123_downsampled_2.fastq.gz && \
- ls -lh
-
-# test pandora
-# test make_prg
-# test seqfu
-# test mafft
-
-# test bcftools
-RUN echo "downloading test SC2 BAM and FASTA and running bcftools mpileup and bcftools call test commands..." && \
-  wget -q https://raw.githubusercontent.com/artic-network/artic-ncov2019/master/primer_schemes/nCoV-2019/V4/SARS-CoV-2.reference.fasta && \
-  wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123.primertrim.sorted.bam && \
-  bcftools mpileup -A -d 200 -B -Q 0 -f SARS-CoV-2.reference.fasta SRR13957123.primertrim.sorted.bam | \
-  bcftools call -mv -Ov -o SRR13957123.vcf
-
-RUN echo $PATH && ls /usr/local/bin && echo whatever
+RUN drprg --help
 
 # testing prediction
 RUN wget -q ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR230/005/SRR23086705/SRR23086705_1.fastq.gz && \

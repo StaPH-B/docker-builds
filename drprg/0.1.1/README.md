@@ -11,13 +11,6 @@ Main tool: [Dr. PRG](https://mbh.sh/drprg/)
   
 Code repository: https://github.com/mbhall88/drprg
 
-Additional tools:
-- mafft version 7.505
-- rasusa version 0.7.0
-- seqfu version 1.16.0
-- makeprg version 0.3.0
-- pandora version 0.9.2
-
 Basic information on how to use this tool:
 - executable: drprg
 - help: --help
@@ -26,13 +19,24 @@ Basic information on how to use this tool:
 
 Additional information:
 
-Imagine contains the mtb@20230308 database. 
+Imagine contains the mtb@20230308 database located at `/drprg/mtb/mtb`.
 
 Full documentation: https://mbh.sh/drprg/guide/download.html
 
 ## Example Usage
 
+Using the index in from the image
+
 ```bash
+
+# prediction (paired-end fastq files much be contatenated together into one)
+drprg predict -x /drprg/mtb/mtb -i input.fastq.gz --illumina -o outdir/
+```
+
+Getting the latest index and using it
+
+```bash
+
 # download latest TB database
 drprg index --download mtb
 
@@ -42,4 +46,3 @@ drprg index --list
 # prediction (paired-end fastq files much be contatenated together into one)
 drprg predict -x mtb -i input.fastq.gz --illumina -o outdir/
 ```
-
