@@ -45,13 +45,13 @@ WORKDIR /test
 # the minimap2 command used below is that installed in the 'app' layer, proven by the output of "command -v minimap2"
 # lastly, I'm using the test commands listed here: https://github.com/lh3/minimap2#getting-started
 RUN apt-get update && apt-get install -y --no-install-recommends git && \
-git clone https://github.com/lh3/minimap2 && \
-cd minimap2 && \
-echo && \
-echo "double checking that the 'minimap2' command used below is the executable installed in the app stage of the docker image. Here is the path:" && \
-command -v minimap2 && \
-echo && \
-minimap2 -a test/MT-human.fa test/MT-orang.fa > test.sam && \
-minimap2 -x map-ont -d MT-human-ont.mmi test/MT-human.fa && \
-minimap2 -a MT-human-ont.mmi test/MT-orang.fa > test.sam && \
-minimap2 --version
+ git clone https://github.com/lh3/minimap2 && \
+ cd minimap2 && \
+ echo && \
+ echo "double checking that the 'minimap2' command used below is the executable installed in the app stage of the docker image. Here is the path:" && \
+ command -v minimap2 && \
+ echo && \
+ minimap2 -a test/MT-human.fa test/MT-orang.fa > test.sam && \
+ minimap2 -x map-ont -d MT-human-ont.mmi test/MT-human.fa && \
+ minimap2 -a MT-human-ont.mmi test/MT-orang.fa > test.sam && \
+ minimap2 --version
