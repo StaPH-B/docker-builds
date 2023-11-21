@@ -9,7 +9,7 @@ WORKDIR /
 ARG MYKROBE_VER="0.13.0"
 
 # metadata labels
-LABEL base.image="python:3.9.17-slim"
+LABEL base.image="mambaorg/micromamba:1.4.1"
 LABEL dockerfile.version="1"
 LABEL software="Mykrobe"
 LABEL software.version="${MYKROBE_VER}"
