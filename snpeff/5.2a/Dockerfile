@@ -71,9 +71,9 @@ FROM ubuntu:focal as app
 LABEL base.image="ubuntu:focal"
 LABEL dockerfile.version="1"
 LABEL software="SnpEff & SnpSift"
-LABEL software.version=$SNPEFF_VER
-LABEL snpeff.jarfile.version=$SNPEFF_JAR_VER
-LABEL snpsift.software.version=$SNPSIFT_VER
+LABEL software.version=${SNPEFF_VER}
+LABEL snpeff.jarfile.version=${SNPEFF_JAR_VER}
+LABEL snpsift.software.version=${SNPSIFT_VER}
 LABEL description="Genetic variant annotation and effect prediction toolbox."
 LABEL description.SnpSift="Used after SnpEff annotation to filter and manipulate annotated files."
 LABEL website="https://pcingola.github.io/SnpEff"
