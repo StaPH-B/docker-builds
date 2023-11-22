@@ -1,22 +1,13 @@
-FROM ubuntu:focal as app
-
 ARG SNPEFF_VER="5.2a"
 ARG SNPEFF_JAR_VER="5.2"
 ARG SNPSIFT_VER="5.1"
 
-# Metadata
-LABEL base.image="ubuntu:focal"
-LABEL dockerfile.version="1"
-LABEL software="SnpEff & SnpSift"
-LABEL software.version=$SNPEFF_VER
-LABEL snpeff.jarfile.version=$SNPEFF_JAR_VER
-LABEL snpsift.software.version=$SNPSIFT_VER
-LABEL description="Genetic variant annotation and effect prediction toolbox."
-LABEL description.SnpSift="Used after SnpEff annotation to filter and manipulate annotated files."
-LABEL website="https://pcingola.github.io/SnpEff"
-LABEL license="https://github.com/pcingola/SnpEff/blob/master/LICENSE.md"
-LABEL maintainer="Tom Iverson"
-LABEL maintainer.email="tiverson@utah.gov"
+## Builder ##
+FROM ubuntu:focal as builder
+
+ARG SNPEFF_VER
+ARG SNPEFF_JAR_VER
+ARG SNPSIFT_VER
 
 # Install open using apt 
 RUN apt-get update && apt-get install -y software-properties-common && \
@@ -73,9 +64,41 @@ RUN for file in $(grep -iw "snpEff.jar" /snpEff/scripts/*sh | cut -f 1 -d ":" ) 
   for file in $(grep -iw "SnpSift.jar" /snpEff/scripts/*sh | cut -f 1 -d ":" ) ; do cat $file | sed 's/snpEff.jar/\/snpEff\/SnpSift.jar/g' > $file.tmp ; mv $file.tmp $file  ; done && \
   chmod +x /snpEff/scripts/*sh
 
+## App ##
+FROM ubuntu:focal as app
+
+# Metadata
+LABEL base.image="ubuntu:focal"
+LABEL dockerfile.version="1"
+LABEL software="SnpEff & SnpSift"
+LABEL software.version=$SNPEFF_VER
+LABEL snpeff.jarfile.version=$SNPEFF_JAR_VER
+LABEL snpsift.software.version=$SNPSIFT_VER
+LABEL description="Genetic variant annotation and effect prediction toolbox."
+LABEL description.SnpSift="Used after SnpEff annotation to filter and manipulate annotated files."
+LABEL website="https://pcingola.github.io/SnpEff"
+LABEL license="https://github.com/pcingola/SnpEff/blob/master/LICENSE.md"
+LABEL maintainer="Tom Iverson"
+LABEL maintainer.email="tiverson@utah.gov"
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+# perl, python2, and r are required for the scripts
+RUN apt-get update && apt-get install --no-install-recommends -y \
+  openjdk-11-jre-headless \
+  perl \
+  r-base \
+  python-is-python2 \
+  curl \
+  && apt-get autoclean && rm -rf /var/lib/apt/lists/*
+
+COPY --from=builder /snpEff/snpeff /snpEff/snpsift /snpEff/snpEff.jar /snpEff/SnpSift.jar /snpEff/snpEff.config /snpEff/
+COPY --from=builder /snpEff/scripts/ /snpEff/scripts/ 
+
 ENV PATH="${PATH}:/snpEff:/snpEff/scripts" 
 
-# Set working directory
+CMD snpEff -h
+
 WORKDIR /data
 
 # Run test of annotation
