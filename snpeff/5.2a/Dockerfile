@@ -66,6 +66,9 @@ RUN for file in $(grep -iw "snpEff.jar" /snpEff/scripts/*sh | cut -f 1 -d ":" ) 
 
 ## App ##
 FROM ubuntu:focal as app
+ARG SNPEFF_VER
+ARG SNPEFF_JAR_VER
+ARG SNPSIFT_VER
 
 # Metadata
 LABEL base.image="ubuntu:focal"
