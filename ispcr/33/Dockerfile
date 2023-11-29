@@ -46,9 +46,12 @@ WORKDIR /data
 ## Test ##
 FROM app AS test
 
-RUN wget https://hgdownload.soe.ucsc.edu/goldenPath/wuhCor1/bigZips/wuhCor1.fa.gz &&\
+# prepare inputs
+RUN apt-get update && apt-get install -y wget &&\
+    wget https://hgdownload.soe.ucsc.edu/goldenPath/wuhCor1/bigZips/wuhCor1.fa.gz &&\
     gunzip wuhCor1.fa.gz &&\
     echo "orf1a CTAGGACCTCTTTCTGCTCA ACACTCTCCTAGCACCATCA" > primers
-
+    
+# run a test
 RUN isPcr wuhCor1.fa primers stdout
 
