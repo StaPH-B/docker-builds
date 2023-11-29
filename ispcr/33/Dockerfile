@@ -1,7 +1,7 @@
 ARG ISPCR_VER="33"
 
 ## Builder ##
-FROM ubuntu:jammy AS builder
+FROM ubuntu:jammy as builder
 
 ARG ISPCR_VER
 ARG MACHTYPE="x86_64-pc-linux-gnu"
@@ -21,7 +21,7 @@ RUN wget https://hgwdev.gi.ucsc.edu/~kent/src/isPcr${ISPCR_VER}.zip &&\
     mv bin/$MACHTYPE/* /usr/local/bin/
 
 ## App ##
-FROM ubuntu:jammy AS app 
+FROM ubuntu:jammy as app 
 
 ARG ISPCR_VER
 
@@ -44,14 +44,14 @@ CMD [ "isPcr" ]
 WORKDIR /data
 
 ## Test ##
-FROM app AS test
+FROM app as test
 
 # prepare inputs
 RUN apt-get update && apt-get install -y wget &&\
     wget https://hgdownload.soe.ucsc.edu/goldenPath/wuhCor1/bigZips/wuhCor1.fa.gz &&\
     gunzip wuhCor1.fa.gz &&\
     echo "orf1a CTAGGACCTCTTTCTGCTCA ACACTCTCCTAGCACCATCA" > primers
-    
+
 # run a test
 RUN isPcr wuhCor1.fa primers stdout
 
