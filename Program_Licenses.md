@@ -7,6 +7,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Software | License | Link to license |
 | :--------: | :-------: | -------- |
 | ABRicate | GNU GPLv2 | https://github.com/tseemann/abricate/blob/master/LICENSE |
+| artic | MIT | https://github.com/artic-network/fieldbioinformatics/blob/master/LICENSE |
 | artic-ncov2019-epi2me | MPL 2.0 | https://github.com/epi2me-labs/wf-artic/blob/master/LICENSE |
 | any2fasta | GNU GPLv3 | https://github.com/tseemann/any2fasta/blob/master/LICENSE |
 | ARIBA | GNU GPLv3 | https://github.com/sanger-pathogens/ariba/blob/master/LICENSE |
@@ -17,17 +18,20 @@ The licenses of the open-source software that is contained in these Docker image
 | bedtools | MIT | https://github.com/arq5x/bedtools2/blob/master/LICENSE |
 | blast+ | Public Domain | https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/scripts/projects/blast/LICENSE |
 | bowtie2 | GNU GPLv3 | https://github.com/BenLangmead/bowtie2/blob/master/LICENSE |
+| Bracken | GNU GPLv3 | https://github.com/jenniferlu717/Bracken/blob/master/LICENSE |
 | BUSCO | MIT | https://gitlab.com/ezlab/busco/-/raw/master/LICENSE |
 | BWA | GNU GPLv3 | https://github.com/lh3/bwa/blob/master/COPYING |
 | Canu <br/> Racon <br/> Minimap2 | GNU GPLv3 (Canu), <br/> MIT (Racon), <br/> MIT (Minimap2) | https://github.com/marbl/canu/blob/master/README.license.GPL https://github.com/isovic/racon/blob/master/LICENSE https://github.com/lh3/minimap2/blob/master/LICENSE.txt |
 | centroid | GitHub No License | https://github.com/https://github.com/stjacqrm/centroid |
 | CDC-SPN | GitHub No License | https://github.com/BenJamesMetcalf/Spn_Scripts_Reference |
 | cfsan-snp-pipeline | non-standard license see --> | https://github.com/CFSAN-Biostatistics/snp-pipeline/blob/master/LICENSE.txt |
+| CheckM | GNU GPLv3 | https://github.com/Ecogenomics/CheckM/blob/master/LICENSE |
 | Circlator | GNU GPLv3 | https://github.com/sanger-pathogens/circlator/blob/master/LICENSE |
 | colorid | MIT | https://github.com/hcdenbakker/colorid/blob/master/LICENSE |
 | datasets-sars-cov-2 | Apache 2.0 | https://github.com/CDCgov/datasets-sars-cov-2/blob/master/LICENSE |
 | dnaapler | MIT | https://github.com/gbouras13/dnaapler/blob/main/LICENSE |
 | dragonflye | GNU GPLv3 | https://github.com/rpetit3/dragonflye/blob/main/LICENSE |
+| drprg | MIT | https://github.com/mbhall88/drprg/blob/main/LICENSE |
 | DSK | GNU Affero GPLv3 | https://github.com/GATB/dsk/blob/master/LICENSE |
 | emboss | GNU GPLv3 | http://emboss.sourceforge.net/licence/ |
 | emmtyper | GNU GPLv3 | https://github.com/MDU-PHL/emmtyper/blob/master/LICENSE |
@@ -46,6 +50,7 @@ The licenses of the open-source software that is contained in these Docker image
 | GAMBIT | GNU aGPLv3 | https://github.com/jlumpe/gambit/blob/master/LICENSE |
 | GAMMA | Apache 2.0 | https://github.com/rastanton/GAMMA/blob/main/LICENSE |
 | Genotyphi | GNU GPLv3 | https://github.com/katholt/genotyphi/blob/main/LICENSE |
+| GenoVi | BY-NC-SA Creative Commons License | https://github.com/robotoD/GenoVi/blob/main/LICENSE.txt |
 | gfastats | MIT | https://github.com/vgl-hub/gfastats/blob/main/LICENSE |
 | Hmmer | BSD-3 | http://eddylab.org/software/hmmer/Userguide.pdf |
 | homopolish | GNU GPLv3 | https://github.com/ythuang0522/homopolish/blob/master/LICENSE |
@@ -53,6 +58,7 @@ The licenses of the open-source software that is contained in these Docker image
 | iqtree | GNU GPLv2 | https://github.com/Cibiv/IQ-TREE/blob/master/LICENSE |
 | iqtree2 | GNU GPLv2 | https://github.com/iqtree/iqtree2/blob/master/LICENSE |
 | IRMA | GNU GPLv3 | https://wonder.cdc.gov/amd/flu/irma/disclaimer.html |
+| isPcr | non-standard - see README in source | https://hgwdev.gi.ucsc.edu/~kent/src/isPcr33.zip |
 | iVar | GNU GPLv3 | https://github.com/andersen-lab/ivar/blob/master/LICENSE |
 | Kaptive |  GNU GPLv3 | https://github.com/katholt/Kaptive/blob/master/LICENSE |
 | Kleborate | GNU GPLv3 | https://github.com/katholt/Kleborate/blob/master/LICENSE |
@@ -63,6 +69,7 @@ The licenses of the open-source software that is contained in these Docker image
 | kSNP4 | BSD | available in zipped kSNP archive on sourceforge or in docker image under `/opt/kSNP4 Linux package/Documentation/THE BSD OPENSOURCE LICENSE.pdf` |
 | legsta | GNU GPLv3 | https://github.com/tseemann/legsta/blob/master/LICENSE |
 | liftoff | GNU GPLv3 | https://github.com/agshumate/Liftoff/blob/master/LICENSE.md |
+| longshot | MIT | https://github.com/pjedge/longshot/blob/master/LICENSE |
 | Lyve-SET  | MIT | https://github.com/lskatz/lyve-SET/blob/master/LICENSE |
 | Mafft  | BSD | https://mafft.cbrc.jp/alignment/software/license.txt |
 | Mash | non-standard license (see link) | https://github.com/marbl/Mash/blob/master/LICENSE.txt |
@@ -84,12 +91,15 @@ The licenses of the open-source software that is contained in these Docker image
 | NCBI Datasets | Public Domain | https://github.com/ncbi/datasets/blob/master/pkgs/ncbi-datasets-cli/LICENSE.md |
 | NCBI table2asn | Public Domain | unknown |
 | ngmaster | GNU GPLv3 | https://github.com/MDU-PHL/ngmaster/blob/master/LICENSE |
+| ONTime | MIT | https://github.com/mbhall88/ontime/blob/main/LICENSE |
 | OrthoFinder | GNU GPLv3 | https://github.com/davidemms/OrthoFinder/blob/master/License.md |
 | Panaroo | MIT | https://github.com/gtonkinhill/panaroo/blob/master/LICENSE |
 | Pangolin | GNU GPLv3 | https://github.com/cov-lineages/pangolin/blob/master/LICENSE.txt |
 | pasty | Apache 2.0 | https://github.com/rpetit3/pasty/blob/main/LICENSE |
+| Pavian | GNU GPLv3 | https://github.com/fbreitwieser/pavian/blob/master/DESCRIPTION |
 | pbptyper | MIT | https://github.com/rpetit3/pbptyper/blob/main/LICENSE |
 | Phyml | GNU GPLv3 | https://github.com/stephaneguindon/phyml/blob/master/COPYING |
+| phyTreeViz | MIT | https://github.com/moshi4/phyTreeViz/blob/main/LICENSE |
 | Piggy | GNU GPLv3 | https://github.com/harry-thorpe/piggy/blob/master/LICENSE |
 | Pilon | GNU GPLv2 | https://github.com/broadinstitute/pilon/blob/master/LICENSE |
 | Piranha | GNU GPLv3 | https://github.com/polio-nanopore/piranha/blob/main/LICENSE |
@@ -99,6 +109,7 @@ The licenses of the open-source software that is contained in these Docker image
 | PopPUNK | Apache 2.0 | https://github.com/bacpop/PopPUNK/blob/master/LICENSE |
 | Porechop | GNU GPLv3 | https://github.com/rrwick/Porechop/blob/master/LICENSE |
 | Prokka | GNU GPLv3 | https://raw.githubusercontent.com/tseemann/prokka/master/doc/LICENSE.Prokka |
+| pyCirclize | MIT | https://github.com/moshi4/pyCirclize/blob/main/LICENSE |
 | pyGenomeViz | MIT | https://github.com/moshi4/pyGenomeViz/blob/main/LICENSE |
 | QUAST | GNU GPLv2 | https://github.com/ablab/quast/blob/master/LICENSE.txt |
 | QuickSNP | GNU GPLv3 | https://github.com/k-florek/QuickSNP/blob/main/LICENSE |
