@@ -315,4 +315,5 @@ Each Dockerfile lists the author(s)/maintainer(s) as a metadata `LABEL`, but the
   * [@Kincekara](https://github.com/Kincekara)
   * [@Haikelnb](https://github.com/Haikelnb)
   * [@kprus](https://github.com/kprus)
+  * [@arianna-smith](https://github.com/arianna-smith)
 
