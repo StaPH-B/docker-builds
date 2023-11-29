@@ -35,6 +35,8 @@ LC_ALL=C
 # set final working directory as /data
 WORKDIR /data
 
+CMD minimap2 -h
+
 # test layer
 FROM app as test
 
