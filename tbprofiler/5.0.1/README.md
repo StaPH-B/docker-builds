@@ -22,19 +22,22 @@ tbdb    5f3c51e Jody Phelan <jody.phelan@lshtm.ac.uk>   Thu Jan 19 10:47:32 2023
 
 ## Additional included tools/dependencies
 
-- bcftools 1.12
 - bedtools 2.30.0
-- bwa 0.7.17
-- freebayes 1.3.5
 - gatk4 4.3.0.0
 - kmc 3.2.1
 - pathogen-profiler 2.0.4
 - perl 5.32.1
-- python 3.9.9
-- samclip 0.4.0
-- samtools 1.12
-- snpeff 5.1
+- python 3.9.9 
 - trimmomatic 0.39
+- bwa 0.7.17
+- minimap2 2.16
+- samtools 1.12
+- bcftools 1.12
+- freebayes 1.3.5
+- tqdm 4.32.2
+- parallel v20190522
+- samclip 0.4.0
+- snpeff 5.1
 
 ## Example Usage
 
