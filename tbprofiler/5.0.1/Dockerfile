@@ -39,14 +39,15 @@ ARG MAMBA_DOCKERFILE_ACTIVATE=1
 
 # Version of database can be confirmed at /opt/conda/share/tbprofiler/tbdb.version.json
 # can also run 'tb-profiler list_db' to find the same version info
-# In 5.0.1 updating_tbdb does not work through this --commit but list_db produces correct version
-# RUN tb-profiler update_tbdb --commit ${TBDB_VER}
+# In 5.0.1 updating_tbdb does not work with tb-profiler update_tbdb --commit ${TBDB_VER}
+RUN tb-profiler update_tbdb
 
 WORKDIR /data
 
 # hardcode 'base' env bin into PATH, so conda env does not have to be "activated" at run time
 ENV PATH="/opt/conda/bin:${PATH}"
 
+# Added command to bring help menu up upon running container.
 CMD "tb-profiler"
 
 # test stage
