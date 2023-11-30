@@ -58,3 +58,6 @@ ARG MAMBA_DOCKERFILE_ACTIVATE=1
 # Run Panaroo
 RUN mkdir /data/panaroo_results && \
     panaroo --clean-mode strict -i /data/*.gff -o /data/panaroo_results/
+
+RUN cmp /data/gene_data.csv /data/panaroo_results/gene_data.csv && \
+    cmp /data/summary_statistics.txt /data/panaroo_results/summary_statistics.txt
