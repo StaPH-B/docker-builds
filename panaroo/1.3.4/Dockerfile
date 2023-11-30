@@ -17,8 +17,8 @@ LABEL software.version=${PANAROO_SOFTWARE_VERSION}
 LABEL description="An updated pipeline for pangenome investigation"
 LABEL website="https://github.com/gtonkinhill/panaroo"
 LABEL license="https://github.com/gtonkinhill/panaroo/blob/master/LICENSE"
-LABEL maintainer1="Kevin Libuit"
-LABEL maintainer1.email="kevin.libuit@theiagen.com"
+LABEL maintainer="Kevin Libuit"
+LABEL maintainer.email="kevin.libuit@theiagen.com"
 
 # install dependencies; cleanup apt garbage
 RUN apt-get update && apt-get install -y --no-install-recommends \
