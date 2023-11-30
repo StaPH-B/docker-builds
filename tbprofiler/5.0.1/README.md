@@ -1,4 +1,3 @@
-
 # TBProfiler Container
 
 Main tool: [TBProfiler](https://github.com/jodyphelan/TBProfiler)
@@ -52,5 +51,5 @@ tb-profiler create_db --prefix <new_library_name>
 tb-profiler load_library --prefix <new_library_name>
 ```
 
-
-Official documentation can be found [here.](https://jodyphelan.gitbook.io/tb-profiler/)
+## Updates
+Release 5.0.1 implemented sqlite3 database locking with https://py-filelock.readthedocs.io/en/latest/index.html. This should fix issues using it over network filing systems (NFS). For more information, official documentation can be found [here.](https://jodyphelan.gitbook.io/tb-profiler/)
