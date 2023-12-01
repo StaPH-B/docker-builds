@@ -1,6 +1,6 @@
 FROM ubuntu:jammy as app
 
-ARG DATASETS_VER="15.31.0"
+ARG DATASETS_VER="15.31.1"
 
 LABEL base.image="ubuntu:jammy"
 LABEL dockerfile.version="1"
