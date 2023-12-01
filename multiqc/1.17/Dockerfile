@@ -1,13 +1,13 @@
-# base image
 FROM ubuntu:jammy as app
 
-ARG MULTIQC_VER="1.17"
+ARG MULTIQC_VER="1.18"
+ARG PANDOC_VER="2.7.3"
 
 # metadata
 LABEL base.image="ubuntu:jammy"
 LABEL dockerfile.version="1"
 LABEL software="MultiQC"
-LABEL software.version="1.17"
+LABEL software.version="${MULTIQC_VER}"
 LABEL description="Aggregate bioinformatics results across many samples into a single report."
 LABEL website="https://github.com/ewels/MultiQC"
 LABEL license="https://github.com/ewels/MultiQC/blob/master/LICENSE"
@@ -34,17 +34,17 @@ RUN apt-get update && apt-get install -y \
   apt-get clean && apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # install multiqc
-RUN pip3 install "multiqc==1.17"
+RUN pip3 install "multiqc==${MULTIQC_VER}"
 
 # install pandoc
-RUN wget https://github.com/jgm/pandoc/releases/download/2.7.3/pandoc-2.7.3-linux.tar.gz && \
-  tar -xvf pandoc-2.7.3-linux.tar.gz && \
-  rm pandoc-2.7.3-linux.tar.gz
+RUN wget https://github.com/jgm/pandoc/releases/download/${PANDOC_VER}/pandoc-${PANDOC_VER}-linux.tar.gz && \
+  tar -xvf pandoc-${PANDOC_VER}-linux.tar.gz && \
+  rm pandoc-${PANDOC_VER}-linux.tar.gz
 
 ENV LC_ALL='C.UTF-8' LANG='C.UTF-8'
 
 # add pandoc to path
-ENV PATH="/pandoc-2.7.3/bin:${PATH}"
+ENV PATH="/pandoc-${PANDOC_VER}/bin:${PATH}"
 
 RUN mkdir /data
 WORKDIR /data
@@ -55,9 +55,6 @@ FROM app as test
 # set working directory so that all test inputs & outputs are kept in /test
 RUN mkdir /test
 WORKDIR /test
-
-# to ensure this env variable is set in test layer
-ARG ARG MULTIQC_VER
 
 RUN git clone https://github.com/ewels/MultiQC_TestData
 RUN multiqc .
