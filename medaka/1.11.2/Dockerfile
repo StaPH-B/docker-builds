@@ -1,6 +1,6 @@
 FROM mambaorg/micromamba:1.5.1 as app
 
-ARG MEDAKA_VER=1.11.1
+ARG MEDAKA_VER=1.11.2
 ARG PYABPOA_VER=1.2.4
 
 LABEL base.image="mambaorg/micromamba:1.5.1"
