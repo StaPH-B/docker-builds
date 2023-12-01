@@ -15,13 +15,6 @@ LABEL maintainer="Erin Young"
 LABEL maintainer.email="eriny@utah.gov"
 # Although... let's be honest. Most of this is copied and pasted from Abigail Shockey
 
-# install software-properties-common for add-apt-repository
-RUN apt-get update && apt-get install -y \
-  software-properties-common
-
-# add universe repository for texlive-xetex and texlive-math-extra
-RUN add-apt-repository universe
-
 # install remaining dependencies
 RUN apt-get update && apt-get install -y \
   wget \
@@ -41,10 +34,11 @@ RUN wget https://github.com/jgm/pandoc/releases/download/${PANDOC_VER}/pandoc-${
   tar -xvf pandoc-${PANDOC_VER}-linux.tar.gz && \
   rm pandoc-${PANDOC_VER}-linux.tar.gz
 
-ENV LC_ALL='C.UTF-8' LANG='C.UTF-8'
-
 # add pandoc to path
-ENV PATH="/pandoc-${PANDOC_VER}/bin:${PATH}"
+ENV PATH="/pandoc-${PANDOC_VER}/bin:${PATH}" \
+   LC_ALL='C.UTF-8' LANG='C.UTF-8'
+
+CMD multiqc --help
 
 RUN mkdir /data
 WORKDIR /data
@@ -52,9 +46,16 @@ WORKDIR /data
 # testing layer starts here
 FROM app as test
 
+# to ensure multiqc is in PATH
+RUN multiqc --help
+
 # set working directory so that all test inputs & outputs are kept in /test
 RUN mkdir /test
 WORKDIR /test
 
-RUN git clone https://github.com/ewels/MultiQC_TestData
-RUN multiqc .
+# getting multiqc test data and testing pandoc
+RUN git clone https://github.com/ewels/MultiQC_TestData && \
+    multiqc . && \
+    ls multiqc_report.html && \
+    multiqc . --filename multiqc_report2.html -o multiqc_data2 --pdf && \
+    ls multiqc_report2.html
