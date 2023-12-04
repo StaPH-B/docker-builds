@@ -18,27 +18,28 @@ LABEL maintainer.email="eriny@utah.gov"
 # install remaining dependencies
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y \
-  wget \
-  git \
-  python3 \
-  python3-dev \
-  python3-pip \
-  locales \
-  texlive-xetex && \
-  locale-gen en_US.UTF-8 && \
-  apt-get clean && apt-get autoclean && rm -rf /var/lib/apt/lists/*
+    wget \
+    git \
+    python3 \
+    python3-dev \
+    python3-pip \
+    locales \
+    pandoc \
+    texlive-xetex && \
+    locale-gen en_US.UTF-8 && \
+    apt-get clean && apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # install multiqc
 RUN pip3 install "multiqc==${MULTIQC_VER}"
 
 # install pandoc
 RUN wget https://github.com/jgm/pandoc/releases/download/${PANDOC_VER}/pandoc-${PANDOC_VER}-linux.tar.gz && \
-  tar -xvf pandoc-${PANDOC_VER}-linux.tar.gz && \
-  rm pandoc-${PANDOC_VER}-linux.tar.gz
+    tar -xvf pandoc-${PANDOC_VER}-linux.tar.gz && \
+    rm pandoc-${PANDOC_VER}-linux.tar.gz
 
 # add pandoc to path
 ENV PATH="/pandoc-${PANDOC_VER}/bin:${PATH}" \
-   LC_ALL='C.UTF-8' LANG='C.UTF-8'
+    LC_ALL='C.UTF-8' LANG='C.UTF-8'
 
 CMD multiqc --help
 
@@ -58,6 +59,7 @@ WORKDIR /test
 # getting multiqc test data and testing pandoc
 RUN git clone https://github.com/ewels/MultiQC_TestData && \
     multiqc . && \
-    ls multiqc_report.html && \
-    multiqc . --filename multiqc_report2.html -o multiqc_data2 --pdf && \
-    ls multiqc_report2.html
+    ls multiqc_report.html 
+    
+RUN multiqc /test/MultiQC_TestData/data/modules/BUSCO --filename multiqc_report2.html -o multiqc_data2 --pdf && \
+    ls multiqc_data2/multiqc_report2.html multiqc_data2/multiqc_report2_data
