@@ -16,6 +16,7 @@ LABEL maintainer.email="eriny@utah.gov"
 # Although... let's be honest. Most of this is copied and pasted from Abigail Shockey
 
 # install remaining dependencies
+ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y \
   wget \
   git \
