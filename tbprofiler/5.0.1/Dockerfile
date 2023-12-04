@@ -6,8 +6,9 @@ WORKDIR /
 ARG TBPROFILER_VER="5.0.1"
 
 # this version is the shortened commit hash on the `master` branch here https://github.com/jodyphelan/tbdb/
-# this was the latest commit as of 2023-11-15
-ARG TBDB_VER="c2fb9a2"
+# commits are found on https://github.com/jodyphelan/tbdb/commits/master
+# this was the latest commit as of 2023-10-26
+ARG TBDB_VER="e25540b"
 
 # LABEL instructions tag the image with metadata that might be important to the user
 LABEL base.image="micromamba:1.3.0"
@@ -34,24 +35,24 @@ RUN micromamba install --yes --name base --channel conda-forge --channel biocond
     tb-profiler=${TBPROFILER_VER} && \
     micromamba clean --all --yes
 
-# this ARG is so that the conda env is activated for running the following command
-ARG MAMBA_DOCKERFILE_ACTIVATE=1
+# hardcode 'base' env bin into PATH, so conda env does not have to be "activated" at run time
+ENV PATH="/opt/conda/bin:${PATH}"
 
 # Version of database can be confirmed at /opt/conda/share/tbprofiler/tbdb.version.json
 # can also run 'tb-profiler list_db' to find the same version info
 # In 5.0.1 updating_tbdb does not work with tb-profiler update_tbdb --commit ${TBDB_VER}
-RUN tb-profiler update_tbdb
+RUN tb-profiler update_tbdb --commit ${TBDB_VER}
 
 WORKDIR /data
 
-# hardcode 'base' env bin into PATH, so conda env does not have to be "activated" at run time
-ENV PATH="/opt/conda/bin:${PATH}"
-
 # Added command to bring help menu up upon running container.
-CMD "tb-profiler"
+CMD tb-profiler
 
 # test stage
 FROM app as test
+
+# checking if tool is in PATH
+RUN tb-profiler && tb-profiler version
 
 WORKDIR /tests
 
