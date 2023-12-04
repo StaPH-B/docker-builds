@@ -1,7 +1,6 @@
 FROM ubuntu:jammy as app
 
 ARG MULTIQC_VER="1.18"
-ARG PANDOC_VER="2.7.3"
 
 # metadata
 LABEL base.image="ubuntu:jammy"
@@ -32,13 +31,9 @@ RUN apt-get update && apt-get install -y \
 # install multiqc
 RUN pip3 install "multiqc==${MULTIQC_VER}"
 
-# install pandoc
-RUN wget https://github.com/jgm/pandoc/releases/download/${PANDOC_VER}/pandoc-${PANDOC_VER}-linux.tar.gz && \
-    tar -xvf pandoc-${PANDOC_VER}-linux.tar.gz && \
-    rm pandoc-${PANDOC_VER}-linux.tar.gz
 
 # add pandoc to path
-ENV PATH="/pandoc-${PANDOC_VER}/bin:${PATH}" \
+ENV PATH="${PATH}" \
     LC_ALL='C.UTF-8' LANG='C.UTF-8'
 
 CMD multiqc --help
