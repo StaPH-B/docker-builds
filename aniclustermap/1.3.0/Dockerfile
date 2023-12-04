@@ -13,7 +13,7 @@ ARG ANICLUSTERMAP_VER
 LABEL base.image="ubuntu:jammy"
 LABEL dockerfile.version="1"
 LABEL software="ANIclustermap"
-LABEL software.version="${SOFTWARENAME_VER}"
+LABEL software.version="${ANICLUSTERMAP_VER}"
 LABEL description="ANIclustermap draws ANI(Average Nucleotide Identity) clustermap between all-vs-all microbial genomes."
 LABEL website="https://github.com/moshi4/ANIclustermap"
 LABEL license="https://github.com/moshi4/ANIclustermap/blob/main/LICENSE"
