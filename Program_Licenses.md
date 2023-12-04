@@ -7,6 +7,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Software | License | Link to license |
 | :--------: | :-------: | -------- |
 | ABRicate | GNU GPLv2 | https://github.com/tseemann/abricate/blob/master/LICENSE |
+| ANIclustermap | MIT | https://github.com/moshi4/ANIclustermap/blob/main/LICENSE |
 | artic | MIT | https://github.com/artic-network/fieldbioinformatics/blob/master/LICENSE |
 | artic-ncov2019-epi2me | MPL 2.0 | https://github.com/epi2me-labs/wf-artic/blob/master/LICENSE |
 | any2fasta | GNU GPLv3 | https://github.com/tseemann/any2fasta/blob/master/LICENSE |
