@@ -24,40 +24,42 @@ LABEL maintainer.email="kevin.libuit@theiagen.com"
 RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
     ca-certificates \
-    git \
-    pip && \
+    procps && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-COPY panaroo-environment.yml /panaroo-environment.yml
-
-RUN micromamba install -y -n base -f /panaroo-environment.yml && \
-    micromamba clean -a -y
-
-# Install Panaroo conda environment into base environment using YML file
+# Install Panaroo conda environment into base environment
 # clean up conda garbage
-RUN micromamba install -y -n base -f /panaroo-environment.yml && \
+# conda environment includes optional tools prokka, prank, mafft, clustal, and mash
+RUN micromamba install -y -n base -c conda-forge -c bioconda -c defaults python=3.9 panaroo=${PANAROO_SOFTWARE_VERSION} && \
     micromamba clean -a -y
 
 # set the environment, put new conda env in PATH by default
-ENV PATH="/opt/conda/envs/base/bin:${PATH}" \
+ENV PATH="/opt/conda/bin:/opt/conda/envs/base/bin:${PATH}" \
     LC_ALL=C.UTF-8
 
 # set working directory to /data
 WORKDIR /data
 
+# set default command
+CMD panaroo -h
+
 # new base for testing
 FROM app as test
 
-# Grab test data
-COPY tests/ /data/
+# checks to see if tool is in PATH
+RUN panaroo --version && panaroo -h
 
-# so that mamba/conda env is active when running below commands
-ENV ENV_NAME="base"
-ARG MAMBA_DOCKERFILE_ACTIVATE=1
+WORKDIR /test
+
+# Grab test data from 1.2.10
+RUN wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/panaroo/1.2.10/tests/ecoli_1.gff && \
+    wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/panaroo/1.2.10/tests/ecoli_2.gff && \
+    wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/panaroo/1.2.10/tests/gene_data.csv && \
+    wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/panaroo/1.2.10/tests/summary_statistics.txt
 
 # Run Panaroo
-RUN mkdir /data/panaroo_results && \
-    panaroo --clean-mode strict -i /data/*.gff -o /data/panaroo_results/
+RUN panaroo --clean-mode strict -i *.gff -o panaroo_results/
 
-RUN cmp /data/gene_data.csv /data/panaroo_results/gene_data.csv && \
-    cmp /data/summary_statistics.txt /data/panaroo_results/summary_statistics.txt
+RUN head panaroo_results/summary_statistics.txt && \
+    head summary_statistics.txt && \
+    cmp summary_statistics.txt panaroo_results/summary_statistics.txt
