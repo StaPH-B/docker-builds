@@ -11,7 +11,7 @@ Additional tools:
 - [pangolin-data](https://github.com/cov-lineages/pangolin-data) 1.23.1
 - [pangolin-assignment](https://github.com/cov-lineages/pangolin-assignment) 1.23.1
 - [minimap2](https://github.com/lh3/minimap2) 2.26-r1175
-- [usher](https://github.com/yatisht/usher) 0.6.2
+- [usher](https://github.com/yatisht/usher) 0.6.3
 - [faToVcf](https://github.com/yatisht/usher) 448
 - [scorpio](https://github.com/cov-lineages/scorpio) 0.3.19
 - [constellations](https://github.com/cov-lineages/constellations) 0.1.12
