@@ -3,7 +3,7 @@ FROM ubuntu:jammy as app
 ARG SRATOOLKIT_VER="3.0.7"
 
 LABEL base.image="ubuntu:jammy"
-LABEL version="1"
+LABEL dockerfile.version="1"
 LABEL software="SRA Toolkit"
 LABEL software.version="${SRATOOLKIT_VER}"
 LABEL description="Collection of tools and libraries for using data in the INSDC Sequence Read Archives"
