@@ -42,12 +42,19 @@ WORKDIR /data
 
 ## Test ##
 FROM app as test
+
+# making sure sylph is in PATH
+RUN sylph -h
+
 ARG SYLPH_VER
+
 RUN apt update && apt install -y wget
+
 RUN wget -q https://github.com/bluenote-1577/sylph/raw/v${SYLPH_VER}/test_files/e.coli-EC590.fasta && \
     wget -q https://github.com/bluenote-1577/sylph/raw/v${SYLPH_VER}/test_files/e.coli-K12.fasta && \
     wget -q https://github.com/bluenote-1577/sylph/raw/v${SYLPH_VER}/test_files/e.coli-o157.fasta && \
     wget -q https://github.com/bluenote-1577/sylph/raw/v${SYLPH_VER}/test_files/o157_reads.fastq
+
 RUN date && \
     sylph sketch -i e.coli-*.fasta -o database && \
     sylph sketch o157_reads.fastq  && \
