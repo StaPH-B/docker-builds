@@ -1,4 +1,4 @@
-# skani container
+# sylph container
 
 Main tool : [sylph](https://github.com/bluenote-1577/sylph)
 
