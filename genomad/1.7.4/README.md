@@ -1,62 +1,40 @@
-<!-- 
-Please edit this readme with some basic information about the tool and how to use this container. 
-- Include information about databases and additional files that are included.
-- Keep it short - you don't need to recreate the documentation from the creators.
-- Do not just copy and paste the readme or help for the tool. 
--->
+# geNomad container
 
-# <program> container
-
-Main tool: [<program>](link to program)
+Main tool: [geNomad](https://github.com/apcamargo/genomad/)
   
-Code repository:
+Code repository: https://github.com/apcamargo/genomad/
 
 Additional tools:
-- list: version
+- aragorn: 1.2.41
+- mmseq2: 15-6f452
 
 Basic information on how to use this tool:
-- executable: <tool>
-- help: <-h>
-- version: <-v>
-- description: <tool does something>
+- executable: genomad
+- help: --help
+- version: --version
+- description: Identification of mobile genetic elements
 
 Additional information:
 
-<Container contains X database at Y>
+The geNomad database version 1.6 is downloaded in /genomad_db.
   
-Full documentation: link to documentation or wiki
+Full documentation: https://portal.nersc.gov/genomad/
 
 ## Example Usage
 
 ```bash
-<how creator of the dockerfile uses it>
+# to download the database (database is already downloaded at /genomad_db)
+genomad download-database .
+
+# recommended usage
+genomad end-to-end input.fna output /genomad_db
+
+# subsections of genomad
+genomad annotate metagenome.fna genomad_output /genomad_db
+genomad find-proviruses metagenome.fna genomad_output /genomad_db
+genomad marker-classification metagenome.fna genomad_output /genomad_db
+genomad nn-classification metagenome.fna /genomad_output
+genomad aggregated-classification metagenome.fna /genomad_output
+genomad score-calibration metagenome.fna /genomad_output
+genomad summary metagenome.fna /genomad_output
 ```
-
-  
-<!-- Example README
-# pasty container
-
-Main tool: [pasty](https://github.com/rpetit3/pasty)
-
-Code repository: https://github.com/rpetit3/pasty
-
-Additional tools:
-- ncbi-blast+: 2.12.0
-- python: 3.10.6
-
-Basic information on how to use this tool:
-- executable: pasty
-- help: --help
-- version: --version
-- description: "A tool easily taken advantage of for in silico serogrouping of Pseudomonas aeruginosa isolates from genome assemblies"
-
-Additional information:  
-  
-Full documentation: [https://github.com/rpetit3/pasty](https://github.com/rpetit3/pasty)
-
-## Example Usage
-
-```bash
-pasty --assembly /pasty-1.0.2/test/O1-GCF_000504045.fna.gz --prefix O1-GCF_000504045
-``` 
--->

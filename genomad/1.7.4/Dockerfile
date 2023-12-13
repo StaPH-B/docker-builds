@@ -7,8 +7,6 @@ FROM ubuntu:jammy as builder
 
 ARG ARAGORN_VER
 
-# 'RUN' executes code during the build
-# Install dependencies via apt-get or yum if using a centos or fedora base
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     libc6-dev \
@@ -32,7 +30,7 @@ LABEL dockerfile.version="1"
 LABEL software="geNomad"
 LABEL software.version="${GENOMAD_VER}"
 LABEL description="Identification of mobile genetic elements"
-LABEL website="https://github.com/apcamargo/genomad/"
+LABEL website="https://github.com/apcamargo/genomad"
 LABEL license="https://github.com/apcamargo/genomad/blob/main/LICENSE"
 LABEL maintainer="Erin Young"
 LABEL maintainer.email="eriny@utah.gov"
@@ -58,7 +56,10 @@ RUN wget -q https://github.com/apcamargo/genomad/archive/refs/tags/v${GENOMAD_VE
     rm -rf v${GENOMAD_VER}.tar.gz && \
     mkdir /data
 
-ENV PATH="/mmseqs/bin:$PATH"
+ENV PATH="/mmseqs/bin:$PATH" LC_ALL=C
+
+# downloads latest database, which is version 1.6 and about ~1.6 G in size
+RUN genomad download-database .
 
 # 'CMD' instructions set a default command when the container is run. This is typically 'tool --help.'
 CMD genomad --help
@@ -76,7 +77,7 @@ RUN genomad --help && \
     aragorn -h && \
     mmseqs -h
 
-RUN genomad download-database . 
-#&& \
-#    genomad end-to-end input.fna output genomad_db
-
+# downloads genome from NCBI and runs end-to-end (which looks like all steps) on the downloaded fasta
+RUN wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/025/259/185/GCA_025259185.1_ASM2525918v1/GCA_025259185.1_ASM2525918v1_genomic.fna.gz && \
+    gunzip GCA_025259185.1_ASM2525918v1_genomic.fna.gz && \
+    genomad end-to-end GCA_025259185.1_ASM2525918v1_genomic.fna test /genomad_db
