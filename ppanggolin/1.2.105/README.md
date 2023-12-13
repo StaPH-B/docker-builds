@@ -1,62 +1,33 @@
-<!-- 
-Please edit this readme with some basic information about the tool and how to use this container. 
-- Include information about databases and additional files that are included.
-- Keep it short - you don't need to recreate the documentation from the creators.
-- Do not just copy and paste the readme or help for the tool. 
--->
+# PPanGGOLiN container
 
-# <program> container
-
-Main tool: [<program>](link to program)
+Main tool: [PPanGGOLiN](https://github.com/labgem/PPanGGOLiN)
   
-Code repository:
-
-Additional tools:
-- list: version
+Code repository: https://github.com/labgem/PPanGGOLiN
 
 Basic information on how to use this tool:
-- executable: <tool>
-- help: <-h>
-- version: <-v>
-- description: <tool does something>
+- executable: ppanggolin
+- help: --help
+- version: --version
+- description: |
+> PPanGGOLiN builds pangenomes through a graphical model and a statistical method to partition gene families in persistent, shell and cloud genomes.
 
 Additional information:
 
-<Container contains X database at Y>
+PPanGGOLiN only creates the pangenome graphs. It is recommended to use another tool to visualize them. Please read https://github.com/labgem/PPanGGOLiN/wiki for more information.
   
-Full documentation: link to documentation or wiki
+Full documentation: https://github.com/labgem/PPanGGOLiN/wiki
 
 ## Example Usage
 
 ```bash
-<how creator of the dockerfile uses it>
+ppanggolin annotate --fasta organisms.fasta.list --output output 
+
+# many of the commands manipulate the 'pangenome.h5' file in place
+ppanggolin cluster -p pangenome.h5
+ppanggolin graph -p pangenome.h5 
+ppanggolin partition -p pangenome.h5
+ppanggolin draw -p pangenome.h5 --ucurve   
+
+# there are some human-readable files that can be generated as well
+ppanggolin write -p pangenome.h5 --stats --output stats
 ```
-
-  
-<!-- Example README
-# pasty container
-
-Main tool: [pasty](https://github.com/rpetit3/pasty)
-
-Code repository: https://github.com/rpetit3/pasty
-
-Additional tools:
-- ncbi-blast+: 2.12.0
-- python: 3.10.6
-
-Basic information on how to use this tool:
-- executable: pasty
-- help: --help
-- version: --version
-- description: "A tool easily taken advantage of for in silico serogrouping of Pseudomonas aeruginosa isolates from genome assemblies"
-
-Additional information:  
-  
-Full documentation: [https://github.com/rpetit3/pasty](https://github.com/rpetit3/pasty)
-
-## Example Usage
-
-```bash
-pasty --assembly /pasty-1.0.2/test/O1-GCF_000504045.fna.gz --prefix O1-GCF_000504045
-``` 
--->
