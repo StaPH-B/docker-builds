@@ -34,6 +34,7 @@ The licenses of the open-source software that is contained in these Docker image
 | dragonflye | GNU GPLv3 | https://github.com/rpetit3/dragonflye/blob/main/LICENSE |
 | drprg | MIT | https://github.com/mbhall88/drprg/blob/main/LICENSE |
 | DSK | GNU Affero GPLv3 | https://github.com/GATB/dsk/blob/master/LICENSE |
+| el_gato | MIT | https://github.com/appliedbinf/el_gato/blob/main/LICENSE |
 | emboss | GNU GPLv3 | http://emboss.sourceforge.net/licence/ |
 | emmtyper | GNU GPLv3 | https://github.com/MDU-PHL/emmtyper/blob/master/LICENSE |
 | emm-typing-tool | GNU GPLv3 | https://github.com/phe-bioinformatics/emm-typing-tool/blob/master/LICENCE |
