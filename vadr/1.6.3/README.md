@@ -21,6 +21,7 @@ Available VADR models:
 - Norovirus and other Caliciviridae
 - Dengue virus and other Flaviviridae
 - RSV v1.5.1-2
+- influenza v1.6.3-1
 
 ## FYI
 
@@ -37,6 +38,7 @@ Available VADR models:
 - [Docs on Mpox annotation](https://github.com/ncbi/vadr/wiki/Monkeypox-virus-annotation)
 - [Docs on Dengue and other Flaviviridae annotation](https://github.com/ncbi/vadr/wiki/Available-VADR-model-files#dengue-virus-and-other-flaviviridae-refseq-vadr-models)
 - [Docs on RSV annotation](https://github.com/ncbi/vadr/wiki/RSV-annotation)
+- [Docs on flu annotation](https://github.com/ncbi/vadr/wiki/flu-annotation)
 
 ## Example Usage
 
@@ -68,4 +70,11 @@ v-annotate.pl --split --cpu 1 --group Dengue --nomisc --noprotid \
     --mdir /opt/vadr/vadr-models-flavi/ --mkey flavi \
     GCF_000862125.1_ViralProj15306_genomic.fna \
     dengue-test-outdir
+
+# run v-annotate.pl using flu models to annotate input sequences in flu.fa
+v-annotate.pl --split --cpu 8 -r --atgonly --xnocomp --nomisc \
+    --alt_fail extrant5,extrant3 --mkey flu \
+    flu.fa \
+    flu-test-output
+
 ```

@@ -1,10 +1,11 @@
 FROM ubuntu:focal as app
 
 # for easy upgrade later. LC_ALL set for singularity compatibility
-ENV VADR_VERSION="1.6.2" \
+ENV VADR_VERSION="1.6.3" \
   VADR_SARSCOV2_MODELS_VERSION="1.3-2" \
   VADR_MPXV_MODELS_VERSION="1.4.2-1" \
   VADR_RSV_MODELS_VER="1.5-2"\
+  VADR_FLU_MODELS_VER="1.6.3-1"\
   LC_ALL=C \
   VADRINSTALLDIR=/opt/vadr
 
@@ -89,6 +90,13 @@ RUN wget https://ftp.ncbi.nlm.nih.gov/pub/nawrocki/vadr-models/rsv/${VADR_RSV_MO
  cp -nvr /vadr-models-rsv-${VADR_RSV_MODELS_VER}/* ${VADRMODELDIR} && \
  rm -rfv /vadr-models-rsv-${VADR_RSV_MODELS_VER}
 
+# download flu VADR models; copy model files into VADRMODELDIR
+RUN wget https://ftp.ncbi.nlm.nih.gov/pub/nawrocki/vadr-models/flu/${VADR_FLU_MODELS_VER}/vadr-models-flu-${VADR_FLU_MODELS_VER}.tar.gz && \
+ tar -xf /vadr-models-flu-${VADR_FLU_MODELS_VER}.tar.gz && \
+ rm -v /vadr-models-flu-${VADR_FLU_MODELS_VER}.tar.gz && \
+ cp -nvr /vadr-models-flu-${VADR_FLU_MODELS_VER}/* ${VADRMODELDIR} && \
+ rm -rfv /vadr-models-flu-${VADR_FLU_MODELS_VER}
+
 # Virus model files other than sarscov2 will need to be made available to vadr either in
 # the $VADRMODELDIR or another path can be specified using the 'v-annotate.pl -mdir' option.
 # These files will need to be mounted into the container at runtime, e.g. 'docker run -v' option.
@@ -147,6 +155,24 @@ v-annotate.pl --split --cpu 2 \
     /data/${GENBANK_ACCESSION}.trimmed.fasta \
     ${GENBANK_ACCESSION}-mpxv-vadr-test-output
 
+# download some test flu genomes, run through VADR using flu models
+# example commands taken from VADR flu guide: https://github.com/ncbi/vadr/wiki/flu-annotation
+ RUN echo "testing flu functionality..." && \
+  wget https://ftp.ncbi.nlm.nih.gov/pub/nawrocki/vadr-models/flu/pretrim.flu.3.fa && \
+ fasta-trim-terminal-ambigs.pl pretrim.flu.3.fa \
+     --minlen 60 \
+     >/data/flu.3.fa && \
+ v-annotate.pl --split \
+     -r \
+     --atgonly \
+     --xnocomp \
+     --nomisc \
+     --alt_fail extrant5,extrant3 \
+     --mkey flu \
+     /data/flu.3.fa \
+     flu-vadr-test-output
+    
+
 ### COMMENTING OUT RSV TEST BELOW SINCE THIS TEST CAN CONSUME UPWARDS OF 30GB RAM ###
 ### it runs fine when you have that much RAM available, but not in GHActions runners that are limited to 7GB RAM ###
 
@@ -164,4 +190,3 @@ v-annotate.pl --split --cpu 2 \
 #     -mkey rsv \
 #     /data/rsv.r10.trimmed.fasta \
 #     rsv-vadr-test-output
-    
