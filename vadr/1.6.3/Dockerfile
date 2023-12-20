@@ -156,7 +156,7 @@ v-annotate.pl --split --cpu 2 \
     ${GENBANK_ACCESSION}-mpxv-vadr-test-output
 
 # download some test flu genomes, run through VADR using flu models
-# example commands taken from VADR flu guide: https://github.com/ncbi/vadr/wiki/flu-annotation
+# example commands taken from VADR flu guide: https://github.com/ncbi/vadr/wiki/Influenza-annotation
  RUN echo "testing flu functionality..." && \
   wget https://ftp.ncbi.nlm.nih.gov/pub/nawrocki/vadr-models/flu/pretrim.flu.3.fa && \
  fasta-trim-terminal-ambigs.pl pretrim.flu.3.fa \

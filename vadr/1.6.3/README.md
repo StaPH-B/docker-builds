@@ -38,7 +38,7 @@ Available VADR models:
 - [Docs on Mpox annotation](https://github.com/ncbi/vadr/wiki/Monkeypox-virus-annotation)
 - [Docs on Dengue and other Flaviviridae annotation](https://github.com/ncbi/vadr/wiki/Available-VADR-model-files#dengue-virus-and-other-flaviviridae-refseq-vadr-models)
 - [Docs on RSV annotation](https://github.com/ncbi/vadr/wiki/RSV-annotation)
-- [Docs on flu annotation](https://github.com/ncbi/vadr/wiki/flu-annotation)
+- [Docs on flu annotation](https://github.com/ncbi/vadr/wiki/Influenza-annotation)
 
 ## Example Usage
 
