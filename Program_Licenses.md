@@ -58,6 +58,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Hmmer | BSD-3 | http://eddylab.org/software/hmmer/Userguide.pdf |
 | homopolish | GNU GPLv3 | https://github.com/ythuang0522/homopolish/blob/master/LICENSE |
 | htslib | MIT | https://github.com/samtools/htslib/blob/develop/LICENSE |
+| hybracter | MIT | https://github.com/gbouras13/hybracter/blob/main/LICENSE |
 | iqtree | GNU GPLv2 | https://github.com/Cibiv/IQ-TREE/blob/master/LICENSE |
 | iqtree2 | GNU GPLv2 | https://github.com/iqtree/iqtree2/blob/master/LICENSE |
 | IRMA | GNU GPLv3 | https://wonder.cdc.gov/amd/flu/irma/disclaimer.html |
