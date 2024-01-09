@@ -50,7 +50,7 @@ RUN cpanm --force --notest BioPerl \
 RUN wget https://github.com/marbl/Mash/releases/download/v${mashVer}/mash-Linux64-v${mashVer}.tar && \
   tar -xf mash-Linux64-v${mashVer}.tar && \
   rm -rf mash-Linux64-v${mashVer}.tar && \
-  chown root:root /mash-Linux64-v${MASH_VER}/*
+  chown root:root /mash-Linux64-v${mashVer}/*
 
 # install quicktree
 RUN wget https://github.com/khowe/quicktree/archive/v${quicktreeVer}.tar.gz && \
