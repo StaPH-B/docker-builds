@@ -67,11 +67,14 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     && apt-get autoclean && rm -rf /var/lib/apt/lists/* && \
     mkdir /data
 
+WORKDIR /bcftools/plugins
+
 # copy in bcftools executables from builder stage
 COPY --from=builder /usr/local/bin/* /usr/local/bin/
+COPY --from=builder /bcftools-${BCFTOOLS_VER}/plugins/* /bcftools/plugins
 
 # set locale settings for singularity compatibility
-ENV LC_ALL=C
+ENV LC_ALL=C BCFTOOLS_PLUGINS='/bcftools/plugins'
 
 # set final working directory
 WORKDIR /data
