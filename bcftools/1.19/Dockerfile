@@ -85,6 +85,9 @@ CMD ["bcftools", "--help"]
 ### start of test stage ###
 FROM app as test
 
+# running --help and listing plugins
+RUN bcftools --help && bcftools plugin -lv
+
 # install wget for downloading test files
 RUN apt-get update && apt-get install --no-install-recommends -y wget ca-certificates
 
