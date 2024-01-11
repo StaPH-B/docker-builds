@@ -40,6 +40,7 @@ The licenses of the open-source software that is contained in these Docker image
 | emm-typing-tool | GNU GPLv3 | https://github.com/phe-bioinformatics/emm-typing-tool/blob/master/LICENCE |
 | EToKi | GNU GPLv3 | https://github.com/zheminzhou/EToKi/blob/master/LICENSE |
 | FastANI | Apache v2.0 | https://github.com/ParBLiSS/FastANI/blob/master/LICENSE |
+| fasten | MIT | https://github.com/lskatz/fasten/blob/master/LICENSE |
 | Fastp | MIT | https://github.com/OpenGene/fastp/blob/master/LICENSE |
 | FastTree | GNU GPLv2 | http://www.microbesonline.org/fasttree/ |
 | FastQC | GNU GPLv3 | https://github.com/s-andrews/FastQC/blob/master/LICENSE.txt |
