@@ -1,0 +1,97 @@
+##### ------------------------------------------------------------------------------------------------ #####
+##### This caller workflow tests, builds, and pushes the image to Docker Hub and Quay using the most   #####
+##### recent version of Freyja and downloading the most recent variant information.                    #####
+##### It takes no manual input.                                                                        #####
+##### ------------------------------------------------------------------------------------------------ #####
+
+name: Update Freyja
+
+on: 
+  workflow_dispatch:
+  schedule:
+    - cron: '30 7 * * *'
+
+run-name: Updating Freyja
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+
+# Keeping here in case we want to use it to keep Freyja's version up-to-date as well
+#      - name: Get latest release
+#        uses: rez0n/actions-github-release@main
+#        id: latest_release
+#        with:
+#          token: ${{ secrets.GITHUB_TOKEN }}
+#          repository: andersen-lab/Freyja
+#          type: "stable"
+#      - name: Remove V
+#        id: strip
+#        run: |
+#          version=$(echo "${{ steps.latest_release.outputs.release }}" | sed 's/V//g' | sed 's/v//g' )
+#          echo "The version is $version"
+#          echo "version=$version" >> $GITHUB_OUTPUT
+          
+      - name: pull repo
+        uses: actions/checkout@v3
+        
+      - name: get latest version of freyja in docker-builds repo
+        id: latest_version
+        run: | 
+          file=$(git log -1 --name-only --format=%cd --date=iso freyja/*/Dockerfile | grep Dockerfile | head -n 1 )
+          echo "the latest file is $file"
+          echo "file=$file" >> $GITHUB_OUTPUT
+
+          version=$(echo $file | cut -f 2 -d "/" | cut -f 1 -d "_")
+          echo "the latest version is $version"
+          echo "version=$version" >> $GITHUB_OUTPUT      
+
+      - name: set up docker buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: cache docker layers
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache-freyja
+          key: ${{ runner.os }}-buildx-freyja-${{ github.sha }}
+          restore-keys: ${{ runner.os }}-buildx-freyja
+
+      - name: build to test
+        id: docker_build_to_test
+        uses: docker/build-push-action@v3
+        with:
+          file: ${{ steps.latest_version.outputs.file }}
+          target: test
+          load: true
+          push: false
+          cache-from: type=local,src=/tmp/.buildx-cache-freyja
+          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-freyja-new
+          tags: freyja:update
+
+      - name: get freyja database version
+        id: db_version
+        run: |
+          docker run freyja:update freyja demix --version
+          version=$(docker run freyja:update freyja demix --version | grep . | grep -v Barcode | head -n 1)
+          echo "the latest version is $version"
+          echo "version=$version" >> $GITHUB_OUTPUT
+      
+      - name: build to deploy
+        uses: ./.github/workflows/build-to-deploy.yml
+        secrets:
+          docker_username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          docker_access_token: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+          quay_username: ${{ secrets.quay_username }}
+          quay_robot_token: ${{ secrets.quay_robot_token }}
+        with:
+          path_to_context: "./freyja/${{ steps.latest_version.outputs.version }}"
+          repository_name: staphb
+          cache: freyja
+          container_name: freyja
+          tag: ${{ steps.latest_version.outputs.version }}_${{ steps.db_version.outputs.version }}
+          push_quay: true
+          push_latest_tag: true
+
+          
