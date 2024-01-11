@@ -60,7 +60,8 @@ RUN pip3 install biopython==${BIOPYTHON_VER}
 RUN wget -q https://github.com/aldertzomer/vibrio_parahaemolyticus_genomoserotyping/archive/refs/tags/${VP_GENOMOSEROTYPING_VER}.tar.gz && \
   tar -xzf ${VP_GENOMOSEROTYPING_VER}.tar.gz && \
   rm -v ${VP_GENOMOSEROTYPING_VER}.tar.gz && \
-  mv -v vibrio_parahaemolyticus_genomoserotyping-${VP_GENOMOSEROTYPING_VER} /vibrio_parahaemolyticus_genomoserotyping
+  mv -v vibrio_parahaemolyticus_genomoserotyping-${VP_GENOMOSEROTYPING_VER}/*gbk /kaptive/reference_database/. && \
+  rm -rf vibrio_parahaemolyticus_genomoserotyping-${VP_GENOMOSEROTYPING_VER}
 
 # set $PATH, with /kaptive at the highest priority
 ENV PATH="/kaptive:/ncbi-blast-${blastVer}+/bin:${PATH}"
@@ -106,5 +107,5 @@ RUN echo "downloading an 2 V. parahaemolyticus genomes & testing Kaptive..." && 
   wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/001/728/135/GCF_001728135.1_ASM172813v1/GCF_001728135.1_ASM172813v1_genomic.fna.gz && \
   gzip -d GCF_001558495.2_ASM155849v2_genomic.fna.gz && \
   gzip -d GCF_001728135.1_ASM172813v1_genomic.fna.gz && \
-  kaptive.py -a *.fna -k /vibrio_parahaemolyticus_genomoserotyping/VibrioPara_Kaptivedb_K.gbk -o /test3/Vparahaemolyticus && \
-  kaptive.py -a *.fna -k /vibrio_parahaemolyticus_genomoserotyping/VibrioPara_Kaptivedb_O.gbk -o /test3/Vparahaemolyticus
+  kaptive.py -a *.fna -k /kaptive/reference_database/VibrioPara_Kaptivedb_K.gbk -o /test3/Vparahaemolyticus && \
+  kaptive.py -a *.fna -k /kaptive/reference_database/VibrioPara_Kaptivedb_O.gbk -o /test3/Vparahaemolyticus
