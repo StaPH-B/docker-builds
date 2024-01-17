@@ -77,21 +77,53 @@ jobs:
           version=$(docker run freyja:update freyja demix --version | grep . | grep -v Barcode | head -n 1)
           echo "the latest version is $version"
           echo "version=$version" >> $GITHUB_OUTPUT
-      
-      - name: build to deploy
-        uses: ./.github/workflows/build-to-deploy.yml
-        secrets:
-          docker_username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          docker_access_token: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-          quay_username: ${{ secrets.quay_username }}
-          quay_robot_token: ${{ secrets.quay_robot_token }}
-        with:
-          path_to_context: "./freyja/${{ steps.latest_version.outputs.version }}"
-          repository_name: staphb
-          cache: freyja
-          container_name: freyja
-          tag: ${{ steps.latest_version.outputs.version }}_${{ steps.db_version.outputs.version }}
-          push_quay: true
-          push_latest_tag: true
 
-          
+      - name: Get current date
+        id: date
+        run: |
+          date=$(date '+%Y-%m-%d')
+          echo "the date is $date"
+          echo "date=$date" >> $GITHUB_OUTPUT
+      
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+      - name: Login to Quay
+        uses: docker/login-action@v2
+        with:
+          registry: quay.io
+          username: ${{ secrets.QUAY_USERNAME }}
+          password: ${{ secrets.QUAY_PASSWORD }}
+
+      - name: Build and push user-defined tag to DockerHub
+        id: docker_build_user_defined_tag
+        uses: docker/build-push-action@v3
+        with:
+          file: ${{ steps.latest_version.outputs.file }}
+          target: app
+          push: true
+          cache-from: type=local,src=/tmp/.buildx-cache-freyja
+          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-freyja-new # mode=max means export layers from all stage to cache
+          tags: staphb/freyja:${{ steps.latest_version.outputs.version }}-${{ steps.db_version.outputs.version }}-${{ steps.date.outputs.date }}
+            
+      - name: Build and push to Quay
+        id: build
+        uses: docker/build-push-action@v3
+        with:
+          file: ${{ steps.latest_version.outputs.file }}
+          target: app
+          push: true
+          cache-from: type=local,src=/tmp/.buildx-cache-freyja
+          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-freyja-new # mode=max means export 
+          tags: quay.io/staphb/freyja:${{ steps.latest_version.outputs.version }}-${{ steps.db_version.outputs.version }}-${{ steps.date.outputs.date }}
+
+      - name: Move cache # apparently prevents the cache from growing in size forever
+        run: |
+          rm -rf /tmp/.buildx-cache-freyja
+          mv /tmp/.buildx-cache-freyja-new /tmp/.buildx-cache-freyja
+
+      - name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
