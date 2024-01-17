@@ -14,7 +14,7 @@ Additional tools:
 - BioPython 1.83
 - R 3.6.3
 - Perl 5.30.0
-- OpenJDK 11.0.20
+- OpenJDK 1.8.0_392
 - Miniprot 0.12
 
 Full documentation: https://busco.ezlab.org/busco_userguide.html
