@@ -18,7 +18,7 @@ This is a BUSCO docker image which has basic functions for prokaryotes only. Thi
 ## Example Usage
 ```bash
 # offline usage with bacteria lineage
-busco --offline -i assembly.fasta -l bacteria_odb10 -o output -m genome
+busco --offline -i assembly.fasta -l /busco_downloads/lineages/bacteria_odb10 -o output -m genome
 # auto lineage selection
 busco -i assembly.fasta -o output -m genome --auto-lineage-prok
 ```
