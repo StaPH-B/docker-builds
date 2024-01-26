@@ -52,8 +52,7 @@ RUN wget https://gitlab.com/ezlab/busco/-/archive/${BUSCO_VER}/busco-${BUSCO_VER
     python3 setup.py install
 
 # download bacteria_odb10
-RUN mkdir data && cd data &&\
-    busco --download bacteria_odb10
+RUN busco --download bacteria_odb10    
 
 ENV PATH="${PATH}:/sepp-package/sepp"
 ENV LC_ALL=C
@@ -68,7 +67,7 @@ FROM app as test
 # offline test
 RUN wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/010/941/835/GCA_010941835.1_PDT000052640.3/GCA_010941835.1_PDT000052640.3_genomic.fna.gz  && \
     gzip -d GCA_010941835.1_PDT000052640.3_genomic.fna.gz && \
-    busco --offline -l bacteria_odb10 -m genome -i GCA_010941835.1_PDT000052640.3_genomic.fna -o offline --cpu 4 && \
+    busco --offline -l /busco_downloads/lineages/bacteria_odb10 -m genome -i GCA_010941835.1_PDT000052640.3_genomic.fna -o offline --cpu 4 && \
     head offline/short_summary*.txt
 
 # auto-lineage-prok
