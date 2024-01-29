@@ -6,7 +6,8 @@ USER root
 WORKDIR /
 
 # ARG variables only persist during build time 
-ARG DRAGONFLYE_VER="1.1.2"    
+ARG DRAGONFLYE_VER="1.1.2"
+ARG POLYPOLISH_VER="0.5.0"
 
 # metadata labels
 LABEL base.image="mambaorg/micromamba:1.4.4"
@@ -31,7 +32,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # create the conda environment; install dragonflye and dependencies based on bioconda package; cleanup conda garbage
-RUN micromamba install -n base -c conda-forge -c bioconda -c defaults -y dragonflye=${DRAGONFLYE_VER} && \
+RUN micromamba install -n base -c conda-forge -c bioconda -c defaults -y dragonflye=${DRAGONFLYE_VER} polypolish=${POLYPOLISH_VER} && \
     micromamba clean -a -y && \
     mkdir /data
 
