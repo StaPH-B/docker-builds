@@ -2,7 +2,7 @@ FROM ubuntu:jammy as app
 
 ARG RASUSA_VER="0.8.0"
 
-LABEL base.image="ubuntu:focal"
+LABEL base.image="ubuntu:jammy"
 LABEL dockerfile.version="1"
 LABEL software="rasusa"
 LABEL software.version="${RASUSA_VER}"
