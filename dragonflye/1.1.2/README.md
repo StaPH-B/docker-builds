@@ -1,6 +1,6 @@
 # dragonflye docker image
 
-Main tool : [dragonflye v1.1.1](https://github.com/rpetit3/dragonflye)
+Main tool : [dragonflye](https://github.com/rpetit3/dragonflye)
 
 > dragonflye: Assemble bacterial isolate genomes from Nanopore reads
 
