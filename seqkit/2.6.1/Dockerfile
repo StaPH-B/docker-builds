@@ -34,9 +34,8 @@ RUN wget -q https://github.com/shenwei356/seqkit/releases/download/v${SEQKIT_VER
 	rm seqkit_linux_amd64.tar.gz && \
 	mkdir /data
 
-# put executable in PATH
-ENV PATH="$PATH"  \
-	LC_ALL=C
+# singularity compatibility
+ENV LC_ALL=C
 
 CMD seqkit --help
 
