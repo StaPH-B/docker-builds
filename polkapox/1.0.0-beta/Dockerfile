@@ -32,15 +32,13 @@ RUN pip install --no-cache-dir \
     gfapy==1.2.3
 
 # Stage 2: Build the final (lightweight) image 
-FROM python:3.8-slim
+FROM python:3.8-slim AS app2
 
 # Copy only the necessary files from the builder stage
 COPY --from=app /usr/local/lib/python3.8/site-packages /usr/local/lib/python3.8/site-packages
 COPY --from=app /usr/local/bin /usr/local/bin
 COPY --from=app /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu
 COPY --from=app /usr/bin/wget /usr/bin/wget
-
-RUN echo "Original path: ${PATH}"
 
 # Set environment variables
 ENV PATH="/usr/local/bin:${PATH}"
@@ -65,6 +63,23 @@ WORKDIR /data
 
 # Set the default command
 CMD ["bash"]
+
+##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
+##### Step 2. Set up the testing stage.                                 #####
+##### The docker image is built to the 'test' stage before merging, but #####
+##### the test stage (or any stage after 'app') will be lost.           #####
+##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
+
+# A second FROM insruction creates a new stage
+FROM app2 as test
+
+ENV PATH="/usr/local/bin:${PATH}"
+ENV PATH="/src/ncbi-blast-${BLAST_VER}+/bin:${PATH}" \
+    LC_ALL=C
+
+# set working directory so that all test inputs & outputs are kept in /test
+WORKDIR /test
+
 
 ###### Testing Stage ######
 RUN blastn -version
