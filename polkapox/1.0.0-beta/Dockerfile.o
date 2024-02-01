@@ -1,9 +1,7 @@
 ##### Building stage #####
 
 # Stage 1: Build Python environment with required packages
-FROM python:3.8-slim as app
-
-ARG SOFTWARENAME_VER="1.0.0-beta"
+FROM python:3.8-slim AS app
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -14,19 +12,16 @@ LABEL authors="CDC PolkaPox Team"
 LABEL description="Container used in the PolkaPox pipeline by graph_reconstruct.nf module"
 LABEL base.image="python:3.8-slim"
 LABEL dockerfile.version="1.0"
-LABEL software="polkapox"
-LABEL software.version="${SOFTWARENAME_VER}"
 LABEL website="https://github.com/CDCgov/polkapox"
 LABEL license="https://github.com/CDCgov/polkapox/blob/master/LICENSE"
 
-
 # Install required system dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
-  build-essential \
-  libopenblas-dev \
-  wget \
-  procps && \
-  rm -rf /var/lib/apt/lists/* && apt-get autoclean
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    build-essential \
+    libopenblas-dev \
+    wget \
+    procps
 
 # Install Python packages
 RUN pip install --no-cache-dir \
@@ -35,6 +30,15 @@ RUN pip install --no-cache-dir \
     mkl==2024.0.0 \
     networkx==3.1 \
     gfapy==1.2.3
+
+# Stage 2: Build the final (lightweight) image 
+FROM python:3.8-slim AS app2
+
+# Copy only the necessary files from the builder stage
+COPY --from=app /usr/local/lib/python3.8/site-packages /usr/local/lib/python3.8/site-packages
+COPY --from=app /usr/local/bin /usr/local/bin
+COPY --from=app /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu
+COPY --from=app /usr/bin/wget /usr/bin/wget
 
 # Set environment variables
 ENV PATH="/usr/local/bin:${PATH}"
@@ -58,7 +62,7 @@ ENV PATH="/src/ncbi-blast-${BLAST_VER}+/bin:${PATH}" \
 WORKDIR /data
 
 # Set the default command
-CMD echo "The polkapox container is not intended to run independently of the workflow. See https://github.com/CDCgov/polkapox"
+CMD ["bash"]
 
 ##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
 ##### Step 2. Set up the testing stage.                                 #####
@@ -67,7 +71,7 @@ CMD echo "The polkapox container is not intended to run independently of the wor
 ##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
 
 # A second FROM insruction creates a new stage
-FROM app as test
+FROM app2 as test
 
 ENV PATH="/usr/local/bin:${PATH}"
 ENV PATH="/src/ncbi-blast-${BLAST_VER}+/bin:${PATH}" \
