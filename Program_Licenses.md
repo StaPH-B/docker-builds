@@ -70,6 +70,7 @@ The licenses of the open-source software that is contained in these Docker image
 | kma | Apache v2.0 | https://bitbucket.org/genomicepidemiology/kma/src/master/ |
 | Kraken | GNU GPLv3 | https://github.com/DerrickWood/kraken/blob/master/LICENSE |
 | Kraken2 | MIT | https://github.com/DerrickWood/kraken2/blob/master/LICENSE |
+| KrakenUniq | GNU GPLv3 | https://github.com/fbreitwieser/krakenuniq/blob/master/LICENSE |
 | kSNP3 | BSD | available in zipped kSNP archive on sourceforge or in docker image under `/kSNP3.1_Linux_package/THE BSD OPENSOURCE LICENSE.pdf` |
 | kSNP4 | BSD | available in zipped kSNP archive on sourceforge or in docker image under `/opt/kSNP4 Linux package/Documentation/THE BSD OPENSOURCE LICENSE.pdf` |
 | legsta | GNU GPLv3 | https://github.com/tseemann/legsta/blob/master/LICENSE |
