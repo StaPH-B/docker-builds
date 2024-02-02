@@ -18,7 +18,8 @@ LABEL software="polkapox"
 LABEL software.version="${SOFTWARENAME_VER}"
 LABEL website="https://github.com/CDCgov/polkapox"
 LABEL license="https://github.com/CDCgov/polkapox/blob/master/LICENSE"
-
+LABEL maintainer="CDC PolkaPox Group"
+LABEL maintainer.email="yrh8@cdc.gov"
 
 # Install required system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
