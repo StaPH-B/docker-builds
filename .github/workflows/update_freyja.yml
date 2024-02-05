@@ -35,17 +35,28 @@ jobs:
           
       - name: pull repo
         uses: actions/checkout@v3
-        
-      - name: get latest version of freyja in docker-builds repo
-        id: latest_version
-        run: | 
-          file=$(git log -1 --name-only --format=%cd --date=iso freyja/*/Dockerfile | grep Dockerfile | head -n 1 )
-          echo "the latest file is $file"
-          echo "file=$file" >> $GITHUB_OUTPUT
 
-          version=$(echo $file | cut -f 2 -d "/" | cut -f 1 -d "_")
-          echo "the latest version is $version"
-          echo "version=$version" >> $GITHUB_OUTPUT      
+# Keeping here in case we want to figure out why this doesn't work      
+#      - name: get latest version of freyja in docker-builds repo
+#        id: latest_version
+#        run: | 
+#          file=$(git log -1 --name-only --format=%cd --date=iso freyja/*/Dockerfile | grep Dockerfile | head -n 1 )
+#          echo "the latest file is $file"
+#          echo "file=$file" >> $GITHUB_OUTPUT
+#
+#          version=$(echo $file | cut -f 2 -d "/" | cut -f 1 -d "_")
+#          echo "the latest version is $version"
+#          echo "version=$version" >> $GITHUB_OUTPUT      
+
+      - name: set freyja version
+        id: latest_version
+        run: |
+          version=1.4.8
+          echo "version=$version" >> $GITHUB_OUTPUT 
+          
+          file=freyja/$version/Dockerfile
+          ls $file
+          echo "file=$file" >> $GITHUB_OUTPUT
 
       - name: set up docker buildx
         id: buildx
