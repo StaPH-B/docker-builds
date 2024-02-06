@@ -26,6 +26,7 @@ Available VADR models:
 Additional VADR models:
 
 - [HAV](https://github.com/theiagen/VADR_models/tree/main/hav)
+  - The description on how this model was built can be found [here](https://github.com/theiagen/VADR_models?tab=readme-ov-file#hav)
 
 ## FYI
 
