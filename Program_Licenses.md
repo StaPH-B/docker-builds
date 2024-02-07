@@ -14,6 +14,7 @@ The licenses of the open-source software that is contained in these Docker image
 | ARIBA | GNU GPLv3 | https://github.com/sanger-pathogens/ariba/blob/master/LICENSE |
 | Augur | GNU Affero GPLv3 | https://github.com/nextstrain/augur/blob/master/LICENSE.txt |
 | Auspice | GNU Affero GPLv3 | https://github.com/nextstrain/auspice/blob/master/LICENSE.txt |
+| Bakta | GNU GPLv3 | https://github.com/oschwengers/bakta/blob/main/LICENSE |
 | BBTools | non-standard - see `licence.txt` and `legal.txt` that is included in docker image under `/bbmap/docs/`; Also on sourceforge repo for BBTools | https://jgi.doe.gov/disclaimer/ |
 | bcftools | MIT or **GNU GPLv3** (depends on how bcftools was compiled, I believe GNU GPLv3 applies here) | https://github.com/samtools/bcftools/blob/develop/LICENSE |
 | bedtools | MIT | https://github.com/arq5x/bedtools2/blob/master/LICENSE |
