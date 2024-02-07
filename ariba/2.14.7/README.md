@@ -3,8 +3,10 @@
 Main tool: [ARIBA](https://github.com/sanger-pathogens/ariba)
 
 Additional tools:
-- [pysam](https://github.com/pysam-developers/pysam) 0.15.4
-- [SPAdes](https://github.com/ablab/spades) 3.15.5
+- [bowtie2](https://bowtie-bio.sourceforge.net/bowtie2/manual.shtml) 2.4.4
+- [SPAdes](https://github.com/ablab/spades) 3.13.1
+- [mummer](https://mummer.sourceforge.net/) 3.1
+- [cd-hit](https://sites.google.com/view/cd-hit) 4.8.1
 
 Full documentation: [https://github.com/sanger-pathogens/ariba/wiki](https://github.com/sanger-pathogens/ariba/wiki)
 

@@ -31,6 +31,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   python3-wheel \
   cython3 \
   zlib1g-dev \
+  bowtie2 \
   mummer \
   cd-hit \
   wget \
@@ -45,17 +46,12 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   automake \
   perl \
   libcurl4-gnutls-dev \
-  libssl-dev && \
+  libssl-dev \
+  libncurses5 && \
   apt-get autoclean && rm -rf /var/lib/apt/lists/* 
 
 ENV LANG=en_US.UTF-8 \
     LANGUAGE=en_US:en 
-
-# install bowtie2
-RUN wget -q http://downloads.sourceforge.net/project/bowtie-bio/bowtie2/${BOWTIE2_VER}/bowtie2-${BOWTIE2_VER}-legacy-linux-x86_64.zip && \
-  unzip -n bowtie2-${BOWTIE2_VER}-legacy-linux-x86_64.zip && \
-  rm bowtie2-${BOWTIE2_VER}-legacy-linux-x86_64.zip && \
-  mv bowtie2-${BOWTIE2_VER}-legacy /usr/local/bin/bowtie2
 
 # optional installation to enable the usage of SPAdes assembler
 RUN wget -q https://github.com/ablab/spades/releases/download/v${SPADES_VER}/SPAdes-${SPADES_VER}-Linux.tar.gz && \
@@ -73,7 +69,7 @@ RUN wget -q https://github.com/sanger-pathogens/ariba/archive/refs/tags/v${ARIBA
   mkdir /data
 
 # set $PATH and locale settings for singularity compatibility
-ENV PATH="$PATH:/SPAdes-${SPADES_VER}-Linux/bin" \
+ENV PATH="/SPAdes-${SPADES_VER}-Linux/bin:$PATH" \
   LC_ALL=C
 
 WORKDIR /data
