@@ -4,7 +4,6 @@ FROM ubuntu:jammy as app
 ARG ARIBA_VER="2.14.7"
 
 # versions from https://github.com/sanger-pathogens/ariba/blob/71909ed5b068723119e941045d25ed60328e70e7/install_dependencies.sh
-ARG BOWTIE2_VER="2.3.1"
 ARG SPADES_VER="3.13.1"
 
 LABEL base.image="ubuntu:jammy"
