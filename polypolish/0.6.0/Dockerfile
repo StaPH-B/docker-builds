@@ -1,6 +1,19 @@
+ARG POLYPOLISH_VER="0.6.0"
+
+FROM rust:1.75 as builder
+
+ARG POLYPOLISH_VER
+
+RUN wget -q https://github.com/rrwick/Polypolish/archive/refs/tags/v${POLYPOLISH_VER}.tar.gz && \
+    tar -vxf v${POLYPOLISH_VER}.tar.gz && \
+    cd /Polypolish-${POLYPOLISH_VER} && \
+    cargo build --release 
+
 FROM ubuntu:jammy as app
 
-ARG POLYPOLISH_VER="0.6.0"
+ARG POLYPOLISH_VER
+
+COPY --from=builder /Polypolish-${POLYPOLISH_VER}/target/release/polypolish /usr/local/bin/polypolish
 
 LABEL base.image="ubuntu:jammy"
 LABEL dockerfile.version="1"
@@ -22,18 +35,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /usr/local/bin
 
-# install polypolish without rust et al.
-RUN wget -q https://github.com/rrwick/Polypolish/releases/download/v${POLYPOLISH_VER}/polypolish-linux-x86_64-musl-v${POLYPOLISH_VER}.tar.gz && \
-    tar -xf polypolish-linux-x86_64-musl-v${POLYPOLISH_VER}.tar.gz && \
-    rm polypolish-linux-x86_64-musl-v${POLYPOLISH_VER}.tar.gz 
-
-# getting polypolish_insert_filter.py
-RUN wget -q https://github.com/rrwick/Polypolish/archive/refs/tags/v${POLYPOLISH_VER}.tar.gz && \
-    tar -xf v${POLYPOLISH_VER}.tar.gz && \
-    cp Polypolish-0.5.0/scripts/polypolish_insert_filter.py . && \
-    rm v${POLYPOLISH_VER}.tar.gz && \
-    rm -rf Polypolish-0.5.0
-
 ENV LC_ALL=C
 
 CMD polypolish --help
@@ -42,9 +43,9 @@ WORKDIR /data
 
 FROM app as test
 
-RUN polypolish --help && polypolish --version && polypolish_insert_filter.py --help && polypolish_insert_filter.py --version
+RUN polypolish --help && polypolish --version
 
 # using "toy" data
 RUN wget -q https://raw.githubusercontent.com/wiki/rrwick/Polypolish/files/toy_example/assembly.fasta && \
     wget -q https://raw.githubusercontent.com/wiki/rrwick/Polypolish/files/toy_example/alignments.sam && \
-    polypolish assembly.fasta alignments.sam > polished.fasta
+    polypolish polish assembly.fasta alignments.sam > polished.fasta
