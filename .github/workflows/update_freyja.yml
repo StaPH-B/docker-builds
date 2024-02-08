@@ -107,7 +107,7 @@ jobs:
         with:
           registry: quay.io
           username: ${{ secrets.QUAY_USERNAME }}
-          password: ${{ secrets.QUAY_PASSWORD }}
+          password: ${{ secrets.QUAY_ROBOT_TOKEN }}
 
       - name: Build and push user-defined tag to DockerHub
         id: docker_build_user_defined_tag
