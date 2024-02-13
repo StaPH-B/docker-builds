@@ -19,7 +19,9 @@ Freyja is a tool to recover relative lineage abundances from mixed SARS-CoV-2 sa
 
 ## freyja barcodes
 
-This docker image was built on **2024-02-09** and the command `freyja update` is run as part of the build to retrieve the most up-to-date barcode file `freyja/data/usher_barcodes.csv` file from Freyja's GitHub repo. The barcode version included in this docker image is **`12_29_2023-00-41`** as reported by `freyja demix --version`
+This docker image was built on **2024-02-13** and the command `freyja update` is run as part of the build to retrieve the most up-to-date barcode file `freyja/data/usher_barcodes.csv` file from Freyja's GitHub repo. The barcode version included in this docker image is **`12_29_2023-00-41`** as reported by `freyja demix --version`
+
+This image is rebuilt every day on Dockerhub with the tag ${freyja version}-${freyja database version}-${data image was deployed}.
 
 ## Example Usage
 
