@@ -34,9 +34,9 @@ You can view all available docker images on [dockerhub](https://hub.docker.com/r
 $ amrfinder -l
 Running: amrfinder -l
 Software directory: '/amrfinder/'
-Software version: 3.11.26
-Database directory: '/amrfinder/data/2023-11-15.1'
-Database version: 2023-11-15.1
+Software version: 3.12.8
+Database directory: '/amrfinder/data/2024-01-31.1'
+Database version: 2024-01-31.1
 
 Available --organism options: Acinetobacter_baumannii, Burkholderia_cepacia, Burkholderia_pseudomallei, Campylobacter, 
 Citrobacter_freundii, Clostridioides_difficile, Enterobacter_asburiae, Enterobacter_cloacae, Enterococcus_faecalis, 
@@ -64,5 +64,5 @@ GCA_003812925.1  NA                  CP033844.1  637913   639706   -       ybtP 
 GCA_003812925.1  NA                  CP033844.1  3473617  3474798  +       emrD         multidrug efflux MFS transporter EmrD                              plus   AMR           AMR              EFFLUX              EFFLUX                           BLASTX   394            394                        100.00                            94.16                             394               ACN65732.1                     multidrug efflux MFS transporter EmrD                              NA      NA
 GCA_003812925.1  NA                  CP033844.1  5085488  5086357  -       blaOXY-2-1   extended-spectrum class A beta-lactamase OXY-2-1                   core   AMR           AMR              BETA-LACTAM         CEPHALOSPORIN                    ALLELEX  290            290                        100.00                            100.00                            290               WP_032727905.1                 extended-spectrum class A beta-lactamase OXY-2-1                   NA      NA
 GCA_003812925.1  NA                  CP033845.1  5102     5632     -       ant(2'')-Ia  aminoglycoside nucleotidyltransferase ANT(2'')-Ia                  core   AMR           AMR              AMINOGLYCOSIDE      GENTAMICIN/KANAMYCIN/TOBRAMYCIN  BLASTX   177            177                        100.00                            98.31                             177               WP_000381803.1                 aminoglycoside nucleotidyltransferase ANT(2'')-Ia                  NA      NA
-GCA_003812925.1  NA                  CP033846.1  748      1932     -       tet(39)      tetracycline efflux MFS transporter Tet(39)                        core   AMR           AMR              TETRACYCLINE        TETRACYCLINE                     EXACTX   395            395                        100.00                            100.00                            395               WP_004856455.1                 tetracycline efflux MFS transporter Tet(39)                        NA      NA
+GCA_003812925.1  NA                  CP033846.1  748      1932     -       tet(39)      tetracycline efflux MFS transporter Tet(39)                        core   AMR           AMR              TETRACYCLINE        TETRACYCLINE                     EXACTX   395            395                        100.00                            100.00                            395               WP_004856455.1                 tetracycline efflux MFS transporter Tet(39)
 ```
