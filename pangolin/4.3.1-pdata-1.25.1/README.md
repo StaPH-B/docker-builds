@@ -8,8 +8,8 @@ Phylogenetic Assignment of Named Global Outbreak LINeages
 
 Additional tools:
 
-- [pangolin-data](https://github.com/cov-lineages/pangolin-data) 1.25
-- [pangolin-assignment](https://github.com/cov-lineages/pangolin-assignment) 1.25
+- [pangolin-data](https://github.com/cov-lineages/pangolin-data) 1.25.1
+- [pangolin-assignment](https://github.com/cov-lineages/pangolin-assignment) 1.25.1
 - [minimap2](https://github.com/lh3/minimap2) 2.26-r1175
 - [usher](https://github.com/yatisht/usher) 0.6.3
 - [faToVcf](https://github.com/yatisht/usher) 448
@@ -25,7 +25,7 @@ As of pangolin version 4.3, pangoLEARN mode has been deprecated. [More info can 
 
 > If `--analysis-mode fast` or `--analysis-mode pangolearn` is given, pangolin v4.3 will print out a warning and use UShER mode instead, unless `--datadir` is also given specifying a directory with pangoLEARN model files. The next release of pangolin-data (v1.20) will no longer include the model files which have not been updated since v1.18.
 
-This docker image contains `pangolin-data` v1.25. The pangoLEARN model has not been updated since pangolin-data version 1.18. Only the the underlying UShER tree/protobuf file will be maintained for the forseeable future.
+This docker image contains `pangolin-data` v1.25.1. The pangoLEARN model has not been updated since pangolin-data version 1.18. Only the the underlying UShER tree/protobuf file will be maintained for the forseeable future.
 
 **Please use the UShER mode of pangolin if you want to stay up-to-date with the most recent lineages.** [See pangolin-data release notes here for more details](https://github.com/cov-lineages/pangolin-data/releases)
 
