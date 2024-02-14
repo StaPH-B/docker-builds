@@ -164,3 +164,13 @@ mv -v ncbi_dataset/data/genomic.fna OR716684.1.genomic.fna && \
 rm -vr ncbi_dataset/ README.md && \
 pangolin OR716684.1.genomic.fna --analysis-mode usher -o OR716684.1-usher && \
 column -t -s, OR716684.1-usher/lineage_report.csv
+
+## test for JN.1.22 (BA.2.86.x sublineage; full unaliased lineage is B.1.1.529.2.86.1.1.22)
+# see here for commit where it was designated https://github.com/cov-lineages/pango-designation/commit/a90c8e31c154621ed86c985debfea09e17541cda
+# Here's the genome on NCBI, which was used to designate JN.1.22 lineage
+RUN datasets download virus genome accession PP189069.1 --filename PP189069.1.zip && \
+unzip PP189069.1.zip && rm PP189069.1.zip && \
+mv -v ncbi_dataset/data/genomic.fna PP189069.1.genomic.fna && \
+rm -vr ncbi_dataset/ README.md && \
+pangolin PP189069.1.genomic.fna --analysis-mode usher -o PP189069.1-usher && \
+column -t -s, PP189069.1-usher/lineage_report.csv
