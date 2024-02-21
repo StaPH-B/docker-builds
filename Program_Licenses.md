@@ -14,6 +14,7 @@ The licenses of the open-source software that is contained in these Docker image
 | ARIBA | GNU GPLv3 | https://github.com/sanger-pathogens/ariba/blob/master/LICENSE |
 | Augur | GNU Affero GPLv3 | https://github.com/nextstrain/augur/blob/master/LICENSE.txt |
 | Auspice | GNU Affero GPLv3 | https://github.com/nextstrain/auspice/blob/master/LICENSE.txt |
+| Bakta | GNU GPLv3 | https://github.com/oschwengers/bakta/blob/main/LICENSE |
 | BBTools | non-standard - see `licence.txt` and `legal.txt` that is included in docker image under `/bbmap/docs/`; Also on sourceforge repo for BBTools | https://jgi.doe.gov/disclaimer/ |
 | bcftools | MIT or **GNU GPLv3** (depends on how bcftools was compiled, I believe GNU GPLv3 applies here) | https://github.com/samtools/bcftools/blob/develop/LICENSE |
 | bedtools | MIT | https://github.com/arq5x/bedtools2/blob/master/LICENSE |
@@ -28,8 +29,10 @@ The licenses of the open-source software that is contained in these Docker image
 | cfsan-snp-pipeline | non-standard license see --> | https://github.com/CFSAN-Biostatistics/snp-pipeline/blob/master/LICENSE.txt |
 | CheckM | GNU GPLv3 | https://github.com/Ecogenomics/CheckM/blob/master/LICENSE |
 | Circlator | GNU GPLv3 | https://github.com/sanger-pathogens/circlator/blob/master/LICENSE |
+| Circos | GNU GPLv3 | https://circos.ca/ |
 | colorid | MIT | https://github.com/hcdenbakker/colorid/blob/master/LICENSE |
 | datasets-sars-cov-2 | Apache 2.0 | https://github.com/CDCgov/datasets-sars-cov-2/blob/master/LICENSE |
+| diamond | GNU GPLv3 | https://github.com/bbuchfink/diamond/blob/master/LICENSE |
 | dnaapler | MIT | https://github.com/gbouras13/dnaapler/blob/main/LICENSE |
 | dragonflye | GNU GPLv3 | https://github.com/rpetit3/dragonflye/blob/main/LICENSE |
 | drprg | MIT | https://github.com/mbhall88/drprg/blob/main/LICENSE |
@@ -73,6 +76,7 @@ The licenses of the open-source software that is contained in these Docker image
 | KrakenUniq | GNU GPLv3 | https://github.com/fbreitwieser/krakenuniq/blob/master/LICENSE |
 | kSNP3 | BSD | available in zipped kSNP archive on sourceforge or in docker image under `/kSNP3.1_Linux_package/THE BSD OPENSOURCE LICENSE.pdf` |
 | kSNP4 | BSD | available in zipped kSNP archive on sourceforge or in docker image under `/opt/kSNP4 Linux package/Documentation/THE BSD OPENSOURCE LICENSE.pdf` |
+| LABEL | GPL version 3 | In zipped file in README.md |
 | legsta | GNU GPLv3 | https://github.com/tseemann/legsta/blob/master/LICENSE |
 | liftoff | GNU GPLv3 | https://github.com/agshumate/Liftoff/blob/master/LICENSE.md |
 | longshot | MIT | https://github.com/pjedge/longshot/blob/master/LICENSE |
@@ -120,7 +124,7 @@ The licenses of the open-source software that is contained in these Docker image
 | pyGenomeViz | MIT | https://github.com/moshi4/pyGenomeViz/blob/main/LICENSE |
 | QUAST | GNU GPLv2 | https://github.com/ablab/quast/blob/master/LICENSE.txt |
 | QuickSNP | GNU GPLv3 | https://github.com/k-florek/QuickSNP/blob/main/LICENSE |
-| racon | MIT | https://github.com/isovic/racon/blob/master/LICENSE |
+| racon | MIT | https://github.com/lbcb-sci/racon/blob/master/LICENSE ; https://github.com/isovic/racon/blob/master/LICENSE |
 | rasusa | MIT | https://github.com/mbhall88/rasusa/blob/master/LICENSE |
 | raven | MIT | https://github.com/lbcb-sci/raven/blob/master/LICENSE |
 | RAxML <br/> RAxML Next Generation | GNU GPLv3 (RAxML), <br/> GNU Affero GPLv3 (RAxML Next Generation)| https://github.com/stamatak/standard-RAxML/blob/master/gpl-3.0.txt <br/> https://github.com/amkozlov/raxml-ng/blob/master/LICENSE.txt |
