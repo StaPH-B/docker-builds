@@ -33,8 +33,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 COPY --from=builder /Polypolish-${POLYPOLISH_VER}/target/release/polypolish /usr/local/bin/polypolish
 
-WORKDIR /usr/local/bin
-
 ENV LC_ALL=C
 
 CMD polypolish --help
