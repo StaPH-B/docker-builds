@@ -13,8 +13,6 @@ FROM ubuntu:jammy as app
 
 ARG POLYPOLISH_VER
 
-COPY --from=builder /Polypolish-${POLYPOLISH_VER}/target/release/polypolish /usr/local/bin/polypolish
-
 LABEL base.image="ubuntu:jammy"
 LABEL dockerfile.version="1"
 LABEL software="polypolish"
@@ -32,6 +30,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     unzip \
     python3 && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
+
+COPY --from=builder /Polypolish-${POLYPOLISH_VER}/target/release/polypolish /usr/local/bin/polypolish
 
 WORKDIR /usr/local/bin
 
