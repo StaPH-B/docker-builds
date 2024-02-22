@@ -1,4 +1,4 @@
-ARG PPANGGOLIN_VER="2.0.2"
+ARG PPANGGOLIN_VER="2.0.3"
 
 FROM mambaorg/micromamba:1.5.6 as app
 
