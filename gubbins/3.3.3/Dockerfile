@@ -9,7 +9,7 @@ WORKDIR /
 LABEL base.image="mambaorg/micromamba:1.5.6"
 LABEL dockerfile.version="1"
 LABEL software="Gubbins"
-LABEL software.version="${SOFTWARENAME_VERSION}"
+LABEL software.version="${GUBBINS_VER}"
 LABEL description="Genealogies Unbiased By recomBinations In Nucleotide Sequences"
 LABEL website="https://github.com/nickjcroucher/gubbins"
 LABEL license="https://github.com/nickjcroucher/gubbins/blob/master/LICENSE"
