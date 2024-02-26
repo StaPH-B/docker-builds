@@ -49,5 +49,5 @@ ARG HMMER_VER
 COPY --from=builder /hmmer-${HMMER_VER}/tutorial/* .
 
 RUN hmmbuild globins4.hmm globins4.sto &&\
-    hmmsearch globins4.hmm globins45.fa |& tee test.out
+    hmmsearch globins4.hmm globins45.fa | tee test.out
 
