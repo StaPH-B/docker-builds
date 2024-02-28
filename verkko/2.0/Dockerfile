@@ -46,5 +46,5 @@ RUN curl -L https://obj.umiacs.umd.edu/sergek/shared/ecoli_hifi_subset24x.fastq.
 # verkko test run
 RUN verkko -d asm --hifi ./hifi.fastq.gz --nano ./ont.fastq.gz &&\
     head asm/assembly.hifi-coverage.csv &&\
-    head asm/assembly.fasta
+    head -c 1000 asm/assembly.fasta
 
