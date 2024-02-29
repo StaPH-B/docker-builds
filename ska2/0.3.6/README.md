@@ -1,62 +1,24 @@
-<!-- 
-Please edit this readme with some basic information about the tool and how to use this container. 
-- Include information about databases and additional files that are included.
-- Keep it short - you don't need to recreate the documentation from the creators.
-- Do not just copy and paste the readme or help for the tool. 
--->
+# SKA2 container
 
-# <program> container
-
-Main tool: [<program>](link to program)
+Main tool: [SKA2](https://github.com/bacpop/ska.rust)
   
-Code repository:
-
-Additional tools:
-- list: version
+Code repository: https://github.com/bacpop/ska.rust
 
 Basic information on how to use this tool:
-- executable: <tool>
-- help: <-h>
-- version: <-v>
-- description: <tool does something>
-
-Additional information:
-
-<Container contains X database at Y>
+- executable: ska
+- help: -h, --help
+- version: -V, --version
+- description: SKA2 is a reimplementation of the SKA package in the rust language. Split k-mer analysis (version 2) uses exact matching of split k-mer sequences to align closely related sequences, typically small haploid genomes such as bacteria and viruses.
   
-Full documentation: link to documentation or wiki
+Full documentation: https://docs.rs/ska/latest/ska/
 
 ## Example Usage
 
 ```bash
-<how creator of the dockerfile uses it>
+# Build from two input FASTA files with a k-mer size of 31
+ska build -o seqs -k 31 assemblies/seq1.fa assemblies/seq2.fa
+# align
+ska align --min-freq 1 --filter no-filter -o seqs seqs.skf
+# map
+ska map ref.fa seqs.skf -o ref_mapped.aln
 ```
-
-  
-<!-- Example README
-# pasty container
-
-Main tool: [pasty](https://github.com/rpetit3/pasty)
-
-Code repository: https://github.com/rpetit3/pasty
-
-Additional tools:
-- ncbi-blast+: 2.12.0
-- python: 3.10.6
-
-Basic information on how to use this tool:
-- executable: pasty
-- help: --help
-- version: --version
-- description: "A tool easily taken advantage of for in silico serogrouping of Pseudomonas aeruginosa isolates from genome assemblies"
-
-Additional information:  
-  
-Full documentation: [https://github.com/rpetit3/pasty](https://github.com/rpetit3/pasty)
-
-## Example Usage
-
-```bash
-pasty --assembly /pasty-1.0.2/test/O1-GCF_000504045.fna.gz --prefix O1-GCF_000504045
-``` 
--->
