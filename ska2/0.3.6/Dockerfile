@@ -29,9 +29,12 @@ WORKDIR /data
 ## Test ##
 FROM app as test
 
+# force bash to avoid shell errors
+SHELL ["/bin/bash", "-c"]
+
 # adapted from tutorial https://www.bacpop.org/guides/building_trees_with_ska/
 RUN wget --no-check-certificate https://zenodo.org/record/8172518/files/building_trees_with_ska.tar &&\
-    tar -xvf building_trees_with_ska.tar assemblies/LA002.fa.gz assemblies/LA022.fa.gz assemblies/LA023.fa.gz assemblies/LA026.fa.gz &&\
+    tar -xvf building_trees_with_ska.tar assemblies/LA002.fa.gz assemblies/LA022.fa.gz assemblies/LA023.fa.gz assemblies/LA026.fa.gz &&\    
     paste <(ls assemblies | sed 's/[.].*$//g') <(ls -d assemblies/*) > laos_ska_input.tsv
 
 RUN ska build -f laos_ska_input.tsv -k 31 -o laos_ska_index --threads 4 &&\
