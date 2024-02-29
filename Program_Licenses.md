@@ -146,6 +146,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Shovill | GNU GPLv3 | https://github.com/tseemann/shovill/blob/master/LICENSE |
 | SISTR | Apache 2.0 | https://github.com/phac-nml/sistr_cmd/blob/master/LICENSE |
 | SKA | MIT | https://github.com/simonrharris/SKA/blob/master/LICENSE |
+| SKA2 | Apache 2.0 | https://github.com/bacpop/ska.rust/blob/master/LICENSE |
 | skani | MIT | https://github.com/bluenote-1577/skani/blob/main/LICENSE |
 | SKESA | Public Domain | https://github.com/ncbi/SKESA/blob/master/LICENSE |
 | Smalt | GNU GPLv3 | https://www.sanger.ac.uk/tool/smalt-0/ |
