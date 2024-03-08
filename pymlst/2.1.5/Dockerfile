@@ -47,7 +47,7 @@ COPY --from=blat /usr/local/bin/* /usr/local/bin/
 # install pymlst
 RUN pip3 install --no-cache pymlst==${PYMLST_VER}
 
-CMD ["pyMLST", "-h"]
+CMD pyMLST -h && claMLST -h && wgMLST -h
 
 ENV LC_ALL=C
 

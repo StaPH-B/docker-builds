@@ -10,7 +10,7 @@ Additional tools:
 - BLAT :  v.35
 
 Basic information on how to use this tool:
-- executable: pyMLST
+- executables: pyMLST, claMLST, wgMLST
 - help: -h
 - version: -v
 - description: A Python Mlst Local Search Tool.
