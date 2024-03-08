@@ -17,7 +17,7 @@ Basic information on how to use this tool:
 
 Additional information:
 
-<Container contains X database at Y>
+This container does not have any database. However, it can download it via app.
   
 Full documentation: https://pymlst.readthedocs.io/en/latest/
 
