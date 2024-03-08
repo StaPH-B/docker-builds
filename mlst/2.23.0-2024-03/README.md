@@ -16,7 +16,7 @@ Scan contig files against PubMLST typing schemes
 
 Available schemes found here: [https://github.com/tseemann/mlst/tree/master/db/pubmlst](https://github.com/tseemann/mlst/tree/master/db/pubmlst)
 
-This docker image was built in January of 2024 and databases were updated during the docker image build process. See Dockerfile for update commands.
+This docker image was built in March of 2024 and databases were updated during the docker image build process. See Dockerfile for update commands.
 
 ```bash
 # sorted list of available mlst schemes
