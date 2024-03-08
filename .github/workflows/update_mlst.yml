@@ -9,7 +9,7 @@ name: Update MLST
 on: 
   workflow_dispatch:
   schedule:
-    - cron: '30 7 * * 1'
+    - cron: '30 7 1 * *'
 
 run-name: Updating MLST
 
@@ -27,7 +27,7 @@ jobs:
           version=2.23.0
           echo "version=$version" >> $GITHUB_OUTPUT 
           
-          file=mlst/2.23.0-2024-01/Dockerfile
+          file=mlst/2.23.0-2024-03/Dockerfile
           ls $file
           echo "file=$file" >> $GITHUB_OUTPUT
 
