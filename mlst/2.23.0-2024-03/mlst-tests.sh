@@ -25,5 +25,6 @@ mlst -q --csv test/example.fna.gz | grep ',184,'
 mlst -q test/example.gbk.gz --json out.json && grep 'sequence_type' out.json
 ! mlst -q --label double_trouble test/example.gbk.gz test/example.fna.gz
 mlst -q --label GDAYMATE test/example.fna.gz | grep GDAYMATE
-mlst -q --novel novel.fa test/novel.fasta.bz2 && grep 'recP' novel.fa
+# LOL commenting this test out because the recP is no longer novel. It has an allele number and contributes to an ST.
+#mlst -q --novel novel.fa test/novel.fasta.bz2 && grep 'recP' novel.fa
 scripts/mlst-show_seqs -s efaecium -t 111

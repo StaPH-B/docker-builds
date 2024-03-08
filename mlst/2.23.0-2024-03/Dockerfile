@@ -76,6 +76,9 @@ FROM app as test
 COPY mlst-tests.sh .
 RUN bash mlst-tests.sh
 
+# need unzip for the datasets tool
+RUN apt-get update && apt-get install -y --no-install-recommends unzip
+
 # for pinning the version of NCBI datasets that is downloaded for this test
 ARG DATASETS_VER="16.2.0"
 
@@ -96,7 +99,9 @@ RUN datasets download genome accession ${GENBANK_ACCESSION} --filename ${GENBANK
     rm -v ${GENBANK_ACCESSION}.zip && \
     mv -v ${GENBANK_ACCESSION}-download/ncbi_dataset/data/${GENBANK_ACCESSION}/${GENBANK_ACCESSION}*.fna ${GENBANK_ACCESSION}-download/ncbi_dataset/data/${GENBANK_ACCESSION}/${GENBANK_ACCESSION}.genomic.fna && \
     mlst ${GENBANK_ACCESSION}-download/ncbi_dataset/data/${GENBANK_ACCESSION}/${GENBANK_ACCESSION}.genomic.fna | tee mlst.${GENBANK_ACCESSION}.tsv && \
-    grep "ST15199" mlst.${GENBANK_ACCESSION}.tsv
+    echo && \
+    echo "Checking for ST15199 in the mlst results now..." && \
+    grep "15199" mlst.${GENBANK_ACCESSION}.tsv
 
 ### Example command to run mlst (broken into two lines for readability)
 ### If you have an assembly named contigs.fasta in your PWD:
