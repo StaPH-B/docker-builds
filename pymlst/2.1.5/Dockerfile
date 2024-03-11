@@ -56,6 +56,9 @@ WORKDIR /data
 ## Test ##
 FROM app as test
 
+# checking CMD line
+RUN pyMLST -h && claMLST -h && wgMLST -h
+
 RUN apt-get update && apt-get install --no-install-recommends -y wget
 
 # download assemblies for test
