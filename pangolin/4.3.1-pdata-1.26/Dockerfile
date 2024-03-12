@@ -46,12 +46,13 @@ ENV PATH="$PATH" \
  LC_ALL=C.UTF-8
 
 # modify environment.yml to pin specific versions during install
+# pin specific versions of usher, scorpio, pangolin-data, constellations, and pulp
 # create the conda environment using modified environment.yml
 RUN sed -i "s|usher.*|usher=${USHER_VER}|" /pangolin/environment.yml && \
  sed -i "s|scorpio.git|scorpio.git@${SCORPIO_VER}|" /pangolin/environment.yml && \
  sed -i "s|pangolin-data.git|pangolin-data.git@${PANGOLIN_DATA_VER}|" /pangolin/environment.yml && \
  sed -i "s|constellations.git|constellations.git@${CONSTELLATIONS_VER}|" /pangolin/environment.yml && \
- sed  "12 a\  - pulp=2.7.0" && \
+ sed -i "12 a\  - pulp=2.7.0" /pangolin/environment.yml && \
  micromamba create -n pangolin -y -f /pangolin/environment.yml
 
 # so that mamba/conda env is active when running below commands
