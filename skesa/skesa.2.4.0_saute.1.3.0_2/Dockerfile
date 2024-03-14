@@ -24,11 +24,11 @@ RUN wget -q https://github.com/ncbi/SKESA/archive/refs/tags/${SKESA_VER}.tar.gz 
   make
 
 # copying executables to easy-to-copy-later place
-RUN cp /SKESA-skesa.${SKESA_VER}/skesa         /usr/local/bin/ && \
-    cp /SKESA-skesa.${SKESA_VER}/saute         /usr/local/bin/ && \
-    cp /SKESA-skesa.${SKESA_VER}/saute_prot    /usr/local/bin/ && \
-    cp /SKESA-skesa.${SKESA_VER}/gfa_connector /usr/local/bin/ && \
-    cp /SKESA-skesa.${SKESA_VER}/kmercounter   /usr/local/bin/ && skesa -h
+RUN cp /SKESA-${SKESA_VER}/skesa         /usr/local/bin/ && \
+    cp /SKESA-${SKESA_VER}/saute         /usr/local/bin/ && \
+    cp /SKESA-${SKESA_VER}/saute_prot    /usr/local/bin/ && \
+    cp /SKESA-${SKESA_VER}/gfa_connector /usr/local/bin/ && \
+    cp /SKESA-${SKESA_VER}/kmercounter   /usr/local/bin/ && skesa -h
 
 FROM ubuntu:jammy as app
 
