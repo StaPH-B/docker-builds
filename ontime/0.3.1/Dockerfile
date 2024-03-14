@@ -1,7 +1,7 @@
 ARG ONTIME_VER="0.3.1"
 ARG TARGET="x86_64-unknown-linux-musl"
 
-FROM rust:1.70 AS builder
+FROM rust:1.76 AS builder
 
 ARG ONTIME_VER
 ARG TARGET
@@ -63,6 +63,9 @@ WORKDIR /test
 # Mostly this ensures the tool of choice is in path and is executable
 RUN ontime --help && \
     ontime --version
+
+# testing with files uploaded with prior version
+RUN apt-get update && apt-get install -y wget
 
 RUN wget -q https://github.com/StaPH-B/docker-builds/raw/master/ontime/0.2.3/tests/test.fastq.gz && \
     ontime --to 1h test.fastq.gz -o ontime.test.txt && \
