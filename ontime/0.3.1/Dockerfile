@@ -68,5 +68,5 @@ RUN ontime --help && \
 RUN apt-get update && apt-get install -y wget
 
 RUN wget -q https://github.com/StaPH-B/docker-builds/raw/master/ontime/0.2.3/tests/test.fastq.gz && \
-    ontime --to 1h test.fastq.gz -o ontime.test.txt && \
-    head ontime.test.txt
+    ontime --to 1h test.fastq.gz -o ontime.test.fastq.gz && \
+    ls -alh test.fastq.gz  ontime.test.fastq.gz
