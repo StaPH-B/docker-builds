@@ -1,10 +1,10 @@
-FROM mambaorg/micromamba:1.6.7 as app
+FROM mambaorg/micromamba:1.5.7 as app
 
 ARG BAKTA_VER="1.9.3"
 ARG DIAMOND_VER="2.1.8"
 
 # 'LABEL' instructions tag the image with metadata that might be important to the user
-LABEL base.image="mambaorg/micromamba:1.6.7"
+LABEL base.image="mambaorg/micromamba:1.5.7"
 LABEL dockerfile.version="1"
 LABEL software="Bakta"
 LABEL software.version="${BAKTA_VER}"
