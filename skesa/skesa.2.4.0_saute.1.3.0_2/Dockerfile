@@ -34,6 +34,16 @@ FROM ubuntu:jammy as app
 
 ARG SKESA_VER
 
+LABEL base.image="ubuntu:jammy"
+LABEL dockerfile.version="1"
+LABEL software="SKESA"
+LABEL software.version="${SKESA_VER}"
+LABEL description="Strategic Kmer Extension for Scrupulous Assemblies"
+LABEL website="https://github.com/ncbi/SKESA"
+LABEL lisence="https://github.com/ncbi/SKESA/blob/master/LICENSE"
+LABEL maintainer="Erin Young"
+LABEL maintainer.email="eriny@utah.gov"
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
   ca-certificates \
   procps \
