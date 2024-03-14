@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     wget
 
 # get ARAGORN
-RUN wget -q https://www.ansikte.se/ARAGORN/Downloads/aragorn${ARAGORN_VER}.c && \
+RUN wget -q https://www.trna.se/ARAGORN/Downloads/aragorn${ARAGORN_VER}.c && \
     gcc -O3 -ffast-math -finline-functions -o aragorn aragorn${ARAGORN_VER}.c && \
     /aragorn -h 
 
@@ -80,4 +80,11 @@ RUN genomad --help && \
 # downloads genome from NCBI and runs end-to-end (which looks like all steps) on the downloaded fasta
 RUN wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/025/259/185/GCA_025259185.1_ASM2525918v1/GCA_025259185.1_ASM2525918v1_genomic.fna.gz && \
     gunzip GCA_025259185.1_ASM2525918v1_genomic.fna.gz && \
+#    genomad annotate GCA_025259185.1_ASM2525918v1_genomic.fna genomad_output /genomad_db && \
+#    genomad find-proviruses GCA_025259185.1_ASM2525918v1_genomic.fna genomad_output /genomad_db && \
+#    genomad marker-classification GCA_025259185.1_ASM2525918v1_genomic.fna genomad_output /genomad_db && \
+#    genomad nn-classification GCA_025259185.1_ASM2525918v1_genomic.fna /genomad_db && \
+#    genomad aggregated-classification GCA_025259185.1_ASM2525918v1_genomic.fna /genomad_db && \
+#    genomad score-calibration GCA_025259185.1_ASM2525918v1_genomic.fna /genomad_db && \
+#    genomad summary GCA_025259185.1_ASM2525918v1_genomic.fna /genomad_db
     genomad end-to-end GCA_025259185.1_ASM2525918v1_genomic.fna test /genomad_db

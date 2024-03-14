@@ -16,7 +16,7 @@ Basic information on how to use this tool:
 
 Additional information:
 
-The geNomad database version 1.6 is downloaded in /genomad_db.
+The geNomad database version 1.7 is downloaded in /genomad_db.
   
 Full documentation: https://portal.nersc.gov/genomad/
 
