@@ -34,15 +34,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # install minimap2
 RUN curl -L https://github.com/lh3/minimap2/releases/download/v${MINIMAP2_VER}/minimap2-${MINIMAP2_VER}_x64-linux.tar.bz2 | tar -jxvf - --no-same-owner
 
-# # install bwa
-# RUN mkdir /bwa && \
-#   cd /bwa && \
-#   wget https://github.com/lh3/bwa/releases/download/v$BWA_VER/bwa-$BWA_VER.tar.bz2 && \
-#   tar -xjf bwa-$BWA_VER.tar.bz2 && \
-#   rm bwa-$BWA_VER.tar.bz2 && \
-#   cd bwa-$BWA_VER && \
-#   make
-
 # install masurca suite
 RUN mkdir /data && \
   wget https://github.com/alekseyzimin/masurca/releases/download/v$MASURCA_VER/MaSuRCA-$MASURCA_VER.tar.gz && \
