@@ -56,7 +56,7 @@ RUN wget -q https://github.com/apcamargo/genomad/archive/refs/tags/v${GENOMAD_VE
     rm -rf v${GENOMAD_VER}.tar.gz && \
     mkdir /data
 
-ENV PATH="/mmseqs/bin:$PATH" LC_ALL=C
+ENV PATH="/mmseqs/bin:$PATH" LC_ALL=C CUDA_VISIBLE_DEVICES=-1
 
 # downloads latest database, which is version 1.6 and about ~1.6 G in size
 RUN genomad download-database .
@@ -87,4 +87,4 @@ RUN wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/025/259/185/GCA_0252591
 #    genomad aggregated-classification GCA_025259185.1_ASM2525918v1_genomic.fna /genomad_db && \
 #    genomad score-calibration GCA_025259185.1_ASM2525918v1_genomic.fna /genomad_db && \
 #    genomad summary GCA_025259185.1_ASM2525918v1_genomic.fna /genomad_db
-    genomad end-to-end GCA_025259185.1_ASM2525918v1_genomic.fna test /genomad_db
+    genomad end-to-end GCA_025259185.1_ASM2525918v1_genomic.fna test /genomad_db --splits 16
