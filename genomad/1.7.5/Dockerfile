@@ -2,6 +2,8 @@
 ARG GENOMAD_VER="1.7.5"
 ARG ARAGORN_VER="1.2.41"
 ARG MMSEQS2_VER="15-6f452"
+ARG KERAS_VER="2.15.0"
+ARG TENSORFLOW_VER="2.15.0"
 
 FROM ubuntu:jammy as builder
 
@@ -23,6 +25,8 @@ FROM ubuntu:jammy as app
 
 ARG GENOMAD_VER
 ARG MMSEQS2_VER
+ARG KERAS_VER
+ARG TENSORFLOW_VER
 
 # 'LABEL' instructions tag the image with metadata that might be important to the user
 LABEL base.image="ubuntu:jammy"
@@ -52,11 +56,12 @@ RUN wget -q https://github.com/soedinglab/MMseqs2/releases/download/${MMSEQS2_VE
 
 # get genomad
 RUN wget -q https://github.com/apcamargo/genomad/archive/refs/tags/v${GENOMAD_VER}.tar.gz && \
-    python3 -m pip install v${GENOMAD_VER}.tar.gz && \
+    python3 -m pip install v${GENOMAD_VER}.tar.gz keras==${KERAS_VER} tensorflow==${TENSORFLOW_VER} && \
     rm -rf v${GENOMAD_VER}.tar.gz && \
     mkdir /data
 
-ENV PATH="/mmseqs/bin:$PATH" LC_ALL=C CUDA_VISIBLE_DEVICES=-1
+ENV PATH="/mmseqs/bin:$PATH" LC_ALL=C 
+#CUDA_VISIBLE_DEVICES=-1
 
 # downloads latest database, which is version 1.6 and about ~1.6 G in size
 RUN genomad download-database .
@@ -78,7 +83,7 @@ RUN genomad --help && \
     mmseqs -h
 
 # downloads genome from NCBI and runs end-to-end (which looks like all steps) on the downloaded fasta
-RUN wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/025/259/185/GCA_025259185.1_ASM2525918v1/GCA_025259185.1_ASM2525918v1_genomic.fna.gz && \
+RUN pip list && wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/025/259/185/GCA_025259185.1_ASM2525918v1/GCA_025259185.1_ASM2525918v1_genomic.fna.gz && \
     gunzip GCA_025259185.1_ASM2525918v1_genomic.fna.gz && \
 #    genomad annotate GCA_025259185.1_ASM2525918v1_genomic.fna genomad_output /genomad_db && \
 #    genomad find-proviruses GCA_025259185.1_ASM2525918v1_genomic.fna genomad_output /genomad_db && \
