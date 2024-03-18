@@ -122,7 +122,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY --from=builder /parsnp-$PARSNP_VER/ /parsnp/
 COPY --from=builder /usr/local/bin/* /usr/local/bin/
 COPY --from=builder /usr/local/lib/* /usr/local/lib/
-COPY --from=builder /parsnp-$PARSNP_VER/LICENSE /.
 
 RUN pip install pyspoa numpy biopython tqdm
 
