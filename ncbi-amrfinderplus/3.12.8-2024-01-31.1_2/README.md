@@ -5,7 +5,7 @@ Main tool : [NCBI AMRFinderPlus](https://github.com/ncbi/amr)
 Additional tools:
 
 - hmmer v3.3.2
-- ncbi-blast+ v2.14.0
+- ncbi-blast+ v2.15.0
 
 ## Database information
 
