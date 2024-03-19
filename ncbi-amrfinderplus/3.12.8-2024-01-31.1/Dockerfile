@@ -2,7 +2,7 @@ FROM ubuntu:jammy as app
 
 ARG AMRFINDER_VER="3.12.8"
 ARG AMRFINDER_DB_VER="2024-01-31.1"
-ARG BLAST_VER="2.14.0"
+ARG BLAST_VER="2.15.0"
 
 LABEL base.image="ubuntu:jammy"
 LABEL dockerfile.version="1"
