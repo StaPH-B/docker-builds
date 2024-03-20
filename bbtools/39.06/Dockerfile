@@ -1,6 +1,10 @@
 FROM staphb/samtools:1.19 as samtools
 FROM staphb/htslib:1.19 as htslib
 
+# As a reminder
+# https://github.com/StaPH-B/docker-builds/pull/925#issuecomment-2010553275
+# bbmap/docs/TableOfContents.txt lists additional dependencies
+
 FROM ubuntu:jammy as app
 
 ARG SAMBAMBAVER=1.0.1
