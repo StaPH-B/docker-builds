@@ -1,8 +1,8 @@
 FROM staphb/samtools:1.19 as samtools
+FROM staphb/htslib:1.19 as htslib
 
 FROM ubuntu:jammy as app
 
-ARG SAMTOOLSVER=1.19
 ARG SAMBAMBAVER=1.0.1
 ARG BBTOOLSVER=39.06
 
@@ -26,7 +26,6 @@ RUN apt-get update && \
     pbzip2 \
     lbzip2 \
     bzip2 \
-    bgzip \
     wget \
     ca-certificates \
     procps && \
@@ -35,6 +34,7 @@ RUN apt-get update && \
 
 # copy samtools to image
 COPY --from=samtools /usr/local/bin/* /usr/local/bin/
+COPY --from=htslib   /usr/local/bin/* /usr/local/bin/
 
 # download and install sambamba
 RUN wget -q https://github.com/biod/sambamba/releases/download/v${SAMBAMBAVER}/sambamba-${SAMBAMBAVER}-linux-amd64-static.gz && \
