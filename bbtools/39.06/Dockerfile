@@ -22,6 +22,11 @@ LABEL maintainer2.email="faninnpm AT miamioh DOT edu"
 RUN apt-get update && \
     apt-get install --no-install-recommends -y \
     openjdk-8-jre-headless \
+    pigz \
+    pbzip2 \
+    lbzip2 \
+    bzip2 \
+    bgzip \
     wget \
     ca-certificates \
     procps && \
