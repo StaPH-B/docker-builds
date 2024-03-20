@@ -19,9 +19,9 @@ Freyja is a tool to recover relative lineage abundances from mixed SARS-CoV-2 sa
 
 ## freyja barcodes
 
-This docker image was built on **2024-02-13** and the command `freyja update` is run as part of the build to retrieve the most up-to-date barcode file `freyja/data/usher_barcodes.csv` file from Freyja's GitHub repo. The barcode version included in this docker image is **`12_29_2023-00-41`** as reported by `freyja demix --version`
+This docker image was built on **2024-03-20** and the command `freyja update` is run as part of the build to retrieve the most up-to-date barcode file `freyja/data/usher_barcodes.csv` file from Freyja's GitHub repo. The barcode version included in this docker image is **`03_20_2024-00-43`** as reported by `freyja demix --version`
 
-This image is rebuilt every day on Dockerhub with the tag ${freyja version}-${freyja database version}-${data image was deployed}.
+This image is rebuilt every day on Dockerhub and Quay.io with the tag ${freyja version}-${freyja database version}-${data image was deployed}.
 
 ## Example Usage
 
@@ -33,4 +33,4 @@ freyja variants [bamfile] --variants [variant outfile name] --depths [depths out
 freyja demix [variants-file] [depth-file] --output [output-file]
 ```
 
-Warning: `freyja update` does not work under all conditions. You may need to specify an output directory (`freyja update --outdir /path/to/outdir`) for which your user has write priveleges, such as a mounted volume.
+Warning: `freyja update` does not work under all conditions. You may need to specify an output directory (`freyja update --outdir /path/to/outdir`) for which your user has write privileges, such as a mounted volume.
