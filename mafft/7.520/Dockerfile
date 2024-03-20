@@ -29,6 +29,8 @@ RUN wget https://mafft.cbrc.jp/alignment/software/mafft_${MAFFT_VER}-1_amd64.deb
     rm mafft_${MAFFT_VER}-1_amd64.deb && \
     mkdir /data
 
+CMD mafft help
+
 WORKDIR /data
 
 FROM staphb/ncbi-datasets:16.8.1 as datasets
