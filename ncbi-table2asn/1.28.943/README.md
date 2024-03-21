@@ -21,6 +21,7 @@ asndisc: 2.3
 asnmacro: 1.8
 asnval: 15.7
 asnvalidate: 3.28.943
+fastaedit_public: 29.4.0
 gap_stats: 4.2.943 (Build for external use)
 gene2xml: 1.6
 insdseqget: 1.1
