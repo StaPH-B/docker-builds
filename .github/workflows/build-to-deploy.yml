@@ -51,7 +51,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Check Out Repo (+ download Git LFS dependencies)  # each job runs in an isolated environment, so need to check out the repo in each job
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           lfs: true
 
@@ -61,10 +61,10 @@ jobs:
 
       - name: Set up Docker Buildx
         id: buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
 
       - name: Cache Docker layers  # also need to set up the cache in each job, using the same prefix (here ${{ runner.os }}-buildx) makes it sharable between jobs
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: /tmp/.buildx-cache-${{ inputs.cache }}
           key: ${{ runner.os }}-buildx-${{ inputs.cache }}-${{ github.sha }}
@@ -73,7 +73,7 @@ jobs:
 
       - name: Docker meta
         id: meta
-        uses: docker/metadata-action@v4 # trying this to resolve issues with pushing identical images to quay. info here: https://github.com/docker/build-push-action/issues/452
+        uses: docker/metadata-action@v5 # trying this to resolve issues with pushing identical images to quay. info here: https://github.com/docker/build-push-action/issues/452
         with:
           images: |
             ${{ inputs.repository_name }}/${{ inputs.container_name }}:${{ inputs.tag }}
@@ -82,13 +82,13 @@ jobs:
             quay.io/${{ inputs.repository_name }}/${{ inputs.container_name }}:latest
 
       - name: Login to DockerHub
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.docker_username }}
           password: ${{ secrets.docker_access_token }}
 
       - name: Login to Quay
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         if: ${{ inputs.push_quay }}
         with:
           registry: quay.io
@@ -97,7 +97,7 @@ jobs:
 
       - name: Build and push user-defined tag to DockerHub
         id: docker_build_user_defined_tag
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v5
         with:
           context: ${{ inputs.path_to_context }}
           file: ${{ inputs.path_to_context }}/${{ inputs.dockerfile_name }}
@@ -111,7 +111,7 @@ jobs:
 
       - name: Build and push latest tag to DockerHub
         id: docker_build_latest_tag
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v5
         if: ${{ inputs.push_latest_tag }}
         with:
           context: ${{ inputs.path_to_context }}
@@ -126,7 +126,7 @@ jobs:
 
       - name: Build and push user-defined tag to Quay
         id: quay_build_user_defined_tag
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v5
         if: ${{ inputs.push_quay }}
         with:
           context: ${{ inputs.path_to_context }}
@@ -141,7 +141,7 @@ jobs:
 
       - name: Build and push latest tag to Quay
         id: quay_build_latest_tag
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v5
         if: ${{ inputs.push_quay && inputs.push_latest_tag }}
         with:
           context: ${{ inputs.path_to_context }}
@@ -160,4 +160,4 @@ jobs:
           mv /tmp/.buildx-cache-${{ inputs.cache }}-new /tmp/.buildx-cache-${{ inputs.cache }}
 
       - name: Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
+        run: echo ${{ steps.docker_build_user_defined_tag.outputs.digest }}
