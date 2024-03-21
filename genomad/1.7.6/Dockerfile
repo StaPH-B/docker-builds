@@ -1,5 +1,5 @@
 
-ARG GENOMAD_VER="1.7.5"
+ARG GENOMAD_VER="1.7.6"
 ARG ARAGORN_VER="1.2.41"
 ARG MMSEQS2_VER="15-6f452"
 ARG KERAS_VER="2.15.0"
@@ -61,7 +61,6 @@ RUN wget -q https://github.com/apcamargo/genomad/archive/refs/tags/v${GENOMAD_VE
     mkdir /data
 
 ENV PATH="/mmseqs/bin:$PATH" LC_ALL=C 
-#CUDA_VISIBLE_DEVICES=-1
 
 # downloads latest database, which is version 1.6 and about ~1.6 G in size
 RUN genomad download-database .
@@ -85,11 +84,4 @@ RUN genomad --help && \
 # downloads genome from NCBI and runs end-to-end (which looks like all steps) on the downloaded fasta
 RUN pip list && wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/025/259/185/GCA_025259185.1_ASM2525918v1/GCA_025259185.1_ASM2525918v1_genomic.fna.gz && \
     gunzip GCA_025259185.1_ASM2525918v1_genomic.fna.gz && \
-#    genomad annotate GCA_025259185.1_ASM2525918v1_genomic.fna genomad_output /genomad_db && \
-#    genomad find-proviruses GCA_025259185.1_ASM2525918v1_genomic.fna genomad_output /genomad_db && \
-#    genomad marker-classification GCA_025259185.1_ASM2525918v1_genomic.fna genomad_output /genomad_db && \
-#    genomad nn-classification GCA_025259185.1_ASM2525918v1_genomic.fna /genomad_db && \
-#    genomad aggregated-classification GCA_025259185.1_ASM2525918v1_genomic.fna /genomad_db && \
-#    genomad score-calibration GCA_025259185.1_ASM2525918v1_genomic.fna /genomad_db && \
-#    genomad summary GCA_025259185.1_ASM2525918v1_genomic.fna /genomad_db
     genomad end-to-end GCA_025259185.1_ASM2525918v1_genomic.fna test /genomad_db --splits 16
