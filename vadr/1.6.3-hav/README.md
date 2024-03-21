@@ -25,8 +25,8 @@ Available VADR models:
 
 Additional VADR models:
 
-- [HAV](https://github.com/theiagen/VADR_models/tree/main/hav)
-  - The description on how this model was built can be found [here](https://github.com/theiagen/VADR_models?tab=readme-ov-file#hav)
+- HAV v1.0.0
+  - The description on how this model was built can be found [here](https://github.com/theiagen/VADR_models)
 
 ## FYI
 
@@ -82,4 +82,12 @@ v-annotate.pl --split --cpu 8 -r --atgonly --xnocomp --nomisc \
     flu.fa \
     flu-test-output
 
+# run v-annotate.pl using HAV modesl to annotate an HAV FASTA file
+# the "-mkey hav.vadr" option is required to specify the HAV model
+ v-annotate.pl --split \
+     -r \
+     -xnocomp \
+     -mkey hav.vadr \
+     hav.trimmed.fasta \
+     hav-vadr-test-output
 ```

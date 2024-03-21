@@ -6,6 +6,7 @@ ENV VADR_VERSION="1.6.3" \
   VADR_MPXV_MODELS_VERSION="1.4.2-1" \
   VADR_RSV_MODELS_VER="1.5-2"\
   VADR_FLU_MODELS_VER="1.6.3-1"\
+  VADR_HAV_MODELS_VER="1.0.0" \
   LC_ALL=C \
   VADRINSTALLDIR=/opt/vadr
 
@@ -36,6 +37,8 @@ LABEL maintainer="Anders Goncalves da Silva"
 LABEL maintainer.email="andersgs@gmail.com"
 LABEL maintainer2="Curtis Kapsak"
 LABEL maintainer2.email="curtis.kapsak@theiagen.com"
+LABEL maintainer3="Ines Mendes"
+LABEL maintainer3.email="ines.mendes@theiagen.com"
 
 # install dependencies via apt-get. Clean up apt garbage 
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -51,8 +54,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  zip \
  unzip \
  procps \
- zlib1g-dev \
- git && \
+ zlib1g-dev && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # install VADR
@@ -98,10 +100,12 @@ RUN wget https://ftp.ncbi.nlm.nih.gov/pub/nawrocki/vadr-models/flu/${VADR_FLU_MO
  cp -nvr /vadr-models-flu-${VADR_FLU_MODELS_VER}/* ${VADRMODELDIR} && \
  rm -rfv /vadr-models-flu-${VADR_FLU_MODELS_VER}
 
-# git clone and move HAV files into VADRMODELDIR
-RUN git clone https://github.com/theiagen/VADR_models.git && \
- cp -nvr /VADR_models/hav/* ${VADRMODELDIR} && \
- rm -rf /VADR_models
+# download release of HAV VADR model files and move files into $VADRMODELDIR; clean up extra copies (original downloaded files)
+RUN wget https://github.com/theiagen/VADR_models/archive/refs/tags/v${VADR_HAV_MODELS_VER}.tar.gz && \
+ tar -xf v${VADR_HAV_MODELS_VER}.tar.gz && \
+ rm -v v${VADR_HAV_MODELS_VER}.tar.gz && \ 
+ cp -nvr /VADR_models-${VADR_HAV_MODELS_VER}/hav/* ${VADRMODELDIR} && \
+ rm -rf /VADR_models-${VADR_HAV_MODELS_VER}
 
 # Virus model files other than sarscov2 will need to be made available to vadr either in
 # the $VADRMODELDIR or another path can be specified using the 'v-annotate.pl -mdir' option.
