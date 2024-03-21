@@ -14,14 +14,12 @@ Additional tools:
 
 - python 3.8.10
 - biopython 1.73
-- [kma](https://bitbucket.org/genomicepidemiology/kma/src/master/) 1.0.0
+- [kma](https://bitbucket.org/genomicepidemiology/kma/src/master/) 1.4.14
 - ncbi-blast+ 2.9.0
 
-## Version information
+Database version:
 
-VirulenceFinder version: 2.0.4 [https://bitbucket.org/genomicepidemiology/virulencefinder/src/2.0.4/](https://bitbucket.org/genomicepidemiology/virulencefinder/src/2.0.4/) made on 2020-02-06
-
-VirulenceFinder database version: commit `f678bdc15283aed3a45f66050d2eb3a6c9651f3f` made on 2023‑05‑03. [Link to commit history](https://bitbucket.org/genomicepidemiology/virulencefinder_db/commits/)
+VirulenceFinder database version: commit `2b705359191a24f6db64f891ab07c93b0281e685` made on 2024-01-02. [Link to commit history](https://bitbucket.org/genomicepidemiology/virulencefinder_db/commits/)
 
 ## Requirements
 
@@ -78,7 +76,7 @@ optional arguments:
 
 ```bash
 # download the image
-$ docker pull staphb/virulencefinder:2.0.4
+$ docker pull staphb/virulencefinder:latest
 
 # input files are in my PWD
 $ ls
@@ -88,11 +86,11 @@ E-coli.skesa.fasta  E-coli.R1.fastq.gz  E-coli.R2.fastq.gz
 $ mkdir output-dir-reads output-dir-asm
 
 # query reads, mount PWD to /data inside container (broken into two lines for readabilty)
-$ docker run --rm -u $(id -u):$(id -g) -v $PWD:/data staphb/virulencefinder:2.0.1 \
+$ docker run --rm -u $(id -u):$(id -g) -v $PWD:/data staphb/virulencefinder:latest \
     virulencefinder.py -i /data/E-coli.R1.fastq.gz -o /data/output-dir-reads
 
 # query assembly
-$ docker run --rm -u $(id -u):$(id -g) -v $PWD:/data staphb/virulencefinder:2.0.1 \
+$ docker run --rm -u $(id -u):$(id -g) -v $PWD:/data staphb/virulencefinder:latest \
     virulencefinder.py -i /data/E-coli.skesa.fasta  -o /data/output-dir-asm
 ```
 
@@ -100,7 +98,7 @@ $ docker run --rm -u $(id -u):$(id -g) -v $PWD:/data staphb/virulencefinder:2.0.
 
 ```bash
 # download the image
-$ singularity build virulencefinder.2.0.4.sif docker://staphb/virulencefinder:2.0.4
+$ singularity build virulencefinder.latest.sif docker://staphb/virulencefinder:latest
 
 # files are in my PWD
 $ ls
@@ -110,10 +108,10 @@ E-coli.skesa.fasta  E-coli.R1.fastq.gz  E-coli.R2.fastq.gz
 $ mkdir output-dir-reads output-dir-asm
 
 # query reads; mount PWD to /data inside container
-$ singularity exec --no-home -B $PWD:/data virulencefinder.2.0.4.sif \
+$ singularity exec --no-home -B $PWD:/data virulencefinder.latest.sif \
     virulencefinder.py -i /data/E-coli.R1.fastq.gz -o /data/output-dir-reads
 
 # assembly
-$ singularity exec --no-home -B $PWD:/data virulencefinder.2.0.4.sif \
+$ singularity exec --no-home -B $PWD:/data virulencefinder.latest.sif \
     virulencefinder.py -i /data/E-coli.skesa.fasta  -o /data/output-dir-asm
 ```
