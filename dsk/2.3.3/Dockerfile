@@ -12,6 +12,8 @@ LABEL description="DSK is a k-mer counter for reads or genomes."
 LABEL website="https://github.com/GATB/dsk"
 LABEL documentation="https://gatb.inria.fr/software/dsk/"
 LABEL license="https://github.com/GATB/dsk/blob/master/LICENSE"
+LABEL maintainer="Erin Young"
+LABEL maintainer.email="eriny@utah.gov"
 
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends\
