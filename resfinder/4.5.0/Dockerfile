@@ -1,4 +1,4 @@
-ARG RESFINDER_VER="4.4.3"
+ARG RESFINDER_VER="4.5.0"
 
 FROM ubuntu:jammy as app
 
@@ -8,7 +8,7 @@ ARG KMA_VER="1.4.14"
 
 # Database may not be properly versioned, but using a version tag here (2024-03-08)
 # see here: https://bitbucket.org/genomicepidemiology/resfinder_db/downloads/?tab=tags
-ARG RESFINDER_DB_COMMIT_HASH="2.3.0"
+ARG RESFINDER_DB_COMMIT_HASH="2.3.1"
 
 # Database may not be properly versioned, but using a version tag here (2024-03-08)
 # see here: https://bitbucket.org/genomicepidemiology/pointfinder_db/downloads/?tab=tags
