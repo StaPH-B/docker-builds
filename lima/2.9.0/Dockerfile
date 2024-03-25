@@ -16,9 +16,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     wget \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-COPY --from=builder /usr/local/lib/R/site-library/ /usr/local/lib/R/site-library/
-COPY --from=builder /usr/local/bin/ /usr/local/bin/
-
 RUN wget https://github.com/PacificBiosciences/barcoding/releases/download/v${LIMA_VER}/lima.tar.gz &&\
     tar -C /usr/local/bin -xvf lima.tar.gz
 
