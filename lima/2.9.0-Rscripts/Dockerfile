@@ -59,9 +59,10 @@ RUN wget -q https://downloads.pacbcloud.com/public/dataset/HiFiViral/Jan_2022/Hi
     https://downloads.pacbcloud.com/public/dataset/HiFiViral/Jan_2022/m64187e_211217_130958.hifi_reads.bam
 # run test
 RUN lima m64187e_211217_130958.hifi_reads.bam HiFiViral_Barcoded_M13_Primer_Plate.fasta demux.hifi.bam --biosample-csv InqabaOmicronSamples_Barcoded_Sample.csv --hifi-preset ASYMMETRIC &&\
-    cat demux.hifi.lima.summary &&\
-    report_summary.R demux.hifi.lima.report &&\
-    ls | grep *.png
+    cat demux.hifi.lima.summary
+    
+RUN report_summary.R demux.hifi.lima.report &&\
+    ls | grep png
 
 
 
