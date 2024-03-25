@@ -5,7 +5,7 @@ Main tool : [ResFinder](https://bitbucket.org/genomicepidemiology/resfinder/src/
 Additional tools:
 
 - kma 1.4.14
-- ResFinder database 2.3.0
+- ResFinder database 2.3.1
 - PointFinder database 4.1.0
 - disinfinder database 2.0.1
 
