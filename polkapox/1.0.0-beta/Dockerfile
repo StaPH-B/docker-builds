@@ -74,9 +74,15 @@ ENV PATH="/usr/local/bin:${PATH}"
 ENV PATH="/src/ncbi-blast-${BLAST_VER}+/bin:${PATH}" \
     LC_ALL=C
 
-# set working directory so that all test inputs & outputs are kept in /test
+# Set working directory so that all test inputs & outputs are kept in /test
 WORKDIR /test
 
 
 ###### Testing Stage ######
 RUN blastn -version
+
+# Copy and run test files
+COPY my_tests.sh .
+COPY LIY15561A65_2022_1744_NE.assembly.gfa.gz .
+RUN bash my_tests.sh
+
