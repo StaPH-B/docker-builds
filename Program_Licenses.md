@@ -83,6 +83,7 @@ The licenses of the open-source software that is contained in these Docker image
 | LABEL | GPL version 3 | In zipped file in README.md |
 | legsta | GNU GPLv3 | https://github.com/tseemann/legsta/blob/master/LICENSE |
 | liftoff | GNU GPLv3 | https://github.com/agshumate/Liftoff/blob/master/LICENSE.md |
+| lima | BSD-3 | https://github.com/PacificBiosciences/barcoding/blob/master/LICENSE |
 | longshot | MIT | https://github.com/pjedge/longshot/blob/master/LICENSE |
 | Lyve-SET  | MIT | https://github.com/lskatz/lyve-SET/blob/master/LICENSE |
 | Mafft  | BSD | https://mafft.cbrc.jp/alignment/software/license.txt |
