@@ -83,7 +83,9 @@ RUN blastn -version
 
 # Copy and run test files
 COPY my_tests.sh .
-COPY LIY15561A65_2022_1744_NE.assembly.gfa.gz .
+COPY LIY15561A68_2022_1748_IN.assembly.gfa.gz .
+COPY LIY15561A68_2022_1748_IN.assembly_longest.fasta .
+COPY LIY15561A68_2022_1748_IN.assembly.log .
 COPY mpxv-AssemblyGraph_gfaPy.py .
 RUN bash my_tests.sh
 
