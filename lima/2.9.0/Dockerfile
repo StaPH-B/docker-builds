@@ -13,10 +13,10 @@ LABEL maintainer="Kutluhan Incekara"
 LABEL maintainer.email="kutluhan.incekara@ct.gov"
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
-    wget \
+    wget &&\
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-RUN wget https://github.com/PacificBiosciences/barcoding/releases/download/v${LIMA_VER}/lima.tar.gz &&\
+RUN wget --no-check-certificate https://github.com/PacificBiosciences/barcoding/releases/download/v${LIMA_VER}/lima.tar.gz &&\
     tar -C /usr/local/bin -xvf lima.tar.gz
 
 ENV LC_ALL=C
@@ -27,7 +27,7 @@ WORKDIR /data
 
 FROM app as test
 # download test files
-RUN wget https://downloads.pacbcloud.com/public/dataset/HiFiViral/Jan_2022/HiFiViral_Barcoded_M13_Primer_Plate.fasta \
+RUN wget -q --no-check-certificate https://downloads.pacbcloud.com/public/dataset/HiFiViral/Jan_2022/HiFiViral_Barcoded_M13_Primer_Plate.fasta \
     https://downloads.pacbcloud.com/public/dataset/HiFiViral/Jan_2022/InqabaOmicronSamples_Barcoded_Sample.csv \
     https://downloads.pacbcloud.com/public/dataset/HiFiViral/Jan_2022/m64187e_211217_130958.hifi_reads.bam
 # run test

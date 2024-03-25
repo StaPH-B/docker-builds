@@ -54,7 +54,7 @@ WORKDIR /data
 
 FROM app as test
 # download test files
-RUN wget https://downloads.pacbcloud.com/public/dataset/HiFiViral/Jan_2022/HiFiViral_Barcoded_M13_Primer_Plate.fasta \
+RUN wget -q https://downloads.pacbcloud.com/public/dataset/HiFiViral/Jan_2022/HiFiViral_Barcoded_M13_Primer_Plate.fasta \
     https://downloads.pacbcloud.com/public/dataset/HiFiViral/Jan_2022/InqabaOmicronSamples_Barcoded_Sample.csv \
     https://downloads.pacbcloud.com/public/dataset/HiFiViral/Jan_2022/m64187e_211217_130958.hifi_reads.bam
 # run test
