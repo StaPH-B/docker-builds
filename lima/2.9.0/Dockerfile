@@ -17,7 +17,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 RUN wget --no-check-certificate https://github.com/PacificBiosciences/barcoding/releases/download/v${LIMA_VER}/lima.tar.gz &&\
-    tar -C /usr/local/bin -xvf lima.tar.gz
+    tar -C /usr/local/bin -xvf lima.tar.gz &&\
+    rm lima.tar.gz
 
 ENV LC_ALL=C
 

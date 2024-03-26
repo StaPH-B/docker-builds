@@ -44,7 +44,8 @@ COPY --from=builder /usr/local/lib/R/site-library/ /usr/local/lib/R/site-library
 COPY --from=builder /usr/local/bin/ /usr/local/bin/
 
 RUN wget https://github.com/PacificBiosciences/barcoding/releases/download/v${LIMA_VER}/lima.tar.gz &&\
-    tar -C /usr/local/bin -xvf lima.tar.gz
+    tar -C /usr/local/bin -xvf lima.tar.gz &&\
+    rm lima.tar.gz
 
 ENV LC_ALL=C
 
