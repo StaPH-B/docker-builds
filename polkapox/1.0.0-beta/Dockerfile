@@ -70,22 +70,21 @@ CMD echo "The polkapox container is not intended to run independently of the wor
 # A second FROM insruction creates a new stage
 FROM app as test
 
-ENV PATH="/usr/local/bin:${PATH}"
-ENV PATH="/src/ncbi-blast-${BLAST_VER}+/bin:${PATH}" \
-    LC_ALL=C
-
 # Set working directory so that all test inputs & outputs are kept in /test
 WORKDIR /test
-
 
 ###### Testing Stage ######
 RUN blastn -version
 
 # Copy and run test files
-COPY my_tests.sh .
-COPY LIY15561A68_2022_1748_IN.assembly.gfa.gz .
-COPY LIY15561A68_2022_1748_IN.assembly_longest.fasta .
-COPY LIY15561A68_2022_1748_IN.assembly.log .
-COPY mpxv-AssemblyGraph_gfaPy.py .
-RUN bash my_tests.sh
+COPY LIY15561A68_2022_1748_IN.assembly.gfa /test/.
+COPY mpxv-AssemblyGraph_gfaPy.py /test/.
 
+RUN mkdir /test/test && \
+    wget -q https://raw.githubusercontent.com/CDCgov/polkapox/master/assets/MPXV-UK_P2.noN_39086_40204.fasta && \
+    ls /test/LIY15561A68_2022_1748_IN.assembly.gfa && wc -l /test/LIY15561A68_2022_1748_IN.assembly.gfa && \
+    cat LIY15561A68_2022_1748_IN.assembly.gfa | awk 'BEGIN { FS="\t" } /^S/{ if( length($3) >= 1) print ">Contig"$2"_len"substr($4,6)"_cov"substr($5,6,5)"\n"$3}' | fold > LIY15561A65_2022_1744_NE.contigs.fasta && \
+    python mpxv-AssemblyGraph_gfaPy.py \
+        -i /test/LIY15561A68_2022_1748_IN.assembly.gfa \
+        -r /test/MPXV-UK_P2.noN_39086_40204.fasta \
+        -o test && head /test/test/LIY15561A68_2022_1748_IN.assembly.log /test/test/LIY15561A68_2022_1748_IN.assembly.summary
