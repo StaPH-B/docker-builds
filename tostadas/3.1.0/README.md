@@ -1,6 +1,7 @@
 # tostadas container
 
 Main tool : [tostadas](https://github.com/CDCgov/tostadas)
+Version: 3.1.0
 
 Additional tools installed via conda:
   - pip
