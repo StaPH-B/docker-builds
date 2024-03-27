@@ -13,7 +13,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 LABEL authors="CDC PolkaPox Team"
 LABEL description="Container used in the PolkaPox pipeline by graph_reconstruct.nf module"
 LABEL base.image="python:3.8-slim"
-LABEL dockerfile.version="1.0"
+LABEL dockerfile.version="1"
 LABEL software="polkapox"
 LABEL software.version="${SOFTWARENAME_VER}"
 LABEL website="https://github.com/CDCgov/polkapox"
@@ -23,11 +23,11 @@ LABEL maintainer.email="yrh8@cdc.gov"
 
 # Install required system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
-  build-essential \
-  libopenblas-dev \
-  wget \
-  procps && \
-  rm -rf /var/lib/apt/lists/* && apt-get autoclean
+    build-essential \
+    libopenblas-dev \
+    wget \
+    procps && \
+    rm -rf /var/lib/apt/lists/* && apt-get autoclean
 
 # Install Python packages
 RUN pip install --no-cache-dir \
@@ -37,9 +37,6 @@ RUN pip install --no-cache-dir \
     networkx==3.1 \
     gfapy==1.2.3
 
-# Set environment variables
-ENV PATH="/usr/local/bin:${PATH}"
-
 # Set a work dir for the Blast+ install
 WORKDIR /src
 
@@ -47,9 +44,9 @@ WORKDIR /src
 ARG BLAST_VER=2.15.0
 
 RUN wget https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/${BLAST_VER}/ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz && \
- tar -xzf ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz && \
- rm ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz && \
- mkdir /data
+    tar -xzf ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz && \
+    rm ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz && \
+    mkdir /data
 
 # Add blast executable to path
 ENV PATH="/src/ncbi-blast-${BLAST_VER}+/bin:${PATH}" \
@@ -77,14 +74,15 @@ WORKDIR /test
 RUN blastn -version
 
 # Copy and run test files
-COPY LIY15561A68_2022_1748_IN.assembly.gfa /test/.
-COPY mpxv-AssemblyGraph_gfaPy.py /test/.
+COPY LIY15561A68_2022_1748_IN.assembly.gfa.gz /test/.
 
-RUN mkdir /test/test && \
+RUN gunzip LIY15561A68_2022_1748_IN.assembly.gfa.gz && \
     wget -q https://raw.githubusercontent.com/CDCgov/polkapox/master/assets/MPXV-UK_P2.noN_39086_40204.fasta && \
-    ls /test/LIY15561A68_2022_1748_IN.assembly.gfa && wc -l /test/LIY15561A68_2022_1748_IN.assembly.gfa && \
+    wget -q https://raw.githubusercontent.com/CDCgov/polkapox/master/bin/mpxv-AssemblyGraph_gfaPy.py && \
     cat LIY15561A68_2022_1748_IN.assembly.gfa | awk 'BEGIN { FS="\t" } /^S/{ if( length($3) >= 1) print ">Contig"$2"_len"substr($4,6)"_cov"substr($5,6,5)"\n"$3}' | fold > LIY15561A65_2022_1744_NE.contigs.fasta && \
     python mpxv-AssemblyGraph_gfaPy.py \
         -i /test/LIY15561A68_2022_1748_IN.assembly.gfa \
         -r /test/MPXV-UK_P2.noN_39086_40204.fasta \
-        -o test && head /test/test/LIY15561A68_2022_1748_IN.assembly.log /test/test/LIY15561A68_2022_1748_IN.assembly.summary
+        -o . && \
+        head /test/LIY15561A68_2022_1748_IN.assembly.log /test/LIY15561A68_2022_1748_IN.assembly.summary && \
+        wc -l LIY15561A68_2022_1748_IN.assembly_longest.fasta
