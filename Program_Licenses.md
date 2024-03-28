@@ -114,6 +114,7 @@ The licenses of the open-source software that is contained in these Docker image
 | pasty | Apache 2.0 | https://github.com/rpetit3/pasty/blob/main/LICENSE |
 | Pavian | GNU GPLv3 | https://github.com/fbreitwieser/pavian/blob/master/DESCRIPTION |
 | pbptyper | MIT | https://github.com/rpetit3/pbptyper/blob/main/LICENSE |
+| pbtk | BSD-3 | https://github.com/PacificBiosciences/pbtk/blob/main/LICENSE.txt |
 | Phyml | GNU GPLv3 | https://github.com/stephaneguindon/phyml/blob/master/COPYING |
 | phyTreeViz | MIT | https://github.com/moshi4/phyTreeViz/blob/main/LICENSE |
 | Piggy | GNU GPLv3 | https://github.com/harry-thorpe/piggy/blob/master/LICENSE |
