@@ -113,6 +113,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Parsnp | Battelle National Biodefense Institute (BNBI) | https://github.com/marbl/parsnp?tab=License-1-ov-file#readme |
 | pasty | Apache 2.0 | https://github.com/rpetit3/pasty/blob/main/LICENSE |
 | Pavian | GNU GPLv3 | https://github.com/fbreitwieser/pavian/blob/master/DESCRIPTION |
+| pbmm2 | BSD-3 | https://github.com/PacificBiosciences/pbmm2/blob/develop/LICENSE |
 | pbptyper | MIT | https://github.com/rpetit3/pbptyper/blob/main/LICENSE |
 | Phyml | GNU GPLv3 | https://github.com/stephaneguindon/phyml/blob/master/COPYING |
 | phyTreeViz | MIT | https://github.com/moshi4/phyTreeViz/blob/main/LICENSE |
