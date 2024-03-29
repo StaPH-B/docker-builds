@@ -1,22 +1,14 @@
-#FROM nfcore/base:2.1 as app
 FROM mambaorg/micromamba:1.5.8 as app
-# nfcore/base is Debian
-
-# comes with warning about conda version
-# ==> WARNING: A newer version of conda exists. <==
-#   current version: 4.9.2
-#   latest version: 22.11.1
-#
-# Please update conda by running
-#
-#     $ conda update -n base -c defaults conda
 
 ARG TOSTADAS_VER="3.0.0"
 
+USER root
+
+WORKDIR /
+
 LABEL authors="Cole and Ankush Gupta"
-#LABEL base.image="nfcore/base:2.1"
-LABEL base.image="micromamba:1.5.8"
-LABEL dockerfile.version="2"
+LABEL base.image="mambaorg/micromamba:1.5.8"
+LABEL dockerfile.version="1"
 LABEL software="tostadas"
 LABEL software.version=$TOSTADAS_VER
 LABEL description="Image for the TOSTADAS: Toolkit for Open Sequence Triage, Annotation and DAtabase Submission pipeline"
@@ -29,22 +21,11 @@ LABEL maintainer2.email="kyoconnell@deloitte.com"
 LABEL maintainer3="Cole Tindall"
 LABEL maintainer3.email="ctindall@deloitte.com"
 
-# install required system dependencies
-#RUN apt-get update && \
-#    apt-get install -y wget
-#    rm -rf /var/lib/apt/lists/*
-
 RUN apt-get update && apt-get install -y --no-install-recommends \
-      wget \
-      ca-certificates \
-#     build-essential \
-#     libopenblas-dev \
-#     wget \
-      procps && \
-      apt-get autoclean && rm -rf /var/lib/apt/lists/*
-#     rm -rf /var/lib/apt/lists/* && apt-get autoclean
-#
-
+    wget \
+    ca-certificates \
+    procps && \
+    apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # download tostadas repo, move to /tostadas, and create /data
 RUN wget https://github.com/CDCgov/tostadas/archive/refs/tags/v${TOSTADAS_VER}.tar.gz && \
@@ -53,12 +34,9 @@ RUN wget https://github.com/CDCgov/tostadas/archive/refs/tags/v${TOSTADAS_VER}.t
     mv tostadas-${TOSTADAS_VER} tostadas && \
     mkdir /data
 
-# install mamba
-RUN conda install mamba -n base -c conda-forge
-
 # use mamba to install conda packages
-RUN mamba env create -f tostadas/environment.yml && \
-    mamba clean -a -y && \
+RUN micromamba env create -f tostadas/environment.yml && \
+    micromamba clean -a -y && \
     echo "source activate tostadas" > ~/.bashrc && \
     rm -rf /tostadas
 
@@ -75,8 +53,6 @@ WORKDIR /data
 
 # A second FROM insruction creates a new stage
 FROM app as test
-
-RUN mamba list && conda list
 
 RUN liftoff --version && \
     samtools --version && \
