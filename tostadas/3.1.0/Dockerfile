@@ -1,4 +1,5 @@
-FROM nfcore/base:2.1 as app
+#FROM nfcore/base:2.1 as app
+FROM mambaorg/micromamba:1.5.8 as app
 # nfcore/base is Debian
 
 # comes with warning about conda version
@@ -13,8 +14,9 @@ FROM nfcore/base:2.1 as app
 ARG TOSTADAS_VER="3.0.0"
 
 LABEL authors="Cole and Ankush Gupta"
-LABEL base.image="nfcore/base:2.1"
-LABEL dockerfile.version="1"
+#LABEL base.image="nfcore/base:2.1"
+LABEL base.image="micromamba:1.5.8"
+LABEL dockerfile.version="2"
 LABEL software="tostadas"
 LABEL software.version=$TOSTADAS_VER
 LABEL description="Image for the TOSTADAS: Toolkit for Open Sequence Triage, Annotation and DAtabase Submission pipeline"
@@ -26,6 +28,23 @@ LABEL maintainer2="Kyle O'Connell"
 LABEL maintainer2.email="kyoconnell@deloitte.com"
 LABEL maintainer3="Cole Tindall"
 LABEL maintainer3.email="ctindall@deloitte.com"
+
+# install required system dependencies
+#RUN apt-get update && \
+#    apt-get install -y wget
+#    rm -rf /var/lib/apt/lists/*
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      wget \
+      ca-certificates \
+#     build-essential \
+#     libopenblas-dev \
+#     wget \
+      procps && \
+      apt-get autoclean && rm -rf /var/lib/apt/lists/*
+#     rm -rf /var/lib/apt/lists/* && apt-get autoclean
+#
+
 
 # download tostadas repo, move to /tostadas, and create /data
 RUN wget https://github.com/CDCgov/tostadas/archive/refs/tags/v${TOSTADAS_VER}.tar.gz && \
