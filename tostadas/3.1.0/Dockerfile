@@ -8,7 +8,7 @@ WORKDIR /
 
 LABEL authors="Cole and Ankush Gupta"
 LABEL base.image="mambaorg/micromamba:1.5.8"
-LABEL dockerfile.version="1"
+LABEL dockerfile.version="2"
 LABEL software="tostadas"
 LABEL software.version=$TOSTADAS_VER
 LABEL description="Image for the TOSTADAS: Toolkit for Open Sequence Triage, Annotation and DAtabase Submission pipeline"
