@@ -1,6 +1,6 @@
 FROM mambaorg/micromamba:1.5.8 as app
 
-ARG TOSTADAS_VER="3.0.0"
+ARG TOSTADAS_VER="3.1.0"
 
 USER root
 
