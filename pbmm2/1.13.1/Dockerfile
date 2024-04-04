@@ -33,5 +33,5 @@ RUN wget -q --no-check-certificate https://downloads.pacbcloud.com/public/datase
     gunzip -c GCF_009858895.2_ASM985889v3_genomic.fna.gz > ref.fasta
 
 RUN pbmm2 index ref.fasta ref.mmi --preset HiFi &&\
-    pbmm2 align -j 8 ref.mmi m64012_210821_095651.hifi_reads.bam mapped.hifi.reads.bam --preset HiFi
+    pbmm2 align -j 4 ref.mmi m64012_210821_095651.hifi_reads.bam mapped.hifi.reads.bam --preset HiFi
 
