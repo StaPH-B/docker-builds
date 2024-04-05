@@ -21,7 +21,7 @@ Available VADR models:
 - Norovirus and other Caliciviridae
 - Dengue virus and other Flaviviridae
 - RSV v1.5.1-2
-- influenza v1.6.3-1
+- influenza v1.6.3-2
 
 Additional VADR models:
 
