@@ -53,3 +53,4 @@ RUN gfastats gfastats-${GFASTATS_VER}/testFiles/random1.fasta -o gfa && \
   gfastats gfastats-${GFASTATS_VER}/testFiles/random2.gfa2 && \
   gfastats gfastats-${GFASTATS_VER}/testFiles/random1.fasta -k gfastats-${GFASTATS_VER}/testFiles/random1.instructions.sak -o gfa && \
   gfastats --tabular --seq-report gfastats-${GFASTATS_VER}/testFiles/random6.circular.gfa
+  
