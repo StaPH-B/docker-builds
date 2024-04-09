@@ -14,6 +14,8 @@ LABEL software.version="${SEQSERO2_VER}"
 LABEL description="Salmonella serotyping from genome sequencing data"
 LABEL website="https://github.com/denglab/SeqSero2"
 LABEL license="https://github.com/denglab/SeqSero2/blob/master/LICENSE"
+LABEL maintainer="Erin Young"
+LABEL maintainer.email="eriny@utah.gov"
 LABEL maintainer1="Jake Garfin"
 LABEL maintainer1.email="jake.garfin@state.mn.us"
 LABEL maintainer2="Curtis Kapsak"
@@ -76,6 +78,8 @@ RUN wget -q https://github.com/denglab/SeqSero2/archive/v${SEQSERO2_VER}.tar.gz 
 # PATH edited to include /SeqSero2-1.1.0/bin in previous python3 command
 ENV PATH="${PATH}:/SPAdes-${SPADES_VER}-Linux/bin:/SalmID-${SALMID_VER}:/samtools-${SAMTOOLS_VER}" \
     LC_ALL=C
+
+CMD SeqSero2_package.py --help
 
 WORKDIR /data
 
