@@ -3,7 +3,7 @@ FROM mambaorg/micromamba:1.5.7 as app
 # Version arguments
 # ARG variables only persist during build time
 # THIS ARG ONLY USED FOR A LABEL. VERSION SPECIFIED IN PANAROO-ENVIRONMENT.YML
-ARG PANAROO_SOFTWARE_VERSION="1.4.2"
+ARG PANAROO_SOFTWARE_VERSION="1.5.0"
 
 # build and run as root users since micromamba image has 'mambauser' set as the $USER
 USER root
