@@ -67,6 +67,8 @@ RUN wget -q https://github.com/rrwick/Trycycler/archive/v${TRYCYCLER_VER}.tar.gz
     pip3 install ./Trycycler-${TRYCYCLER_VER} Pillow && \
     mkdir /data
 
+CMD trycycler --help
+
 # set /data as working directory
 WORKDIR /data
 
