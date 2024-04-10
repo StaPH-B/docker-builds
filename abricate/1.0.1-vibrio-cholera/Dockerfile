@@ -107,6 +107,5 @@ abricate-get_db --db ncbi --dbdir . && \
 abricate --threads `nproc` --fofn test/fofn.txt
 
 # vibrio-specific abricate test
-RUN abricate --db vibrio /data/ > /data/abricate_vibrio.tsv
-RUN cat /data/abricate_vibrio.tsv
+RUN abricate --db vibrio /data/ERR10146580_contigs.fasta > /data/abricate_vibrio.tsv
 RUN grep "ctxA" /data/abricate_vibrio.tsv && echo done
