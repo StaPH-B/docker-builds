@@ -15,6 +15,8 @@ LABEL website="https://github.com/tseemann/abricate"
 LABEL license="https://github.com/tseemann/abricate/blob/master/LICENSE"
 LABEL maintainer="Curtis Kapsak"
 LABEL maintainer.email="curtis.kapsak@theiagen.com"
+LABEL maintainer2="Inês Mendes"
+LABEL maintainer2.email="ines.mendes@theiagen.com"
 
 # install dependencies
 # removed: emboss
