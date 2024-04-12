@@ -55,7 +55,9 @@ RUN wget -q https://github.com/samtools/samtools/releases/download/${SAMTOOLS_VE
   cd samtools-${SAMTOOLS_VER} && \
   ./configure && \
   make && \
-  make install
+  make install && \
+  cd / && \
+  rm -rfv /samtools-${SAMTOOLS_VER}
 
 # Install salmID 
 RUN wget -q https://github.com/hcdenbakker/SalmID/archive/${SALMID_VER}.tar.gz && \
@@ -75,7 +77,7 @@ RUN wget -q https://github.com/denglab/SeqSero2/archive/v${SEQSERO2_VER}.tar.gz 
   python3 -m pip install . && \
   mkdir /data
 
-# PATH edited to include /SeqSero2-1.1.0/bin in previous python3 command
+# set PATH for manually installed tools. SeqSero2 placed in PATH already with "pip install" cmd
 ENV PATH="${PATH}:/SPAdes-${SPADES_VER}-Linux/bin:/SalmID-${SALMID_VER}:/samtools-${SAMTOOLS_VER}" \
     LC_ALL=C
 
