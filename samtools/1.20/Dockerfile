@@ -1,4 +1,4 @@
-ARG SAMTOOLS_VER="1.19.2"
+ARG SAMTOOLS_VER="1.20"
 
 FROM ubuntu:jammy as builder
 
@@ -21,12 +21,13 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     ca-certificates
 
 # download, compile, and install samtools
-RUN wget https://github.com/samtools/samtools/releases/download/${SAMTOOLS_VER}/samtools-${SAMTOOLS_VER}.tar.bz2 && \
+RUN wget -q https://github.com/samtools/samtools/releases/download/${SAMTOOLS_VER}/samtools-${SAMTOOLS_VER}.tar.bz2 && \
     tar -xjf samtools-${SAMTOOLS_VER}.tar.bz2 && \
     cd samtools-${SAMTOOLS_VER} && \
     ./configure && \
     make && \
-    make install
+    make install && \
+    make test
 
 ### start of app stage ###
 FROM ubuntu:jammy as app
@@ -77,8 +78,15 @@ CMD ["samtools", "--help"]
 ### start of test stage ###
 FROM app as test
 
-# install wget for downloading test files
+ARG SAMTOOLS_VER
+
+# check PATH
+RUN samtools --help
+
+# install make and wget for downloading test files
 RUN apt-get update && apt-get install --no-install-recommends -y wget ca-certificates
+
+WORKDIR /test
 
 RUN wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123.consensus.fa && \
     wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123.primertrim.sorted.bam && \
