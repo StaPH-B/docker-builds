@@ -1,9 +1,7 @@
 
-ARG GENOMAD_VER="1.7.6"
+ARG GENOMAD_VER="1.8.0"
 ARG ARAGORN_VER="1.2.41"
 ARG MMSEQS2_VER="15-6f452"
-ARG KERAS_VER="2.15.0"
-ARG TENSORFLOW_VER="2.15.0"
 
 FROM ubuntu:jammy as builder
 
@@ -25,8 +23,6 @@ FROM ubuntu:jammy as app
 
 ARG GENOMAD_VER
 ARG MMSEQS2_VER
-ARG KERAS_VER
-ARG TENSORFLOW_VER
 
 # 'LABEL' instructions tag the image with metadata that might be important to the user
 LABEL base.image="ubuntu:jammy"
@@ -56,7 +52,7 @@ RUN wget -q https://github.com/soedinglab/MMseqs2/releases/download/${MMSEQS2_VE
 
 # get genomad
 RUN wget -q https://github.com/apcamargo/genomad/archive/refs/tags/v${GENOMAD_VER}.tar.gz && \
-    python3 -m pip install v${GENOMAD_VER}.tar.gz keras==${KERAS_VER} tensorflow==${TENSORFLOW_VER} && \
+    python3 -m pip install v${GENOMAD_VER}.tar.gz && \
     rm -rf v${GENOMAD_VER}.tar.gz && \
     mkdir /data
 
