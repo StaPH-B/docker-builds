@@ -2,12 +2,7 @@
 
 Main tool:
 
-* [https://www.htslib.org/](https://www.htslib.org/)
-* [GitHub](https://github.com/samtools/bcftools)
-
-Additional tools:
-
-* perl 5.34.0
+* [bcftools](https://github.com/samtools/bcftools)
 
 ## Example Usage
 
