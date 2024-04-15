@@ -1,5 +1,5 @@
 # for easy upgrade later. ARG variables only persist during build time
-ARG HTSLIB_VER="1.19.1"
+ARG HTSLIB_VER="1.20"
 
 FROM ubuntu:jammy as builder
 
@@ -54,16 +54,18 @@ LABEL maintainer2.email="kapsakcj@gmail.com"
 # install runtime dependencies & cleanup apt garbage
 # installed as recommend here: https://github.com/samtools/htslib/blob/develop/INSTALL#L31
 RUN apt-get update && apt-get install --no-install-recommends -y \
- bzip2 \
- zlib1g-dev \
- libbz2-dev \
- liblzma-dev \
- libcurl4-gnutls-dev \
- ca-certificates \ 
- && apt-get autoclean && rm -rf /var/lib/apt/lists/*
+    bzip2 \
+    zlib1g-dev \
+    libbz2-dev \
+    liblzma-dev \
+    libcurl4-gnutls-dev \
+    ca-certificates \ 
+    && apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # copy in htslib executables from builder stage
 COPY --from=builder /usr/local/bin/* /usr/local/bin/
+COPY --from=builder /usr/local/lib/ /usr/local/lib/
+COPY --from=builder /usr/local/include/ /usr/local/include/
 
 # set locale settings for singularity compatibility
 ENV LC_ALL=C
@@ -79,6 +81,13 @@ FROM app as test
 
 # check that these three executables are available
 RUN bgzip --help && tabix --help && htsfile --help
+
+RUN apt-get update && apt-get install --no-install-recommends -y wget
+
+# use on actual files
+RUN wget -q https://github.com/StaPH-B/docker-builds/raw/master/tests/SARS-CoV-2/SRR13957123_1.fastq.gz && \
+    gunzip SRR13957123_1.fastq.gz && \
+    bgzip SRR13957123_1.fastq
 
 # FYI Test suite "make test" now performed in the builder stage since app and
 # test stages do not include htslib source code.
