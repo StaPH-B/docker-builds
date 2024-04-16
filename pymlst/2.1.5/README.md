@@ -1,6 +1,6 @@
 # pyMLST container
 
-Main tool: [pyMLST](link to program)
+Main tool: [pyMLST](https://github.com/bvalot/pyMLST)
   
 Code repository: https://github.com/bvalot/pyMLST
 
