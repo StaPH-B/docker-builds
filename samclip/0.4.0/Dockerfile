@@ -51,5 +51,3 @@ RUN wget https://raw.githubusercontent.com/tseemann/samclip/master/test.fna && \
     wget https://raw.githubusercontent.com/tseemann/samclip/master/test.sam && \
     wget https://raw.githubusercontent.com/tseemann/samclip/master/test.fna.fai && \
     /samclip --ref test.fna < test.sam > out.sam  
-
-    
