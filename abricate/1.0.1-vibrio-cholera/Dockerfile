@@ -59,9 +59,9 @@ $PATH"\
   LC_ALL=C
 
 # add custom database; rename FASTA file as 'sequences'; index database with --setupdb
-ADD vibrio_v1.0.0 /
+COPY vibrio_v1.0.0.fasta /
 RUN mkdir -v /abricate-${ABRICATE_VER}/db/vibrio && \
-  cp -v /vibrio_v1.0.0 /abricate-${ABRICATE_VER}/db/vibrio/sequences && \
+  cp -v /vibrio_v1.0.0.fasta /abricate-${ABRICATE_VER}/db/vibrio/sequences && \
   abricate --setupdb && \
   abricate --list
 
@@ -71,8 +71,9 @@ WORKDIR /data
 # testing layer starts here
 FROM app as test
 
-# Grab test data
-COPY tests/ /data/
+# Grab test Vcholerae genome, uncompress, and save to /data
+RUN wget -O - https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/018/083/565/GCA_018083565.2_PDT000793508.2/GCA_018083565.2_PDT000793508.2_genomic.fna.gz \
+  | gunzip -c > /data/GCA_018083565.2_PDT000793508.2_genomic.fna
 
 # to ensure this env variable is set in test layer
 ARG ABRICATE_VER
@@ -109,5 +110,12 @@ abricate-get_db --db ncbi --dbdir . && \
 abricate --threads `nproc` --fofn test/fofn.txt
 
 # vibrio-specific abricate test
-RUN abricate --db vibrio /data/ERR10146580_contigs.fasta > /data/abricate_vibrio.tsv
-RUN grep "ctxA" /data/abricate_vibrio.tsv && echo done
+# grep to find the 5 expected genes in the output TSV; error if not found
+RUN abricate --db vibrio /data/GCA_018083565.2_PDT000793508.2_genomic.fna | tee /data/abricate_vibrio.tsv && \
+  echo && \
+  echo "grepping for expected genes in abricate output now..." && \
+  grep 'ctxA' /data/abricate_vibrio.tsv && \
+  grep 'toxR' /data/abricate_vibrio.tsv && \
+  grep 'tcpA_ElTor' /data/abricate_vibrio.tsv && \
+  grep 'ompW' /data/abricate_vibrio.tsv && \
+  grep 'wbeN_O1' /data/abricate_vibrio.tsv
