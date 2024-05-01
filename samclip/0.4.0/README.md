@@ -8,11 +8,6 @@ Basic information on how to use this tool:
 - version: -V, --version
 - description: Filter SAM file for soft and hard clipped alignments
 
-Additional tools:
-
-- [samtools](https://github.com/samtools/samtools) 
-- [bwa](https://github.com/lh3/bwa)
-
 ## Example Usage
 
 Basic command to clip ends of reads
