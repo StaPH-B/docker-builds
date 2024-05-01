@@ -142,6 +142,7 @@ The licenses of the open-source software that is contained in these Docker image
 | ResFinder | Apache 2.0 | https://bitbucket.org/genomicepidemiology/resfinder/src/master/ |
 | Roary | GNU GPLv3 | https://github.com/sanger-pathogens/Roary/blob/master/GPL-LICENSE |
 | SalmID| MIT | https://github.com/hcdenbakker/SalmID/blob/master/LICENSE |
+| samclip | GNU GPLv3 | https://github.com/tseemann/samclip/blob/master/LICENSE |
 | Samtools | GNU GPLv3 | https://github.com/samtools/samtools/blob/develop/LICENSE |
 | SeqKit | MIT | https://github.com/shenwei356/seqkit/blob/master/LICENSE
 | SeqSero | GNU GPLv2 | https://github.com/denglab/SeqSero/blob/master/LICENSE |
