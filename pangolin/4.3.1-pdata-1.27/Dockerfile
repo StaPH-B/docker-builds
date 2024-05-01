@@ -176,3 +176,14 @@ mv -v ncbi_dataset/data/genomic.fna PP189069.1.genomic.fna && \
 rm -vr ncbi_dataset/ README.md && \
 pangolin PP189069.1.genomic.fna -o PP189069.1-usher && \
 column -t -s, PP189069.1-usher/lineage_report.csv
+
+## test for JN.1.48 (BA.2.86.x sublineage; full unaliased lineage is B.1.1.529.2.86.1.1.48) 
+# this lineages which was designated in pango-designation v1.27: https://github.com/cov-lineages/pango-designation/releases/tag/v1.27
+# see here for commit where it was designated https://github.com/cov-lineages/pango-designation/commit/67f48bf24283999f1940f3aee8159f404124ff3f
+# Here's the genome on NCBI: https://www.ncbi.nlm.nih.gov/nuccore/PP218754
+RUN datasets download virus genome accession PP218754.1 --filename PP218754.1.zip && \
+unzip PP218754.1.zip && rm PP218754.1.zip && \
+mv -v ncbi_dataset/data/genomic.fna PP218754.1.genomic.fna && \
+rm -vr ncbi_dataset/ README.md && \
+pangolin PP218754.1.genomic.fna -o PP218754.1-usher && \
+column -t -s, PP218754.1-usher/lineage_report.csv
