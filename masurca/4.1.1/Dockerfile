@@ -28,7 +28,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   liblzma-dev \
   numactl \
   procps \
-  bwa && \
+  bwa \
+  file && \
   apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # install minimap2
