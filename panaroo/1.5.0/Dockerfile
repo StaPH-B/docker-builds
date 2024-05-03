@@ -19,6 +19,8 @@ LABEL website="https://github.com/gtonkinhill/panaroo"
 LABEL license="https://github.com/gtonkinhill/panaroo/blob/master/LICENSE"
 LABEL maintainer="Kevin Libuit"
 LABEL maintainer.email="kevin.libuit@theiagen.com"
+LABEL maintainer2="Erin Young"
+LABEL maintainer2.email="eriny@utah.gov"
 
 # install dependencies; cleanup apt garbage
 RUN apt-get update && apt-get install -y --no-install-recommends \
