@@ -4,7 +4,7 @@ Main tool :
 - [PopPUNK](https://github.com/bacpop/PopPUNK)
 
 Additional tools:
-- biopython 1.82
+- biopython 1.83
 - pp-sketchlib 2.1.2
 - python 3.10.13
 - rapidnj 2.3.2
