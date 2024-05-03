@@ -69,6 +69,7 @@ The licenses of the open-source software that is contained in these Docker image
 | htslib | MIT | https://github.com/samtools/htslib/blob/develop/LICENSE |
 | iqtree | GNU GPLv2 | https://github.com/Cibiv/IQ-TREE/blob/master/LICENSE |
 | iqtree2 | GNU GPLv2 | https://github.com/iqtree/iqtree2/blob/master/LICENSE |
+| IPA | BSD-3 | https://github.com/PacificBiosciences/pbipa/blob/master/LICENSE.txt |
 | IRMA | GNU GPLv3 | https://wonder.cdc.gov/amd/flu/irma/disclaimer.html |
 | isPcr | non-standard - see README in source | https://hgwdev.gi.ucsc.edu/~kent/src/isPcr33.zip |
 | iVar | GNU GPLv3 | https://github.com/andersen-lab/ivar/blob/master/LICENSE |
@@ -141,6 +142,7 @@ The licenses of the open-source software that is contained in these Docker image
 | ResFinder | Apache 2.0 | https://bitbucket.org/genomicepidemiology/resfinder/src/master/ |
 | Roary | GNU GPLv3 | https://github.com/sanger-pathogens/Roary/blob/master/GPL-LICENSE |
 | SalmID| MIT | https://github.com/hcdenbakker/SalmID/blob/master/LICENSE |
+| samclip | GNU GPLv3 | https://github.com/tseemann/samclip/blob/master/LICENSE |
 | Samtools | GNU GPLv3 | https://github.com/samtools/samtools/blob/develop/LICENSE |
 | SeqKit | MIT | https://github.com/shenwei356/seqkit/blob/master/LICENSE
 | SeqSero | GNU GPLv2 | https://github.com/denglab/SeqSero/blob/master/LICENSE |
