@@ -69,6 +69,7 @@ The licenses of the open-source software that is contained in these Docker image
 | htslib | MIT | https://github.com/samtools/htslib/blob/develop/LICENSE |
 | iqtree | GNU GPLv2 | https://github.com/Cibiv/IQ-TREE/blob/master/LICENSE |
 | iqtree2 | GNU GPLv2 | https://github.com/iqtree/iqtree2/blob/master/LICENSE |
+| IPA | BSD-3 | https://github.com/PacificBiosciences/pbipa/blob/master/LICENSE.txt |
 | IRMA | GNU GPLv3 | https://wonder.cdc.gov/amd/flu/irma/disclaimer.html |
 | isPcr | non-standard - see README in source | https://hgwdev.gi.ucsc.edu/~kent/src/isPcr33.zip |
 | iVar | GNU GPLv3 | https://github.com/andersen-lab/ivar/blob/master/LICENSE |
@@ -83,6 +84,7 @@ The licenses of the open-source software that is contained in these Docker image
 | LABEL | GPL version 3 | In zipped file in README.md |
 | legsta | GNU GPLv3 | https://github.com/tseemann/legsta/blob/master/LICENSE |
 | liftoff | GNU GPLv3 | https://github.com/agshumate/Liftoff/blob/master/LICENSE.md |
+| lima | BSD-3 | https://github.com/PacificBiosciences/barcoding/blob/master/LICENSE |
 | longshot | MIT | https://github.com/pjedge/longshot/blob/master/LICENSE |
 | Lyve-SET  | MIT | https://github.com/lskatz/lyve-SET/blob/master/LICENSE |
 | Mafft  | BSD | https://mafft.cbrc.jp/alignment/software/license.txt |
@@ -109,9 +111,12 @@ The licenses of the open-source software that is contained in these Docker image
 | OrthoFinder | GNU GPLv3 | https://github.com/davidemms/OrthoFinder/blob/master/License.md |
 | Panaroo | MIT | https://github.com/gtonkinhill/panaroo/blob/master/LICENSE |
 | Pangolin | GNU GPLv3 | https://github.com/cov-lineages/pangolin/blob/master/LICENSE.txt |
+| Parsnp | Battelle National Biodefense Institute (BNBI) | https://github.com/marbl/parsnp?tab=License-1-ov-file#readme |
 | pasty | Apache 2.0 | https://github.com/rpetit3/pasty/blob/main/LICENSE |
 | Pavian | GNU GPLv3 | https://github.com/fbreitwieser/pavian/blob/master/DESCRIPTION |
+| pbmm2 | BSD-3 | https://github.com/PacificBiosciences/pbmm2/blob/develop/LICENSE |
 | pbptyper | MIT | https://github.com/rpetit3/pbptyper/blob/main/LICENSE |
+| pbtk | BSD-3 | https://github.com/PacificBiosciences/pbtk/blob/main/LICENSE.txt |
 | Phyml | GNU GPLv3 | https://github.com/stephaneguindon/phyml/blob/master/COPYING |
 | phyTreeViz | MIT | https://github.com/moshi4/phyTreeViz/blob/main/LICENSE |
 | Piggy | GNU GPLv3 | https://github.com/harry-thorpe/piggy/blob/master/LICENSE |
@@ -137,6 +142,7 @@ The licenses of the open-source software that is contained in these Docker image
 | ResFinder | Apache 2.0 | https://bitbucket.org/genomicepidemiology/resfinder/src/master/ |
 | Roary | GNU GPLv3 | https://github.com/sanger-pathogens/Roary/blob/master/GPL-LICENSE |
 | SalmID| MIT | https://github.com/hcdenbakker/SalmID/blob/master/LICENSE |
+| samclip | GNU GPLv3 | https://github.com/tseemann/samclip/blob/master/LICENSE |
 | Samtools | GNU GPLv3 | https://github.com/samtools/samtools/blob/develop/LICENSE |
 | SeqKit | MIT | https://github.com/shenwei356/seqkit/blob/master/LICENSE
 | SeqSero | GNU GPLv2 | https://github.com/denglab/SeqSero/blob/master/LICENSE |
