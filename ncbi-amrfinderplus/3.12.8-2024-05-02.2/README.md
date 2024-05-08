@@ -9,7 +9,7 @@ Additional tools:
 
 ## Database information
 
-The database included at time of docker image build is **`2024-05-02.2`**. More information can be found in the changes.txt on [NCBI's FTP]([https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/3.12/2024-01-31.1/changelog.txt](https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/3.12/2024-05-02.2/changelog.txt)).
+The database included at time of docker image build is **`2024-05-02.2`**. More information can be found in the [changelog.txt on NCBI's FTP](https://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/3.12/2024-05-02.2/changelog.txt).
 
 Full documentation: [https://github.com/ncbi/amr/wiki](https://github.com/ncbi/amr/wiki)
 
