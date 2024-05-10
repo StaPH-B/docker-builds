@@ -3,7 +3,7 @@ FROM mambaorg/micromamba:1.5.8 as app
 USER root
 WORKDIR /
 
-ARG TBPROFILER_VER="6.2.`"
+ARG TBPROFILER_VER="6.2.1"
 
 # this version is the shortened commit hash on the `master` branch here https://github.com/jodyphelan/tbdb/
 # commits are found on https://github.com/jodyphelan/tbdb/commits/master
