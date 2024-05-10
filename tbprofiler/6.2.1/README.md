@@ -6,7 +6,7 @@ The pipeline aligns reads to the H37Rv reference using bowtie2, BWA or minimap2 
 
 ## Database
 
-This tool relies on a database to run. The version (AKA git commit hash) of the database that is included in the docker image is `c2fb9a2`. This is from the GitHub repository https://github.com/jodyphelan/tbdb. This can be confirmed in the json file: `/opt/conda/share/tbprofiler/tbdb.version.json`:
+This tool relies on a database to run. The version (AKA git commit hash) of the database that is included in the docker image is `97b5876`. This is from the GitHub repository https://github.com/jodyphelan/tbdb. This can be confirmed in the json file: `/opt/conda/share/tbprofiler/tbdb.version.json`:
 
 ```bash
 $ grep 'commit' /opt/conda/share/tbprofiler/tbdb.version.json
@@ -25,7 +25,7 @@ tbdb    5f3c51e Jody Phelan <jody.phelan@lshtm.ac.uk>   Thu Jan 19 10:47:32 2023
 - bedtools 2.30.0
 - gatk4 4.3.0.0
 - kmc 3.2.1
-- pathogen-profiler 2.0.4
+- pathogen-profiler 4.2.0
 - perl 5.32.1
 - python 3.9.9 
 - trimmomatic 0.39
