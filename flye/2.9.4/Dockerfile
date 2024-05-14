@@ -1,5 +1,5 @@
 # for easy upgrade later
-ARG FLYE_VER="2.9.3"
+ARG FLYE_VER="2.9.4"
 
 FROM ubuntu:jammy as app
 
