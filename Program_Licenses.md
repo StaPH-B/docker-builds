@@ -72,6 +72,7 @@ The licenses of the open-source software that is contained in these Docker image
 | IRMA | GNU GPLv3 | https://wonder.cdc.gov/amd/flu/irma/disclaimer.html |
 | isPcr | non-standard - see README in source | https://hgwdev.gi.ucsc.edu/~kent/src/isPcr33.zip |
 | iVar | GNU GPLv3 | https://github.com/andersen-lab/ivar/blob/master/LICENSE |
+| Jasmine | BSD-3 | https://github.com/PacificBiosciences/jasmine/blob/main/LICENSE |
 | Kaptive |  GNU GPLv3 | https://github.com/katholt/Kaptive/blob/master/LICENSE |
 | Kleborate | GNU GPLv3 | https://github.com/katholt/Kleborate/blob/master/LICENSE |
 | kma | Apache v2.0 | https://bitbucket.org/genomicepidemiology/kma/src/master/ |
