@@ -1,7 +1,7 @@
 ARG VIRULENCEFINDER_VER="2.0.5"
-# Database not properly versioned, so using most recent commit made on 2024-01-02
-# see here: https://bitbucket.org/genomicepidemiology/virulencefinder_db/commits/2b705359191a24f6db64f891ab07c93b0281e685
-ARG VIRULENCEFINDER_DB_COMMIT_HASH="2b705359191a24f6db64f891ab07c93b0281e685"
+# Database not properly versioned, so using most recent commit made on 2024-04-06
+# see here: https://bitbucket.org/genomicepidemiology/virulencefinder_db/commits/bcf7f0b26271a59ca85715fa2ab8a0c380e5357b
+ARG VIRULENCEFINDER_DB_COMMIT_HASH="bcf7f0b26271a59ca85715fa2ab8a0c380e5357b"
 
 FROM ubuntu:focal as app
 
@@ -16,10 +16,12 @@ LABEL dockerfile.version="1"
 LABEL software="VirulenceFinder"
 LABEL software.version="${VIRULENCEFINDER_VER}"
 LABEL description="Tool for identifying the virulence genes in E. coli, Enterococcus, Staphylococcus aureus, & Listeria from reads or assemblies"
-LABEL website="https://bitbucket.org/genomicepidemiology/virulencefinder/src/master/"
+LABEL website="https://bitbucket.org/genomicepidemiology/virulencefinder"
 LABEL license="https://bitbucket.org/genomicepidemiology/virulencefinder/src/master/"
 LABEL maintainer="Curtis Kapsak"
 LABEL maintainer.email="kapsakcj@gmail.com"
+LABEL maintainer1="Erin Young"
+LABEL maintainer1.email="eriny@utah.gov"
 
 # install dependencies; cleanup apt garbage 
 # ncbi-blast+ v2.9.0-2 (ubuntu:focal), min required version is 2.8.1
