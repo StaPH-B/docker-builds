@@ -25,7 +25,16 @@ CMD [ "jasmine", "-h" ]
 
 WORKDIR /data
 
-## TEST ##
+## Test prep ##
+FROM staphb/pbtk:latest as testdata
+
+RUN wget -q --no-check-certificate https://downloads.pacbcloud.com/public/Sequel-II-CpG-training/CCS/methylated/m64168_200823_191315.hifi_reads.bam &&\
+    pbindex m64168_200823_191315.hifi_reads.bam &&\
+    zmwfilter --downsample-count 10 m64168_200823_191315.hifi_reads.bam test.bam
+
+## Test ##
 FROM app as test
 
-RUN jasmine -h 
+COPY --from=testdata /data/test.bam /data/test.bam 
+
+RUN jasmine test.bam out.bam --log-level INFO
