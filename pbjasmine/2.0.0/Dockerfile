@@ -30,7 +30,8 @@ FROM staphb/pbtk:latest as testdata
 
 RUN wget -q --no-check-certificate https://downloads.pacbcloud.com/public/Sequel-II-CpG-training/CCS/methylated/m64168_200823_191315.hifi_reads.bam &&\
     pbindex m64168_200823_191315.hifi_reads.bam &&\
-    zmwfilter --downsample-count 10 m64168_200823_191315.hifi_reads.bam test.bam
+    zmwfilter --downsample-count 10 m64168_200823_191315.hifi_reads.bam test.bam &&\
+    rm m64168_200823_191315.hifi_reads.bam
 
 ## Test ##
 FROM app as test
