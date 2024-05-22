@@ -26,7 +26,7 @@ CMD [ "jasmine", "-h" ]
 WORKDIR /data
 
 ## Test prep ##
-FROM staphb/pbtk:latest as testdata
+FROM staphb/pbtk:3.1.1 as testdata
 
 RUN wget -q --no-check-certificate https://downloads.pacbcloud.com/public/Sequel-II-CpG-training/CCS/methylated/m64168_200823_191315.hifi_reads.bam &&\
     pbindex m64168_200823_191315.hifi_reads.bam &&\
