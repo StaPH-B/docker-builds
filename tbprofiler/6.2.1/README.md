@@ -17,27 +17,27 @@ Additionally you can run the command `tb-profiler list_db` to list the same info
 
 ```bash
 $ tb-profiler list_db
-tbdb    5f3c51e Jody Phelan <jody.phelan@lshtm.ac.uk>   Thu Jan 19 10:47:32 2023 +0000  /opt/conda/share/tbprofiler/tbdb
+tbdb    97b5876 Jody Phelan <jody.phelan@lshtm.ac.uk>   Wed May 8 13:53:15 2024 +0100   /opt/conda/share/tbprofiler/tbdb
 ```
 
 ## Additional included tools/dependencies
 
-- bedtools 2.30.0
-- gatk4 4.3.0.0
-- kmc 3.2.1
+- bedtools 2.31.1
+- gatk4 4.5.0.0
+- kmc 3.2.4
 - pathogen-profiler 4.2.0
 - perl 5.32.1
-- python 3.9.9 
+- python 3.10.14
 - trimmomatic 0.39
-- bwa 0.7.17
-- minimap2 2.16
-- samtools 1.12
-- bcftools 1.12
-- freebayes 1.3.5
-- tqdm 4.32.2
-- parallel v20190522
+- bwa 0.7.18
+- minimap2 2.28
+- samtools 1.20
+- bcftools 1.20
+- freebayes 1.3.6
+- tqdm 4.66.4
+- parallel 20240522
 - samclip 0.4.0
-- snpeff 5.1
+- snpeff 5.2
 
 ## Example Usage
 
