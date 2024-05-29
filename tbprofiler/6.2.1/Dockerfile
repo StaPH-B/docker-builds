@@ -22,6 +22,8 @@ LABEL maintainer="John Arnn"
 LABEL maintainer.email="jarnn@utah.gov"
 LABEL maintainer2="Curtis Kapsak"
 LABEL maintainer2.email="kapsakcj@gmail.com"
+LABEL maintainer3="Sage Wright"
+LABEL maintainer3.email="sagemwright@gmail.com"
 
 # Install dependencies via apt-get; cleanup apt garbage
 RUN apt-get update && apt-get install -y --no-install-recommends \
