@@ -26,7 +26,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     rm -rf /var/lib/apt/lists/*
 
 # download, uncompress iqtree2 tarball; make /data
-RUN wget -q https://github.com/iqtree/iqtree2/releases/download/v.${IQTREE2_VER}/iqtree-${IQTREE2_VER}-Linux-intel.tar.gz && \
+RUN wget -q https://github.com/iqtree/iqtree2/releases/download/v${IQTREE2_VER}/iqtree-${IQTREE2_VER}-Linux-intel.tar.gz && \
     tar -xvf iqtree-${IQTREE2_VER}-Linux-intel.tar.gz && \
     rm -v iqtree-${IQTREE2_VER}-Linux-intel.tar.gz && \
     mkdir /data
