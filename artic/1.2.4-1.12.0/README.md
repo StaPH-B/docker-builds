@@ -33,15 +33,15 @@ docker run -v $(pwd):/data staphb/artic:latest artic minion --normalise 200 --sk
 # the result files will all start with test*
 ```
 
-In general, any primer scheme can be used as long as it meeds [artic's requirments](https://github.com/artic-network/primer-schemes).
+In general, any primer scheme can be used as long as it meets [artic's requirements](https://github.com/artic-network/primer-schemes).
 
 This is the recommended directory structure with corresponding files:
 
 ```bash
-${diretory}/${name}/V${version}/${name}.primer.bed
-${diretory}/${name}/V${version}/${name}.scheme.bed
-${diretory}/${name}/V${version}/${name}.reference.fasta
-${diretory}/${name}/V${version}/${name}.reference.fasta.fai
+${directory}/${name}/V${version}/${name}.primer.bed
+${directory}/${name}/V${version}/${name}.scheme.bed
+${directory}/${name}/V${version}/${name}.reference.fasta
+${directory}/${name}/V${version}/${name}.reference.fasta.fai
 ```
 
 The command to use this primer scheme would be
