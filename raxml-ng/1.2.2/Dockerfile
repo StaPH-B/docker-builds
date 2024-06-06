@@ -33,7 +33,7 @@ FROM app as test
 ARG RAXMLNG_VER="1.2.2"
 
 RUN wget --no-check-certificate https://github.com/amkozlov/raxml-ng/releases/download/${RAXMLNG_VER}/raxml-ng_v${RAXMLNG_VER}_linux_x86_64.zip &&\
-    unzip -j raxml-ng_v${RAXMLNG_VER}_linux_x86_64.zip data/* -d test &&\     
-    raxml-ng --msa test/test.fa --model GTR+G &&\
+    unzip -j raxml-ng_v${RAXMLNG_VER}_linux_x86_64.zip data/test.fa &&\     
+    raxml-ng --msa test.fa --model GTR+G &&\
     cat test.fa.raxml.bestTree
 
