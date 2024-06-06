@@ -31,7 +31,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # create the conda environment; install dragonflye and dependencies based on bioconda package; cleanup conda garbage
-RUN micromamba install -n base -c conda-forge -c bioconda -c defaults -y dragonflye=${DRAGONFLYE_VER} && \
+RUN micromamba install -n base -c conda-forge -c bioconda -y dragonflye=${DRAGONFLYE_VER} && \
     micromamba clean -a -y && \
     mkdir /data
 
@@ -60,9 +60,9 @@ WORKDIR /test
 
 # download test data (ONT and ILMN FASTQs)
 RUN echo "downloading ILMN and ONT test data from bactopia/bactopia-tests on GitHub..." && \
-    wget https://raw.githubusercontent.com/bactopia/bactopia-tests/main/data/species/portiera/nanopore/ERR3772599.fastq.gz && \
-    wget https://raw.githubusercontent.com/bactopia/bactopia-tests/main/data/species/portiera/illumina/SRR2838702_R1.fastq.gz && \
-    wget https://raw.githubusercontent.com/bactopia/bactopia-tests/main/data/species/portiera/illumina/SRR2838702_R2.fastq.gz
+    wget -q https://raw.githubusercontent.com/bactopia/bactopia-tests/main/data/species/portiera/nanopore/ERR3772599.fastq.gz && \
+    wget -q https://raw.githubusercontent.com/bactopia/bactopia-tests/main/data/species/portiera/illumina/SRR2838702_R1.fastq.gz && \
+    wget -q https://raw.githubusercontent.com/bactopia/bactopia-tests/main/data/species/portiera/illumina/SRR2838702_R2.fastq.gz
 
 # test assembly and polishing algorithms with test data
 # modified code from here: https://github.com/rpetit3/dragonflye/blob/main/.github/workflows/test-dragonflye.yml
