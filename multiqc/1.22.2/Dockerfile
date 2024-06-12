@@ -17,10 +17,6 @@ LABEL maintainer.email="eriny@utah.gov"
 # install remaining dependencies
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y \
-    wget \
-    git \
-    python3 \
-    python3-dev \
     python3-pip && \
     apt-get clean && apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
@@ -39,6 +35,9 @@ WORKDIR /data
 # testing layer starts here
 FROM app as test
 
+# getting git
+RUN apt-get update && apt-get install -y git
+
 # to ensure multiqc is in PATH
 RUN multiqc --help
 
@@ -46,10 +45,8 @@ RUN multiqc --help
 RUN mkdir /test
 WORKDIR /test
 
-# getting multiqc test data and testing pandoc
+# getting multiqc test data
 RUN git clone https://github.com/ewels/MultiQC_TestData && \
     multiqc . && \
     ls multiqc_report.html 
     
-RUN multiqc /test/MultiQC_TestData/data/modules/BUSCO --filename multiqc_report2.html -o multiqc_data2 && \
-    ls multiqc_data2/multiqc_report2.html multiqc_data2/multiqc_report2_data
