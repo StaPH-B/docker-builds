@@ -8,24 +8,20 @@ LABEL dockerfile.version="1"
 LABEL software="MultiQC"
 LABEL software.version="${MULTIQC_VER}"
 LABEL description="Aggregate bioinformatics results across many samples into a single report."
-LABEL website="https://github.com/ewels/MultiQC"
-LABEL license="https://github.com/ewels/MultiQC/blob/master/LICENSE"
+LABEL website="https://github.com/MultiQC/MultiQC"
+LABEL license="https://github.com/MultiQC/MultiQC/blob/main/LICENSE"
 LABEL maintainer="Erin Young"
 LABEL maintainer.email="eriny@utah.gov"
-# Although... let's be honest. Most of this is copied and pasted from Abigail Shockey
 
-# install remaining dependencies
-ARG DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install --no-install-recommends -y \
     python3-pip && \
     apt-get clean && apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # install multiqc
-RUN pip3 install "multiqc==${MULTIQC_VER}"
+RUN pip3 install --no-cache-dir "multiqc==${MULTIQC_VER}"
 
-# add pandoc to path
-ENV PATH="${PATH}" \
-    LC_ALL='C.UTF-8' LANG='C.UTF-8'
+ENV LC_ALL='C.UTF-8' \
+    LANG='C.UTF-8'
 
 CMD multiqc --help
 
