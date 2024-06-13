@@ -44,7 +44,8 @@ LABEL maintainer="Kutluhan Incekara"
 LABEL maintainer.email="kutluhan.incekara@ct.gov"
 
 RUN apt-get update && apt-get install --no-install-recommends -y\
-    openmpi-bin
+    openmpi-bin &&\
+    apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder standard-RAxML-${RAXML_VER}/raxmlHPC* /usr/local/bin/
 
