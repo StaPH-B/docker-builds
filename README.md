@@ -289,6 +289,7 @@ To learn more about the docker pull rate limits and the open source software pro
 | [Verkko](https://hub.docker.com/r/staphb/verkko/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/verkko)](https://hub.docker.com/r/staphb/verkko) | <ul><li>[2.0](./verkko/2.0/)</li></ul> | https://github.com/marbl/verkko |
 | [VIBRANT](https://hub.docker.com/r/staphb/vibrant/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/vibrant)](https://hub.docker.com/r/staphb/vibrant) | <ul><li>1.2.1</li></ul> | https://github.com/AnantharamanLab/VIBRANT |
 | [VIGOR4](https://hub.docker.com/r/staphb/vigor4/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/vigor4)](https://hub.docker.com/r/staphb/vigor4) | <ul><li>4.1.20190131</li></ul> | https://github.com/JCVenterInstitute/VIGOR4 |
+| [Viridian](https://hub.docker.com/r/staphb/viridian/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/viridian)](https://hub.docker.com/r/staphb/viridian) | <ul><li>1.2.2</li></ul> | https://github.com/iqbal-lab-org/viridian |
 | [VirSorter2](https://hub.docker.com/r/staphb/virsorter2/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/virsorter2)](https://hub.docker.com/r/staphb/virsorter2/) | <ul><li>2.1</li></ul> | https://github.com/jiarong/VirSorter2 |
 | [VirulenceFinder](https://hub.docker.com/r/staphb/virulencefinder/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/virulencefinder)](https://hub.docker.com/r/staphb/virulencefinder/) | <ul><li>[2.1.4](virulencefinder/2.0.4/)</li></ul> | https://bitbucket.org/genomicepidemiology/virulencefinder/src/master/ <br/> https://bitbucket.org/genomicepidemiology/virulencefinder_db/src/master/ |
 | [wtdbg2](https://hub.docker.com/r/staphb/wtdbg2/) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/wtdbg2)](https://hub.docker.com/r/staphb/wtdbg2) | <ul><li>2.5</li></ul> | https://github.com/ruanjue/wtdbg2 |
@@ -359,3 +360,4 @@ Each Dockerfile lists the author(s)/maintainer(s) as a metadata `LABEL`, but the
   * [@evagunawan](https://github.com/evagunawan)
   * [@nawrockie](https://github.com/nawrockie)
   * [@stephenturner](https://github.com/stephenturner)
+  * [@soejun](https://github.com/soejun)
