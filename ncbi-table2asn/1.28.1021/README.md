@@ -8,26 +8,26 @@ Full documentation: [README](https://ftp.ncbi.nlm.nih.gov/asn1-converters/by_pro
 
 There are also a collection of related tools that are included in the image
 
-agp_validate: 2.28.943
-asn2all: 14.7
-asn2asn: 1.28.943
+Versions pulled from https://ftp.ncbi.nlm.nih.gov/asn1-converters/versions/2024-06-18/documentation/VERSIONS
+agp_validate: 2.28.1021
+asn2all 14.7
+asn2asn: 1.28.1021
 asn2fasta: 1.0.3
-asn2flat: 6.28.943
-asn2fsa: 6.1
-asn2gb: 18.7
-asn2idx: 1.1
-asn2xml: 1.0
-asndisc: 2.3
-asnmacro: 1.8
-asnval: 15.7
-asnvalidate: 3.28.943
-fastaedit_public: 29.4.0
-gap_stats: 4.2.943 (Build for external use)
-gene2xml: 1.6
-insdseqget: 1.1
-sqn2agp: 1.9
-srcchk: 0.0.943
-table2asn: 1.28.943
+asn2flat: 6.28.1021
+asn2fsa 6.1
+asn2gb 18.7
+asn2idx 1.1
+asn2xml 1.0
+asndisc 2.3
+asnmacro 1.8
+asnval 15.7
+asnvalidate: 3.28.1021
+gap_stats: 4.2.1021 (Build for external use)
+gene2xml 1.6
+insdseqget 1.1
+sqn2agp 1.9
+srcchk: 0.0.1021
+table2asn: 1.28.1021
 
 ## Example Usage
 
