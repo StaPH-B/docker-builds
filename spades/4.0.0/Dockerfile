@@ -35,6 +35,8 @@ RUN wget -q https://github.com/ablab/spades/releases/download/v${SPADES_VER}/SPA
 ENV LC_ALL=C.UTF-8 \
   PATH="${PATH}:/SPAdes-${SPADES_VER}-Linux/bin"
 
+CMD spades.py --help
+
 WORKDIR /data
 
 # test layer
