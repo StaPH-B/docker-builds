@@ -60,8 +60,8 @@ jobs:
         run: |
           #checking layers
           warning=''
-          app_layer=$(grep FROM ./${{ steps.parse.outputs.tool }}/${{ steps.parse.outputs.version }}/Dockerfile | grep "as app")
-          tst_layer=$(grep FROM ./${{ steps.parse.outputs.tool }}/${{ steps.parse.outputs.version }}/Dockerfile | grep "as test")
+          app_layer=$(grep FROM ./${{ steps.parse.outputs.tool }}/${{ steps.parse.outputs.version }}/Dockerfile | grep -E "as app|AS app")
+          tst_layer=$(grep FROM ./${{ steps.parse.outputs.tool }}/${{ steps.parse.outputs.version }}/Dockerfile | grep -E "as test|AS test")
           if [ -z "$app_layer" ] ; then echo "FATAL : app layer is missing" ; warning='warning' ; fi
           if [ -z "$tst_layer" ] ; then echo "FATAL : test layer is missing" ; warning='warning' ; fi
           if [ -n "$warning" ] ; then echo "Please see template for recommended format https://github.com/StaPH-B/docker-builds/blob/master/dockerfile-template/Dockerfile" ; exit 1 ; fi
