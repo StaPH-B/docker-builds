@@ -39,6 +39,8 @@ RUN micromamba create -n freyja-env -c conda-forge -c bioconda -c defaults freyj
 ENV PATH="/opt/conda/envs/freyja-env/bin:/opt/conda/envs/env/bin:${PATH}" \
     LC_ALL=C.UTF-8
 
+RUN pip install pyarrow
+
 # update barcodes
 # NOTE: this will download the latest version of the `freyja/data/usher_barcodes.csv` file from GitHub
 RUN freyja update
