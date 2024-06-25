@@ -14,18 +14,12 @@ Additional tools:
 
 - python 3.8.10
 - biopython 1.73
-- [kma](https://bitbucket.org/genomicepidemiology/kma/src/master/) 1.4.14
+- [kma](https://bitbucket.org/genomicepidemiology/kma/src/master/) 1.4.15
 - ncbi-blast+ 2.9.0
 
 Database version:
 
-VirulenceFinder database version: commit `2b705359191a24f6db64f891ab07c93b0281e685` made on 2024-01-02. [Link to commit history](https://bitbucket.org/genomicepidemiology/virulencefinder_db/commits/)
-
-## Requirements
-
-- Docker or Singularity
-- E. coli raw reads (fastq.gz) or assembly (fasta)
-  - Illumina, Ion Torrent, Roche 454, SOLiD, Oxford Nanopore, and PacBio reads are supported. (I've only tested Illumina reads)
+VirulenceFinder database version: tag 2.0.0 made on 2024-05-29. [Link to commit history](https://bitbucket.org/genomicepidemiology/virulencefinder_db/downloads/?tab=tags)
 
 ## Usage
 
