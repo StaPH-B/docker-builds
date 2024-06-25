@@ -1,4 +1,4 @@
-FROM mambaorg/micromamba:1.5.8 as app
+FROM mambaorg/micromamba:1.5.8 AS app
 
 # build and run as root users since micromamba image has 'mambauser' set as the $USER
 USER root
@@ -81,7 +81,7 @@ ENV PATH="${PATH}:/opt/conda/envs/pangolin/bin/" XDG_CACHE_HOME=/tmp
 CMD ["pangolin", "-h"]
 
 # new base for testing
-FROM app as test
+FROM app AS test
 
 # so that mamba/conda env is active when running below commands
 ENV ENV_NAME="pangolin"
