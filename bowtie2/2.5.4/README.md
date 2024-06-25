@@ -4,7 +4,7 @@ Main tool : [bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml)
 Bowtie2 : Genome assembler using a reference and mapping
 
 Additional tools:
-- Samtools version 1.19
+- Samtools version 1.20
 
 # Example Usage
 
