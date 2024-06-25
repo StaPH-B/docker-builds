@@ -4,13 +4,6 @@ Main tool: [Gubbins](https://github.com/nickjcroucher/gubbins)
   
 Code repository: https://github.com/nickjcroucher/gubbins
 
-Additional tools:
-- RAxML: 8.2.12
-- FastTree: 2.1.10
-- IQTree: 2.3.0
-- RAxML-NG: 1.0.1
-- Rapidnj: 2.3.2
-
 Basic information on how to use this tool:
 - executable: run_gubbins.py
 - help: -h
