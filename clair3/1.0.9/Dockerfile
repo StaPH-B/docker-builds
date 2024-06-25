@@ -109,8 +109,6 @@ CMD run_clair3.sh
 WORKDIR /data
 
 ## Test ##
-# adapted from http://www.bio8.cs.hku.hk/clair3/demo/clair3_ont_quick_demo.sh
-
 FROM app as test
 
 RUN apt-get update && apt-get install -y wget
