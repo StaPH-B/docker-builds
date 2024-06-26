@@ -17,12 +17,11 @@ LABEL maintainer="Kutluhan Incekara"
 LABEL maintainer.email="kutluhan.incekara@ct.gov"
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
-    procps \
-    curl && \
+    procps &&\
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 RUN micromamba install --name base -c conda-forge -c bioconda verkko=${VERKKO_VER} && \
-    micromamba clean -a -y
+    micromamba clean -afy
 
 ENV PATH="/opt/conda/bin/:${PATH}" \
     LC_ALL=C.UTF-8
