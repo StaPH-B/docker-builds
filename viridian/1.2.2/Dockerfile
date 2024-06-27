@@ -140,4 +140,4 @@ RUN cd /viridian &&\
   python3 -m pip install pytest &&\
   pytest
 
-RUN viridian run_one_sample --run_accession SRR12345678 --outdir OUT
+RUN viridian run_one_sample --run_accession SRR29437696 --outdir OUT
