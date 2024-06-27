@@ -1,15 +1,3 @@
-FROM ubuntu:20.04 as build
-
-LABEL base.image="ubuntu:20.04"
-LABEL dockerfile.version="1"
-LABEL software="viridian"
-LABEL software.version="${VIRIDIAN_VERSION}"
-LABEL description="Ultra-careful amplicon-aware viral assembly for tiled amplicon schemes."
-LABEL website="https://github.com/iqbal-lab-org/viridian"
-LABEL license="https://github.com/iqbal-lab-org/viridian/blob/master/LICENSE"
-LABEL maintainer="Wilson Chan"
-LABEL maintainer.email="chan.wilson.wc@gmail.com"
-
 ARG VIRIDIAN_VERSION=1.2.2
 ARG ENA_VERSION=1.7.1
 ARG BCFTOOLS_VERSION=1.10.2
@@ -21,8 +9,18 @@ ARG CYLON_COMMIT_HASH=57d559a76254b0b95785f7c02fa58ef806713e01
 ARG READITANDKEEP_COMMIT_HASH=61ae15be1e515c960b0135eae7dd59568a9de30d
 ARG VARIFIER_COMMIT_HASH=8bc8726ed3cdb337dc47b62515e709759e451137
 
+## Builder ##
+FROM ubuntu:20.04 as build
+
+ARG ENA_VERSION
+ARG BCFTOOLS_VERSION
+ARG MUMMER_VERSION
+ARG NGMERGE_COMMIT_HASH
+ARG VT_COMMIT_HASH
+ARG MINIMAP2_COMMIT_HASH
+ARG READITANDKEEP_COMMIT_HASH
+
 ENV DEBIAN_FRONTEND=noninteractive
-ENV PATH=/usr/local/bin:/data/enaBrowserTools/python3/:$PATH
 
 RUN apt-get update && \
   apt-get install -y --no-install-recommends \
@@ -44,8 +42,6 @@ RUN apt-get update && \
   samtools && \
   update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 100 --slave /usr/bin/g++ g++ /usr/bin/g++-10 && \
   python3 -m pip install tox
-
-WORKDIR /tmp
 
 # Install dependencies
 RUN git clone https://github.com/harvardinformatics/NGmerge.git NGmerge && \
@@ -75,41 +71,72 @@ RUN mkdir -p mummer && \
   tar xz --strip-components=1 -C mummer && \
   cd mummer && ./configure LDFLAGS=-static && make && make install && ldconfig
 
-RUN git clone https://github.com/iqbal-lab-org/cylon.git cylon && \
-  cd cylon && git checkout ${CYLON_COMMIT_HASH} && python3 -m pip install .
-
 RUN git clone https://github.com/GlobalPathogenAnalysisService/read-it-and-keep.git read-it-and-keep && \
   cd read-it-and-keep && git checkout ${READITANDKEEP_COMMIT_HASH} && \
   cd src && make && mv readItAndKeep /usr/local/bin/
-
-RUN git clone https://github.com/iqbal-lab-org/varifier.git varifier && \
-  cd varifier && git checkout ${VARIFIER_COMMIT_HASH} && python3 -m pip install .
-
-FROM build as app
-
-COPY --from=build /usr/local/bin/* /usr/local/bin/
-
-WORKDIR /data
 
 RUN mkdir -p enaBrowserTools && \
   wget -qO- https://github.com/enasequence/enaBrowserTools/archive/refs/tags/v${ENA_VERSION}.tar.gz | \
   tar xz --strip-components=1 -C enaBrowserTools
 
-RUN wget -qO- https://github.com/iqbal-lab-org/viridian/archive/refs/tags/v${VIRIDIAN_VERSION}.tar.gz | \
-  tar xz --strip-components=1 -C . && \
-  python3 -m pip install pytest && \
-  python3 -m pip install -r requirements.txt && \
+## App ##
+FROM ubuntu:20.04 as app
+
+LABEL base.image="ubuntu:20.04"
+LABEL dockerfile.version="1"
+LABEL software="viridian"
+LABEL software.version="${VIRIDIAN_VERSION}"
+LABEL description="Ultra-careful amplicon-aware viral assembly for tiled amplicon schemes."
+LABEL website="https://github.com/iqbal-lab-org/viridian"
+LABEL license="https://github.com/iqbal-lab-org/viridian/blob/master/LICENSE"
+LABEL maintainer="Wilson Chan"
+LABEL maintainer.email="chan.wilson.wc@gmail.com"
+LABEL maintainer2="Kutluhan Incekara"
+LABEL maintainer2.email="kutluhan.incekara@ct.gov"
+
+ARG VIRIDIAN_VERSION
+ARG CYLON_COMMIT_HASH
+ARG VARIFIER_COMMIT_HASH
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+  python3-dev \
+  python3-pip \
+  unzip \
+  gcc-x86-64-linux-gnu \
+  wget \
+  samtools
+
+COPY --from=build /usr/local/bin/* /usr/local/bin/
+COPY --from=build /usr/local/lib/* /usr/local/lib/
+
+RUN wget -q https://github.com/iqbal-lab-org/cylon/archive/${CYLON_COMMIT_HASH}.zip &&\
+  unzip ${CYLON_COMMIT_HASH}.zip && rm ${CYLON_COMMIT_HASH}.zip &&\
+  mv cylon-${CYLON_COMMIT_HASH} cylon && cd cylon &&\
   python3 -m pip install .
 
+RUN wget https://github.com/iqbal-lab-org/varifier/archive/${VARIFIER_COMMIT_HASH}.zip &&\
+  unzip ${VARIFIER_COMMIT_HASH}.zip && rm ${VARIFIER_COMMIT_HASH}.zip &&\
+  mv varifier-${VARIFIER_COMMIT_HASH} varifier && cd varifier &&\
+  python3 -m pip install .
+
+RUN wget -q https://github.com/iqbal-lab-org/viridian/archive/refs/tags/v${VIRIDIAN_VERSION}.tar.gz &&\
+  mkdir viridian &&\
+  tar -C viridian --strip-components=1 -xvf v${VIRIDIAN_VERSION}.tar.gz && \
+  cd viridian &&\
+  python3 -m pip install -r requirements.txt &&\
+  python3 -m pip install . 
+
+WORKDIR /data
+
 CMD ["viridian"]
+
+ENV LC_ALL=C
 
 ## Test ##
 FROM app as test
 
-WORKDIR /test
-
-COPY --from=app /data /test
-
-RUN pytest
+RUN cd /viridian &&\
+  python3 -m pip install pytest &&\
+  pytest
 
 RUN viridian run_one_sample --run_accession SRR12345678 --outdir OUT
