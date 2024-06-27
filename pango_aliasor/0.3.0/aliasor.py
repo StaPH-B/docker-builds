@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
 
+#####
+# Mostly stolen from https://github.com/corneliusroemer/pango_aliasor?tab=readme-ov-file#convenience-script
+# and https://github.com/UPHL-BioNGS/Wastewater-genomic-analysis/blob/pooja-dev/utils/freyja_custom_lin_processing.py
+#####
+
 import pandas as pd
 from pango_aliasor.aliasor import Aliasor
 import argparse
