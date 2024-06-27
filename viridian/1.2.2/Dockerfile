@@ -83,6 +83,10 @@ RUN mkdir -p enaBrowserTools && \
 ## App ##
 FROM ubuntu:20.04 as app
 
+ARG VIRIDIAN_VERSION
+ARG CYLON_COMMIT_HASH
+ARG VARIFIER_COMMIT_HASH
+
 LABEL base.image="ubuntu:20.04"
 LABEL dockerfile.version="1"
 LABEL software="viridian"
@@ -94,10 +98,6 @@ LABEL maintainer="Wilson Chan"
 LABEL maintainer.email="chan.wilson.wc@gmail.com"
 LABEL maintainer2="Kutluhan Incekara"
 LABEL maintainer2.email="kutluhan.incekara@ct.gov"
-
-ARG VIRIDIAN_VERSION
-ARG CYLON_COMMIT_HASH
-ARG VARIFIER_COMMIT_HASH
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
   python3-dev \
