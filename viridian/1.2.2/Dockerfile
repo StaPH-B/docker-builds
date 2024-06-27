@@ -77,7 +77,8 @@ RUN git clone https://github.com/GlobalPathogenAnalysisService/read-it-and-keep.
 
 RUN mkdir -p enaBrowserTools && \
   wget -qO- https://github.com/enasequence/enaBrowserTools/archive/refs/tags/v${ENA_VERSION}.tar.gz | \
-  tar xz --strip-components=1 -C enaBrowserTools
+  tar xz --strip-components=1 -C enaBrowserTools &&\
+  cp -r ./enaBrowserTools/python3/* /usr/local/bin/
 
 ## App ##
 FROM ubuntu:20.04 as app
