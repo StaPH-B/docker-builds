@@ -184,6 +184,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Verkko | Public Domain | https://github.com/marbl/verkko/blob/master/README.licenses |
 | VIBRANT | GNU GPLv3 | https://github.com/AnantharamanLab/VIBRANT/blob/master/LICENSE |
 | VIGOR4 | GNU GPLv3 | https://github.com/JCVenterInstitute/VIGOR4/blob/master/LICENSE.txt |
+| Viridian | MIT | https://github.com/iqbal-lab-org/viridian/blob/master/LICENSE |
 | VirSorter2 | GNU GPLv2 | https://github.com/jiarong/VirSorter2/blob/master/LICENSE |
 | VirulenceFinder | Apache 2.0 | https://bitbucket.org/genomicepidemiology/virulencefinder/src/master/ |
 | wtdbg2 | GNU GPLv3 | https://github.com/ruanjue/wtdbg2/blob/master/LICENSE.txt |
