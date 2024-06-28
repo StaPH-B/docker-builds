@@ -1,12 +1,31 @@
 # Viridian container
 
 Main tool: [Viridian](https://github.com/iqbal-lab-org/viridian)
-
+  
 Code repository: [Viridian](https://github.com/iqbal-lab-org/viridian)
 
-Basic Usage: Ultra-careful amplicon-aware viral assembly for tiled amplicon schemes.
+Additional tools:
+- samtools: version
+- bcftools: version
+- htslib: version
+- ENA: 1.7.1
+- ngmerge: version
+- vt: 0.577721
+- racon: 1.5.0
+- mummer: 4.0.0
+- read-it-and-keep: 
+- cylon: commit hash 57d559a76254b0b95785f7c02fa58ef806713e01
+- varifier: commit hash 8bc8726ed3cdb337dc47b62515e709759e451137
+- minimap2: version
 
+Basic information on how to use this tool:
+- executable: viridian
+- help: --help
+- version: --version
+- description: Ultra-careful amplicon-aware viral assembly for tiled amplicon schemes.
+  
 Full documentation: [Viridian wiki](https://github.com/iqbal-lab-org/viridian/wiki)
+
 
 ## Example Usage
 
