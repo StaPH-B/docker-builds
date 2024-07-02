@@ -1,96 +1,146 @@
-ARG VIRIDIAN_VERSION=1.2.2
-ARG ENA_VERSION=1.7.1
-ARG BCFTOOLS_VERSION=1.10.2
-ARG MUMMER_VERSION=4.0.0
-ARG NGMERGE_COMMIT_HASH=224fc6a0066024e05965d101d998704815cb4c41
-ARG VT_COMMIT_HASH=2187ff6347086e38f71bd9f8ca622cd7dcfbb40c
-ARG MINIMAP2_COMMIT_HASH=b0b199f5039e8da5e8d1a9a7ae130580fd33fe1f
-ARG CYLON_COMMIT_HASH=57d559a76254b0b95785f7c02fa58ef806713e01
-ARG READITANDKEEP_COMMIT_HASH=61ae15be1e515c960b0135eae7dd59568a9de30d
-ARG VARIFIER_COMMIT_HASH=8bc8726ed3cdb337dc47b62515e709759e451137
+ARG VIRIDIAN_VER="1.2.2"
+ARG SAMTOOLS_VER="1.20"
+ARG BCFTOOLS_VER=${SAMTOOLS_VER}
+ARG HTSLIB_VER=${SAMTOOLS_VER}
+ARG ENA_VER="1.7.1"
+ARG NGMERGE_VER="0.3"
+ARG VT_VER="0.57721"
+ARG RACON_VER="1.5.0"
+ARG MUMMER_VER="4.0.0rc1"
+ARG READITANDKEEP_VER="0.3.0"
+ARG CYLON_COMMIT_HASH="57d559a76254b0b95785f7c02fa58ef806713e01"
+ARG VARIFIER_COMMIT_HASH="8bc8726ed3cdb337dc47b62515e709759e451137"
+ARG MINIMAP2_VER="2.28"
 
 ## Builder ##
-FROM ubuntu:20.04 as build
-
-ARG ENA_VERSION
-ARG BCFTOOLS_VERSION
-ARG MUMMER_VERSION
-ARG NGMERGE_COMMIT_HASH
-ARG VT_COMMIT_HASH
-ARG MINIMAP2_COMMIT_HASH
-ARG READITANDKEEP_COMMIT_HASH
+FROM ubuntu:jammy as build
+ARG SAMTOOLS_VER
+ARG BCFTOOLS_VER
+ARG HTSLIB_VER
+ARG NGMERGE_VER
+ARG VT_VER
+ARG RACON_VER
+ARG READITANDKEEP_VER
+ARG MINIMAP2_VER
+ARG MUMMER_VER
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && \
-  apt-get install -y --no-install-recommends \
-  build-essential \
-  cmake \
-  gcc-10 \
-  g++-10 \
-  git \
-  python3 \
-  python3-pip \
-  python3-dev \
+RUN apt-get update && apt-get install --no-install-recommends -y \
   wget \
+  ca-certificates \
+  perl \
+  bzip2 \
+  cmake \
+  git \
+  autoconf \
+  automake \
+  make \
+  curl \
+  gcc \
+  g++ \
+  gnuplot \
   zlib1g-dev \
   libbz2-dev \
   liblzma-dev \
-  libhts-dev \
   libcurl4-gnutls-dev \
+  libncurses5-dev \
   libssl-dev \
-  samtools && \
-  update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 100 --slave /usr/bin/g++ g++ /usr/bin/g++-10 && \
-  python3 -m pip install tox
+  libperl-dev \
+  libgsl0-dev \
+  procps \
+  gawk \
+  sed \
+  build-essential \
+  unzip \
+  nasm \
+  pkgconf \
+  libtool \
+  ruby \
+  yaggo \
+  gcc-11 && \
+  rm -rf /var/lib/apt/lists/* && apt-get autoclean
 
-# Install dependencies
-RUN git clone https://github.com/harvardinformatics/NGmerge.git NGmerge && \
-  cd NGmerge && git checkout ${NGMERGE_COMMIT_HASH} && make install
-
-RUN mkdir -p bcftools && \
-  wget -qO- https://github.com/samtools/bcftools/releases/download/${BCFTOOLS_VERSION}/bcftools-${BCFTOOLS_VERSION}.tar.bz2 | tar xj --strip-components=1 -C bcftools && \
-  cd bcftools && make install
-
-RUN git clone https://github.com/atks/vt.git vt && \
-  cd vt && git checkout ${VT_COMMIT_HASH} && make && mv vt /usr/local/bin/
-
-RUN git clone https://github.com/lh3/minimap2.git minimap2 && \
-  cd minimap2 && git checkout ${MINIMAP2_COMMIT_HASH} && \
-  if [ "$(dpkg --print-architecture | grep '^arm' | wc -l)" -eq 1 ]; then \
-  make arm_neon=1 aarch64=1; else make; fi && \
-  mv minimap2 /usr/local/bin/
-
-RUN git clone --recursive https://github.com/lbcb-sci/racon.git racon && \
-  cd racon && mkdir build && cd build && \
-  cmake -DCMAKE_BUILD_TYPE=Release .. && \
-  make CC=gcc-10 CPP=g++-10 CXX=g++-10 LD=g++-10 && \
+# compile bcftools
+RUN wget -q https://github.com/samtools/bcftools/releases/download/${BCFTOOLS_VER}/bcftools-${BCFTOOLS_VER}.tar.bz2 && \
+  tar -xjf bcftools-${BCFTOOLS_VER}.tar.bz2 && \
+  rm -v bcftools-${BCFTOOLS_VER}.tar.bz2 && \
+  cd bcftools-${BCFTOOLS_VER} && \
+  make && \
   make install
 
-RUN mkdir -p mummer && \
-  wget -qO- https://github.com/mummer4/mummer/releases/download/v${MUMMER_VERSION}rc1/mummer-${MUMMER_VERSION}rc1.tar.gz | \
-  tar xz --strip-components=1 -C mummer && \
-  cd mummer && ./configure LDFLAGS=-static && make && make install && ldconfig
+# compile samtools
+RUN wget -q https://github.com/samtools/samtools/releases/download/${SAMTOOLS_VER}/samtools-${SAMTOOLS_VER}.tar.bz2 && \
+  tar -xjf samtools-${SAMTOOLS_VER}.tar.bz2 && \
+  cd samtools-${SAMTOOLS_VER} && \
+  ./configure && \
+  make && \
+  make install
 
-RUN git clone https://github.com/GlobalPathogenAnalysisService/read-it-and-keep.git read-it-and-keep && \
-  cd read-it-and-keep && git checkout ${READITANDKEEP_COMMIT_HASH} && \
-  cd src && make && mv readItAndKeep /usr/local/bin/
+# compile htslib
+RUN wget -q https://github.com/samtools/htslib/releases/download/${HTSLIB_VER}/htslib-${HTSLIB_VER}.tar.bz2 && \
+  tar -vxjf htslib-${HTSLIB_VER}.tar.bz2 && \
+  rm -v htslib-${HTSLIB_VER}.tar.bz2 && \
+  cd htslib-${HTSLIB_VER} && \
+  make && \
+  make install
 
-RUN mkdir -p enaBrowserTools && \
-  wget -qO- https://github.com/enasequence/enaBrowserTools/archive/refs/tags/v${ENA_VERSION}.tar.gz | \
-  tar xz --strip-components=1 -C enaBrowserTools &&\
-  cp -r ./enaBrowserTools/python3/* /usr/local/bin/
+# compile NGmerge
+RUN wget -q https://github.com/harvardinformatics/NGmerge/archive/refs/tags/v${NGMERGE_VER}.tar.gz && \
+  tar -vxf v${NGMERGE_VER}.tar.gz && \
+  cd NGmerge-${NGMERGE_VER} && \
+  make && \
+  cp NGmerge /usr/local/bin/.
+
+# compile vt
+RUN wget -q https://github.com/atks/vt/archive/refs/tags/${VT_VER}.tar.gz && \
+  tar -vxf ${VT_VER}.tar.gz && \
+  cd vt-${VT_VER} && \
+  make && \
+  cp vt /usr/local/bin/.
+
+# compile racon
+RUN wget -q https://github.com/lbcb-sci/racon/archive/refs/tags/${RACON_VER}.tar.gz && \
+  tar -xvf ${RACON_VER}.tar.gz && \
+  cd racon-${RACON_VER} && \
+  mkdir build && \
+  cd build && \
+  cmake -DCMAKE_BUILD_TYPE=Release .. && \
+  make && \
+  cp bin/racon /usr/local/bin/.
+
+# compile read-it-and-keep
+RUN wget -q https://github.com/GlobalPathogenAnalysisService/read-it-and-keep/archive/refs/tags/v${READITANDKEEP_VER}.tar.gz && \
+  tar -vxf v${READITANDKEEP_VER}.tar.gz && \
+  cd read-it-and-keep-${READITANDKEEP_VER}/src && \
+  make && \
+  cp readItAndKeep /usr/local/bin/.
+
+# install minimap2 binary
+RUN curl -L https://github.com/lh3/minimap2/releases/download/v${MINIMAP2_VER}/minimap2-${MINIMAP2_VER}_x64-linux.tar.bz2 | tar -jxvf - --no-same-owner && \
+  cp minimap2-${MINIMAP2_VER}_x64-linux/minimap2 /usr/local/bin
+
+RUN wget -q https://github.com/mummer4/mummer/archive/refs/tags/v${MUMMER_VER}.tar.gz && \
+  tar -xvf v${MUMMER_VER}.tar.gz && \
+  cd mummer-${MUMMER_VER} && \
+  autoreconf -i && \
+  ./configure CXXFLAGS="-std=c++11 -Wno-maybe-uninitialized" LDFLAGS=-static && \
+  make && \
+  make install && \
+  ldconfig
 
 ## App ##
-FROM ubuntu:20.04 as app
+FROM ubuntu:jammy as app
 
-ARG VIRIDIAN_VERSION
+ARG VIRIDIAN_VER
+ARG ENA_VER
 ARG CYLON_COMMIT_HASH
 ARG VARIFIER_COMMIT_HASH
 
-LABEL base.image="ubuntu:20.04"
+LABEL base.image="ubuntu:jammy"
 LABEL dockerfile.version="1"
 LABEL software="viridian"
-LABEL software.version="${VIRIDIAN_VERSION}"
+LABEL software.version="${VIRIDIAN_VER}"
 LABEL description="Ultra-careful amplicon-aware viral assembly for tiled amplicon schemes."
 LABEL website="https://github.com/iqbal-lab-org/viridian"
 LABEL license="https://github.com/iqbal-lab-org/viridian/blob/master/LICENSE"
@@ -98,46 +148,68 @@ LABEL maintainer="Wilson Chan"
 LABEL maintainer.email="chan.wilson.wc@gmail.com"
 LABEL maintainer2="Kutluhan Incekara"
 LABEL maintainer2.email="kutluhan.incekara@ct.gov"
+LABEL maintainer3="Erin Young"
+LABEL maintainer3.email="eriny@utah.gov"
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-  python3-dev \
+  python3 \
   python3-pip \
-  unzip \
-  gcc-x86-64-linux-gnu \
+  python3-dev \
+  gzip \
+  gcc \
+  perl \
+  zlib1g \
+  libncurses5 \
+  bzip2 \
+  liblzma-dev \
+  libcurl4-gnutls-dev \
   wget \
-  samtools
+  && apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 COPY --from=build /usr/local/bin/* /usr/local/bin/
 COPY --from=build /usr/local/lib/* /usr/local/lib/
 
+RUN pip install --no-cache-dir cython
+
+# ENA tools
+RUN wget -q https://github.com/enasequence/enaBrowserTools/archive/refs/tags/v${ENA_VER}.tar.gz && \
+  tar -xvf v${ENA_VER}.tar.gz && \
+  rm v${ENA_VER}.tar.gz
+
 RUN wget -q https://github.com/iqbal-lab-org/cylon/archive/${CYLON_COMMIT_HASH}.zip &&\
-  unzip ${CYLON_COMMIT_HASH}.zip && rm ${CYLON_COMMIT_HASH}.zip &&\
-  mv cylon-${CYLON_COMMIT_HASH} cylon && cd cylon &&\
-  python3 -m pip install .
+  pip install --no-cache-dir ${CYLON_COMMIT_HASH}.zip && \
+  rm ${CYLON_COMMIT_HASH}.zip
 
-RUN wget https://github.com/iqbal-lab-org/varifier/archive/${VARIFIER_COMMIT_HASH}.zip &&\
-  unzip ${VARIFIER_COMMIT_HASH}.zip && rm ${VARIFIER_COMMIT_HASH}.zip &&\
-  mv varifier-${VARIFIER_COMMIT_HASH} varifier && cd varifier &&\
-  python3 -m pip install .
+RUN wget -q https://github.com/iqbal-lab-org/varifier/archive/${VARIFIER_COMMIT_HASH}.zip &&\
+  pip install --no-cache-dir ${VARIFIER_COMMIT_HASH}.zip && \
+  rm ${VARIFIER_COMMIT_HASH}.zip 
 
-RUN wget -q https://github.com/iqbal-lab-org/viridian/archive/refs/tags/v${VIRIDIAN_VERSION}.tar.gz &&\
-  mkdir viridian &&\
-  tar -C viridian --strip-components=1 -xvf v${VIRIDIAN_VERSION}.tar.gz && \
-  cd viridian &&\
-  python3 -m pip install -r requirements.txt &&\
-  python3 -m pip install . 
+# install viridian
+RUN wget -q https://github.com/iqbal-lab-org/viridian/archive/refs/tags/v${VIRIDIAN_VER}.tar.gz && \
+  pip install --no-cache-dir v${VIRIDIAN_VER}.tar.gz && \
+  mkdir viridian && \
+  tar -C viridian --strip-components=1 -xvf v${VIRIDIAN_VER}.tar.gz && \
+  rm v${VIRIDIAN_VER}.tar.gz
 
 WORKDIR /data
 
-CMD ["viridian"]
+CMD ["viridian", "--help "]
 
-ENV LC_ALL=C
+ENV PATH="/enaBrowserTools-${ENA_VER}/python3:$PATH" LC_ALL=C
 
 ## Test ##
 FROM app as test
 
-RUN cd /viridian &&\
-  python3 -m pip install pytest &&\
+WORKDIR /test
+
+RUN cd /viridian && \
+  pip install --no-cache-dir pytest && \
   pytest
 
-RUN viridian run_one_sample --run_accession SRR29437696 --outdir OUT
+RUN viridian run_one_sample --run_accession SRR29437696 --outdir OUT && \
+  wc -l OUT/consensus.fa.gz OUT/log.json.gz OUT/qc.tsv.gz && \
+  head OUT/variants.vcf
+
+RUN viridian run_one_sample --run_accession SRR29437696 --outdir OUT2 --keep_bam && \
+  wc -l OUT2/consensus.fa.gz OUT2/log.json.gz OUT2/qc.tsv.gz OUT2/reference_mapped.bam && \
+  head OUT2/variants.vcf
