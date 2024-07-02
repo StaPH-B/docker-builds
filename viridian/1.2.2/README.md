@@ -5,18 +5,18 @@ Main tool: [Viridian](https://github.com/iqbal-lab-org/viridian)
 Code repository: [Viridian](https://github.com/iqbal-lab-org/viridian)
 
 Additional tools:
-- samtools: version
-- bcftools: version
-- htslib: version
+- samtools: 1.20
+- bcftools: 1.20
+- htslib: 1.20
 - ENA: 1.7.1
-- ngmerge: version
+- ngmerge: 0.3
 - vt: 0.577721
 - racon: 1.5.0
 - mummer: 4.0.0
-- read-it-and-keep: 
+- read-it-and-keep: 0.3.0
 - cylon: commit hash 57d559a76254b0b95785f7c02fa58ef806713e01
 - varifier: commit hash 8bc8726ed3cdb337dc47b62515e709759e451137
-- minimap2: version
+- minimap2: 2.28
 
 Basic information on how to use this tool:
 - executable: viridian
