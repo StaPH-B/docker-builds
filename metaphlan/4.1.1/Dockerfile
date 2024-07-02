@@ -21,7 +21,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 RUN micromamba install --name base -c conda-forge -c bioconda metaphlan=${METAPHLAN_VER} &&\
-    micromamba clean -a -y
+    micromamba clean -afy
 
 ENV PATH="/opt/conda/bin/:${PATH}" \
     LC_ALL=C.UTF-8
