@@ -7,13 +7,13 @@ FROM ubuntu:jammy as app
 ARG TABLE2ASN_VER="1.28.1021"
 ARG RELEASE_DATE
 
-LABEL base.image="ubuntu:focal"
+LABEL base.image="ubuntu:jammy"
 LABEL dockerfile.version="1"
 LABEL software="NCBI's table2asn"
 LABEL software.version="${TABLE2ASN_VER}"
 LABEL description="Converts files of various formats to ASN.1"
 LABEL website="https://www.ncbi.nlm.nih.gov/genbank/table2asn/"
-LABEL license="unknown"
+LABEL license="Public Domain"
 LABEL maintainer="Sage Wright"
 LABEL maintainer.email="sage.wright@theiagen.com"
 
