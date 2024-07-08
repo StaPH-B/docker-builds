@@ -66,7 +66,7 @@ WORKDIR /pangolin
 # print versions
 RUN pip install . && \
  pangolin --add-assignment-cache && \
- micromamba clean -a -y && \
+ micromamba clean -a -y -f && \
  mkdir /data && \
  pangolin --all-versions && \
  usher --version
