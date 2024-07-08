@@ -53,7 +53,8 @@ RUN sed -i "s|usher.*|usher=${USHER_VER}|" /pangolin/environment.yml && \
  sed -i "s|pangolin-data.git|pangolin-data.git@${PANGOLIN_DATA_VER}|" /pangolin/environment.yml && \
  sed -i "s|constellations.git|constellations.git@${CONSTELLATIONS_VER}|" /pangolin/environment.yml && \
  sed -i "12 a\  - pulp=2.7.0" /pangolin/environment.yml && \
- micromamba create -n pangolin -y -f /pangolin/environment.yml
+ micromamba create -n pangolin -y -f /pangolin/environment.yml && \
+ micromamba clean -a -y -f
 
 # so that mamba/conda env is active when running below commands
 ENV ENV_NAME="pangolin"
@@ -66,7 +67,6 @@ WORKDIR /pangolin
 # print versions
 RUN pip install . && \
  pangolin --add-assignment-cache && \
- micromamba clean -a -y -f && \
  mkdir /data && \
  pangolin --all-versions && \
  usher --version
