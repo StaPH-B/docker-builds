@@ -65,7 +65,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     bzip2 \
     liblzma-dev \
     libcurl4-gnutls-dev \
-    libdeflate \
+    libdeflate0 \
     procps \
     && apt-get autoclean && rm -rf /var/lib/apt/lists/* && \
     mkdir /data
