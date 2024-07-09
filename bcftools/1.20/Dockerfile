@@ -20,6 +20,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   libbz2-dev \
   liblzma-dev \
   libcurl4-gnutls-dev \
+  libdeflate-dev \
   libssl-dev \
   libperl-dev \
   libgsl0-dev \
@@ -31,6 +32,7 @@ RUN wget https://github.com/samtools/bcftools/releases/download/${BCFTOOLS_VER}/
   tar -xjf bcftools-${BCFTOOLS_VER}.tar.bz2 && \
   rm -v bcftools-${BCFTOOLS_VER}.tar.bz2 && \
   cd bcftools-${BCFTOOLS_VER} && \
+  ./configure && \
   make && \
   make install && \
   make test 
@@ -63,6 +65,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     bzip2 \
     liblzma-dev \
     libcurl4-gnutls-dev \
+    libdeflate \
     procps \
     && apt-get autoclean && rm -rf /var/lib/apt/lists/* && \
     mkdir /data
