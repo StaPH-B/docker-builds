@@ -11,7 +11,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   wget \
   ca-certificates \
   perl \
-  bzip2 \
   autoconf \
   automake \
   make \
@@ -62,10 +61,10 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     perl \
     zlib1g \
     libncurses5 \
-    bzip2 \
-    liblzma-dev \
-    libcurl4-gnutls-dev \
-    libdeflate0 \
+    libbz2-1.0 \
+    liblzma5 \
+    libcurl3-gnutls \
+    lidbeflate0 \
     procps \
     && apt-get autoclean && rm -rf /var/lib/apt/lists/* && \
     mkdir /data

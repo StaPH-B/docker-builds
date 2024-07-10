@@ -11,7 +11,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     wget \
     ca-certificates \
     make \
-    bzip2 \
     autoconf \
     automake \
     make \
@@ -19,6 +18,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     perl \
     zlib1g-dev \
     libbz2-dev \
+    libdeflate-dev \
     liblzma-dev \
     libcurl4-gnutls-dev \
     libssl-dev \
@@ -30,6 +30,7 @@ RUN wget -q https://github.com/samtools/htslib/releases/download/${HTSLIB_VER}/h
     tar -vxjf htslib-${HTSLIB_VER}.tar.bz2 && \
     rm -v htslib-${HTSLIB_VER}.tar.bz2 && \
     cd htslib-${HTSLIB_VER} && \
+    ./configure && \
     make && \
     make install && \
     make test
@@ -54,11 +55,11 @@ LABEL maintainer2.email="kapsakcj@gmail.com"
 # install runtime dependencies & cleanup apt garbage
 # installed as recommend here: https://github.com/samtools/htslib/blob/develop/INSTALL#L31
 RUN apt-get update && apt-get install --no-install-recommends -y \
-    bzip2 \
-    zlib1g-dev \
-    libbz2-dev \
-    liblzma-dev \
-    libcurl4-gnutls-dev \
+    zlib1g \
+    libbz2-1.0 \
+    liblzma5 \
+    libcurl3-gnutls \
+    lidbeflate0 \
     ca-certificates \ 
     && apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
