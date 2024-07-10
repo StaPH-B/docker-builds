@@ -100,6 +100,9 @@ RUN echo "downloading test SC2 BAM and FASTA and running bcftools mpileup and bc
   bcftools mpileup -A -d 200 -B -Q 0 -f SARS-CoV-2.reference.fasta SRR13957123.primertrim.sorted.bam | \
   bcftools call -mv -Ov -o SRR13957123.vcf
 
+RUN echo "reading test data from Google Cloud to validate GCS support" && \
+  bcftools head gs://genomics-public-data/references/hg38/v0/1000G_phase1.snps.high_confidence.hg38.vcf.gz
+
 # FYI Test suite "make test" is performed in the builder stage since app and
 # test stages do not include bcftools source code.
 # This is to avoid having to re-download source code simply to run test suite
