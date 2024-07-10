@@ -3,7 +3,7 @@ FROM mambaorg/micromamba:1.5.8 as app
 USER root
 WORKDIR /
 
-ARG GENOFLU_VER="1.0.3"
+ARG GENOFLU_VER="1.03-0"
 
 # LABEL instructions tag the image with metadata that might be important to the user
 LABEL base.image="micromamba:1.5.8"
@@ -24,6 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # install genoflu via bioconda; install into 'base' conda env
+# genoflu is not recognized in micromamba by the version tag
 RUN micromamba install --yes --name base --channel conda-forge --channel bioconda \
     genoflu=${GENOFLU_VER} && \
     micromamba clean --all --yes
