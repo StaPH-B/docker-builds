@@ -27,7 +27,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # genoflu is not recognized in micromamba by the version tag
 RUN micromamba install --yes --name base --channel conda-forge --channel bioconda \
     genoflu=${GENOFLU_VER} && \
-    micromamba clean --all --yes
+    micromamba clean --all --force-pkgs-dirs --yes
 
 
 # ENV instructions set environment variables that persist from the build into the resulting image
