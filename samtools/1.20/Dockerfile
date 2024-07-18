@@ -12,7 +12,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     libcurl4-gnutls-dev \
     zlib1g-dev \
     libssl-dev \
-    libdeflate-dev \
     gcc \
     wget \
     make \
@@ -59,10 +58,9 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     perl \
     zlib1g \
     libncurses5 \
-    libbz2-1.0 \
-    liblzma5 \
-    libcurl3-gnutls \
-    lidbeflate0 \
+    bzip2 \
+    liblzma-dev \
+    libcurl4-gnutls-dev \
     gnuplot \
     && apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
