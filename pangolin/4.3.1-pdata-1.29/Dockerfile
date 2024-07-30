@@ -188,8 +188,9 @@ rm -vr ncbi_dataset/ README.md && \
 pangolin PP218754.1.genomic.fna -o PP218754.1-usher && \
 column -t -s, PP218754.1-usher/lineage_report.csv
 
-# new lineage KP.3.3.2 that was introduced in pango-designation v1.29: https://github.com/cov-lineages/pango-designation/commit/7125e606818312b78f0756d7fcab6dba92dd0a9e
-# genome on NCBI: https://www.ncbi.nlm.nih.gov/nuccore/PQ073669
+# new lineage LK.1 that was introduced in pango-designation v1.28: https://github.com/cov-lineages/pango-designation/commit/922795c90de355e67200cf4d379e8e5ff22472e4
+# thank you Luis, Lorraine, Marcos & team from PR Sci Trust for sharing your data!
+# genome on NCBI: https://www.ncbi.nlm.nih.gov/nuccore/2728145425
 RUN datasets download virus genome accession PP770375.1 --filename PP770375.1.zip && \
 unzip PP770375.1.zip && rm PP770375.1.zip && \
 mv -v ncbi_dataset/data/genomic.fna PP770375.1.genomic.fna && \
@@ -197,8 +198,8 @@ rm -vr ncbi_dataset/ README.md && \
 pangolin PP770375.1.genomic.fna -o PP770375.1-usher && \
 column -t -s, PP770375.1-usher/lineage_report.csv
 
-
-
+# new lineage KP.3.3.2 that was introduced in pango-designation v1.29: https://github.com/cov-lineages/pango-designation/commit/7125e606818312b78f0756d7fcab6dba92dd0a9e
+# genome on NCBI: https://www.ncbi.nlm.nih.gov/nuccore/PQ073669
 RUN datasets download virus genome accession PQ073669.1 --filename PQ073669.1.zip && \
 unzip PQ073669.1.zip && rm PQ073669.1.zip && \
 mv -v ncbi_dataset/data/genomic.fna PQ073669.1.genomic.fna && \
