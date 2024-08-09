@@ -59,6 +59,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Freyja | BSD-2 | https://github.com/andersen-lab/Freyja/blob/main/LICENSE |
 | GAMBIT | GNU aGPLv3 | https://github.com/jlumpe/gambit/blob/master/LICENSE |
 | GAMMA | Apache 2.0 | https://github.com/rastanton/GAMMA/blob/main/LICENSE |
+| GenoFlu | GNU GPL v3 | https://github.com/USDA-VS/GenoFLU/blob/main/LICENSE |
 | Genotyphi | GNU GPLv3 | https://github.com/katholt/genotyphi/blob/main/LICENSE |
 | geNomad | ACADEMIC, INTERNAL, RESEARCH & DEVELOPMENT, NON-COMMERCIAL USE ONLY | https://github.com/apcamargo/genomad/blob/main/LICENSE |
 | GenoVi | BY-NC-SA Creative Commons License | https://github.com/robotoD/GenoVi/blob/main/LICENSE.txt |
@@ -114,6 +115,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Panaroo | MIT | https://github.com/gtonkinhill/panaroo/blob/master/LICENSE |
 | pango_aliasor | MIT | https://github.com/corneliusroemer/pango_aliasor/blob/main/LICENSE |
 | Pangolin | GNU GPLv3 | https://github.com/cov-lineages/pangolin/blob/master/LICENSE.txt |
+| panqc | MIT | https://github.com/maxgmarin/panqc/blob/main/LICENSE |
 | Parsnp | Battelle National Biodefense Institute (BNBI) | https://github.com/marbl/parsnp?tab=License-1-ov-file#readme |
 | pasty | Apache 2.0 | https://github.com/rpetit3/pasty/blob/main/LICENSE |
 | Pavian | GNU GPLv3 | https://github.com/fbreitwieser/pavian/blob/master/DESCRIPTION |
@@ -185,6 +187,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Verkko | Public Domain | https://github.com/marbl/verkko/blob/master/README.licenses |
 | VIBRANT | GNU GPLv3 | https://github.com/AnantharamanLab/VIBRANT/blob/master/LICENSE |
 | VIGOR4 | GNU GPLv3 | https://github.com/JCVenterInstitute/VIGOR4/blob/master/LICENSE.txt |
+| Viridian | MIT | https://github.com/iqbal-lab-org/viridian/blob/master/LICENSE |
 | VirSorter2 | GNU GPLv2 | https://github.com/jiarong/VirSorter2/blob/master/LICENSE |
 | VirulenceFinder | Apache 2.0 | https://bitbucket.org/genomicepidemiology/virulencefinder/src/master/ |
 | wtdbg2 | GNU GPLv3 | https://github.com/ruanjue/wtdbg2/blob/master/LICENSE.txt |
