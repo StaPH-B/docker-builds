@@ -113,6 +113,7 @@ The licenses of the open-source software that is contained in these Docker image
 | ONTime | MIT | https://github.com/mbhall88/ontime/blob/main/LICENSE |
 | OrthoFinder | GNU GPLv3 | https://github.com/davidemms/OrthoFinder/blob/master/License.md |
 | Panaroo | MIT | https://github.com/gtonkinhill/panaroo/blob/master/LICENSE |
+| pango_aliasor | MIT | https://github.com/corneliusroemer/pango_aliasor/blob/main/LICENSE |
 | Pangolin | GNU GPLv3 | https://github.com/cov-lineages/pangolin/blob/master/LICENSE.txt |
 | panqc | MIT | https://github.com/maxgmarin/panqc/blob/main/LICENSE |
 | Parsnp | Battelle National Biodefense Institute (BNBI) | https://github.com/marbl/parsnp?tab=License-1-ov-file#readme |
