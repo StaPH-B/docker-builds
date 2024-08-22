@@ -30,7 +30,7 @@ LABEL maintainer.email="kutluhan.incekara@ct.gov"
 COPY --from=builder /root/.cargo/bin/skani /usr/local/bin/skani
 
 # default run command
-CMD skani -h
+CMD ["skani", "-h"]
 
 # singularity compatibility
 ENV LC_ALL=C
