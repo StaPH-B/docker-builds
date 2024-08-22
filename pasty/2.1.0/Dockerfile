@@ -7,7 +7,7 @@ ARG PASTY_VER
 LABEL base.image="mambaorg/micromamba:1.5.8"
 LABEL dockerfile.version="1"
 LABEL software="pasty"
-LABEL software.version="${PASTY_VERSION}"
+LABEL software.version="${PASTY_VER}"
 LABEL description="In silico serogrouping of Pseudomonas aeruginosa isolates from genome assemblies"
 LABEL website="https://github.com/rpetit3/pasty"
 LABEL license="https://github.com/rpetit3/pasty/blob/main/LICENSE"
