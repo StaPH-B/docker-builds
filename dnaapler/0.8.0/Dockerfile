@@ -27,7 +27,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # create the conda environment, install mykrobe via bioconda package; cleanup conda garbage
 RUN micromamba create -n dnaapler -y -c bioconda -c defaults -c conda-forge dnaapler=${DNAAPLER_VER} && \
-    micromamba clean -a -y
+    micromamba clean -a -f -y
 
 # set the PATH and LC_ALL for singularity compatibility
 ENV PATH="/opt/conda/envs/dnaapler/bin/:${PATH}" \
