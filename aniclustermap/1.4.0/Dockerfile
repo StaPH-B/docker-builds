@@ -1,6 +1,6 @@
 ARG ANICLUSTERMAP_VER="1.4.0"
 ARG FASTANI_VER="1.34"
-ARG SKANI_VER="0.2.1"
+ARG SKANI_VER="0.2.2"
 
 FROM staphb/fastani:${FASTANI_VER} as fastani
 FROM staphb/skani:${SKANI_VER} as skani
