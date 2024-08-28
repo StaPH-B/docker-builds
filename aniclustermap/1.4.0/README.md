@@ -6,7 +6,7 @@ Code repository: https://github.com/moshi4/ANIclustermap
 
 Additional tools:
 - fastANI: 1.34
-- skani: 0.2.1
+- skani: 0.2.2
 
 Basic information on how to use this tool:
 - executable: ANIclustermap
