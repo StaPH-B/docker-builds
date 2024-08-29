@@ -1,4 +1,4 @@
-ARG PASTY_VER="2.1.0"
+ARG PASTY_VER="2.2.1"
 
 FROM mambaorg/micromamba:1.5.8 AS app
 
