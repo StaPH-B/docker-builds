@@ -1,62 +1,110 @@
-<!-- 
-Please edit this readme with some basic information about the tool and how to use this container. 
-- Include information about databases and additional files that are included.
-- Keep it short - you don't need to recreate the documentation from the creators.
-- Do not just copy and paste the readme or help for the tool. 
--->
+# VIGOR4 container
 
-# <program> container
-
-Main tool: [<program>](link to program)
+Main tool: [vigor4](https://github.com/JCVenterInstitute/VIGOR4)
   
-Code repository:
+Code repository: https://github.com/JCVenterInstitute/VIGOR4
 
 Additional tools:
-- list: version
+- exonerate: 2.4.0
 
 Basic information on how to use this tool:
-- executable: <tool>
-- help: <-h>
-- version: <-v>
-- description: <tool does something>
+- executable: vigor4
+- help: -h
+- version: --version
+- description: |
+> VIGOR4 (Viral Genome ORF Reader) is a Java application to predict protein sequences encoded in viral genomes.
+> VIGOR4 determines the protein coding sequences by sequence similarity searching against curated viral protein databases.
 
 Additional information:
 
-<Container contains X database at Y>
-  
-Full documentation: link to documentation or wiki
+All databases in VIGOR4_DB have been downloaded to /VIGOR_DB and can be found at /VIGOR_DB/Reference_DBs.
 
-## Example Usage
-
+Currently included databases:
 ```bash
-<how creator of the dockerfile uses it>
+antennavirus_txid2560091_db
+bandavirus_txid2733256_db
+beidivirus_txid2501981_db
+cicadellivirus_txid2948664_db
+coguvirus_txid2560118_db
+dengue_GP_mp
+dengue_txid12637_db
+embe_db
+embe_orf1a_mp
+embe_orf1ab_mp
+entovirus_txid2733257_db
+feravirus_txid2501995_db
+flua_db
+flua_ha_mp
+flub_db
+fluc_db
+goukovirus_txid1980420_db
+hantaviridae_db
+hartmanivirus_txid2169607_db
+hibeco_db
+hibeco_orf1a_mp
+hibeco_orf1ab_mp
+horwuvirus_txid2501976_db
+hudivirus_txid2501977_db
+hudovirus_txid2501978_db
+inshuvirus_txid2501996_db
+ixovirus_txid2733258_db
+jonvirus_txid2501997_db
+lassa_db
+laulavirus_txid2560166_db
+lentinuvirus_txid2733259_db
+merbe_db
+merbe_orf1a_mp
+merbe_orf1ab_mp
+mobuvirus_txid2501979_db
+monkeypox_db
+nairoviridae_db
+nobeco_db
+nobeco_orf1a_mp
+nobeco_orf1ab_mp
+orthophasmavirus_txid1980538_db
+peribunyaviridae_db
+phasivirus_txid1980421_db
+phlebovirus_txid11584_db
+pidchovirus_txid2501975_db
+reptarenavirus_txid1653395_db
+rsv_db
+rtva_db
+rtvb_db
+rtvc_db
+rtvf_db
+rtvg_db
+rubodvirus_txid2733260_db
+sapo_db
+sapo_mp
+sarbe_db
+sarbe_orf1a_mp
+sarbe_orf1ab_mp
+sarscov2_db
+sarscov2_orf1a_mp
+sarscov2_orf1ab_mp
+sawastrivirus_txid2560224_db
+tenuivirus_txid12329_db
+uukuvirus_txid2734594_db
+veev_db
+veev_nsp_mp
+veev_sp_mp
+wenrivirus_txid2560254_db
+wnvII_db
+wnvI_db
+wnv_GP1_mp
+wnv_GP2_mp
+wnv_GP3_mp
+wuhivirus_txid2501998_db
+zikv_db
+zikv_mp
 ```
 
+VIGOR4_DB is up-to-date with commit [390582955049b9ddc989510672fbde90cf3387c7](https://github.com/JCVenterInstitute/VIGOR_DB/commits/master/), which was made on Dec 1, 2022.
   
-<!-- Example README
-# pasty container
-
-Main tool: [pasty](https://github.com/rpetit3/pasty)
-
-Code repository: https://github.com/rpetit3/pasty
-
-Additional tools:
-- ncbi-blast+: 2.12.0
-- python: 3.10.6
-
-Basic information on how to use this tool:
-- executable: pasty
-- help: --help
-- version: --version
-- description: "A tool easily taken advantage of for in silico serogrouping of Pseudomonas aeruginosa isolates from genome assemblies"
-
-Additional information:  
-  
-Full documentation: [https://github.com/rpetit3/pasty](https://github.com/rpetit3/pasty)
+Full documentation: [https://github.com/JCVenterInstitute/VIGOR4](https://github.com/JCVenterInstitute/VIGOR4)
 
 ## Example Usage
 
 ```bash
-pasty --assembly /pasty-1.0.2/test/O1-GCF_000504045.fna.gz --prefix O1-GCF_000504045
-``` 
--->
+vigor4 -i entovirus.fasta -o entovirus -d /VIGOR_DB/Reference_DBs/entovirus_txid2733257_db
+```
