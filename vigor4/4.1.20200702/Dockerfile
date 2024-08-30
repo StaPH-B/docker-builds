@@ -66,13 +66,15 @@ WORKDIR /test
 # checking help and version
 RUN vigor4 -h && vigor4 --version
 
+# list databases
+RUN ls /VIGOR_DB/Reference_DBs
+
+# copy bash script for running
+COPY test.sh .
+
+RUN bash test.sh
+
 # using test files
-RUN ls /VIGOR4/src/test && whatever
+COPY test.fasta .
 
-RUN wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/861/905/GCF_000861905.1_ViralProj15445/GCF_000861905.1_ViralProj15445_genomic.fna.gz && \
-    wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/861/165/GCF_000861165.1_ViralProj15288/GCF_000861165.1_ViralProj15288_genomic.fna.gz && \
-    gunzip GCF_000861905.1_ViralProj15445_genomic.fna.gz && gunzip GCF_000861165.1_ViralProj15288_genomic.fna.gz
-
-RUN vigor4 -i GCF_000861905.1_ViralProj15445_genomic.fna -o test1 -d /VIGOR_DB/Reference_DBs/entovirus_txid2733257_db && \
-    vigor4 -i GCF_000861165.1_ViralProj15288_genomic.fna -o test2 -d /VIGOR_DB/Reference_DBs/entovirus_txid2733257_db && \
-    head test*
+RUN vigor4 -i test.fasta -o test1 -d /VIGOR_DB/Reference_DBs/entovirus_txid2733257_db 
