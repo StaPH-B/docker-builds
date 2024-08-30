@@ -68,7 +68,7 @@ WORKDIR /test
 RUN vigor4 -h && vigor4 --version
 
 # list databases
-RUN ls /VIGOR_DB/Reference_DBs | grep -v ini && whatever
+RUN ls /VIGOR_DB/Reference_DBs | grep -v ini
 
 # copy bash script for running
 COPY test.sh .
