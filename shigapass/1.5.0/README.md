@@ -29,8 +29,10 @@ Additional information:
 
 Full documentation: https://github.com/imanyass/ShigaPass
 
+Included Database: Found at `/ShigaPass-${version}/SCRIPT/ShigaPass_DataBases/` so for v1.5.0 use `-p /ShigaPass-1.5.0/SCRIPT/ShigaPass_DataBases/`
+
 ## Example Usage
 
 ```bash
-ShigaPass.sh -l ShigaPass_test.txt -o ShigaPass_Results -p ShigaPass_DataBases -u -k
+ShigaPass.sh -l ShigaPass_test.txt -o ShigaPass_Results -p /ShigaPass-1.5.0/SCRIPT/ShigaPass_DataBases/ -u -k
 ```

@@ -38,10 +38,18 @@ RUN wget https://github.com/imanyass/ShigaPass/archive/refs/tags/v${SHIGAPASS_VE
     chmod +x /ShigaPass-${SHIGAPASS_VER}/SCRIPT/ShigaPass.sh && \
     mkdir /data
 
+#creating variable for referencing database
+ENV DB_PATH=/ShigaPass-${SHIGAPASS_VER}/SCRIPT/ShigaPass_DataBases/
+
 # 'ENV' instructions set environment variables that persist from the build into the resulting image
 # Use for e.g. $PATH and locale settings for compatibility with Singularity
 ENV PATH="/ncbi-blast-${BLAST_VER}+/bin/:/ShigaPass-${SHIGAPASS_VER}/SCRIPT:$PATH" \
  LC_ALL=C
+
+# running test to index the database
+RUN gunzip /ShigaPass-${SHIGAPASS_VER}/Example/Input/*.gz && \
+sed -i "s/^/\/ShigaPass-${SHIGAPASS_VER}\//" /ShigaPass-${SHIGAPASS_VER}/Example/Input/ShigaPass_test.txt && \
+ShigaPass.sh -l /ShigaPass-${SHIGAPASS_VER}/Example/Input/ShigaPass_test.txt -o ShigaPass_Results -p ${DB_PATH} -u
 
 # 'CMD' instructions set a default command when the container is run. This is typically 'tool --help.'
 CMD [ "ShigaPass.sh" ]
@@ -60,6 +68,4 @@ RUN ShigaPass.sh -h && \
  ShigaPass.sh -v
 
 # Testing a script - need to unzip the test files and correct the path for the container
-RUN gunzip /ShigaPass-${SHIGAPASS_VER}/Example/Input/*.gz && \
-sed -i "s/^/\/ShigaPass-${SHIGAPASS_VER}\//" /ShigaPass-${SHIGAPASS_VER}/Example/Input/ShigaPass_test.txt && \
-ShigaPass.sh -l /ShigaPass-${SHIGAPASS_VER}/Example/Input/ShigaPass_test.txt -o ShigaPass_Results -p /ShigaPass-${SHIGAPASS_VER}/SCRIPT/ShigaPass_DataBases -u -k
+RUN ShigaPass.sh -l /ShigaPass-${SHIGAPASS_VER}/Example/Input/ShigaPass_test.txt -o ShigaPass_Results -p ${DB_PATH}
