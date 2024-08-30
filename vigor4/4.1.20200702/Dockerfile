@@ -19,8 +19,9 @@ RUN apt-get update && apt-get -y upgrade && apt-get -y  --no-install-recommends 
     maven \
     openjdk-11-jre-headless \
     unzip \
-    wget \
-    && rm -rf /var/lib/apt/lists/*
+    wget && \
+    apt-get autoclean && \
+    rm -rf /var/lib/apt/lists/*
 
 #get VIGOR4
 RUN wget -q https://github.com/JCVenterInstitute/VIGOR4/archive/${VIGOR4_COMMIT}.zip && \
@@ -67,7 +68,7 @@ WORKDIR /test
 RUN vigor4 -h && vigor4 --version
 
 # list databases
-RUN ls /VIGOR_DB/Reference_DBs
+RUN ls /VIGOR_DB/Reference_DBs | grep -v ini && whatever
 
 # copy bash script for running
 COPY test.sh .
