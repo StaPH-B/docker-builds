@@ -27,6 +27,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # install ncbi-blast+ 2.12.0 pre-compiled linux binaries
 ARG BLAST_VER=2.12.0
 
+#creating variable for referencing database
+ENV DB_PATH=/ShigaPass-${SHIGAPASS_VER}/SCRIPT/ShigaPass_DataBases/
+
 RUN wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/${BLAST_VER}/ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz && \
  tar -xzf ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz && \
  rm ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz 
@@ -36,15 +39,16 @@ RUN wget https://github.com/imanyass/ShigaPass/archive/refs/tags/v${SHIGAPASS_VE
     tar -xzf v${SHIGAPASS_VER}.tar.gz && \
     rm -r v${SHIGAPASS_VER}.tar.gz && \
     chmod +x /ShigaPass-${SHIGAPASS_VER}/SCRIPT/ShigaPass.sh && \
+    chmod -R a+rw ${DB_PATH} && \
     mkdir /data
-
-#creating variable for referencing database
-ENV DB_PATH=/ShigaPass-${SHIGAPASS_VER}/SCRIPT/ShigaPass_DataBases/
 
 # 'ENV' instructions set environment variables that persist from the build into the resulting image
 # Use for e.g. $PATH and locale settings for compatibility with Singularity
 ENV PATH="/ncbi-blast-${BLAST_VER}+/bin/:/ShigaPass-${SHIGAPASS_VER}/SCRIPT:$PATH" \
  LC_ALL=C
+
+#creating variable for referencing database
+ENV DB_PATH=/ShigaPass-${SHIGAPASS_VER}/SCRIPT/ShigaPass_DataBases/
 
 # running test to index the database
 RUN gunzip /ShigaPass-${SHIGAPASS_VER}/Example/Input/*.gz && \
