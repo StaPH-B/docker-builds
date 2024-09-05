@@ -6,6 +6,7 @@ ARG VIGOR4_DB_COMMIT='390582955049b9ddc989510672fbde90cf3387c7'
 
 LABEL base.image="ubuntu:jammy"
 LABEL container.version="1"
+LABEL dockerfile.version="1"
 LABEL software="VIGOR4"
 LABEL software.version="${VIGOR4_VER}"
 LABEL description="VIGOR - Viral Genome ORF Reader"
@@ -60,6 +61,7 @@ CMD vigor4 -h
 RUN mkdir /data
 WORKDIR /data
 
+# testing stage
 FROM app as test
 
 WORKDIR /test
@@ -73,9 +75,6 @@ RUN ls /VIGOR_DB/Reference_DBs | grep -v ini
 # copy bash script for running
 COPY test.sh .
 
-RUN bash test.sh
-
-# using test files
-COPY test.fasta .
-
-RUN vigor4 -i test.fasta -o test1 -d /VIGOR_DB/Reference_DBs/entovirus_txid2733257_db 
+# run bash script, which goes through each test fasta file and compares it to the test tbl file.
+RUN bash test.sh && \
+    head *.tbl
