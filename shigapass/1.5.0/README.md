@@ -4,6 +4,10 @@ Main tool: [ShigaPass](https://github.com/imanyass/ShigaPass)
   
 Code repository: https://github.com/imanyass/ShigaPass
 
+Additional tools:
+
+- ncbi-blast+ 2.12.0
+
 Basic information on how to use this tool:
 
 ````
