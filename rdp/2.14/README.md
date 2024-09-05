@@ -1,9 +1,33 @@
 # RDP Classifier 
 
-This image implements:
-* [RDP v2.14](https://sourceforge.net/projects/rdp-classifier/)
+Main tool: [RDP Classifier](https://sourceforge.net/projects/rdp-classifier/)
+  
+Code repository: https://github.com/rdpstaff/classifier
 
-and can be accessed at [docker hub](https://hub.docker.com/u/tpaisie).
+Basic information on how to use this tool:
+- executable: |
+```
+	classify      - classify one or multiple samples
+	crossvalidate - cross validate accuracy testing
+	libcompare    - compare two samples
+	loot          - leave one (sequence or taxon) out accuracy testing
+	merge-detail  - merge classification detail result files to create a taxon assignment counts file
+	merge-count   - merge multiple taxon assignment count files to into one count file
+	random-sample - random select a subset or subregion of sequences
+	rm-dupseq     - remove identical or any sequence contained by another sequence
+	rm-partialseq - remove partial sequences
+	taxa-sim      - calculate and plot the similarities within taxa
+	train         - retrain classifier
+```
+
+- help: classify # with no flags
+- version: NA
+- description: | 
+> The RDP Classifier is a naive Bayesian classifier which was developed to provide rapid taxonomic placement based on rRNA sequence data.
+
+  
+Full documentation: https://sourceforge.net/projects/rdp-classifier/
+
 
 ## Example analysis
 Get test data:
