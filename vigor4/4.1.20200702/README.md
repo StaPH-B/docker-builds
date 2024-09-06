@@ -99,7 +99,7 @@ zikv_db
 zikv_mp
 ```
 
-VIGOR4_DB is up-to-date with commit [390582955049b9ddc989510672fbde90cf3387c7](https://github.com/JCVenterInstitute/VIGOR_DB/commits/master/), which was made on Dec 1, 2022.
+VIGOR4_DB is up-to-date with commit [390582955049b9ddc989510672fbde90cf3387c7](https://github.com/JCVenterInstitute/VIGOR_DB/commits/master/) on Dec 1, 2022.
   
 Full documentation: [https://github.com/JCVenterInstitute/VIGOR4](https://github.com/JCVenterInstitute/VIGOR4)
 

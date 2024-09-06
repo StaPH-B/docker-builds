@@ -31,20 +31,21 @@ RUN wget -q https://github.com/JCVenterInstitute/VIGOR4/archive/${VIGOR4_COMMIT}
     rm ${VIGOR4_COMMIT}.zip && \
     cd /VIGOR4 && \
     mvn -DskipTests clean package && \
-    ls /VIGOR4/target && \
     unzip /VIGOR4/target/vigor-${VIGOR4_VER}.zip && \
+    rm /VIGOR4/target/vigor-${VIGOR4_VER}.zip && \
+    # create temp directory
     mkdir -p /VIGOR4/tmp/vigor-temp && \
-    chmod 777 -R /VIGOR4/vigor-${VIGOR4_VER}/bin/VIGOR4
+    # make executable
+    chmod 777 -R /VIGOR4/vigor-${VIGOR4_VER}/bin/vigor4 && \
+    #set paths for refs, exonerate, and tmp directory in the config file
+    cd /VIGOR4/vigor-${VIGOR4_VER}/config && \
+    (echo  "\nreference_database_path=/VIGOR_DB/Reference_DBs/\nexonerate_path=/usr/bin/exonerate\ntemporary_directory=/VIGOR4/tmp/vigor-temp\n" > vigor.ini)
 
 #get databases
 RUN wget -q https://github.com/JCVenterInstitute/VIGOR_DB/archive/${VIGOR4_DB_COMMIT}.zip && \
     unzip ${VIGOR4_DB_COMMIT}.zip && \
     rm ${VIGOR4_DB_COMMIT}.zip && \
     mv VIGOR_DB-${VIGOR4_DB_COMMIT} /VIGOR_DB
-
-#set paths for refs, exonerate, and tmp directory in the config file
-RUN cd VIGOR4/vigor-${VIGOR4_VER}/config && \
-    (echo  "\nreference_database_path=/VIGOR_DB/Reference_DBs/\nexonerate_path=/usr/bin/exonerate\ntemporary_directory=/VIGOR4/tmp/vigor-temp\n" > vigor.ini)
 
 #set paths
 ENV PATH="/usr/bin/exonerate:/VIGOR_DB/Reference_DBs:/VIGOR4/vigor-${VIGOR4_VER}/bin/:$PATH"\
