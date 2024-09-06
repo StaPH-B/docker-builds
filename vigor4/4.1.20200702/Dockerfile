@@ -40,17 +40,15 @@ RUN cd VIGOR4 && \
     mkdir vigor-temp
 
 #get databases
-RUN wget https://github.com/JCVenterInstitute/VIGOR_DB/archive/${VIGOR4_DB_COMMIT}.zip && \
+RUN wget -q https://github.com/JCVenterInstitute/VIGOR_DB/archive/${VIGOR4_DB_COMMIT}.zip && \
     unzip ${VIGOR4_DB_COMMIT}.zip && \
     rm ${VIGOR4_DB_COMMIT}.zip && \
     mv VIGOR_DB-${VIGOR4_DB_COMMIT} /VIGOR_DB
 
 #set paths for refs, exonerate, and tmp directory in the config file
 RUN cd VIGOR4/vigor-${VIGOR4_VER}/config && \
-    (echo  "\nreference_database_path=/VIGOR_DB/Reference_DBs/\nexonerate_path=/usr/bin/exonerate\ntemporary_directory=/VIGOR4/tmp/vigor-temp\n" > vigor.ini)
-
-#permissions
-RUN chmod 777 -R VIGOR4
+    (echo  "\nreference_database_path=/VIGOR_DB/Reference_DBs/\nexonerate_path=/usr/bin/exonerate\ntemporary_directory=/VIGOR4/tmp/vigor-temp\n" > vigor.ini) && \
+    chmod 777 -R VIGOR4
 
 #set paths
 ENV PATH="/usr/bin/exonerate:/VIGOR_DB/Reference_DBs:/VIGOR4/vigor-${VIGOR4_VER}/bin/:$PATH"\
@@ -72,9 +70,18 @@ RUN vigor4 -h && vigor4 --version
 # list databases
 RUN ls /VIGOR_DB/Reference_DBs | grep -v ini
 
-# copy bash script for running
-COPY test.sh .
-
-# run bash script, which goes through each test fasta file and compares it to the test tbl file.
-RUN bash test.sh && \
-    head *.tbl
+# running on test files
+RUN vigor4 -i /VIGOR4/src/test/resources/vigor4ReferenceOutput/rtva/rtva.ungapped.fasta -o test_rtva_db -d /VIGOR_DB/Reference_DBs/rtva_db && \
+    vigor4 -i /VIGOR4/src/test/resources/vigor4ReferenceOutput/rtvb/rtvb.ungapped.fasta -o test_rtvb_db -d /VIGOR_DB/Reference_DBs/rtvb_db && \
+    vigor4 -i /VIGOR4/src/test/resources/vigor4ReferenceOutput/rtvc/rtvc.ungapped.fasta -o test_rtvc_db -d /VIGOR_DB/Reference_DBs/rtvc_db && \
+    vigor4 -i /VIGOR4/src/test/resources/vigor4ReferenceOutput/rtvf/rtvf.ungapped.fasta -o test_rtvf_db -d /VIGOR_DB/Reference_DBs/rtvf_db && \
+    vigor4 -i /VIGOR4/src/test/resources/vigor4ReferenceOutput/rtvg/rtvg.ungapped.fasta -o test_rtvg_db -d /VIGOR_DB/Reference_DBs/rtvg_db && \
+    vigor4 -i /VIGOR4/src/test/resources/vigor4ReferenceOutput/sapo/sapo.ungapped.fasta -o test_sapo_db -d /VIGOR_DB/Reference_DBs/sapo_db && \
+    vigor4 -i /VIGOR4/src/test/resources/vigor4ReferenceOutput/wnvI/wnvI.ungapped.fasta -o test_wnvI_db -d /VIGOR_DB/Reference_DBs/wnvI_db && \
+    vigor4 -i /VIGOR4/src/test/resources/vigor4ReferenceOutput/wnvII/wnvII.ungapped.fasta -o test_wnvII_db -d /VIGOR_DB/Reference_DBs/wnvII_db && \
+    vigor4 -i /VIGOR4/src/test/resources/vigor4ReferenceOutput/zikv/zikv.ungapped.fasta -o test_zikv_db -d /VIGOR_DB/Reference_DBs/zikv_db && \
+    vigor4 -i /VIGOR4/src/test/resources/vigor4ReferenceOutput/flua/flua.ungapped.fasta -o test_flua_db -d /VIGOR_DB/Reference_DBs/flua_db && \
+    vigor4 -i /VIGOR4/src/test/resources/vigor4ReferenceOutput/flub/flub.ungapped.fasta -o test_flub_db -d /VIGOR_DB/Reference_DBs/flub_db && \
+    vigor4 -i /VIGOR4/src/test/resources/vigor4ReferenceOutput/fluc/fluc.ungapped.fasta -o test_fluc_db -d /VIGOR_DB/Reference_DBs/fluc_db && \
+    vigor4 -i /VIGOR4/src/test/resources/vigor4ReferenceOutput/veev/veev.ungapped.fasta -o test_veev_db -d /VIGOR_DB/Reference_DBs/veev_db && \
+    head test*.tbl
