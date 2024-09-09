@@ -1,8 +1,6 @@
 # stxtyper container
 
 Main tool: [stxtyper](https://github.com/ncbi/stxtyper)
-  
-Code repository:
 
 Additional tools:
 
@@ -16,6 +14,8 @@ Basic information on how to use this tool:
 - description: Detects and types Shiga toxin genes in nucleotide sequences
 
 Full documentation: [https://github.com/ncbi/stxtyper](https://github.com/ncbi/stxtyper)
+
+Note: This software will soon be incorporated into NCBI's AMRFinderPlus software. Stxtyper will run under-the-hood of AMRFinderPlus when using the `amrfinder --organism Escherichia` option.
 
 ## Example Usage
 
