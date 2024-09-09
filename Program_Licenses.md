@@ -145,6 +145,7 @@ The licenses of the open-source software that is contained in these Docker image
 | raven | MIT | https://github.com/lbcb-sci/raven/blob/master/LICENSE |
 | RAxML | GNU GPLv3 | https://github.com/stamatak/standard-RAxML/blob/master/gpl-3.0.txt |
 | RAxML-NG | GNU AGPLv3| https://github.com/amkozlov/raxml-ng/blob/master/LICENSE.txt |
+| RAxML-NG | GNU GPLv2 | https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html |
 | ResFinder | Apache 2.0 | https://bitbucket.org/genomicepidemiology/resfinder/src/master/ |
 | Roary | GNU GPLv3 | https://github.com/sanger-pathogens/Roary/blob/master/GPL-LICENSE |
 | SalmID| MIT | https://github.com/hcdenbakker/SalmID/blob/master/LICENSE |
