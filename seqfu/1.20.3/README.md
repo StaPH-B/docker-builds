@@ -1,6 +1,6 @@
 # SeqFu
 
-Main tool: [SeqFu](https://sourceforge.net/projects/rdp-classifier/)
+Main tool: [SeqFu](https://github.com/telatin/seqfu2)
   
 Code repository: https://github.com/telatin/seqfu2
 
