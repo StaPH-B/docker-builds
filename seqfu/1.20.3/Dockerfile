@@ -69,3 +69,12 @@ WORKDIR /data
 
 # Verify installation
 RUN ls -l /usr/local/bin && seqfu --version && seqfu --help
+
+# Uncomment for testing
+# FROM app as test
+# RUN apt-get update && apt-get install -y python3 wget
+# RUN mkdir ../tests/
+# COPY tests/ ../tests/
+# RUN python3 -m unittest discover -v -s ../tests
+
+# tpaisie/seqfu@sha256:e2d3e2f7229cf64c20634701dca5206619191551b91f2f306bdd326e623864c8
