@@ -56,7 +56,7 @@ ARG SEQFU_VER
 
 # Copy the necessary files from the builder
 COPY --from=builder /usr/local/bin /usr/local/bin
-COPY --from=builder /root/seqfu2-${SEQFU_VER}/data/tests /root/seqfu2-${SEQFU_VER}/data/tests
+# COPY --from=builder /root/seqfu2-${SEQFU_VER}/data/tests /root/seqfu2-${SEQFU_VER}/data/tests
 
 # Install minimal runtime dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -68,4 +68,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 WORKDIR /data
 
 # Verify installation
-RUN seqfu --version && seqfu --help
+RUN ls -l /usr/local/bin && \
+seqfu --version && seqfu --help
+
