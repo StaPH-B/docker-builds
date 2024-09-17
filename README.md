@@ -93,6 +93,7 @@ Further documentation can be found at [docs.sylabs.io](https://docs.sylabs.io/gu
 ## Training
 
 - Training materials (slides & exercises) from the North East Bioinformatics Regional Resource 2023 workshop **Docker for Public Health Bioinformatics** can be located here, within [`training/NE-BRR-docker-for-PH-bioinformatics-May2023/`](training/NE-BRR-docker-for-PH-bioinformatics-May2023/)
+- Video training from APHL 2024 workshop **Intermediate Docker Bioinformatics Workshop** can be located in [APHL's e-learning resources](https://learn.aphl.org/learn/course/external/view/elearning/355/intermediate-docker-bioinformatics-workshop)
 
 ## Logs
 
