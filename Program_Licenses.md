@@ -177,6 +177,7 @@ The licenses of the open-source software that is contained in these Docker image
 | SRA-toolkit | Public Domain | https://github.com/ncbi/sra-tools/blob/master/LICENSE |
 | SRST2 | BSD | https://github.com/katholt/srst2/blob/master/LICENSE.txt |
 | Staramr | Apache 2.0 | https://github.com/phac-nml/staramr/blob/master/LICENSE |
+| stxtyper | Public Domain | https://github.com/ncbi/stxtyper/blob/main/LICENSE |
 | sylph | MIT | https://github.com/bluenote-1577/sylph/blob/main/LICENSE |
 | TBProfiler | GNU GPLv3 | https://github.com/jodyphelan/TBProfiler/blob/master/LICENSE |
 | TipToft | GNU GPLv3 | https://github.com/andrewjpage/tiptoft/blob/master/LICENSE |
