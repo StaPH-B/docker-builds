@@ -8,6 +8,8 @@ Additional tools:
 - blast : 2.12.0+ 
 - mafft : v7.490
 - mash : 2.3
+- pandas : 1.3.5
+- numpy : 1.21.5
 
 Basic information on how to use this tool:
 - executable: sistr

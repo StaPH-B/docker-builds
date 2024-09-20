@@ -23,6 +23,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     python3-tables \
     python3-scipy \
     python3-pycurl \
+    python3-fastcluster \
     ncbi-blast+ \
     mafft \
     mash &&\
@@ -43,8 +44,13 @@ CMD ["sistr", "--help"]
 ## Test ##
 FROM app AS test
 
-RUN wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/006/945/GCF_000006945.2_ASM694v2/GCF_000006945.2_ASM694v2_genomic.fna.gz &&\
-    gunzip GCF_000006945.2_ASM694v2_genomic.fna.gz
+# Testing Salmonella enterica subsp. salamae serovar 58:l,z13,z28:z6 str. 00-0163 SES60163_1000002
+RUN wget -q https://github.com/phac-nml/sistr_cmd/raw/master/tests/00_0163.fasta &&\
+    sistr --qc -vv --alleles-output 00_0163.allele-results.json --novel-alleles 00_0163.novel-alleles.fasta --cgmlst-profiles 00_0163.cgmlst-profiles.csv -f tab -o 00_0163.sistr-output.tab 00_0163.fasta &&\
+    cat 00_0163.sistr-output.tab
 
-RUN sistr --qc -vv --alleles-output allele-results.json --novel-alleles novel-alleles.fasta --cgmlst-profiles cgmlst-profiles.csv -f tab -o sistr-output.tab GCF_000006945.2_ASM694v2_genomic.fna &&\
+# Testing Salmonella enterica subsp. enterica serovar Typhimurium str. LT2 (https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000006945.2/)
+RUN wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/006/945/GCF_000006945.2_ASM694v2/GCF_000006945.2_ASM694v2_genomic.fna.gz &&\
+    gunzip GCF_000006945.2_ASM694v2_genomic.fna.gz &&\
+    sistr --qc -vv --alleles-output allele-results.json --novel-alleles novel-alleles.fasta --cgmlst-profiles cgmlst-profiles.csv -f tab -o sistr-output.tab GCF_000006945.2_ASM694v2_genomic.fna &&\
     cat sistr-output.tab 
