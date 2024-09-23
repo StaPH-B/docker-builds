@@ -19,9 +19,9 @@ LABEL maintainer.email="fraser.combe@theiagen.com"
 WORKDIR /usr/src/app
 
 # Install dependencies
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    wget
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends wget ca-certificates && \
+    rm -rf /var/lib/apt/lists/* && apt-get autoclean
 
 # Download and extract Dorado package
 RUN wget https://cdn.oxfordnanoportal.com/software/analysis/dorado-${DORADO_VER}-linux-x64.tar.gz \
@@ -36,11 +36,6 @@ RUN mkdir /dorado_models && \
     cd /dorado_models && \
     dorado download --model all
 
-# Download the specific Pod5 test file
-RUN wget -O /usr/src/app/dna_r10.4.1_e8.2_260bps-FLO_PRO114-SQK_NBD114_96_260-4000.pod5 \
-  https://github.com/nanoporetech/dorado/raw/release-v0.7/tests/data/pod5/dna_r10.4.1_e8.2_260bps/\
-dna_r10.4.1_e8.2_260bps-FLO_PRO114-SQK_NBD114_96_260-4000.pod5
-
 # Default command
 CMD ["dorado"]
 
@@ -48,6 +43,12 @@ CMD ["dorado"]
 # Test Stage
 # -----------------------------
 FROM app AS test
+
+
+# Download the specific Pod5 test file
+RUN wget -O /usr/src/app/dna_r10.4.1_e8.2_260bps-FLO_PRO114-SQK_NBD114_96_260-4000.pod5 \
+  https://github.com/nanoporetech/dorado/raw/release-v0.7/tests/data/pod5/dna_r10.4.1_e8.2_260bps/\
+dna_r10.4.1_e8.2_260bps-FLO_PRO114-SQK_NBD114_96_260-4000.pod5
 
 # Set working directory
 WORKDIR /usr/src/app

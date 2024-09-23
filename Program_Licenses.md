@@ -38,6 +38,7 @@ The licenses of the open-source software that is contained in these Docker image
 | datasets-sars-cov-2 | Apache 2.0 | https://github.com/CDCgov/datasets-sars-cov-2/blob/master/LICENSE |
 | diamond | GNU GPLv3 | https://github.com/bbuchfink/diamond/blob/master/LICENSE |
 | dnaapler | MIT | https://github.com/gbouras13/dnaapler/blob/main/LICENSE |
+| dorado | Oxford Nanopore Technologies PLC Public License | [ONT License](https://github.com/nanoporetech/dorado/blob/master/LICENSE) |
 | dragonflye | GNU GPLv3 | https://github.com/rpetit3/dragonflye/blob/main/LICENSE |
 | drprg | MIT | https://github.com/mbhall88/drprg/blob/main/LICENSE |
 | DSK | GNU Affero GPLv3 | https://github.com/GATB/dsk/blob/master/LICENSE |
