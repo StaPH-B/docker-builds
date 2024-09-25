@@ -1,15 +1,19 @@
 ARG MEDAKA_VER="2.0.0"
 ARG SAMTOOLS_VER="1.21"
+ARG BCFTOOLS_VER=${SAMTOOLS_VER}
 ARG HTSLIB_VER=${SAMTOOLS_VER}
 ARG MINIMAP2_VER="2.28"
 
 FROM ubuntu:jammy as builder
 
 ARG SAMTOOLS_VER
-ARG HTSLIB_VER=${SAMTOOLS_VER}
+ARG BCFTOOLS_VER
+ARG HTSLIB_VER
 ARG MINIMAP2_VER
 
 # install dependencies required for compiling samtools
+ARG DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update && apt-get install --no-install-recommends -y \
     libncurses5-dev \
     libbz2-dev \
@@ -24,7 +28,33 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     bzip2 \
     gnuplot \
     ca-certificates \
-    curl
+    curl \
+    perl \
+    bzip2 \
+    autoconf \
+    automake \
+    make \
+    gcc \
+    libdeflate-dev \
+    zlib1g-dev \
+    libbz2-dev \
+    liblzma-dev \
+    libcurl4-gnutls-dev \
+    libssl-dev \
+    libperl-dev \
+    libgsl0-dev \
+    libdeflate-dev \
+    procps && \
+    rm -rf /var/lib/apt/lists/* && apt-get autoclean
+
+# download, compile, and install bcftools
+RUN wget -q https://github.com/samtools/bcftools/releases/download/${BCFTOOLS_VER}/bcftools-${BCFTOOLS_VER}.tar.bz2 && \
+    tar -xjf bcftools-${BCFTOOLS_VER}.tar.bz2 && \
+    rm -v bcftools-${BCFTOOLS_VER}.tar.bz2 && \
+    cd bcftools-${BCFTOOLS_VER} && \
+    ./configure --enable-libgsl --enable-perl-filters &&\
+    make && \
+    make install
 
 # download, compile, and install samtools
 RUN wget -q https://github.com/samtools/samtools/releases/download/${SAMTOOLS_VER}/samtools-${SAMTOOLS_VER}.tar.bz2 && \
@@ -32,8 +62,7 @@ RUN wget -q https://github.com/samtools/samtools/releases/download/${SAMTOOLS_VE
     cd samtools-${SAMTOOLS_VER} && \
     ./configure && \
     make && \
-    make install && \
-    make test
+    make install 
 
 RUN wget -q https://github.com/samtools/htslib/releases/download/${HTSLIB_VER}/htslib-${HTSLIB_VER}.tar.bz2 && \
     tar -vxjf htslib-${HTSLIB_VER}.tar.bz2 && \
@@ -41,8 +70,7 @@ RUN wget -q https://github.com/samtools/htslib/releases/download/${HTSLIB_VER}/h
     cd htslib-${HTSLIB_VER} && \
     ./configure && \
     make && \
-    make install && \
-    make test
+    make install 
 
 RUN curl -L https://github.com/lh3/minimap2/releases/download/v${MINIMAP2_VER}/minimap2-${MINIMAP2_VER}_x64-linux.tar.bz2 | tar -jxvf - --no-same-owner && \
     ls && \
@@ -73,17 +101,28 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     zlib1g \
     libncurses5 \
     bzip2 \
+    libdeflate-dev \
     liblzma-dev \
     libcurl4-gnutls-dev \
     python3 \
     python3-pip \
     python-is-python3 \
+    python3-dev \
+    build-essential \
+    libssl-dev \
+    libffi-dev \
+    libxml2-dev \
+    libxslt1-dev \
+    zlib1g-dev \
+    libgsl-dev \
     && apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # copy in samtools, htslib, and minimap2 executables from builder stage
 COPY --from=builder /usr/local/bin/* /usr/local/bin/
 
-RUN pip install medaka==$MEDAKA_VER
+# install medaka via pip
+RUN pip install medaka-cpu --extra-index-url https://download.pytorch.org/whl/cpu -vv --no-cache-dir && \
+    pip install pyabpoa -vv --no-cache-dir
 
 ENV LC_ALL=C
 
@@ -97,7 +136,6 @@ CMD medaka --help
 FROM app as test
 
 RUN apt-get update && apt-get install --no-install-recommends -y wget
-
 
 # making sure dependencies are in path
 RUN samtools --help && minimap2 --help && tabix --help && bgzip --help
