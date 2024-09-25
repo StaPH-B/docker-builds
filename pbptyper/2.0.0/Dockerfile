@@ -18,8 +18,8 @@ LABEL software.version="${PBPTYPER_VERSION}"
 LABEL description="In silico Penicillin Binding Protein (PBP) typer for Streptococcus pneumoniae assemblies"
 LABEL website="https://github.com/rpetit3/pbptyper"
 LABEL license="https://github.com/rpetit3/pbptyper/blob/main/LICENSE"
-LABEL maintainer1="Curtis Kapsak"
-LABEL maintainer1.email="curtis.kapsak@theiagen.com"
+LABEL maintainer="Curtis Kapsak"
+LABEL maintainer.email="curtis.kapsak@theiagen.com"
 
 # install dependencies; cleanup apt garbage
 RUN apt-get update && apt-get install -y --no-install-recommends \
