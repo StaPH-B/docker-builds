@@ -82,6 +82,7 @@ FROM ubuntu:jammy as app
 ARG MEDAKA_VER
 
 LABEL base.image="ubuntu:jammy"
+LABEL dockerfile.version=1
 LABEL container.version="1"
 LABEL software="Medaka"
 LABEL software.version="${MEDAKA_VER}"
