@@ -25,7 +25,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 RUN micromamba install --name base -c conda-forge -c bioconda -c defaults bakta=${BAKTA_VER} diamond=${DIAMOND_VER} && \
-    micromamba clean -a -y && \
+    micromamba clean -a -f -y && \
     mkdir /data
 
 ENV PATH="/opt/conda/bin/:$PATH" \
