@@ -149,6 +149,7 @@ To learn more about the docker pull rate limits and the open source software pro
 | [datasets-sars-cov-2](https://github.com/CDCgov/datasets-sars-cov-2) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/datasets-sars-cov-2)](https://hub.docker.com/r/staphb/datasets-sars-cov-2) | <ul><li>0.6.2</li><li>0.6.3</li><li>0.7.2</li></ul> | https://github.com/CDCgov/datasets-sars-cov-2 |
 | [diamond](https://github.com/bbuchfink/diamond) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/diamond)](https://hub.docker.com/r/staphb/diamond) | <ul><li>[2.1.9](./diamond/2.1.9)</li></ul> | https://github.com/bbuchfink/diamond|
 | [dnaapler](https://hub.docker.com/r/staphb/dnaapler) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/dnaapler)](https://hub.docker.com/r/staphb/dnaapler) | <ul><li>[0.1.0](dnaapler/0.1.0/)</li></ul> <ul><li>[0.4.0](dnaapler/0.4.0/)</li><li>[0.5.0](dnaapler/0.5.0/)</li><li>[0.5.1](dnaapler/0.5.1/)</li><li>[0.7.0](dnaapler/0.7.0/)</li><li>[0.8.0](dnaapler/0.8.0/)</li></ul> | https://github.com/gbouras13/dnaapler |
+| [dorado](https://hub.docker.com/r/staphb/dorado) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/dorado)](https://hub.docker.com/r/staphb/dorado) | <ul><li>[0.8.0](dorado/0.8.0/)</li></ul> | [https://github.com/nanoporetech/dorado](https://github.com/nanoporetech/dorado) |
 | [dragonflye](https://hub.docker.com/r/staphb/dragonflye) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/dragonflye)](https://hub.docker.com/r/staphb/dragonflye) | <ul><li>[1.0.14](./dragonflye/1.0.14/)</li><li>[1.1.1](./dragonflye/1.1.1/)</li><li>[1.1.2](./dragonflye/1.1.2/)</li><li>[1.2.0](./dragonflye/1.2.0/)</li><li>[1.2.1](./dragonflye/1.2.1/)</li></ul> | https://github.com/rpetit3/dragonflye |
 | [Dr. PRG ](https://hub.docker.com/r/staphb/drprg) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/drprg)](https://hub.docker.com/r/staphb/drprg) | <ul><li>[0.1.1](drprg/0.1.1/)</li></ul> | https://mbh.sh/drprg/ |
 | [DSK](https://hub.docker.com/r/staphb/dsk) <br/> [![docker pulls](https://badgen.net/docker/pulls/staphb/dsk)](https://hub.docker.com/r/staphb/dsk) | <ul><li>[0.0.100](./dsk/0.0.100/)</li><li>[2.3.3](./dsk/2.3.3/)</li></ul> | https://gatb.inria.fr/software/dsk/ |
@@ -376,3 +377,6 @@ Each Dockerfile lists the author(s)/maintainer(s) as a metadata `LABEL`, but the
   * [@stephenturner](https://github.com/stephenturner)
   * [@soejun](https://github.com/soejun)
   * [@taylorpaisie](https://github.com/taylorpaisie)
+  * [@fraser-combe](https://github.com/fraser-combe)
+
+
