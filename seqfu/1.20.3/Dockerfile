@@ -42,8 +42,7 @@ RUN curl https://nim-lang.org/choosenim/init.sh -sSf | sh -s -- -y --ver 1.22.2 
     tar -xzf v${SEQFU_VER}.tar.gz && \
     rm v${SEQFU_VER}.tar.gz && \
     cd seqfu2-${SEQFU_VER} && \
-    make && \
-    /bin/bash  # Start an interactive shell to manually inspect and debug tests
+    make
 
 # Copy the built binary to a location in the PATH
 RUN ls -l /root/seqfu2-${SEQFU_VER}/bin && \
@@ -56,7 +55,6 @@ ARG SEQFU_VER
 
 # Copy the necessary files from the builder
 COPY --from=builder /usr/local/bin /usr/local/bin
-# COPY --from=builder /root/seqfu2-${SEQFU_VER}/data/tests /root/seqfu2-${SEQFU_VER}/data/tests
 
 # Install minimal runtime dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
