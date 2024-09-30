@@ -12,7 +12,7 @@ Basic information on how to use this tool:
 
 Additional information:
 
-This container includes bcftools v1.20 compiled with **libdeflate** for a better cloud performance. Also, "polysomy" and plugins are enabled in this image.
+This container includes bcftools v1.21 compiled with **libdeflate** for a better cloud performance. Also, "polysomy" and plugins are enabled in this image.
   
 Full documentation: https://samtools.github.io/bcftools/howtos/index.html
 
