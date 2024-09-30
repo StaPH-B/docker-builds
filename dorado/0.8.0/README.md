@@ -46,7 +46,6 @@ To test that Dorado is working correctly, you will need to download a sample Pod
 wget -O dna_r10.4.1_e8.2_260bps-FLO_PRO114-SQK_NBD114_96_260-4000.pod5 \
   https://github.com/nanoporetech/dorado/raw/release-v0.7/tests/data/pod5/dna_r10.4.1_e8.2_260bps/dna_r10.4.1_e8.2_260bps-FLO_PRO114-SQK_NBD114_96_260-4000.pod5
 
-
 ### Basecalling Test
 
 Run the following command:
@@ -77,7 +76,8 @@ You should see SAM-formatted basecalling results.
 
 ## Additional Notes
 
-- **Sample Data**: The sample Pod5 file is downloaded to `/usr/src/app` during the build.
+- **Sample Data**: The sample Pod5 file is downloaded to `/usr/src/app` during the docker image build.
+  - _Note: If you are using the pre-built StaPH-B docker image downloaded from dockerhub or quay.io, it will only include the `app` stage. This means that the sample Pod5 file will not be available in the container. You will need to download the sample Pod5 file manually using the `wget` example command shown above._
 - **Internal Testing**: An internal test stage is included in the Dockerfile to verify installation.
 - **Basecalling Models**: All models are downloaded to `/dorado_models` during the build process.
   Below is the list of basecalling models included in the Docker image:
