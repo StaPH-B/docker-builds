@@ -16,7 +16,7 @@ Basic information on how to use this tool:
 
 Additional information:
 
-This container includes samtools v1.20 compiled with **libdeflate** for a better cloud performance.
+This container includes samtools v1.21 compiled with **libdeflate** for a better cloud performance.
 
 Full documentation: https://www.htslib.org/doc/samtools.html
 
