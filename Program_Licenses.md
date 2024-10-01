@@ -13,6 +13,7 @@ The licenses of the open-source software that is contained in these Docker image
 | artic-ncov2019-epi2me | MPL 2.0 | https://github.com/epi2me-labs/wf-artic/blob/master/LICENSE |
 | any2fasta | GNU GPLv3 | https://github.com/tseemann/any2fasta/blob/master/LICENSE |
 | ARIBA | GNU GPLv3 | https://github.com/sanger-pathogens/ariba/blob/master/LICENSE |
+| assembly_snptyper | MIT | https://github.com/boasvdp/assembly_snptyper/blob/main/LICENSE |
 | Augur | GNU Affero GPLv3 | https://github.com/nextstrain/augur/blob/master/LICENSE.txt |
 | Auspice | GNU Affero GPLv3 | https://github.com/nextstrain/auspice/blob/master/LICENSE.txt |
 | Bakta | GNU GPLv3 | https://github.com/oschwengers/bakta/blob/main/LICENSE |
@@ -38,6 +39,7 @@ The licenses of the open-source software that is contained in these Docker image
 | datasets-sars-cov-2 | Apache 2.0 | https://github.com/CDCgov/datasets-sars-cov-2/blob/master/LICENSE |
 | diamond | GNU GPLv3 | https://github.com/bbuchfink/diamond/blob/master/LICENSE |
 | dnaapler | MIT | https://github.com/gbouras13/dnaapler/blob/main/LICENSE |
+| dorado | Oxford Nanopore Technologies PLC Public License | [ONT License](https://github.com/nanoporetech/dorado/blob/master/LICENCE.txt) |
 | dragonflye | GNU GPLv3 | https://github.com/rpetit3/dragonflye/blob/main/LICENSE |
 | drprg | MIT | https://github.com/mbhall88/drprg/blob/main/LICENSE |
 | DSK | GNU Affero GPLv3 | https://github.com/GATB/dsk/blob/master/LICENSE |
