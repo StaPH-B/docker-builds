@@ -1,4 +1,5 @@
 ARG MEDAKA_VER="2.0.0"
+ARG PYABPOA_VER="1.5.3"
 ARG SAMTOOLS_VER="1.21"
 ARG BCFTOOLS_VER=${SAMTOOLS_VER}
 ARG HTSLIB_VER=${SAMTOOLS_VER}
@@ -80,6 +81,7 @@ RUN curl -L https://github.com/lh3/minimap2/releases/download/v${MINIMAP2_VER}/m
 FROM ubuntu:jammy as app
 
 ARG MEDAKA_VER
+ARG PYABPOA_VER
 
 LABEL base.image="ubuntu:jammy"
 LABEL dockerfile.version=1
@@ -122,8 +124,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 COPY --from=builder /usr/local/bin/* /usr/local/bin/
 
 # install medaka via pip
-RUN pip install medaka-cpu --extra-index-url https://download.pytorch.org/whl/cpu -vv --no-cache-dir && \
-    pip install pyabpoa -vv --no-cache-dir
+RUN pip install medaka-cpu==${MEDAKA_VER} --extra-index-url https://download.pytorch.org/whl/cpu -vv --no-cache-dir && \
+    pip install pyabpoa==${PYABPOA_VER} -vv --no-cache-dir
 
 ENV LC_ALL=C
 
