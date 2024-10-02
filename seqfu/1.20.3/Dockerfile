@@ -64,8 +64,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     wget && \
     rm -rf /var/lib/apt/lists/*
 
-# Set working directory
-WORKDIR /data
+    
+
 
 # Verify installation
 RUN ls -l /usr/local/bin && \
@@ -74,9 +74,11 @@ seqfu --version && seqfu --help
 # Running seqfu on test staph-b test dataset
 FROM app AS test
 
-RUN mkdir tests && cd tests && \
-    wget -q https://github.com/StaPH-B/docker-builds/raw/master/tests/SARS-CoV-2/SRR13957123_1.fastq.gz && \
+WORKDIR /data/test
+
+RUN wget -q https://github.com/StaPH-B/docker-builds/raw/master/tests/SARS-CoV-2/SRR13957123_1.fastq.gz && \
     wget -q https://github.com/StaPH-B/docker-builds/raw/master/tests/SARS-CoV-2/SRR13957123_2.fastq.gz && \
     seqfu check SRR13957123_1.fastq.gz SRR13957123_2.fastq.gz > seqfu_check_test.txt && \
     seqfu count -f SRR13957123_1.fastq.gz -r SRR13957123_2.fastq.gz > seqfu_count_test.txt
 
+WORKDIR /data
