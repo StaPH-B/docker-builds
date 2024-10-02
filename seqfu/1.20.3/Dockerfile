@@ -64,8 +64,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     wget && \
     rm -rf /var/lib/apt/lists/*
 
-    
-
 
 # Verify installation
 RUN ls -l /usr/local/bin && \
