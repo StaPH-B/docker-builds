@@ -71,26 +71,8 @@ WORKDIR /data
 RUN ls -l /usr/local/bin && \
 seqfu --version && seqfu --help
 
-# Running RDP on test controls
-FROM app AS test
-
 RUN mkdir tests && cd tests && \
     wget -q https://github.com/StaPH-B/docker-builds/raw/master/tests/SARS-CoV-2/SRR13957123_1.fastq.gz && \
     wget -q https://github.com/StaPH-B/docker-builds/raw/master/tests/SARS-CoV-2/SRR13957123_2.fastq.gz && \
     seqfu check SRR13957123_1.fastq.gz SRR13957123_2.fastq.gz && \
     seqfu count -f SRR13957123_1.fastq.gz -r SRR13957123_2.fastq.gz
-
-
-# RUN wget -q https://github.com/telatin/seqfu2/blob/main/data/tests/sample1_1.fq && \
-#     wget -q https://github.com/telatin/seqfu2/blob/main/data/tests/sample1_2.fq && \
-#     seqfu count -f sample1_1.fq -r sample1_2.fq
-
-# RUN wget -q https://github.com/telatin/seqfu2/blob/main/data/tests/sample1_R1.fq && \
-#     wget -q https://github.com/telatin/seqfu2/blob/main/data/tests/sample1_R2.fq && \
-#     seqfu count -f sample1_R1.fq -r sample1_R2.fq
-
-
-
-
-
-
