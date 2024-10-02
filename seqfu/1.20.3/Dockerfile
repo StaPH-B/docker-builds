@@ -6,15 +6,15 @@ FROM ubuntu:focal AS builder
 ARG SEQFU_VER
 
 # Metadata
-LABEL base.image="ubuntu:focal" \
-      dockerfile.version="1" \
-      software="SeqFu" \
-      software.version="${SEQFU_VER}" \
-      description="A general-purpose program to manipulate and parse information from FASTA/FASTQ files, supporting gzipped input files." \
-      website="https://github.com/telatin/seqfu2" \
-      license.url="https://github.com/telatin/seqfu2?tab=GPL-3.0-1-ov-file#readme" \
-      maintainer="Taylor K. Paisie" \
-      maintainer.email="ltj8@cdc.gov"
+LABEL base.image="ubuntu:focal" 
+LABEL dockerfile.version="1" 
+LABEL software="SeqFu"
+LABEL software.version="${SEQFU_VER}"
+LABEL description="A general-purpose program to manipulate and parse information from FASTA/FASTQ files, supporting gzipped input files."
+LABEL website="https://github.com/telatin/seqfu2"
+LABEL license.url="https://github.com/telatin/seqfu2?tab=GPL-3.0-1-ov-file#readme"
+LABEL maintainer="Taylor K. Paisie"
+LABEL maintainer.email="ltj8@cdc.gov"
 
 # Set non-interactive frontend and update PATH
 ENV DEBIAN_FRONTEND=noninteractive \
