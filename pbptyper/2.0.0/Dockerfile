@@ -31,12 +31,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Install pbptyper into the base conda/micromamba environment, pinning the version
 # clean up conda garbage
 RUN micromamba install --name base -c conda-forge -c bioconda -c defaults pbptyper=${PBPTYPER_VERSION} && \
-    micromamba clean -a -y
+    micromamba clean -a -f -y
 
 # set the environment, add base conda/micromamba bin directory into path
 # set locale settings to UTF-8
-ENV PATH="/opt/conda/bin/:\
-${PATH}" \
+ENV PATH="/opt/conda/bin/:${PATH}" \
     LC_ALL=C.UTF-8
 
 # set final working directory to /data
@@ -44,18 +43,16 @@ WORKDIR /data
 
 CMD pbptyper --help
 
-RUN pbptyper --help && \
-    pbptyper --version
-
-
 # new base for testing
 FROM app as test
 
 ARG PBPTYPER_VERSION
 
-# # so that all test inputs & outputs are kept in /test
-WORKDIR /test
+RUN pbptyper --help && \
+    pbptyper --version
 
+# so that all test inputs & outputs are kept in /test
+WORKDIR /test
 
 # download test data from pbptyper repo
 RUN wget -q https://github.com/rpetit3/pbptyper/archive/refs/tags/v${PBPTYPER_VERSION}.tar.gz && \
