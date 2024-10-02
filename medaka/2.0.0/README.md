@@ -7,6 +7,7 @@ Additional tools:
 - samtools version 1.21
 - htslib version 1.21
 - minimap2 version 2.28
+- pyabpoa verson 1.5.3
 
 Full documentation: [https://github.com/nanoporetech/medaka](https://github.com/nanoporetech/medaka)
 
