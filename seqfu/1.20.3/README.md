@@ -37,10 +37,16 @@ Full documentation: https://telatin.github.io/seqfu2/
 
 # Testing SeqFU analysis
 ```
+wget -q https://github.com/StaPH-B/docker-builds/raw/master/tests/SARS-CoV-2/SRR13957123_1.fastq.gz
+
+wget -q https://github.com/StaPH-B/docker-builds/raw/master/tests/SARS-CoV-2/SRR13957123_2.fastq.gz
+
 seqfu check \
-      --deep \
-      --verbose \
-      /root/seqfu2-1.20.3/data/tests/sample1_R1.fq \
-      /root/seqfu2-1.20.3/data/tests/sample1_R2.fq
+  SRR13957123_1.fastq.gz \
+  SRR13957123_2.fastq.gz
+
+seqfu count \
+  -f SRR13957123_1.fastq.gz \
+  -r SRR13957123_2.fastq.gz
 ```
 
