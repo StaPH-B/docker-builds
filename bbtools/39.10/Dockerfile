@@ -62,8 +62,8 @@ WORKDIR /data
 # testing
 FROM app as test
 
-# testing that '-h' works for all tools
-RUN for tool in $(ls /bbmap/*sh | cut -f 3 -d "/") ; do echo $tool; done
+# testing all tools
+RUN for tool in $(ls /bbmap/*sh | cut -f 3 -d "/") ; do $tool; done
 
 # get test data and test one thing that uses samtools/sambamba
 RUN wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123.primertrim.sorted.bam && \
