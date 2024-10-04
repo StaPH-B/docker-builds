@@ -55,7 +55,9 @@ LABEL maintainer.email="ltj8@cdc.gov"
 COPY --from=builder /root/seqfu2-${SEQFU_VER}/bin /usr/local/bin
 
 # Install minimal runtime dependencies
+# curl is used in checking for the versions of dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
     ca-certificates \
     wget && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
