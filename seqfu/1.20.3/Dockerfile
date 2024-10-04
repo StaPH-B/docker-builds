@@ -5,17 +5,6 @@ ARG SEQFU_VER="1.20.3"
 FROM ubuntu:focal AS builder
 ARG SEQFU_VER
 
-# Metadata
-LABEL base.image="ubuntu:focal" 
-LABEL dockerfile.version="1" 
-LABEL software="SeqFu"
-LABEL software.version="${SEQFU_VER}"
-LABEL description="A general-purpose program to manipulate and parse information from FASTA/FASTQ files, supporting gzipped input files."
-LABEL website="https://github.com/telatin/seqfu2"
-LABEL license.url="https://github.com/telatin/seqfu2?tab=GPL-3.0-1-ov-file#readme"
-LABEL maintainer="Taylor K. Paisie"
-LABEL maintainer.email="ltj8@cdc.gov"
-
 # Set non-interactive frontend and update PATH
 ENV DEBIAN_FRONTEND=noninteractive \
     PATH="/root/.nimble/bin:${PATH}"
@@ -52,6 +41,18 @@ RUN ls -l /root/seqfu2-${SEQFU_VER}/bin && \
 # Stage 2: Create the final image
 FROM ubuntu:focal AS app
 ARG SEQFU_VER
+
+# Metadata
+LABEL base.image="ubuntu:focal" 
+LABEL dockerfile.version="1" 
+LABEL software="SeqFu"
+LABEL software.version="${SEQFU_VER}"
+LABEL description="A general-purpose program to manipulate and parse information from FASTA/FASTQ files, supporting gzipped input files."
+LABEL website="https://github.com/telatin/seqfu2"
+LABEL license.url="https://github.com/telatin/seqfu2?tab=GPL-3.0-1-ov-file#readme"
+LABEL maintainer="Taylor K. Paisie"
+LABEL maintainer.email="ltj8@cdc.gov"
+
 
 # Copy the necessary files from the builder
 COPY --from=builder /usr/local/bin /usr/local/bin
