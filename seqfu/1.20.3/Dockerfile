@@ -79,7 +79,7 @@ WORKDIR /test
 # using dev supplied tests
 COPY --from=builder /root/seqfu2-${SEQFU_VER} /test
 
-# skipping test-check.sh because it through error on dev-supplied fastq files
+# skipping test-check.sh because it throws an error on dev-supplied fastq files
 RUN mv test/test-check.sh test/test-check.sh_skip && \
     bash test/mini.sh
 
