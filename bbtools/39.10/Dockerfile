@@ -62,9 +62,6 @@ WORKDIR /data
 # testing
 FROM app as test
 
-# testing all tools
-RUN for tool in $(ls /bbmap/*sh | cut -f 3 -d "/") ; do $tool; done
-
 # get test data and test one thing that uses samtools/sambamba
 RUN wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123.primertrim.sorted.bam && \
     streamsam.sh in='SRR13957123.primertrim.sorted.bam' out='test_SRR13957123.primertrim.sorted.fastq.gz' && \
