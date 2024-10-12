@@ -1,6 +1,6 @@
 # VirulenceFinder Docker Image
 
-A docker image  that contains VirulenceFinder, a tool for identifying virulence factors in E. coli isolates from reads or assemblies
+A docker image  that contains VirulenceFinder, a tool for identifying virulence factors in E. coli, Enterococcus, S. aureus, and Listeria isolates from reads or assemblies
 
 [Link to StaPH-B DockerHub repository](https://hub.docker.com/r/staphb/virulencefinder)
 
