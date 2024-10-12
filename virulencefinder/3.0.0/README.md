@@ -1,4 +1,4 @@
-# VirulenceFinder Docker Image
+# VirulenceFinder 3.0.0 Docker Image
 
 A docker image  that contains VirulenceFinder, a tool for identifying virulence factors in E. coli, Enterococcus, S. aureus, and Listeria isolates from reads or assemblies
 
@@ -12,10 +12,14 @@ Main tool:
 
 Additional tools:
 
-- python 3.8.10
-- biopython 1.73
+- python 3.10.12
+- cgecore 1.5.6
+- biopython 1.84
+- numpy 2.1.2
+- pandas 2.2.3
+- tabulate 0.9.0
 - [kma](https://bitbucket.org/genomicepidemiology/kma/src/master/) 1.4.15
-- ncbi-blast+ 2.9.0
+- ncbi-blast+ 2.12.0
 
 Database version:
 
