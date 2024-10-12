@@ -4,7 +4,7 @@ ARG VIRULENCEFINDER_DB_VER="2.0.0"
 # see here: https://bitbucket.org/genomicepidemiology/virulencefinder_db/commits/bcf7f0b26271a59ca85715fa2ab8a0c380e5357b
 # ARG VIRULENCEFINDER_DB_COMMIT_HASH="bcf7f0b26271a59ca85715fa2ab8a0c380e5357b"
 
-FROM ubuntu:jammy as app
+FROM ubuntu:jammy AS app
 
 # re-instantiating for use in the app layer
 ARG VIRULENCEFINDER_VER
@@ -93,7 +93,7 @@ RUN echo -e '#!/bin/bash\npython -m virulencefinder "$@"' > /usr/bin/virulencefi
 CMD python -m virulencefinder -h
 
 ### START OF TEST STAGE ###
-FROM app as test
+FROM app AS test
 
 RUN python -m virulencefinder -h && /usr/bin/virulencefinder.py -h
 
