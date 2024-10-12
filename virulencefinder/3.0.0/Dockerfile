@@ -90,7 +90,7 @@ RUN echo -e '#!/bin/bash\npython -m virulencefinder "$@"' > /usr/bin/virulencefi
     chmod +x /usr/bin/virulencefinder.py
 
 # default command is to pull up help options for virulencefinder
-CMD python -m virulencefinder -h
+CMD [ "python", "-m", "virulencefinder", "-h" ]
 
 ### START OF TEST STAGE ###
 FROM app AS test
