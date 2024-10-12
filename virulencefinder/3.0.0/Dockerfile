@@ -47,9 +47,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get autoclean && rm -rf /var/lib/apt/lists/* && \
     update-alternatives --install /usr/bin/python python /usr/bin/python3 10
 
-# install python dependencies
-RUN pip3 install biopython==1.73 tabulate==0.7.7 cgecore==1.5.5
-
 # Install kma
 # apt deps: libz-dev (for compiling) 
 RUN git clone --branch ${KMA_VER} --depth 1 https://bitbucket.org/genomicepidemiology/kma.git && \
