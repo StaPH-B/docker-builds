@@ -26,8 +26,8 @@ LABEL maintainer1="Erin Young"
 LABEL maintainer1.email="eriny@utah.gov"
 
 # install dependencies; cleanup apt garbage 
-# ncbi-blast+ v2.9.0-2 (ubuntu:focal), min required version is 2.8.1
-# python3 v3.8.10, min required version is 3.5
+# ncbi-blast+ v2.12.0 (ubuntu:jammy), min required version is 2.8.1
+# python3 v3.10.12, min required version is 3.10
 RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
     ca-certificates \
@@ -81,6 +81,9 @@ ENV PATH="/virulencefinder:${PATH}" \
 
 # set final working directory for production docker image (app layer only)
 WORKDIR /data
+
+# force bash shell so below lines to make an alias runs properly
+SHELL ["/bin/bash", "-c"]
 
 # setting a janky alias for everyone that uses the "latest" tag 
 RUN echo -e '#!/bin/bash\npython -m virulencefinder "$@"' > /usr/bin/virulencefinder.py && \
