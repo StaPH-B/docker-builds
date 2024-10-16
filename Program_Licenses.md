@@ -31,6 +31,7 @@ The licenses of the open-source software that is contained in these Docker image
 | CDC-SPN | GitHub No License | https://github.com/BenJamesMetcalf/Spn_Scripts_Reference |
 | cfsan-snp-pipeline | non-standard license see --> | https://github.com/CFSAN-Biostatistics/snp-pipeline/blob/master/LICENSE.txt |
 | CheckM | GNU GPLv3 | https://github.com/Ecogenomics/CheckM/blob/master/LICENSE |
+| CheckM2 | GNU GPLv3 | https://github.com/chklovski/CheckM2/blob/main/LICENSE |
 | CheckV | MIT | https://bitbucket.org/berkeleylab/checkv/src/master/LICENSE.txt |
 | Circlator | GNU GPLv3 | https://github.com/sanger-pathogens/circlator/blob/master/LICENSE |
 | Circos | GNU GPLv3 | https://circos.ca/ |
