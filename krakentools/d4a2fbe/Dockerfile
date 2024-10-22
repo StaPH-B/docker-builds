@@ -3,6 +3,7 @@ FROM ubuntu:jammy AS app
 WORKDIR /
 
 # using a git commit because the last release was over three years ago, despite recent(ish) activity in the repo's main branch
+# this commit is from 2023-11-16: https://github.com/jenniferlu717/KrakenTools/commit/d4a2fbe2833c2392a724697c0c97a3014e748474
 ARG KRAKENTOOLS_VERSION="d4a2fbe2833c2392a724697c0c97a3014e748474"
 
 # LABEL instructions tag the image with metadata that might be important to the user
