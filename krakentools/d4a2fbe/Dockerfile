@@ -1,8 +1,8 @@
-FROM ubuntu:jammy as app
+FROM ubuntu:jammy AS app
 
 WORKDIR /
 
-# using a git commit because the last release was over three years ago,, despite recent(ish) activity in the repo's main branch
+# using a git commit because the last release was over three years ago, despite recent(ish) activity in the repo's main branch
 ARG KRAKENTOOLS_VERSION="d4a2fbe2833c2392a724697c0c97a3014e748474"
 
 # LABEL instructions tag the image with metadata that might be important to the user
@@ -43,6 +43,6 @@ ENV PATH=/KrakenTools:${PATH}
 
 WORKDIR /data
 
-FROM app as test
+FROM app AS test
 
 RUN python3 /KrakenTools/extract_kraken_reads.py --help
