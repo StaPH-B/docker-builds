@@ -6,7 +6,7 @@ Code repository: https://github.com/jenniferlu717/KrakenTools
 
 Additional tools:
 
-- python 3.10.6
+- python 3.10.12
 - biopython 1.84
 - pandas 2.2.3
 - numpy 2.1.2
