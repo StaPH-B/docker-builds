@@ -26,14 +26,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python3 \
     python3-pip \
     python3-setuptools \
-    gawk \
-    jq \
     git \
     procps && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-RUN pip install biopython \
-    pandas 
+RUN pip install biopython==1.84 \
+    pandas==2.2.3
 
 RUN git clone https://github.com/jenniferlu717/KrakenTools.git && \
     cd KrakenTools && \
