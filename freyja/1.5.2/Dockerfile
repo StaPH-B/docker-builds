@@ -64,7 +64,7 @@ ENV PATH="/opt/conda/envs/freyja-env/bin:/opt/conda/envs/env/bin:${PATH}" \
     LC_ALL=C.UTF-8
 
 RUN wget -q https://github.com/andersen-lab/Freyja/archive/refs/tags/v${FREYJA_SOFTWARE_VERSION}.tar.gz && \
-    pip install --no-cache-dir -vv v${FREYJA_SOFTWARE_VERSION}.tar.gz && \
+    pip install --no-cache-dir v${FREYJA_SOFTWARE_VERSION}.tar.gz && \
     rm v${FREYJA_SOFTWARE_VERSION}.tar.gz
 
 
