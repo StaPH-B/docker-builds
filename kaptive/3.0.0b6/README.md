@@ -3,14 +3,11 @@
 Main tool: [Kaptive](https://github.com/klebgenomics/Kaptive)
 
 Additional tools:
-
-- ncbi-blast+ 2.3.0
-- python 3.8.10
-- biopython 1.81
+- minimap2 2.28
 
 ## Kaptive databases
 
-There are few databases included in this docker image for Kaptive v2.0.8:
+There are few databases included in this docker image:
 
 - Klebsiella pneumoniae species complex
   - included w/ Kaptive
@@ -42,17 +39,17 @@ Example commands for each of these databases can be found below.
 
 ```bash
 # K locus, A. baumannii
-kaptive.py -a assembly.fasta -k /kaptive/reference_database/Acinetobacter_baumannii_k_locus_primary_reference.gbk
+kaptive.py assembly /kaptive/reference_database/Acinetobacter_baumannii_k_locus_primary_reference.gbk assembly.fasta -o outfile.txt
 # O locus, A. baumannii
-kaptive.py -a assembly.fasta -k /kaptive/reference_database/Acinetobacter_baumannii_OC_locus_primary_reference.gbk
+kaptive.py assembly /kaptive/reference_database/Acinetobacter_baumannii_OC_locus_primary_reference.gbk assembly.fasta -o outfile.txt
 
 # K locus, K. pneumoniae
-kaptive.py -a assembly.fasta -k /kaptive/reference_database/Klebsiella_k_locus_primary_reference.gbk
+kaptive.py assembly /kaptive/reference_database/Klebsiella_k_locus_primary_reference.gbk assembly.fasta -o outfile.txt
 # O locus, K. pneumoniae
-kaptive.py -a assembly.fasta -k /kaptive/reference_database/Klebsiella_o_locus_primary_reference.gbk
+kaptive.py assembly /kaptive/reference_database/Klebsiella_o_locus_primary_reference.gbk assembly.fasta -o outfile.txt
 
 # K locus, V. parahaemolyticus
-kaptive.py -a assembly.fasta -k /kaptive/reference_database/VibrioPara_Kaptivedb_K.gbk
+kaptive.py assembly /kaptive/reference_database/VibrioPara_Kaptivedb_K.gbk assembly.fasta -o outfile.txt
 # O locus, V. parahaemolyticus
-kaptive.py -a assembly.fasta -k /kaptive/reference_database/VibrioPara_Kaptivedb_O.gbk
+kaptive.py assembly /kaptive/reference_database/VibrioPara_Kaptivedb_O.gbk assembly.fasta -o outfile.txt
 ```
