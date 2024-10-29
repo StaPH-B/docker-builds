@@ -25,13 +25,13 @@ RUN apt-get update && apt-get -y install --no-install-recommends \
     rm -rf /var/lib/apt/lists/*
 
 # install rasusa
-RUN wget -q https://github.com/mbhall88/rasusa/releases/download/${RASUSA_VER}/rasusa-${RASUSA_VER}-x86_64-unknown-linux-musl.tar.gz && \
-    tar -xvf rasusa-${RASUSA_VER}-x86_64-unknown-linux-musl.tar.gz && \
-    rm -rf rasusa-${RASUSA_VER}-x86_64-unknown-linux-musl.tar.gz && \
+RUN wget -q https://github.com/mbhall88/rasusa/releases/download/${RASUSA_VER}/rasusa-${RASUSA_VER}-x86_64-unknown-linux-gnu.tar.gz && \
+    tar -xvf rasusa-${RASUSA_VER}-x86_64-unknown-linux-gnu.tar.gz && \
+    rm -rf rasusa-${RASUSA_VER}-x86_64-unknown-linux-gnu.tar.gz && \
     mkdir /data
 
 # set PATH and perl locale settings
-ENV PATH="${PATH}:/rasusa-${RASUSA_VER}-x86_64-unknown-linux-musl/" \
+ENV PATH="${PATH}:/rasusa-${RASUSA_VER}-x86_64-unknown-linux-gnu/" \
     LC_ALL=C
 
 WORKDIR /data
