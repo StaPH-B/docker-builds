@@ -30,6 +30,7 @@ RUN apt-get update && \
     pbzip2 \
     lbzip2 \
     bzip2 \
+    libdeflate-dev \
     wget \
     ca-certificates \
     procps && \
