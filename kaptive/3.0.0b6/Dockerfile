@@ -74,6 +74,8 @@ CMD [ "kaptive", "--help"]
 # test layer
 FROM app as test
 
+RUN kaptive --help && kaptive --version
+
 WORKDIR /test1
 
 # test with A. baumannii; testing both k and o locus
