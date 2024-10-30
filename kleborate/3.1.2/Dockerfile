@@ -42,7 +42,7 @@ RUN curl -L https://github.com/lh3/minimap2/releases/download/v${MINIMAP2_VER}/m
         tar -jxvf - --no-same-owner
 
 # set PATH and TERM to avoid warnings
-ENV PATH="/mash-Linux64-v${MASH_VER}:/minimap2-${MINIMAP2_VER}_x64-linux:/root/.local/bin:${PATH}"
+ENV PATH="/mash-Linux64-v${MASH_VER}:/minimap2-${MINIMAP2_VER}_x64-linux:${PATH}"
 
 # install kleborate
 RUN pip install --no-cache-dir kleborate==${KLEBORATE_VER} && \
