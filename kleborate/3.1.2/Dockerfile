@@ -27,8 +27,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         ca-certificates \
         bzip2 \
         procps \
-        curl \
-        git && \
+        curl && \
         rm -rf /var/lib/apt/lists/* && apt-get autoclean
 
 # mash; update UID and GID of mash files; make /data
