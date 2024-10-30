@@ -1,7 +1,7 @@
-FROM ubuntu:noble as app
+FROM ubuntu:jammy as app
 
 # for easy upgrade later. ARG variables only persist during image build time
-ARG KLEBORATE_VER="3.1.0"
+ARG KLEBORATE_VER="3.1.2"
 ARG MINIMAP2_VER="2.28"
 ARG MASH_VER="2.3"
 
@@ -22,7 +22,7 @@ LABEL maintainer3.email="eriny@utah.gov"
 # install prerequisites. Cleanup apt garbage
 RUN apt-get update && apt-get install -y --no-install-recommends \
         python3 \
-        pipx \
+        python3-pip \
         wget \
         ca-certificates \
         bzip2 \
@@ -47,10 +47,8 @@ ENV PATH="/mash-Linux64-v${MASH_VER}:/minimap2-${MINIMAP2_VER}_x64-linux:/root/.
 
 # install kleborate (kaptive must be installed first)
 #RUN pip install kleborate
-RUN pipx install kleborate==${KLEBORATE_VER} && \
-        mkdir /data && \
-        kleborate --help
-
+RUN pip install --no-cache-dir kleborate==${KLEBORATE_VER} && \
+        mkdir /data
 
 # set working directory
 WORKDIR /data
@@ -59,20 +57,12 @@ CMD kleborate --help
 
 FROM app as test
 
+WORKDIR /test
+
 # from https://kleborate.readthedocs.io/en/latest/Installation.html
 RUN wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/002/813/595/GCF_002813595.1_ASM281359v1/GCF_002813595.1_ASM281359v1_genomic.fna.gz && \
-        kleborate -a GCF_002813595.1_ASM281359v1_genomic.fna.gz -o kleborate_test -p kpsc
-
-# run Kleborate on assembly supplied with Kleborate code
-RUN wget -q https://github.com/klebgenomics/Kleborate/archive/refs/tags/v${KLEBORATE_VER}.tar.gz && \
-        tar -xvf v${KLEBORATE_VER}.tar.gz && \
-        kleborate --resistance --kaptive --all \
-        --assemblies /Kleborate/test/test_genomes/172.fasta.gz \
-        --outfile /data/strain172-kleborate-test-out.tsv
-
-# run with pytest
-RUN pip install pytest && \
-        python3 -m pytest klobarate-v${KLEBORATE_VER}
+        kleborate -a GCF_002813595.1_ASM281359v1_genomic.fna.gz -o kleborate_test -p kpsc && \
+        head kleborate_test/klebsiella_pneumo_complex_output.txt
 
 # print help and version info
-RUN kleborate --help && kleborate --version
+RUN kleborate --help && kleborate --version && kleborate --list_modules
