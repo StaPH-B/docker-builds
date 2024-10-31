@@ -1,4 +1,4 @@
-FROM mambaorg/micromamba:1.5.8 as app
+FROM mambaorg/micromamba:1.5.8 AS app
 
 USER root
 WORKDIR /
@@ -50,10 +50,10 @@ RUN tb-profiler update_tbdb --commit ${TBDB_COMMIT} && \
 WORKDIR /data
 
 # Added command to bring help menu up upon running container.
-CMD tb-profiler
+CMD ["tb-profiler"]
 
 # test stage
-FROM app as test
+FROM app AS test
 
 # checking if tool is in PATH
 RUN tb-profiler && tb-profiler version
