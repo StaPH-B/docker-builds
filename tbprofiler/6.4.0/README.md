@@ -6,18 +6,18 @@ The pipeline aligns reads to the H37Rv reference using bowtie2, BWA or minimap2 
 
 ## Database
 
-This tool relies on a database to run. The version (AKA git commit hash) of the database that is included in the docker image is `97b5876`. This is from the GitHub repository https://github.com/jodyphelan/tbdb. This can be confirmed in the json file: `/opt/conda/share/tbprofiler/tbdb.version.json`:
+This tool relies on a database to run. The version (AKA git commit hash) of the database that is included in the docker image is `2c92475`. This is from the GitHub repository https://github.com/jodyphelan/tbdb. This can be confirmed in the json file: `/opt/conda/share/tbprofiler/tbdb.variables.json`:
 
 ```bash
-$ grep 'commit' /opt/conda/share/tbprofiler/tbdb.version.json
-{"name": "tbdb", "commit": "5f3c51e", "Merge": "b1a2549 abddb8e", "Author": "Jody Phelan <jody.phelan@lshtm.ac.uk>", "Date": "Thu Jan 19 10:47:32 2023 +0000"}
+$ grep 'commit' /opt/conda/share/tbprofiler/tbdb.variables.json
+{"db-schema-version": "1.0.0", "snpEff_db": "Mycobacterium_tuberculosis_h37rv", "drugs": ["rifampicin", "isoniazid", "ethambutol", "pyrazinamide", "moxifloxacin", "levofloxacin", "bedaquiline", "delamanid", "pretomanid", "linezolid", "streptomycin", "amikacin", "kanamycin", "capreomycin", "clofazimine", "ethionamide", "para-aminosalicylic_acid", "cycloserine"], "tb-profiler-version": ">=6.0.0,<7.0.0", "version": {"name": "tbdb", "commit": "2c92475", "Merge": "8918884 2a51937", "Author": "Jody Phelan <jody.phelan@lshtm.ac.uk>", "Date": "Mon Oct 7 17:06:42 2024 +0100", "db-schema-version": "1.0.0"}, "amplicon": false, "files": {"ref": "tbdb.fasta", "gff": "tbdb.gff", "bed": "tbdb.bed", "json_db": "tbdb.dr.json", "variables": "tbdb.variables.json", "spoligotype_spacers": "tbdb.spoligotype_spacers.txt", "spoligotype_annotations": "tbdb.spoligotype_list.csv", "bedmask": "tbdb.mask.bed", "barcode": "tbdb.barcode.bed", "rules": "tbdb.rules.txt"}}
 ```
 
 Additionally you can run the command `tb-profiler list_db` to list the same information
 
 ```bash
 $ tb-profiler list_db
-tbdb    97b5876 Jody Phelan <jody.phelan@lshtm.ac.uk>   Wed May 8 13:53:15 2024 +0100   /opt/conda/share/tbprofiler/tbdb
+tbdb    2c92475 Jody Phelan <jody.phelan@lshtm.ac.uk>   Mon Oct 7 17:06:42 2024 +0100   /opt/conda/share/tbprofiler/tbdb
 ```
 
 ## Additional included tools/dependencies
@@ -55,4 +55,5 @@ tb-profiler load_library --prefix <new_library_name>
 ```
 
 ## Updates
+
 Release 5.0.1 implemented sqlite3 database locking with https://py-filelock.readthedocs.io/en/latest/index.html. This should fix issues using it over network filing systems (NFS). For more information, official documentation can be found [here.](https://jodyphelan.gitbook.io/tb-profiler/)
