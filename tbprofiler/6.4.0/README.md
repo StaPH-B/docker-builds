@@ -23,19 +23,19 @@ tbdb    2c92475 Jody Phelan <jody.phelan@lshtm.ac.uk>   Mon Oct 7 17:06:42 2024 
 ## Additional included tools/dependencies
 
 - bedtools 2.31.1
-- gatk4 4.5.0.0
+- gatk4 4.6.1.0
 - kmc 3.2.4
 - pathogen-profiler 4.5.0
 - perl 5.32.1
-- python 3.10.14
+- python 3.12.3
 - trimmomatic 0.39
 - bwa 0.7.18
 - minimap2 2.28
-- samtools 1.20
-- bcftools 1.20
+- samtools 1.21
+- bcftools 1.21
 - freebayes 1.3.6
-- tqdm 4.66.4
-- parallel 20240522
+- tqdm 4.66.6
+- parallel 20240922
 - samclip 0.4.0
 - snpeff 5.2
 
