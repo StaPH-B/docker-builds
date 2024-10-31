@@ -44,7 +44,8 @@ ENV PATH="/opt/conda/bin:${PATH}"
 # can also run 'tb-profiler list_db' to find the same version info
 
 # https://github.com/jodyphelan/tbdb
-RUN tb-profiler update_tbdb --commit ${TBDB_COMMIT}
+RUN tb-profiler update_tbdb --commit ${TBDB_COMMIT} && \
+    tb-profiler list_db
 
 WORKDIR /data
 
