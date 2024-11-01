@@ -38,6 +38,7 @@ tbdb    2c92475 Jody Phelan <jody.phelan@lshtm.ac.uk>   Mon Oct 7 17:06:42 2024 
 - parallel 20240922
 - samclip 0.4.0
 - snpeff 5.2
+- delly 1.2.6 (the more recent version 1.3.1 did not allow for the conda environment to resolve. More info here: https://github.com/jodyphelan/TBProfiler/issues/393#issuecomment-2452076859)
 
 ## Example Usage
 
