@@ -47,7 +47,7 @@ RUN pip install --no-cache-dir biopython
 RUN wget https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/${BLAST_VER}/ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz &&\
     tar -xvf ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz && rm ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz
 # sepp 
-RUN wget https://github.com/smirarab/sepp/archive/refs/tags/v4.5.5.tar.gz &&\
+RUN wget https://github.com/smirarab/sepp/archive/refs/tags/v${SEPP_VER}.tar.gz &&\
     tar -xvf v${SEPP_VER}.tar.gz && rm v${SEPP_VER}.tar.gz &&\
     cd sepp-${SEPP_VER} &&\
     python setup.py config -c && python setup.py install
