@@ -94,7 +94,7 @@ RUN echo "Downloading Salmonella genome (GCA_010941835.1_PDT000052640.3) for tes
 # run amrfinder on Klebesiella oxytoca using --organism/-O flag
 RUN echo "Downloading Klebsiella oxytoca genome (GCA_003812925.1_ASM381292v1) for testing now..." && \
   wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/003/812/925/GCA_003812925.1_ASM381292v1/GCA_003812925.1_ASM381292v1_genomic.fna.gz && \
-  amrfinder --threads 4 --plus --name GCA_003812925.1 -n GCA_003812925.1_ASM381292v1_genomic.fna.gz  -O Klebsiella_oxytoca -o GCA_003812925.1-amrfinder.tsv & \
+  amrfinder --threads 4 --plus --name GCA_003812925.1 -n GCA_003812925.1_ASM381292v1_genomic.fna.gz  -O Klebsiella_oxytoca -o GCA_003812925.1-amrfinder.tsv && \
   head GCA_003812925.1-amrfinder.tsv
 
 # test that gunzip is installed
