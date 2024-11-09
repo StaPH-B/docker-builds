@@ -1,4 +1,4 @@
-FROM python:3.11-slim as app
+FROM python:3.11-slim AS app
 
 ARG AUGUR_VER="26.0.0"
 
@@ -28,18 +28,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 RUN wget -q https://github.com/nextstrain/augur/archive/refs/tags/${AUGUR_VER}.tar.gz && \
-    tar -xzvf ${AUGUR_VER}.tar.gz && \
+    tar -xzf ${AUGUR_VER}.tar.gz && \
     pip install ${AUGUR_VER}.tar.gz && \
-    rm ${AUGUR_VER}.tar.gz 
+    rm -v ${AUGUR_VER}.tar.gz 
     #&& \
     #cd augur-${AUGUR_VER} && \
     #python3 -m pip install '.[full]'
 
-CMD augur --help
+CMD [ "augur", "--help" ]
 
 WORKDIR /data
 
-FROM app as test
+FROM app AS test
 
 RUN augur --help
 
