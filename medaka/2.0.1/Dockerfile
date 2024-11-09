@@ -5,7 +5,7 @@ ARG BCFTOOLS_VER=${SAMTOOLS_VER}
 ARG HTSLIB_VER=${SAMTOOLS_VER}
 ARG MINIMAP2_VER="2.28"
 
-FROM ubuntu:jammy as builder
+FROM ubuntu:jammy AS builder
 
 ARG SAMTOOLS_VER
 ARG BCFTOOLS_VER
@@ -66,7 +66,7 @@ RUN wget -q https://github.com/samtools/samtools/releases/download/${SAMTOOLS_VE
     make install 
 
 RUN wget -q https://github.com/samtools/htslib/releases/download/${HTSLIB_VER}/htslib-${HTSLIB_VER}.tar.bz2 && \
-    tar -vxjf htslib-${HTSLIB_VER}.tar.bz2 && \
+    tar -xjf htslib-${HTSLIB_VER}.tar.bz2 && \
     rm -v htslib-${HTSLIB_VER}.tar.bz2 && \
     cd htslib-${HTSLIB_VER} && \
     ./configure && \
@@ -74,10 +74,10 @@ RUN wget -q https://github.com/samtools/htslib/releases/download/${HTSLIB_VER}/h
     make install 
 
 RUN curl -L https://github.com/lh3/minimap2/releases/download/v${MINIMAP2_VER}/minimap2-${MINIMAP2_VER}_x64-linux.tar.bz2 | tar -jxvf - --no-same-owner && \
-    mv minimap2-${MINIMAP2_VER}_x64-linux/minimap2 /usr/local/bin
+    mv -v minimap2-${MINIMAP2_VER}_x64-linux/minimap2 /usr/local/bin
 
 ### start of app stage ###
-FROM ubuntu:jammy as app
+FROM ubuntu:jammy AS app
 
 ARG MEDAKA_VER
 ARG PYABPOA_VER
@@ -91,7 +91,7 @@ LABEL description="Consensus sequence correction provided by ONT Research"
 LABEL website="https://github.com/nanoporetech/medaka"
 LABEL license="https://github.com/nanoporetech/medaka/blob/master/LICENSE.md"
 LABEL maintainer="Curtis Kapsak"
-LABEL maintainer.email="pjx8@cdc.gov"
+LABEL maintainer.email="kapsakcj@gmail.com"
 LABEL maintainer1="Erin Young"
 LABEL maintainer1.email="eriny@utah.gov"
 
@@ -132,10 +132,10 @@ ENV LC_ALL=C
 WORKDIR /data
 
 # default command is to pull up help options
-CMD medaka --help
+CMD [ "medaka", "--help" ]
 
 ### start of test stage ###
-FROM app as test
+FROM app AS test
 
 RUN apt-get update && apt-get install --no-install-recommends -y wget
 
