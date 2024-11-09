@@ -1,4 +1,4 @@
-FROM ubuntu:jammy as app
+FROM ubuntu:jammy AS app
 
 # for easy upgrade later. ARG variables only persist during image build time
 ARG KLEBORATE_VER="3.1.2"
@@ -41,19 +41,20 @@ RUN wget -q https://github.com/marbl/Mash/releases/download/v${MASH_VER}/mash-Li
 RUN curl -L https://github.com/lh3/minimap2/releases/download/v${MINIMAP2_VER}/minimap2-${MINIMAP2_VER}_x64-linux.tar.bz2 | \
         tar -jxvf - --no-same-owner
 
-# set PATH and TERM to avoid warnings
+# set PATH
 ENV PATH="/mash-Linux64-v${MASH_VER}:/minimap2-${MINIMAP2_VER}_x64-linux:${PATH}"
 
-# install kleborate
+# install kleborate; uninstall mash (that comes with kleborate via pypi, see: https://github.com/klebgenomics/Kleborate/issues/90); make /data
 RUN pip install --no-cache-dir kleborate==${KLEBORATE_VER} && \
+        pip uninstall mash -y && \
         mkdir /data
 
 # set working directory
 WORKDIR /data
 
-CMD kleborate --help
+CMD [ "kleborate", "--help" ]
 
-FROM app as test
+FROM app AS test
 
 WORKDIR /test
 

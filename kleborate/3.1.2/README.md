@@ -2,10 +2,17 @@
 
 Main tool : [Kleborate](https://github.com/katholt/Kleborate)
 
+:warning: **Note:** Kleborate v3 is different from v2, please see here for the differences: https://kleborate.readthedocs.io/en/latest/index.html#changes-from-v2
+
 Additional tools:
 
 - [mash](https://github.com/marbl/Mash) version 2.3
-- [minimap2]() version 2.28
+- [minimap2](https://github.com/lh3/minimap2) version 2.28
+- [kaptive](https://github.com/klebgenomics/Kaptive) version 3.0.0b6
+- biopython 1.84
+- dna-features-viewer 3.1.3
+- matplotlib 3.9.2
+- numpy 2.1.3
 
 Full documentation: [https://github.com/katholt/Kleborate/wiki](https://github.com/katholt/Kleborate/wiki)
 
@@ -70,7 +77,6 @@ and ybst modules
 
 klebsiella_pneumo_complex__wzi: WZI typing for K antigen prediction
 ```
-
 
 ## Example Usage
 
