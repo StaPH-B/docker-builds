@@ -15,7 +15,7 @@ Additional tools:
 - python 3.10.12
 - cgecore 1.5.6
 - biopython 1.84
-- numpy 2.1.2
+- numpy 2.1.3
 - pandas 2.2.3
 - tabulate 0.9.0
 - [kma](https://bitbucket.org/genomicepidemiology/kma/src/master/) 1.4.15
