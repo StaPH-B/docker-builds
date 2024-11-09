@@ -28,29 +28,44 @@ VirulenceFinder database version: tag 2.0.0 made on 2024-05-29. [Link to commit 
 ## Usage
 
 ```bash
-usage: virulencefinder.py [-h] -i INFILE [INFILE ...] [-o OUTDIR] [-tmp TMP_DIR] [-mp METHOD_PATH] [-p DB_PATH] [-d DATABASES] [-l MIN_COV] [-t THRESHOLD] [-x] [-q]
+$ virulencefinder.py -h
+usage: __main__.py [-h] [-ifa INPUTFASTA [INPUTFASTA ...]] [-ifq INPUTFASTQ [INPUTFASTQ ...]] [--nanopore] [-o OUTPUTPATH] [-tmp TMP_DIR] [-b BLASTPATH] [-k KMAPATH] [-p DB_PATH] [-d DATABASES] [-l MIN_COV]
+                   [-t THRESHOLD] [-x] [--speciesinfo_json SPECIESINFO_JSON] [-db_vir_kma DB_PATH_VIR_KMA] [-q] [-j OUT_JSON] [-v] [--overlap OVERLAP]
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
-  -i INFILE [INFILE ...], --infile INFILE [INFILE ...]
+  -ifa INPUTFASTA [INPUTFASTA ...], --inputfasta INPUTFASTA [INPUTFASTA ...]
                         FASTA or FASTQ input files.
-  -o OUTDIR, --outputPath OUTDIR
+  -ifq INPUTFASTQ [INPUTFASTQ ...], --inputfastq INPUTFASTQ [INPUTFASTQ ...]
+                        Input fastq file(s). Assumed to be single-end fastq if only one file is provided, and assumed to be paired-end data if two files are provided.
+  --nanopore            If nanopore data is used
+  -o OUTPUTPATH, --outputPath OUTPUTPATH
                         Path to blast output
   -tmp TMP_DIR, --tmp_dir TMP_DIR
-                        Temporary directory for storage of the results from the external software.
-  -mp METHOD_PATH, --methodPath METHOD_PATH
-                        Path to method to use (kma or blastn)
+                        Temporary directory for storage of the results from the external software. Defaults to 'tmp' dir in the given output dir.
+  -b BLASTPATH, --blastPath BLASTPATH
+                        Path to blastn
+  -k KMAPATH, --kmaPath KMAPATH
+                        Path to KMA
   -p DB_PATH, --databasePath DB_PATH
                         Path to the databases
   -d DATABASES, --databases DATABASES
-                        Databases chosen to search in - if non is specified all is used
+                        Databases chosen to search in - if non or all is specified all is used
   -l MIN_COV, --mincov MIN_COV
                         Minimum coverage
   -t THRESHOLD, --threshold THRESHOLD
-                        Minimum threshold for identity
+                        Minimum hreshold for identity
   -x, --extented_output
                         Give extented output with allignment files, template and query hits in fasta and a tab seperated file with gene profile results
+  --speciesinfo_json SPECIESINFO_JSON
+                        Argument used by the cge pipeline. It takes a list in json format consisting of taxonomy, from domain -> species. A database is chosen based on the taxonomy.
+  -db_vir_kma DB_PATH_VIR_KMA, --db_path_vir_kma DB_PATH_VIR_KMA
+                        Path to the virulencefinder databases indexed with KMA. Defaults to the value of the --db_res flag.
   -q, --quiet
+  -j OUT_JSON, --out_json OUT_JSON
+                        Specify JSON filename and output directory. If the directory doesn't exist, it will be created.
+  -v, --version         Version of Virulencefinder
+  --overlap OVERLAP     Genes are allowed to overlap this number ofnucleotides.
 ```
 
 ## Notes and Recommendations
@@ -85,11 +100,11 @@ $ mkdir output-dir-reads output-dir-asm
 
 # query reads, mount PWD to /data inside container (broken into two lines for readabilty)
 $ docker run --rm -u $(id -u):$(id -g) -v $PWD:/data staphb/virulencefinder:latest \
-    virulencefinder.py -i /data/E-coli.R1.fastq.gz -o /data/output-dir-reads
+    virulencefinder.py -ifq /data/E-coli.R1.fastq.gz -o /data/output-dir-reads -x
 
 # query assembly
 $ docker run --rm -u $(id -u):$(id -g) -v $PWD:/data staphb/virulencefinder:latest \
-    virulencefinder.py -i /data/E-coli.skesa.fasta  -o /data/output-dir-asm
+    virulencefinder.py -ifa /data/E-coli.skesa.fasta  -o /data/output-dir-asm -x
 ```
 
 ## Example Usage: Singularity
@@ -107,9 +122,9 @@ $ mkdir output-dir-reads output-dir-asm
 
 # query reads; mount PWD to /data inside container
 $ singularity exec --no-home -B $PWD:/data virulencefinder.latest.sif \
-    virulencefinder.py -i /data/E-coli.R1.fastq.gz -o /data/output-dir-reads
+    virulencefinder.py -ifq /data/E-coli.R1.fastq.gz /data/E-coli.R2.fastq.gz -o /data/output-dir-reads -x
 
 # assembly
 $ singularity exec --no-home -B $PWD:/data virulencefinder.latest.sif \
-    virulencefinder.py -i /data/E-coli.skesa.fasta  -o /data/output-dir-asm
+    virulencefinder.py -ifa /data/E-coli.skesa.fasta -o /data/output-dir-asm -x
 ```
