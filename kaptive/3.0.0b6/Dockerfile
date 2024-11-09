@@ -1,4 +1,4 @@
-FROM ubuntu:jammy as app
+FROM ubuntu:jammy AS app
 
 # for easy upgrade later. ARG variables only persist during image build time
 ARG MINIMAP2_VER="2.28"
@@ -61,18 +61,17 @@ RUN wget -q https://github.com/aldertzomer/vibrio_parahaemolyticus_genomoserotyp
     mv -v vibrio_parahaemolyticus_genomoserotyping-${VP_GENOMOSEROTYPING_VER}/*gbk /kaptive/reference_database/. && \
     rm -rf vibrio_parahaemolyticus_genomoserotyping-${VP_GENOMOSEROTYPING_VER}
 
-# set PATH and TERM to avoid warnings
+# set PATH
 ENV PATH="/mash-Linux64-v${MASH_VER}:/minimap2-${MINIMAP2_VER}_x64-linux:${PATH}"
 
 # set working directory
 WORKDIR /data
 
-
 # default command is to print help options
-CMD [ "kaptive", "--help"]
+CMD [ "kaptive", "--help" ]
 
 # test layer
-FROM app as test
+FROM app AS test
 
 RUN kaptive --help && kaptive --version
 

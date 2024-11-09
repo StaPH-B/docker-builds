@@ -1,9 +1,15 @@
-# Kaptive
+# Kaptive Container
 
 Main tool: [Kaptive](https://github.com/klebgenomics/Kaptive)
 
 Additional tools:
+
 - minimap2 2.28
+- python 3.10.12
+- biopython 1.84
+- matplotlib 3.9.2
+- dna-features-viewer 3.1.3
+- numpy 2.1.3
 
 ## Kaptive databases
 
