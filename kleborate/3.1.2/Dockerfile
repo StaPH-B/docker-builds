@@ -37,7 +37,7 @@ RUN wget -q https://github.com/marbl/Mash/releases/download/v${MASH_VER}/mash-Li
         rm -rf mash-Linux64-v${MASH_VER}.tar && \
         chown root:root /mash-Linux64-v${MASH_VER}/* 
 
-# install minimap2 binary; make /data
+# install minimap2 binary
 RUN curl -L https://github.com/lh3/minimap2/releases/download/v${MINIMAP2_VER}/minimap2-${MINIMAP2_VER}_x64-linux.tar.bz2 | \
         tar -jxvf - --no-same-owner
 
