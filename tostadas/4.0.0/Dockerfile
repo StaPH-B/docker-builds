@@ -1,14 +1,13 @@
-FROM ubuntu:jammy as app
+FROM mambaorg/micromamba:1.5.8 as app
 
 ARG TOSTADAS_VER="4.0.0"
-ARG TABLE2ASN_RELEASE_DATE="2023-10-05"
 
 USER root
 
 WORKDIR /
 
 LABEL authors="Jessica Rowell and Ankush Gupta"
-LABEL base.image="ubuntu:focal"
+LABEL base.image="mambaorg/micromamba:1.5.8"
 LABEL dockerfile.version="3"
 LABEL software="tostadas"
 LABEL software.version=$TOSTADAS_VER
@@ -39,11 +38,6 @@ RUN micromamba env create -f tostadas/environment.yml && \
     echo "source activate tostadas" > ~/.bashrc && \
     rm -rf /tostadas
 
-RUN wget -q https://ftp.ncbi.nlm.nih.gov/asn1-converters/versions/${TABLE2ASN_RELEASE_DATE}/by_program/table2asn/linux64.table2asn.gz && \
-    gunzip linux64.table2asn.gz && \
-    mv linux64.table2asn table2asn && \
-    chmod +x table2asn
-
 ENV PATH=/opt/conda/envs/tostadas/bin:/opt/conda/envs/env/bin:$PATH \
     LC_ALL=C.UTF-8
 
@@ -57,16 +51,8 @@ WORKDIR /data
 
 # A second FROM insruction creates a new stage
 FROM app as test
-ARG TABLE2ASN_RELEASE_DATE="2023-10-05"
 
 RUN liftoff --version && \
     samtools --version && \
     python --version && \
     table2asn -help
-
-ARG FILES="table2asn_readme.txt \
-    SubmissionTemplate.sbt \
-    short.fsa"
-
-RUN for file in ${FILES}; do wget -q https://ftp.ncbi.nlm.nih.gov/asn1-converters/versions/${TABLE2ASN_RELEASE_DATE}/documentation/${file}; done && \
-    table2asn -t SubmissionTemplate.sbt -i short.fsa -o helicase.sqn
