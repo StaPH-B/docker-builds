@@ -34,7 +34,7 @@ RUN wget https://github.com/CDCgov/tostadas/archive/refs/tags/v${TOSTADAS_VER}.t
 
 # use mamba to install conda packages
 RUN micromamba env create -f tostadas/environment.yml && \
-    micromamba clean -a -y && \
+    micromamba clean -a -y -f && \
     echo "source activate tostadas" > ~/.bashrc && \
     rm -rf /tostadas
 
