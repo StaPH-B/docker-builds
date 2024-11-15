@@ -49,7 +49,7 @@ WORKDIR /data
 ###### the test stage (or any stage after 'app') will be lost.           #####
 ###### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
 
-# A second FROM insruction creates a new stage
+# A second FROM instruction creates a new stage
 FROM app as test
 
 RUN liftoff --version && \
