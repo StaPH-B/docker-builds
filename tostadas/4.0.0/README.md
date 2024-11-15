@@ -24,8 +24,8 @@ Additional tools installed via conda:
   - samtools=1.15.1=h1170115_0
   - setuptools=62.3.2=py39hf3d152e_0
   - simplejson=3.17.6=py39hb9d737c_1
+  - table2asn=1.28.1179=h48fe88c_0
   - tbb=2021.5.0=h924138e_1
-  - tbl2asn=25.7=h9ee0642_1
   - tk=8.6.12=h27826a3_0
   - tzdata=2022a=h191b570_0
   - ujson=5.3.0=py39h5a03fae_0
