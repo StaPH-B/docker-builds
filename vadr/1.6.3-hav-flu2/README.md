@@ -22,6 +22,7 @@ Available VADR models:
 - Dengue virus and other Flaviviridae
 - RSV v1.5.1-2
 - influenza v1.6.3-2
+  - More information on this model can be found in the publication describing the creation, testing, and validation here: [https://doi.org/10.1093/database/baae091](https://doi.org/10.1093/database/baae091)
 
 Additional VADR models:
 
