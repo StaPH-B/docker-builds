@@ -20,15 +20,15 @@ on:
 jobs:
 
   build_singularity:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Check out Repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Singularity
-        uses: eWaterCycle/setup-singularity@v7
+        uses: eWaterCycle/setup-apptainer@v2
         with:
-          singularity-version: 3.8.3
+          apptainer-version: 1.3.5
 
-      - name: Run a singularity container
-        run: singularity run docker://${{ inputs.repository_name }}/${{ inputs.image_name }} ${{ inputs.command }}
+      - name: Run a singularity/apptainer container
+        run: apptainer run docker://${{ inputs.repository_name }}/${{ inputs.image_name }} ${{ inputs.command }}
