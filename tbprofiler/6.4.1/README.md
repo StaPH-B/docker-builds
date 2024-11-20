@@ -27,14 +27,14 @@ tbdb    2c92475 Jody Phelan <jody.phelan@lshtm.ac.uk>   Mon Oct 7 17:06:42 2024 
 - kmc 3.2.4
 - pathogen-profiler 4.5.1
 - perl 5.32.1
-- python 3.12.3
+- python 3.12.7
 - trimmomatic 0.39
 - bwa 0.7.18
 - minimap2 2.28
 - samtools 1.21
 - bcftools 1.21
 - freebayes 1.3.6
-- tqdm 4.66.6
+- tqdm 4.67.0
 - parallel 20240922
 - samclip 0.4.0
 - snpeff 5.2
