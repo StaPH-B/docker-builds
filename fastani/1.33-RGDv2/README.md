@@ -6,7 +6,7 @@ Full documentation: https://github.com/ParBLiSS/FastANI
 
 FastANI was developed for fast alignment-free computation of whole-genome Average Nucleotide Identity (ANI). ANI is defined as mean nucleotide identity of orthologous gene pairs shared between two microbial genomes.
 
-This docker image contains the Reference Genome Database version 2 (RGDv2) from the Enteric Diseases Laboratory Branch at the CDC. It contains the genomes of 43 enteric bacterial isolates that are used to for species identification of bacterial isolate WGS data. This database is NOT meant to be comprehensive - it contains the genomes of enteric pathogens commonly sequenced by EDLB and some closely related species.
+This docker image contains the Reference Genome Database version 2 (RGDv2) from the Enteric Diseases Laboratory Branch at the CDC. It contains the genomes of 43 enteric bacterial isolates that are used to for species identification of bacterial isolate WGS data. This database is NOT meant to be comprehensive - it contains the genomes of enteric pathogens commonly sequenced by EDLB and some closely related species. Here is the publication describing the database: [https://doi.org/10.3389/fmicb.2023.1225207](https://doi.org/10.3389/fmicb.2023.1225207)
 
 The FASTA files for RGDv2 can be found within `/RGDv2/` inside the docker image.
 
