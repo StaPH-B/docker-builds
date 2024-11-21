@@ -35,9 +35,7 @@ Full documentation: https://github.com/bede/hostile
 wget https://github.com/bacterial-genomics/test-datasets/raw/assembly/test_data/test_miniburk_R1.fastq.gz --no-check-certificate
 wget https://github.com/bacterial-genomics/test-datasets/raw/assembly/test_data/test_miniburk_R2.fastq.gz --no-check-certificate
 
-# Fetching human host indexes    
-hostile fetch
 
 # Running hostile clean on test dataset
-hostile clean --fastq1 test_miniburk_R1.fastq.gz --fastq2 test_miniburk_R2.fastq.gz
+hostile clean --index /data/test/sars-cov-2/sars-cov-2 --fastq1 test_miniburk_R1.fastq.gz --fastq2 test_miniburk_R2.fastq.gz
 ```

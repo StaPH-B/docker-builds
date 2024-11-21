@@ -51,6 +51,7 @@ RUN wget https://github.com/bede/hostile/archive/refs/tags/${HOSTILE_VER}.tar.gz
 FROM ubuntu:focal AS app
 
 COPY --from=builder /usr/ /usr/
+COPY --from=builder /hostile-1.1.0/tests/data/sars-cov-2 /data/test/sars-cov-2/
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates && update-ca-certificates && \
@@ -65,9 +66,7 @@ WORKDIR /data/test
 RUN wget https://github.com/bacterial-genomics/test-datasets/raw/assembly/test_data/test_miniburk_R1.fastq.gz \
     --no-check-certificate && \
     wget https://github.com/bacterial-genomics/test-datasets/raw/assembly/test_data/test_miniburk_R2.fastq.gz \
-    --no-check-certificate
-
-#     hostile fetch && \
-#     hostile clean --fastq1 test_miniburk_R1.fastq.gz --fastq2 test_miniburk_R2.fastq.gz
+    --no-check-certificate && \
+    hostile clean --index /data/test/sars-cov-2/sars-cov-2 --fastq1 test_miniburk_R1.fastq.gz --fastq2 test_miniburk_R2.fastq.gz
 
 WORKDIR /data
