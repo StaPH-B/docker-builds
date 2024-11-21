@@ -51,7 +51,7 @@ RUN wget https://github.com/bede/hostile/archive/refs/tags/${HOSTILE_VER}.tar.gz
 FROM ubuntu:focal AS app
 
 COPY --from=builder /usr/ /usr/
-COPY --from=builder /hostile-1.1.0/tests/data/sars-cov-2 /data/test/sars-cov-2/
+COPY --from=builder /hostile-1.1.0/tests/data/ /data/test/
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates && update-ca-certificates && \
@@ -61,7 +61,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 FROM app AS test
 
 WORKDIR /data/test
-
 
 RUN wget https://github.com/bacterial-genomics/test-datasets/raw/assembly/test_data/test_miniburk_R1.fastq.gz \
     --no-check-certificate && \
