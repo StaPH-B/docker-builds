@@ -75,10 +75,8 @@ jobs:
           tags: |
             staphb/pango_aliasor:${{ steps.latest_version.outputs.version }}-${{ steps.date.outputs.date }}
             staphb/pango_aliasor:latest
-            quay.io/staphb/pango_aliasor:${{ steps.latest_version.outputs.version }}-${{ steps.date.outputs.date 
-}}
+            quay.io/staphb/pango_aliasor:${{ steps.latest_version.outputs.version }}-${{ steps.date.outputs.date }}
             quay.io/staphb/pango_aliasor:latest
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
-

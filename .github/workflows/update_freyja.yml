@@ -80,13 +80,10 @@ jobs:
           target: app
           push: true
           tags: |
-            staphb/freyja:${{ steps.latest_version.outputs.version }}-${{ steps.db_version.outputs.version 
-}}-${{ steps.date.outputs.date }}
+            staphb/freyja:${{ steps.latest_version.outputs.version }}-${{ steps.db_version.outputs.version }}-${{ steps.date.outputs.date }}
             staphb/freyja:latest
-            quay.io/staphb/freyja:${{ steps.latest_version.outputs.version }}-${{ 
-steps.db_version.outputs.version }}-${{ steps.date.outputs.date }}
+            quay.io/staphb/freyja:${{ steps.latest_version.outputs.version }}-${{ steps.db_version.outputs.version }}-${{ steps.date.outputs.date }}
             quay.io/staphb/freyja:latest
 
       - name: Image digest
         run: echo ${{ steps.docker_build_user_defined_tag.outputs.digest }}
-
