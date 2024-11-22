@@ -25,6 +25,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 
+
 # Install pip for Python 3.10
 RUN wget https://bootstrap.pypa.io/get-pip.py && python3.10 get-pip.py && \
     rm get-pip.py && pip install --no-cache-dir setuptools pytest && \
@@ -50,7 +51,7 @@ RUN wget https://github.com/bede/hostile/archive/refs/tags/${HOSTILE_VER}.tar.gz
 FROM ubuntu:focal AS app
 
 COPY --from=builder /usr/ /usr/
-COPY --from=builder /hostile-1.1.0/tests/data/ /data/test/
+COPY --from=builder /hostile-1.1.0/tests/data/sars-cov-2/ /data/test/sars-cov-2/
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates && update-ca-certificates && \
