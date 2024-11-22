@@ -46,7 +46,6 @@ RUN wget https://github.com/bede/hostile/archive/refs/tags/${HOSTILE_VER}.tar.gz
     cd .. && rm -rf ${HOSTILE_VER}.tar.gz
 
 
-
 # Stage 2: Final image
 FROM ubuntu:focal AS app
 
