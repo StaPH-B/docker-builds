@@ -111,109 +111,21 @@ RUN wget https://ftp.ncbi.nlm.nih.gov/pub/datasets/command-line/LATEST/linux-amd
  chmod +x datasets && \
  mv -v datasets /usr/local/bin
 
-# download assembly for a BA.1 from Florida (https://www.ncbi.nlm.nih.gov/biosample?term=SAMN29506515 and https://www.ncbi.nlm.nih.gov/nuccore/ON924087)
-# run pangolin in usher analysis mode
-RUN datasets download virus genome accession ON924087.1 --filename ON924087.1.zip && \
- unzip ON924087.1.zip && rm ON924087.1.zip && \
- mv -v ncbi_dataset/data/genomic.fna ON924087.1.genomic.fna && \
- rm -vr ncbi_dataset/ README.md && \
- pangolin ON924087.1.genomic.fna -o ON924087.1-usher && \
- column -t -s, ON924087.1-usher/lineage_report.csv
-
-# test specific for new lineage, XBB.1.16, introduced in pangolin-data v1.19
-# using this assembly: https://www.ncbi.nlm.nih.gov/nuccore/2440446687
-# biosample here: https://www.ncbi.nlm.nih.gov/biosample?term=SAMN33060589
-# one of the sample included in initial pango-designation here: https://github.com/cov-lineages/pango-designation/issues/1723
-RUN datasets download virus genome accession OQ381818.1 --filename OQ381818.1.zip && \
- unzip -o OQ381818.1.zip && rm OQ381818.1.zip && \
- mv -v ncbi_dataset/data/genomic.fna OQ381818.1.genomic.fna && \
- rm -vr ncbi_dataset/ README.md && \
- pangolin OQ381818.1.genomic.fna -o OQ381818.1-usher && \
- column -t -s, OQ381818.1-usher/lineage_report.csv
-
-# testing another XBB.1.16, trying to test scorpio functionality. Want pangolin to NOT assign lineage based on pango hash match.
-# this test runs as expected, uses scorpio to check for constellation of mutations, then assign using PUSHER placement
-RUN datasets download virus genome accession OR177999.1 --filename OR177999.1.zip && \
-unzip -o OR177999.1.zip && rm OR177999.1.zip && \
-mv -v ncbi_dataset/data/genomic.fna OR177999.1.genomic.fna && \
-rm -vr ncbi_dataset/ README.md && \
-pangolin OR177999.1.genomic.fna -o OR177999.1-usher && \
-column -t -s, OR177999.1-usher/lineage_report.csv
-
- ## test for BA.2.86
- # virus identified in MI: https://www.ncbi.nlm.nih.gov/nuccore/OR461132.1
-RUN datasets download virus genome accession OR461132.1 --filename OR461132.1.zip && \
-unzip -o OR461132.1.zip && rm OR461132.1.zip && \
-mv -v ncbi_dataset/data/genomic.fna OR461132.1.genomic.fna && \
-rm -vr ncbi_dataset/ README.md && \
-pangolin OR461132.1.genomic.fna -o OR461132.1-usher && \
-column -t -s, OR461132.1-usher/lineage_report.csv
-
- ## test for JN.2 (BA.2.86 sublineage) JN.2 is an alias of B.1.1.529.2.86.1.2
- # NY CDC Quest sample: https://www.ncbi.nlm.nih.gov/nuccore/OR598183
-RUN datasets download virus genome accession OR598183.1 --filename OR598183.1.zip && \
-unzip -o OR598183.1.zip && rm OR598183.1.zip && \
-mv -v ncbi_dataset/data/genomic.fna OR598183.1.genomic.fna && \
-rm -vr ncbi_dataset/ README.md && \
-pangolin OR598183.1.genomic.fna -o OR598183.1-usher && \
-column -t -s, OR598183.1-usher/lineage_report.csv
-
-## test for JQ.1 (BA.2.86.3 sublineage); JQ.1 is an alias of B.1.1.529.2.86.3.1
-# THANK YOU ERIN AND UPHL!! https://www.ncbi.nlm.nih.gov/nuccore/OR716684
-# this test is important due to the fact that this lineage was included in the UShER tree, despite being designated after the pangolin-designation 1.23 release
-# it previously caused and error/bug in pangolin, but now is fixed
-RUN datasets download virus genome accession OR716684.1 --filename OR716684.1.zip && \
-unzip -o OR716684.1.zip && rm OR716684.1.zip && \
-mv -v ncbi_dataset/data/genomic.fna OR716684.1.genomic.fna && \
-rm -vr ncbi_dataset/ README.md && \
-pangolin OR716684.1.genomic.fna -o OR716684.1-usher && \
-column -t -s, OR716684.1-usher/lineage_report.csv
-
-## test for JN.1.22 (BA.2.86.x sublineage; full unaliased lineage is B.1.1.529.2.86.1.1.22)
-# see here for commit where it was designated https://github.com/cov-lineages/pango-designation/commit/a90c8e31c154621ed86c985debfea09e17541cda
-# Here's the genome on NCBI, which was used to designate JN.1.22 lineage
-RUN datasets download virus genome accession PP189069.1 --filename PP189069.1.zip && \
-unzip -o PP189069.1.zip && rm PP189069.1.zip && \
-mv -v ncbi_dataset/data/genomic.fna PP189069.1.genomic.fna && \
-rm -vr ncbi_dataset/ README.md && \
-pangolin PP189069.1.genomic.fna -o PP189069.1-usher && \
-column -t -s, PP189069.1-usher/lineage_report.csv
-
-## test for JN.1.48 (BA.2.86.x sublineage; full unaliased lineage is B.1.1.529.2.86.1.1.48) 
-# this lineages which was designated in pango-designation v1.27: https://github.com/cov-lineages/pango-designation/releases/tag/v1.27
-# see here for commit where it was designated https://github.com/cov-lineages/pango-designation/commit/67f48bf24283999f1940f3aee8159f404124ff3f
-# Here's the genome on NCBI: https://www.ncbi.nlm.nih.gov/nuccore/PP218754
-RUN datasets download virus genome accession PP218754.1 --filename PP218754.1.zip && \
-unzip -o PP218754.1.zip && rm PP218754.1.zip && \
-mv -v ncbi_dataset/data/genomic.fna PP218754.1.genomic.fna && \
-rm -vr ncbi_dataset/ README.md && \
-pangolin PP218754.1.genomic.fna -o PP218754.1-usher && \
-column -t -s, PP218754.1-usher/lineage_report.csv
-
-# new lineage LK.1 that was introduced in pango-designation v1.28: https://github.com/cov-lineages/pango-designation/commit/922795c90de355e67200cf4d379e8e5ff22472e4
-# thank you Luis, Lorraine, Marcos & team from PR Sci Trust for sharing your data!
-# genome on NCBI: https://www.ncbi.nlm.nih.gov/nuccore/2728145425
-RUN datasets download virus genome accession PP770375.1 --filename PP770375.1.zip && \
-unzip -o PP770375.1.zip && rm PP770375.1.zip && \
-mv -v ncbi_dataset/data/genomic.fna PP770375.1.genomic.fna && \
-rm -vr ncbi_dataset/ README.md && \
-pangolin PP770375.1.genomic.fna -o PP770375.1-usher && \
-column -t -s, PP770375.1-usher/lineage_report.csv
-
-# new lineage KP.3.3.2 that was introduced in pango-designation v1.29: https://github.com/cov-lineages/pango-designation/commit/7125e606818312b78f0756d7fcab6dba92dd0a9e
-# genome on NCBI: https://www.ncbi.nlm.nih.gov/nuccore/PQ073669
-RUN datasets download virus genome accession PQ073669.1 --filename PQ073669.1.zip && \
-unzip -o PQ073669.1.zip && rm PQ073669.1.zip && \
-mv -v ncbi_dataset/data/genomic.fna PQ073669.1.genomic.fna && \
-rm -vr ncbi_dataset/ README.md && \
-pangolin PQ073669.1.genomic.fna -o PQ073669.1-usher && \
-column -t -s, PQ073669.1-usher/lineage_report.csv
-
-# new lineage MC.2 that was introduced in pango-designation v1.30: https://github.com/cov-lineages/pango-designation/commit/c64dbc47fbfbfd7f4da011deeb1a88dd6baa45f1#diff-a121ea4b8cbeb4c0020511b5535bf24489f0223cc83511df7b8209953115d329R2564181
-# genome on NCBI: https://www.ncbi.nlm.nih.gov/nuccore/PQ034842.1
-RUN datasets download virus genome accession PQ034842.1 --filename PQ034842.1.zip && \
-unzip -o PQ034842.1.zip && rm PQ034842.1.zip && \
-mv -v ncbi_dataset/data/genomic.fna PQ034842.1.genomic.fna && \
-rm -vr ncbi_dataset/ README.md && \
-pangolin PQ034842.1.genomic.fna -o PQ034842.1-usher && \
-column -t -s, PQ034842.1-usher/lineage_report.csv
+# testing the following lineages:
+# BA.1 | ON924087.1 | from Florida https://www.ncbi.nlm.nih.gov/biosample?term=SAMN29506515 and https://www.ncbi.nlm.nih.gov/nuccore/ON924087
+# XBB.1.16 | OQ381818.1 | introduced in p-data 1.19, https://www.ncbi.nlm.nih.gov/nuccore/2440446687 and https://www.ncbi.nlm.nih.gov/biosample?term=SAMN33060589 and https://github.com/cov-lineages/pango-designation/issues/1723
+# another XBB.1.16 | OR177999.1 | https://www.ncbi.nlm.nih.gov/nuccore/OR177999.1
+# BA.2.86 | OR461132.1 | from Michigan https://www.ncbi.nlm.nih.gov/nuccore/OR461132.1
+# JN.2 (BA.2.86 sublineage) JN.2 is an alias of B.1.1.529.2.86.1.2 | OR598183.1 | NY CDC Quest sample https://www.ncbi.nlm.nih.gov/nuccore/OR598183
+# JQ.1 (BA.2.86.3 sublineage); JQ.1 is an alias of B.1.1.529.2.86.3.1 | OR716684.1 | THANK YOU ERIN AND UPHL!! https://www.ncbi.nlm.nih.gov/nuccore/OR716684 this test is important due to the fact that this lineage was included in the UShER tree, despite being designated after the pangolin-designation 1.23 release it previously caused and error/bug in pangolin, but now is fixed
+# JN.1.22 (BA.2.86.x sublineage; full unaliased lineage is B.1.1.529.2.86.1.1.22) | PP189069.1 | https://github.com/cov-lineages/pango-designation/commit/a90c8e31c154621ed86c985debfea09e17541cda
+# JN.1.48 (BA.2.86.x sublineage; full unaliased lineage is B.1.1.529.2.86.1.1.48) | PP218754.1 | https://github.com/cov-lineages/pango-designation/releases/tag/v1.27 and https://github.com/cov-lineages/pango-designation/commit/67f48bf24283999f1940f3aee8159f404124ff3f and https://www.ncbi.nlm.nih.gov/nuccore/PP218754
+# LK.1 | PP770375.1 | introduced in pango-designation 1.28 https://github.com/cov-lineages/pango-designation/commit/922795c90de355e67200cf4d379e8e5ff22472e4 and https://www.ncbi.nlm.nih.gov/nuccore/2728145425 thank you Luis, Lorraine, Marcos & team from PR Sci Trust for sharing your data!
+# KP.3.3.2 | PQ073669.1 | introduced in pango-designation 1.29 https://github.com/cov-lineages/pango-designation/commit/7125e606818312b78f0756d7fcab6dba92dd0a9e and https://www.ncbi.nlm.nih.gov/nuccore/PQ073669
+# MC.2 | PQ034842.1 | introduced in pango-designation 1.30 https://github.com/cov-lineages/pango-designation/commit/c64dbc47fbfbfd7f4da011deeb1a88dd6baa45f1#diff-a121ea4b8cbeb4c0020511b5535bf24489f0223cc83511df7b8209953115d329R2564181 and https://www.ncbi.nlm.nih.gov/nuccore/PQ034842
+# XEC.3 | PQ277908.1 | introduced in pango-designation 1.31 https://github.com/cov-lineages/pango-designation/commit/ba3711a5615956ed97150288eb68356aa0fe7cdd#diff-a121ea4b8cbeb4c0020511b5535bf24489f0223cc83511df7b8209953115d329R2572545 and https://www.ncbi.nlm.nih.gov/nuccore/PQ277908.1
+RUN datasets download virus genome accession ON924087.1,OQ381818.1,OR177999.1,OR461132.1,OR598183.1,OR716684.1,PP189069.1,PP218754.1,PP770375.1,PQ073669.1,PQ034842.1,PQ277908.1 && \
+unzip -o ncbi_dataset.zip && \
+rm -v ncbi_dataset.zip && \
+pangolin ncbi_dataset/data/genomic.fna && \
+column -t -s, lineage_report.csv
