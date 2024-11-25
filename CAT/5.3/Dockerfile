@@ -8,7 +8,7 @@ ARG CAT_VER
 ARG DIAMOND_VER
 
 LABEL base.image="ubuntu:focal"
-LABEL dockerfile.version="2"
+LABEL dockerfile.version="1"
 LABEL software="CAT"
 LABEL software.version=${CAT_VER}
 LABEL description="CAT: a tool for taxonomic classification of contigs and metagenome-assembled genomes (MAGs)."
@@ -65,6 +65,14 @@ FROM app AS test
 
 WORKDIR /data/test
 
+RUN wget -nv --no-check-certificate \
+    https://raw.githubusercontent.com/taylorpaisie/docker_containers/main/checkm2/1.0.2/burk_wgs.fa \
+    -O burk_wgs_pos_ctrl.fa &&\
+    wget -nv --no-check-certificate \
+    https://merenlab.org/data/refining-mags/files/GN02_MAG_IV_B_1-contigs.fa \
+    -O GN02_MAG_IV_B_1-contigs.fa
+
+
 # Prepare testing database
 RUN mkdir -p db_tests && \
     gzip -d /CAT/tests/data/prepare/small.fa.gz && \
@@ -74,8 +82,18 @@ RUN mkdir -p db_tests && \
     --nodes /CAT/tests/data/prepare/nodes.dmp \
     --db_dir db_tests/
 
+# Running CAT on contigs
+RUN CAT contigs -c burk_wgs_pos_ctrl.fa \
+    -d db_tests/db \
+    -t db_tests/tax
+
+# Running BAT on a set of MAGs
+RUN CAT bins -b GN02_MAG_IV_B_1-contigs.fa \
+    -d db_tests/db \
+    -t db_tests/tax
+
 # Run CAT test
-RUN CAT contigs -c /CAT/tests/data/contigs/small_contigs.fa \
-    -d db_tests/db/ -t db_tests/tax/
+# RUN CAT contigs -c /CAT/tests/data/contigs/small_contigs.fa \
+#     -d db_tests/db/ -t db_tests/tax/
 
 WORKDIR /data

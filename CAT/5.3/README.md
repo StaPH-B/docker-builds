@@ -26,12 +26,12 @@ wget -nv --no-check-certificate https://merenlab.org/data/refining-mags/files/GN
 Use CAT and BAT for taxonomic classification for both best datasets:
 ```
 # Running CAT on contigs
-CAT contigs -c burk_wgs_pos_ctrl.fa \
-    -d /$LAB_HOME/.databases/CAT/20231120_CAT_nr/db \
-    -t /$LAB_HOME/.databases/CAT/20231120_CAT_nr/tax
+CAT contigs -c test/burk_wgs_pos_ctrl.fa \
+    -d db_tests/db \
+    -t db_tests/tax
 
 # Running BAT on a set of MAGs
-CAT bins -b GN02_MAG_IV_B_1-contigs.fa \
-    -d /$LAB_HOME/.databases/CAT/20231120_CAT_nr/db \
-    -t /$LAB_HOME/.databases/CAT/20231120_CAT_nr/tax
+CAT bins -b test/GN02_MAG_IV_B_1-contigs.fa \
+    -d db_tests/db \
+    -t db_tests/tax
 ```
