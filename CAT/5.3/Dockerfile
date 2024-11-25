@@ -34,8 +34,6 @@ RUN wget https://github.com/MGXlab/CAT_pack/archive/refs/tags/v${CAT_VER}.tar.gz
     chmod +x CAT_pack-${CAT_VER}/CAT_pack/CAT && \
     rm v${CAT_VER}.tar.gz
 
-# Add CAT to PATH
-# ENV PATH="${PATH}:/CAT_pack-${CAT_VER}/CAT_pack"
 
 # Install Diamond
 RUN wget http://github.com/bbuchfink/diamond/archive/v${DIAMOND_VER}.tar.gz && \
@@ -47,11 +45,6 @@ RUN wget http://github.com/bbuchfink/diamond/archive/v${DIAMOND_VER}.tar.gz && \
 # Application Stage
 FROM ubuntu:focal AS app
 ARG CAT_VER
-
-# Install Python and Prodigal in the app stage
-# RUN apt-get update && apt-get install -y --no-install-recommends \
-#     python3 python3-pip gzip prodigal && \
-#     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
 
 # Copy necessary files from the builder stage
 COPY --from=builder /CAT_pack-${CAT_VER}/ /CAT/
