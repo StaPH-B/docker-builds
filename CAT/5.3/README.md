@@ -39,10 +39,17 @@ Full documentation: https://github.com/dutilh/CAT
 wget -nv --no-check-certificate https://raw.githubusercontent.com/taylorpaisie/docker_containers/main/checkm2/1.0.2/burk_wgs.fa -O burk_wgs_pos_ctrl.fa
 
 wget -nv --no-check-certificate https://merenlab.org/data/refining-mags/files/GN02_MAG_IV_B_1-contigs.fa -O GN02_MAG_IV_B_1-contigs.fa
-```
 
-Use CAT and BAT for taxonomic classification for both best datasets:
-```
+# Prepare testing database
+RUN mkdir -p db_tests && \
+    gzip -d /CAT/tests/data/prepare/small.fa.gz && \
+    CAT prepare --db_fasta /CAT/tests/data/prepare/small.fa \
+    --acc2tax /CAT/tests/data/prepare/prot2acc.txt \
+    --names /CAT/tests/data/prepare/names.dmp \
+    --nodes /CAT/tests/data/prepare/nodes.dmp \
+    --db_dir db_tests/
+
+# Use CAT and BAT for taxonomic classification for both best datasets
 # Running CAT on contigs
 CAT contigs -c test/burk_wgs_pos_ctrl.fa \
     -d db_tests/db \
