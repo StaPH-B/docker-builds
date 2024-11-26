@@ -43,5 +43,13 @@ dnaapler plasmid --input plasmid.fasta --output dnaapler_plasmid
 
 # Reorienting Mixed Contigs
 dnaapler all -i input_mixed_contigs.fasta -o output_directory_path -p my_bacteria_name
-
 ```
+
+## Additional tools/dependencies
+
+- biopython 1.78
+- python 3.11.10
+- pandas 2.2.2
+- numpy 1.26.4
+- mmseqs2 13.45111
+- pyrodigal 3.6.3

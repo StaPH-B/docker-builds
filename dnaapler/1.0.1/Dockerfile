@@ -1,5 +1,5 @@
 # Base image: micromamba for Conda support
-FROM mambaorg/micromamba:1.5.8 as app
+FROM mambaorg/micromamba:1.5.8 AS app
 
 USER root
 
@@ -28,7 +28,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # Create the conda environment, install dnaapler via bioconda package; clean up micromamba garbage
-RUN micromamba create -n dnaapler -y -c bioconda -c defaults -c conda-forge dnaapler=${DNAAPLER_VER} && \
+RUN micromamba create -n dnaapler -y -c conda-forge -c bioconda dnaapler=${DNAAPLER_VER} && \
     micromamba clean -a -f -y
 
 # Set PATH and LC_ALL for compatibility
@@ -42,7 +42,7 @@ WORKDIR /data
 CMD [ "dnaapler", "--help" ]
 
 # New stage for testing
-FROM app as test
+FROM app AS test
 
 # Set working directory to /test
 WORKDIR /test
