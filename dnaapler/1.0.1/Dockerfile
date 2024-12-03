@@ -10,7 +10,7 @@ ARG DNAAPLER_VER="1.0.1"
 
 # Metadata labels
 LABEL base.image="mambaorg/micromamba:1.5.8"
-LABEL dockerfile.version="2"
+LABEL dockerfile.version="1"
 LABEL software="dnaapler"
 LABEL software.version="${DNAAPLER_VER}"
 LABEL description="Rotates chromosomes and more"
