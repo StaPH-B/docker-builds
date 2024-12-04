@@ -59,6 +59,8 @@ LABEL base.image="ubuntu:jammy"
 LABEL dockerfile.version="1"
 LABEL software="Racon + Minimap2"
 LABEL racon.version="${RACON_VER}"
+LABEL software.version="Racon-${RACON_VER}, Minimap2-${MINIMAP2_VER}"
+LABEL racon.version="${RACON_VER}"
 LABEL minimap2.version="${MINIMAP2_VER}"
 LABEL description="Racon for assembly polishing and Minimap2 for alignment"
 LABEL website="https://github.com/lbcb-sci/racon, https://github.com/lh3/minimap2"
@@ -94,6 +96,12 @@ RUN racon --help && racon --version && minimap2 --version
 COPY --from=builder /racon-${RACON_VER}/test/data/* /test/
 
 WORKDIR /test
+
+# Minimap2 alignment test
+RUN wget -q https://raw.githubusercontent.com/lh3/minimap2/master/test/MT-human.fa && \
+    wget -q https://raw.githubusercontent.com/lh3/minimap2/master/test/MT-orang.fa && \
+    minimap2 -a MT-human.fa MT-orang.fa > test.sam && \
+    head test.sam
 
 # Example polishing workflow
 RUN wget -q https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/prokaryotes/bacteroides_fragilis/genome/genome.paf && \
