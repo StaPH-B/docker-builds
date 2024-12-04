@@ -1,5 +1,6 @@
 # Set global variables
 ARG HOSTILE_VER="1.1.0"
+ARG BOWTIE2_VER="2.5.1"
 
 # Stage 1: Build Dockerfile
 FROM ubuntu:focal AS builder
@@ -20,11 +21,11 @@ RUN wget https://bootstrap.pypa.io/get-pip.py && python3.10 get-pip.py && \
     ln -sf /usr/local/bin/pip /usr/bin/pip
 
 # Install bowtie2 and ensure all executables are accessible
-RUN wget https://github.com/BenLangmead/bowtie2/releases/download/v2.5.1/bowtie2-2.5.1-linux-x86_64.zip && \
-    unzip bowtie2-2.5.1-linux-x86_64.zip && \
-    mv bowtie2-2.5.1-linux-x86_64 /usr/local/bowtie2 && \
+RUN wget https://github.com/BenLangmead/bowtie2/releases/download/v${BOWTIE2_VER}/bowtie2-${BOWTIE2_VER}-linux-x86_64.zip && \
+    unzip bowtie2-${BOWTIE2_VER}-linux-x86_64.zip && \
+    mv bowtie2-${BOWTIE2_VER}-linux-x86_64 /usr/local/bowtie2 && \
     ln -s /usr/local/bowtie2/bowtie2* /usr/bin/ && \
-    rm -f bowtie2-2.5.1-linux-x86_64.zip
+    rm -f bowtie2-${BOWTIE2_VER}-linux-x86_64.zip
 
 # Install hostile
 RUN wget https://github.com/bede/hostile/archive/refs/tags/${HOSTILE_VER}.tar.gz && \
