@@ -7,16 +7,6 @@ FROM ubuntu:focal AS builder
 ARG CAT_VER
 ARG DIAMOND_VER
 
-LABEL base.image="ubuntu:focal"
-LABEL dockerfile.version="1"
-LABEL software="CAT"
-LABEL software.version=${CAT_VER}
-LABEL description="CAT: a tool for taxonomic classification of contigs and metagenome-assembled genomes (MAGs)."
-LABEL website="https://github.com/dutilh/CAT"
-LABEL license.url="https://github.com/dutilh/CAT/blob/master/LICENSE.md"
-LABEL maintainer="Taylor K. Paisie"
-LABEL maintainer.email='ltj8@cdc.gov'
-
 ENV DEBIAN_FRONTEND=noninteractive 
 
 # Install dependencies
@@ -46,12 +36,25 @@ RUN wget http://github.com/bbuchfink/diamond/archive/v${DIAMOND_VER}.tar.gz && \
 FROM ubuntu:focal AS app
 ARG CAT_VER
 
+LABEL base.image="ubuntu:focal"
+LABEL dockerfile.version="1"
+LABEL software="CAT"
+LABEL software.version=${CAT_VER}
+LABEL description="CAT: a tool for taxonomic classification of contigs and metagenome-assembled genomes (MAGs)."
+LABEL website="https://github.com/dutilh/CAT"
+LABEL license.url="https://github.com/dutilh/CAT/blob/master/LICENSE.md"
+LABEL maintainer="Taylor K. Paisie"
+LABEL maintainer.email='ltj8@cdc.gov'
+
 # Copy necessary files from the builder stage
 COPY --from=builder /CAT_pack-${CAT_VER}/ /CAT/
 COPY --from=builder /usr/ /usr/
 
 # Add CAT to PATH
 ENV PATH="${PATH}:/CAT/CAT_pack"
+
+CMD CAT --help
+WORKDIR /data
 
 # Optional stage: Test data
 FROM app AS test
