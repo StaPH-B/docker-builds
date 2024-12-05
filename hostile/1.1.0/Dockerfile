@@ -3,8 +3,9 @@ ARG HOSTILE_VER="1.1.0"
 ARG BOWTIE2_VER="2.5.1"
 
 # Stage 1: Build Dockerfile
-FROM ubuntu:jammy AS builder
+FROM ubuntu:focal AS builder
 ARG HOSTILE_VER
+ARG BOWTIE2_VER
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     software-properties-common && \
@@ -36,7 +37,7 @@ RUN wget https://github.com/bede/hostile/archive/refs/tags/${HOSTILE_VER}.tar.gz
 
 
 # Stage 2: Final image
-FROM ubuntu:jammy AS app
+FROM ubuntu:focal AS app
 
 LABEL base.image="ubuntu:focal" 
 LABEL dockerfile.version="1" 
