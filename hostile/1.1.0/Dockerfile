@@ -38,11 +38,12 @@ RUN wget https://github.com/bede/hostile/archive/refs/tags/${HOSTILE_VER}.tar.gz
 
 # Stage 2: Final image
 FROM ubuntu:focal AS app
+ARG HOSTILE_VER
 
 LABEL base.image="ubuntu:focal" 
 LABEL dockerfile.version="1" 
 LABEL software="hostile"
-LABEL software.version="${HOSTILE_VER}"
+LABEL software.version=${HOSTILE_VER}
 LABEL description="Precise host read removal."
 LABEL website="https://github.com/bede/hostile"
 LABEL license.url="https://github.com/bede/hostile?tab=MIT-1-ov-file#readme"
@@ -50,7 +51,7 @@ LABEL maintainer="Taylor K. Paisie"
 LABEL maintainer.email="ltj8@cdc.gov"
 
 COPY --from=builder /usr/ /usr/
-COPY --from=builder /hostile-1.1.0/tests/data/sars-cov-2/ /data/test/sars-cov-2/
+COPY --from=builder /hostile-${HOSTILE_VER}/tests/data/sars-cov-2/ /data/test/sars-cov-2/
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates && update-ca-certificates && \
