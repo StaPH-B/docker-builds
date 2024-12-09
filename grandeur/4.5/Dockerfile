@@ -14,8 +14,8 @@ RUN mkdir prep && bash rename.sh
 
 FROM ubuntu:jammy as app
 
-LABEL base.image="ubuntu:jammy:
-LABEL dockerfile.version=1
+LABEL base.image="ubuntu:jammy"
+LABEL dockerfile.version="1"
 LABEL software="UPHL-BioNGS/Grandeur"
 LABEL software.version="4.5"
 LABEL description="Reference genomes for Grandeur"
