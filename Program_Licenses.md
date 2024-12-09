@@ -74,6 +74,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Hmmer | BSD-3 | http://eddylab.org/software/hmmer/Userguide.pdf |
 | homopolish | GNU GPLv3 | https://github.com/ythuang0522/homopolish/blob/master/LICENSE |
 | htslib | MIT | https://github.com/samtools/htslib/blob/develop/LICENSE |
+| IGV-Reports | MIT | https://github.com/igvteam/igv-reports/blob/master/LICENSE.md |
 | Integron Finder | GNU GPLv3 | https://github.com/gem-pasteur/Integron_Finder/blob/master/COPYING |
 | iqtree | GNU GPLv2 | https://github.com/Cibiv/IQ-TREE/blob/master/LICENSE |
 | iqtree2 | GNU GPLv2 | https://github.com/iqtree/iqtree2/blob/master/LICENSE |
