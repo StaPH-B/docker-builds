@@ -15,6 +15,7 @@ run-name: Updating Freyja
 
 jobs:
   update:
+    if: github.repository == 'StaPH-B/docker-builds'
     runs-on: ubuntu-latest
     steps:    
       - name: pull repo
