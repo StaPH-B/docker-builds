@@ -102,6 +102,7 @@ The licenses of the open-source software that is contained in these Docker image
 | mashtree | GNU GPLv3 | https://github.com/lskatz/mashtree/blob/master/LICENSE |
 | MaSuRCA | GNU GPLv3 | https://github.com/alekseyzimin/masurca/blob/master/LICENSE.txt
 | Medaka | Mozilla Public License 2.0 | https://github.com/nanoporetech/medaka/blob/master/LICENSE.md |
+| meningotype | GNU General Public License v3.0 | https://github.com/MDU-PHL/meningotype/blob/master/LICENSE |
 | Metaphlan | MIT | https://github.com/biobakery/MetaPhlAn/blob/master/license.txt |
 | MIDAS | GNU GPLv3 |https://github.com/snayfach/MIDAS/blob/master/LICENSE |
 | minimap2 | MIT | https://github.com/lh3/minimap2/blob/master/LICENSE.txt |
