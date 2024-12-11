@@ -40,9 +40,9 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   update-alternatives --install /usr/bin/python python /usr/bin/python3 10
 
 # install SPAdes binary
-RUN wget http://cab.spbu.ru/files/release${spadesVer}/SPAdes-${spadesVer}-Linux.tar.gz && \
+RUN wget https://github.com/ablab/spades/releases/download/v${spadesVer}/SPAdes-${spadesVer}-Linux.tar.gz && \
   tar -xzf SPAdes-${spadesVer}-Linux.tar.gz && \
-  rm -r SPAdes-${spadesVer}-Linux.tar.gz
+  rm -v SPAdes-${spadesVer}-Linux.tar.gz
 
 # ncbi-blast+
 # ubuntu:focal apt version of blast is old-ish (2.9.0)
