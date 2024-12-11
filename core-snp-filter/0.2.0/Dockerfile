@@ -20,9 +20,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /usr/local/bin
 
-RUN wget -q https://github.com/rrwick/Core-SNP-filter/releases/download/v0.2.0/coresnpfilter-linux-x86_64-musl-v0.2.0.tar.gz && \
-    tar -vxf coresnpfilter-linux-x86_64-musl-v0.2.0.tar.gz && \
-    rm -rf coresnpfilter-linux-x86_64-musl-v0.2.0.tar.gz
+RUN wget -q https://github.com/rrwick/Core-SNP-filter/releases/download/v${CORESNPFILTER_VER}/coresnpfilter-linux-x86_64-musl-v${CORESNPFILTER_VER}.tar.gz && \
+    tar -vxf coresnpfilter-linux-x86_64-musl-v${CORESNPFILTER_VER}.tar.gz && \
+    rm -rf coresnpfilter-linux-x86_64-musl-v${CORESNPFILTER_VER}.tar.gz
 
 ENV LC_ALL=C
 
