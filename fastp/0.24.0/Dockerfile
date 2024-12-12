@@ -15,7 +15,8 @@ LABEL maintainer2="Erin Young"
 LABEL maintainer2.email="eriny@utah.gov"
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    wget &&\
+    wget \
+    jq &&\
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 RUN wget --no-check-certificate -O /usr/local/bin/fastp http://opengene.org/fastp/fastp.${FASTP_VER} && \
