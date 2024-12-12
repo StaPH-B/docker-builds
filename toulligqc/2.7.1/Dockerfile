@@ -60,4 +60,6 @@ RUN wget -q http://outils.genomique.biologie.ens.fr/leburon/downloads/toulligqc-
     tar -xvjf toulligqc_demo_data.tar.bz2 && \
     cd toulligqc_demo_data && \
     ./run-toulligqc.sh && \
-    ls output/ToulligQC_Demo_Data/report.{html,data} output/ToulligQC_Demo_Data/images/*{html,png}
+    ls /test/toulligqc_demo_data/output/ToulligQC_Demo_Data/report.html \
+    /test/toulligqc_demo_data/output/ToulligQC_Demo_Data/report.data \
+    /test/toulligqc_demo_data/output/ToulligQC_Demo_Data/images/*html
