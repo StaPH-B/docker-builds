@@ -23,7 +23,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 RUN wget -q https://github.com/GenomiqueENS/toulligQC/archive/refs/tags/v${TOULIGQC_VER}.tar.gz && \
-    pip install v${TOULIGQC_VER}.tar.gz && \
+    pip install --no-cache-dir v${TOULIGQC_VER}.tar.gz && \
     rm -rf v${TOULIGQC_VER}.tar.gz
 
 # 'ENV' instructions set environment variables that persist from the build into the resulting image
