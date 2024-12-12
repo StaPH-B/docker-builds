@@ -9,7 +9,8 @@ Basic information on how to use this tool:
 - executable: toulligqc
 - help: --help
 - version: --version
-- description: <tool does something>
+- description: |
+> ToulligQC is dedicated to the QC analyses of Oxford Nanopore runs.
   
 Full documentation: https://github.com/GenomiqueENS/toulligQC
 
