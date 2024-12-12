@@ -36,6 +36,7 @@ ENV PATH="/opt/conda/envs/emmtyper/bin:/opt/conda/envs/env/bin:${PATH}" \
 # overwriting the emmtyper database
 WORKDIR /opt/conda/envs/emmtyper/lib/python3.13/site-packages/emmtyper/db
 
+# removing original files and replacing with most-current fasta file
 RUN rm * && \
     wget -q https://ftp.cdc.gov/pub/infectious_diseases/biotech/tsemm/alltrimmed.tfa && \
     makeblastdb -in alltrimmed.tfa -dbtype nucl -out emm.fna
