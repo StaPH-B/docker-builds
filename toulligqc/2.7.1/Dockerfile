@@ -1,6 +1,6 @@
 FROM python:3.11.11-slim AS app
 
-ARG TOULIGQC_VER
+ARG TOULIGQC_VER="2.7.1"
 
 # 'LABEL' instructions tag the image with metadata that might be important to the user
 LABEL base.image="python:3.11.11-slim"
