@@ -1,62 +1,60 @@
-<!-- 
-Please edit this readme with some basic information about the tool and how to use this container. 
-- Include information about databases and additional files that are included.
-- Keep it short - you don't need to recreate the documentation from the creators.
-- Do not just copy and paste the readme or help for the tool. 
--->
+# toulligQC container
 
-# <program> container
-
-Main tool: [<program>](link to program)
+Main tool: [toulligQC](https://github.com/GenomiqueENS/toulligQC)
   
-Code repository:
+Code repository: https://github.com/GenomiqueENS/toulligQC
 
-Additional tools:
-- list: version
 
 Basic information on how to use this tool:
-- executable: <tool>
-- help: <-h>
-- version: <-v>
-- description: <tool does something>
-
-Additional information:
-
-<Container contains X database at Y>
-  
-Full documentation: link to documentation or wiki
-
-## Example Usage
-
-```bash
-<how creator of the dockerfile uses it>
-```
-
-  
-<!-- Example README
-# pasty container
-
-Main tool: [pasty](https://github.com/rpetit3/pasty)
-
-Code repository: https://github.com/rpetit3/pasty
-
-Additional tools:
-- ncbi-blast+: 2.12.0
-- python: 3.10.6
-
-Basic information on how to use this tool:
-- executable: pasty
+- executable: toulligqc
 - help: --help
 - version: --version
-- description: "A tool easily taken advantage of for in silico serogrouping of Pseudomonas aeruginosa isolates from genome assemblies"
-
-Additional information:  
+- description: <tool does something>
   
-Full documentation: [https://github.com/rpetit3/pasty](https://github.com/rpetit3/pasty)
+Full documentation: https://github.com/GenomiqueENS/toulligQC
 
 ## Example Usage
 
 ```bash
-pasty --assembly /pasty-1.0.2/test/O1-GCF_000504045.fna.gz --prefix O1-GCF_000504045
-``` 
--->
+# Sequencing summary alone
+toulligqc --report-name summary_only \
+            --sequencing-summary-source /path/to/basecaller/output/sequencing_summary.txt \
+            --html-report-path /path/to/output/report.html
+
+# Sequencing summary + telemetry file
+toulligqc --report-name summary_plus_telemetry \
+            --telemetry-source /path/to/basecaller/output/sequencing_telemetry.js \
+            --sequencing-summary-source /path/to/basecaller/output/sequencing_summary.txt \
+            --html-report-path /path/to/output/report.html
+
+# Telemetry file + fast5 files
+toulligqc --report-name telemetry_plus_fast5 \
+            --telemetry-source /path/to/basecaller/output/sequencing_telemetry.js \
+            --fast5-source /path/to/basecaller/output/fast5_files.fast5.gz \ 
+            --html-report-path /path/to/output/report.html
+# Fastq/ bam files only
+toulligqc --report-name FAF0256 \
+            --fastq /path/to/basecaller/output/fastq_files.fq.gz \ # (replace with --bam)
+            --html-report-path /path/to/output/report.html
+
+# Optional arguments for 1D² analysis
+toulligqc --report-name FAF0256 \
+            --telemetry-source /path/to/basecaller/output/sequencing_telemetry.js \
+            --sequencing-summary-source /path/to/basecaller/output/sequencing_summary.txt \
+            --sequencing-summary-1dsqr-source /path/to/basecaller/output/sequencing_1dsqr_summary.txt \ # (optional)
+            --html-report-path /path/to/output/report.html
+
+# Optional arguments to deal with barcoded samples
+toulligqc --report-name FAF0256 \
+            --barcoding \
+            --telemetry-source /path/to/basecaller/output/sequencing_telemetry.js \
+            --sequencing-summary-source /path/to/basecaller/output/sequencing_summary.txt \
+            --sequencing-summary-source /path/to/basecaller/output/barcoding_summary_pass.txt \         # (optional)
+            --sequencing-summary-source /path/to/basecaller/output/barcoding_summary_fail.txt \         # (optional)
+            --sequencing-summary-1dsqr-source /path/to/basecaller/output/sequencing_1dsqr_summary.txt \ # (optional)
+            --sequencing-summary-1dsqr-source /path/to/basecaller/output/barcoding_summary_pass.txt \   # (optional)
+            --sequencing-summary-1dsqr-source /path/to/basecaller/output/barcoding_summary_fail.txt \   # (optional)
+            --html-report-path /path/to/output/report.html \
+            --data-report-path /path/to/output/report.data \                                            # (optional)
+            --barcodes BC01,BC02,BC03
+```

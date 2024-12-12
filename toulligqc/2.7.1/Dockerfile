@@ -1,6 +1,4 @@
-ARG TOULIGQC_VER="2.7.1"
-
-FROM python:3.11.11-slim as app
+FROM python:3.11.11-slim AS app
 
 ARG TOULIGQC_VER
 
@@ -20,7 +18,8 @@ LABEL maintainer.email="eriny@utah.gov"
 RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
     ca-certificates\
-    procps && \
+    procps \
+    bzip2 && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 RUN wget -q https://github.com/GenomiqueENS/toulligQC/archive/refs/tags/v${TOULIGQC_VER}.tar.gz && \
@@ -45,7 +44,7 @@ WORKDIR /data
 ##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
 
 # A second FROM insruction creates a new stage
-FROM app as test
+FROM app AS test
 
 ARG TOULIGQC_VER
 
@@ -57,8 +56,8 @@ WORKDIR /test
 RUN toulligqc --help && \
     toulligqc --version
 
-RUN wget -q $ wget http://outils.genomique.biologie.ens.fr/leburon/downloads/toulligqc-example/toulligqc_demo_data.tar.bz2 && \
-    tar -xzf toulligqc_demo_data.tar.bz2 && \
+RUN wget -q http://outils.genomique.biologie.ens.fr/leburon/downloads/toulligqc-example/toulligqc_demo_data.tar.bz2 && \
+    tar -xvjf toulligqc_demo_data.tar.bz2 && \
     cd toulligqc_demo_data && \
     ./run-toulligqc.sh && \
-    ls RUN_ID/report.{html,data} RUN_ID/images/*{html,png}
+    ls output/ToulligQC_Demo_Data/report.{html,data} output/ToulligQC_Demo_Data/images/*{html,png}
