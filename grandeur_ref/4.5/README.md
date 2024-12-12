@@ -1,6 +1,6 @@
-# Grandeur container
+# Grandeur References container
 
-Main tool: [UPHL-BioNGS/Grandeur](https://github.com/UPHL-BioNGS/Grandeur)
+Main tool: Part of [UPHL-BioNGS/Grandeur](https://github.com/UPHL-BioNGS/Grandeur)
   
 Code repository: https://github.com/UPHL-BioNGS/Grandeur
 
