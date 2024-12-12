@@ -30,26 +30,29 @@ Here's a working example of a Dockerfile for the SPAdes software:
 ```Dockerfile
 # FROM defines the base docker image. This command has to come first in the file
 # The 'as' keyword lets you name the folowing stage. We use `app` for the production image
-FROM ubuntu:xenial as app
+FROM ubuntu:jammy as app
+
+ARG SOFTWARE_VER="3.12.0"
 
 # LABEL instructions tag the image with metadata that might be important to the user
-LABEL base.image="ubuntu:xenial"
-LABEL software.version="3.12.0"
+LABEL base.image="ubuntu:jammy"
+LABEL software.version="${SOFTWARE_VER}"
 
 # RUN executes code during the build
 # If you're using a Ubuntu base image, run apt-get update to update the package list first
 RUN apt-get update && apt-get install -y \
     python \
-    wget
+    wget \
+    dependency
 
 # Download and install the tool
-RUN wget http://cab.spbu.ru/files/release3.12.0/SPAdes-3.12.0-Linux.tar.gz && \
-    tar -xzf SPAdes-3.12.0-Linux.tar.gz && \
-    rm -r SPAdes-3.12.0-Linux.tar.gz && \
+RUN wget http://cab.spbu.ru/files/release${SOFTWARE_VER}/SPAdes-${SOFTWARE_VER}-Linux.tar.gz && \
+    tar -xzf SPAdes-${SOFTWARE_VER}-Linux.tar.gz && \
+    rm -r SPAdes-${SOFTWARE_VER}-Linux.tar.gz && \
     mkdir /data
 
 # ENV instructions set environment variables that persist from the build into the resulting image
-ENV PATH="${PATH}:/SPAdes-3.12.0-Linux/bin"
+ENV PATH="${PATH}:/SPAdes-${SOFTWARE_VER}-Linux/bin"
 
 # WORKDIR sets working directory, this persists from the build into the resulting image
 WORKDIR /data
@@ -79,9 +82,7 @@ Fill in [this template](https://github.com/StaPH-B/docker-builds/blob/master/doc
 - **Use a standard base image**
 
 
-    We typically use the official docker `ubuntu:xenial` image (Ubuntu 16.04) as our base because it's a reliable and trusted base image and because Ubuntu is the OS we typically work on and are most familiar with.
-
-    HOWEVER - Ubuntu Xenial (16.04) is now EOL, so we recommend to use a more recent distro, like Ubuntu Focal (20.04). The offical docker image is called `ubuntu:focal`
+    We typically use the official docker `ubuntu:jammy` image (Ubuntu 22.04 LTS) as our base because it's a reliable and trusted base image and because Ubuntu is the OS we typically work on and are most familiar with.
 
     `alpine` is another frequently used image, and has the added benefit of being smaller than most other images.
 
@@ -94,11 +95,11 @@ Fill in [this template](https://github.com/StaPH-B/docker-builds/blob/master/doc
     1. As recommended in Docker docs: [utilize the features of a multi-stage build](https://docs.docker.com/develop/develop-images/multistage-build/).
        You can use the following Dockerfile structure to isolate installation layers in a builder stage. Then, you can copy only the necessary layers into the production image stage, called "app". This keeps the production image small.
        ```Dockerfile
-       FROM ubuntu:xenial as builder
+       FROM ubuntu:jammy as builder
 
        # install the program here, using lots of RUN commands
 
-       FROM ubuntu:xenial as app
+       FROM ubuntu:jammy as app
 
        COPY --from=builder /path/to/<program executable> /usr/local/bin/<program executable>
        ```
