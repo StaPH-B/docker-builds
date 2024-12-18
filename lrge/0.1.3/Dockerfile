@@ -1,16 +1,5 @@
 ARG LRGE_VER="0.1.3"
 
-# FROM rust:1.67 AS builder
-
-# ARG LRGE_VER
-
-# RUN wget -q https://github.com/bluenote-1577/skani/archive/refs/tags/v${SKANI_VER}.tar.gz &&\
-#     tar -xvf v${SKANI_VER}.tar.gz &&\
-#     cd skani-${SKANI_VER} &&\
-#     cargo install --path . --root ~/.cargo &&\
-#     chmod +x /root/.cargo/bin/skani
-
-
 FROM ubuntu:jammy AS app
 
 ARG LRGE_VER
@@ -43,7 +32,7 @@ CMD [ "lrge", "--help" ]
 
 WORKDIR /data
 
-FROM app as test
+FROM app AS test
 
 # set working directory so that all test inputs & outputs are kept in /test
 WORKDIR /test
