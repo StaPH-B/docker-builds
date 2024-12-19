@@ -1,7 +1,7 @@
 FROM ubuntu:focal as app
 
 # for easy upgrade later. ARG variables only persist during image build time
-ARG unicyclerVer="0.5.0"
+ARG unicyclerVer="0.5.1"
 ARG blastVer="2.12.0"
 # the spades.py version is actually VERY important
 ARG spadesVer="3.15.4"
@@ -10,7 +10,7 @@ ARG raconVer="1.4.3"
 LABEL base.image="ubuntu:focal"
 LABEL dockerfile.version="1"
 LABEL software="Unicycler"
-LABEL software.version="0.5.0"
+LABEL software.version="${unicyclerVer}"
 LABEL description="Unicycler is an assembly pipeline for bacterial genomes."
 LABEL website="https://github.com/rrwick/Unicycler"
 LABEL license="https://github.com/rrwick/Unicycler/blob/main/LICENSE"
@@ -18,8 +18,8 @@ LABEL maintainer1="Kelsey Florek"
 LABEL maintainer1.email="kelsey.florek@slh.wisc.edu"
 LABEL maintainer2="Curtis Kapsak"
 LABEL maintainer2.email="kapsakcj@gmail.com"
-LABEL maintainer3="Erin Young"
-LABEL maintainer3.email="eriny@utah.gov"
+LABEL maintainer="Erin Young"
+LABEL maintainer.email="eriny@utah.gov"
 
 ARG DEBIAN_FRONTEND=noninteractive
 
