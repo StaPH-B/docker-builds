@@ -1,11 +1,8 @@
-# Set global variables
-ARG BINDASHTREE_VER="0.1.0"
-
 # Stage 1: Build stage
 FROM ubuntu:focal AS builder
 
-# Set version argument
-ARG BINDASHTREE_VER
+# Set global variables
+ARG BINDASHTREE_VER="0.1.0"
 
 # Update package manager and install necessary tools
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -16,7 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     pkg-config \
     libssl-dev \
     ca-certificates \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install Rust and Cargo using rustup
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y && \
@@ -34,9 +31,13 @@ RUN wget https://github.com/jianshu93/bindashtree/archive/refs/tags/v${BINDASHTR
 
 # Stage 2: Final image
 FROM ubuntu:focal AS app
-
-# Set the version argument again for this stage
 ARG BINDASHTREE_VER="0.1.0"
+
+# Install wget for test stage compatibility
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    wget \
+    ca-certificates \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Labels for metadata
 LABEL base.image="ubuntu:focal" \
@@ -52,5 +53,28 @@ LABEL base.image="ubuntu:focal" \
 # Copy built binaries from the builder stage
 COPY --from=builder /bindashtree-${BINDASHTREE_VER}/target/release/bindashtree /usr/local/bin/
 
-# Set default command
-# CMD ["bindashtree", "-h"]
+# Stage 3: Test stage
+FROM app AS test
+
+# Set working directory
+WORKDIR /data/test
+
+# Install wget if not installed (redundancy for safety)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    wget \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Download test files
+RUN wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/002/587/385/GCA_002587385.1_ASM258738v1/GCA_002587385.1_ASM258738v1_genomic.fna.gz && \
+    wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/002/596/765/GCA_002596765.1_ASM259676v1/GCA_002596765.1_ASM259676v1_genomic.fna.gz && \
+    wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/002/598/005/GCA_002598005.1_ASM259800v1/GCA_002598005.1_ASM259800v1_genomic.fna.gz
+
+RUN ls /data/test/*.fna.gz > name.txt
+
+#### for highly similar genomes, e.g., > 99.9% ANI, a large sketch size should be used. -s 10204 works well for ANI below 99%.
+RUN bindashtree -i name.txt -k 16 -s 10240 -d 1 -t 8 --output_tree try.nwk
+
+WORKDIR /data/
+
+
+# FROM app
