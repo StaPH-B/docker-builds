@@ -74,7 +74,6 @@ RUN ls /data/test/*.fna.gz > name.txt
 #### for highly similar genomes, e.g., > 99.9% ANI, a large sketch size should be used. -s 10204 works well for ANI below 99%.
 RUN bindashtree -i name.txt -k 16 -s 10240 -d 1 -t 8 --output_tree try.nwk
 
+FROM app
+
 WORKDIR /data/
-
-
-# FROM app
