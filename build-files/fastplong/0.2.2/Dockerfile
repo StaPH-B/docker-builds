@@ -28,7 +28,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 RUN wget --no-check-certificate -q http://opengene.org/fastplong/fastplong.${FASTPLONG_VER} && \
-    mv fastplong.0.2.2 /usr/local/bin/fastplong && \
+    mv fastplong.${FASTPLONG_VER} /usr/local/bin/fastplong && \
     chmod a+x /usr/local/bin/fastplong
 
 # 'CMD' instructions set a default command when the container is run. This is typically 'tool --help.'
