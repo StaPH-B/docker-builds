@@ -28,7 +28,7 @@ jobs:
           version=2.23.0
           echo "version=$version" >> $GITHUB_OUTPUT 
           
-          file=build/files/mlst/2.23.0-2024-03/Dockerfile
+          file=build-files/mlst/2.23.0-2024-03/Dockerfile
           ls $file
           echo "file=$file" >> $GITHUB_OUTPUT
 
