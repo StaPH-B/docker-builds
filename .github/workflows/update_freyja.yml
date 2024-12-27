@@ -1,3 +1,4 @@
+
 ##### ------------------------------------------------------------------------------------------------ #####
 ##### This caller workflow tests, builds, and pushes the image to Docker Hub and Quay using the most   #####
 ##### recent version of Freyja and downloading the most recent variant information.                    #####
@@ -27,7 +28,7 @@ jobs:
           version=1.5.2
           echo "version=$version" >> $GITHUB_OUTPUT 
           
-          file=freyja/$version/Dockerfile
+          file=build-files/freyja/$version/Dockerfile
           ls $file
           echo "file=$file" >> $GITHUB_OUTPUT
 
@@ -87,4 +88,4 @@ jobs:
             quay.io/staphb/freyja:latest
 
       - name: Image digest
-        run: echo ${{ steps.docker_build_user_defined_tag.outputs.digest }}
+        run: echo ${{ steps.docker_build_and_push.outputs.digest }}
