@@ -30,10 +30,10 @@ Here's a working example of a Dockerfile for the SPAdes software:
 ```Dockerfile
 # FROM defines the base docker image. This command has to come first in the file
 # The 'as' keyword lets you name the folowing stage. We use `app` for the production image
-FROM ubuntu:xenial as app
+FROM ubuntu:jammy AS app
 
 # LABEL instructions tag the image with metadata that might be important to the user
-LABEL base.image="ubuntu:xenial"
+LABEL base.image="ubuntu:jammy"
 LABEL software.version="3.12.0"
 
 # RUN executes code during the build
@@ -56,7 +56,7 @@ WORKDIR /data
 
 # A second FROM insruction creates a new stage
 # Here we add a test stage to run internal tests on the installed software.
-FROM app as test
+FROM app AS test
 
 RUN spades.py --test
 ```
@@ -79,26 +79,24 @@ Fill in [this template](https://github.com/StaPH-B/docker-builds/blob/master/doc
 - **Use a standard base image**
 
 
-    We typically use the official docker `ubuntu:xenial` image (Ubuntu 16.04) as our base because it's a reliable and trusted base image and because Ubuntu is the OS we typically work on and are most familiar with.
-
-    HOWEVER - Ubuntu Xenial (16.04) is now EOL, so we recommend to use a more recent distro, like Ubuntu Focal (20.04). The offical docker image is called `ubuntu:focal`
+    We typically use the official docker `ubuntu:jammy` image (Ubuntu 22.04.5 LTS) as our base because it's a reliable and trusted base image and because Ubuntu is the OS we typically work on and are most familiar with.
 
     `alpine` is another frequently used image, and has the added benefit of being smaller than most other images.
 
 
 - **Minimize the number of layers**
 
-    The dockerfile commands (`FROM`, `RUN`, `CMD`, and `COPY`) will each add an additional layer (everytime you use one), increasing the size of the image.
+    The dockerfile commands (`FROM`, `RUN`, `CMD`, and `COPY`) will each add an additional layer (every time you use one), increasing the size of the image.
     There are two ways to reduce the size of your image.
 
     1. As recommended in Docker docs: [utilize the features of a multi-stage build](https://docs.docker.com/develop/develop-images/multistage-build/).
        You can use the following Dockerfile structure to isolate installation layers in a builder stage. Then, you can copy only the necessary layers into the production image stage, called "app". This keeps the production image small.
        ```Dockerfile
-       FROM ubuntu:xenial as builder
+       FROM ubuntu:jammy AS builder
 
        # install the program here, using lots of RUN commands
 
-       FROM ubuntu:xenial as app
+       FROM ubuntu:jammy AS app
 
        COPY --from=builder /path/to/<program executable> /usr/local/bin/<program executable>
        ```
