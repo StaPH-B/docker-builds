@@ -73,16 +73,8 @@ jobs:
           file: ${{ steps.latest_version.outputs.file }}
           target: app
           push: true
-          tags: staphb/mlst:${{ steps.latest_version.outputs.version }}-${{ steps.date.outputs.date }}
-            
-      - name: Build and push to Quay
-        id: build
-        uses: docker/build-push-action@v5
-        with:
-          file: ${{ steps.latest_version.outputs.file }}
-          target: app
-          push: true
-          tags: quay.io/staphb/mlst:${{ steps.latest_version.outputs.version }}-${{ steps.date.outputs.date }}
-
-      - name: Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
+          tags: |
+            staphb/mlst:${{ steps.latest_version.outputs.version }}-${{ steps.date.outputs.date }}
+            staphb/mlst:latest
+            quay.io/staphb/mlst:${{ steps.latest_version.outputs.version }}-${{ steps.date.outputs.date }}
+            quay.io/staphb/mlst:latest
