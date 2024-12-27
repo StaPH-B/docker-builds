@@ -53,6 +53,10 @@ LABEL base.image="ubuntu:focal" \
 # Copy built binaries from the builder stage
 COPY --from=builder /bindashtree-${BINDASHTREE_VER}/target/release/bindashtree /usr/local/bin/
 
+CMD ["bindashtree", "--help"]
+
+WORKDIR /data
+
 # Stage 3: Test stage
 FROM app AS test
 
@@ -75,5 +79,3 @@ RUN ls /data/test/*.fna.gz > name.txt
 RUN bindashtree -i name.txt -k 16 -s 10240 -d 1 -t 8 --output_tree try.nwk
 
 FROM app
-
-WORKDIR /data/
