@@ -51,7 +51,7 @@ WORKDIR /test
 
 RUN fastplong --help
 
-RUN wget --no-check-certificate https://zenodo.org/records/10733190/files/df_test_files.tar.gz && \
+RUN wget --no-check-certificate -q https://zenodo.org/records/10733190/files/df_test_files.tar.gz && \
     tar -xvf df_test_files.tar.gz && \
     fastplong -i test_files/test.fastq.gz -o filtered.test.fastq.gz && \
     ls filtered.test.fastq.gz
