@@ -87,7 +87,8 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./build-files/${{ steps.parse.outputs.tool }}/${{ steps.parse.outputs.version }}
-          file: ./build-files/${{ steps.parse.outputs.tool }}/${{ steps.parse.outputs.version }}/Dockerfile          target: test
+          file: ./build-files/${{ steps.parse.outputs.tool }}/${{ steps.parse.outputs.version }}/Dockerfile
+          target: test
           tags: ${{ steps.parse.outputs.tool }}:${{ steps.parse.outputs.version }}
           load: true
           push: false
