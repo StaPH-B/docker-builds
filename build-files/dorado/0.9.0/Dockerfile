@@ -1,10 +1,10 @@
 # Use NVIDIA CUDA image as the base image
-FROM nvidia/cuda:12.4.0-base-ubuntu22.04 AS app
+FROM nvidia/cuda:12.2.0-devel-ubuntu20.04 AS app
 
 ARG DORADO_VER=0.9.0
 
 # Metadata
-LABEL base.image="nvidia/cuda:12.4.0-base-ubuntu22.04"
+LABEL base.image="nvidia/cuda:12.2.0-devel-ubuntu20.04"
 LABEL dockerfile.version="1"
 LABEL software="dorado ${DORADO_VER}"
 LABEL software.version="${DORADO_VER}"
