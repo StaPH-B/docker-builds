@@ -50,6 +50,8 @@ WORKDIR /data
 
 FROM app AS test
 
+RUN combine_kreports.py -h
+
 RUN python3 /KrakenTools/extract_kraken_reads.py --help
 RUN ktImportTaxonomy
 
