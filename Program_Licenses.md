@@ -95,6 +95,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Kraken2 | MIT | https://github.com/DerrickWood/kraken2/blob/master/LICENSE |
 | KrakenTools | GNU GPLv3 | https://github.com/jenniferlu717/KrakenTools/blob/master/LICENSE |
 | KrakenUniq | GNU GPLv3 | https://github.com/fbreitwieser/krakenuniq/blob/master/LICENSE |
+| Krona | non-standard license (see link) | https://github.com/marbl/Krona/blob/master/KronaTools/LICENSE.txt |
 | kSNP3 | BSD | available in zipped kSNP archive on sourceforge or in docker image under `/kSNP3.1_Linux_package/THE BSD OPENSOURCE LICENSE.pdf` |
 | kSNP4 | BSD | available in zipped kSNP archive on sourceforge or in docker image under `/opt/kSNP4 Linux package/Documentation/THE BSD OPENSOURCE LICENSE.pdf` |
 | LABEL | GPL version 3 | In zipped file in README.md |
