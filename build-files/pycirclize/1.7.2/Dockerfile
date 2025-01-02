@@ -34,9 +34,9 @@ RUN pip show pycirclize
 
 RUN apt-get update && apt-get install -y --no-install-recommends wget
 
-RUN wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/pycirclize/1.5.0/tests/example1.py && \
-    wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/pycirclize/1.5.0/tests/example2.py && \
-    wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/pycirclize/1.5.0/tests/example3.py
+RUN wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/build-files/pycirclize/1.5.0/tests/example1.py && \
+    wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/build-files/pycirclize/1.5.0/tests/example2.py && \
+    wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/build-files/pycirclize/1.5.0/tests/example3.py
 
 RUN python example1.py && ls example01.png && \
     python example2.py && ls example02.png && \
