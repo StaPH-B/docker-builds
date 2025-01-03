@@ -1,7 +1,11 @@
 FROM ubuntu:jammy AS app
 
 ARG KRONA_VER="2.8.1"
-ARG KRAKENTOOLS_VER="d4a2fbe"
+ARG KRAKENTOOLS_COMMIT="d4a2fbe2833c2392a724697c0c97a3014e748474"
+
+USER root
+
+WORKDIR /
 
 LABEL base_image="ubuntu:jammy"
 LABEL dockerfile.version="1"
@@ -18,35 +22,39 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
     ca-certificates \
     curl \
+    perl \
+    unzip \
     python3 \
     python3-pip \
     python3-setuptools \
-    git \
     make \
     procps && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p ~/miniconda3 && \
-    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh && \
-    bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3 && \
-    rm ~/miniconda3/miniconda.sh
-
 ENV PATH="/root/miniconda3/bin:$PATH"
 
-RUN conda install -c bioconda krona=${KRONA_VER} && \
-    ktUpdateTaxonomy.sh
+RUN wget https://github.com/marbl/Krona/releases/download/v${KRONA_VER}/KronaTools-${KRONA_VER}.tar && \
+    tar -xvf KronaTools-${KRONA_VER}.tar && \
+    rm KronaTools-${KRONA_VER}.tar && \
+    mv KronaTools-${KRONA_VER} KronaTools && \
+    cd KronaTools && \
+    ./install.pl
 
 RUN pip install biopython==1.84 \
     pandas==2.2.3
 
-RUN git clone https://github.com/jenniferlu717/KrakenTools.git && \
-    cd KrakenTools && \
-    git checkout ${KRAKENTOOLS_VERSION} && \
-    chmod +x *
+ARG KRAKENTOOLS_COMMIT="d4a2fbe2833c2392a724697c0c97a3014e748474"
+
+RUN wget https://github.com/jenniferlu717/KrakenTools/archive/${KRAKENTOOLS_COMMIT}.zip && \
+    unzip ${KRAKENTOOLS_COMMIT}.zip && \
+    mv KrakenTools-${KRAKENTOOLS_COMMIT} KrakenTools && \
+    chmod +x KrakenTools/*
 
 ENV PATH=/KrakenTools:${PATH}
 
 WORKDIR /data
+
+CMD ["ktImportTaxonomy"]
 
 FROM app AS test
 
