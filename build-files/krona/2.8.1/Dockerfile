@@ -50,15 +50,13 @@ RUN wget https://github.com/jenniferlu717/KrakenTools/archive/${KRAKENTOOLS_COMM
     mv KrakenTools-${KRAKENTOOLS_COMMIT} KrakenTools && \
     chmod +x KrakenTools/*
 
-ENV PATH=/KrakenTools:${PATH}
-
 WORKDIR /data
 
 CMD ["ktImportTaxonomy"]
 
 FROM app AS test
 
-RUN combine_kreports.py -h
+RUN python3 /KrakenTools/combine_kreports.py -h
 
 RUN python3 /KrakenTools/extract_kraken_reads.py --help
 RUN ktImportTaxonomy
