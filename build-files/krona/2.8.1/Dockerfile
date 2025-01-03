@@ -7,7 +7,7 @@ USER root
 
 WORKDIR /
 
-LABEL base_image="ubuntu:jammy"
+LABEL base.image="ubuntu:jammy"
 LABEL dockerfile.version="1"
 LABEL software="krona"
 LABEL software.version="${KRONA_VER}"
