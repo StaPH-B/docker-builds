@@ -74,7 +74,7 @@ ARG HOCORT_VER
 ARG HISTAT2_VER
 
 # Set up labels
-LABEL base.image="ubuntu:20.04-slim" \
+LABEL base.image="ubuntu:jammy" \
       dockerfile.version="1" \
       software="HoCoRT" \
       software.version=${HOCORT_VER} \
