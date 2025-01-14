@@ -130,5 +130,3 @@ RUN apt-get update && \
     curl -L -o test/genome.fna https://raw.githubusercontent.com/ignasrum/hocort/main/tests/test_data/fasta/genome.fna && \
     hocort index bowtie2 --input test/genome.fna --output test/hocort_test && \
     rm -rf /var/lib/apt/lists/*
-
-FROM app

@@ -1,6 +1,13 @@
 # HoCoRT
 
-Main tool: [HoCoRT](https://github.com/ignasrum/hocort)
+Main tool: [HoCoRT v1.2.2](https://github.com/ignasrum/hocort)
+Dependencies:  
+[bwa-mem2 v2.2.1](https://github.com/bwa-mem2/bwa-mem2)
+[histat2 v2.2.1](https://github.com/DaehwanKimLab/hisat2)
+[sparsehash v2.0.4](https://github.com/sparsehash/sparsehash)
+[sdsl-lite v2.1.1](https://github.com/simongog/sdsl-lite)
+[btl_bloomfilter v1.0.2](https://github.com/bcgsc/btl_bloomfilter)
+[biobloom v2.3.5](https://github.com/bcgsc/biobloom)
   
 Code repository: https://github.com/ignasrum/hocort
 
