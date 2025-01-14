@@ -4,7 +4,7 @@ ARG BWAMEM2_VER="2.2.1"
 ARG HISTAT2_VER="2.2.1"
 ARG SPARSEHASH_VER="2.0.4"
 ARG SDSL_VER="2.1.1"
-ARG BTLBLOOMFILTER_VER=""
+ARG BTLBLOOMFILTER_VER="1.0.2"
 ARG BIOBLOOM_VER="2.3.5"
 
 # Base image for building
@@ -28,13 +28,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     bowtie2 kraken2 bwa minimap2 samtools bbmap doxygen \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# BWA-MEM2 installation
-RUN git clone --recursive https://github.com/bwa-mem2/bwa-mem2.git && \
-    cd bwa-mem2 && \
+# # BWA-MEM2 installation
+RUN git clone --recursive https://github.com/bwa-mem2/bwa-mem2.git /bwa-mem2-${BWAMEM2_VER} && \
+    cd bwa-mem2-${BWAMEM2_VER} && \
     make -j$(nproc) && \
     cp bwa-mem2* /usr/local/bin && \
-    rm -rf /bwa-mem2
-
+    cd ../ && rm -rf bwa-mem2-${BWAMEM2_VER}
 
 # HISAT2 installation
 RUN wget -q https://github.com/DaehwanKimLab/hisat2/archive/refs/tags/v${HISTAT2_VER}.tar.gz && \
@@ -44,7 +43,6 @@ RUN wget -q https://github.com/DaehwanKimLab/hisat2/archive/refs/tags/v${HISTAT2
     cd .. && rm -rf hisat2-${HISTAT2_VER} v${HISTAT2_VER}.tar.gz
 
 # # Install sparsehash
-
 RUN wget https://github.com/sparsehash/sparsehash/archive/refs/tags/sparsehash-${SPARSEHASH_VER}.tar.gz && \
     tar -xvzf sparsehash-${SPARSEHASH_VER}.tar.gz && \
     cd sparsehash-sparsehash-${SPARSEHASH_VER} && \
@@ -53,7 +51,6 @@ RUN wget https://github.com/sparsehash/sparsehash/archive/refs/tags/sparsehash-$
     make install && \
     cd ../ && \
     rm -rf sparsehash-${SPARSEHASH_VER}.tar.gz sparsehash-sparsehash-${SPARSEHASH_VER}
-
 
 # Clone and build SDSL-lite
 RUN git clone --recursive https://github.com/simongog/sdsl-lite.git /sdsl-lite-${SDSL_VER} && \
@@ -67,17 +64,16 @@ RUN git clone --recursive https://github.com/simongog/sdsl-lite.git /sdsl-lite-$
     cd ../ && \
     rm -rf /sdsl-lite-${SDSL_VER}
 
-
 # Install BTL Bloom filter
-RUN git clone https://github.com/bcgsc/btl_bloomfilter.git && \
-    cd btl_bloomfilter && \
+RUN git clone https://github.com/bcgsc/btl_bloomfilter.git /btl_bloomfilter-${BTLBLOOMFILTER_VER} && \
+    cd btl_bloomfilter-${BTLBLOOMFILTER_VER} && \
     chmod +x autogen.sh && \
     ./autogen.sh && \
     ./configure && \
     make && make install && \
     mkdir -p /usr/local/include/btl_bloomfilter && \
     cp -r *.hpp vendor /usr/local/include/btl_bloomfilter && \
-    cd .. && rm -rf btl_bloomfilter
+    cd .. && rm -rf btl_bloomfilter-${BTLBLOOMFILTER_VER}
 
 # # Install BioBloom
 RUN wget https://github.com/bcgsc/biobloom/archive/refs/tags/${BIOBLOOM_VER}.tar.gz && \
@@ -87,9 +83,8 @@ RUN wget https://github.com/bcgsc/biobloom/archive/refs/tags/${BIOBLOOM_VER}.tar
     ./autogen.sh && \
     ./configure CXXFLAGS="-I/usr/local/include/btl_bloomfilter" LDFLAGS="-L/usr/local/lib" && \
     make && make install && \
-    cd ../ && rm -rf ${BIOBLOOM_VER}.tar.gz
+    cd ../ && rm -rf ${BIOBLOOM_VER}.tar.gz biobloom-${BIOBLOOM_VER}
     
-
 # Install HoCoRT
 RUN wget -q https://github.com/ignasrum/hocort/archive/refs/tags/${HOCORT_VER}.tar.gz && \
     tar -xzf ${HOCORT_VER}.tar.gz && cd hocort-${HOCORT_VER} && \
@@ -136,3 +131,4 @@ RUN apt-get update && \
     hocort index bowtie2 --input test/genome.fna --output test/hocort_test && \
     rm -rf /var/lib/apt/lists/*
 
+FROM app
