@@ -44,8 +44,6 @@ RUN wget https://github.com/marbl/Krona/releases/download/v${KRONA_VER}/KronaToo
 RUN pip install biopython==1.84 \
     pandas==2.2.3
 
-ARG KRAKENTOOLS_COMMIT="d4a2fbe2833c2392a724697c0c97a3014e748474"
-
 RUN wget https://github.com/jenniferlu717/KrakenTools/archive/${KRAKENTOOLS_COMMIT}.zip && \
     unzip ${KRAKENTOOLS_COMMIT}.zip && \
     mv KrakenTools-${KRAKENTOOLS_COMMIT} KrakenTools && \
