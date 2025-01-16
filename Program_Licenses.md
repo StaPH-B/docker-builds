@@ -52,6 +52,7 @@ The licenses of the open-source software that is contained in these Docker image
 | emboss | GNU GPLv3 | http://emboss.sourceforge.net/licence/ |
 | emmtyper | GNU GPLv3 | https://github.com/MDU-PHL/emmtyper/blob/master/LICENSE |
 | emm-typing-tool | GNU GPLv3 | https://github.com/phe-bioinformatics/emm-typing-tool/blob/master/LICENCE |
+| enabrowsertools |  Apache v2.0 | https://github.com/enasequence/enaBrowserTools/blob/master/LICENSE |
 | EToKi | GNU GPLv3 | https://github.com/zheminzhou/EToKi/blob/master/LICENSE |
 | FastANI | Apache v2.0 | https://github.com/ParBLiSS/FastANI/blob/master/LICENSE |
 | fasten | MIT | https://github.com/lskatz/fasten/blob/master/LICENSE |
