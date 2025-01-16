@@ -118,11 +118,14 @@ COPY --from=builder /usr/ /usr/
 # Set up working directory
 WORKDIR /data
 
-# Verify installation
-RUN hocort --version
+CMD ["hocort", "--help"]
+
 
 # Optional: Test stage
 FROM app AS test
+
+# Verify installation
+RUN hocort --version && hocort --help
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends ca-certificates curl && \
