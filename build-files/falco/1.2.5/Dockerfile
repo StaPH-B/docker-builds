@@ -13,8 +13,9 @@ RUN apt-get update && apt-get install -y \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 RUN wget https://github.com/smithlabcode/falco/releases/download/v${FALCO_VER}/falco-${FALCO_VER}.tar.gz &&\
-    tar -xvf falco-${FALCO_VER}.tar.gz &&\
-    cd falco-${FALCO_VER} &&\
+    mkdir /opt/falco &&\
+    tar --strip-components=1 -C /opt/falco -xvf falco-${FALCO_VER}.tar.gz &&\
+    cd /opt/falco &&\
     ./configure CXXFLAGS="-O3 -Wall" --enable-hts &&\
     make HAVE_HTSLIB=1 all &&\
     make HAVE_HTSLIB=1 install
@@ -38,7 +39,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     libhts-dev && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-COPY --from=builder /usr/local/bin/ /usr/local/bin/ 
+COPY --from=builder /usr/local/bin/ /usr/local/bin/
+COPY --from=builder /opt/falco/Configuration/ /opt/falco/Configuration/
 
 ENV LC_ALL=C
 
