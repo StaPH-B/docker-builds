@@ -2,6 +2,9 @@ FROM ubuntu:jammy AS app
 
 ARG KRONA_VER="2.8.1"
 ARG KRAKENTOOLS_COMMIT="d4a2fbe2833c2392a724697c0c97a3014e748474"
+ARG BIOPYTHON_VER="1.84"
+ARG PANDAS_VER="2.2.3"
+
 
 USER root
 
@@ -41,8 +44,8 @@ RUN wget https://github.com/marbl/Krona/releases/download/v${KRONA_VER}/KronaToo
     cd KronaTools && \
     ./install.pl
 
-RUN pip install biopython==1.84 \
-    pandas==2.2.3
+RUN pip install biopython==${BIOPYTHON_VER} \
+    pandas==${PANDAS_VER}
 
 RUN wget https://github.com/jenniferlu717/KrakenTools/archive/${KRAKENTOOLS_COMMIT}.zip && \
     unzip ${KRAKENTOOLS_COMMIT}.zip && \
