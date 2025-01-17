@@ -5,9 +5,9 @@ Main tool: [dorado](https://github.com/nanoporetech/dorado)
 Code repository: https://github.com/nanoporetech/dorado
 
 Basic information on how to use this tool:
-- executable: dorado
-- help: -h, --help
-- version: -v, --version
+- executable: `dorado`
+- help: `-h`, `--help`
+- version: `-v`, `--version`
 - description: Dorado is a high-performance, easy-to-use, open source basecaller for Oxford Nanopore reads.
 
 Additional information:
