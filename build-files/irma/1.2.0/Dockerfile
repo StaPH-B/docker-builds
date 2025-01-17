@@ -49,19 +49,23 @@ RUN cd /flu-amd/tests && \
 # do custom tests in /test directory
 WORKDIR /test
 
-# setting up irma_config.sh file so tests run w/ more cpus
+# setting up irma_config.sh file so tests run w/ more cpus and other settings
 RUN num_cpus_actual=$(nproc) && \
   echo "DEBUG: Number of CPUs available: ${num_cpus_actual}. Setting this in irma_config.sh file..." && \
   echo "SINGLE_LOCAL_PROC=${num_cpus_actual}" > irma_config.sh && \
   # set this variable to half the value of num_cpus_actual, as per the IRMA documentation: https://wonder.cdc.gov/amd/flu/irma/configuration.html
-  echo "DOUBLE_LOCAL_PROC=$((${num_cpus_actual}/2))" >> irma_config.sh
+  echo "DOUBLE_LOCAL_PROC=$((${num_cpus_actual}/2))" >> irma_config.sh && \
+  # this setting is to test IRMA's feature to replace bases that don't reach 1000X coverage with Ns in the <outdir>/amended_consensus/*.fasta files
+  # 1000X is obviously a high value, but this is just for testing purposes
+  echo 'MIN_CONS_SUPPORT="1000"' >> irma_config.sh 
 
 # test with H5N1 sample from USDA collected in 2024 from cattle
 # SRR28752647
-# SAMN41019197
-# https://www.ncbi.nlm.nih.gov/biosample?LinkName=nuccore_biosample&from_uid=2725951746
+# SAMN41019197 https://www.ncbi.nlm.nih.gov/biosample?LinkName=nuccore_biosample&from_uid=2725951746
 # used as a reference genome for 2024 cattle outbreak analysis in this repo: https://github.com/andersen-lab/avian-influenza
 RUN echo "downloading test H5N1 data now..." && \
   wget -q ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR287/047/SRR28752647/SRR28752647_1.fastq.gz && \
   wget -q ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR287/047/SRR28752647/SRR28752647_2.fastq.gz && \
-  IRMA FLU SRR28752647_1.fastq.gz SRR28752647_2.fastq.gz SRR28752647 --external-config irma_config.sh
+  IRMA FLU SRR28752647_1.fastq.gz SRR28752647_2.fastq.gz SRR28752647 --external-config irma_config.sh && \
+  echo "IRMA test complete. Checking for Ns in amended_consensus/*.fa files..." && \
+  grep 'N' SRR28752647/amended_consensus/*.fa
