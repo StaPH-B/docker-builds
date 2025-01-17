@@ -1,8 +1,8 @@
-FROM nvidia/cuda:12.4.0-base-ubuntu22.04 AS app
+FROM nvidia/cuda:12.2.0-base-ubuntu22.04 AS app
 
 ARG DORADO_VER="0.9.0"
 
-LABEL base.image="nvidia/cuda:12.4.0-base-ubuntu20.04"
+LABEL base.image="nvidia/cuda:12.2.0-base-ubuntu22.04"
 LABEL dockerfile.version="1"
 LABEL software="Dorado"
 LABEL software.version="${DORADO_VER}"
@@ -14,11 +14,12 @@ LABEL maintainer.email="kutluhan.incekara@ct.gov"
 
 RUN apt-get update && apt-get install --no-install-recommends -y\
     wget \
+    ca-certificates \
     pigz \
     procps &&\
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-RUN wget -q --no-check-certificate https://cdn.oxfordnanoportal.com/software/analysis/dorado-${DORADO_VER}-linux-x64.tar.gz &&\
+RUN wget -q https://cdn.oxfordnanoportal.com/software/analysis/dorado-${DORADO_VER}-linux-x64.tar.gz &&\
     tar --strip-components=1 -C /usr/local/ -xvf dorado-${DORADO_VER}-linux-x64.tar.gz &&\
     rm dorado-${DORADO_VER}-linux-x64.tar.gz
 
