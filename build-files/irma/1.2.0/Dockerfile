@@ -69,3 +69,4 @@ RUN echo "downloading test H5N1 data now..." && \
   IRMA FLU SRR28752647_1.fastq.gz SRR28752647_2.fastq.gz SRR28752647 --external-config irma_config.sh && \
   echo "IRMA test complete. Checking for Ns in amended_consensus/*.fa files..." && \
   grep 'N' SRR28752647/amended_consensus/*.fa
+  

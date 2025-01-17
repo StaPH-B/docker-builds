@@ -36,5 +36,4 @@ IRMA FLU SingleEndIllumina.fastq.gz MyIlluminaSample
 IRMA FLU-pacbio ccs_reads.fastq MyPacBioSample
 
 IRMA FLU-pgm pgm_reads.fastq MyIonTorrentSample
-
 ```
