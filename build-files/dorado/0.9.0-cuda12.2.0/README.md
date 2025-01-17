@@ -6,13 +6,11 @@ This Dockerfile sets up an environment for running **Dorado**, a tool for baseca
 
 - [Introduction](#introduction)
 - [Requirements](#requirements)
-- [Building the Docker Image](#building-the-docker-image)
 - [Running the Docker Container](#running-the-docker-container)
 - [Testing the Docker Image](#testing-the-docker-image)
 - [Basecalling Test](#basecalling-test)
 - [Verifying the Output](#verifying-the-output)
 - [Additional Notes](#additional-notes)
-- [License](#license)
 
 ## Introduction
 
@@ -46,11 +44,13 @@ To test that Dorado is working correctly, you will need to download a sample Pod
 ```bash
 wget -O dna_r10.4.1_e8.2_260bps-FLO_PRO114-SQK_NBD114_96_260-4000.pod5 \
   https://github.com/nanoporetech/dorado/raw/release-v0.7/tests/data/pod5/dna_r10.4.1_e8.2_260bps/dna_r10.4.1_e8.2_260bps-FLO_PRO114-SQK_NBD114_96_260-4000.pod5
+```
 
 ### Basecalling Test
-# Run the following command:
 
-docker run --gpus all -v $(pwd):/usr/src/app -it dorado-image bash -c "\
+```bash
+# Run the following command:
+docker run --gpus all -v $(pwd):/usr/src/app -it staphb/dorado:latest bash -c "\
   dorado basecaller /dorado_models/dna_r10.4.1_e8.2_260bps_sup@v3.5.2 \
   /usr/src/app/dna_r10.4.1_e8.2_260bps-FLO_PRO114-SQK_NBD114_96_260-4000.pod5 \
   --emit-moves > /usr/src/app/basecalled.sam"
