@@ -12,9 +12,9 @@ Basic information on how to use this tool:
 
 Additional information:
 
-This container does not contain any models.</br>
-Cuda drivers >= 12.2.0 are required for gpu support.</br>
-Use **"--gpus all"** flag to activate gpu support in docker. E.g.
+- This container does not contain any models. They must be downloaded at runtime.
+- Cuda drivers >= 12.2.0 are required for gpu support.
+- Use **"--gpus all"** flag to activate gpu support in docker. E.g.
 `docker run -it --gpus all staphb/dorado:0.9.0-cuda12.2.0-no_model bash`
 
 Full documentation: https://dorado-docs.readthedocs.io/en/latest/
@@ -23,7 +23,7 @@ Full documentation: https://dorado-docs.readthedocs.io/en/latest/
 ```bash
 # list models
 dorado download --list
-# downlaod a single model
+# download a single model
 dorado download --model {model_name}
 # download all models
 dorado download
