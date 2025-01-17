@@ -46,7 +46,6 @@ WORKDIR /data
 # -----------------------------
 FROM app AS test
 
-
 # Download the specific Pod5 test file
 RUN wget -O /usr/src/app/dna_r10.4.1_e8.2_260bps-FLO_PRO114-SQK_NBD114_96_260-4000.pod5 \
   https://github.com/nanoporetech/dorado/raw/release-v0.7/tests/data/pod5/dna_r10.4.1_e8.2_260bps/\

@@ -18,10 +18,10 @@ This Dockerfile sets up an environment for running **Dorado**, a tool for baseca
 
 This Docker image includes:
 
-- **Dorado**: Version **0.8.3**, a tool for basecalling Oxford Nanopore sequencing data.
+- **Dorado**: Version **0.9.0**, a tool for basecalling Oxford Nanopore sequencing data.
 - **NVIDIA CUDA**: Version **12.2.0**, for GPU acceleration (requires NVIDIA GPU).
 - **Pigz**: Version **2.6**, for parallel compression and decompression.
-- **Pre-downloaded basecalling models**: All models are downloaded during the build process for basecalling.
+- **Pre-downloaded basecalling models**: All models are downloaded during the build process for basecalling. They are located at `/dorado_models/` in the container filesystem.
 
 ## Requirements
 
@@ -34,7 +34,7 @@ This Docker image includes:
 To run the Dorado tool within the Docker container, use the following command:
 
 ```bash
-docker run --gpus all -it dorado-image dorado --help
+docker run --gpus all -it staphb/dorado:latest dorado --help
 ```
 
 This command will display the help information for Dorado, confirming that it's installed correctly.
@@ -47,12 +47,9 @@ To test that Dorado is working correctly, you will need to download a sample Pod
 wget -O dna_r10.4.1_e8.2_260bps-FLO_PRO114-SQK_NBD114_96_260-4000.pod5 \
   https://github.com/nanoporetech/dorado/raw/release-v0.7/tests/data/pod5/dna_r10.4.1_e8.2_260bps/dna_r10.4.1_e8.2_260bps-FLO_PRO114-SQK_NBD114_96_260-4000.pod5
 
-
 ### Basecalling Test
+# Run the following command:
 
-Run the following command:
-
-```bash
 docker run --gpus all -v $(pwd):/usr/src/app -it dorado-image bash -c "\
   dorado basecaller /dorado_models/dna_r10.4.1_e8.2_260bps_sup@v3.5.2 \
   /usr/src/app/dna_r10.4.1_e8.2_260bps-FLO_PRO114-SQK_NBD114_96_260-4000.pod5 \
@@ -211,7 +208,6 @@ You should see SAM-formatted basecalling results.
 - rna004_130bps_sup@v5.1.0_m5C@v1
 - rna004_130bps_sup@v5.1.0_m6A_DRACH@v1
 - rna004_130bps_sup@v5.1.0_pseU@v1
-
 ```
 
 ---
