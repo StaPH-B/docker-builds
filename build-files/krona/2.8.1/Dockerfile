@@ -60,8 +60,14 @@ CMD ["ktImportTaxonomy"]
 
 FROM app AS test
 
+# various help commands
 RUN combine_kreports.py -h
-
 RUN extract_kraken_reads.py --help
 RUN ktImportTaxonomy
 
+# test on sample kraken report
+RUN wget https://github.com/MultiQC/test-data/blob/6d54b5743d1a39fd769e3df22ab886acd86d6945/data/modules/kraken/sample_01.report.txt
+
+# use krakentools to format report for krona's ktImportText
+RUN kreport2krona.py -r sample_01.report.txt -o sample_01.krona 
+RUN ktImportText sample_01.krona -o sample_01.krona.html
