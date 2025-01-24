@@ -15,6 +15,7 @@ run-name: Updating MLST
 
 jobs:
   update:
+    if: github.repository == 'StaPH-B/docker-builds'
     runs-on: ubuntu-latest
     steps:
           
@@ -27,7 +28,7 @@ jobs:
           version=2.23.0
           echo "version=$version" >> $GITHUB_OUTPUT 
           
-          file=mlst/2.23.0-2024-03/Dockerfile
+          file=build-files/mlst/2.23.0-2024-03/Dockerfile
           ls $file
           echo "file=$file" >> $GITHUB_OUTPUT
 
@@ -39,7 +40,7 @@ jobs:
         id: docker_build_to_test
         uses: docker/build-push-action@v5
         with:
-          context: mlst/${{ steps.latest_version.outputs.version }}
+          context: build-files/mlst/${{ steps.latest_version.outputs.version }}
           target: test
           load: true
           push: false
@@ -72,16 +73,8 @@ jobs:
           file: ${{ steps.latest_version.outputs.file }}
           target: app
           push: true
-          tags: staphb/mlst:${{ steps.latest_version.outputs.version }}-${{ steps.date.outputs.date }}
-            
-      - name: Build and push to Quay
-        id: build
-        uses: docker/build-push-action@v5
-        with:
-          file: ${{ steps.latest_version.outputs.file }}
-          target: app
-          push: true
-          tags: quay.io/staphb/mlst:${{ steps.latest_version.outputs.version }}-${{ steps.date.outputs.date }}
-
-      - name: Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
+          tags: |
+            staphb/mlst:${{ steps.latest_version.outputs.version }}-${{ steps.date.outputs.date }}
+            staphb/mlst:latest
+            quay.io/staphb/mlst:${{ steps.latest_version.outputs.version }}-${{ steps.date.outputs.date }}
+            quay.io/staphb/mlst:latest
