@@ -4,12 +4,17 @@ Main tool: [Augur](https://github.com/nextstrain/augur)
 
 Additional tools:
 
-- mafft 7.505
-- iqtree2 2.0.7
-- raxml 8.2.12
+- biopython 1.85
 - fasttree 2.1.11
+- iqtree2 2.0.7
+- mafft 7.505
+- matplotlib 3.10.1
+- numpy 1.26.4
+- pandas 2.2.3
+- python 3.11.11
+- raxml 8.2.12
+- scipy 1.15.1
 - vcftools 0.1.16
-
 
 Definition: One held to foretell events by omens.
 
