@@ -45,12 +45,11 @@ WORKDIR /test
 # print help and version info; check dependencies (not all software has these options available)
 # Mostly this ensures the tool of choice is in path and is executable
 RUN krocus --help && \
-    krocus --version
+    krocus --version && \
+    krocus_database_downloader -l && \
+    krocus_database_downloader  --species "Pseudomonas aeruginosa" --output_directory Pseudomonas_aeruginosa
 
-RUN krocus_database_downloader -l && \
-    krocus_database_downloader  --species "Klebsiella pneumoniae" --output_directory Klebsiella_pneumoniae
-
-# klebsiella:147
-RUN wget -q ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR303/058/SRR30357358/SRR30357358_1.fastq.gz && \
-    krocus Klebsiella_pneumoniae SRR30357358_1.fastq.gz > results.txt && \
-    head results.txt
+# Pseudomonas_aeruginosa ST282: https://www.ncbi.nlm.nih.gov/biosample/SAMN45714326
+RUN wget -q https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR319/005/SRR31976205/SRR31976205_1.fastq.gz && \
+    krocus Pseudomonas_aeruginosa SRR31976205_1.fastq.gz > results.txt && \
+    head -n 15 results.txt
