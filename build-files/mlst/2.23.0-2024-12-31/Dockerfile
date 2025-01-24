@@ -87,7 +87,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends unzip
 ARG DATASETS_VER="16.2.0"
 
 # install ncbi datasets tool (pre-compiled binary)
-RUN wget https://github.com/ncbi/datasets/releases/download/v${DATASETS_VER}/linux-amd64.cli.package.zip && \
+RUN wget -q https://github.com/ncbi/datasets/releases/download/v${DATASETS_VER}/linux-amd64.cli.package.zip && \
   unzip linux-amd64.cli.package.zip && \
   rm linux-amd64.cli.package.zip && \
   chmod +x dataformat datasets
@@ -107,16 +107,12 @@ RUN datasets download genome accession ${GENBANK_ACCESSION} --filename ${GENBANK
     echo "Checking for ST15199 in the mlst results now..." && \
     grep "15199" mlst.${GENBANK_ACCESSION}.tsv
 
-# Serretia
-RUN wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/045/328/555/GCA_045328555.1_PDT002493578.1/GCA_045328555.1_PDT002493578.1_genomic.fna.gz &&\
-    gunzip GCA_045328555.1_PDT002493578.1_genomic.fna.gz &&\
-    mlst GCA_045328555.1_PDT002493578.1_genomic.fna
-# Providencia
-RUN wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/045/183/445/GCA_045183445.1_PDT002481084.1/GCA_045183445.1_PDT002481084.1_genomic.fna.gz &&\
-    gunzip GCA_045183445.1_PDT002481084.1_genomic.fna.gz &&\
-    mlst GCA_045183445.1_PDT002481084.1_genomic.fna
+# Serretia (ST349)
+RUN wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/001/065/325/GCF_001065325.1_ASM106532v1/GCF_001065325.1_ASM106532v1_genomic.fna.gz &&\
+    gunzip GCF_001065325.1_ASM106532v1_genomic.fna.gz &&\
+    mlst GCF_001065325.1_ASM106532v1_genomic.fna | tee Serretia.tsv
+# Providencia (ST19)
+RUN wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/001/558/855/GCF_001558855.2_ASM155885v2/GCF_001558855.2_ASM155885v2_genomic.fna.gz &&\
+    gunzip GCF_001558855.2_ASM155885v2_genomic.fna.gz &&\
+    mlst GCF_001558855.2_ASM155885v2_genomic.fna | tee Providencia.tsv
     
-### Example command to run mlst (broken into two lines for readability)
-### If you have an assembly named contigs.fasta in your PWD:
-# $ docker run -v ${PWD}:/data staphb/mlst:latest \ 
-#   mlst contigs.fasta >mlst-results.tsv
