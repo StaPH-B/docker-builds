@@ -1,4 +1,4 @@
-FROM ubuntu:jammy as app
+FROM ubuntu:jammy AS app
 
 ARG KROCUS_VER="1.0.3"
 
@@ -37,7 +37,7 @@ WORKDIR /data
 ##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
 
 # A second FROM insruction creates a new stage
-FROM app as test
+FROM app AS test
 
 # set working directory so that all test inputs & outputs are kept in /test
 WORKDIR /test
