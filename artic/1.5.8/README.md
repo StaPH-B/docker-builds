@@ -13,6 +13,22 @@ WARNING : This container does not contain the primer schemes found at [https://g
 
 This image DOES contain the medaka models downloaded with `artic_get_models`
 
+Additional tools included in the image:
+
+- bcftools 1.17
+- biopython 1.85
+- bwa 0.7.18
+- clair3 1.0.10
+- htslib 1.17
+- mafft 7.526
+- minimap2 2.28
+- multiqc 1.27
+- pandas 2.2.3
+- python 3.9.0
+- samtools 1.15.1
+- seqtk 1.4
+- tensorflow 2.8.0
+
 ## Example Usage with the artic primers
 
 ```bash
@@ -33,14 +49,13 @@ artic minion --normalise 200 --threads 4  --model ont --read-file sample.fastq.g
 
 In general, any primer scheme can be used as long as it meets [artic's requirements](https://github.com/artic-network/primer-schemes).
 
-
-
 ## Medaka models
 
 Artic uses [Clair3](https://github.com/HKU-BAL/Clair3), which uses medaka models. Medaka updates frequently, and artic can throw errors when corresponding ONT models are not found.
 
 These are the medaka models in this image:
-```
+
+```bash
 # included models at /opt/conda/envs/artic/bin/models
 hifi
 hifi_revio

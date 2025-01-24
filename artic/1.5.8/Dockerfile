@@ -21,18 +21,7 @@ WORKDIR /
 RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
     ca-certificates \
-    procps \
-    gcc \
-    make \
-    pkg-config \
-    zlib1g-dev \
-    libbz2-dev \
-    liblzma-dev \
-    libcurl4-gnutls-dev \
-    libssl-dev \
-    python3-dev \
-    python3-pip \
-    python-is-python3 && \
+    procps && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 RUN micromamba create -n artic -y -c conda-forge -c bioconda -c defaults \
@@ -46,7 +35,7 @@ ENV PATH="${PATH}:/opt/conda/envs/artic/bin/" \
 
 RUN artic_get_models
 
-CMD artic --help
+CMD ["artic","--help"]
 
 WORKDIR /data
 
@@ -90,7 +79,6 @@ RUN wget -q https://raw.githubusercontent.com/artic-network/primer-schemes/maste
 # running artic as it pulls schemes from github
 RUN artic minion --normalise 200 --threads 4  --model ont --read-file SRR22452250_1_filtered.fastq.gz --scheme-name sars-cov-2  --scheme-version  V5.3.2 test2 && \
     ls test2*
-
 
 RUN echo "included models" && \
     ls ${CONDA_PREFIX}/bin/models
