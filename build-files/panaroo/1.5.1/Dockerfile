@@ -54,10 +54,10 @@ RUN panaroo --version && panaroo -h
 WORKDIR /test
 
 # Grab test data from 1.2.10
-RUN wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/panaroo/1.2.10/tests/ecoli_1.gff && \
-    wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/panaroo/1.2.10/tests/ecoli_2.gff && \
-    wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/panaroo/1.2.10/tests/gene_data.csv && \
-    wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/panaroo/1.2.10/tests/summary_statistics.txt
+RUN wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/build-files/panaroo/1.2.10/tests/ecoli_1.gff && \
+    wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/build-files/panaroo/1.2.10/tests/ecoli_2.gff && \
+    wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/build-files/panaroo/1.2.10/tests/gene_data.csv && \
+    wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/build-files/panaroo/1.2.10/tests/summary_statistics.txt
 
 # Run Panaroo
 RUN panaroo --clean-mode strict -i *.gff -o panaroo_results/
