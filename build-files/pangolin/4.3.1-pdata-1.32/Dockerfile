@@ -61,10 +61,6 @@ RUN sed -i "s|usher.*|usher=${USHER_VER}|" /pangolin/environment.yml && \
 # hardcode pangolin executable into the PATH variable
 ENV PATH="${PATH}:/opt/conda/envs/pangolin/bin/" XDG_CACHE_HOME=/tmp
 
-# so that mamba/conda env is active when running below commands
-#ENV ENV_NAME="pangolin"
-#ARG MAMBA_DOCKERFILE_ACTIVATE=1
-
 WORKDIR /pangolin
 
 # run pip install step; download optional pre-computed assignment hashes for UShER (useful for running on large batches of samples)
@@ -79,16 +75,11 @@ RUN pip install . && \
 # final working directory in "app" layer is /data for passing data in/out of container
 WORKDIR /data
 
-
 # default command is to pull up help options for pangolin; can be overridden of course
 CMD ["pangolin", "-h"]
 
 # new base for testing
 FROM app AS test
-
-# so that mamba/conda env is active when running below commands
-#ENV ENV_NAME="pangolin"
-#ARG MAMBA_DOCKERFILE_ACTIVATE=1
 
 RUN pangolin -h 
 
