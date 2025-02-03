@@ -7,7 +7,7 @@ WORKDIR /
 
 # ARG variables only persist during build time
 ARG MYKROBE_VER="0.12.1"
-ARG SONNEITYPING_VER="20210201"
+ARG SONNEITYPING_VER="7d18a7cbfdb1f931765cc0b243a17605b7cff570"
 # see below for why we aren't using this. Keeping as a comment for when we can switch to versioned releases
 #ARG GENOTYPHI_VER="1.9.1"
 
@@ -49,10 +49,9 @@ RUN git clone https://github.com/katholt/genotyphi.git && \
  mkdir -v /data
 
 # Get the sonneityping code
-RUN wget https://github.com/katholt/sonneityping/archive/refs/tags/v${SONNEITYPING_VER}.tar.gz && \
- tar -xzf v${SONNEITYPING_VER}.tar.gz && \
- rm -vf v${SONNEITYPING_VER}.tar.gz && \
- mv -v sonneityping-${SONNEITYPING_VER}/ /sonneityping/ && \
+RUN git clone https://github.com/katholt/sonneityping.git && \
+ cd sonneityping && \
+ git checkout ${SONNEITYPING_VER} && \
  chmod +x /sonneityping/parse_mykrobe_predict.py
 
 # set the PATH and LC_ALL for singularity compatibility
