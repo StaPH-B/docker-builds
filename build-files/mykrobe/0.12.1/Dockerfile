@@ -85,12 +85,13 @@ FROM app as test
 ENV ENV_NAME="mykrobe"
 ARG MAMBA_DOCKERFILE_ACTIVATE=1
 
-# test with TB FASTQs
+# test with TB FASTQs and Sonneityping parser test
 RUN wget -O test_reads.fq.gz https://ndownloader.figshare.com/files/21059229 && \
  mykrobe predict -s SAMPLE -S tb -o out.json --format json -i test_reads.fq.gz && \
  cat out.json && \
  mykrobe panels describe && \
- mykrobe --version
+ mykrobe --version && \
+ python /sonneityping/parse_mykrobe_predict.py -h
 
  ### OUTPUT FROM mykrobe panels describe run on 2022-11-01: ###
 # Species summary:
