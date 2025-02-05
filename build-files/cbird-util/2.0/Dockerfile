@@ -47,9 +47,7 @@ WORKDIR /data
 
 FROM app AS test
 
-RUN datasets -h &&\
-    html_report.py -h &&\
-    est_coverage.py -h &&\
-    qc_report.py -h &&\
-    plain_report.py -h
+COPY test/ /test/
+
+RUN cd /test && ./test.sh
 
