@@ -1,0 +1,23 @@
+Assembly	AR46_scaffolds_trim
+# contigs (>= 0 bp)	63
+# contigs (>= 1000 bp)	54
+# contigs (>= 5000 bp)	38
+# contigs (>= 10000 bp)	36
+# contigs (>= 25000 bp)	31
+# contigs (>= 50000 bp)	24
+Total length (>= 0 bp)	5682868
+Total length (>= 1000 bp)	5678766
+Total length (>= 5000 bp)	5642015
+Total length (>= 10000 bp)	5628648
+Total length (>= 25000 bp)	5566161
+Total length (>= 50000 bp)	5304479
+# contigs	55
+Largest contig	526156
+Total length	5679586
+GC (%)	56.80
+N50	328984
+N90	86396
+auN	304002.7
+L50	7
+L90	22
+# N's per 100 kbp	15.62
