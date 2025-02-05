@@ -1,4 +1,4 @@
-FROM mambaorg/micromamba:0.27.0 as app
+FROM mambaorg/micromamba:2.0.5-ubuntu22.04 as app
 
 # build and run as root users since micromamba image has 'mambauser' set as the $USER
 USER root
@@ -7,12 +7,12 @@ WORKDIR /
 
 # ARG variables only persist during build time
 ARG MYKROBE_VER="0.12.1"
-ARG SONNEITYPING_VER="20210201"
+ARG SONNEITYPING_VER="7d18a7cbfdb1f931765cc0b243a17605b7cff570"
 # see below for why we aren't using this. Keeping as a comment for when we can switch to versioned releases
 #ARG GENOTYPHI_VER="1.9.1"
 
 # metadata labels
-LABEL base.image="mambaorg/micromamba:0.27.0"
+LABEL base.image="mambaorg/micromamba:2.0.5-ubuntu22.04"
 LABEL dockerfile.version="1"
 LABEL software="Mykrobe & Genotyphi & Sonneityping"
 LABEL software.version=${MYKROBE_VER}
@@ -49,10 +49,9 @@ RUN git clone https://github.com/katholt/genotyphi.git && \
  mkdir -v /data
 
 # Get the sonneityping code
-RUN wget https://github.com/katholt/sonneityping/archive/refs/tags/v${SONNEITYPING_VER}.tar.gz && \
- tar -xzf v${SONNEITYPING_VER}.tar.gz && \
- rm -vf v${SONNEITYPING_VER}.tar.gz && \
- mv -v sonneityping-${SONNEITYPING_VER}/ /sonneityping/ && \
+RUN git clone https://github.com/katholt/sonneityping.git && \
+ cd sonneityping && \
+ git checkout ${SONNEITYPING_VER} && \
  chmod +x /sonneityping/parse_mykrobe_predict.py
 
 # set the PATH and LC_ALL for singularity compatibility
@@ -86,12 +85,13 @@ FROM app as test
 ENV ENV_NAME="mykrobe"
 ARG MAMBA_DOCKERFILE_ACTIVATE=1
 
-# test with TB FASTQs
+# test with TB FASTQs and Sonneityping parser test
 RUN wget -O test_reads.fq.gz https://ndownloader.figshare.com/files/21059229 && \
  mykrobe predict -s SAMPLE -S tb -o out.json --format json -i test_reads.fq.gz && \
  cat out.json && \
  mykrobe panels describe && \
- mykrobe --version
+ mykrobe --version && \
+ python /sonneityping/parse_mykrobe_predict.py -h
 
  ### OUTPUT FROM mykrobe panels describe run on 2022-11-01: ###
 # Species summary:
