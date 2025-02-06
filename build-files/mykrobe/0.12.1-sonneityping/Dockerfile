@@ -16,18 +16,15 @@ LABEL base.image="mambaorg/micromamba:2.0.5-ubuntu22.04"
 LABEL dockerfile.version="1"
 LABEL software="Mykrobe & Genotyphi & Sonneityping"
 LABEL software.version=${MYKROBE_VER}
-LABEL description="Conda environment for Mykrobe, particularly for Genotyphi"
-LABEL website1="https://github.com/Mykrobe-tools/mykrobe"
-LABEL license1="MIT"
-LABEL license1.url="https://github.com/Mykrobe-tools/mykrobe/blob/master/LICENSE"
+LABEL description="Conda environment for Mykrobe, Genotyphi and Sonneityping"
+LABEL website="https://github.com/Mykrobe-tools/mykrobe"
+LABEL license="https://github.com/Mykrobe-tools/mykrobe/blob/master/LICENSE"
 LABEL website2="https://github.com/katholt/genotyphi"
-LABEL license2="GNU General Public License v3.0"
-LABEL license2.url="https://github.com/katholt/genotyphi/blob/main/LICENSE"
+LABEL license2="https://github.com/katholt/genotyphi/blob/main/LICENSE"
 LABEL website3="https://github.com/katholt/sonneityping/"
-LABEL license3="GNU General Public License v3.0"
-LABEL license3.url="https://github.com/katholt/sonneityping/blob/master/LICENSE.txt"
-LABEL maintainer1="Curtis Kapsak"
-LABEL maintainer1.email="kapsakcj@gmail.com"
+LABEL license3="https://github.com/katholt/sonneityping/blob/master/LICENSE.txt"
+LABEL maintainer="Curtis Kapsak"
+LABEL maintainer.email="kapsakcj@gmail.com"
 
 # install dependencies; cleanup apt garbage
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -65,7 +62,7 @@ RUN micromamba create -n mykrobe -y -c conda-forge -c bioconda -c defaults \
  python \ 
  pip \
  pandas && \
- micromamba clean -a -y
+ micromamba clean -a -f -y
 
 # so that mamba/conda env is active when running below commands
 ENV ENV_NAME="mykrobe"
