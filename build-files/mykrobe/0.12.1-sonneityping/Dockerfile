@@ -1,4 +1,4 @@
-FROM mambaorg/micromamba:2.0.5-ubuntu22.04 as app
+FROM mambaorg/micromamba:2.0.5-ubuntu22.04 AS app
 
 # build and run as root users since micromamba image has 'mambauser' set as the $USER
 USER root
@@ -76,7 +76,7 @@ RUN mykrobe panels update_metadata && \
 WORKDIR /data
 
 # new base for testing
-FROM app as test
+FROM app AS test
 
 # so that mamba/conda env is active when running below commands
 ENV ENV_NAME="mykrobe"
