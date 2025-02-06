@@ -88,7 +88,8 @@ RUN wget -O test_reads.fq.gz https://ndownloader.figshare.com/files/21059229 && 
  cat out.json && \
  mykrobe panels describe && \
  mykrobe --version && \
- python /sonneityping/parse_mykrobe_predict.py -h
+ python /sonneityping/parse_mykrobe_predict.py  --jsons out.json --alleles /sonneityping/alleles.txt --prefix test && \
+ cat test_predictResults.tsv
 
  ### OUTPUT FROM mykrobe panels describe run on 2022-11-01: ###
 # Species summary:
