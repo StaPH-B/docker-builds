@@ -1,5 +1,5 @@
 ##### --------------------------------------------------------------------------- #####
-##### This workflow looks for new dockefiles and builds them to the test target.  #####
+##### This workflow looks for new dockerfiles and builds them to the test target. #####
 ##### This in intended to start on a pull request (PR)                            #####
 ##### Ana06 is being used instead of jitterbit because of the filter option       #####
 ##### --------------------------------------------------------------------------- #####
@@ -20,7 +20,7 @@ jobs:
         uses: Ana06/get-changed-files@v2.3.0
         with:
           format: 'json'
-          filter: 'Dockerfile' 
+          filter: 'build-files/*/*/Dockerfile' 
       - run: "echo ${{ steps.files.outputs.all }}"
   
   build_to_test:
@@ -34,11 +34,13 @@ jobs:
       - name: parse file path
         id: parse
         run: |
-          tool=$(echo    "${{ matrix.added_modified }}" | cut -f 1 -d "/" )
-          version=$(echo "${{ matrix.added_modified }}" | cut -f 2 -d "/" )
+          echo "parsing ${{ matrix.added_modified }}"
+          tool=$(echo    "${{ matrix.added_modified }}" | cut -f 2 -d "/" )
+          version=$(echo "${{ matrix.added_modified }}" | cut -f 3 -d "/" )
+          echo "found version $version for $tool"
           echo "tool=$tool"       >> $GITHUB_OUTPUT
           echo "version=$version" >> $GITHUB_OUTPUT
-   
+
 ##### --------------------------------------------------------------------------- #####
 ##### Workflows still cannot be run in parrallel as of 2022-12-01                 #####
 ##### --------------------------------------------------------------------------- #####
@@ -60,8 +62,8 @@ jobs:
         run: |
           #checking layers
           warning=''
-          app_layer=$(grep FROM ./${{ steps.parse.outputs.tool }}/${{ steps.parse.outputs.version }}/Dockerfile | grep -E "as app|AS app")
-          tst_layer=$(grep FROM ./${{ steps.parse.outputs.tool }}/${{ steps.parse.outputs.version }}/Dockerfile | grep -E "as test|AS test")
+          app_layer=$(grep FROM ./build-files/${{ steps.parse.outputs.tool }}/${{ steps.parse.outputs.version }}/Dockerfile | grep -E "as app|AS app")
+          tst_layer=$(grep FROM ./build-files/${{ steps.parse.outputs.tool }}/${{ steps.parse.outputs.version }}/Dockerfile | grep -E "as test|AS test")
           if [ -z "$app_layer" ] ; then echo "FATAL : app layer is missing" ; warning='warning' ; fi
           if [ -z "$tst_layer" ] ; then echo "FATAL : test layer is missing" ; warning='warning' ; fi
           if [ -n "$warning" ] ; then echo "Please see template for recommended format https://github.com/StaPH-B/docker-builds/blob/master/dockerfile-template/Dockerfile" ; exit 1 ; fi
@@ -85,8 +87,8 @@ jobs:
         id: docker_build_to_test
         uses: docker/build-push-action@v5
         with:
-          context: ./${{ steps.parse.outputs.tool }}/${{ steps.parse.outputs.version }}
-          file: ./${{ steps.parse.outputs.tool }}/${{ steps.parse.outputs.version }}/Dockerfile
+          context: ./build-files/${{ steps.parse.outputs.tool }}/${{ steps.parse.outputs.version }}
+          file: ./build-files/${{ steps.parse.outputs.tool }}/${{ steps.parse.outputs.version }}/Dockerfile
           target: test
           tags: ${{ steps.parse.outputs.tool }}:${{ steps.parse.outputs.version }}
           load: true

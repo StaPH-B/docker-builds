@@ -21,6 +21,7 @@ The licenses of the open-source software that is contained in these Docker image
 | BBTools | non-standard - see `licence.txt` and `legal.txt` that is included in docker image under `/bbmap/docs/`; Also on sourceforge repo for BBTools | https://jgi.doe.gov/disclaimer/ |
 | bcftools | MIT & **GNU GPLv3** | https://github.com/samtools/bcftools/blob/develop/LICENSE |
 | bedtools | MIT | https://github.com/arq5x/bedtools2/blob/master/LICENSE |
+| bindashtree | MIT | https://github.com/jianshu93/bindashtree?tab=MIT-1-ov-file#readme |
 | blast+ | Public Domain | https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/scripts/projects/blast/LICENSE |
 | bowtie2 | GNU GPLv3 | https://github.com/BenLangmead/bowtie2/blob/master/LICENSE |
 | Bracken | GNU GPLv3 | https://github.com/jenniferlu717/Bracken/blob/master/LICENSE |
@@ -28,6 +29,7 @@ The licenses of the open-source software that is contained in these Docker image
 | BWA | GNU GPLv3 | https://github.com/lh3/bwa/blob/master/COPYING |
 | Canu <br/> Racon <br/> Minimap2 | GNU GPLv3 (Canu), <br/> MIT (Racon), <br/> MIT (Minimap2) | https://github.com/marbl/canu/blob/master/README.license.GPL https://github.com/isovic/racon/blob/master/LICENSE https://github.com/lh3/minimap2/blob/master/LICENSE.txt |
 | CAT | MIT | https://github.com/MGXlab/CAT_pack?tab=MIT-1-ov-file#readme and https://github.com/MGXlab/CAT_pack/blob/master/LICENSE.md |
+| cbird-util | GNU AGPLv3 | https://github.com/Kincekara/C-BIRD/blob/main/LICENSE |
 | centroid | GitHub No License | https://github.com/https://github.com/stjacqrm/centroid |
 | CDC-SPN | GitHub No License | https://github.com/BenJamesMetcalf/Spn_Scripts_Reference |
 | cfsan-snp-pipeline | non-standard license see --> | https://github.com/CFSAN-Biostatistics/snp-pipeline/blob/master/LICENSE.txt |
@@ -51,10 +53,13 @@ The licenses of the open-source software that is contained in these Docker image
 | emboss | GNU GPLv3 | http://emboss.sourceforge.net/licence/ |
 | emmtyper | GNU GPLv3 | https://github.com/MDU-PHL/emmtyper/blob/master/LICENSE |
 | emm-typing-tool | GNU GPLv3 | https://github.com/phe-bioinformatics/emm-typing-tool/blob/master/LICENCE |
+| enabrowsertools |  Apache v2.0 | https://github.com/enasequence/enaBrowserTools/blob/master/LICENSE |
 | EToKi | GNU GPLv3 | https://github.com/zheminzhou/EToKi/blob/master/LICENSE |
+| falco | GNU GPLv3 | https://github.com/smithlabcode/falco/blob/master/LICENSE |
 | FastANI | Apache v2.0 | https://github.com/ParBLiSS/FastANI/blob/master/LICENSE |
 | fasten | MIT | https://github.com/lskatz/fasten/blob/master/LICENSE |
 | Fastp | MIT | https://github.com/OpenGene/fastp/blob/master/LICENSE |
+| Fastplong | MIT | https://github.com/OpenGene/fastplong/blob/main/LICENSE |
 | FastTree | GNU GPLv2 | http://www.microbesonline.org/fasttree/ |
 | FastQC | GNU GPLv3 | https://github.com/s-andrews/FastQC/blob/master/LICENSE.txt |
 | fastq-scan | MIT | https://github.com/rpetit3/fastq-scan/blob/master/LICENSE |
@@ -74,6 +79,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Gubbins | GNU GPLv2 | https://github.com/nickjcroucher/gubbins/blob/master/LICENSE |
 | HeatCluster | GPL-3.0 | https://github.com/DrB-S/heatcluster/blob/main/LICENSE |
 | Hmmer | BSD-3 | http://eddylab.org/software/hmmer/Userguide.pdf |
+| HoCoRT | MIT | https://github.com/ignasrum/hocort?tab=MIT-1-ov-file#readme |
 | homopolish | GNU GPLv3 | https://github.com/ythuang0522/homopolish/blob/master/LICENSE |
 | hostile | MIT | https://github.com/bede/hostile?tab=MIT-1-ov-file#readme |
 | htslib | MIT | https://github.com/samtools/htslib/blob/develop/LICENSE |
@@ -93,6 +99,8 @@ The licenses of the open-source software that is contained in these Docker image
 | Kraken2 | MIT | https://github.com/DerrickWood/kraken2/blob/master/LICENSE |
 | KrakenTools | GNU GPLv3 | https://github.com/jenniferlu717/KrakenTools/blob/master/LICENSE |
 | KrakenUniq | GNU GPLv3 | https://github.com/fbreitwieser/krakenuniq/blob/master/LICENSE |
+| krocus | GNU GPLv3 | https://github.com/andrewjpage/krocus/blob/master/LICENSE |
+| Krona | non-standard license (see link) | https://github.com/marbl/Krona/blob/master/KronaTools/LICENSE.txt |
 | kSNP3 | BSD | available in zipped kSNP archive on sourceforge or in docker image under `/kSNP3.1_Linux_package/THE BSD OPENSOURCE LICENSE.pdf` |
 | kSNP4 | BSD | available in zipped kSNP archive on sourceforge or in docker image under `/opt/kSNP4 Linux package/Documentation/THE BSD OPENSOURCE LICENSE.pdf` |
 | LABEL | GPL version 3 | In zipped file in README.md |
