@@ -23,9 +23,9 @@ LABEL maintainer5="Holly McQueary"
 LABEL maintainer5.email="holly.c.mcqueary@mass.gov"
 
 # ncbi-blast+ installed via apt is v2.12.0 - DISABLING so that we can manually install a more recent version
-# see here for reason why I'm manualy installing 2.14.0 instead of using apt-get: https://github.com/ncbi/amr/releases/tag/amrfinder_v3.11.8
+# see here for reason why I'm manualy installing 2.16.0 instead of using apt-get: https://github.com/ncbi/amr/releases/tag/amrfinder_v3.11.8
 
-# hmmer installed via apt is v3.3.2
+# hmmer installed via apt is v3.4
 # removed because likely unnecessary since we are not compiling from source: make g++
 # libgomp1 required for makeblastdb
 RUN apt-get update && apt-get install -y --no-install-recommends \
