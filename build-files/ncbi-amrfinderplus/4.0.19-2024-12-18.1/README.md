@@ -4,9 +4,9 @@ Main tool : [NCBI AMRFinderPlus](https://github.com/ncbi/amr)
 
 Additional tools:
 
-- hmmer v3.3.2
+- hmmer v3.4
 - ncbi-blast+ v2.16.0
-- [stxtyper](https://github.com/ncbi/stxtyper/) v1.0.31 (Shiga toxin subtyping tool, added in AMRFinderPlus v4.0.3)
+- [stxtyper](https://github.com/ncbi/stxtyper/) v1.0.40 (Shiga toxin subtyping tool, added in AMRFinderPlus v4.0.3)
 
 ## Database information
 
