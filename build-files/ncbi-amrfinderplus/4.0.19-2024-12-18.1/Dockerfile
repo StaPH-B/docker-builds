@@ -4,7 +4,7 @@ ARG AMRFINDER_VER="4.0.19"
 ARG AMRFINDER_DB_VER="2024-12-18.1"
 ARG BLAST_VER="2.16.0"
 
-LABEL base.image="ubuntu:jammy"
+LABEL base.image="ubuntu:noble"
 LABEL dockerfile.version="1"
 LABEL software="NCBI AMRFinderPlus"
 LABEL software.version="${AMRFINDER_VER}"
