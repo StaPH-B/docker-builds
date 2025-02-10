@@ -94,7 +94,7 @@ Further documentation can be found at [docs.sylabs.io](https://docs.sylabs.io/gu
 - Video training from APHL 2024 workshop **Intermediate Docker Bioinformatics Workshop** can be located in [APHL's e-learning resources](https://learn.aphl.org/learn/course/external/view/elearning/355/intermediate-docker-bioinformatics-workshop)
 
 ## Logs
-In December 2024, StaPH-B/dockerbuilds underwent a structural change where all Dockerfiles were placed in the subdirectory `build-files`.
+In December 2024, StaPH-B/docker-builds underwent a structural change where all Dockerfiles were placed in the subdirectory `build-files`.
 
 In November 2020, Docker began to implement pull rate limits for images hosted on dockerhub. This limits the number of `docker pull`'s per time period (e.g. anonymous users allowed 100 pulls per six hours). We applied and were approved for Docker's "Open Source Program," which should have removed the pull rate limits for all `staphb` docker images! 🎉 🥳 If you encounter an error such as `ERROR: toomanyrequests: Too Many Requests.` or `You have reached your pull rate limit. You may increase the limit by authenticating and upgrading: https://www.docker.com/increase-rate-limits.` , please let us know by [submitting an issue.](https://github.com/StaPH-B/docker-builds/issues)
 
