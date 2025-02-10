@@ -7,6 +7,7 @@ Code repository: https://github.com/USDA-VS/GenoFLU
 Additional tools:
 
 - biopython 1.85
+- ncbi-blast 2.16.0
 - numpy 2.0.2
 - pandas 2.2.3
 - python 3.9.21
