@@ -48,7 +48,7 @@ on:
 jobs:
 
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Check Out Repo (+ download Git LFS dependencies)  # each job runs in an isolated environment, so need to check out the repo in each job
         uses: actions/checkout@v4
