@@ -13,37 +13,21 @@ WARNING : This container does not contain the primer schemes found at [https://g
 
 This image DOES contain the medaka models downloaded with `artic_get_models`
 
-Additional tools included in the image:
-
-- bcftools 1.17
-- biopython 1.85
-- bwa 0.7.18
-- clair3 1.0.10
-- htslib 1.17
-- mafft 7.526
-- minimap2 2.28
-- multiqc 1.27
-- pandas 2.2.3
-- python 3.9.0
-- samtools 1.15.1
-- seqtk 1.4
-- tensorflow 2.8.0
-
 ## Example Usage with the artic primers
 
 ```bash
 # filtering reads
-artic guppyplex --min-length 400 --max-length 700  --directory . --prefix SRR22452250_1.fastq.gz --output SRR22452250_1_filtered.fastq.gz
+artic guppyplex --min-length 400 --max-length 700  --directory . --prefix SRR22452250_1.fastq.gz --output SRR22452250_1_filtered.fastq
 
 # downloading medaka models for clair3
 artic_get_models
 
 # running the artic minion workflow
 # the result files will all start with test*
-artic minion --normalise 200 --medaka-model ont --threads 4 --read-file sample.fastq.gz --scheme-directory primer-schemes --scheme-version 5.3.2 nCoV-2019 test
+artic minion --normalise 200 --medaka-model ont --threads 4 --read-file sample.fastq --scheme-directory primer-schemes --scheme-version 5.3.2 nCoV-2019 test
 
 # running the artic minion workflow with user-provided primer bedfiles and references
-artic minion --normalise 200 --threads 4  --model ont --read-file sample.fastq.gz --scheme-name sars-cov-2  --scheme-version  V5.3.2 name
+artic minion --normalise 200 --threads 4  --model ont --read-file sample.fastq --scheme-name sars-cov-2  --scheme-version  V5.3.2 name
 
 ```
 

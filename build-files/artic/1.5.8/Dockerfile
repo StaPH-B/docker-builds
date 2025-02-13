@@ -1,4 +1,4 @@
-ARG ARTIC_VER=1.5.8
+ARG ARTIC_VER=1.6.1
 
 FROM mambaorg/micromamba:1.5.8 AS app
 
@@ -68,7 +68,8 @@ WORKDIR /test
 # using on "real" data (sample files were not sequenced with version 5.3.2 primers)
 # filtering fastq files
 RUN wget -q ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR224/050/SRR22452250/SRR22452250_1.fastq.gz && \
-    artic guppyplex --min-length 400 --max-length 700  --directory . --prefix SRR22452250_1.fastq.gz --output SRR22452250_1_filtered.fastq.gz
+    artic guppyplex --min-length 400 --max-length 700  --directory . --prefix SRR22452250_1.fastq.gz --output SRR22452250_1_filtered.fastq && \
+    gzip SRR22452250_1_filtered.fastq
 
 # running artic minion with user-provided bed and reference
 RUN wget -q https://raw.githubusercontent.com/artic-network/primer-schemes/master/nCoV-2019/V5.3.2/SARS-CoV-2.primer.bed && \
