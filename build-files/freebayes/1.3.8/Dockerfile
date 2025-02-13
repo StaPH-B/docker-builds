@@ -1,11 +1,11 @@
-FROM mambaorg/micromamba:1.5.8 AS app
+FROM mambaorg/micromamba:2.0.5-ubuntu22.04 AS app
 
 ARG FREEBAYES_VER="1.3.8"
 
 USER root
 WORKDIR /
 
-LABEL base.image="mambaorg/micromamba:1.5.8"
+LABEL base.image="mambaorg/micromamba:2.0.5-ubuntu22.04"
 LABEL dockerfile.version="1"
 LABEL software="FreeBayes"
 LABEL software.version="${FREEBAYES_VER}"
