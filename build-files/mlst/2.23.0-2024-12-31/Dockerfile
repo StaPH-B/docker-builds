@@ -53,14 +53,13 @@ ENV PATH="${PATH}:/mlst-${MLST_VER}/bin:" \
 RUN mlst --check && mlst --list
 
 # copy alternative script for additional schemes
-COPY mlst-download_pub_mlst_alt additional_db.xml /mlst-${MLST_VER}/scripts/
+COPY mlst-download_pub_mlst_alt dbases.xml /mlst-${MLST_VER}/scripts/
 
 # update databases, following steps from here, but modified after much trial and error: https://github.com/tseemann/mlst#updating-the-database
 # delete the old databases instead of renaming & saving the dir
 RUN cd /mlst-${MLST_VER}/scripts && \
  mkdir -v db-downloaded-$(date -I) && \
- ./mlst-download_pub_mlst -d db-downloaded-$(date -I) | bash && \
- ./mlst-download_pub_mlst_alt -d db-downloaded-$(date -I) | bash && \
+ ./mlst-download_pub_mlst_alt -v -j $(nproc) -d db-downloaded-$(date -I) | bash && \
  rm -rv /mlst-${MLST_VER}/db/pubmlst && \
  mv -v db-downloaded-$(date -I) /mlst-${MLST_VER}/db/pubmlst && \
  ./mlst-make_blast_db && \

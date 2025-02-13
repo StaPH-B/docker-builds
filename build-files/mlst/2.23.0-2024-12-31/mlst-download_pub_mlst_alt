@@ -8,7 +8,7 @@ use File::Which;
 use Cwd 'abs_path';
 
 my $EXE = basename($0);
-my $URL = 'http://pubmlst.org/data/dbases.xml';
+my $URL = 'https://pubmlst.org/data/dbases.xml';
 my $CURL = "curl --silent";
 
 my %opt = (
@@ -67,7 +67,7 @@ else {
 }
 
 # Use local file instead of downloading
-my $fn = 'additional_db.xml';
+my $fn = 'dbases.xml';
 msg("Using local file:", $fn);
 
 open my $fh, '<', $fn or err("Could not open file: $fn");
