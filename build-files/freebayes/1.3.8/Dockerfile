@@ -1,6 +1,6 @@
 FROM mambaorg/micromamba:1.5.8 AS app
 
-ARG FREEBAYES_VER="1.3.7"
+ARG FREEBAYES_VER="1.3.8"
 
 USER root
 WORKDIR /
@@ -8,7 +8,7 @@ WORKDIR /
 LABEL base.image="mambaorg/micromamba:1.5.8"
 LABEL dockerfile.version="1"
 LABEL software="FreeBayes"
-LABEL software.version="1.3.7"
+LABEL software.version="${FREEBAYES_VER}"
 LABEL description="FreeBayes is a haplotype-based variant detector and is a great tool for calling variants from a population."
 LABEL website="https://github.com/freebayes/freebayes"
 LABEL license="https://github.com/freebayes/freebayes/blob/master/LICENSE"
