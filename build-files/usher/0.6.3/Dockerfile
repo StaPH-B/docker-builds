@@ -1,6 +1,6 @@
 ARG USHER_VER="0.6.3"
 
-FROM mambaorg/micromamba:1.5.8 AS app
+FROM mambaorg/micromamba:2.0.5-ubuntu22.04 AS app
 
 ARG USHER_VER
 
@@ -8,7 +8,7 @@ USER root
 WORKDIR /
 
 # 'LABEL' instructions tag the image with metadata that might be important to the user
-LABEL base.image="mambaorg/micromamba:1.5.8"
+LABEL base.image="mambaorg/micromamba:2.0.5-ubuntu22.04"
 LABEL dockerfile.version="1"
 LABEL software="UShER"
 LABEL software.version="${USHER_VER}"
