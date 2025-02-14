@@ -35,7 +35,7 @@ WORKDIR /db
 
 RUN bakta_db download --type light 
 
-CMD bakta --help
+CMD ["bakta", "--help"]
 
 WORKDIR /data
 
