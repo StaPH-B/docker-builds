@@ -15,26 +15,27 @@ There are several commands associated with fasten:
 |script             |Description|
 |-------------------|-----------|
 |[`fasten_clean`](https://lskatz.github.io/fasten/fasten_clean)     | Trims and cleans a fastq file.|
-|[`fasten_convert`](https://lskatz.github.io/fasten/fasten_convert)   | Converts between different sequence formats like fastq, sam, fasta.|
-|[`fasten_straighten`](https://lskatz.github.io/fasten/fasten_straighten)| Convert any fastq file to a standard four-line-per-entry format.|
-|[`fasten_metrics`](https://lskatz.github.io/fasten/fasten_metrics)   | Prints basic read metrics.|
-|[`fasten_pe`](https://lskatz.github.io/fasten/fasten_pe)        | Determines paired-endedness based on read IDs.|
-|[`fasten_randomize`](https://lskatz.github.io/fasten/fasten_randomize) | Randomizes reads from input |
 |[`fasten_combine`](https://lskatz.github.io/fasten/fasten_combine)   | Combines identical reads and updates quality scores.|
+|[`fasten_convert`](https://lskatz.github.io/fasten/fasten_convert)   | Converts between different sequence formats like fastq, sam, fasta.|
+|[`fasten_inspect`](https://lskatz.github.io/fasten/fasten_inspect)  | adds information to read IDs such as seqlength |
 |[`fasten_kmer`](https://lskatz.github.io/fasten/fasten_kmer)      | Kmer counting.|
+|[`fasten_metrics`](https://lskatz.github.io/fasten/fasten_metrics)   | Prints basic read metrics.|
+|[`fasten_mutate`](https://lskatz.github.io/fasten/fasten_mutate)    | introduce random mutations | |
 |[`fasten_normalize`](https://lskatz.github.io/fasten/fasten_normalize)      | Normalize read depth by using kmer counting.|
+|[`fasten_pe`](https://lskatz.github.io/fasten/fasten_pe)        | Determines paired-endedness based on read IDs.|
+|[`fasten_progress`](https://lskatz.github.io/fasten/fasten_progress)  | Add progress to any place in the pipeline | |
+|[`fasten_quality_filter`](https://lskatz.github.io/fasten/fasten_quality_filter) | Transforms nucleotides to "N" if the quality is low | |
+|[`fasten_randomize`](https://lskatz.github.io/fasten/fasten_randomize) | Randomizes reads from input |
+|[`fasten_regex`](https://lskatz.github.io/fasten/fasten_regex)     | Filter for reads using regex | |
+|[`fasten_repair`](https://lskatz.github.io/fasten/fasten_repair)  | Repairs corrupted reads |
+|[`fasten_replace`](https://lskatz.github.io/fasten/fasten_replace)   | Find and replace using regex | |
 |[`fasten_sample`](https://lskatz.github.io/fasten/fasten_sample)    | Downsamples reads.|
 |[`fasten_shuffle`](https://lskatz.github.io/fasten/fasten_shuffle)   | Shuffles or deshuffles paired end reads.|
-|[`fasten_validate`](https://lskatz.github.io/fasten/fasten_validate)  | Validates your reads (deprecated in favor of `fasten_inspect` and `fasten_repair`|
-|[`fasten_inspect`](https://lskatz.github.io/fasten/fasten_inspect)  | adds information to read IDs such as seqlength |
-|[`fasten_repair`](https://lskatz.github.io/fasten/fasten_repair)  | Repairs corrupted reads |
-|[`fasten_quality_filter`](https://lskatz.github.io/fasten/fasten_quality_filter) | Transforms nucleotides to "N" if the quality is low | |
-|[`fasten_trim`](https://lskatz.github.io/fasten/fasten_trim)      | Blunt-end trims reads | |
-|[`fasten_replace`](https://lskatz.github.io/fasten/fasten_replace)   | Find and replace using regex | |
-|[`fasten_mutate`](https://lskatz.github.io/fasten/fasten_mutate)    | introduce random mutations | |
-|[`fasten_regex`](https://lskatz.github.io/fasten/fasten_regex)     | Filter for reads using regex | |
-|[`fasten_progress`](https://lskatz.github.io/fasten/fasten_progress)  | Add progress to any place in the pipeline | |
 |[`fasten_sort`](https://lskatz.github.io/fasten/fasten_sort)  | Sort fastq entries | |
+|[`fasten_straighten`](https://lskatz.github.io/fasten/fasten_straighten)| Convert any fastq file to a standard four-line-per-entry format.|
+|[`fasten_trim`](https://lskatz.github.io/fasten/fasten_trim)      | Blunt-end trims reads | |
+|[`fasten_validate`](https://lskatz.github.io/fasten/fasten_validate)  | Validates your reads (deprecated in favor of `fasten_inspect` and `fasten_repair`|
+
 
 Full documentation: https://github.com/lskatz/fasten
 
