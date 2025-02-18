@@ -1,8 +1,14 @@
 # hostile
 
 Main tool: [hostile](https://github.com/bede/hostile)
-  
+
 Code repository: https://github.com/bede/hostile
+
+Additional tools:
+- samtools 1.21
+- minimap2 2.28
+- bowtie2 2.5.1
+- bedtools 2.31.1
 
 Basic information on how to use this tool:
 - executable: hostile
