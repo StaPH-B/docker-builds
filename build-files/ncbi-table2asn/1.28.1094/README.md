@@ -29,7 +29,7 @@ sqn2agp 1.9
 srcchk: 0.0.1094
 table2asn: 1.28.1094
 
-Note: this version does not contain `fastaedit`
+Note: this version does not contain `fastaedit_public`
 
 ## Example Usage
 
