@@ -1,6 +1,6 @@
 FROM ubuntu:jammy AS app
 
-ARG MULTIQC_VER="1.27"
+ARG MULTIQC_VER="1.27.1"
 
 # metadata
 LABEL base.image="ubuntu:jammy"
