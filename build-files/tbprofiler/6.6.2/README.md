@@ -22,23 +22,23 @@ tbdb    00a0db4e        Jody Phelan     Sun Feb 16 11:09:04 2025 +0100  /opt/con
 
 ## Additional included tools/dependencies
 
+- bcftools 1.21
 - bedtools 2.31.1
+- bwa 0.7.18-r1243-dirty
+- delly 1.2.6 (the more recent version 1.3.1 did not allow for the conda environment to resolve; pathogen-profiler has specifically pinned v1.2.6. More info here: https://github.com/jodyphelan/TBProfiler/issues/393#issuecomment-2452076859 and here: https://github.com/bioconda/bioconda-recipes/blob/master/recipes/pathogen-profiler/meta.yaml)
+- freebayes 1.3.6
 - gatk4 4.6.1.0
 - kmc 3.2.4
+- minimap2 2.28-r1209
+- parallel 20241222
 - pathogen-profiler 4.8.0
 - perl 5.32.1
 - python 3.12.9
 - trimmomatic 0.39
-- bwa 0.7.18-r1243-dirty
-- minimap2 2.28-r1209
-- samtools 1.21
-- bcftools 1.21
-- freebayes 1.3.6
-- tqdm 4.67.1
-- parallel 20241222
 - samclip 0.4.0
+- samtools 1.21
 - snpeff 5.2
-- delly 1.2.6 (the more recent version 1.3.1 did not allow for the conda environment to resolve; TBProfiler has specifically pinned v1.2.6. More info here: https://github.com/jodyphelan/TBProfiler/issues/393#issuecomment-2452076859)
+- tqdm 4.67.1
 
 ## Example Usage
 
