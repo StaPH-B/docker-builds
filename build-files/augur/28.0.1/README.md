@@ -10,6 +10,20 @@ The output of augur is a series of JSONs that can be used to visualize your resu
 
 Note: Auspice is a different tool.
 
+## Additional dependencies
+
+- biopython 1.85
+- fasttree 2.1.11
+- python 3.11.11
+- iqtree2 2.0.7
+- mafft 7.505
+- matplotlib 3.10.0
+- numpy 1.26.4
+- pandas 2.2.3
+- raxml 8.2.12
+- scipy 1.15.2
+- vcftools 0.1.16
+
 ## Example Usage
 
 ```bash
