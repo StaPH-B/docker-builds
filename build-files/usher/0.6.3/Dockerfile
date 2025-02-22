@@ -27,7 +27,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     procps && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-RUN micromamba install --name base -c conda-forge -c bioconda -c defaults usher=${USHER_VER} && \
+RUN micromamba install --name base -c conda-forge -c bioconda usher=${USHER_VER} && \
     micromamba clean -a -f -y && \
     mkdir /data
 
@@ -52,16 +52,10 @@ RUN wget -q https://github.com/yatisht/usher/archive/refs/tags/v${USHER_VER}.tar
 
 WORKDIR /test/usher-${USHER_VER}
 
-#RUN ls  && whatever 
 # https://usher-wiki.readthedocs.io/en/latest/UShER.html
-RUN usher -t test/global_phylo.nh -v test/global_samples.vcf -o global_assignments.pb -d output/
-
-RUN usher -t test/global_phylo.nh -v test/global_samples.vcf -o global_assignments.pb -c -d output2/
-
-RUN usher -t test/global_phylo.nh -v test/global_samples.vcf -o global_assignments.pb -c -u -d output3/
-
-RUN usher -i global_assignments.pb -v test/new_samples.vcf -u -d output4/
-
-RUN usher -i global_assignments.pb -v test/new_samples.vcf -u -k 20 -d output5/
-
-RUN usher -i global_assignments.pb -v test/new_samples.vcf -u -o new_global_assignments.pb -d output6/
+RUN usher -t test/global_phylo.nh -v test/global_samples.vcf -o global_assignments.pb -d output/ && \
+usher -t test/global_phylo.nh -v test/global_samples.vcf -o global_assignments.pb -c -d output2/ && \
+usher -t test/global_phylo.nh -v test/global_samples.vcf -o global_assignments.pb -c -u -d output3/ && \
+usher -i global_assignments.pb -v test/new_samples.vcf -u -d output4/ && \
+usher -i global_assignments.pb -v test/new_samples.vcf -u -k 20 -d output5/ && \
+usher -i global_assignments.pb -v test/new_samples.vcf -u -o new_global_assignments.pb -d output6/

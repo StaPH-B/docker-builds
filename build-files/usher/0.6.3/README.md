@@ -2,21 +2,28 @@
 
 Main tool: [UShER](https://usher-wiki.readthedocs.io/en/latest/)
   
-Code repository: https://github.com/yatisht/usher
+Code repository: [https://github.com/yatisht/usher](https://github.com/yatisht/usher)
 
 Basic information on how to use this tool:
-- executable: usher
-- help: --help
-- version: NA
-- description: |
-> UShER is a program for rapid, accurate placement of samples to existing phylogenies. 
+
+- executable: `usher`
+- help: `--help`
+- version: `--version`
+- description: __UShER is a program for rapid, accurate placement of samples to existing phylogenies.__
   
-Full documentation: https://usher-wiki.readthedocs.io/en/latest/
+Full documentation: [https://usher-wiki.readthedocs.io/en/latest/](https://usher-wiki.readthedocs.io/en/latest/)
 
 Also contains (same version):
+
 - matUtils
 - matOptimize
 - ripples
+
+## Additional dependencies
+
+- mafft 7.526
+- ucsc-fatovcf 473
+- ucsc-stringify 472
 
 ## Example Usage
 
