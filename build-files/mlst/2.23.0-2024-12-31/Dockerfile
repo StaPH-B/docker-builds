@@ -59,10 +59,10 @@ COPY mlst-download_pub_mlst_alt dbases.xml /mlst-${MLST_VER}/scripts/
 # delete the old databases instead of renaming & saving the dir
 RUN cd /mlst-${MLST_VER}/scripts && \
  mkdir -v db-downloaded-$(date -I) && \
- ./mlst-download_pub_mlst_alt -v -j $(nproc) -d db-downloaded-$(date -I) | bash && \
+ ./mlst-download_pub_mlst_alt -v -d db-downloaded-$(date -I) 2>&1 | tee mlst-download_pub_mlst_alt.log  && \
  rm -rv /mlst-${MLST_VER}/db/pubmlst && \
  mv -v db-downloaded-$(date -I) /mlst-${MLST_VER}/db/pubmlst && \
- ./mlst-make_blast_db && \
+ ./mlst-make_blast_db  2>&1 | tee mlst-make_blast_db.log && \
  mlst --list
 
 WORKDIR /data
