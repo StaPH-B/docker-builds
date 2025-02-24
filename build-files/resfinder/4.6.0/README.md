@@ -4,10 +4,10 @@ Main tool : [ResFinder](https://bitbucket.org/genomicepidemiology/resfinder/src/
 
 Additional tools:
 
-- kma 1.4.14
-- ResFinder database 2.3.1
-- PointFinder database 4.1.0
-- disinfinder database 2.0.1
+- kma 1.4.17
+- ResFinder database 2.4.0
+- PointFinder database 4.1.1
+- DisinFinder database 2.0.1
 
 Alternatively available as a webtool here: https://cge.cbs.dtu.dk/services/ResFinder/
 
