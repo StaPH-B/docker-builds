@@ -1,6 +1,6 @@
 # Set global variables
-ARG SEQFU_VER="1.20.3"
-ARG NIM_VER="1.22.2"
+ARG SEQFU_VER="1.22.3"
+ARG NIM_VER="2.2.2"
 
 # Stage 1: Build Dockerfile
 FROM ubuntu:jammy AS builder
