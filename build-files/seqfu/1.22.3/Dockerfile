@@ -6,10 +6,6 @@ ARG NIM_VER="1.22.2"
 FROM ubuntu:jammy AS builder
 ARG SEQFU_VER
 
-# Set non-interactive frontend and update PATH
-#ENV DEBIAN_FRONTEND=noninteractive \
-#    PATH="/root/.nimble/bin:${PATH}"
-
 # Install required dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
