@@ -13,10 +13,17 @@ Full documentation: [https://github.com/tseemann/mlst](https://github.com/tseema
 Scan contig files against PubMLST typing schemes
 
 ## pubMLST databases
+
 This docker image contains data that was submitted on or prior to 2024-12-31.
 
 Available schemes found here: [https://github.com/tseemann/mlst/tree/master/db/pubmlst](https://github.com/tseemann/mlst/tree/master/db/pubmlst)
 
+__NOTE:__ This specific docker image also has 2 additional schemes that were not available in previous docker images:
+
+- Serratia spp. https://pubmlst.org/organisms/serratia-spp
+- Providencia spp. https://pubmlst.org/organisms/providencia-spp
+
+These schemes can optionally be accessed using the `mlst --scheme` option with either `serratia` or `providencia`. `mlst` also has the ability to auto detect the scheme so it's not necessary to specify the scheme at runtime.
 
 ```bash
 # sorted list of available mlst schemes
@@ -39,14 +46,13 @@ mflocculare mgallisepticum mgallisepticum_2 mhaemolytica mhominis_3
 mhyopneumoniae mhyorhinis miowae mplutonius mpneumoniae msciuri msynoviae 
 mycobacteria_2 neisseria oralstrep orhinotracheale otsutsugamushi pacnes_3 
 paeruginosa pdamselae pfluorescens pgingivalis plarvae pmultocida pmultocida_2 
-ppentosaceus pputida psalmonis ranatipestifer rhodococcus sagalactiae saureus 
-sbsec scanis schromogenes sdysgalactiae senterica_achtman_2 sepidermidis 
-sgallolyticus shaemolyticus shewanella shominis sinorhizobium smaltophilia 
-spneumoniae spseudintermedius spyogenes ssuis staphlugdunensis sthermophilus 
-streptomyces streptothermophilus suberis szooepidemicus taylorella 
-tenacibaculum tpallidum ureaplasma vcholerae vcholerae_2 vibrio 
-vparahaemolyticus vtapetis vvulnificus wolbachia xfastidiosa 
-ypseudotuberculosis_achtman_3 yruckeri
+ppentosaceus pputida providencia psalmonis ranatipestifer rhodococcus 
+sagalactiae saureus sbsec scanis schromogenes sdysgalactiae senterica_achtman_2 
+sepidermidis serratia sgallolyticus shaemolyticus shewanella shominis 
+sinorhizobium smaltophilia spneumoniae spseudintermedius spyogenes ssuis 
+staphlugdunensis sthermophilus streptomyces streptothermophilus suberis 
+szooepidemicus taylorella tenacibaculum tpallidum ureaplasma vcholerae 
+vcholerae_2 vibrio vparahaemolyticus vtapetis vvulnificus wolbachia xfastidiosa
 ```
 
 ## Example Usage
