@@ -12,10 +12,10 @@ Additional tools:
 - ngmerge: 0.3
 - vt: 0.577721
 - racon: 1.5.0
-- mummer: 4.0.0
+- mummer: 4.0.1
 - read-it-and-keep: 0.3.0
-- cylon: commit hash 57d559a76254b0b95785f7c02fa58ef806713e01
-- varifier: commit hash 8bc8726ed3cdb337dc47b62515e709759e451137
+- cylon: commit hash 9402ba5e96ba52d5ade0deb2268d680d8726ad48
+- varifier: commit hash 940d4503671f5dd09ce51116be6e77c85d50ada5
 - minimap2: 2.28
 
 Basic information on how to use this tool:
