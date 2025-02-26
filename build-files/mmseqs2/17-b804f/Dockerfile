@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     procps && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-RUN wget -q https://github.com/soedinglab/MMseqs2/releases/download/17-b804f/mmseqs-linux-sse41.tar.gz && \
+RUN wget -q https://github.com/soedinglab/MMseqs2/releases/download/${MMSEQS2_VER}/mmseqs-linux-sse41.tar.gz && \
     tar -vxf mmseqs-linux-sse41.tar.gz && \
     rm mmseqs-linux-sse41.tar.gz
 
@@ -44,9 +44,9 @@ WORKDIR /test
 RUN mmseqs && mmseqs --help && mmseqs version
 
 # using the provided example files
-RUN mmseqs easy-search /mmseqs/examples/QUERY.fasta /mmseqs/examples/DB.fasta alnResult.m8 tmp && rm -rf tmp
-RUN    mmseqs easy-cluster /mmseqs/examples/DB.fasta clusterRes tmp
-RUN    mmseqs easy-linclust /mmseqs/examples/DB.fasta clusterRes tmp 
+RUN mmseqs easy-search /mmseqs/examples/QUERY.fasta /mmseqs/examples/DB.fasta alnResult.m8 tmp && \
+    mmseqs easy-cluster /mmseqs/examples/DB.fasta clusterRes tmp && \
+    mmseqs easy-linclust /mmseqs/examples/DB.fasta clusterRes tmp 
 
 # stolen from https://github.com/soedinglab/MMseqs2/wiki/Tutorials
 WORKDIR /tutorial
