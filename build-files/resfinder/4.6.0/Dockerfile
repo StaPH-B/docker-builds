@@ -4,7 +4,7 @@ FROM ubuntu:jammy AS app
 
 # ARG sets environment variables during the build stage
 ARG RESFINDER_VER
-ARG KMA_VER="1.4.17"
+ARG KMA_VER="1.4.18"
 
 # Database may not be properly versioned, but using a version tag here (2024-08-06)
 # see here: https://bitbucket.org/genomicepidemiology/resfinder_db/downloads/?tab=tags
