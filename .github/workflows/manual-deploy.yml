@@ -10,16 +10,16 @@ on:
   workflow_dispatch:
     inputs:
       tool:
-        description: "Tool to deploy. Must match filepath: /<tool>/version/Dockerfile"
+        description: "Tool to deploy. Must match filepath: build-files/<tool>/version/Dockerfile"
         required: true
       version:
-        description: "Version to deploy. Must match filepath: /tool/<version>/Dockerfile"
+        description: "Version to deploy. Must match filepath: build-files/tool/<version>/Dockerfile"
         required: true
       docker_image_tag:
         description: "Docker image tag to use: repository/tool:<tag> (Match version unless you require a custom tag)"
         required: true
       push_quay:
-        description: "Deploy to Quay too? (repository must first exist on quay)"
+        description: "Deploy to Quay too?"
         type: boolean
         default: true
       push_latest_tag:
@@ -38,7 +38,7 @@ jobs:
   build-to-test:
     uses: ./.github/workflows/build-to-test.yml
     with:
-      path_to_context: "./${{ github.event.inputs.tool }}/${{ github.event.inputs.version }}"
+      path_to_context: "./build-files/${{ github.event.inputs.tool }}/${{ github.event.inputs.version }}"
       cache: ${{ github.event.inputs.tool }}
 
   # This job calls a workflow to build the image to the 'app' stage and pushes the image to Docker Hub
@@ -51,7 +51,7 @@ jobs:
       quay_username: ${{ secrets.quay_username }}
       quay_robot_token: ${{ secrets.quay_robot_token }}
     with:
-      path_to_context: "./${{ github.event.inputs.tool }}/${{ github.event.inputs.version }}"
+      path_to_context: "./build-files/${{ github.event.inputs.tool }}/${{ github.event.inputs.version }}"
       repository_name: ${{ github.event.inputs.repository_name }}
       cache: ${{ github.event.inputs.tool }}
       container_name: ${{ github.event.inputs.tool }}

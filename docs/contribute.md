@@ -14,8 +14,8 @@ Regardless of how many docker images are available via staphb/docker-builds or o
 2. Fork this github repository using the fork button at the top right hand of the github page.
     * There are Dockerfile and README templates that can be copied from https://github.com/StaPH-B/docker-builds/tree/master/dockerfile-template and edited
 3. Add your Dockerfile, README, and test files to your forked repository following these conventions:
-    * The first directory should be the name of the program with special characters removed, and it's preferable to remove uppercase - `/spades`
-    * The second directory should be the version number of the program, in X.X.X format - `/spades/3.12.0`
+    * The first directory should be the name of the program with special characters removed, and it's preferable to remove uppercase - `/build-files/spades`
+    * The second directory should be the version number of the program, in X.X.X format - `/build-files/spades/3.12.0`
     * The Dockerfile and any other files required for building and testing belong in the sub-directory - `/spades/3.12.0/Dockerfile` and `/spades/3.12.0/my_spades_tests.sh`
     * NOTE: There is a file size limit for github (~100MB/file), so if you have a program with a huge database or file of some kind -  we won't be able to store the it in our github repository, and that database should be downloaded as part of the Dockerfile instructions with `wget`, `curl`, etc.
 4. Please edit the `README.md` and `LICENSE.md` with the appropriate information for your program (follow alphabetical order please!) and commit changes to your forked repo. It's easiest to copy a line for an existing program from the raw markdown documents [README.md](https://raw.githubusercontent.com/StaPH-B/docker-builds/master/README.md) or [LICENSE.md](https://raw.githubusercontent.com/StaPH-B/docker-builds/master/LICENSE.md) and replace the information with your new image.
