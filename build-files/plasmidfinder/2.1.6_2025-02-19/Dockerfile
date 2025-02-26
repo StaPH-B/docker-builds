@@ -6,7 +6,7 @@ ARG PLASMIDFINDER_VER="2.1.6"
 # see here: https://bitbucket.org/genomicepidemiology/plasmidfinder_db/commits/4add282963c788762cdc3c6e91eb46c3d109f19b
 # commit date: 2024-11-14
 ARG DB_COMMIT_HASH="4add282963c788762cdc3c6e91eb46c3d109f19b"
-ARG KMA_VER="1.4.17"
+ARG KMA_VER="1.4.18"
 
 # LABEL instructions tag the image with metadata that might be important to the user
 # Optional, but highly recommended
