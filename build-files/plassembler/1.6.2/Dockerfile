@@ -21,11 +21,7 @@ LABEL maintainer.email="eriny@utah.gov"
 RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
     ca-certificates \
-    procps \
-    make \
-    g++ \
-    libgomp1 \
-    libz-dev && \
+    procps && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 RUN micromamba install --name base -c conda-forge -c bioconda -c defaults plassembler=${PLASSEMBLER_VERSION} && \
