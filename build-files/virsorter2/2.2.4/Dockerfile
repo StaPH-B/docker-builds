@@ -47,11 +47,12 @@ WORKDIR /test
 RUN wget -O db.tgz https://osf.io/v46sc/download && \
     tar -xzf db.tgz --no-same-owner && \
     rm db.tgz && \
-    virsorter config --init-source --db-dir=./db
-
-# from https://github.com/jiarong/VirSorter2?tab=readme-ov-file#quick-run
-RUN wget -O test.fa https://raw.githubusercontent.com/jiarong/VirSorter2/master/test/8seq.fa && \
+    virsorter config --init-source --db-dir=./db && \
+    # from https://github.com/jiarong/VirSorter2?tab=readme-ov-file#quick-run
+    wget -O test.fa https://raw.githubusercontent.com/jiarong/VirSorter2/master/test/8seq.fa && \
     virsorter run -w test.out -i test.fa --min-length 1500 -j 4 all && \
-    ls test.out
+    ls test.out && \
+    # to reduce size for GA testing
+    rm -rf db
 
 RUN micromamba list
