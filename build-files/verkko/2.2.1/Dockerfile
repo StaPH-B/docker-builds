@@ -4,8 +4,6 @@ ARG VERKKO_VER="2.2.1"
 
 USER root
 
-SHELL ["/bin/bash", "-c"]
-
 WORKDIR /
 
 LABEL base.image="mambaorg/micromamba:2.0.5-ubuntu22.04"
@@ -19,7 +17,8 @@ LABEL maintainer="Kutluhan Incekara"
 LABEL maintainer.email="kutluhan.incekara@ct.gov"
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
-    procps &&\
+    procps \
+    bc && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 RUN micromamba install --name base -c conda-forge -c bioconda verkko=${VERKKO_VER} && \
