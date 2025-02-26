@@ -4,6 +4,8 @@ ARG VERKKO_VER="2.2.1"
 
 USER root
 
+SHELL ["/bin/bash", "-c"]
+
 WORKDIR /
 
 LABEL base.image="mambaorg/micromamba:2.0.5-ubuntu22.04"
