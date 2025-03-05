@@ -88,7 +88,7 @@ COPY --from=builder /usr/local/include/ /usr/local/include/
 
 WORKDIR /data
 
-ENV LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib"
+ENV LD_LIBRARY_PATH="/usr/local/lib"
 
 CMD ["ivar", "help"]
 
