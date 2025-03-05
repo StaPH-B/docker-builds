@@ -1,4 +1,4 @@
-FROM mambaorg/micromamba:1.5.8 as app
+FROM mambaorg/micromamba:2.0.5-ubuntu22.04 as app
 
 # Version arguments
 # ARG variables only persist during build time
