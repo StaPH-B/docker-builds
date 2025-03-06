@@ -1,4 +1,4 @@
-ARG GFASTATS_VER=1.3.9
+ARG GFASTATS_VER=1.3.10
 
 FROM ubuntu:jammy AS app
 
