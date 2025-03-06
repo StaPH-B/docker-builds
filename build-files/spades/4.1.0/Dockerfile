@@ -9,7 +9,7 @@ LABEL software="SPAdes"
 LABEL software.version="${SPADES_VER}"
 LABEL description="de novo DBG genome assembler"
 LABEL website="https://github.com/ablab/spades"
-LABEL license="https://github.com/ablab/spades/blob/v3.15.3/assembler/LICENSE"
+LABEL license="https://github.com/ablab/spades/blob/main/LICENSE"
 LABEL maintainer="Curtis Kapsak"
 LABEL maintainer.email="kapsakcj@gmail.com"
 
