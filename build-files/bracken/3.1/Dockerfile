@@ -2,7 +2,7 @@ ARG KRAKEN_VER="2.1.3"
 ARG BRACKEN_VER="3.1"
 
 ## Builder ##
-FROM ubuntu:jammy as builder
+FROM ubuntu:jammy AS builder
 
 ARG KRAKEN_VER
 ARG BRACKEN_VER
@@ -21,7 +21,7 @@ RUN wget https://github.com/jenniferlu717/Bracken/archive/refs/tags/v${BRACKEN_V
     chmod 755 install_bracken.sh && ./install_bracken.sh
 
 ## App ##
-FROM ubuntu:jammy as app
+FROM ubuntu:jammy AS app
 
 ARG BRACKEN_VER
 
@@ -41,8 +41,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y perl python-is-
 COPY --from=builder /kraken2 /kraken2
 COPY --from=builder /Bracken-${BRACKEN_VER} /Bracken
 
-ENV LC_ALL=C
-ENV PATH="${PATH}:/kraken2:/Bracken"
+ENV PATH="${PATH}:/kraken2:/Bracken" \
+    LC_ALL=C
 
 CMD [ "bracken", "-h" ]
 
