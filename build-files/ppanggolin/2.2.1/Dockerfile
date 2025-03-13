@@ -25,7 +25,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 ENV PATH="/opt/conda/envs/base/bin/:/opt/conda/bin/:$PATH" LC_ALL=C
 
-RUN micromamba install --name base -c conda-forge -c bioconda -c defaults ppanggolin=${PPANGGOLIN_VER} && \
+RUN micromamba install --name base -c conda-forge -c bioconda ppanggolin=${PPANGGOLIN_VER} && \
     micromamba clean -a -f -y
 
 # 'CMD' instructions set a default command when the container is run. This is typically 'tool --help.'
