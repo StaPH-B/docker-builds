@@ -61,3 +61,5 @@ RUN poppunk --help && \
 # Compare the database clusters and assigned clusters of the assemblies
 COPY test.sh ftps.txt /data/
 RUN bash test.sh && cmp assigned.csv database.csv
+
+RUN micromamba list
