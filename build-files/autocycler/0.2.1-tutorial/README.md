@@ -4,7 +4,10 @@ Main tool: [autocycler](https://github.com/rrwick/Autocycler/)
   
 Code repository: https://github.com/rrwick/Autocycler/
 
-Additional tools installed with micromamba:
+<details>
+
+<summary>Additional tools installed via micromamba:</summary>
+
 ```
   Name                       Version               Build               Channel    
 ────────────────────────────────────────────────────────────────────────────────────
@@ -177,6 +180,8 @@ Additional tools installed with micromamba:
   zlib                       1.2.13                h4ab18f5_6          conda-forge
   zstd                       1.5.6                 ha6fb4c9_0          conda-forge
 ```
+
+</details>
 
 Basic information on how to use this tool:
 - executable: autocycler
