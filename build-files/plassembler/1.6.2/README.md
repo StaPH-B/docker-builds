@@ -4,7 +4,10 @@ Main tool: [plassembler](https://github.com/gbouras13/plassembler)
   
 Code repository: https://github.com/gbouras13/plassembler
 
-Additional tools installed via micromamba:
+<details>
+
+<summary>Additional tools installed via micromamba:</summary>
+
 ```
   Name                       Version       Build                 Channel    
 ──────────────────────────────────────────────────────────────────────────────
@@ -243,6 +246,8 @@ Additional tools installed via micromamba:
   zstandard                  0.19.0        py38h0a891b7_0        conda-forge
   zstd                       1.5.7         hb8e6e7a_1            conda-forge
 ```
+
+</details>
 
 Basic information on how to use this tool:
 - executable: plassembler
