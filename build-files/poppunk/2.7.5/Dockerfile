@@ -62,4 +62,4 @@ RUN poppunk --help && \
 COPY test.sh ftps.txt /data/
 RUN bash test.sh && cmp assigned.csv database.csv
 
-RUN micromamba list
+RUN micromamba list poppunk-env
