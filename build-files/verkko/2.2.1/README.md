@@ -12,9 +12,10 @@ Basic information on how to use this tool:
   
 Full documentation: https://github.com/marbl/verkko
 
-## Additional included tools/dependencies
+<details>
 
-verkko is installed with micromamba. These are the dependencies installed alongside verkko:
+<summary>Additional tools installed via micromamba:</summary>
+
 ```bash
   Name                       Version       Build                 Channel    
 ──────────────────────────────────────────────────────────────────────────────
@@ -163,6 +164,8 @@ verkko is installed with micromamba. These are the dependencies installed alongs
   zstandard                  0.23.0        py39h08a7858_1        conda-forge
   zstd                       1.5.6         ha6fb4c9_0            conda-forge
 ```
+
+</details>
 
 ## Example Usage
 
