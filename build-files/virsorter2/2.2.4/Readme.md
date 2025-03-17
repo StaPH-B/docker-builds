@@ -4,7 +4,9 @@ Main tool: [Virsorter 2](https://github.com/jiarong/VirSorter2)
   
 Code repository: https://github.com/jiarong/VirSorter2
 
-Micromamba dependencies:
+<details>
+
+<summary>Additional tools installed via micromamba:</summary>
 
 ```bash
 # packages in environment at /opt/conda:
@@ -162,6 +164,8 @@ zipp                      3.21.0             pyhd8ed1ab_1    conda-forge
 zstandard                 0.19.0          py310h5764c6d_0    conda-forge
 zstd                      1.5.7                hb8e6e7a_1    conda-forge
 ```
+
+</details>
 
 Basic information on how to use this tool:
 - executable: virsorter
