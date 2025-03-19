@@ -1,4 +1,4 @@
-ARG ARTIC_VER=1.6.1
+ARG ARTIC_VER=1.6.2
 
 FROM mambaorg/micromamba:2.0.5-ubuntu22.04 AS app
 
@@ -24,7 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     procps && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-RUN micromamba create -n artic -y -c conda-forge -c bioconda -c defaults \
+RUN micromamba create -n artic -y -c conda-forge -c bioconda \
     artic=${ARTIC_VER} && \
     micromamba clean -a -f -y && \
     mkdir /data
@@ -83,3 +83,5 @@ RUN artic minion --normalise 200 --threads 4  --model ont --read-file SRR2245225
 
 RUN echo "included models" && \
     ls ${CONDA_PREFIX}/bin/models
+
+RUN micromamba list -n artic
