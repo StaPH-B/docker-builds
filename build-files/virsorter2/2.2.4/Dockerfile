@@ -22,7 +22,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     procps && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-RUN micromamba install --name base -c conda-forge -c bioconda -c defaults virsorter=${VIRSORTER2_VER} && \
+RUN micromamba install --name base -c conda-forge -c bioconda virsorter=${VIRSORTER2_VER} && \
     micromamba clean -a -f -y && \
     mkdir /data
 
