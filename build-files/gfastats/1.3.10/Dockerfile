@@ -1,10 +1,10 @@
 ARG GFASTATS_VER=1.3.10
 
-FROM ubuntu:jammy AS app
+FROM ubuntu:noble AS app
 
 ARG GFASTATS_VER
 
-LABEL base.image="ubuntu:jammy"
+LABEL base.image="ubuntu:noble"
 LABEL dockerfile.version="1"
 LABEL software="gfastats"
 LABEL software.version=${GFASTATS_VER}
@@ -17,18 +17,14 @@ LABEL maintainer.email="eriny@utah.gov"
 RUN apt-get update && apt-get install -y --no-install-recommends \
   ca-certificates \
   procps \
-  wget \
-  make \
-  g++ \
-  zlib1g-dev \
-  unzip && \
+  wget && \
   apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /usr/local/bin
 
-RUN wget -q https://github.com/vgl-hub/gfastats/releases/download/v${GFASTATS_VER}/gfastats.v${GFASTATS_VER}-linux.zip && \
-  unzip gfastats.v${GFASTATS_VER}-linux.zip && \
-  rm gfastats.v${GFASTATS_VER}-linux.zip && \
+RUN wget -q https://github.com/vgl-hub/gfastats/releases/download/v${GFASTATS_VER}/gfastats.v${GFASTATS_VER}-linux.tar.gz && \
+  tar -vxf gfastats.v${GFASTATS_VER}-linux.tar.gz && \
+  rm gfastats.v${GFASTATS_VER}-linux.tar.gz && \
   chmod +x gfastats
 
 ENV PATH="$PATH" \
