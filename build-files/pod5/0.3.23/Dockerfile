@@ -1,5 +1,8 @@
 FROM python:3.9.17-slim as app
 
+USER root
+WORKDIR /
+
 ARG POD5_TOOLS_VERSION="0.3.23"
 
 LABEL base.image="python:3.9.17-slim"
@@ -14,14 +17,15 @@ LABEL maintainer.email="sagemwright@gmail.com"
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
-    ca-certificates && \
+    ca-certificates \
+    procps && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-RUN pip install --no-cache pod5==${POD5_TOOLS_VERSION}
-
-CMD [ "pod5", "--help" ]
+RUN pip3 install --no-cache pod5==${POD5_TOOLS_VERSION}
 
 WORKDIR /data
+
+CMD [ "pod5", "--help" ]
 
 FROM app as test
 
