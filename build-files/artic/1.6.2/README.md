@@ -255,7 +255,7 @@ And additional documentation: [https://artic.readthedocs.io/en/latest/](https://
 
 WARNING : This container does not contain the primer schemes found at [https://github.com/artic-network/primer-schemes](https://github.com/artic-network/primer-schemes). Those will have to be downloaded and mounted separately. There are now commands to download the use the primers at runtime.
 
-This image DOES contain the medaka models downloaded with `artic_get_models`
+This image DOES contain the models downloaded with `artic_get_models`
 
 ## Example Usage with the artic primers
 
@@ -277,11 +277,11 @@ artic minion --normalise 200 --threads 4  --model ont --read-file sample.fastq -
 
 In general, any primer scheme can be used as long as it meets [artic's requirements](https://github.com/artic-network/primer-schemes).
 
-## Medaka models
+## Clair3 models
 
-Artic uses [Clair3](https://github.com/HKU-BAL/Clair3), which uses medaka models. Medaka updates frequently, and artic can throw errors when corresponding ONT models are not found.
+Artic uses [Clair3](https://github.com/HKU-BAL/Clair3), which uses its own models for polishing. ONT chemistries update frequently, and artic can throw errors when corresponding ONT models are not found.
 
-These are the medaka models in this image:
+These are the models in this image:
 
 ```bash
 # included models at /opt/conda/envs/artic/bin/models
