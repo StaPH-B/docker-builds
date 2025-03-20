@@ -1,4 +1,4 @@
-# mummer + RGDv2 container
+# mummer
 
 Main tool : [mummer](https://github.com/mummer4/mummer)
 
@@ -10,7 +10,6 @@ Additional tools:
 
 MUMmer is a versatile alignment tool for DNA and protein sequences.
 
-
 Better documentation for Mummer can be found at [https://github.com/mummer4/mummer](https://github.com/mummer4/mummer)
 
 A tutorial can be found at [https://mummer4.github.io/tutorial/tutorial.html](https://mummer4.github.io/tutorial/tutorial.html)
@@ -18,6 +17,7 @@ A tutorial can be found at [https://mummer4.github.io/tutorial/tutorial.html](ht
 And the manual can be found at [http://mummer.sourceforge.net/manual/](http://mummer.sourceforge.net/manual/)
 
 ## Example Usage
+
 ```bash
 mummer -mum -b -c H_pylori26695_Eslice.fasta H_pyloriJ99_Eslice.fasta > mummer.mums
 mummerplot -x "[0,275287]" -y "[0,265111]" --terminal png -postscript -p mummer mummer.mums
