@@ -1,6 +1,6 @@
 # Kleborate container
 
-Main tool : [Kleborate](https://github.com/katholt/Kleborate)
+Main tool : [Kleborate](https://github.com/klebgenomics/Kleborate)
 
 :warning: **Note:** Kleborate v3 is different from v2, please see here for the differences: https://kleborate.readthedocs.io/en/latest/index.html#changes-from-v2
 
@@ -14,7 +14,7 @@ Additional tools:
 - matplotlib 3.9.2
 - numpy 2.1.3
 
-Full documentation: [https://github.com/katholt/Kleborate/wiki](https://github.com/katholt/Kleborate/wiki)
+Full documentation: [https://kleborate.readthedocs.io/en/latest/index.html](https://kleborate.readthedocs.io/en/latest/index.html)
 
 Description:
 > Kleborate is a tool to screen genome assemblies of Klebsiella pneumoniae and the Klebsiella pneumoniae species complex (KpSC) for:
@@ -28,7 +28,7 @@ Description:
 
 ## Included models
 
-Kleborate has models for both Klebsiella and Escherichia species. The available presets and models are listed below.
+Kleborate has modules for both Klebsiella and Escherichia species. The available presets and modules are listed below.
 
 Available presets: kpsc, kosc, escherichia
 
