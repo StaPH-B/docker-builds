@@ -3,7 +3,6 @@ ARG RELEASE_DATE="2024-10-23"
 FROM ubuntu:jammy AS app
 
 # version doesn't show appear anywhere on ftp; only can be determined via command-line
-# this docker image was built 2022-12-13 and this was the current version
 ARG TABLE2ASN_VER="1.28.1094"
 ARG RELEASE_DATE
 
@@ -53,7 +52,6 @@ RUN for tool in ${STAPHB_TOOLS} ; do \
   gunzip linux64.${tool}.gz && \
   mv linux64.${tool} ${tool} && \
   chmod +x ${tool} ; done
-
 
 ENV LC_ALL=C
 
