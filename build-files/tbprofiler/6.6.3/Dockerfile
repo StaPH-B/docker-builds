@@ -7,7 +7,7 @@ ARG TBPROFILER_VER="6.6.3"
 
 # this version is the shortened commit hash on the `master` branch here https://github.com/jodyphelan/tbdb/
 # commits are found on https://github.com/jodyphelan/tbdb/commits/master
-# this was the latest commit as of 2025-02-20
+# this was the latest commit as of 2025-03-25
 ARG TBDB_COMMIT="00a0db4efdf9ce6bbae7766f6fb8214a1d935a2c"
 
 # LABEL instructions tag the image with metadata that might be important to the user
