@@ -16,6 +16,7 @@ The licenses of the open-source software that is contained in these Docker image
 | assembly_snptyper | MIT | https://github.com/boasvdp/assembly_snptyper/blob/main/LICENSE |
 | Augur | GNU Affero GPLv3 | https://github.com/nextstrain/augur/blob/master/LICENSE.txt |
 | Auspice | GNU Affero GPLv3 | https://github.com/nextstrain/auspice/blob/master/LICENSE.txt |
+| Autocycler | GNU General Public License v3.0 | https://github.com/rrwick/Autocycler/blob/main/LICENSE |
 | Bakta | GNU GPLv3 | https://github.com/oschwengers/bakta/blob/main/LICENSE |
 | Bandage | GNU GPLv3 | https://github.com/rrwick/Bandage?tab=GPL-3.0-1-ov-file#readme |
 | BBTools | non-standard - see `licence.txt` and `legal.txt` that is included in docker image under `/bbmap/docs/`; Also on sourceforge repo for BBTools | https://jgi.doe.gov/disclaimer/ |
