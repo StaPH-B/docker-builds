@@ -122,6 +122,7 @@ The licenses of the open-source software that is contained in these Docker image
 | miniasm | MIT | https://github.com/lh3/miniasm/blob/master/LICENSE.txt |
 | minipolish | GNU GPLv3 | https://github.com/rrwick/Minipolish/blob/main/LICENSE |
 | mlst | GNU GPLv2 | https://github.com/tseemann/mlst/blob/master/LICENSE |
+| MMseqs2 | MIT | https://github.com/soedinglab/MMseqs2/blob/master/LICENSE.md |
 | Mugsy | Artistic License 2.0 | Archived in: <br/> https://sourceforge.net/projects/mugsy/files/mugsy_x86-64-v1r2.3.tgz |
 | MultiQC | GNU GPLv3 | https://github.com/ewels/MultiQC/blob/master/LICENSE |
 | Mummer | The Artistic License 2.0| https://github.com/mummer4/mummer/blob/master/LICENSE.md |
