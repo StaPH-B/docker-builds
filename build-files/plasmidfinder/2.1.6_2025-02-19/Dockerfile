@@ -1,4 +1,4 @@
-FROM ubuntu:focal AS app
+FROM ubuntu:jammy AS app
 
 ARG PLASMIDFINDER_VER="2.1.6"
 # There is a plasmidfinder database version (2.1), but that hasn't been updated in... awhile
@@ -6,67 +6,43 @@ ARG PLASMIDFINDER_VER="2.1.6"
 # see here: https://bitbucket.org/genomicepidemiology/plasmidfinder_db/commits/4add282963c788762cdc3c6e91eb46c3d109f19b
 # commit date: 2024-11-14
 ARG DB_COMMIT_HASH="4add282963c788762cdc3c6e91eb46c3d109f19b"
-ARG KMA_VER="1.4.18"
 
-# LABEL instructions tag the image with metadata that might be important to the user
-# Optional, but highly recommended
-LABEL base.image="ubuntu:focal"
+LABEL base.image="ubuntu:jammy"
 LABEL dockerfile.version="1"
 LABEL software="plasmidfinder"
 LABEL software.version="${PLASMIDFINDER_VER}"
 LABEL description="Identifies plasmids in total or partial sequenced isolates of bacteria."
 LABEL website="https://bitbucket.org/genomicepidemiology/plasmidfinder"
 LABEL license="https://bitbucket.org/genomicepidemiology/plasmidfinder/src/master/README.md"
-LABEL maintainer="John Arnn"
-LABEL maintainer.email="jarnn@utah.gov"
+LABEL maintainer="Kutluhan Incekara"
+LABEL maintainer.email="kutluinct@gmail.com"
+LABEL maintainer2="Erin Young"
+LABEL maintainer2.email="eriny@utah.gov"
 
-# ARG so that this variable only persists at image build time
-ARG DEBIAN_FRONTEND noninteractive
-
-# RUN executes code during the build
-# Install dependencies via apt-get or yum if using a centos or fedora base
-# ncbi-blast v2.6.0 via debian:stretch apt
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install --no-install-recommends -y \
     wget \
+    python3-biopython \
+    python3-cgecore \
+    python3-tabulate \
+    python3-distutils \
+    kma \
     ca-certificates \
-    procps \
-    git \
-    ncbi-blast+ \
-    python3 \
-    python3-pip \
-    python3-setuptools \
-    python3-dev \
-    gcc \
-    make \
-    libz-dev \
-    dos2unix \
-    unzip && \
+    ncbi-blast+ &&\
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-# Install python dependencies
-RUN pip3 install biopython==1.73 tabulate==0.7.7 cgecore==1.5.5
-
-# Install kma
-RUN git clone --branch ${KMA_VER} --depth 1 https://bitbucket.org/genomicepidemiology/kma.git && \
-    cd kma && \
-    make && \
-    mv -v kma* /usr/local/bin/
-
-RUN wget https://bitbucket.org/genomicepidemiology/plasmidfinder/get/${PLASMIDFINDER_VER}.tar.gz && \
-    mkdir plasmidfinder && \
-    tar -xvf ${PLASMIDFINDER_VER}.tar.gz -C plasmidfinder --strip-components 1 && \
+# install plasmidfinder
+RUN wget -q https://bitbucket.org/genomicepidemiology/plasmidfinder/get/${PLASMIDFINDER_VER}.tar.gz && \
+    tar -C /usr/local/bin/ --strip-components=1 --wildcards -xvf ${PLASMIDFINDER_VER}.tar.gz */plasmidfinder.py &&\
     rm ${PLASMIDFINDER_VER}.tar.gz
+    
+# download plasmindfinder database
+RUN wget -q https://bitbucket.org/genomicepidemiology/plasmidfinder_db/get/${DB_COMMIT_HASH}.tar.gz &&\
+    mkdir /database &&\
+    tar -C /database --strip-components=1 -xvf ${DB_COMMIT_HASH}.tar.gz &&\
+    rm ${DB_COMMIT_HASH}.tar.gz  &&\
+    cd /database && python3 INSTALL.py kma_index
 
-ENV PATH="${PATH}:/plasmidfinder"
-
-RUN chmod +x plasmidfinder/plasmidfinder.py 
-
-RUN mkdir /database && \
-    git clone https://bitbucket.org/genomicepidemiology/plasmidfinder_db.git /database && \
-    cd /database && \
-    git checkout ${DB_COMMIT_HASH} && \
-    dos2unix *.fsa && \
-    python3 INSTALL.py kma_index
+ENV LC_ALL=C
 
 CMD ["plasmidfinder.py", "-h"]
 
