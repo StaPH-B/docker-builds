@@ -151,6 +151,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Piranha | GNU GPLv3 | https://github.com/polio-nanopore/piranha/blob/main/LICENSE |
 | PlasmidSeeker | BSD 3-Clause | https://github.com/bioinfo-ut/PlasmidSeeker/blob/master/LICENSE |
 | pmga | GNU GPLv2 | https://github.com/rpetit3/pmga/blob/master/LICENSE |
+| pod5 | Mozilla Public License Version 2.0 | https://github.com/nanoporetech/pod5-file-format/blob/master/LICENSE.md |
 | polypolish | GNU GPLv3 | https://github.com/rrwick/Polypolish/blob/main/LICENSE |
 | PopPUNK | Apache 2.0 | https://github.com/bacpop/PopPUNK/blob/master/LICENSE |
 | Porechop | GNU GPLv3 | https://github.com/rrwick/Porechop/blob/master/LICENSE |
@@ -210,6 +211,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Trimmomatic | GNU GPLv3 | https://github.com/usadellab/Trimmomatic/blob/main/distSrc/LICENSE |
 | Trycycler | GNU GPLv3 | https://github.com/rrwick/Trycycler/blob/master/LICENSE |
 | Unicycler | GNU GPLv3 | https://github.com/rrwick/Unicycler/blob/master/LICENSE |
+| UShER | MIT | https://github.com/yatisht/usher/blob/master/LICENSE |
 | VADR | Public Domain | https://github.com/nawrockie/vadr/blob/master/LICENSE |
 | Verkko | Public Domain | https://github.com/marbl/verkko/blob/master/README.licenses |
 | VIBRANT | GNU GPLv3 | https://github.com/AnantharamanLab/VIBRANT/blob/master/LICENSE |
