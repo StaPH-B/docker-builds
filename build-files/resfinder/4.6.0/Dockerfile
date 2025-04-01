@@ -4,7 +4,6 @@ FROM ubuntu:jammy AS app
 
 # ARG sets environment variables during the build stage
 ARG RESFINDER_VER
-ARG KMA_VER="1.4.18"
 
 # Database may not be properly versioned, but using a version tag here (2024-08-06)
 # see here: https://bitbucket.org/genomicepidemiology/resfinder_db/downloads/?tab=tags
@@ -36,20 +35,20 @@ ARG DEBIAN_FRONTEND noninteractive
 # install dependencies; cleanup apt garbage 
 # ncbi-blast+ 2.12.0+ds-3build1 (ubuntu:jammy)
 # python3 v3.10
+# uses git at runtime
 RUN apt-get update && apt-get install -y --no-install-recommends \
   wget \
   ca-certificates \
   procps \
-  git \
   ncbi-blast+ \
   python3 \
   python3-pip \
   python3-setuptools \
   python3-dev \
-  gcc \
-  make \
   libz-dev \
-  unzip && \
+  unzip \
+  git \
+  kma && \
   apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # Install resfinder ()
@@ -59,29 +58,29 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN pip3 install --no-cache-dir resfinder==${RESFINDER_VER} && \
   mkdir /data
 
-# Install kma
-RUN git clone --branch ${KMA_VER} --depth 1 https://bitbucket.org/genomicepidemiology/kma.git && \
-  cd kma && \
-  make && \
-  mv -v kma* /usr/local/bin/
+# resfinder database install
+RUN mkdir /resfinder_db && \
+  wget https://git@bitbucket.org/genomicepidemiology/resfinder_db/get/${RESFINDER_DB_COMMIT_HASH}.tar.gz && \
+  tar -C /resfinder_db --strip-components=1 -xvf ${RESFINDER_DB_COMMIT_HASH}.tar.gz && \
+  rm -rf ${RESFINDER_DB_COMMIT_HASH}.tar.gz && \
+  cd /resfinder_db && \
+  python3 INSTALL.py kma_index non_interactive
 
 # pointfinder database install
 RUN mkdir /pointfinder_db && \
-  git clone --branch ${POINTFINDER_DB_COMMIT_HASH} --depth 1 https://git@bitbucket.org/genomicepidemiology/pointfinder_db.git /pointfinder_db && \
+  wget https://git@bitbucket.org/genomicepidemiology/pointfinder_db/get/${POINTFINDER_DB_COMMIT_HASH}.tar.gz && \
+  tar -C /pointfinder_db --strip-components=1 -xvf ${POINTFINDER_DB_COMMIT_HASH}.tar.gz && \
+  rm -rf ${POINTFINDER_DB_COMMIT_HASH}.tar.gz && \
   cd /pointfinder_db && \
-  python3 INSTALL.py /usr/local/bin/kma_index non_interactive
-
-# resfinder database install
-RUN mkdir /resfinder_db && \
-  git clone --branch ${RESFINDER_DB_COMMIT_HASH} --depth 1 https://git@bitbucket.org/genomicepidemiology/resfinder_db.git /resfinder_db && \
-  cd /resfinder_db && \
-  python3 INSTALL.py /usr/local/bin/kma_index non_interactive
+  python3 INSTALL.py kma_index non_interactive
 
 # disinfinder database install
 RUN mkdir /disinfinder_db && \
-  git clone --branch ${DISINFINDER_DB_COMMIT_HASH} --depth 1 https://git@bitbucket.org/genomicepidemiology/disinfinder_db.git /disinfinder_db && \
+  wget https://git@bitbucket.org/genomicepidemiology/disinfinder_db/get/${DISINFINDER_DB_COMMIT_HASH}.tar.gz && \
+  tar -C /disinfinder_db --strip-components=1 -xvf ${DISINFINDER_DB_COMMIT_HASH}.tar.gz && \
+  rm -rf ${DISINFINDER_DB_COMMIT_HASH}.tar.gz && \
   cd /disinfinder_db && \
-  python3 INSTALL.py /usr/local/bin/kma_index non_interactive
+  python3 INSTALL.py kma_index non_interactive
 
 # so that run_resfinder.py is in the PATH
 ENV PATH="${PATH}" \
@@ -90,11 +89,7 @@ ENV PATH="${PATH}" \
   CGE_RESFINDER_RESPOINT_DB="/pointfinder_db" \
   CGE_DISINFINDER_DB="/disinfinder_db"
 
-# setting a janky alias for everyone that uses the "latest" tag 
-RUN echo -e '#!/bin/bash\npython3 -m resfinder "$@"' > /usr/bin/run_resfinder.py && \
-    chmod +x /usr/bin/run_resfinder.py
-
-CMD python3 -m resfinder -h
+CMD ["python3", "-m", "resfinder", "-h"]
 
 WORKDIR /data
 
@@ -108,7 +103,9 @@ RUN python3 -m resfinder -h && run_resfinder.py --help
 WORKDIR /test
 
 # getting test files
-RUN git clone --branch ${RESFINDER_VER} --depth 1 https://git@bitbucket.org/genomicepidemiology/resfinder.git 
+RUN wget https://git@bitbucket.org/genomicepidemiology/resfinder/get/${RESFINDER_VER}.tar.gz && \
+  tar -vxf ${RESFINDER_VER}.tar.gz && \
+  mv genomicepi* resfinder
 
 ##### short description of included test files #####
 ### test files for typical gene detection (or lack thereof)
@@ -122,7 +119,6 @@ RUN git clone --branch ${RESFINDER_VER} --depth 1 https://git@bitbucket.org/geno
 # test_isolate_09b.fa fasta header ">gyrA_G81D_GAT_D82G_GGC"
 
 # test fastq files are also available for isolates 01, 05, 09a, and 09b. They are used to test KMA's functionality
-
 # run resfinder on supplied fasta files for gene detection (-acq for acquired genes, NOT point mutations)
 RUN echo "TESTING RESFINDER ON SUPPLIED FASTA FILES FOR ACQUIRED GENES" && \
   for ISOLATE in 01 02 03; do \
