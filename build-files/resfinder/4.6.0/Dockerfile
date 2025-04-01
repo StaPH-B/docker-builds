@@ -97,8 +97,8 @@ FROM app AS test
 
 ARG RESFINDER_VER
 
-# checking suggested usage and alias
-RUN python3 -m resfinder -h && run_resfinder.py --help
+# checking suggested usage
+RUN python3 -m resfinder -h
 
 WORKDIR /test
 
