@@ -118,8 +118,8 @@ RUN wget https://ftp.ncbi.nlm.nih.gov/pub/datasets/command-line/LATEST/linux-amd
 # KP.3.3.2 | PQ073669.1 | introduced in pango-designation 1.29 https://github.com/cov-lineages/pango-designation/commit/7125e606818312b78f0756d7fcab6dba92dd0a9e and https://www.ncbi.nlm.nih.gov/nuccore/PQ073669
 # MC.2 | PQ034842.1 | introduced in pango-designation 1.30 https://github.com/cov-lineages/pango-designation/commit/c64dbc47fbfbfd7f4da011deeb1a88dd6baa45f1#diff-a121ea4b8cbeb4c0020511b5535bf24489f0223cc83511df7b8209953115d329R2564181 and https://www.ncbi.nlm.nih.gov/nuccore/PQ034842
 # XEC.3 | PQ277908.1 | introduced in pango-designation 1.31 https://github.com/cov-lineages/pango-designation/commit/ba3711a5615956ed97150288eb68356aa0fe7cdd#diff-a121ea4b8cbeb4c0020511b5535bf24489f0223cc83511df7b8209953115d329R2572545 and https://www.ncbi.nlm.nih.gov/nuccore/PQ277908.1
-# new lineage here
-RUN datasets download virus genome accession ON924087.1,OQ381818.1,OR177999.1,OR461132.1,OR598183.1,OR716684.1,PP189069.1,PP218754.1,PP770375.1,PQ073669.1,PQ034842.1,PQ277908.1 && \
+# NC.1.2 | PQ725776.1 | introduced in pango-designation 1.33 https://github.com/cov-lineages/pango-designation/commit/4e87876f825fbd932b614c791c5848ea7f3d7b83 and https://www.ncbi.nlm.nih.gov/biosample?term=SAMN45350159
+RUN datasets download virus genome accession ON924087.1,OQ381818.1,OR177999.1,OR461132.1,OR598183.1,OR716684.1,PP189069.1,PP218754.1,PP770375.1,PQ073669.1,PQ034842.1,PQ277908.1,PQ725776.1 && \
     unzip -o ncbi_dataset.zip && \
     rm -v ncbi_dataset.zip && \
     pangolin ncbi_dataset/data/genomic.fna && \
