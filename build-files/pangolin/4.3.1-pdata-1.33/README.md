@@ -8,14 +8,14 @@ Phylogenetic Assignment of Named Global Outbreak LINeages
 
 Additional tools:
 
-- [pangolin-data](https://github.com/cov-lineages/pangolin-data) 1.32
-- [pangolin-assignment](https://github.com/cov-lineages/pangolin-assignment) 1.32
+- [pangolin-data](https://github.com/cov-lineages/pangolin-data) 1.33
+- [pangolin-assignment](https://github.com/cov-lineages/pangolin-assignment) 1.33
 - [minimap2](https://github.com/lh3/minimap2) 2.28-r1209
 - [usher](https://github.com/yatisht/usher) 0.6.3
 - [faToVcf](https://github.com/yatisht/usher) 473
 - [scorpio](https://github.com/cov-lineages/scorpio) 0.3.19
 - [constellations](https://github.com/cov-lineages/constellations) 0.1.12
-- [gofasta](https://github.com/virus-evolution/gofasta) 1.2.1
+- [gofasta](https://github.com/virus-evolution/gofasta) 1.2.3
 - [mafft](https://mafft.cbrc.jp/alignment/software/) 7.526
 - python 3.8.19
 
