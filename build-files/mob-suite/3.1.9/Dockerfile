@@ -36,4 +36,5 @@ RUN apt-get update && apt-get install -y \
 RUN mob_init &&\
     git clone https://github.com/phac-nml/mob-suite.git &&\
     cd mob-suite/mob_suite/tests &&\
-    pytest-3 
+    pytest-3 &&\
+    rm -rf /usr/local/lib/python3.10/dist-packages/mob_suite/databases
