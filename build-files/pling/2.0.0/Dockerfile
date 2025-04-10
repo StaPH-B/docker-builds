@@ -33,6 +33,7 @@ RUN apt-get update && apt-get install -y wget xz-utils
 
 # adapted from https://pling.readthedocs.io/latest/tutorial.html
 RUN wget --content-disposition https://figshare.com/ndownloader/files/48723568 &&\
+    tar -xvf fastas.tar.xz &&\
     ls -d -1 $PWD/fastas/*.fna | head -n 20 > input.txt &&\
     pling input.txt pling_out align --cores 4 --sourmash &&\
     cat pling_out/all_plasmids_distances.tsv
