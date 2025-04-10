@@ -124,6 +124,7 @@ The licenses of the open-source software that is contained in these Docker image
 | minipolish | GNU GPLv3 | https://github.com/rrwick/Minipolish/blob/main/LICENSE |
 | mlst | GNU GPLv2 | https://github.com/tseemann/mlst/blob/master/LICENSE |
 | MMseqs2 | MIT | https://github.com/soedinglab/MMseqs2/blob/master/LICENSE.md |
+| mob-suite | Apache v2.0 | https://github.com/phac-nml/mob-suite/blob/master/LICENSE
 | Mugsy | Artistic License 2.0 | Archived in: <br/> https://sourceforge.net/projects/mugsy/files/mugsy_x86-64-v1r2.3.tgz |
 | MultiQC | GNU GPLv3 | https://github.com/ewels/MultiQC/blob/master/LICENSE |
 | Mummer | The Artistic License 2.0| https://github.com/mummer4/mummer/blob/master/LICENSE.md |
@@ -211,6 +212,7 @@ The licenses of the open-source software that is contained in these Docker image
 | TipToft | GNU GPLv3 | https://github.com/andrewjpage/tiptoft/blob/master/LICENSE |
 | Tostadas | Apache-2.0 license | https://github.com/CDCgov/tostadas/blob/master/LICENSE |
 | toulligqc | GNU GPLv3 | https://github.com/GenomiqueENS/toulligQC/blob/master/LICENSE.txt |
+| transcluster | GNU GPLv3 | https://github.com/JamesStimson/transcluster/blob/master/DESCRIPTION |
 | Treemmer | GNU GPLv3 | https://github.com/fmenardo/Treemmer/blob/master/COPYING |
 | Trimmomatic | GNU GPLv3 | https://github.com/usadellab/Trimmomatic/blob/main/distSrc/LICENSE |
 | Trycycler | GNU GPLv3 | https://github.com/rrwick/Trycycler/blob/master/LICENSE |
