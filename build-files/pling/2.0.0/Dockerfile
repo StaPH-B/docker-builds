@@ -37,7 +37,7 @@ RUN wget --content-disposition https://figshare.com/ndownloader/files/48723568 &
     ls -d $(pwd)/fastas/*.fna > input.txt &&\
     head -n 20 input.txt > test.txt
     
-RUN pling input.txt pling_out align --cores 4 --sourmash &&\
+RUN pling test.txt pling_out align --cores 4 --sourmash &&\
     cat pling_out/all_plasmids_distances.tsv
 
 
