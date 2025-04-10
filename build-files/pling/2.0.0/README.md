@@ -251,7 +251,12 @@ Basic information on how to use this tool:
 - version: `--version`
 - description: 
 >Pling is a software workflow for plasmid analysis using rearrangement distances, specifically the Double Cut and Join Indel (DCJ-Indel) distance. By intelligently combining containment distance (shared content as fraction of the smaller) and DCJ-indel distance (“how far apart evolutionarily” in a structural sense), and by preventing shared mobile elements from clouding the issue, it infers clusters of related plasmids.
- 
+
+Additional information:
+
+Frolova, D., Lima, L., Roberts, L. W., Bohnenkämper, L., Wittler, R., Stoye, J., & Iqbal, Z. (2024). Applying rearrangement distances to enable plasmid epidemiology with pling. Microbial Genomics, 10(10). https://doi.org/10.1099/mgen.0.001300
+‌
+
 Full documentation: https://pling.readthedocs.io/latest/
 
 ## Example Usage
