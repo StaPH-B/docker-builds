@@ -1,8 +1,8 @@
 FROM ubuntu:jammy as app
 
 # for easy upgrade later. ARG variables only persist during build time.
-ARG K2VER="2.1.4"
-
+ARG K2VER="2.14"  
+# This is supposed to be v2.1.4 but there was a typo on their repo as "v2.14"
 LABEL base.image="ubuntu:jammy"
 LABEL dockerfile.version="2"
 LABEL software="Kraken2"
