@@ -14,7 +14,7 @@ Additional tools:
 
 Full documentation: https://busco.ezlab.org/busco_userguide.html
 
-This is a BUSCO docker image which has basic functions for prokaryotes only. This image contains bacteria_odb10 lineage dataset for offline use.
+This is a BUSCO docker image which has basic functions for prokaryotes only. This image contains bacteria_odb12 lineage dataset for offline use.
 ## Example Usage
 ```bash
 # offline usage with bacteria lineage
