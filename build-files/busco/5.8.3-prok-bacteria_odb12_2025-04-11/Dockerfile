@@ -1,4 +1,4 @@
-ARG BUSCO_VER="5.8.2"
+ARG BUSCO_VER="5.8.3"
 
 FROM ubuntu:jammy AS app
 
@@ -53,7 +53,7 @@ RUN wget -q https://gitlab.com/ezlab/busco/-/archive/${BUSCO_VER}/busco-${BUSCO_
     python3 setup.py install
 
 # download bacteria_odb10
-RUN busco --help && whatever && busco --download bacteria_odb12
+RUN busco --help && busco --download bacteria_odb12
 
 ENV LC_ALL=C
 
