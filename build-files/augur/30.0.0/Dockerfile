@@ -52,7 +52,7 @@ RUN git clone https://github.com/nextstrain/zika-tutorial && \
         --sequence-index results/sequence_index.tsv \
         --metadata data/metadata.tsv \
         --exclude config/dropped_strains.txt \
-        --output results/filtered.fasta \
+        --output-sequences results/filtered.fasta \
         --sequences-per-group 20 \
         --min-date 2012 && \
     augur align \
