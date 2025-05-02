@@ -66,8 +66,10 @@ CMD [ "fastp", "--help" ]
 ## Test ##
 FROM app AS test
 
+RUN apt-get update && apt-get install -y wget
+
 # downloading sars-cov-2 fastq test files
-RUN wget -q --no-check-certificate \
+RUN wget -q \
     https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123_1.fastq.gz \
     https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123_2.fastq.gz
 
