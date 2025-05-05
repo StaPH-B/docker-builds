@@ -1,8 +1,11 @@
-# Kraken2 2.1.3 container
+# Kraken2 2.1.5 container
 
 Main tool : [Kraken2](https://github.com/DerrickWood/kraken2/)
 
 Additional tools:
+
+- perl 5.34.0
+- ncbi-blast+ 2.12.0
 
 - [Pre-built kraken2 databases can be found here](https://benlangmead.github.io/aws-indexes/k2)
 
