@@ -15,6 +15,11 @@ LABEL license="https://github.com/rrwick/Autocycler/blob/main/LICENSE"
 LABEL maintainer="Erin Young"
 LABEL maintainer.email="eriny@utah.gov"
 
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    wget \
+    ca-certificates && \
+    apt-get autoclean && rm -rf /var/lib/apt/lists/*
+
 # get conda environment file for extra tools
 RUN wget -q https://github.com/rrwick/Autocycler/archive/refs/tags/v${AUTOCYCLER_VER}.tar.gz && \
     tar -xvf v${AUTOCYCLER_VER}.tar.gz && \
@@ -27,10 +32,10 @@ RUN wget -q https://github.com/rrwick/Autocycler/archive/refs/tags/v${AUTOCYCLER
 # install autocycler and helper scripts
 WORKDIR /usr/local/bin
 
-RUN wget -q https://github.com/rrwick/Autocycler/releases/download/v${AUTOCYCLER_VER}/autocycler-linux-x86_64-musl-v${AUTOCYCLER_VER}.tar.gz && \
+RUN wget https://github.com/rrwick/Autocycler/releases/download/v${AUTOCYCLER_VER}/autocycler-linux-x86_64-musl-v${AUTOCYCLER_VER}.tar.gz && \
     tar -vxf autocycler-linux-x86_64-musl-v${AUTOCYCLER_VER}.tar.gz && \
     rm autocycler-linux-x86_64-musl-v${AUTOCYCLER_VER}.tar.gz && \
-    wget -q https://github.com/rrwick/Autocycler/releases/download/v${AUTOCYCLER_VER}/autocycler-helper-scripts-v${AUTOCYCLER_VER}.tar.gz && \
+    wget https://github.com/rrwick/Autocycler/releases/download/v${AUTOCYCLER_VER}/autocycler-helper-scripts-v${AUTOCYCLER_VER}.tar.gz && \
     tar -vxf autocycler-helper-scripts-v${AUTOCYCLER_VER}.tar.gz && \
     rm autocycler-helper-scripts-v${AUTOCYCLER_VER}.tar.gz
 
