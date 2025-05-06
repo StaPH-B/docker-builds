@@ -1,4 +1,4 @@
-ARG MASURCA_VER="4.1.2"
+ARG MASURCA_VER="4.1.3"
 
 FROM ubuntu:jammy AS builder
 
