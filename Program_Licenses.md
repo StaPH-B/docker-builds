@@ -182,6 +182,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Samtools | GNU GPLv3 | https://github.com/samtools/samtools/blob/develop/LICENSE |
 | SeqFu | GNU GPLv3 | https://github.com/telatin/seqfu2 |
 | SeqKit | MIT | https://github.com/shenwei356/seqkit/blob/master/LICENSE
+| SeqSender | Apache 2.0 | https://github.com/CDCgov/seqsender/blob/master/LICENSE |
 | SeqSero | GNU GPLv2 | https://github.com/denglab/SeqSero/blob/master/LICENSE |
 | SeqSero2 | GNU GPLv2 | https://github.com/denglab/SeqSero2/blob/master/LICENSE |
 | seqyclean | MIT | https://github.com/ibest/seqyclean/blob/master/LICENSE |
