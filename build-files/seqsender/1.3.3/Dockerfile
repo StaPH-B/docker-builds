@@ -1,5 +1,5 @@
 # sourced from https://github.com/StaPH-B/docker-builds/blob/master/dockerfile-template/Dockerfile_mamba
-FROM mambaorg/micromamba:1.5.3 as micromamba
+FROM mambaorg/micromamba:1.5.3 as app
 
 ARG SEQSENDER_VERSION=1.3.3
 
@@ -49,7 +49,7 @@ CMD seqsender.py --help
 WORKDIR /data
 
 # test layer
-FROM micromamba as test
+FROM app as test
 
 # activate micromamba env for running below commands
 ENV ENV_NAME="base"
