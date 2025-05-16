@@ -166,6 +166,7 @@ The licenses of the open-source software that is contained in these Docker image
 | pyGenomeViz | MIT | https://github.com/moshi4/pyGenomeViz/blob/main/LICENSE |
 | pyMLST | GNU GPLv3 | https://github.com/bvalot/pyMLST/blob/master/LICENSE |
 | pypolca | MIT | https://github.com/gbouras13/pypolca/blob/main/LICENSE |
+| QualiMap | GNU GPLv2 | https://bitbucket.org/kokonech/qualimap/src/master/LICENSE |
 | QUAST | GNU GPLv2 | https://github.com/ablab/quast/blob/master/LICENSE.txt |
 | QuickSNP | GNU GPLv3 | https://github.com/k-florek/QuickSNP/blob/main/LICENSE |
 | racon | MIT | https://github.com/lbcb-sci/racon/blob/master/LICENSE ; https://github.com/isovic/racon/blob/master/LICENSE |
