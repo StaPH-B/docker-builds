@@ -47,8 +47,6 @@ fasta-trim-terminal-ambigs.pl \
     --maxlen 210000 \
     > trimmed.fasta
 
-fasta-trim-terminal-ambigs.pl input.consensus.fa > trimmed.fasta
-
 # run v-annotate.pl using mpxv model
 v-annotate.pl --split --cpu 8 --glsearch -s -r --nomisc --mkey mpxv \
     --r_lowsimok --r_lowsimxd 100 --r_lowsimxl 2000 --alt_pass discontn,dupregin \

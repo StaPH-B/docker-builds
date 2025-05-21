@@ -67,7 +67,6 @@ RUN mkdir -p ${VADRINSTALLDIR}/vadr-${VADR_VERSION} /data ${VADRMODELDIR} && \
     cp -nv ${VADRINSTALLDIR}/vadr-models-calici/* ${VADRMODELDIR}
 
 # download mpxv models 
-# cleanup duplicate copies of model files
 RUN wget -O vadr-models-mpxv.tar.gz https://ftp.ncbi.nlm.nih.gov/pub/nawrocki/vadr-models/mpxv/${VADR_MPXV_MODELS_VERSION}/vadr-models-mpxv-${VADR_MPXV_MODELS_VERSION}.tar.gz && \
     tar -xf vadr-models-mpxv.tar.gz && \
     cp -nv /vadr-models-mpxv-${VADR_MPXV_MODELS_VERSION}/* ${VADRMODELDIR} && \
