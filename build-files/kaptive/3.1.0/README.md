@@ -20,6 +20,7 @@ There are few databases included in this docker image:
 - Acinetobacter baumannii
   - included w/ Kaptive
 - Vibrio parahaemolyticus
+  - Verson 1.1
   - Located in separate GitHub repo: https://github.com/aldertzomer/vibrio_parahaemolyticus_genomoserotyping
   - Publication: https://www.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.001007
 
