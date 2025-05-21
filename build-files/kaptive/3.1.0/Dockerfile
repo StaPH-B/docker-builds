@@ -4,7 +4,7 @@ FROM ubuntu:jammy AS app
 ARG MINIMAP2_VER="2.29"
 ARG MASH_VER="2.3"
 ARG KAPTIVE_VER="3.1.0"
-ARG VP_GENOMOSEROTYPING_VER="1.0"
+ARG VP_GENOMOSEROTYPING_VER="1.1"
 
 LABEL base.image="ubuntu:jammy"
 LABEL dockerfile.version="1"
