@@ -18,7 +18,7 @@ ENV VADRSCRIPTSDIR=$VADRINSTALLDIR/vadr \
   VADRMINIMAP2DIR=$VADRINSTALLDIR/minimap2
 
 ENV PERL5LIB=$VADRSCRIPTSDIR:$VADRSEQUIPDIR:$VADRBIOEASELDIR/blib/lib:$VADRBIOEASELDIR/blib/arch:$PERL5LIB \
-  PATH=$VADRSCRIPTSDIR:$VADRMINISCRIPTSDIR:$PATH
+  PATH=$VADRSCRIPTSDIR:$VADRMINISCRIPTSDIR:$VADRINFERNALDIR:$VADRBIOEASELDIR:$VADRSEQUIPDIR:$VADRBLASTDIR:$VADRFASTADIR:$VADRMINIMAP2DIR:$PATH
 
 LABEL base.image="ubuntu:jammy"
 LABEL dockerfile.version="1"
@@ -49,94 +49,63 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   zlib1g-dev && \
   apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-# install VADR
-# download entire VADR source code from GitHub release
+# create relevant directories
+# download vadr source code
+# decompress souce code
+# remove tarfile
 # use vadr-install.sh script to install VADR into $VADRINSTALLDIR (set to /opt/vadr)
-# this script grabs files from tagged release and sets things up in /opt/vadr/vadr
-# last step is to delete the original source code that is a duplicate (/opt/vadr/vadr-$VADR_VERSION)
-RUN mkdir -p ${VADRINSTALLDIR} && \
+# remove directory that's no longer needed
+# copy calici files that are used in testing
+RUN mkdir -p ${VADRINSTALLDIR}/vadr-${VADR_VERSION} /data ${VADRMODELDIR} && \
   cd ${VADRINSTALLDIR} && \ 
-  wget https://github.com/ncbi/vadr/archive/refs/tags/vadr-${VADR_VERSION}.tar.gz && \
-  mkdir vadr-${VADR_VERSION} && tar -xzf vadr-${VADR_VERSION}.tar.gz -C vadr-${VADR_VERSION} --strip-components 1 && \
+  wget -q https://github.com/ncbi/vadr/archive/refs/tags/vadr-${VADR_VERSION}.tar.gz && \
+  tar -xzf vadr-${VADR_VERSION}.tar.gz -C vadr-${VADR_VERSION} --strip-components 1 && \
   rm vadr-${VADR_VERSION}.tar.gz && \
   bash vadr-${VADR_VERSION}/vadr-install.sh linux && \
   rm -rf vadr-${VADR_VERSION}/ && \
-  mkdir /data
+  cp -nv ${VADRINSTALLDIR}/vadr-models-calici/* ${VADRMODELDIR}
 
 # set working directory
 WORKDIR /data
 
+# set default command
 CMD ["v-annotate.pl", "-h"]
 
 FROM app AS test 
 
 ARG VADR_SARSCOV2_MODELS_VERSION="1.3-2"
-ARG VADR_MPXV_MODELS_VERSION="1.4.2-1" 
 
+# testing that executable is in PATH
+RUN v-annotate.pl -h
+RUN fasta-trim-terminal-ambigs.pl -h || echo "prints to stderr for some reason"
+
+# running vadr tests
+RUN /opt/vadr/vadr/testfiles/do-install-tests-local.sh
+
+# downloading some test files
 WORKDIR /
 
-# install the latest sarscov2 and mpxv models 
-# copy calici model files into VADRMODELDIR to allow VADR tests to pass completely
-# cleanup duplicate copies of model files
+# install the latest sarscov2 models 
 RUN wget -O vadr-models-sarscov2.tar.gz https://ftp.ncbi.nlm.nih.gov/pub/nawrocki/vadr-models/sarscov2/${VADR_SARSCOV2_MODELS_VERSION}/vadr-models-sarscov2-${VADR_SARSCOV2_MODELS_VERSION}.tar.gz && \
-  wget -O vadr-models-mpxv.tar.gz https://ftp.ncbi.nlm.nih.gov/pub/nawrocki/vadr-models/mpxv/${VADR_MPXV_MODELS_VERSION}/vadr-models-mpxv-${VADR_MPXV_MODELS_VERSION}.tar.gz && \
   tar -xf vadr-models-sarscov2.tar.gz && \
-  tar -xf vadr-models-mpxv.tar.gz && \
-  mkdir -vp ${VADRMODELDIR} && \
   cp -nv /vadr-models-sarscov2-${VADR_SARSCOV2_MODELS_VERSION}/* ${VADRMODELDIR} && \
-  cp -nv /vadr-models-mpxv-${VADR_MPXV_MODELS_VERSION}/* ${VADRMODELDIR} && \
-  rm -rf /vadr-models-sarscov2* && \
-  rm -rf /vadr-models-mpxv* && \
-  cp -nv ${VADRINSTALLDIR}/vadr-models-calici/* ${VADRMODELDIR} && \
-  rm -rf ${VADRINSTALLDIR}/vadr-models-calici
+  rm -rf /vadr-models-sarscov2*
 
 WORKDIR /test
 
-# download B.1.1.7 genome from Utah
-ADD https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123.consensus.fa /test-data/SRR13957123.consensus.fa
-
 # print help options (which prints version at top)
+# download B.1.1.7 genome from Utah
 # run test script included w VADR
 # test terminal N trimming script
 # run v-annotate.pl on trimmed B.1.1.7 genome
-RUN v-annotate.pl -h && \
-  /opt/vadr/vadr/testfiles/do-install-tests-local.sh && \ 
-  /opt/vadr/vadr/miniscripts/fasta-trim-terminal-ambigs.pl \
-        /test-data/SRR13957123.consensus.fa \
-        --minlen 50 \
-        --maxlen 30000 \
-        > /test-data/SRR13957123.consensus.trimmed.fasta && \
-  v-annotate.pl --noseqnamemax --glsearch -s -r --nomisc \
-        --mkey sarscov2 --lowsim5seq 6 --lowsim3seq 6 --alt_fail lowscore,insertnn,deletinn \
-        "/test-data/SRR13957123.consensus.trimmed.fasta" \
-        "SRR13957123-vadr-outdir" && \
-  ls SRR13957123-vadr-outdir
-
-# install ncbi datasets tool (pre-compiled binary); place in $PATH
-RUN wget https://ftp.ncbi.nlm.nih.gov/pub/datasets/command-line/LATEST/linux-amd64/datasets && \
-  chmod +x datasets && \
-  mv -v datasets /usr/local/bin
-
-# download assembly for a MPXV from the UK
-# run VADR trimming script and v-annotate.pl
-# link to GenBank accession: https://www.ncbi.nlm.nih.gov/nuccore/OP022171
-ARG GENBANK_ACCESSION="OP022171.1"
-RUN datasets download virus genome accession ${GENBANK_ACCESSION} --filename ${GENBANK_ACCESSION}.zip && \
-  unzip ${GENBANK_ACCESSION}.zip && rm ${GENBANK_ACCESSION}.zip && \
-  mv -v ncbi_dataset/data/genomic.fna ${GENBANK_ACCESSION}.genomic.fna && \
-  fasta-trim-terminal-ambigs.pl ${GENBANK_ACCESSION}.genomic.fna \
+RUN wget https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123.consensus.fa && \ 
+  fasta-trim-terminal-ambigs.pl \
+    SRR13957123.consensus.fa \
     --minlen 50 \
-    --maxlen 210000 \
-    > ${GENBANK_ACCESSION}.trimmed.fasta && \
-  v-annotate.pl --split --cpu 2 \
-    --glsearch -s -r \
-    --nomisc \
-    --mkey mpxv \
-    --r_lowsimok \
-    --r_lowsimxd 100 \
-    --r_lowsimxl 2000 \
-    --alt_pass discontn,dupregin \
-    --minimap2 \
-    --s_overhang 150 \
-    ${GENBANK_ACCESSION}.trimmed.fasta \
-    ${GENBANK_ACCESSION}-mpxv-vadr-test-output
+    --maxlen 30000 \
+    > SRR13957123.consensus.trimmed.fasta && \
+  v-annotate.pl --noseqnamemax --glsearch -s -r --nomisc \
+    --mkey sarscov2 --lowsim5seq 6 --lowsim3seq 6 --alt_fail lowscore,insertnn,deletinn \
+    "SRR13957123.consensus.trimmed.fasta" \
+    "SRR13957123-vadr-outdir" && \
+  ls SRR13957123-vadr-outdir

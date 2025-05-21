@@ -17,18 +17,7 @@ Additional tools:
 Available VADR models:
 
 - sarscov2 v1.3-2
-- Mpox (AKA MPXV, formerly known as "Monkeypox") v1.4.2-1
-- Norovirus and other Caliciviridae
-- Dengue virus and other Flaviviridae
-- RSV v1.5.1-2
-- influenza v1.6.3-1
 
-## FYI
-
-- Mpox FYIs
-  - **Note:** Support for MonkeyPox genome annotation was added to the VADR software (July 2022) and is under active development. Things may change quickly. See the above documentation ^ to see the latest information on the state of MPXV annotation with VADR.
-  - Also be aware that some Mpox sequences may take up to **30 minutes** to annotate, depending on how divergent it is from the RefSeq NC_063383 sequence. Some sequences may only take a minute or so.
-- Most of the VADR model files are located at `/opt/vadr/vadr-models` in the container filesystem and this path is stored in the globally accessible bash variable `$VADRMODELDIR`. For most applications, there is no need to specify `v-annotate.pl --mdir /path/to/model/files` since `$VADRMODELDIR` is set in the environment.
   - The exception is that Dengue and other Flaviviridae model files are located at `/opt/vadr/vadr-models-flavi/` within the container filesystem. To use these models, please specify the 2 options: `v-annotate.pl --mdir /opt/vadr/vadr-models-flavi/ --mkey flavi`. A full example command can be found below.
 
 ### VADR Documentation

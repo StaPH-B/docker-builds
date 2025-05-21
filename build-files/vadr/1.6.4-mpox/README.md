@@ -16,12 +16,9 @@ Additional tools:
 
 Available VADR models:
 
-- sarscov2 v1.3-2
 - Mpox (AKA MPXV, formerly known as "Monkeypox") v1.4.2-1
 - Norovirus and other Caliciviridae
 - Dengue virus and other Flaviviridae
-- RSV v1.5.1-2
-- influenza v1.6.3-1
 
 ## FYI
 

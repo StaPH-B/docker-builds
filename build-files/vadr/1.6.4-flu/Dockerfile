@@ -19,7 +19,7 @@ ENV VADRSCRIPTSDIR=$VADRINSTALLDIR/vadr \
     VADRMINIMAP2DIR=$VADRINSTALLDIR/minimap2
 
 ENV PERL5LIB=$VADRSCRIPTSDIR:$VADRSEQUIPDIR:$VADRBIOEASELDIR/blib/lib:$VADRBIOEASELDIR/blib/arch:$PERL5LIB \
-    PATH=$VADRSCRIPTSDIR:$VADRMINISCRIPTSDIR:$PATH
+    PATH=$VADRSCRIPTSDIR:$VADRMINISCRIPTSDIR:$VADRINFERNALDIR:$VADRBIOEASELDIR:$VADRSEQUIPDIR:$VADRBLASTDIR:$VADRFASTADIR:$VADRMINIMAP2DIR:$PATH
 
 LABEL base.image="ubuntu:jammy"
 LABEL dockerfile.version="1"
@@ -32,8 +32,6 @@ LABEL maintainer="Anders Goncalves da Silva"
 LABEL maintainer.email="andersgs@gmail.com"
 LABEL maintainer2="Curtis Kapsak"
 LABEL maintainer2.email="curtis.kapsak@theiagen.com"
-LABEL maintainer3="Ines Mendes"
-LABEL maintainer3.email="ines.mendes@theiagen.com"
 
 # install dependencies via apt-get. Clean up apt garbage 
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -52,25 +50,21 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     zlib1g-dev && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-# install VADR
-# download entire VADR source code from GitHub release
+# create relevant directories
+# download vadr source code
+# decompress souce code
+# remove tarfile
 # use vadr-install.sh script to install VADR into $VADRINSTALLDIR (set to /opt/vadr)
-# this script grabs files from tagged release and sets things up in /opt/vadr/vadr
-# last step is to delete the original source code that is a duplicate (/opt/vadr/vadr-$VADR_VERSION)
-RUN mkdir -p ${VADRINSTALLDIR} && \
+# remove directory that's no longer needed
+# copy calici files that are used in testing
+RUN mkdir -p ${VADRINSTALLDIR}/vadr-${VADR_VERSION} /data ${VADRMODELDIR} && \
     cd ${VADRINSTALLDIR} && \ 
-    wget https://github.com/ncbi/vadr/archive/refs/tags/vadr-${VADR_VERSION}.tar.gz && \
-    mkdir vadr-${VADR_VERSION} && tar -xzf vadr-${VADR_VERSION}.tar.gz -C vadr-${VADR_VERSION} --strip-components 1 && \
+    wget -q https://github.com/ncbi/vadr/archive/refs/tags/vadr-${VADR_VERSION}.tar.gz && \
+    tar -xzf vadr-${VADR_VERSION}.tar.gz -C vadr-${VADR_VERSION} --strip-components 1 && \
     rm vadr-${VADR_VERSION}.tar.gz && \
     bash vadr-${VADR_VERSION}/vadr-install.sh linux && \
     rm -rf vadr-${VADR_VERSION}/ && \
-    mkdir /data
-
-# copy calici model files into VADRMODELDIR to allow VADR tests to pass completely
-# cleanup duplicate copies of model files
-RUN mkdir -vp ${VADRMODELDIR} && \
-    cp -nv ${VADRINSTALLDIR}/vadr-models-calici/* ${VADRMODELDIR} && \
-    rm -rf ${VADRINSTALLDIR}/vadr-models-calici/ 
+    cp -nv ${VADRINSTALLDIR}/vadr-models-calici/* ${VADRMODELDIR}
 
 # download flu VADR models; copy model files into VADRMODELDIR
 RUN wget https://ftp.ncbi.nlm.nih.gov/pub/nawrocki/vadr-models/flu/${VADR_FLU_MODELS_VER}/vadr-models-flu-${VADR_FLU_MODELS_VER}.tar.gz && \
@@ -84,20 +78,16 @@ WORKDIR /data
 
 CMD ["v-annotate.pl", "-h"]
 
-FROM app as test 
+FROM app AS test 
+
+# testing that executable is in PATH
+RUN v-annotate.pl -h
+RUN fasta-trim-terminal-ambigs.pl -h || echo "prints to stderr for some reason"
+
+# running vadr tests
+RUN /opt/vadr/vadr/testfiles/do-install-tests-local.sh
 
 WORKDIR /test
-
-# print help options (which prints version at top)
-# run test script included w VADR
-# test terminal N trimming script
-RUN v-annotate.pl -h && \
-    /opt/vadr/vadr/testfiles/do-install-tests-local.sh 
-
-# install ncbi datasets tool (pre-compiled binary); place in $PATH
-RUN wget https://ftp.ncbi.nlm.nih.gov/pub/datasets/command-line/LATEST/linux-amd64/datasets && \
-    chmod +x datasets && \
-    mv -v datasets /usr/local/bin
 
 # download some test flu genomes, run through VADR using flu models
 # example commands taken from VADR flu guide: https://github.com/ncbi/vadr/wiki/Influenza-annotation

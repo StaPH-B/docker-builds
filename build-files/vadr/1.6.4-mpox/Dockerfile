@@ -1,7 +1,7 @@
 FROM ubuntu:jammy AS app
 
 # for easy upgrade later. LC_ALL set for singularity compatibility
-ENV VADR_VERSION="1.6.3" \
+ENV VADR_VERSION="1.6.4" \
     VADR_MPXV_MODELS_VERSION="1.4.2-1" \
     LC_ALL=C \
     VADRINSTALLDIR=/opt/vadr
@@ -19,9 +19,8 @@ ENV VADRSCRIPTSDIR=$VADRINSTALLDIR/vadr \
     VADRMINIMAP2DIR=$VADRINSTALLDIR/minimap2
 
 ENV PERL5LIB=$VADRSCRIPTSDIR:$VADRSEQUIPDIR:$VADRBIOEASELDIR/blib/lib:$VADRBIOEASELDIR/blib/arch:$PERL5LIB \
-    PATH=$VADRSCRIPTSDIR:$VADRMINISCRIPTSDIR:$PATH
+    PATH=$VADRSCRIPTSDIR:$VADRMINISCRIPTSDIR:$VADRINFERNALDIR:$VADRBIOEASELDIR:$VADRSEQUIPDIR:$VADRBLASTDIR:$VADRFASTADIR:$VADRMINIMAP2DIR:$PATH
 
-# metadata - optional, but highly recommended
 LABEL base.image="ubuntu:jammy"
 LABEL dockerfile.version="1"
 LABEL software="VADR"
@@ -51,43 +50,44 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     zlib1g-dev && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-# install VADR
-# download entire VADR source code from GitHub release
+# create relevant directories
+# download vadr source code
+# decompress souce code
+# remove tarfile
 # use vadr-install.sh script to install VADR into $VADRINSTALLDIR (set to /opt/vadr)
-# this script grabs files from tagged release and sets things up in /opt/vadr/vadr
-# last step is to delete the original source code that is a duplicate (/opt/vadr/vadr-$VADR_VERSION)
-RUN mkdir -p ${VADRINSTALLDIR} && \
+# remove directory that's no longer needed
+# copy calici files that are used in testing
+RUN mkdir -p ${VADRINSTALLDIR}/vadr-${VADR_VERSION} /data ${VADRMODELDIR} && \
     cd ${VADRINSTALLDIR} && \ 
-    wget https://github.com/ncbi/vadr/archive/refs/tags/vadr-${VADR_VERSION}.tar.gz && \
-    mkdir vadr-${VADR_VERSION} && tar -xzf vadr-${VADR_VERSION}.tar.gz -C vadr-${VADR_VERSION} --strip-components 1 && \
+    wget -q https://github.com/ncbi/vadr/archive/refs/tags/vadr-${VADR_VERSION}.tar.gz && \
+    tar -xzf vadr-${VADR_VERSION}.tar.gz -C vadr-${VADR_VERSION} --strip-components 1 && \
     rm vadr-${VADR_VERSION}.tar.gz && \
     bash vadr-${VADR_VERSION}/vadr-install.sh linux && \
     rm -rf vadr-${VADR_VERSION}/ && \
-    mkdir /data
+    cp -nv ${VADRINSTALLDIR}/vadr-models-calici/* ${VADRMODELDIR}
 
-# install the latest sarscov2 and mpxv models 
-# copy calici model files into VADRMODELDIR to allow VADR tests to pass completely
+# download mpxv models 
 # cleanup duplicate copies of model files
 RUN wget -O vadr-models-mpxv.tar.gz https://ftp.ncbi.nlm.nih.gov/pub/nawrocki/vadr-models/mpxv/${VADR_MPXV_MODELS_VERSION}/vadr-models-mpxv-${VADR_MPXV_MODELS_VERSION}.tar.gz && \
     tar -xf vadr-models-mpxv.tar.gz && \
-    mkdir -vp ${VADRMODELDIR} && \
     cp -nv /vadr-models-mpxv-${VADR_MPXV_MODELS_VERSION}/* ${VADRMODELDIR} && \
-    rm -rf /vadr-models-mpxv* && \
-    cp -nv ${VADRINSTALLDIR}/vadr-models-calici/* ${VADRMODELDIR} && \
-    rm -rf ${VADRINSTALLDIR}/vadr-models-calici/ 
+    rm -rf /vadr-models-mpxv* 
 
 # set working directory
 WORKDIR /data
 
 CMD ["v-annotate.pl", "-h"]
 
-FROM app as test 
+FROM app AS test 
 
-# print help options (which prints version at top)
-# run test script included w VADR
-# test terminal N trimming script
-RUN v-annotate.pl -h && \
-    /opt/vadr/vadr/testfiles/do-install-tests-local.sh 
+# testing that executable is in PATH
+RUN v-annotate.pl -h
+RUN fasta-trim-terminal-ambigs.pl -h || echo "prints to stderr for some reason"
+
+# running vadr tests
+RUN /opt/vadr/vadr/testfiles/do-install-tests-local.sh
+
+WORKDIR /test
 
 # install ncbi datasets tool (pre-compiled binary); place in $PATH
 RUN wget https://ftp.ncbi.nlm.nih.gov/pub/datasets/command-line/LATEST/linux-amd64/datasets && \

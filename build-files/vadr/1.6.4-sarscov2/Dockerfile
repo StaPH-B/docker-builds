@@ -1,7 +1,7 @@
 FROM ubuntu:jammy AS app
 
 # for easy upgrade later. LC_ALL set for singularity compatibility
-ENV VADR_VERSION="1.6.3" \
+ENV VADR_VERSION="1.6.4" \
   VADR_SARSCOV2_MODELS_VERSION="1.3-2" \
   LC_ALL=C \
   VADRINSTALLDIR=/opt/vadr
@@ -19,7 +19,7 @@ ENV VADRSCRIPTSDIR=$VADRINSTALLDIR/vadr \
   VADRMINIMAP2DIR=$VADRINSTALLDIR/minimap2
 
 ENV PERL5LIB=$VADRSCRIPTSDIR:$VADRSEQUIPDIR:$VADRBIOEASELDIR/blib/lib:$VADRBIOEASELDIR/blib/arch:$PERL5LIB \
-  PATH=$VADRSCRIPTSDIR:$VADRMINISCRIPTSDIR:$PATH
+  PATH=$VADRSCRIPTSDIR:$VADRMINISCRIPTSDIR:$VADRINFERNALDIR:$VADRBIOEASELDIR:$VADRSEQUIPDIR:$VADRBLASTDIR:$VADRFASTADIR:$VADRMINIMAP2DIR:$PATH
 
 LABEL base.image="ubuntu:jammy"
 LABEL dockerfile.version="1"
@@ -50,57 +50,49 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   zlib1g-dev && \
   apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-# install VADR
-# download entire VADR source code from GitHub release
+# create relevant directories
+# download vadr source code
+# decompress souce code
+# remove tarfile
 # use vadr-install.sh script to install VADR into $VADRINSTALLDIR (set to /opt/vadr)
-# this script grabs files from tagged release and sets things up in /opt/vadr/vadr
-# last step is to delete the original source code that is a duplicate (/opt/vadr/vadr-$VADR_VERSION)
-RUN mkdir -p ${VADRINSTALLDIR} && \
+# remove directory that's no longer needed
+# copy calici files that are used in testing
+RUN mkdir -p ${VADRINSTALLDIR}/vadr-${VADR_VERSION} /data ${VADRMODELDIR} && \
   cd ${VADRINSTALLDIR} && \ 
-  wget https://github.com/ncbi/vadr/archive/refs/tags/vadr-${VADR_VERSION}.tar.gz && \
-  mkdir vadr-${VADR_VERSION} && tar -xzf vadr-${VADR_VERSION}.tar.gz -C vadr-${VADR_VERSION} --strip-components 1 && \
+  wget -q https://github.com/ncbi/vadr/archive/refs/tags/vadr-${VADR_VERSION}.tar.gz && \
+  tar -xzf vadr-${VADR_VERSION}.tar.gz -C vadr-${VADR_VERSION} --strip-components 1 && \
   rm vadr-${VADR_VERSION}.tar.gz && \
   bash vadr-${VADR_VERSION}/vadr-install.sh linux && \
   rm -rf vadr-${VADR_VERSION}/ && \
-  mkdir /data
+  cp -nv ${VADRINSTALLDIR}/vadr-models-calici/* ${VADRMODELDIR}
 
-# install the latest sarscov2 modles
-# copy calici model files into VADRMODELDIR to allow VADR tests to pass completely
-# cleanup duplicate copies of model files
+# download the sarscov2 model
 RUN wget -O vadr-models-sarscov2.tar.gz https://ftp.ncbi.nlm.nih.gov/pub/nawrocki/vadr-models/sarscov2/${VADR_SARSCOV2_MODELS_VERSION}/vadr-models-sarscov2-${VADR_SARSCOV2_MODELS_VERSION}.tar.gz && \
   tar -xf vadr-models-sarscov2.tar.gz && \
-  mkdir -vp ${VADRMODELDIR} && \
   cp -nv /vadr-models-sarscov2-${VADR_SARSCOV2_MODELS_VERSION}/* ${VADRMODELDIR} && \
-  rm -rf /vadr-models-sarscov2* && \
-  cp -nv ${VADRINSTALLDIR}/vadr-models-calici/* ${VADRMODELDIR} && \
-  rm -rf ${VADRINSTALLDIR}/vadr-models-calici/ 
-
-# download flu VADR models; copy model files into VADRMODELDIR
-RUN wget https://ftp.ncbi.nlm.nih.gov/pub/nawrocki/vadr-models/flu/${VADR_FLU_MODELS_VER}/vadr-models-flu-${VADR_FLU_MODELS_VER}.tar.gz && \
-  tar -xf /vadr-models-flu-${VADR_FLU_MODELS_VER}.tar.gz && \
-  rm -v /vadr-models-flu-${VADR_FLU_MODELS_VER}.tar.gz && \
-  cp -nvr /vadr-models-flu-${VADR_FLU_MODELS_VER}/* ${VADRMODELDIR} && \
-  rm -rfv /vadr-models-flu-${VADR_FLU_MODELS_VER}
+  rm -rf /vadr-models-sarscov2* 
 
 # set working directory
 WORKDIR /data
 
 CMD ["v-annotate.pl", "-h"]
 
-FROM app as test 
+FROM app AS test 
+
+# testing that executable is in PATH
+RUN v-annotate.pl -h
+RUN fasta-trim-terminal-ambigs.pl -h || echo "prints to stderr for some reason"
+
+# running vadr tests
+RUN /opt/vadr/vadr/testfiles/do-install-tests-local.sh
 
 WORKDIR /test
 
 # download B.1.1.7 genome from Utah
-ADD https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123.consensus.fa /test-data/SRR13957123.consensus.fa
-
-# print help options (which prints version at top)
-# run test script included w VADR
-# test terminal N trimming script
-# run v-annotate.pl on trimmed B.1.1.7 genome
-RUN v-annotate.pl -h && \
-  /opt/vadr/vadr/testfiles/do-install-tests-local.sh && \ 
-  /opt/vadr/vadr/miniscripts/fasta-trim-terminal-ambigs.pl \
+# run fasta-trim-terminal-ambigs
+# run v-annotate.pl
+RUN wget https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123.consensus.fa && \
+  fasta-trim-terminal-ambigs.pl \
         SRR13957123.consensus.fa \
         --minlen 50 \
         --maxlen 30000 \
