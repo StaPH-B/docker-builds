@@ -154,6 +154,11 @@ RUN echo "testing HAV functionality..." && \
 
 WORKDIR /test-mpxv
 
+# install ncbi datasets tool (pre-compiled binary); place in $PATH
+RUN wget https://ftp.ncbi.nlm.nih.gov/pub/datasets/command-line/LATEST/linux-amd64/datasets && \
+    chmod +x datasets && \
+    mv -v datasets /usr/local/bin
+
 # download assembly for a MPXV from the UK
 # run VADR trimming script and v-annotate.pl
 # link to GenBank accession: https://www.ncbi.nlm.nih.gov/nuccore/OP022171
