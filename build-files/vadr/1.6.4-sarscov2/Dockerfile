@@ -2,6 +2,7 @@ FROM ubuntu:jammy AS app
 
 # for easy upgrade later. LC_ALL set for singularity compatibility
 ENV VADR_VERSION="1.6.4" \
+  
   VADR_SARSCOV2_MODELS_VERSION="1.3-2" \
   LC_ALL=C \
   VADRINSTALLDIR=/opt/vadr
