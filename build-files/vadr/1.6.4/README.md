@@ -22,7 +22,7 @@ Basic information on how to use this tool:
 
 Additional information: |
 
-This image only contains the default Caliciviridae models (including Norovirus virus) and a set of Flaviviridae models (including Dengue virus). 
+This image only contains the default Caliciviridae models (including Norovirus virus) and Flaviviridae models (including Dengue virus). 
 
 Flaviviridae model files are located at `/opt/vadr/vadr-models-flavi/` within the container filesystem. To use these models, please specify the 2 options: `v-annotate.pl --mdir /opt/vadr/vadr-models-flavi/ --mkey flavi`.
 
