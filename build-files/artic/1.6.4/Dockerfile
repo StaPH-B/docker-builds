@@ -1,4 +1,4 @@
-ARG ARTIC_VER=1.6.3
+ARG ARTIC_VER=1.6.4
 
 FROM mambaorg/micromamba:2.0.8-ubuntu22.04 AS app
 
