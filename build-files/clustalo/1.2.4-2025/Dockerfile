@@ -13,7 +13,7 @@ LABEL software="ClustalO"
 LABEL software.version="${CLUSTALO_VER}"
 LABEL description="Multiple sequence alignment program."
 LABEL website="http://www.clustal.org/omega/"
-LABEL license=""
+LABEL license="https://www.ebi.ac.uk/licencing/"
 LABEL documentation="http://www.clustal.org/omega/"
 LABEL maintainer="Kelsey Florek"
 LABEL maintainer.email="Kelsey.florek@slh.wisc.edu"
@@ -28,8 +28,6 @@ CMD [ "clustalo", "--help" ]
 WORKDIR /data
 
 FROM app AS test
-
-ARG USHER_VER
 
 RUN clustalo --help \
     clustalo --version
