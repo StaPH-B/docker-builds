@@ -1,6 +1,6 @@
 # ECTyper container
 
-Main tool: [checkm2](https://github.com/phac-nml/ecoli_serotyping)
+Main tool: [ectyper](https://github.com/phac-nml/ecoli_serotyping)
   
 Code repository: https://github.com/phac-nml/ecoli_serotyping
 
@@ -133,7 +133,7 @@ Basic information on how to use this tool:
 - version: `--version`
 - description: Prediction of Escherichia coli serotype, pathotype and shiga toxin tying from raw reads or assembled genome sequences.
 
-Additional information:
+## Additional information
 
 This docker container contains a few databases used by ECTyper:
 
