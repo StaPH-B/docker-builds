@@ -122,6 +122,7 @@ Code repository: https://github.com/phac-nml/ecoli_serotyping
   zstandard                0.23.0        py313h536fd9c_2       conda-forge
   zstd                     1.5.7         hb8e6e7a_2            conda-forge
 ```
+
 </details>
 </br>
 
@@ -143,5 +144,6 @@ This docker container contains a few databases used by ECTyper:
 ## Example Usage
 
 ```bash
-UPDATE ME
+# run ECTyper on an assembled genome sequence using 2 threads. Also run QC verification steps and pathotype prediction.
+ectyper -i E-coli-assembly.fasta -o ectyper-outdir -c 2 --verify --pathotype
 ```
