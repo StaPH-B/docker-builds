@@ -7,7 +7,7 @@ ARG PARSNP_VER
 ARG HARVEST_VER
 
 ARG RAXML_VER="8.2.12"
-ARG FASTTREE_VER="2.1.11"
+ARG FASTTREE_VER="2.2.0"
 ARG MASH_VER="2.3"
 ARG FASTANI_VER="1.34"
 
@@ -42,9 +42,13 @@ RUN pip3 install numpy
 
 # install fasttree
 # ParSNP expects the FastTree executable to be called 'fasttree'
-RUN wget -q http://www.microbesonline.org/fasttree/FastTree && \
-    chmod +x FastTree && \
-    mv FastTree /usr/local/bin/fasttree
+
+RUN wget https://github.com/morgannprice/fasttree/archive/refs/tags/v${FASTTREE_VER}.tar.gz && \
+    tar -vxf v${FASTTREE_VER}.tar.gz && \
+    chmod +x */FastTree && \
+    mv */FastTree /usr/local/bin/fasttree && \
+    rm -rf fasttree-* && \
+    rm v${FASTTREE_VER}.tar.gz
 
 # Install RAxML: https://cme.h-its.org/exelixis/resource/download/NewManual.pdf
 RUN wget -q https://github.com/stamatak/standard-RAxML/archive/refs/tags/v$RAXML_VER.tar.gz && \
@@ -60,7 +64,7 @@ RUN wget -q https://github.com/marbl/Mash/releases/download/v${MASH_VER}/mash-Li
     chown root:root /mash-Linux64-v${MASH_VER}/*
 
 # Install PhiPack: https://www.maths.otago.ac.nz/~dbryant/software/phimanual.pdf
-RUN wget -q https://www.maths.otago.ac.nz/~dbryant/software/PhiPack.tar.gz && \
+RUN wget --user-agent="Mozilla/5.0" https://www.maths.otago.ac.nz/~dbryant/software/PhiPack.tar.gz && \
     tar -xvf PhiPack.tar.gz && \
     cd /PhiPack/src && \
     make && \
