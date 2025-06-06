@@ -42,6 +42,7 @@ RUN pip3 install numpy
 
 # install fasttree
 # ParSNP expects the FastTree executable to be called 'fasttree'
+
 RUN wget https://github.com/morgannprice/fasttree/archive/refs/tags/v${FASTTREE_VER}.tar.gz && \
     tar -vxf v${FASTTREE_VER}.tar.gz && \
     chmod +x */FastTree && \
