@@ -34,9 +34,6 @@ RUN wget https://github.com/morgannprice/fasttree/archive/refs/tags/v${fasttree_
   rm v${fasttree_ver}.tar.gz && \
   mkdir /data
 
-# add to path
-ENV PATH="${PATH}:/fasttree"
-
 CMD ["FastTree", "-help"]
 
 WORKDIR /data
