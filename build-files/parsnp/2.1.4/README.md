@@ -4,7 +4,7 @@ This container implements [ParSNP](https://github.com/marbl/parsnp) from the [Ha
 
 ### Includes
 - ParSNP: `parsnp`
-- FastTree: `FastTree` or `fasttree` : 2.1.11
+- FastTree: `FastTree` or `fasttree` : 2.2.0
 - RAxML: `raxmlHPC-PTHREADS` : 8.2.12
 - Mash: `mash` : 2.3
 - PhiPack: `Phi` : 1.1
