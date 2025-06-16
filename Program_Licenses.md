@@ -90,7 +90,7 @@ The licenses of the open-source software that is contained in these Docker image
 | iqtree | GNU GPLv2 | https://github.com/Cibiv/IQ-TREE/blob/master/LICENSE |
 | iqtree2 | GNU GPLv2 | https://github.com/iqtree/iqtree2/blob/master/LICENSE |
 | IPA | BSD-3 | https://github.com/PacificBiosciences/pbipa/blob/master/LICENSE.txt |
-| IRMA | GNU GPLv3 | https://wonder.cdc.gov/amd/flu/irma/disclaimer.html |
+| IRMA | GNU GPLv3 ; Apache License 2.0 | https://wonder.cdc.gov/amd/flu/irma/disclaimer.html ; https://github.com/CDCgov/irma/blob/master/LICENSE|
 | isPcr | non-standard - see README in source | https://hgwdev.gi.ucsc.edu/~kent/src/isPcr33.zip |
 | iVar | GNU GPLv3 | https://github.com/andersen-lab/ivar/blob/master/LICENSE |
 | Jasmine | BSD-3 | https://github.com/PacificBiosciences/jasmine/blob/main/LICENSE |
