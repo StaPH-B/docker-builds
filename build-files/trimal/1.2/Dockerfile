@@ -1,59 +1,50 @@
-# -------------------------------
-# STAGE 1 — Build trimal from source
-# -------------------------------
-FROM ubuntu:16.04 AS build
+##### ----- STAGE 1: app ----- #####
+FROM ubuntu:jammy AS app
 
-ARG TRIMAL_VERSION="v1.2rev59"
-ENV DEBIAN_FRONTEND=noninteractive
+# Set software version
+ARG TRIMAL_VER="v1.2rev59"
 
-LABEL base.image="ubuntu:focal"
+# Metadata labels
+LABEL base.image="ubuntu:jammy"
 LABEL dockerfile.version="1"
-LABEL software="trimal"
-LABEL software.version=$TRIMAL_VERSION
+LABEL software="TrimAl"
+LABEL software.version="${TRIMAL_VER}"
 LABEL description="trimAl is a tool for the automated removal of spurious sequences or poorly aligned regions from a multiple sequence alignment."
 LABEL website="https://vicfero.github.io/trimal/"
 LABEL license="https://github.com/inab/trimal?tab=GPL-3.0-1-ov-file#readme"
-LABEL maintainer=""
-LABEL maintainer.email=""
+LABEL maintainer="FirstName LastName"
+LABEL maintainer.email="my.email@email.com"
 
-RUN apt-get update && apt-get install -y \
+# Install build dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     wget \
-    ca-certificates \
-    && rm -rf /var/lib/apt/lists/*
+    ca-certificates && \
+    apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
+# Download and build TrimAl
 WORKDIR /opt
-
-# Download and extract trimal source
 RUN wget https://github.com/user-attachments/files/17989858/trimal.v1.2rev59.tar.gz -O trimal.tar.gz && \
-    tar -xzf trimal.tar.gz
+    tar -xzf trimal.tar.gz && \
+    rm trimal.tar.gz
 
-# Compile
 WORKDIR /opt/trimAl/source
-RUN make
+RUN make && \
+    cp trimal /usr/local/bin/
 
-# -------------------------------
-# STAGE 2 — Minimal Runtime
-# -------------------------------
-FROM ubuntu:16.04 AS runtime
+# Set ENV variables
+ENV PATH="/usr/local/bin:$PATH" \
+    LC_ALL=C
 
-ENV DEBIAN_FRONTEND=noninteractive
-ENV PATH="/usr/local/bin:${PATH}"
-
-RUN apt-get update && apt-get install -y \
-    ca-certificates \
-    && rm -rf /var/lib/apt/lists/*
-
-# Copy only final binary
-COPY --from=build /opt/trimAl/source/trimal /usr/local/bin/trimal
-
+# Default working directory and command
 WORKDIR /data
+CMD ["trimal", "--help"]
 
-# -------------------------------
-# STAGE 3 — Test
-# -------------------------------
-FROM runtime AS test
+##### ----- STAGE 2: test ----- #####
+FROM app AS test
 
-# Simple version test
+WORKDIR /test
+
+# Run basic version test
 RUN trimal --version
 
