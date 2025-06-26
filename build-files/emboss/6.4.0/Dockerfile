@@ -4,7 +4,7 @@ ARG EMBOSS_VERSION="6.4.0"
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-LABEL base.image="ubuntu:bionic"
+LABEL base.image="ubuntu:focal"
 LABEL dockerfile.version="1"
 LABEL software="EMBOSS"
 LABEL software.version=$EMBOSS_VERSION
@@ -29,8 +29,8 @@ ENV LANG=en_US.UTF-8
 
 # EMBOSS
 RUN wget ftp://emboss.open-bio.org/pub/EMBOSS/old/${EMBOSS_VERSION}/EMBOSS-${EMBOSS_VERSION}.tar.gz && \
-	gunzip EMBOSS-${EMBOSS_VERSION}.tar.gz && \
-	tar xvf EMBOSS-${EMBOSS_VERSION}.tar && \
+	tar -xzf EMBOSS-${EMBOSS_VERSION}.tar.gz && \
+	rm EMBOSS-${EMBOSS_VERSION}.tar.gz && \
 	cd EMBOSS-${EMBOSS_VERSION} && \ 
 	./configure && \
 	make  
