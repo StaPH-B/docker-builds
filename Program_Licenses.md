@@ -62,7 +62,7 @@ The licenses of the open-source software that is contained in these Docker image
 | fasten | MIT | https://github.com/lskatz/fasten/blob/master/LICENSE |
 | Fastp | MIT | https://github.com/OpenGene/fastp/blob/master/LICENSE |
 | Fastplong | MIT | https://github.com/OpenGene/fastplong/blob/main/LICENSE |
-| FastTree | GNU GPLv2 | http://www.microbesonline.org/fasttree/ |
+| FastTree | GNU General Public License v3.0 | https://github.com/morgannprice/fasttree/blob/main/LICENSE |
 | FastQC | GNU GPLv3 | https://github.com/s-andrews/FastQC/blob/master/LICENSE.txt |
 | fastq-scan | MIT | https://github.com/rpetit3/fastq-scan/blob/master/LICENSE |
 | Freebayes | MIT | https://github.com/freebayes/freebayes/blob/master/LICENSE |
