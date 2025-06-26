@@ -1,11 +1,11 @@
 ##### ----- STAGE 1: app ----- #####
-FROM ubuntu:jammy AS app
+FROM ubuntu:focal AS app
 
 # Set software version
 ARG TRIMAL_VER="v1.2rev59"
 
 # Metadata labels
-LABEL base.image="ubuntu:jammy"
+LABEL base.image="ubuntu:focal"
 LABEL dockerfile.version="1"
 LABEL software="TrimAl"
 LABEL software.version="${TRIMAL_VER}"
