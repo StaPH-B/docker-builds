@@ -10,10 +10,11 @@ LABEL dockerfile.version="1"
 LABEL software="TrimAl"
 LABEL software.version="${TRIMAL_VER}"
 LABEL description="trimAl is a tool for the automated removal of spurious sequences or poorly aligned regions from a multiple sequence alignment."
-LABEL website="https://vicfero.github.io/trimal/"
+LABEL website="https://github.com/inab/trimal"
+LABEL documentation="https://vicfero.github.io/trimal/"
 LABEL license="https://github.com/inab/trimal?tab=GPL-3.0-1-ov-file#readme"
-LABEL maintainer="FirstName LastName"
-LABEL maintainer.email="my.email@email.com"
+LABEL maintainer="Rong Jin"
+LABEL maintainer.email="jinrongshanghai@gmail.com"
 
 # Install build dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -24,7 +25,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Download and build TrimAl
 WORKDIR /opt
-RUN wget https://github.com/user-attachments/files/17989858/trimal.v1.2rev59.tar.gz -O trimal.tar.gz && \
+RUN wget https://github.com/user-attachments/files/17989858/trimal.${TRIMAL_VER}.tar.gz -O trimal.tar.gz && \
     tar -xzf trimal.tar.gz && \
     rm trimal.tar.gz
 
@@ -47,4 +48,7 @@ WORKDIR /test
 
 # Run basic version test
 RUN trimal --version
+
+# Functional test using the embedded example file
+RUN trimal -in /opt/trimAl/dataset/example1.clw -automated1
 
