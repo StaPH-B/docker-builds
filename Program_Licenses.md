@@ -217,6 +217,7 @@ The licenses of the open-source software that is contained in these Docker image
 | toulligqc | GNU GPLv3 | https://github.com/GenomiqueENS/toulligQC/blob/master/LICENSE.txt |
 | transcluster | GNU GPLv3 | https://github.com/JamesStimson/transcluster/blob/master/DESCRIPTION |
 | Treemmer | GNU GPLv3 | https://github.com/fmenardo/Treemmer/blob/master/COPYING |
+| Trimal | GNU GPLv3 | https://github.com/inab/trimal?tab=GPL-3.0-1-ov-file#readme |
 | Trimmomatic | GNU GPLv3 | https://github.com/usadellab/Trimmomatic/blob/main/distSrc/LICENSE |
 | Trycycler | GNU GPLv3 | https://github.com/rrwick/Trycycler/blob/master/LICENSE |
 | Unicycler | GNU GPLv3 | https://github.com/rrwick/Unicycler/blob/master/LICENSE |
