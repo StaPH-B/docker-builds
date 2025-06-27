@@ -35,7 +35,10 @@ RUN wget ftp://emboss.open-bio.org/pub/EMBOSS/old/${EMBOSS_VERSION}/EMBOSS-${EMB
 	./configure && \
 	make  
 ENV PATH="/EMBOSS-${EMBOSS_VERSION}/emboss:${PATH}"
+
+# Default working directory and command
 WORKDIR /data
+CMD ['water', '-help']
 
 
 # test layer
