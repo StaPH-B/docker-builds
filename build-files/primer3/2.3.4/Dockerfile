@@ -11,8 +11,8 @@ LABEL software.version=$PRIMER3_VERSION
 LABEL description="Primer3 is a widely used open-source tool for designing PCR primers."
 LABEL website="https://github.com/primer3-org/primer3"
 LABEL license="https://github.com/primer3-org/primer3/tree/v2.3.4"
-LABEL maintainer="FirstName LastName"
-LABEL maintainer.email="my.email@email.com"
+LABEL maintainer="Rong Jin"
+LABEL maintainer.email="jinrongshanghai@gmail.com"
 
 
 # Install dependencies
