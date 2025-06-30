@@ -66,5 +66,4 @@ RUN trimal -in trimal-${TRIMAL_VER}/dataset/example.007.AA.fasta -automated1 && 
     trimal -in trimal-${TRIMAL_VER}/dataset/example.007.AA.fasta -nogaps && \
     trimal -in trimal-${TRIMAL_VER}/dataset/example.007.AA.fasta -noallgaps
 
-    RUN ls /trimAl_Linux_x86-64 && whatever
 
