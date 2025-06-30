@@ -1,7 +1,7 @@
-ARG PYMLST_VER="2.2.1"
+ARG PYMLST_VER="2.2.2"
 
 ## Builder ##
-FROM ubuntu:jammy as blat
+FROM ubuntu:jammy AS blat
 
 ARG BLAT_VER="35"
 ARG MACHTYPE="x86_64-pc-linux-gnu"
@@ -21,7 +21,7 @@ RUN wget https://genome-test.gi.ucsc.edu/~kent/src/blatSrc${BLAT_VER}.zip &&\
     mv bin/${MACHTYPE}/* /usr/local/bin/
 
 ## App ##
-FROM ubuntu:jammy as app 
+FROM ubuntu:jammy AS app 
 
 ARG PYMLST_VER
 
@@ -57,7 +57,7 @@ ENV LC_ALL=C
 WORKDIR /data
 
 ## Test ##
-FROM app as test
+FROM app AS test
 
 # checking CMD line
 RUN pyMLST -h && claMLST -h && wgMLST -h
