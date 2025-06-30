@@ -1,35 +1,27 @@
-# trimal v1.2rev59 Docker Image
+# trimAl Container
 
-This Docker image provides **trimal v1.2rev59**, a command-line tool for automated trimming of multiple sequence alignments.
+## Main Tool
+**trimAl**  
+Repository: [https://github.com/inab/trimal](https://github.com/inab/trimal)  
+Documentation: [https://vicfero.github.io/trimal/](https://vicfero.github.io/trimal/)
 
-Maintained as part of the [StaPH-B/docker-builds](https://github.com/StaPH-B/docker-builds) repository.
+## Additional Tools
+- `readAl`
 
----
+## Description
+> **trimAl** is a tool for the automated removal of spurious sequences or poorly aligned regions from a multiple sequence alignment.
 
-## 📦 Included Tools
+This container provides the `trimal` executable along with `readAl` for alignment processing.
 
-- **trimal** (v1.2rev59)
+## Executables
+- `trimal`
+- `readAl`
 
----
+## Usage
+- Help: `trimal --help`
+- Version: `trimal --version`
 
-## 🧱 Base Image
-
-- `ubuntu:16.04`
-
----
-
-## 🛠️ Build Overview
-
-This image is built from source using:
-- `make` from the official `trimal.v1.2rev59.tar.gz` archive
-- Only the compiled `trimal` binary is retained in the runtime image
-
----
-
-## 🐳 Usage
-
-### Example: Display version
-
+## Example
 ```bash
-docker run --rm staphb/trimal:1.2rev59 trimal --version
+trimal -in input.fasta -out output.fasta
 
