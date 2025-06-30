@@ -2,7 +2,7 @@ ARG VIRULENCEFINDER_VER="3.2.0"
 ARG VIRULENCEFINDER_DB_VER="2.0.1"
 # Database sometimes is not properly versioned, so using most recent commit made on 2024-04-06 would be something like
 # see here: https://bitbucket.org/genomicepidemiology/virulencefinder_db/commits/
-# ARG VIRULENCEFINDER_DB_COMMIT_HASH="bcf7f0b26271a59ca85715fa2ab8a0c380e5357b"
+# ARG VIRULENCEFINDER_DB_VER="bcf7f0b26271a59ca85715fa2ab8a0c380e5357b"
 ARG KMA_VER="1.5.2"
 
 FROM ubuntu:jammy AS app
@@ -55,9 +55,9 @@ RUN git clone --branch ${KMA_VER} --depth 1 https://bitbucket.org/genomicepidemi
     mv kma kma_index kma_shm kma_update /usr/local/bin/
 
 RUN mkdir /database && \
-    wget https://git@bitbucket.org/genomicepidemiology/virulencefinder_db/get/${VIRULENCEFINDER_DB_COMMIT_HASH}.tar.gz && \
-    tar -C /database --strip-components=1 -xvf ${VIRULENCEFINDER_DB_COMMIT_HASH}.tar.gz && \
-    rm -rf ${VIRULENCEFINDER_DB_COMMIT_HASH}.tar.gz && \
+    wget https://git@bitbucket.org/genomicepidemiology/virulencefinder_db/get/${VIRULENCEFINDER_DB_VER}.tar.gz && \
+    tar -C /database --strip-components=1 -xvf ${VIRULENCEFINDER_DB_VER}.tar.gz && \
+    rm -rf ${VIRULENCEFINDER_DB_VER}.tar.gz && \
     cd /database  && \
     python3 INSTALL.py kma_index non_interactive
 
@@ -95,7 +95,7 @@ RUN mkdir asm-input && \
     python -m virulencefinder -h && \
     which blastn && \
     head -n 5 /test/GCA_012224845.2_ASM1222484v2_genomic.fna && \
-    python -m virulencefinder -ifa /test/GCA_012224845.2_ASM1222484v2_genomic.fna --extented_output -o asm-input && \
+    python -m virulencefinder -ifa /test/GCA_012224845.2_ASM1222484v2_genomic.fna --extended_output -o asm-input && \
     ls asm-input && \
     cat asm-input/results_tab.tsv
 
@@ -103,7 +103,7 @@ RUN mkdir asm-input && \
 RUN mkdir /test/reads-input && \
     wget -q ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR690/006/SRR6903006/SRR6903006_1.fastq.gz && \
     wget -q ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR690/006/SRR6903006/SRR6903006_2.fastq.gz && \
-    python -m virulencefinder -ifq SRR6903006_1.fastq.gz SRR6903006_2.fastq.gz --extented_output -o /test/reads-input && \
+    python -m virulencefinder -ifq SRR6903006_1.fastq.gz SRR6903006_2.fastq.gz --extended_output -o /test/reads-input && \
     cat /test/reads-input/results_tab.tsv
 
 # test using FASTA supplied with VirulenceFinder code; print help options
