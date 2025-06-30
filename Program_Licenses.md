@@ -62,7 +62,7 @@ The licenses of the open-source software that is contained in these Docker image
 | fasten | MIT | https://github.com/lskatz/fasten/blob/master/LICENSE |
 | Fastp | MIT | https://github.com/OpenGene/fastp/blob/master/LICENSE |
 | Fastplong | MIT | https://github.com/OpenGene/fastplong/blob/main/LICENSE |
-| FastTree | GNU GPLv2 | http://www.microbesonline.org/fasttree/ |
+| FastTree | GNU General Public License v3.0 | https://github.com/morgannprice/fasttree/blob/main/LICENSE |
 | FastQC | GNU GPLv3 | https://github.com/s-andrews/FastQC/blob/master/LICENSE.txt |
 | fastq-scan | MIT | https://github.com/rpetit3/fastq-scan/blob/master/LICENSE |
 | Freebayes | MIT | https://github.com/freebayes/freebayes/blob/master/LICENSE |
@@ -162,6 +162,7 @@ The licenses of the open-source software that is contained in these Docker image
 | PopPUNK | Apache 2.0 | https://github.com/bacpop/PopPUNK/blob/master/LICENSE |
 | Porechop | GNU GPLv3 | https://github.com/rrwick/Porechop/blob/master/LICENSE |
 | PPanGGOLiN | CeCILL 2.1 | https://github.com/labgem/PPanGGOLiN/blob/master/LICENSE.txt |
+| Primer3 | GNU General Public License v2.0 | https://github.com/primer3-org/primer3/blob/main/LICENSE |
 | Prokka | GNU GPLv3 | https://raw.githubusercontent.com/tseemann/prokka/master/doc/LICENSE.Prokka |
 | pyCirclize | MIT | https://github.com/moshi4/pyCirclize/blob/main/LICENSE |
 | pyGenomeViz | MIT | https://github.com/moshi4/pyGenomeViz/blob/main/LICENSE |
@@ -217,6 +218,7 @@ The licenses of the open-source software that is contained in these Docker image
 | toulligqc | GNU GPLv3 | https://github.com/GenomiqueENS/toulligQC/blob/master/LICENSE.txt |
 | transcluster | GNU GPLv3 | https://github.com/JamesStimson/transcluster/blob/master/DESCRIPTION |
 | Treemmer | GNU GPLv3 | https://github.com/fmenardo/Treemmer/blob/master/COPYING |
+| Trimal | GNU GPLv3 | https://github.com/inab/trimal?tab=GPL-3.0-1-ov-file#readme |
 | Trimmomatic | GNU GPLv3 | https://github.com/usadellab/Trimmomatic/blob/main/distSrc/LICENSE |
 | Trycycler | GNU GPLv3 | https://github.com/rrwick/Trycycler/blob/master/LICENSE |
 | Unicycler | GNU GPLv3 | https://github.com/rrwick/Unicycler/blob/master/LICENSE |
