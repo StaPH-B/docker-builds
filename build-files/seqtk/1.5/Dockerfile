@@ -1,6 +1,6 @@
-ARG SEQTK_VER="1.4"
+ARG SEQTK_VER="1.5"
 
-FROM ubuntu:jammy as builder
+FROM ubuntu:jammy AS builder
 
 ARG SEQTK_VER
 
@@ -52,7 +52,7 @@ CMD ["seqtk"]
 # 'WORKDIR' sets working directory
 WORKDIR /data
 
-FROM app as test
+FROM app AS test
 
 # set working directory so that all test inputs & outputs are kept in /test
 WORKDIR /test
