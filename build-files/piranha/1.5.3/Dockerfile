@@ -1,6 +1,6 @@
-ARG PIRANHA_VER="1.5.2"
+ARG PIRANHA_VER="1.5.3"
 
-FROM mambaorg/micromamba:2.0.8-ubuntu22.04 AS app
+FROM mambaorg/micromamba:2.3.0-ubuntu22.04 AS app
 
 ARG PIRANHA_VER
 
@@ -10,7 +10,7 @@ USER root
 WORKDIR /
 
 # metadata labels
-LABEL base.image="mambaorg/micromamba:2.0.8-ubuntu22.04"
+LABEL base.image="mambaorg/micromamba:2.3.0-ubuntu22.04"
 LABEL dockerfile.version="1"
 LABEL software="piranha"
 LABEL software.version=${PIRANHA_VER}
@@ -46,7 +46,7 @@ WORKDIR /data
 ENV PATH="${PATH}:/opt/conda/envs/piranha/bin/" \
     LC_ALL=C.UTF-8
 
-RUN pip install pyabpoa
+RUN pip install --no-cache-dir pyabpoa
 
 CMD ["piranha" ,"--help"]
 
