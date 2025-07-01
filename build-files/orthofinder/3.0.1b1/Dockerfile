@@ -10,7 +10,7 @@ WORKDIR /
 
 # metadata
 LABEL base.image="mambaorg/micromamba:2.0.5-ubuntu22.04"
-LABEL version="1"
+LABEL dockerfile.version="1"
 LABEL software="OrthoFinder"
 LABEL software.version="${ORTHOFINDER_VER}"
 LABEL description="Accurate inference of orthologous gene groups made easy"
