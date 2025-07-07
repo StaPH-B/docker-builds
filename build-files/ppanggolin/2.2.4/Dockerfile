@@ -1,4 +1,4 @@
-ARG PPANGGOLIN_VER="2.2.3"
+ARG PPANGGOLIN_VER="2.2.4"
 
 FROM mambaorg/micromamba:2.0.8-ubuntu22.04 AS app
 
