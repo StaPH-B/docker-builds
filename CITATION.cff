@@ -1,0 +1,47 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Florek"
+  given-names: "Kelsey R."
+  orcid: ""
+- family-names: "Young"
+  given-names: "Erin L."
+  orcid: ""
+- family-names: "Incekara"
+  given-names: "Kutluhan"
+  orcid: "https://orcid.org/0000-0001-7915-9847"
+- family-names: "Libuit"
+  given-names: "Kevin G."
+  orcid: ""
+- family-names: "Kapsak"
+  given-names: "Curtis J."
+  orcid: ""
+title: "StaPH-B Docker Image Repository"
+url: "https://github.com/StaPH-B/docker-builds"
+preferred-citation:
+  type: article
+  authors:
+  - family-names: "Florek"
+    given-names: "Kelsey R."
+    orcid: ""
+  - family-names: "Young"
+    given-names: "Erin L."
+    orcid: ""
+  - family-names: "Incekara"
+    given-names: "Kutluhan"
+    orcid: "https://orcid.org/0000-0001-7915-9847"
+  - family-names: "Libuit"
+    given-names: "Kevin G."
+    orcid: ""
+  - family-names: "Kapsak"
+    given-names: "Curtis J."
+    orcid: ""
+  doi: "10.3201/eid3113.241363"
+  journal: "Emerging Infectious Diseases"
+  month: 5
+  start: "S18"
+  end: "S21"
+  title: "Advantages of Software Containerization in Public Health Infectious Disease Genomic Surveillance"
+  issue: "Supplement Issue"
+  volume: 31
+  year: 2025
