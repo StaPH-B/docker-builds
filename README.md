@@ -354,7 +354,7 @@ You can also view the list of images on Docker hub here: https://hub.docker.com/
 
 If you have found this resource useful please use the following citation in addition to the citations of the tools being used:
 
->  Florek KR, Young EL, Incekara K, Libuit KG, Kapsak CJ. Advantages of Software Containerization in Public Health Infectious Disease Genomic Surveillance. Emerg Infect Dis. 2025 May;31(13):18-21. doi: 10.3201/eid3113.241363. PMID: 40359055; PMCID: PMC12078543.
+>  Florek, K. R., Young, E. L., Incekara, K., Libuit, K. G., & Kapsak, C. J. (2025). Advantages of Software Containerization in Public Health Infectious Disease Genomic Surveillance. Emerging Infectious Diseases, 31(13, Supplement), S18–S21. https://doi.org/10.3201/eid3113.241363
 
 APA & BibTeX formatted citations are available via the [CITATION.cff](./CITATION.cff) file. **Click on the button "Cite this repository" at the top of this page to view.**
 
