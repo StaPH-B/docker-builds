@@ -42,9 +42,9 @@ preferred-citation:
   doi: "10.3201/eid3113.241363"
   journal: "Emerging Infectious Diseases"
   month: 5
-  start: 18 # First page number
-  end: 21 # Last page number
+  start: S18 # First page number
+  end: S21 # Last page number
   title: "Advantages of Software Containerization in Public Health Infectious Disease Genomic Surveillance"
-  issue: 13
+  issue: "13, Supplement"
   volume: 31
   year: 2025
