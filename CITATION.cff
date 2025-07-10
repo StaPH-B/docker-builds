@@ -1,0 +1,50 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Florek"
+  given-names: "Kelsey R."
+  orcid: "https://orcid.org/0000-0002-8743-8579"
+- family-names: "Young"
+  given-names: "Erin L."
+  orcid: "https://orcid.org/0000-0002-7535-006X"
+- family-names: "Incekara"
+  given-names: "Kutluhan"
+  orcid: "https://orcid.org/0000-0001-7915-9847"
+- family-names: "Libuit"
+  given-names: "Kevin G."
+  orcid: "https://orcid.org/0000-0002-0894-1820"
+- family-names: "Kapsak"
+  given-names: "Curtis J."
+  orcid: "https://orcid.org/0000-0002-8735-1190"
+title: "StaPH-B/docker-builds"
+version: None
+doi: None
+date-released: N/A
+url: "https://github.com/StaPH-B/docker-builds/"
+preferred-citation:
+  type: article
+  authors:
+    - family-names: "Florek"
+    given-names: "Kelsey R."
+    orcid: "https://orcid.org/0000-0002-8743-8579"
+    - family-names: "Young"
+    given-names: "Erin L."
+    orcid: "https://orcid.org/0000-0002-7535-006X"
+    - family-names: "Incekara"
+    given-names: "Kutluhan"
+    orcid: "https://orcid.org/0000-0001-7915-9847"
+    - family-names: "Libuit"
+    given-names: "Kevin G."
+    orcid: "https://orcid.org/0000-0002-0894-1820"
+    - family-names: "Kapsak"
+    given-names: "Curtis J."
+    orcid: "https://orcid.org/0000-0002-8735-1190"
+  doi: "10.3201/eid3113.241363"
+  journal: "Emerging Infectious Diseases"
+  month: 5
+  start: 18 # First page number
+  end: 21 # Last page number
+  title: "Advantages of Software Containerization in Public Health Infectious Disease Genomic Surveillance"
+  issue: 13
+  volume: 31
+  year: 2025
