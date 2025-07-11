@@ -43,6 +43,9 @@ RUN wget https://github.com/marbl/canu/releases/download/v${CANU_VERSION}/canu-$
    tar -xvf canu-${CANU_VERSION}.Linux-amd64.tar.xz && \
    rm canu-${CANU_VERSION}.Linux-amd64.tar.xz
 
+# java fix = double code $java in Defaults.pm. Possibly not needed future versions @Kutluhan
+RUN sed -i 's/\$java = `command -v \$java`/\$java = `command -v "\$java"`/' /canu-2.3/lib/perl5/site_perl/canu/Defaults.pm
+
 ENV PATH="/canu-${CANU_VERSION}/bin:${PATH}"
 
 CMD ["canu", "-h"]
