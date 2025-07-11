@@ -19,7 +19,7 @@ on:
 jobs:
 
   build_to_test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Check Out Repo
         uses: actions/checkout@v4

@@ -25,10 +25,10 @@ jobs:
       - name: set freyja version
         id: latest_version
         run: |
-          version=1.5.2
+          version=1.5.3
           echo "version=$version" >> $GITHUB_OUTPUT 
           
-          file=build-files/freyja/1.5.2-bf/Dockerfile
+          file=build-files/freyja/1.5.3/Dockerfile
           ls $file
           echo "file=$file" >> $GITHUB_OUTPUT
 
