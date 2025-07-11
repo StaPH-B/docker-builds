@@ -50,6 +50,7 @@ The licenses of the open-source software that is contained in these Docker image
 | dragonflye | GNU GPLv3 | https://github.com/rpetit3/dragonflye/blob/main/LICENSE |
 | drprg | MIT | https://github.com/mbhall88/drprg/blob/main/LICENSE |
 | DSK | GNU Affero GPLv3 | https://github.com/GATB/dsk/blob/master/LICENSE |
+| ectyper | Apache 2.0 | https://github.com/phac-nml/ecoli_serotyping/blob/master/LICENSE |
 | el_gato | MIT | https://github.com/appliedbinf/el_gato/blob/main/LICENSE https://github.com/CDCgov/el_gato/blob/main/LICENSE |
 | emboss | GNU GPLv3 | http://emboss.sourceforge.net/licence/ |
 | emmtyper | GNU GPLv3 | https://github.com/MDU-PHL/emmtyper/blob/master/LICENSE |
@@ -61,7 +62,7 @@ The licenses of the open-source software that is contained in these Docker image
 | fasten | MIT | https://github.com/lskatz/fasten/blob/master/LICENSE |
 | Fastp | MIT | https://github.com/OpenGene/fastp/blob/master/LICENSE |
 | Fastplong | MIT | https://github.com/OpenGene/fastplong/blob/main/LICENSE |
-| FastTree | GNU GPLv2 | http://www.microbesonline.org/fasttree/ |
+| FastTree | GNU General Public License v3.0 | https://github.com/morgannprice/fasttree/blob/main/LICENSE |
 | FastQC | GNU GPLv3 | https://github.com/s-andrews/FastQC/blob/master/LICENSE.txt |
 | fastq-scan | MIT | https://github.com/rpetit3/fastq-scan/blob/master/LICENSE |
 | Freebayes | MIT | https://github.com/freebayes/freebayes/blob/master/LICENSE |
@@ -89,7 +90,7 @@ The licenses of the open-source software that is contained in these Docker image
 | iqtree | GNU GPLv2 | https://github.com/Cibiv/IQ-TREE/blob/master/LICENSE |
 | iqtree2 | GNU GPLv2 | https://github.com/iqtree/iqtree2/blob/master/LICENSE |
 | IPA | BSD-3 | https://github.com/PacificBiosciences/pbipa/blob/master/LICENSE.txt |
-| IRMA | GNU GPLv3 | https://wonder.cdc.gov/amd/flu/irma/disclaimer.html |
+| IRMA | GNU GPLv3 ; Apache License 2.0 | https://wonder.cdc.gov/amd/flu/irma/disclaimer.html ; https://github.com/CDCgov/irma/blob/master/LICENSE|
 | isPcr | non-standard - see README in source | https://hgwdev.gi.ucsc.edu/~kent/src/isPcr33.zip |
 | iVar | GNU GPLv3 | https://github.com/andersen-lab/ivar/blob/master/LICENSE |
 | Jasmine | BSD-3 | https://github.com/PacificBiosciences/jasmine/blob/main/LICENSE |
@@ -104,7 +105,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Krona | non-standard license (see link) | https://github.com/marbl/Krona/blob/master/KronaTools/LICENSE.txt |
 | kSNP3 | BSD | available in zipped kSNP archive on sourceforge or in docker image under `/kSNP3.1_Linux_package/THE BSD OPENSOURCE LICENSE.pdf` |
 | kSNP4 | BSD | available in zipped kSNP archive on sourceforge or in docker image under `/opt/kSNP4 Linux package/Documentation/THE BSD OPENSOURCE LICENSE.pdf` |
-| LABEL | GPL version 3 | In zipped file in README.md |
+| LABEL | Apache License 2.0 | https://github.com/CDCgov/label/blob/master/LICENSE |
 | legsta | GNU GPLv3 | https://github.com/tseemann/legsta/blob/master/LICENSE |
 | liftoff | GNU GPLv3 | https://github.com/agshumate/Liftoff/blob/master/LICENSE.md |
 | lima | BSD-3 | https://github.com/PacificBiosciences/barcoding/blob/master/LICENSE |
@@ -161,6 +162,7 @@ The licenses of the open-source software that is contained in these Docker image
 | PopPUNK | Apache 2.0 | https://github.com/bacpop/PopPUNK/blob/master/LICENSE |
 | Porechop | GNU GPLv3 | https://github.com/rrwick/Porechop/blob/master/LICENSE |
 | PPanGGOLiN | CeCILL 2.1 | https://github.com/labgem/PPanGGOLiN/blob/master/LICENSE.txt |
+| Primer3 | GNU General Public License v2.0 | https://github.com/primer3-org/primer3/blob/main/LICENSE |
 | Prokka | GNU GPLv3 | https://raw.githubusercontent.com/tseemann/prokka/master/doc/LICENSE.Prokka |
 | pyCirclize | MIT | https://github.com/moshi4/pyCirclize/blob/main/LICENSE |
 | pyGenomeViz | MIT | https://github.com/moshi4/pyGenomeViz/blob/main/LICENSE |
@@ -182,6 +184,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Samtools | GNU GPLv3 | https://github.com/samtools/samtools/blob/develop/LICENSE |
 | SeqFu | GNU GPLv3 | https://github.com/telatin/seqfu2 |
 | SeqKit | MIT | https://github.com/shenwei356/seqkit/blob/master/LICENSE
+| SeqSender | Apache 2.0 | https://github.com/CDCgov/seqsender/blob/master/LICENSE |
 | SeqSero | GNU GPLv2 | https://github.com/denglab/SeqSero/blob/master/LICENSE |
 | SeqSero2 | GNU GPLv2 | https://github.com/denglab/SeqSero2/blob/master/LICENSE |
 | seqyclean | MIT | https://github.com/ibest/seqyclean/blob/master/LICENSE |
@@ -215,6 +218,7 @@ The licenses of the open-source software that is contained in these Docker image
 | toulligqc | GNU GPLv3 | https://github.com/GenomiqueENS/toulligQC/blob/master/LICENSE.txt |
 | transcluster | GNU GPLv3 | https://github.com/JamesStimson/transcluster/blob/master/DESCRIPTION |
 | Treemmer | GNU GPLv3 | https://github.com/fmenardo/Treemmer/blob/master/COPYING |
+| Trimal | GNU GPLv3 | https://github.com/inab/trimal?tab=GPL-3.0-1-ov-file#readme |
 | Trimmomatic | GNU GPLv3 | https://github.com/usadellab/Trimmomatic/blob/main/distSrc/LICENSE |
 | Trycycler | GNU GPLv3 | https://github.com/rrwick/Trycycler/blob/master/LICENSE |
 | Unicycler | GNU GPLv3 | https://github.com/rrwick/Unicycler/blob/master/LICENSE |
