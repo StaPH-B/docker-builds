@@ -20,7 +20,7 @@ LABEL maintainer="Abigail Shockey"
 LABEL maintainer.email="abigail.shockey@slh.wisc.edu"
 
 RUN micromamba install --name base -c conda-forge -c bioconda orthofinder=${ORTHOFINDER_VER} && \
-  micromamba clean -a -y && \
+  micromamba clean -a -f -y && \
   mkdir /data
 
 # add programs to path
