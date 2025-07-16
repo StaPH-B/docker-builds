@@ -350,68 +350,15 @@ You can also view the list of images on Docker hub here: https://hub.docker.com/
   * We keep a list of the licenses for the main software within the docker images here: [Program_Licenses.md](/Program_Licenses.md)
   * Links to licenses for each program should also be listed as a metadata `LABEL` within each dockerfile
 
-## Authors/Maintainers
-Each Dockerfile lists the author(s)/maintainer(s) as a metadata `LABEL`, but the authors/maintainers of the docker images are:
-  * [@kapsakcj](https://github.com/kapsakcj)
-  * [@k-florek](https://github.com/k-florek)
-  * [@garfinjm](https://github.com/garfinjm)
-  * [@kevinlibuit](https://github.com/kevinlibuit)
-  * [@erinyoung](https://github.com/erinyoung)
-  * [@lskatz](https://github.com/lskatz)
-  * [@stjacqrm](https://github.com/stjacqrm)
-  * [@AbigailShockey](https://github.com/AbigailShockey)
-  * [@andersgs](https://github.com/andersgs)
-  * [@logan-fink](https://github.com/logan-fink)
-  * [@tgallagh](https://github.com/tgallagh)
-  * [@koakeson](https://github.com/koakeson)
-  * [@joacjo](https://github.com/joacjo)
-  * [@rpetit3](https://github.com/rpetit3/)
-  * [@jvhagey](https://github.com/jvhagey)
-  * [@Antonia-Chalka](https://github.com/Antonia-Chalka)
-  * [@MillironX](https://github.com/MillironX)
-  * [@frankambrosio3](https://github.com/frankambrosio3)
-  * [@HNHalstead](https://github.com/HNHalstead)
-  * [@fanninpm](https://github.com/fanninpm)
-  * [@SarahNadeau](https://github.com/SarahNadeau)
-  * [@DOH-HNH0303](https://github.com/DOH-HNH0303)
-  * [@jwarnn](https://github.com/jwarnn)
-  * [@stitam](https://github.com/stitam)
-  * [@tiverson](https://github.com/tives82)
-  * [@sbthandras](https://github.com/sbthandras)
-  * [@idolawoye](https://github.com/idolawoye)
-  * [@michellescribner](https://github.com/michellescribner)
-  * [@cjjossart](https://github.com/cjjossart)
-  * [@jlumpe](https://github.com/jlumpe)
-  * [@kissake](https://github.com/kissake)
-  * [@sage-wright](https://github.com/sage-wright)
-  * [@ankushkgupta](https://github.com/ankushkgupta)
-  * [@kyleoconnell](https://github.com/kyleoconnell)
-  * [@CTindall-1](https://github.com/CTindall-1)
-  * [@hkunerth](https://github.com/hkunerth)
-  * [@eetueklund](https://github.com/eetueklund)
-  * [@wchen190](https://github.com/wchen190)
-  * [@shelby-bennett](https://github.com/shelby-bennett)
-  * [@cjalcorta](https://github.com/cjalcorta)
-  * [@mndoucette](https://github.com/mndoucette)
-  * [@jcw349](https://github.com/jcw349)
-  * [@poojasgupta](https://github.com/poojasgupta)
-  * [@hollygene](https://github.com/hollygene)
-  * [@HarryHung](https://github.com/HarryHung)
-  * [@sam-baird](https://github.com/sam-baird)
-  * [@eproctor118](https://github.com/eproctor118)
-  * [@cimendes](https://github.com/cimendes)
-  * [@golden75](https://github.com/golden75)
-  * [@Kincekara](https://github.com/Kincekara)
-  * [@Haikelnb](https://github.com/Haikelnb)
-  * [@kprus](https://github.com/kprus)
-  * [@arianna-smith](https://github.com/arianna-smith)
-  * [@laura-bankers](https://github.com/laura-bankers)
-  * [@evagunawan](https://github.com/evagunawan)
-  * [@nawrockie](https://github.com/nawrockie)
-  * [@stephenturner](https://github.com/stephenturner)
-  * [@soejun](https://github.com/soejun)
-  * [@taylorpaisie](https://github.com/taylorpaisie)
-  * [@fraser-combe](https://github.com/fraser-combe)
-  
+## Citation
 
+If you have found this resource useful please use the following citation in addition to the citations of the tools being used:
+
+>  Florek, K. R., Young, E. L., Incekara, K., Libuit, K. G., & Kapsak, C. J. (2025). Advantages of Software Containerization in Public Health Infectious Disease Genomic Surveillance. Emerging Infectious Diseases, 31(13, Supplement), S18–S21. https://doi.org/10.3201/eid3113.241363
+
+APA & BibTeX formatted citations are available via the [CITATION.cff](./CITATION.cff) file. **Click on the button "Cite this repository" at the top of this page to view.**
+
+Hypothetical text example:
+
+>  Reads were assembled with spades version 4.2.0 (PMID: 32559359) before AMR gene identification with AMRFinder version 4.0.23 database version 2025-06-03.1 (PMID: 34135355) using StaPH-B/docker-builds docker images (PMID: 40359055)
 
