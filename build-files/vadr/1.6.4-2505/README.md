@@ -1,10 +1,9 @@
 # VADR container
 
 Main tool : [VADR](https://github.com/ncbi/vadr)
-  
-Code repository: https://github.com/ncbi/vadr
 
 Additional tools:
+
 - perl v5.34.0
 - infernal v1.1.5
 - ncbi-blast+ v2.15.0
@@ -12,17 +11,20 @@ Additional tools:
 - minimap2 2.26-r1175
 
 Basic information on how to use this tool:
-- executable: v-annotate.pl
-- additional executable: fasta-trim-terminal-ambigs.pl
-- help: -h
-- version: -v
-- description: |
+
+- executable: `v-annotate.pl`
+- additional executable: `fasta-trim-terminal-ambigs.pl`
+- help: `-h`
+- version: `-v`
+
+## Description
 
 > VADR is a suite of tools for classifying and analyzing sequences homologous to a set of reference models of viral genomes or gene families. It has been mainly tested for analysis of Norovirus, Dengue, and SARS-CoV-2 virus sequences in preparation for submission to the GenBank database.
 
-Additional information: |
+## Additional information
 
-Included models
+Included models:
+
 - Caliciviridae version 1.2.1 (including Norovirus virus; default values)
 - Flaviviridae version 1.2.1 (including Dengue virus; `--mdir /opt/vadr/vadr-models-flavi/ --mkey flavi`)
 - Flu version 1.6.4 (`-mkey flu`)
@@ -33,15 +35,15 @@ Included models
 
 Most of the VADR model files are located at `/opt/vadr/vadr-models` in the container filesystem and this path is stored in the globally accessible bash variable `$VADRMODELDIR`. For most applications, there is no need to specify `v-annotate.pl --mdir /path/to/model/files` since `$VADRMODELDIR` is set in the environment. Flaviviridae model files are located at `/opt/vadr/vadr-models-flavi/` within the container filesystem. To use these models, please specify the 2 options: `v-annotate.pl --mdir /opt/vadr/vadr-models-flavi/ --mkey flavi`.
 
-Full documentation: https://github.com/ncbi/vadr#vadr-documentation-
-Caliciviridae model documentation: https://github.com/ncbi/vadr/wiki/Available-VADR-model-files#norovirus-and-other-caliciviridae-refseq-vadr-models
-Flaviviridae model documentation: https://github.com/ncbi/vadr/wiki/Available-VADR-model-files#dengue-virus-and-other-flaviviridae-refseq-vadr-models
-Flu model documentation: https://github.com/ncbi/vadr/wiki/Influenza-annotation
-Flu model publication: https://doi.org/10.1093/database/baae091
-HAV model documentation: https://github.com/theiagen/VADR_models
-MPOX/MPXV model documentation: https://github.com/ncbi/vadr/wiki/Mpox-virus-annotation)
-RSV documentation: https://github.com/ncbi/vadr/wiki/Influenza-annotation
-SARS-CoV-2 model documentation: https://github.com/ncbi/vadr/wiki/Coronavirus-annotation
+- Full documentation: https://github.com/ncbi/vadr/wiki
+- Caliciviridae model documentation: https://github.com/ncbi/vadr/wiki/Available-VADR-model-files#norovirus-and-other-caliciviridae-refseq-vadr-models
+- Flaviviridae model documentation: https://github.com/ncbi/vadr/wiki/Available-VADR-model-files#dengue-virus-and-other-flaviviridae-refseq-vadr-models
+- Flu model documentation: https://github.com/ncbi/vadr/wiki/Influenza-annotation
+- Flu model publication: https://doi.org/10.1093/database/baae091
+- HAV model documentation: https://github.com/theiagen/VADR_models
+- MPOX/MPXV model documentation: https://github.com/ncbi/vadr/wiki/Mpox-virus-annotation
+- RSV documentation: https://github.com/ncbi/vadr/wiki/Influenza-annotation
+- SARS-CoV-2 model documentation: https://github.com/ncbi/vadr/wiki/Coronavirus-annotation
 
 ## Example Usage
 

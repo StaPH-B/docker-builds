@@ -1,10 +1,9 @@
 # VADR container
 
 Main tool : [VADR](https://github.com/ncbi/vadr)
-  
-Code repository: https://github.com/ncbi/vadr
 
 Additional tools:
+
 - perl v5.34.0
 - infernal v1.1.5
 - ncbi-blast+ v2.15.0
@@ -12,17 +11,20 @@ Additional tools:
 - minimap2 2.26-r1175
 
 Basic information on how to use this tool:
-- executable: v-annotate.pl
-- additional executable: fasta-trim-terminal-ambigs.pl
-- help: -h
-- version: -v
-- description: |
+
+- executable: `v-annotate.pl`
+- additional executable: `fasta-trim-terminal-ambigs.pl`
+- help: `-h`
+- version: `-v`
+
+## Description
 
 > VADR is a suite of tools for classifying and analyzing sequences homologous to a set of reference models of viral genomes or gene families. It has been mainly tested for analysis of Norovirus, Dengue, and SARS-CoV-2 virus sequences in preparation for submission to the GenBank database.
 
-Additional information: |
+## Additional information
 
-Included models
+Included models:
+
 - Caliciviridae version 1.2.1 (including Norovirus virus; default values)
 - Flaviviridae version 1.2.1 (including Dengue virus; `--mdir /opt/vadr/vadr-models-flavi/ --mkey flavi`)
 - MPOX/mpxv version 1.4.2-1 (`-mkey mpxv`)
@@ -31,10 +33,10 @@ Most of the VADR model files are located at `/opt/vadr/vadr-models` in the conta
 
 Be aware that some Mpox sequences may take up to **30 minutes** to annotate, depending on how divergent it is from the RefSeq NC_063383 sequence. Some sequences may only take a minute or so.
 
-Full documentation: https://github.com/ncbi/vadr#vadr-documentation-
-Caliciviridae model documentation: https://github.com/ncbi/vadr/wiki/Available-VADR-model-files#norovirus-and-other-caliciviridae-refseq-vadr-models
-Flaviviridae model documentation: https://github.com/ncbi/vadr/wiki/Available-VADR-model-files#dengue-virus-and-other-flaviviridae-refseq-vadr-models
-MPOX/MPXV model documentation: https://github.com/ncbi/vadr/wiki/Mpox-virus-annotation)
+- Full documentation: https://github.com/ncbi/vadr/wiki
+- Caliciviridae model documentation: https://github.com/ncbi/vadr/wiki/Available-VADR-model-files#norovirus-and-other-caliciviridae-refseq-vadr-models
+- Flaviviridae model documentation: https://github.com/ncbi/vadr/wiki/Available-VADR-model-files#dengue-virus-and-other-flaviviridae-refseq-vadr-models
+- MPOX/MPXV model documentation: https://github.com/ncbi/vadr/wiki/Mpox-virus-annotation
 
 ## Example Usage
 
