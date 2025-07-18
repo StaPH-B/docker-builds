@@ -1,10 +1,9 @@
 # VADR container
 
 Main tool : [VADR](https://github.com/ncbi/vadr)
-  
-Code repository: https://github.com/ncbi/vadr
 
 Additional tools:
+
 - perl v5.34.0
 - infernal v1.1.5
 - ncbi-blast+ v2.15.0
@@ -12,25 +11,27 @@ Additional tools:
 - minimap2 2.26-r1175
 
 Basic information on how to use this tool:
-- executable: v-annotate.pl
-- additional executable: fasta-trim-terminal-ambigs.pl
-- help: -h
-- version: -v
-- description: |
+
+- executable: `v-annotate.pl`
+- additional executable: `fasta-trim-terminal-ambigs.pl`
+- help: `-h`
+- version: `-v`
+
+## Description
 
 > VADR is a suite of tools for classifying and analyzing sequences homologous to a set of reference models of viral genomes or gene families. It has been mainly tested for analysis of Norovirus, Dengue, and SARS-CoV-2 virus sequences in preparation for submission to the GenBank database.
 
-Additional information: |
+## Additional information
 
-This image only contains the default Caliciviridae models (including Norovirus virus) and Flaviviridae models (including Dengue virus). 
+This image only contains the default Caliciviridae models (including Norovirus virus) and Flaviviridae models (including Dengue virus).
 
 Flaviviridae model files are located at `/opt/vadr/vadr-models-flavi/` within the container filesystem. To use these models, please specify the 2 options: `v-annotate.pl --mdir /opt/vadr/vadr-models-flavi/ --mkey flavi`.
 
-A larger list of vadr models can be found in (VADR's documentation)[https://github.com/ncbi/vadr/wiki/Available-VADR-model-files] for download and mounting/binding during runtime. An example for SARS-CoV-2 is below.
+A larger list of vadr models can be found in [VADR's documentation](https://github.com/ncbi/vadr/wiki/Available-VADR-model-files) for download and mounting/binding during runtime. An example for SARS-CoV-2 is below.
 
-Full documentation: https://github.com/ncbi/vadr#vadr-documentation-
-Caliciviridae model documentation: https://github.com/ncbi/vadr/wiki/Available-VADR-model-files#norovirus-and-other-caliciviridae-refseq-vadr-models
-Flaviviridae model documentation: https://github.com/ncbi/vadr/wiki/Available-VADR-model-files#dengue-virus-and-other-flaviviridae-refseq-vadr-models
+- Full documentation: https://github.com/ncbi/vadr/wiki
+- Caliciviridae model documentation: https://github.com/ncbi/vadr/wiki/Available-VADR-model-files#norovirus-and-other-caliciviridae-refseq-vadr-models
+- Flaviviridae model documentation: https://github.com/ncbi/vadr/wiki/Available-VADR-model-files#dengue-virus-and-other-flaviviridae-refseq-vadr-models
 
 ## Example Usage
 
