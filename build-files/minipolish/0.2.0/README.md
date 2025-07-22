@@ -3,8 +3,9 @@
 Main tool : [minipolish](https://github.com/rrwick/Minipolish) and [miniasm](https://github.com/lh3/miniasm)
 
 Other tools :
-- [racon](https://github.com/isovic/racon) 
-- [minimap2](https://github.com/lh3/minimap2)
+- [racon](https://github.com/isovic/racon)  version 1.5.0
+- [minimap2](https://github.com/lh3/minimap2) version 2.30
+- [miniams](https://github.com/lh3/miniasm) version 0.3
 
 From minipolish's [readme](https://github.com/rrwick/Minipolish):
 
