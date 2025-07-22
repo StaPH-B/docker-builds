@@ -27,7 +27,7 @@ Included models:
 
 - Caliciviridae version 1.2.1 (including Norovirus virus; default values)
 - Flaviviridae version 1.2.1 (including Dengue virus; `--mdir /opt/vadr/vadr-models-flavi/ --mkey flavi`)
-- SARS-CoV-2 version 1.3.2 (`--mkey sarscov2`)
+- SARS-CoV-2 version 1.3-2 (`--mkey sarscov2`)
 
 Most of the VADR model files are located at `/opt/vadr/vadr-models` in the container filesystem and this path is stored in the globally accessible bash variable `$VADRMODELDIR`. For most applications, there is no need to specify `v-annotate.pl --mdir /path/to/model/files` since `$VADRMODELDIR` is set in the environment. Flaviviridae model files are located at `/opt/vadr/vadr-models-flavi/` within the container filesystem. To use these models, please specify the 2 options: `v-annotate.pl --mdir /opt/vadr/vadr-models-flavi/ --mkey flavi`.
 
