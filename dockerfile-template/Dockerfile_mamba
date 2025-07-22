@@ -61,7 +61,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # clean up conda garbage
 # make /data to use as a working directory
 RUN micromamba install --name base -c conda-forge -c bioconda SOFTWARENAME=${SOFTWARENAME_VERSION} && \
- micromamba clean -a -y && \
+ micromamba clean -a -f -y && \
  mkdir /data
 
 # 'ENV' instructions set environment variables that persist from the build into the resulting image
