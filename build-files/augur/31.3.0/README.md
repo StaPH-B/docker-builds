@@ -19,9 +19,9 @@ Note: Auspice is a different tool.
 - mafft 7.505
 - matplotlib 3.10.0
 - numpy 1.26.4
-- pandas 2.2.3
+- pandas 2.3.1
 - raxml 8.2.12
-- scipy 1.15.2
+- scipy 1.16.0
 - vcftools 0.1.16
 
 ## Example Usage
