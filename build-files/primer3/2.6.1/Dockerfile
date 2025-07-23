@@ -58,7 +58,12 @@ RUN primer3_core || echo "This prints to stderr"
 RUN ntdpal || echo "This prints to stderr"
 RUN oligotm  || echo "This prints to stderr"
 
-# Simple test for primer3_core
+# test for primer3_core
 RUN echo -e "=SEQUENCE_ID=Test\nSEQUENCE_TEMPLATE=ATCGATCGATCG\nPRIMER_TASK=generic\nPRIMER_THERMODYNAMIC_PARAMETERS_PATH=${PRIMER3_CONFIG}/\n=" > test_input.txt && \
     primer3_core test_input.txt
-    
+
+# test for ntdpal
+RUN ntdpal ACGTACGTACGT ACGTACGTACGT g
+
+# test for oligotm
+RUN oligotm AGCTAGCTAGCT && oligotm -mv 50 -dv 1.5 -n 0.6 -d 50 -tp 1 -sc 1 AGCTAGCTAGCT && oligotm -dm 10 AGCTAGCTAGCT
