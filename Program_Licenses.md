@@ -89,6 +89,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Integron Finder | GNU GPLv3 | https://github.com/gem-pasteur/Integron_Finder/blob/master/COPYING |
 | iqtree | GNU GPLv2 | https://github.com/Cibiv/IQ-TREE/blob/master/LICENSE |
 | iqtree2 | GNU GPLv2 | https://github.com/iqtree/iqtree2/blob/master/LICENSE |
+| iqtree3 | GNU GPLv2 | https://github.com/iqtree/iqtree3/blob/master/LICENSE |
 | IPA | BSD-3 | https://github.com/PacificBiosciences/pbipa/blob/master/LICENSE.txt |
 | IRMA | GNU GPLv3 ; Apache License 2.0 | https://wonder.cdc.gov/amd/flu/irma/disclaimer.html ; https://github.com/CDCgov/irma/blob/master/LICENSE|
 | isPcr | non-standard - see README in source | https://hgwdev.gi.ucsc.edu/~kent/src/isPcr33.zip |
