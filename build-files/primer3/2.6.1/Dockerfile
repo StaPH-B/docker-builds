@@ -18,7 +18,7 @@ RUN wget https://github.com/primer3-org/primer3/archive/refs/tags/v${PRIMER3_VER
     rm v${PRIMER3_VERSION}.tar.gz && \
     cd /primer3-${PRIMER3_VERSION}/src && \
     make && \
-    cp primer3_core /usr/local/bin/ && \
+    cp primer3_core ntdpal oligotm long_seq_tm_test /usr/local/bin/ && \
     mkdir -p /usr/local/share/primer3_config && \
     cp -r primer3_config/* /usr/local/share/primer3_config/
 
@@ -55,6 +55,8 @@ FROM app AS test
 WORKDIR /test
 
 RUN primer3_core || echo "This prints to stderr"
+RUN ntdpal || echo "This prints to stderr"
+RUN oligotm  || echo "This prints to stderr"
 
 # Simple test for primer3_core
 RUN echo -e "=SEQUENCE_ID=Test\nSEQUENCE_TEMPLATE=ATCGATCGATCG\nPRIMER_TASK=generic\nPRIMER_THERMODYNAMIC_PARAMETERS_PATH=${PRIMER3_CONFIG}/\n=" > test_input.txt && \

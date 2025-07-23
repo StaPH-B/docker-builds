@@ -2,10 +2,14 @@
 
 Main tool: [Primer3](https://github.com/primer3-org/primer3)
   
-Code repository:
+Code repository: https://github.com/primer3-org/primer3
 
 Basic information on how to use this tool:
-- executable: primer3_core or primer3_config
+- executable: | 
+    primer3_core
+    ntdpal
+    oligotm
+    long_seq_tm_test
 - help: NA
 - version: NA
 - description: |
