@@ -18,6 +18,7 @@ RUN wget https://github.com/primer3-org/primer3/archive/refs/tags/v${PRIMER3_VER
     rm v${PRIMER3_VERSION}.tar.gz && \
     cd /primer3-${PRIMER3_VERSION}/src && \
     make && \
+    make test && \
     cp primer3_core ntdpal oligotm long_seq_tm_test /usr/local/bin/ && \
     mkdir -p /usr/local/share/primer3_config && \
     cp -r primer3_config/* /usr/local/share/primer3_config/
