@@ -27,14 +27,14 @@ Included models:
 
 - Caliciviridae version 1.2.1 (including Norovirus virus; default values)
 - Flaviviridae version 1.2.1 (including Dengue virus; `--mdir /opt/vadr/vadr-models-flavi/ --mkey flavi`)
-- RSV version 1.5-2 (`-mkey rsv`)
+- MeV/Measles version 1.02 (`-mkey mev`)
 
 Most of the VADR model files are located at `/opt/vadr/vadr-models` in the container filesystem and this path is stored in the globally accessible bash variable `$VADRMODELDIR`. For most applications, there is no need to specify `v-annotate.pl --mdir /path/to/model/files` since `$VADRMODELDIR` is set in the environment. Flaviviridae model files are located at `/opt/vadr/vadr-models-flavi/` within the container filesystem. To use these models, please specify the 2 options: `v-annotate.pl --mdir /opt/vadr/vadr-models-flavi/ --mkey flavi`.
 
 - Full documentation: https://github.com/ncbi/vadr/wiki
 - Caliciviridae model documentation: https://github.com/ncbi/vadr/wiki/Available-VADR-model-files#norovirus-and-other-caliciviridae-refseq-vadr-models
 - Flaviviridae model documentation: https://github.com/ncbi/vadr/wiki/Available-VADR-model-files#dengue-virus-and-other-flaviviridae-refseq-vadr-models
-- RSV documentation: https://github.com/ncbi/vadr/wiki/Influenza-annotation
+- MeV documentation: https://github.com/greninger-lab/vadr-models-mev
 
 ## Example Usage
 
@@ -46,9 +46,9 @@ fasta-trim-terminal-ambigs.pl input.consensus.fa > trimmed.fasta
 v-annotate.pl --split 
   -r \
   -xnocomp \
-  -mkey rsv \
+  -mkey mev \
   trimmed.fasta \
-  rsv-test-output
+  mev-test-output
 
 # run v-annotate.pl using Flaviviridae model to annotate a Dengue viral genome
 v-annotate.pl --split --cpu 1 --group Dengue --nomisc --noprotid \
