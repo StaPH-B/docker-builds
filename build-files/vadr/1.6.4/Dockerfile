@@ -86,6 +86,7 @@ v-build.pl -h && \
 fasta-trim-terminal-ambigs.pl -h || echo "prints to stderr for some reason"
 
 # running vadr tests
+#NOTE: These tests require the flavi and calici models to be present, which are not included in this image. These tests are however run in the docker build process for the `build-files/vadr/1.6.4-2505/Dockerfile` image. 
 #RUN /opt/vadr/vadr/testfiles/do-install-tests-local.sh
 
 # downloading some test files
