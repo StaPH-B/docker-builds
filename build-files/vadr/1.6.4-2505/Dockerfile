@@ -59,6 +59,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # use vadr-install.sh script to install VADR into $VADRINSTALLDIR (set to /opt/vadr)
 # remove directory that's no longer needed
 # copy calici files that are used in testing
+# install perl module Mozilla::CA required in VADR v1.6.4
 RUN mkdir -p ${VADRINSTALLDIR}/vadr-${VADR_VERSION} /data ${VADRMODELDIR} && \
   cd ${VADRINSTALLDIR} && \ 
   wget -q https://github.com/ncbi/vadr/archive/refs/tags/vadr-${VADR_VERSION}.tar.gz && \
@@ -66,7 +67,8 @@ RUN mkdir -p ${VADRINSTALLDIR}/vadr-${VADR_VERSION} /data ${VADRMODELDIR} && \
   rm vadr-${VADR_VERSION}.tar.gz && \
   bash vadr-${VADR_VERSION}/vadr-install.sh linux && \
   rm -rf vadr-${VADR_VERSION}/ && \
-  cp -nv ${VADRINSTALLDIR}/vadr-models-calici/* ${VADRMODELDIR}
+  cp -nv ${VADRINSTALLDIR}/vadr-models-calici/* ${VADRMODELDIR} && \
+  yes | cpan install Mozilla::CA
 
 # download flu VADR models; copy model files into VADRMODELDIR
 RUN wget https://ftp.ncbi.nlm.nih.gov/pub/nawrocki/vadr-models/flu/${VADR_FLU_MODELS_VER}/vadr-models-flu-${VADR_FLU_MODELS_VER}.tar.gz && \
@@ -109,8 +111,10 @@ CMD ["v-annotate.pl", "-h"]
 FROM app AS test 
 
 # testing that executable is in PATH
-RUN v-annotate.pl -h
-RUN fasta-trim-terminal-ambigs.pl -h || echo "prints to stderr for some reason"
+# v-build.pl -h to ensure required perl modules are available (See issue #1393)
+RUN v-annotate.pl -h &&  \
+v-build.pl -h && \
+fasta-trim-terminal-ambigs.pl -h || echo "prints to stderr for some reason"
 
 # running vadr tests
 RUN /opt/vadr/vadr/testfiles/do-install-tests-local.sh
