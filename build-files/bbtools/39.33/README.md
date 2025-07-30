@@ -5,8 +5,8 @@ Main tool: [BBTools](https://jgi.doe.gov/data-and-tools/software-tools/bbtools/)
 Code repository: https://sourceforge.net/projects/bbmap/
 
 Additional tools:
-- samtools: 1.21
-- htslib: 1.21
+- samtools: 1.22.1
+- htslib: 1.22.1
 - sambamba: 1.0.1
 
 Basic information on how to use this tool:
