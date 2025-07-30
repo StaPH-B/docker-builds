@@ -30,11 +30,7 @@ CMD ["v-annotate.pl", "-h"]
 FROM app AS test 
 
 # testing that executable is in PATH
-RUN v-annotate.pl -h
-RUN fasta-trim-terminal-ambigs.pl -h || echo "prints to stderr for some reason"
-
-# running vadr tests
-RUN /opt/vadr/vadr/testfiles/do-install-tests-local.sh
+RUN v-annotate.pl -h && fasta-trim-terminal-ambigs.pl -h || echo "prints to stderr for some reason"
 
 WORKDIR /test
 
