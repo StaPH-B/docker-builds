@@ -33,5 +33,5 @@ WORKDIR /data
 FROM app AS test
 
 RUN wget https://github.com/nanoporetech/dorado/raw/release-v1.1/tests/data/pod5/dna_r10.4.1_e8.2_400bps_5khz/dna_r10.4.1_e8.2_400bps_5khz-FLO_PRO114M-SQK_LSK114_XL-5000.pod5 &&\
-    dorado basecaller fast dna_r10.4.1_e8.2_400bps_5khz/dna_r10.4.1_e8.2_400bps_5khz-FLO_PRO114M-SQK_LSK114_XL-5000.pod5
+    dorado basecaller fast dna_r10.4.1_e8.2_400bps_5khz-FLO_PRO114M-SQK_LSK114_XL-5000.pod5
 
