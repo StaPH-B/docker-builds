@@ -27,7 +27,7 @@ CMD [ "metaphlan", "--help" ]
 WORKDIR /data
 
 ## Test ##
-FROM app as test
+FROM app AS test
 
 RUN metaphlan --help
 
