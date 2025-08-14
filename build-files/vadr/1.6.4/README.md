@@ -23,15 +23,11 @@ Basic information on how to use this tool:
 
 ## Additional information
 
-This image only contains the default Caliciviridae models (including Norovirus virus) and Flaviviridae models (including Dengue virus).
+**This image does not contain any VADR models by default**, as the files are large and result in a large/bloated docker image. This is meant to be the "slim" docker image for VADR v1.6.4 and is useful in bioinformatics workflows (especially those run in the cloud/HPC environments) as the overheard for downloading the docker image is lower than the docker images that do include the models.
 
-Flaviviridae model files are located at `/opt/vadr/vadr-models-flavi/` within the container filesystem. To use these models, please specify the 2 options: `v-annotate.pl --mdir /opt/vadr/vadr-models-flavi/ --mkey flavi`.
+VADR models should be downloaded separately and mounted/bound to the container at runtime. The default location for VADR models is `/opt/vadr/vadr-models/`.
 
 A larger list of vadr models can be found in [VADR's documentation](https://github.com/ncbi/vadr/wiki/Available-VADR-model-files) for download and mounting/binding during runtime. An example for SARS-CoV-2 is below.
-
-- Full documentation: https://github.com/ncbi/vadr/wiki
-- Caliciviridae model documentation: https://github.com/ncbi/vadr/wiki/Available-VADR-model-files#norovirus-and-other-caliciviridae-refseq-vadr-models
-- Flaviviridae model documentation: https://github.com/ncbi/vadr/wiki/Available-VADR-model-files#dengue-virus-and-other-flaviviridae-refseq-vadr-models
 
 ## Example Usage
 
