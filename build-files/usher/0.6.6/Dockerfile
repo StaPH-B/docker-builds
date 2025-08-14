@@ -35,9 +35,7 @@ FROM app AS test
 # 'RUN' executes code during the build
 # Install dependencies via apt-get or yum if using a centos or fedora base
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    wget \
-    ca-certificates \
-    procps && \
+    wget ca-certificates && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 ARG USHER_VER
