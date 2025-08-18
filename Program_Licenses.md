@@ -131,6 +131,7 @@ The licenses of the open-source software that is contained in these Docker image
 | MultiQC | GNU GPLv3 | https://github.com/ewels/MultiQC/blob/master/LICENSE |
 | Mummer | The Artistic License 2.0| https://github.com/mummer4/mummer/blob/master/LICENSE.md |
 | Mykrobe | MIT | https://github.com/Mykrobe-tools/mykrobe/blob/master/LICENSE |
+| myloasm | MIT | https://github.com/bluenote-1577/myloasm/blob/main/LICENSE |
 | NanoPlot | GNU GPLv3 | https://github.com/wdecoster/NanoPlot/blob/master/LICENSE |
 | NCBI AMRFinderPlus | Public Domain | https://github.com/ncbi/amr/blob/master/LICENSE |
 | NCBI Datasets | Public Domain | https://github.com/ncbi/datasets/blob/master/pkgs/ncbi-datasets-cli/LICENSE.md |
