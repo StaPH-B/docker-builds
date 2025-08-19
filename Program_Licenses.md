@@ -191,7 +191,7 @@ The licenses of the open-source software that is contained in these Docker image
 | SeqSero2 | GNU GPLv2 | https://github.com/denglab/SeqSero2/blob/master/LICENSE |
 | seqyclean | MIT | https://github.com/ibest/seqyclean/blob/master/LICENSE |
 | seqtk | MIT | https://github.com/lh3/seqtk/blob/master/LICENSE |
-| Seroba | GNU GPLv3 | https://github.com/sanger-pathogens/seroba/blob/master/LICENSE |
+| Seroba | GNU GPLv3 | https://github.com/sanger-pathogens/seroba/blob/master/LICENSE</br>https://github.com/GlobalPneumoSeq/seroba/blob/master/LICENSE |
 | SerotypeFinder | Apache 2.0 | https://bitbucket.org/genomicepidemiology/serotypefinder/ |
 | ShigaPass | GNU GPLv3 | https://github.com/imanyass/ShigaPass/blob/main/LICENSE |
 | shigatyper | non-standard license see --> | https://github.com/CFSAN-Biostatistics/shigatyper/blob/master/LICENSE |
