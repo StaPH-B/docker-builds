@@ -49,7 +49,7 @@ FROM app AS test
 COPY --from=data SRR28728181_1.fastq SRR28728181_2.fastq /data/ 
 
 # Streptococcus pneumoniae 19A
-RUN seroba runSerotyping /seroba/database/ SRR28728181_1.fastq SRR28728181_2.fastq test &&\
+RUN seroba runSerotyping /seroba/database/ SRR28728181_1.fastq SRR28728181_2.fastq test 2> stderr.txt &&\
     cat test/pred.csv
 
 # internal test
