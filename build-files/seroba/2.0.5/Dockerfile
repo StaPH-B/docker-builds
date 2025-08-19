@@ -38,10 +38,21 @@ CMD [ "seroba", "--help" ]
 
 WORKDIR /data
 
+# Get test data
+FROM ncbi/sra-tools AS data
+
+RUN fasterq-dump SRR28728181
+
 ## Test ##
 FROM app AS test 
 
-RUN seroba version
+COPY --from=data SRR28728181_1.fastq SRR28728181_2.fastq /data/ 
 
+# Streptococcus pneumoniae 19A
+RUN seroba runSerotyping /seroba/database/ SRR28728181_1.fastq SRR28728181_2.fastq test &&\
+    cat test/pred.csv
+
+# internal test
 RUN cd /seroba && python3 setup.py test
+
 
