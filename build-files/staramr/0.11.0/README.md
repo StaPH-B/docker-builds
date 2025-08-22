@@ -32,7 +32,7 @@ pointfinder_gene_drug_version = 070623
 resfinder_gene_drug_version   = 072423
 ```
 
-This image is re-built every year to the latest databases.
+This image is re-built every year to the latest databases with the tag {latest-version}={date of rebuilding}.
 
 Full documentation: https://github.com/phac-nml/staramr
 
