@@ -277,7 +277,9 @@ The plsdb database that plassembler uses has been pre-downloaded at /plassembler
 ```
 plassembler download -d /plassembler_db
 ```
-  
+
+This image is rebuilt twice a year on January 1 and July 1 to keep the database current.
+
 Full documentation: https://github.com/gbouras13/plassembler
 
 ## Example Usage
