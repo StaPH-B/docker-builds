@@ -26,7 +26,7 @@ CMD ["run_gubbins.py", "-h"]
 
 WORKDIR /data
 
-FROM app as test
+FROM app AS test
 
 RUN run_gubbins.py -h
 
