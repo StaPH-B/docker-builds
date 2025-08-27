@@ -24,7 +24,7 @@ WORKDIR /usr/local/bin
 
 #install openjdk-11 jre
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    openjdk-11-jre \
+    openjdk-11-jre-headless \
     wget \
     unzip \
   && apt-get autoclean && rm -rf /var/lib/apt/lists/*
