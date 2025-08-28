@@ -74,4 +74,4 @@ RUN head /data/test_variants.tsv && \
 # print barcode version and freyja version
 RUN freyja demix --version
 
-RUN micromamba -n freyja-env
+RUN micromamba list -n freyja-env
