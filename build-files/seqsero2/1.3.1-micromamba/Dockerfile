@@ -139,7 +139,7 @@ RUN echo "Running test: SeqSero2 allele mode on diarizonae (subspecies IIIb) rea
     grep -i 'diarizonae' SRR1955549-seqsero2-reads-allele-mode/SeqSero_result.txt
 
 ### SUBSPECIES IV houtenae
-# https://www.ncbi.nlm.nih.gov/biosample/SAMN02367603/
+# https://www.ncbi.nlm.nih.gov/biosample/SAMN14504730/
 RUN echo "Running test: SeqSero2 allele mode on houtenae (subspecies IV) reads..." && \
     wget -q https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR114/034/SRR11457734/SRR11457734_1.fastq.gz && \
     wget -q https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR114/034/SRR11457734/SRR11457734_2.fastq.gz && \
@@ -153,6 +153,7 @@ RUN echo "Running test: SeqSero2 allele mode on houtenae (subspecies IV) reads..
     grep -i 'houtenae' SRR11457734-seqsero2-reads-allele-mode/SeqSero_result.txt
 
 ### (legacy) SUBSPECIES V, now I think Salmonella bongori is it's own species??
+# pretty sure bongori is its own species now, not a subspecies of enterica: https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=54736&lvl=3&lin=f&keep=1&srchmode=1&unlock
 # https://www.ncbi.nlm.nih.gov/biosample/SAMN01933083/
 RUN echo "Running test: SeqSero2 allele mode on bongori (legacy subspecies V, now a new species) reads..." && \
     wget -q https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR588/007/SRR5884027/SRR5884027_1.fastq.gz && \
