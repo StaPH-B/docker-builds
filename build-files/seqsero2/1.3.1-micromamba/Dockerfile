@@ -110,7 +110,6 @@ RUN echo "Running test: SeqSero2 allele mode on salamae (subspecies II) reads...
       -p 2 && \
     grep -i 'salamae' SRR7208786-seqsero2-reads-allele-mode/SeqSero_result.txt
 
-
 ## SUBSPECIES IIIa arizonae
 # https://www.ncbi.nlm.nih.gov/biosample/SAMN02568554/
 RUN echo "Running test: SeqSero2 allele mode on arizonae (subspecies IIIa) reads..." && \
