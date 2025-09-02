@@ -7,8 +7,6 @@ USER root
 # set workdir to default for building; set to /data at the end
 WORKDIR /
 
-# 'LABEL' instructions tag the image with metadata that might be important to the user
-
 LABEL base.image="mambaorg/micromamba:2.3.0-ubuntu22.04"
 LABEL dockerfile.version="1"
 LABEL software="SeqSero2"
@@ -63,7 +61,7 @@ RUN wget -q https://ftp.ncbi.nlm.nih.gov/pub/datasets/command-line/LATEST/linux-
 
 # download an example assembly; test with SeqSero2
 # Salmonella enterica serovar Infantis genome: https://www.ncbi.nlm.nih.gov/data-hub/genome/GCA_007765495.1/
-# BioSample:SAMN07684583
+# BioSample: SAMN07684583
 ARG GENBANK_ACCESSION="GCA_007765495.1"
 RUN datasets download genome accession ${GENBANK_ACCESSION} --filename ${GENBANK_ACCESSION}.zip && \
     mkdir -v ${GENBANK_ACCESSION}-download && \
@@ -81,8 +79,8 @@ RUN datasets download genome accession ${GENBANK_ACCESSION} --filename ${GENBANK
 
 # testing reads as input for the same Salmonella isolate
 # specifically the "allele" mode which does micro assembly first using SPAdes
-RUN wget -q ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR608/003/SRR6082043/SRR6082043_1.fastq.gz && \
-    wget -q ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR608/003/SRR6082043/SRR6082043_2.fastq.gz && \
+RUN wget -q https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR608/003/SRR6082043/SRR6082043_1.fastq.gz && \
+    wget -q https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR608/003/SRR6082043/SRR6082043_2.fastq.gz && \
     SeqSero2_package.py \
       -i SRR6082043_1.fastq.gz SRR6082043_2.fastq.gz \
       -t 2 \
@@ -94,18 +92,91 @@ RUN wget -q ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR608/003/SRR6082043/SRR6082043_
 
 # Tests for various subspecies (truly testing SalmID's functionality here)
 # look for various subspecies listed here in SalmID code: https://github.com/hcdenbakker/SalmID/blob/c50df40caef2fb97c178d6890961e0e527992324/salmid/core.py#L189
+
 # SUBSPECIES I enterica. Tested above with the Infantis isolate
 
 ## SUBSPECIES II salamae
+# https://www.ncbi.nlm.nih.gov/biosample/SAMN09237642/
+# SRR7208786
+RUN echo "Running test: SeqSero2 allele mode on salamae (subspecies II) reads..." && \
+    wget -q https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR720/006/SRR7208786/SRR7208786_1.fastq.gz && \
+    wget -q https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR720/006/SRR7208786/SRR7208786_2.fastq.gz && \
+    SeqSero2_package.py \
+      -i SRR7208786_1.fastq.gz SRR7208786_2.fastq.gz \
+      -t 2 \
+      -m a \
+      -d SRR7208786-seqsero2-reads-allele-mode \
+      -n SRR7208786 \
+      -p 2 && \
+    grep -i 'salamae' SRR7208786-seqsero2-reads-allele-mode/SeqSero_result.txt
 
 
 ## SUBSPECIES IIIa arizonae
-
+# https://www.ncbi.nlm.nih.gov/biosample/SAMN02568554/
+RUN echo "Running test: SeqSero2 allele mode on arizonae (subspecies IIIa) reads..." && \
+    wget -q https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR429/000/SRR4293100/SRR4293100_1.fastq.gz && \
+    wget -q https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR429/000/SRR4293100/SRR4293100_2.fastq.gz && \
+    SeqSero2_package.py \
+      -i SRR4293100_1.fastq.gz SRR4293100_2.fastq.gz \
+      -t 2 \
+      -m a \
+      -d SRR4293100-seqsero2-reads-allele-mode \
+      -n SRR4293100 \
+      -p 2 && \
+    grep -i 'arizonae' SRR4293100-seqsero2-reads-allele-mode/SeqSero_result.txt
 
 ## SUBSPECIES IIIb diarizonae
-
+# https://www.ncbi.nlm.nih.gov/biosample/SAMN03371464/
+RUN echo "Running test: SeqSero2 allele mode on diarizonae (subspecies IIIb) reads..." && \
+    wget -q https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR195/009/SRR1955549/SRR1955549_1.fastq.gz && \
+    wget -q https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR195/009/SRR1955549/SRR1955549_2.fastq.gz && \
+    SeqSero2_package.py \
+      -i SRR1955549_1.fastq.gz SRR1955549_2.fastq.gz \
+      -t 2 \
+      -m a \
+      -d SRR1955549-seqsero2-reads-allele-mode \
+      -n SRR1955549 \
+      -p 2 && \
+    grep -i 'diarizonae' SRR1955549-seqsero2-reads-allele-mode/SeqSero_result.txt
 
 ### SUBSPECIES IV houtenae
+# https://www.ncbi.nlm.nih.gov/biosample/SAMN02367603/
+RUN echo "Running test: SeqSero2 allele mode on houtenae (subspecies IV) reads..." && \
+    wget -q https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR114/034/SRR11457734/SRR11457734_1.fastq.gz && \
+    wget -q https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR114/034/SRR11457734/SRR11457734_2.fastq.gz && \
+    SeqSero2_package.py \
+      -i SRR11457734_1.fastq.gz SRR11457734_2.fastq.gz \
+      -t 2 \
+      -m a \
+      -d SRR11457734-seqsero2-reads-allele-mode \
+      -n SRR11457734 \
+      -p 2 && \
+    grep -i 'houtenae' SRR11457734-seqsero2-reads-allele-mode/SeqSero_result.txt
 
+### (legacy) SUBSPECIES V, now I think Salmonella bongori is it's own species??
+# https://www.ncbi.nlm.nih.gov/biosample/SAMN01933083/
+RUN echo "Running test: SeqSero2 allele mode on bongori (legacy subspecies V, now a new species) reads..." && \
+    wget -q https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR588/007/SRR5884027/SRR5884027_1.fastq.gz && \
+    wget -q https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR588/007/SRR5884027/SRR5884027_2.fastq.gz && \
+    SeqSero2_package.py \
+      -i SRR5884027_1.fastq.gz SRR5884027_2.fastq.gz \
+      -t 2 \
+      -m a \
+      -d SRR5884027-seqsero2-reads-allele-mode \
+      -n SRR5884027 \
+      -p 2 && \
+    grep -i 'bongori' SRR5884027-seqsero2-reads-allele-mode/SeqSero_result.txt
 
 ### SUBSPECIES VI indica
+# https://www.ncbi.nlm.nih.gov/biosample/SAMN02367603/
+RUN echo "Running test: SeqSero2 allele mode on indica (subspecies VI) reads..." && \
+    wget -q https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR184/000/SRR1840570/SRR1840570_1.fastq.gz && \
+    wget -q https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR184/000/SRR1840570/SRR1840570_2.fastq.gz && \
+    SeqSero2_package.py \
+      -i SRR1840570_1.fastq.gz SRR1840570_2.fastq.gz \
+      -t 2 \
+      -m a \
+      -d SRR1840570-seqsero2-reads-allele-mode \
+      -n SRR1840570 \
+      -p 2 && \
+    grep -i 'indica' SRR1840570-seqsero2-reads-allele-mode/SeqSero_result.txt
