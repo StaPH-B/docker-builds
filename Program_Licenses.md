@@ -89,6 +89,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Integron Finder | GNU GPLv3 | https://github.com/gem-pasteur/Integron_Finder/blob/master/COPYING |
 | iqtree | GNU GPLv2 | https://github.com/Cibiv/IQ-TREE/blob/master/LICENSE |
 | iqtree2 | GNU GPLv2 | https://github.com/iqtree/iqtree2/blob/master/LICENSE |
+| iqtree3 | GNU GPLv2 | https://github.com/iqtree/iqtree3/blob/master/LICENSE |
 | IPA | BSD-3 | https://github.com/PacificBiosciences/pbipa/blob/master/LICENSE.txt |
 | IRMA | GNU GPLv3 ; Apache License 2.0 | https://wonder.cdc.gov/amd/flu/irma/disclaimer.html ; https://github.com/CDCgov/irma/blob/master/LICENSE|
 | isPcr | non-standard - see README in source | https://hgwdev.gi.ucsc.edu/~kent/src/isPcr33.zip |
@@ -130,6 +131,7 @@ The licenses of the open-source software that is contained in these Docker image
 | MultiQC | GNU GPLv3 | https://github.com/ewels/MultiQC/blob/master/LICENSE |
 | Mummer | The Artistic License 2.0| https://github.com/mummer4/mummer/blob/master/LICENSE.md |
 | Mykrobe | MIT | https://github.com/Mykrobe-tools/mykrobe/blob/master/LICENSE |
+| myloasm | MIT | https://github.com/bluenote-1577/myloasm/blob/main/LICENSE |
 | NanoPlot | GNU GPLv3 | https://github.com/wdecoster/NanoPlot/blob/master/LICENSE |
 | NCBI AMRFinderPlus | Public Domain | https://github.com/ncbi/amr/blob/master/LICENSE |
 | NCBI Datasets | Public Domain | https://github.com/ncbi/datasets/blob/master/pkgs/ncbi-datasets-cli/LICENSE.md |
@@ -189,7 +191,7 @@ The licenses of the open-source software that is contained in these Docker image
 | SeqSero2 | GNU GPLv2 | https://github.com/denglab/SeqSero2/blob/master/LICENSE |
 | seqyclean | MIT | https://github.com/ibest/seqyclean/blob/master/LICENSE |
 | seqtk | MIT | https://github.com/lh3/seqtk/blob/master/LICENSE |
-| Seroba | GNU GPLv3 | https://github.com/sanger-pathogens/seroba/blob/master/LICENSE |
+| Seroba | GNU GPLv3 | https://github.com/sanger-pathogens/seroba/blob/master/LICENSE</br>https://github.com/GlobalPneumoSeq/seroba/blob/master/LICENSE |
 | SerotypeFinder | Apache 2.0 | https://bitbucket.org/genomicepidemiology/serotypefinder/ |
 | ShigaPass | GNU GPLv3 | https://github.com/imanyass/ShigaPass/blob/main/LICENSE |
 | shigatyper | non-standard license see --> | https://github.com/CFSAN-Biostatistics/shigatyper/blob/master/LICENSE |
