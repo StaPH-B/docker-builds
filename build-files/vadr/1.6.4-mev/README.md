@@ -32,6 +32,8 @@ Most of the VADR model files are located at `/opt/vadr/vadr-models` in the conta
 - Full documentation: https://github.com/ncbi/vadr/wiki
 - MeV documentation: https://github.com/greninger-lab/vadr-models-mev
 
+Please note that VADR may need a large amount of RAM (>16 GB) for many MeV sequences, especially those that are highly divergent.
+
 ## Example Usage
 
 ```bash
@@ -46,3 +48,4 @@ v-annotate.pl --split
   trimmed.fasta \
   mev-test-output
 ```
+
