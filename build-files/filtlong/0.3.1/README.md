@@ -2,9 +2,6 @@
 
 Main tool : [filtlong](https://github.com/rrwick/Filtlong)
 
-Additional tools:
-- python 3.10.6
-
 Full documentation: [https://github.com/rrwick/Filtlong](https://github.com/rrwick/Filtlong)
 
 Filtlong filters long-read fastq files by quality & read lengths.
