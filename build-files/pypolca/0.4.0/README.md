@@ -8,7 +8,7 @@ Additional tools:
 - samtools: 1.22.1
 - vcftools: 0.1.16
 - bwa: 0.7.17-r1188
-- freebayes: 1.3.10
+- freebayes: 1.3.7
 
 Basic information on how to use this tool:
 - executable: pypolca
