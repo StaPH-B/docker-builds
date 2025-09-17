@@ -4,11 +4,11 @@ Main tool : [medaka](https://github.com/nanoporetech/medaka)
 
 Additional tools:
 
-- bcftools version 1.21
-- samtools version 1.21
-- htslib version 1.21
-- minimap2 version 2.28
-- pyabpoa verson 1.5.3
+- bcftools version 1.22
+- samtools version 1.22.1
+- htslib version 1.22.1
+- minimap2 version 2.30
+- pyabpoa verson 1.5.4
 
 Full documentation: [https://github.com/nanoporetech/medaka](https://github.com/nanoporetech/medaka)
 
