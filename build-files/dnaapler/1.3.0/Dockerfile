@@ -20,13 +20,6 @@ LABEL license.url="https://github.com/gbouras13/dnaapler/blob/main/LICENSE"
 LABEL maintainer="Fraser Combe"
 LABEL maintainer.email="fraser.combe@theiagen.com"
 
-# Install dependencies; clean up APT garbage
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    wget \
-    ca-certificates \
-    procps && \
-    apt-get autoclean && rm -rf /var/lib/apt/lists/*
-
 # Create the conda environment, install dnaapler via bioconda package; clean up micromamba garbage
 RUN micromamba create -n dnaapler -y -c conda-forge -c bioconda dnaapler=${DNAAPLER_VER} && \
     micromamba clean -a -f -y
@@ -49,6 +42,11 @@ WORKDIR /test
 
 # Test the tool installation and functionality
 RUN dnaapler --help && dnaapler --version
+
+# Install dependencies; clean up APT garbage
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    wget \
+    ca-certificates
 
 # Download test genome and run DnaApler commands
 RUN wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/025/259/185/GCA_025259185.1_ASM2525918v1/GCA_025259185.1_ASM2525918v1_genomic.fna.gz && \
