@@ -1,4 +1,4 @@
-FROM ubuntu:jammy as app
+FROM ubuntu:jammy AS app
 
 ARG RASUSA_VER="2.2.2"
 
@@ -38,7 +38,7 @@ WORKDIR /data
 
 CMD rasusa --help
 
-FROM app as test 
+FROM app AS test 
 
 # print version and help options
 RUN rasusa --version && rasusa --help
