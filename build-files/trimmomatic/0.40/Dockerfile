@@ -10,7 +10,7 @@ LABEL dockerfile.version="1"
 LABEL software="Trimmomatic"
 LABEL software.version=$TRIMMOMATIC_VER
 LABEL description="Trimmomatic: A flexible read trimming tool for Illumina NGS data"
-LABEL website="https://https://github.com/usadellab/Trimmomatic"
+LABEL website="https://github.com/usadellab/Trimmomatic"
 LABEL documentation="http://www.usadellab.org/cms/?page=trimmomatic"
 LABEL license="https://github.com/usadellab/Trimmomatic/blob/main/distSrc/LICENSE"
 LABEL maintainer="Kelsey Florek"
