@@ -40,7 +40,7 @@ ENV LC_ALL=C.UTF-8 \
 # clean up conda garbage
 RUN ulimit -n 65536 && \
   micromamba install --yes --name base -f "/seqsender-${SEQSENDER_VERSION}/env.yaml" && \
-  micromamba clean --all --yes 
+  micromamba clean --all --force-pkgs-dirs --yes
 
 # default command is to pull up help options
 CMD ["seqsender.py", "--help"]
