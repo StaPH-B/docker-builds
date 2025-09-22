@@ -13,13 +13,11 @@ LABEL maintainer="Erin Young"
 LABEL maintainer.email="eriny@utah.gov"
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    python3 \
-    python3-pip \
+    python3-minimal \
+    python3-requests \
     ca-certificates \
     wget \
     && apt-get autoclean && rm -rf /var/lib/apt/lists/*
-
-RUN pip install requests
 
 # ENA tools
 RUN wget -q https://github.com/enasequence/enaBrowserTools/archive/refs/tags/v${ENA_VER}.tar.gz && \
