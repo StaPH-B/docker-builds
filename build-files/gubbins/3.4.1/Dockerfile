@@ -32,7 +32,11 @@ RUN run_gubbins.py -h
 
 WORKDIR /test
 
-RUN wget --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36" --referer="https://figshare.com/articles/dataset/PMEN1_aln_gz/18685694?file=33468725" "https://figshare.com/ndownloader/files/33468725" -O "PMEN1.aln.gz" &&\
-    gunzip PMEN1.aln.gz &&\
+RUN curl -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36" \
+    -e "https://figshare.com/articles/dataset/PMEN1_aln_gz/18685694?file=33468725" \
+    -o "PMEN1.aln.gz" \
+    "https://figshare.com/ndownloader/files/33468725" 
+    
+RUN gunzip PMEN1.aln.gz &&\
     run_gubbins.py PMEN1.aln
 
