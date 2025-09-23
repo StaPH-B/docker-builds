@@ -32,6 +32,7 @@ RUN run_gubbins.py -h
 
 WORKDIR /test
 
-RUN curl -LJO https://github.com/nickjcroucher/gubbins/raw/master/tests/data/alignment_file_multiple_lines_per_sequence.aln &&\
-    run_gubbins.py alignment_file_multiple_lines_per_sequence.aln
+RUN wget --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36" --referer="https://figshare.com/articles/dataset/PMEN1_aln_gz/18685694?file=33468725" "https://figshare.com/ndownloader/files/33468725" -O "PMEN1.aln.gz" &&\
+    gunzip PMEN1.aln.gz &&\
+    run_gubbins.py PMEN1.aln
 
