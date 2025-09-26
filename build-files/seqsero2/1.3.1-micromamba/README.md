@@ -4,19 +4,6 @@
 
 Main tool : [SeqSero2](https://github.com/denglab/SeqSero2)
 
-Additional tools:
-
-- bedtools 2.17.0
-- biopython 1.73
-- bwa 0.7.18
-- python3 3.7.12
-- ncbi-blast+ 2.16.0
-- SalmID 0.1.23
-- samtools 1.21
-- seqtk 1.4
-- spades 3.15.5
-- sra-toolkit 3.2.1
-
 <details>
 
 <summary>Additional tools installed via micromamba:</summary>
