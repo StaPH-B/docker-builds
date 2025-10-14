@@ -38,7 +38,10 @@ RUN wget -q https://github.com/shenwei356/seqkit/releases/download/v${SEQKIT_VER
 RUN wget -q https://github.com/nextstrain/augur/archive/refs/tags/${AUGUR_VER}.tar.gz && \
     tar -xzf ${AUGUR_VER}.tar.gz && \
     pip install ${AUGUR_VER}.tar.gz --no-cache-dir && \
-    rm -v ${AUGUR_VER}.tar.gz 
+    rm -v ${AUGUR_VER}.tar.gz
+
+# augur tree calls iqtree 
+RUN ln -s /usr/bin/iqtree2 /usr/bin/iqtree
 
 CMD [ "augur", "--help" ]
 
