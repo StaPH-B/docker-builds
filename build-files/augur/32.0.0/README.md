@@ -23,6 +23,7 @@ Note: Auspice is a different tool.
 - raxml 8.2.12
 - scipy 1.16.2
 - vcftools 0.1.16
+- seqkit 2.10.1
 
 ## Example Usage
 
