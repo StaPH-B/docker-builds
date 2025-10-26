@@ -1,8 +1,8 @@
 # NCBI datasets and dataformat container
 
-Main tool : [datasets](https://www.ncbi.nlm.nih.gov/datasets/docs/v1/download-and-install/#use-the-datasets-tool-to-download-biological-data) and [dataformat](https://www.ncbi.nlm.nih.gov/datasets/docs/v1/download-and-install/#use-the-dataformat-tool-to-convert-data-reports-to-other-formats)
+Main tool : [datasets](https://www.ncbi.nlm.nih.gov/datasets/docs/v2/command-line-tools/download-and-install/) and [dataformat](https://www.ncbi.nlm.nih.gov/datasets/docs/v2/command-line-tools/using-dataformat/)
 
-Full documentation: [https://www.ncbi.nlm.nih.gov/datasets/docs/v1/how-tos/](https://www.ncbi.nlm.nih.gov/datasets/docs/v1/how-tos/)
+Full documentation: [https://www.ncbi.nlm.nih.gov/datasets/docs/v2/](https://www.ncbi.nlm.nih.gov/datasets/docs/v2/)
 
 > Use NCBI Datasets to gather metadata, download data packages, view reports and more
 
