@@ -1,18 +1,20 @@
 # BBTools container
 
-Main tool: [BBTools](https://jgi.doe.gov/data-and-tools/software-tools/bbtools/)
+Main tool: [BBTools](https://bbmap.org/)
   
-Code repository: https://sourceforge.net/projects/bbmap/
+Code repository: https://sourceforge.net/projects/bbmap/ and https://github.com/bbushnell/BBTools
 
 Additional tools:
+
 - samtools: 1.22.1
 - htslib: 1.22.1
 - sambamba: 1.0.1
 
 Basic information on how to use this tool:
-- executable: *.sh
+
+- executable: `*.sh`
 - help: Program descriptions and options are shown when running the shell scripts with no parameters.
-- version: --version
+- version: `--version`
 - description: 
 > BBTools is a suite of fast, multithreaded bioinformatics tools designed for analysis of DNA and RNA sequence data. BBTools can handle common sequencing file formats such as fastq, fasta, sam, scarf, fasta+qual, compressed or raw, with autodetection of quality encoding and interleaving.
 
@@ -88,7 +90,7 @@ Additional information:
 | translate6frames.sh     | Translates nucleotide sequence into amino acid sequence in all frames            |                                                                        |
 | vcf2gff.sh              | Converts vcf format to gff format                                                |                                                                        |
   
-Full documentation: https://jgi.doe.gov/data-and-tools/software-tools/bbtools/bb-tools-user-guide/
+Full documentation: https://bbmap.org/docs
 
 ## Example Usage
 
@@ -102,6 +104,7 @@ reformat.sh \
     in2=${SAMPLE}_R2.fastq.gz \
     out=${SAMPLE}.fastq.gz
 ```
+
 Split into SARS-CoV-2 and non-SARS-CoV-2 reads:
 
 ```text
