@@ -1,6 +1,7 @@
 FROM mambaorg/micromamba:2.3.2-ubuntu22.04 AS app
 
 ARG SEQSERO2S_VER="1.1.4"
+ARG MLST_VER="2.22.1"
 
 # build and run as root users since micromamba image has 'mambauser' set as the $USER
 USER root
@@ -28,7 +29,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # MAKE SURE TO INSTALL MLST 2.22.1 AS THE BIOCONDA RECIPE DOES NOT CONTAIN IT AND SEQSERO2S `-m k` REQUIRES IT
 # clean up conda garbage
 # make /data to use as a working directory
-RUN micromamba install --name base -c conda-forge -c bioconda seqsero2s=${SEQSERO2S_VER} mlst=2.22.1 && \
+RUN micromamba install --name base -c conda-forge -c bioconda seqsero2s=${SEQSERO2S_VER} mlst=${MLST_VER} && \
  micromamba clean -a -f -y && \
  mkdir /data
 
