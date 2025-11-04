@@ -18,25 +18,21 @@ List of packages in environment: "/opt/conda/envs/artic"
   _python_abi3_support       1.0                hd8ed1ab_2               conda-forge
   absl-py                    2.3.1              pyhd8ed1ab_0             conda-forge
   aiohappyeyeballs           2.6.1              pyhd8ed1ab_0             conda-forge
-  aiohttp                    3.13.0             py310h258c6eb_0          conda-forge
+  aiohttp                    3.13.2             py310h5541b7b_0          conda-forge
   aiosignal                  1.4.0              pyhd8ed1ab_0             conda-forge
   align_trim                 1.0.2              pyhdfd78af_0             bioconda   
   amply                      0.1.6              pyhd8ed1ab_1             conda-forge
-  anndata                    0.11.4             pyhd8ed1ab_0             conda-forge
   annotated-types            0.7.0              pyhd8ed1ab_1             conda-forge
   args                       0.1.0              pyhd8ed1ab_1004          conda-forge
-  array-api-compat           1.12.0             pyhe01879c_0             conda-forge
   artic                      1.8.5              pyhdfd78af_0             bioconda   
   astunparse                 1.6.3              pyhd8ed1ab_3             conda-forge
   async-timeout              5.0.1              pyhd8ed1ab_1             conda-forge
   attrs                      25.4.0             pyh71513ae_0             conda-forge
   bcftools                   1.22               h3a4d415_1               bioconda   
-  biopython                  1.85               py310h7c4b9e2_2          conda-forge
+  biopython                  1.86               py310h7c4b9e2_0          conda-forge
   blinker                    1.9.0              pyhff2d567_0             conda-forge
   blosc                      1.21.5             h0f2a231_0               conda-forge
-  brotli                     1.1.0              hb03c661_4               conda-forge
-  brotli-bin                 1.1.0              hb03c661_4               conda-forge
-  brotli-python              1.1.0              py310hea6c23e_4          conda-forge
+  brotli-python              1.2.0              py310h8cfb67f_0          conda-forge
   bwa                        0.7.19             h577a1d6_1               bioconda   
   bzip2                      1.0.8              hda65f42_8               conda-forge
   c-ares                     1.34.5             hb9d3cd8_0               conda-forge
@@ -59,10 +55,8 @@ List of packages in environment: "/opt/conda/envs/artic"
   colorama                   0.4.6              pyhd8ed1ab_1             conda-forge
   coloredlogs                15.0.1             pyhd8ed1ab_4             conda-forge
   colormath                  3.0.0              pyhd8ed1ab_4             conda-forge
-  contourpy                  1.3.2              py310h3788b33_0          conda-forge
   cpython                    3.10.19            py310hd8ed1ab_2          conda-forge
   cryptography               46.0.3             py310hed992bd_0          conda-forge
-  cycler                     0.12.1             pyhd8ed1ab_1             conda-forge
   cyvcf2                     0.31.0             py310h0ae5082_1          bioconda   
   docutils                   0.22.2             pyhd8ed1ab_0             conda-forge
   exceptiongroup             1.3.0              pyhd8ed1ab_0             conda-forge
@@ -74,14 +68,13 @@ List of packages in environment: "/opt/conda/envs/artic"
   font-ttf-ubuntu            0.83               h77eed37_3               conda-forge
   fontconfig                 2.15.0             h7e30c49_1               conda-forge
   fonts-conda-forge          1                  0                        conda-forge
-  fonttools                  4.60.1             py310h3406613_0          conda-forge
   freetype                   2.14.1             ha770c72_0               conda-forge
   frozenlist                 1.7.0              py310h9548a50_0          conda-forge
   gast                       0.6.0              pyhd8ed1ab_0             conda-forge
   gawk                       5.3.1              hcd3d067_0               conda-forge
   giflib                     5.2.2              hd590300_0               conda-forge
   gmp                        6.3.0              hac33072_2               conda-forge
-  google-auth                2.41.1             pyhd8ed1ab_0             conda-forge
+  google-auth                2.42.1             pyhd8ed1ab_0             conda-forge
   google-auth-oauthlib       1.2.2              pyhd8ed1ab_0             conda-forge
   google-pasta               0.2.0              pyhd8ed1ab_2             conda-forge
   grpcio                     1.59.3             py310h1b8f574_0          conda-forge
@@ -100,7 +93,6 @@ List of packages in environment: "/opt/conda/envs/artic"
   iniconfig                  2.3.0              pyhd8ed1ab_0             conda-forge
   isa-l                      2.31.1             hb9d3cd8_1               conda-forge
   jinja2                     3.1.6              pyhd8ed1ab_0             conda-forge
-  joblib                     1.5.2              pyhd8ed1ab_0             conda-forge
   jsonschema                 4.25.1             pyhe01879c_0             conda-forge
   jsonschema-specifications  2025.9.1           pyhcf101f3_0             conda-forge
   k8                         1.2                he8db53b_6               bioconda   
@@ -108,22 +100,17 @@ List of packages in environment: "/opt/conda/envs/artic"
   keras                      2.15.0             pyhd8ed1ab_0             conda-forge
   kernel-headers_linux-64    5.14.0             he073ed8_2               conda-forge
   keyutils                   1.6.3              hb9d3cd8_0               conda-forge
-  kiwisolver                 1.4.9              py310haaf941d_1          conda-forge
   krb5                       1.21.3             h659f571_0               conda-forge
   lcms2                      2.17               h717163a_0               conda-forge
-  ld_impl_linux-64           2.44               h1aa0949_3               conda-forge
-  legacy-api-wrap            1.4.1              pyhd8ed1ab_0             conda-forge
+  ld_impl_linux-64           2.44               h1aa0949_4               conda-forge
   lerc                       4.0.0              h0aef613_1               conda-forge
   libabseil                  20230802.1         cxx17_h59595ed_0         conda-forge
   libaec                     1.1.4              h3f801dc_0               conda-forge
   libasprintf                0.25.1             h3f43e3d_1               conda-forge
-  libblas                    3.9.0              37_h4a7cf45_openblas     conda-forge
-  libbrotlicommon            1.1.0              hb03c661_4               conda-forge
-  libbrotlidec               1.1.0              hb03c661_4               conda-forge
-  libbrotlienc               1.1.0              hb03c661_4               conda-forge
-  libcblas                   3.9.0              37_h0358290_openblas     conda-forge
+  libblas                    3.9.0              38_h4a7cf45_openblas     conda-forge
+  libcblas                   3.9.0              38_h0358290_openblas     conda-forge
   libcurl                    8.16.0             h4e3cde8_0               conda-forge
-  libdeflate                 1.24               h86f0d12_0               conda-forge
+  libdeflate                 1.25               h17f619e_0               conda-forge
   libedit                    3.1.20250104       pl5321h7949ede_0         conda-forge
   libev                      4.33               hd590300_2               conda-forge
   libexpat                   2.7.1              hecca717_0               conda-forge
@@ -137,16 +124,14 @@ List of packages in environment: "/opt/conda/envs/artic"
   libgfortran5               15.2.0             hcd61629_7               conda-forge
   libgomp                    15.2.0             h767d61c_7               conda-forge
   libgrpc                    1.59.3             hd6c4280_0               conda-forge
-  libhwloc                   2.11.2             default_he43201b_1000    conda-forge
   libiconv                   1.18               h3b78370_2               conda-forge
-  libjpeg-turbo              3.1.0              hb9d3cd8_0               conda-forge
-  liblapack                  3.9.0              37_h47877c9_openblas     conda-forge
-  liblapacke                 3.9.0              37_h6ae95b6_openblas     conda-forge
+  libjpeg-turbo              3.1.2              hb03c661_0               conda-forge
+  liblapack                  3.9.0              38_h47877c9_openblas     conda-forge
+  liblapacke                 3.9.0              38_h6ae95b6_openblas     conda-forge
   liblzma                    5.8.1              hb9d3cd8_2               conda-forge
-  liblzma-devel              5.8.1              hb9d3cd8_2               conda-forge
   libnghttp2                 1.67.0             had1ee68_0               conda-forge
   libnsl                     2.0.1              hb9d3cd8_1               conda-forge
-  libopenblas                0.3.30             pthreads_h94d23a6_2      conda-forge
+  libopenblas                0.3.30             pthreads_h94d23a6_3      conda-forge
   libpng                     1.6.50             h421ea60_1               conda-forge
   libprotobuf                4.24.4             hf27288f_0               conda-forge
   libre2-11                  2023.09.01         h7a70373_1               conda-forge
@@ -154,37 +139,32 @@ List of packages in environment: "/opt/conda/envs/artic"
   libssh2                    1.11.1             hcf80075_0               conda-forge
   libstdcxx                  15.2.0             h8f9b012_7               conda-forge
   libstdcxx-ng               15.2.0             h4852527_7               conda-forge
-  libtiff                    4.7.1              h8261f1e_0               conda-forge
+  libtiff                    4.7.1              h9d88235_1               conda-forge
   libuuid                    2.41.2             he9a06e4_0               conda-forge
   libwebp-base               1.6.0              hd42ef1d_0               conda-forge
   libxcb                     1.17.0             h8a09558_0               conda-forge
   libxcrypt                  4.4.36             hd590300_1               conda-forge
-  libxml2                    2.12.7             h4c95cb1_3               conda-forge
   libzlib                    1.3.1              hb9d3cd8_2               conda-forge
-  llvmlite                   0.45.1             py310hee1c697_0          conda-forge
   lz4-c                      1.9.4              hcb278e6_0               conda-forge
   lzo                        2.10               h280c20c_1002            conda-forge
   mafft                      7.526              h4bc722e_0               conda-forge
-  markdown                   3.9                pyhd8ed1ab_0             conda-forge
+  markdown                   3.10               pyhd8ed1ab_0             conda-forge
   markdown-it-py             4.0.0              pyhd8ed1ab_0             conda-forge
   markupsafe                 3.0.3              py310h3406613_0          conda-forge
   mathjax                    2.7.7              ha770c72_3               conda-forge
-  matplotlib-base            3.10.7             py310hfde16b3_0          conda-forge
   mdurl                      0.1.2              pyhd8ed1ab_1             conda-forge
   minimap2                   2.30               h577a1d6_0               bioconda   
   ml_dtypes                  0.2.0              py310hcc13569_2          conda-forge
   mpfr                       4.2.1              h90cbb55_3               conda-forge
   multidict                  6.6.3              py310h89163eb_0          conda-forge
-  multiqc                    1.31               pyhdfd78af_0             bioconda   
-  munkres                    1.1.4              pyhd8ed1ab_1             conda-forge
-  narwhals                   2.9.0              pyhcf101f3_0             conda-forge
+  multiqc                    1.32               pyhdfd78af_1             bioconda   
+  narwhals                   2.10.1             pyhcf101f3_0             conda-forge
   natsort                    8.4.0              pyh29332c3_1             conda-forge
   ncurses                    6.5                h2d0b736_3               conda-forge
   networkx                   3.4.2              pyh267e887_2             conda-forge
   nomkl                      1.0                h5ca1d4c_0               conda-forge
   nspr                       4.37               h29cc59b_0               conda-forge
   nss                        3.117              h445c969_0               conda-forge
-  numba                      0.62.1             py310h3477d8a_0          conda-forge
   numexpr                    2.14.1             py310h34a7263_100        conda-forge
   numpy                      1.26.4             py310hb13e2d6_0          conda-forge
   oauthlib                   3.3.1              pyhd8ed1ab_0             conda-forge
@@ -194,18 +174,17 @@ List of packages in environment: "/opt/conda/envs/artic"
   packaging                  25.0               pyh29332c3_1             conda-forge
   pandas                     2.3.3              py310h0158d43_1          conda-forge
   parallel                   20250822           ha770c72_0               conda-forge
-  patsy                      1.0.2              pyhcf101f3_0             conda-forge
   pbzip2                     1.1.13             h1fcc475_2               conda-forge
   perl                       5.32.1             7_hd590300_perl5         conda-forge
   pigz                       2.8                hadc24fc_1               conda-forge
-  pillow                     11.3.0             py310h6557065_3          conda-forge
+  pillow                     12.0.0             py310h80abafc_0          conda-forge
   pip                        25.2               pyh8b19718_0             conda-forge
   plotly                     6.3.1              pyhd8ed1ab_0             conda-forge
   pluggy                     1.6.0              pyhd8ed1ab_0             conda-forge
-  polars                     1.34.0             pyh6a1acc5_0             conda-forge
+  polars                     1.35.1             pyh6a1acc5_0             conda-forge
   polars-lts-cpu             1.34.0.deprecated  hc364b38_0               conda-forge
-  polars-runtime-32          1.34.0             py310hffdcd12_0          conda-forge
-  polars-runtime-compat      1.34.0             py310hbcd5346_0          conda-forge
+  polars-runtime-32          1.35.1             py310hffdcd12_0          conda-forge
+  polars-runtime-compat      1.35.1             py310hbcd5346_0          conda-forge
   primalbedtools             1.0.0              pyhdfd78af_0             bioconda   
   propcache                  0.3.1              py310h89163eb_0          conda-forge
   protobuf                   4.24.4             py310h620c231_0          conda-forge
@@ -221,7 +200,6 @@ List of packages in environment: "/opt/conda/envs/artic"
   pyfaidx                    0.9.0.3            pyhdfd78af_0             bioconda   
   pygments                   2.19.2             pyhd8ed1ab_0             conda-forge
   pyjwt                      2.10.1             pyhd8ed1ab_0             conda-forge
-  pynndescent                0.5.13             pyhd8ed1ab_1             conda-forge
   pyopenssl                  25.3.0             pyhd8ed1ab_0             conda-forge
   pyparsing                  3.2.5              pyhcf101f3_0             conda-forge
   pysam                      0.23.3             py310h64e62c9_1          bioconda   
@@ -230,7 +208,7 @@ List of packages in environment: "/opt/conda/envs/artic"
   pytest                     8.4.2              pyhd8ed1ab_0             conda-forge
   python                     3.10.19            h3c07f61_2_cpython       conda-forge
   python-dateutil            2.9.0.post0        pyhe01879c_2             conda-forge
-  python-dotenv              1.1.1              pyhe01879c_0             conda-forge
+  python-dotenv              1.2.1              pyhcf101f3_0             conda-forge
   python-flatbuffers         25.9.23            pyh1e1bc0e_0             conda-forge
   python-gil                 3.10.19            hd8ed1ab_2               conda-forge
   python-isal                1.8.0              py310h7c4b9e2_0          conda-forge
@@ -242,40 +220,31 @@ List of packages in environment: "/opt/conda/envs/artic"
   pyu2f                      0.1.5              pyhd8ed1ab_1             conda-forge
   pyvcf3                     1.0.4              py310h1fe012e_0          bioconda   
   pyyaml                     6.0.3              py310h3406613_0          conda-forge
-  qhull                      2020.2             h434a139_5               conda-forge
   re2                        2023.09.01         h7f4b329_1               conda-forge
   readline                   8.2                h8c095d6_2               conda-forge
   referencing                0.37.0             pyhcf101f3_0             conda-forge
-  regex                      2025.10.23         py310h7c4b9e2_0          conda-forge
+  regex                      2025.11.3          py310h7c4b9e2_0          conda-forge
   requests                   2.32.5             pyhd8ed1ab_0             conda-forge
   requests-oauthlib          2.0.0              pyhd8ed1ab_1             conda-forge
   rich                       14.2.0             pyhcf101f3_0             conda-forge
-  rich-click                 1.9.3              pyhd8ed1ab_0             conda-forge
+  rich-click                 1.9.4              pyhd8ed1ab_0             conda-forge
   rpds-py                    0.28.0             py310hd8f68c5_1          conda-forge
   rsa                        4.9.1              pyhd8ed1ab_0             conda-forge
   samtools                   1.22.1             h96c455f_0               bioconda   
-  scanpy                     1.11.5             pyhd8ed1ab_0             conda-forge
-  scikit-learn               1.7.2              py310h228f341_0          conda-forge
   scipy                      1.15.2             py310h1d65ade_0          conda-forge
-  seaborn                    0.13.2             hd8ed1ab_3               conda-forge
-  seaborn-base               0.13.2             pyhd8ed1ab_3             conda-forge
   seqtk                      1.5                h577a1d6_1               bioconda   
-  session-info2              0.2.3              pyhd8ed1ab_0             conda-forge
   setuptools                 80.9.0             pyhff2d567_0             conda-forge
   six                        1.17.0             pyhe01879c_1             conda-forge
   snappy                     1.1.10             hdb0a2a9_1               conda-forge
   spectra                    0.0.11             pyhd8ed1ab_2             conda-forge
   sqlite                     3.50.4             hbc0de68_0               conda-forge
-  statsmodels                0.14.5             py310hf779ad0_1          conda-forge
   sysroot_linux-64           2.34               h087de78_2               conda-forge
-  tbb                        2022.1.0           h4ce085d_0               conda-forge
   tensorboard                2.15.2             pyhd8ed1ab_0             conda-forge
   tensorboard-data-server    0.7.0              py310hed992bd_3          conda-forge
   tensorflow                 2.15.0             cpu_py310h7825f03_2      conda-forge
   tensorflow-base            2.15.0             cpu_py310h7e4d085_2      conda-forge
   tensorflow-estimator       2.15.0             cpu_py310haacee6a_2      conda-forge
-  termcolor                  3.1.0              pyhd8ed1ab_0             conda-forge
-  threadpoolctl              3.6.0              pyhecae5ae_0             conda-forge
+  termcolor                  3.2.0              pyhd8ed1ab_0             conda-forge
   tiktoken                   0.12.0             py310h790759e_1          conda-forge
   tk                         8.6.13             noxft_hd72426e_102       conda-forge
   tomli                      2.3.0              pyhcf101f3_0             conda-forge
@@ -285,8 +254,6 @@ List of packages in environment: "/opt/conda/envs/artic"
   typing-inspection          0.4.2              pyhd8ed1ab_0             conda-forge
   typing_extensions          4.15.0             pyhcf101f3_0             conda-forge
   tzdata                     2025b              h78e105d_0               conda-forge
-  umap-learn                 0.5.9.post2        py310hff52083_0          conda-forge
-  unicodedata2               16.0.0             py310h7c4b9e2_1          conda-forge
   urllib3                    2.5.0              pyhd8ed1ab_0             conda-forge
   werkzeug                   3.1.3              pyhd8ed1ab_1             conda-forge
   whatshap                   2.8                py310h184ae93_0          bioconda   
@@ -295,11 +262,8 @@ List of packages in environment: "/opt/conda/envs/artic"
   xopen                      2.0.2              pyh707e725_2             conda-forge
   xorg-libxau                1.0.12             hb9d3cd8_0               conda-forge
   xorg-libxdmcp              1.1.5              hb9d3cd8_0               conda-forge
-  xz                         5.8.1              hbcc6ac9_2               conda-forge
-  xz-gpl-tools               5.8.1              hbcc6ac9_2               conda-forge
-  xz-tools                   5.8.1              hb9d3cd8_2               conda-forge
   yaml                       0.2.5              h280c20c_3               conda-forge
-  yarl                       1.20.1             py310h89163eb_0          conda-forge
+  yarl                       1.22.0             py310h3406613_0          conda-forge
   zipp                       3.23.0             pyhd8ed1ab_0             conda-forge
   zlib-ng                    2.2.5              hde8ca8f_0               conda-forge
   zstandard                  0.25.0             py310h139afa4_0          conda-forge
