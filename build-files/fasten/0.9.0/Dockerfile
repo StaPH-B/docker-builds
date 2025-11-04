@@ -46,7 +46,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     procps \
     bsdmainutils \
-    wget && \
+    wget \
+    bc && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 ENV PATH="$PATH" LC_ALL=C
