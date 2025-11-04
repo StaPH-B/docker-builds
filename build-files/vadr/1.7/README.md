@@ -6,9 +6,9 @@ Additional tools:
 
 - perl v5.34.0
 - infernal v1.1.5
-- ncbi-blast+ v2.15.0
+- ncbi-blast+ v2.17.0
 - fasta v36.3.8h (the tool, not the file format)
-- minimap2 2.26-r1175
+- minimap2 2.30-r1287
 
 Basic information on how to use this tool:
 
@@ -23,7 +23,7 @@ Basic information on how to use this tool:
 
 ## Additional information
 
-**This image does not contain any VADR models by default**, as the files are large and result in a large/bloated docker image. This is meant to be the "slim" docker image for VADR v1.6.4 and is useful in bioinformatics workflows (especially those run in the cloud/HPC environments) as the overheard for downloading the docker image is lower than the docker images that do include the models.
+**This image does not contain any VADR models by default**, as the files are large and result in a large/bloated docker image. This is meant to be the "slim" docker image for VADR v1.7 and is useful in bioinformatics workflows (especially those run in the cloud/HPC environments) as the overheard for downloading the docker image is lower than the docker images that do include the models.
 
 VADR models should be downloaded separately and mounted/bound to the container at runtime. The default location for VADR models is `/opt/vadr/vadr-models/`.
 
