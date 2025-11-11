@@ -10,7 +10,6 @@ Phylogenetic Assignment of Named Global Outbreak LINeages
 
 <summary>Additional tools installed via micromamba:</summary>
 
-
 ```
 List of packages in environment: "/opt/conda/envs/pangolin"
 
@@ -87,13 +86,13 @@ List of packages in environment: "/opt/conda/envs/pangolin"
   liblzma-devel              5.8.1         hb9d3cd8_2            conda-forge
   libnsl                     2.0.1         hb9d3cd8_1            conda-forge
   libopenblas                0.3.30        pthreads_h94d23a6_3   conda-forge
-  libopenssl-static          3.5.4         hb03c661_0            conda-forge
+  libopenssl-static          3.6.0         hb03c661_0            conda-forge
   libpng                     1.6.43        h2797004_0            conda-forge
   libprotobuf                3.21.12       hfc55251_2            conda-forge
   libsqlite                  3.46.0        hde9e2c9_0            conda-forge
   libstdcxx                  15.2.0        h8f9b012_7            conda-forge
   libstdcxx-ng               15.2.0        h4852527_7            conda-forge
-  libudev1                   257.9         h085a93f_0            conda-forge
+  libudev1                   258.2         h07e904d_0            conda-forge
   libuuid                    2.41.2        he9a06e4_0            conda-forge
   libxcrypt                  4.4.36        hd590300_1            conda-forge
   libzlib                    1.2.13        h4ab18f5_6            conda-forge
@@ -108,7 +107,7 @@ List of packages in environment: "/opt/conda/envs/pangolin"
   numpy                      1.24.4        py38h59b608b_0        conda-forge
   openmpi                    4.1.2         hbfc84c5_0            conda-forge
   openssh                    9.6p1         h2d3b35a_0            conda-forge
-  openssl                    3.5.4         h26f9b46_0            conda-forge
+  openssl                    3.6.0         h26f9b46_0            conda-forge
   pip                        19.3.1        py38_0                conda-forge
   pkgutil-resolve-name       1.3.10        pyhd8ed1ab_1          conda-forge
   plac                       1.4.3         pyhd8ed1ab_0          conda-forge

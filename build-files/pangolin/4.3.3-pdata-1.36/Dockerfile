@@ -1,4 +1,4 @@
-FROM mambaorg/micromamba:2.3.0-ubuntu22.04 AS app
+FROM mambaorg/micromamba:2.3.3-ubuntu22.04 AS app
 
 # build and run as root users since micromamba image has 'mambauser' set as the $USER
 USER root
@@ -8,14 +8,14 @@ WORKDIR /
 # ARG variables only persist during build time
 # had to include the v for some of these due to GitHub tags.
 # using pangolin-data github tag, NOT what is in the GH release title "v1.2.133"
-ARG PANGOLIN_VER="v4.3.1"
-ARG PANGOLIN_DATA_VER="v1.35"
+ARG PANGOLIN_VER="v4.3.3"
+ARG PANGOLIN_DATA_VER="v1.36"
 ARG SCORPIO_VER="v0.3.19"
 ARG CONSTELLATIONS_VER="v0.1.12"
 ARG USHER_VER="0.6.3"
 
 # metadata labels
-LABEL base.image="mambaorg/micromamba:2.3.0-ubuntu22.04"
+LABEL base.image="mambaorg/micromamba:2.3.3-ubuntu22.04"
 LABEL dockerfile.version="1"
 LABEL software="pangolin"
 LABEL software.version=${PANGOLIN_VER}
@@ -121,7 +121,8 @@ RUN wget -q https://ftp.ncbi.nlm.nih.gov/pub/datasets/command-line/LATEST/linux-
 # NC.1.2 | PQ725776.1 | introduced in pango-designation 1.33 https://github.com/cov-lineages/pango-designation/commit/4e87876f825fbd932b614c791c5848ea7f3d7b83 and https://www.ncbi.nlm.nih.gov/biosample?term=SAMN45350159
 # PQ.3 | PV666687.1 | introduced in pango-designation 1.34 https://github.com/cov-lineages/pango-designation/commit/5bebd58910e19ebb8058def5c22b67fc5b7a5959
 # XFG.3.5 | PX025687.1 | introduced in pango-designation 1.35 https://github.com/cov-lineages/pango-designation/commit/cb430033b29f760b7f013ff7114790c5b4b6f9b4
-RUN datasets download virus genome accession ON924087.1,OQ381818.1,OR177999.1,OR461132.1,OR598183.1,OR716684.1,PP189069.1,PP218754.1,PQ073669.1,PP770375.1,PQ034842.1,PQ277908.1,PQ725776.1,PV666687.1,PX025687.1 && \
+# XFG.5.1.4 | PV979512.1 | introduced in pango-designation 1.36 https://github.com/cov-lineages/pango-designation/commit/9bc6a238df1bcda12f548b239a86c7ce7fbcf2a3
+RUN datasets download virus genome accession ON924087.1,OQ381818.1,OR177999.1,OR461132.1,OR598183.1,OR716684.1,PP189069.1,PP218754.1,PQ073669.1,PP770375.1,PQ034842.1,PQ277908.1,PQ725776.1,PV666687.1,PX025687.1,PV979512.1 && \
     unzip -o ncbi_dataset.zip && \
     rm -v ncbi_dataset.zip && \
     pangolin ncbi_dataset/data/genomic.fna && \
