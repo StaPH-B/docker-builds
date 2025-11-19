@@ -12,6 +12,7 @@ The licenses of the open-source software that is contained in these Docker image
 | artic | MIT | https://github.com/artic-network/fieldbioinformatics/blob/master/LICENSE |
 | artic-ncov2019-epi2me | MPL 2.0 | https://github.com/epi2me-labs/wf-artic/blob/master/LICENSE |
 | any2fasta | GNU GPLv3 | https://github.com/tseemann/any2fasta/blob/master/LICENSE |
+| ArborView | Apache 2.0 | https://github.com/phac-nml/ArborView/tree/main?tab=readme-ov-file#legal-and-compliance-information |
 | ARIBA | GNU GPLv3 | https://github.com/sanger-pathogens/ariba/blob/master/LICENSE |
 | assembly_snptyper | MIT | https://github.com/boasvdp/assembly_snptyper/blob/main/LICENSE |
 | Augur | GNU Affero GPLv3 | https://github.com/nextstrain/augur/blob/master/LICENSE.txt |
