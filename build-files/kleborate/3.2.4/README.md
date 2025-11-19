@@ -4,6 +4,10 @@ Main tool : [Kleborate](https://github.com/klebgenomics/Kleborate)
 
 :warning: **Note:** Kleborate v3 is different from v2, please see here for the differences: https://kleborate.readthedocs.io/en/latest/index.html#changes-from-v2
 
+## Known Issue :warning:
+
+This docker image `staphb/kleborate:3.2.4` (and the identical docker image hosted on quay.io `quay.io/staphb/kleborate:3.2.4`) throws an error when attempting to use the E. coli specific sub-module with `kleborate --preset escherichia`. This is due to missing dependencies such as `ezclermont`. See issue [#1475](https://github.com/StaPH-B/docker-builds/issues/1475) for more details. We recommend using the docker image `staphb/kleborate:3.2.4-micromamba` which has been built with `micromamba` and includes the necessary dependencies to run the E. coli sub-module.
+
 Additional tools:
 
 - [mash](https://github.com/marbl/Mash) version 2.3
