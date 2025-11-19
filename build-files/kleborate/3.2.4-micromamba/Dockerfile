@@ -81,6 +81,34 @@ gunzip GCA_018509925.1_PDT001047072.1_genomic.fna.gz && \
 kleborate -a GCA_018509925.1_PDT001047072.1_genomic.fna -o kleborate_ecoli_test --preset escherichia && \
 grep 'stx2d' kleborate_ecoli_test/escherichia_output.txt
 
+# testing on another E. coli PNUSAE021029: https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_012047485.2/
+# Known to have both stx2a and stx2c operons
+# Also known to be O157:H7 serotype
+# ectyper should report 'EHEC' pathotype
+# also known to have lots of virulence factors like eae, ehxA, many different esp genes (espA, espB, espJ, espK, espP, espX1)
+RUN wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/012/047/485/GCA_012047485.2_PDT000417198.3/GCA_012047485.2_PDT000417198.3_genomic.fna.gz && \
+gunzip GCA_012047485.2_PDT000417198.3_genomic.fna.gz && \
+kleborate -a GCA_012047485.2_PDT000417198.3_genomic.fna -o kleborate-ecoli-test2 --preset escherichia && \
+grep 'stx2a' kleborate-ecoli-test2/escherichia_output.txt && \
+grep 'stx2c' kleborate-ecoli-test2/escherichia_output.txt && \
+grep 'O157:H7' kleborate-ecoli-test2/escherichia_output.txt && \
+grep 'EHEC' kleborate-ecoli-test2/escherichia_output.txt && \
+grep 'eae' kleborate-ecoli-test2/escherichia_output.txt 
+
+# testing on a particularly drug-resistant E. coli PNUSAE020982: https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_012117185.1/
+# known to have blaCTX-M-27, sul1, tet(A), dfrA17, erm(B), gyrA_D87N, gyrA_S83L, parC_S80I
+RUN wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/012/117/185/GCA_012117185.1_PDT000432447.1/GCA_012117185.1_PDT000432447.1_genomic.fna.gz && \
+gunzip GCA_012117185.1_PDT000432447.1_genomic.fna.gz && \
+kleborate -a GCA_012117185.1_PDT000432447.1_genomic.fna -o kleborate-ecoli-test3 --preset escherichia && \
+grep 'blaCTX-M-27' kleborate-ecoli-test3/escherichia_output.txt && \
+grep 'sul1' kleborate-ecoli-test3/escherichia_output.txt && \
+grep 'tet(A)' kleborate-ecoli-test3/escherichia_output.txt && \
+grep 'dfrA17' kleborate-ecoli-test3/escherichia_output.txt && \
+grep 'erm(B)' kleborate-ecoli-test3/escherichia_output.txt && \
+grep 'gyrA_D87N' kleborate-ecoli-test3/escherichia_output.txt && \
+grep 'gyrA_S83L' kleborate-ecoli-test3/escherichia_output.txt && \
+grep 'parC_S80I' kleborate-ecoli-test3/escherichia_output.txt
+
 # print help and version info
 # list all tools installed via micromamba (put these in the tool-specific REAMDME.md)
 RUN kleborate --help && \
