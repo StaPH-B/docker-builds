@@ -5,11 +5,11 @@ ARG KLEBORATE_VER="3.2.4"
 ARG PYTHON_VER="3.9"
 ARG MINIMAP2_VER="2.30"
 ARG MASH_VER="2.3"
-ARG STXTYPER_VER=""
 ARG AMRFINDERPLUS_VER="4.0.23"
 ARG EZCLERMONT_VER="0.7.0"
 ARG ECTYPER_VER="2.0.0"
 ARG AMRFINDER_DB_VER="2025-07-16.1"
+#NOTE: stxtyper is installed as part of amrfinderplus since it's a submodule of amrfinderplus. StxTyper v1.0.42 comes installed with amrfinderplus v4.0.23
 #NOTE: dna_features_viewer is installed as a dependency of kleborate via pip (using kleborate's requirements.txt)
 
 # build and run as root users since micromamba image has 'mambauser' set as the $USER

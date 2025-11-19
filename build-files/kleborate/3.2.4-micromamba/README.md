@@ -11,12 +11,12 @@ Additional tools:
 - [dna-features-viewer](https://edinburgh-genome-foundry.github.io/DnaFeaturesViewer/) 3.1.5
 - [ectyper](https://github.com/phac-nml/ecoli_serotyping) 2.0.0
 - [ezclermont](https://github.com/nickp60/EzClermont) 0.7.0
-- [mash](https://github.com/marbl/Mash) version 2.3
+- [mash](https://github.com/marbl/Mash) 2.3
 - matplotlib 3.9.4
-- [minimap2](https://github.com/lh3/minimap2) version 2.30
+- [minimap2](https://github.com/lh3/minimap2) 2.30
 - numpy 2.0.2
 - python 3.9.23
-- [kaptive](https://github.com/klebgenomics/Kaptive) version 3.1.0
+- [kaptive](https://github.com/klebgenomics/Kaptive) 3.1.0
 - [stxtyper](https://github.com/ncbi/stxtyper/) 1.0.42
 
 <details>
