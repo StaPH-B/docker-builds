@@ -12,6 +12,7 @@ The licenses of the open-source software that is contained in these Docker image
 | artic | MIT | https://github.com/artic-network/fieldbioinformatics/blob/master/LICENSE |
 | artic-ncov2019-epi2me | MPL 2.0 | https://github.com/epi2me-labs/wf-artic/blob/master/LICENSE |
 | any2fasta | GNU GPLv3 | https://github.com/tseemann/any2fasta/blob/master/LICENSE |
+| ArborView | Apache 2.0 | https://github.com/phac-nml/ArborView/tree/main?tab=readme-ov-file#legal-and-compliance-information |
 | ARIBA | GNU GPLv3 | https://github.com/sanger-pathogens/ariba/blob/master/LICENSE |
 | assembly_snptyper | MIT | https://github.com/boasvdp/assembly_snptyper/blob/main/LICENSE |
 | Augur | GNU Affero GPLv3 | https://github.com/nextstrain/augur/blob/master/LICENSE.txt |
@@ -19,7 +20,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Autocycler | GNU General Public License v3.0 | https://github.com/rrwick/Autocycler/blob/main/LICENSE |
 | Bakta | GNU GPLv3 | https://github.com/oschwengers/bakta/blob/main/LICENSE |
 | Bandage | GNU GPLv3 | https://github.com/rrwick/Bandage?tab=GPL-3.0-1-ov-file#readme |
-| BBTools | non-standard - see `licence.txt` and `legal.txt` that is included in docker image under `/bbmap/docs/`; Also on sourceforge repo for BBTools | https://jgi.doe.gov/disclaimer/ |
+| BBTools | non-standard - see `licence.txt` and `legal.txt` that is included in docker image under `/bbmap/docs/`; Also on sourceforge repo for BBTools | https://github.com/bbushnell/BBTools/blob/master/license.txt |
 | bcftools | MIT & **GNU GPLv3** | https://github.com/samtools/bcftools/blob/develop/LICENSE |
 | bedtools | MIT | https://github.com/arq5x/bedtools2/blob/master/LICENSE |
 | bindashtree | MIT | https://github.com/jianshu93/bindashtree?tab=MIT-1-ov-file#readme |
@@ -189,6 +190,7 @@ The licenses of the open-source software that is contained in these Docker image
 | SeqSender | Apache 2.0 | https://github.com/CDCgov/seqsender/blob/master/LICENSE |
 | SeqSero | GNU GPLv2 | https://github.com/denglab/SeqSero/blob/master/LICENSE |
 | SeqSero2 | GNU GPLv2 | https://github.com/denglab/SeqSero2/blob/master/LICENSE |
+| SeqSero2S | GNU GPLv2 | https://github.com/LSTUGA/SeqSero2S/blob/main/LICENSE |
 | seqyclean | MIT | https://github.com/ibest/seqyclean/blob/master/LICENSE |
 | seqtk | MIT | https://github.com/lh3/seqtk/blob/master/LICENSE |
 | Seroba | GNU GPLv3 | https://github.com/sanger-pathogens/seroba/blob/master/LICENSE</br>https://github.com/GlobalPneumoSeq/seroba/blob/master/LICENSE |
