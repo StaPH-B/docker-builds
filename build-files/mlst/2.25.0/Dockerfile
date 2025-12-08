@@ -109,9 +109,11 @@ RUN datasets download genome accession ${GENBANK_ACCESSION} --filename ${GENBANK
 
 ### THESE TESTS DO NOT WORK SINCE THEY'RE NOT INCLUDED BY DEFAULT W MLST 2.25.0
 # Serretia (ST349)
-#RUN wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/001/065/325/GCF_001065325.1_ASM106532v1/GCF_001065325.1_ASM106532v1_genomic.fna.gz &&\
-#    gunzip GCF_001065325.1_ASM106532v1_genomic.fna.gz &&\
-#    mlst GCF_001065325.1_ASM106532v1_genomic.fna | tee Serretia.tsv
+RUN wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/001/065/325/GCF_001065325.1_ASM106532v1/GCF_001065325.1_ASM106532v1_genomic.fna.gz &&\
+    gunzip GCF_001065325.1_ASM106532v1_genomic.fna.gz &&\
+    mlst GCF_001065325.1_ASM106532v1_genomic.fna | tee Serretia.tsv && \
+    echo "Checking for ST349 in the Serretia results now..." && \
+    grep '349' Serretia.tsv
 # Providencia (ST19)
 #RUN wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/001/558/855/GCF_001558855.2_ASM155885v2/GCF_001558855.2_ASM155885v2_genomic.fna.gz &&\
 #    gunzip GCF_001558855.2_ASM155885v2_genomic.fna.gz &&\
