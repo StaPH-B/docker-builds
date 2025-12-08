@@ -11,16 +11,11 @@ LABEL software.version="${AMRFINDER_VER}"
 LABEL description="NCBI resistance gene detection tool"
 LABEL website="https://github.com/ncbi/amr"
 LABEL license="https://github.com/ncbi/amr/blob/master/LICENSE"
-LABEL maintainer="Kelsey Florek"
-LABEL maintainer.email="kelsey.florek@slh.wisc.edu"
-LABEL maintainer2="Curtis Kapsak"
-LABEL maintainer2.email="kapsakcj@gmail.com"
-LABEL maintainer3="Anders Goncalves da Silva"
-LABEL maintainer3.email="andersgs@gmail.com"
-LABEL maintainer4="Erin Young"
-LABEL maintainer4.email="eriny@utah.gov"
-LABEL maintainer5="Holly McQueary"
-LABEL maintainer5.email="holly.c.mcqueary@mass.gov"
+LABEL maintainer="Curtis Kapsak"
+LABEL maintainer.email="kapsakcj@gmail.com"
+LABEL maintainer2="Erin Young"
+LABEL maintainer2.email="eriny@utah.gov"
+
 
 # ncbi-blast+ installed via apt is v2.12.0 - DISABLING so that we can manually install a more recent version
 # see here for reason why I'm manualy installing 2.16.0 instead of using apt-get: https://github.com/ncbi/amr/releases/tag/amrfinder_v3.11.8
