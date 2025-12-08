@@ -89,6 +89,17 @@ RUN echo "Downloading Klebsiella oxytoca genome (GCA_003812925.1_ASM381292v1) fo
   amrfinder --threads 4 --plus --name GCA_003812925.1 -n GCA_003812925.1_ASM381292v1_genomic.fna.gz  -O Klebsiella_oxytoca -o GCA_003812925.1-amrfinder.tsv && \
   head GCA_003812925.1-amrfinder.tsv
 
+# run test on Klebsiella pneumoniae using --organism/-O flag
+# test genome: https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_053833265.1/
+# tests the fix for issue 174 with K. pneumoniae point mutations: https://github.com/ncbi/amr/issues/174
+# also tests ability to detect point mutations that cause a frameshift (new POINT_DISRUPT model)
+RUN echo "Downloading Klebsiella pneumoniae genome (GCA_053833265.1)" && \
+  wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/053/833/265/GCA_053833265.1_PDT003010475.1/GCA_053833265.1_PDT003010475.1_genomic.fna.gz && \
+  gzip -d GCA_053833265.1_PDT003010475.1_genomic.fna.gz && \
+  amrfinder --threads 4 --plus --name GCA_053833265.1 -n GCA_053833265.1_PDT003010475.1_genomic.fna -O Klebsiella_pneumoniae -o GCA_053833265.1-amrfinder.tsv && \
+  echo "Searching for specific genes and point mutations in amrfinder results..." && \
+  grep -E 'ompK35_R60LfsTer31|ompK36_D135DGD|gyrA_S83I|blaOXA-48|blaNDM-5|blaCTX-M-15' GCA_053833265.1-amrfinder.tsv
+
 # list database version and available --organism options; check stxtyper & blast versions
 RUN amrfinder -l && \
   stxtyper --version && \
