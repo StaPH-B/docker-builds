@@ -1,6 +1,7 @@
 #!/bin/bash
-# test commands stolen shamelessly from https://github.com/tseemann/mlst/blob/master/.travis.yml
+# [legacy] test commands stolen shamelessly from https://github.com/tseemann/mlst/blob/master/.travis.yml
 # updated upon v2.25.0 release since tests were also updated in this version. See https://github.com/tseemann/mlst/compare/v2.23.0...v2.25.0
+# test commands stolen shamelessly again from https://github.com/tseemann/mlst/blob/master/.github/workflows/ci.yml
 
 # change into mlst root dir where it's installed in the docker image, e.g. /mlst-2.22.0
 cd /mlst-*
