@@ -4,7 +4,7 @@ Main tool: [stxtyper](https://github.com/ncbi/stxtyper)
 
 Additional tools:
 
-- ncbi-blast+ 2.12.0
+- ncbi-blast+ 2.17.0
 
 Basic information on how to use this tool:
 
