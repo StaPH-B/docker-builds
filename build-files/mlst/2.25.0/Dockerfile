@@ -28,22 +28,23 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  file \
  ncbi-blast+ \
  libfile-which-perl \
- curl \
  parallel \
  procps && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # get any2fasta; move binary to /usr/local/bin which is already in $PATH
-RUN wget https://github.com/tseemann/any2fasta/archive/refs/tags/v${ANY2FASTA_VER}.tar.gz && \
- tar xzf v${ANY2FASTA_VER}.tar.gz && \
- rm -v v${ANY2FASTA_VER}.tar.gz && \
- chmod +x any2fasta-${ANY2FASTA_VER}/any2fasta && \
- mv -v any2fasta-${ANY2FASTA_VER}/any2fasta /usr/local/bin
+RUN echo "Downloading and installing any2fasta v${ANY2FASTA_VER}..." && \
+wget -q https://github.com/tseemann/any2fasta/archive/refs/tags/v${ANY2FASTA_VER}.tar.gz && \
+tar xzf v${ANY2FASTA_VER}.tar.gz && \
+rm -v v${ANY2FASTA_VER}.tar.gz && \
+chmod +x any2fasta-${ANY2FASTA_VER}/any2fasta && \
+mv -v any2fasta-${ANY2FASTA_VER}/any2fasta /usr/local/bin
 
 # get mlst
-RUN wget https://github.com/tseemann/mlst/archive/v${MLST_VER}.tar.gz && \
- tar -xzf v${MLST_VER}.tar.gz && \
- rm -v v${MLST_VER}.tar.gz
+RUN echo "Downloading and installing mlst v${MLST_VER}..." && \
+wget -q https://github.com/tseemann/mlst/archive/v${MLST_VER}.tar.gz && \
+tar -xzf v${MLST_VER}.tar.gz && \
+rm -v v${MLST_VER}.tar.gz
 
 # set PATH and perl local settings
 ENV PATH="${PATH}:/mlst-${MLST_VER}/bin:" \
@@ -51,19 +52,6 @@ ENV PATH="${PATH}:/mlst-${MLST_VER}/bin:" \
 
 # check dependencies and list available schemes
 RUN mlst --check && mlst --list
-
-# copy alternative script for additional schemes
-#COPY mlst-download_pub_mlst_alt dbases.xml /mlst-${MLST_VER}/scripts/
-
-# update databases, following steps from here, but modified after much trial and error: https://github.com/tseemann/mlst#updating-the-database
-# delete the old databases instead of renaming & saving the dir
-#RUN cd /mlst-${MLST_VER}/scripts && \
-# mkdir -v db-downloaded-$(date -I) && \
-# ./mlst-download_pub_mlst_alt -v -d db-downloaded-$(date -I) 2>&1 | tee mlst-download_pub_mlst_alt.log  && \
-# rm -rv /mlst-${MLST_VER}/db/pubmlst && \
-# mv -v db-downloaded-$(date -I) /mlst-${MLST_VER}/db/pubmlst && \
-# ./mlst-make_blast_db  2>&1 | tee mlst-make_blast_db.log && \
-# mlst --list
 
 WORKDIR /data
 
@@ -83,12 +71,12 @@ RUN bash mlst-tests.sh
 RUN apt-get update && apt-get install -y --no-install-recommends unzip
 
 # for pinning the version of NCBI datasets that is downloaded for this test
-ARG DATASETS_VER="16.2.0"
+ARG DATASETS_VER="18.10.2"
 
 # install ncbi datasets tool (pre-compiled binary)
 RUN wget -q https://github.com/ncbi/datasets/releases/download/v${DATASETS_VER}/linux-amd64.cli.package.zip && \
   unzip linux-amd64.cli.package.zip && \
-  rm linux-amd64.cli.package.zip && \
+  rm -v linux-amd64.cli.package.zip && \
   chmod +x dataformat datasets
 
 # downloading an E. coli (from CT) with a known newer sequence type ST15199 which was designated on 2023-10-16
@@ -106,14 +94,14 @@ RUN datasets download genome accession ${GENBANK_ACCESSION} --filename ${GENBANK
     echo "Checking for ST15199 in the mlst results now..." && \
     grep "15199" mlst.${GENBANK_ACCESSION}.tsv
 
-
-### THESE TESTS DO NOT WORK SINCE THEY'RE NOT INCLUDED BY DEFAULT W MLST 2.25.0
-# Serretia (ST349)
+# Test for Serretia scheme (ST349)
 RUN wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/001/065/325/GCF_001065325.1_ASM106532v1/GCF_001065325.1_ASM106532v1_genomic.fna.gz &&\
     gunzip GCF_001065325.1_ASM106532v1_genomic.fna.gz &&\
     mlst GCF_001065325.1_ASM106532v1_genomic.fna | tee Serretia.tsv && \
     echo "Checking for ST349 in the Serretia results now..." && \
     grep '349' Serretia.tsv
+
+### THIS TEST DOES NOT WORK SINCE PROVIDENCIA SCHEME IS NOT INCLUDED BY DEFAULT WITH MLST V2.25.0
 # Providencia (ST19)
 #RUN wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/001/558/855/GCF_001558855.2_ASM155885v2/GCF_001558855.2_ASM155885v2_genomic.fna.gz &&\
 #    gunzip GCF_001558855.2_ASM155885v2_genomic.fna.gz &&\
