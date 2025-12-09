@@ -152,7 +152,7 @@ RUN echo "Running test: SeqSero2 allele mode on houtenae (subspecies IV) reads..
     -p 2 && \
   grep -i 'houtenae' SRR11457734-seqsero2-reads-allele-mode/SeqSero_result.txt
 
-### (legacy) SUBSPECIES V, now I think Salmonella bongori is it's own species??
+### (legacy) SUBSPECIES V, Salmonella bongori is now it's own species separate from S. enterica
 # pretty sure bongori is its own species now, not a subspecies of enterica: https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=54736&lvl=3&lin=f&keep=1&srchmode=1&unlock
 # https://www.ncbi.nlm.nih.gov/biosample/SAMN01933083/
 RUN echo "Running test: SeqSero2 allele mode on bongori (legacy subspecies V, now a new species) reads..." && \

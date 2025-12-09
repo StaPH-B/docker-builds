@@ -20,8 +20,8 @@ List of packages in environment: "/opt/conda"
   blast                      2.16.0        hc155240_3            bioconda   
   bwa                        0.7.18        he4a0461_1            bioconda   
   bzip2                      1.0.8         hda65f42_8            conda-forge
-  c-ares                     1.34.5        hb9d3cd8_0            conda-forge
-  ca-certificates            2025.10.5     hbd8a1cb_0            conda-forge
+  c-ares                     1.34.6        hb03c661_0            conda-forge
+  ca-certificates            2025.11.12    hbd8a1cb_0            conda-forge
   curl                       8.8.0         he654da7_1            conda-forge
   entrez-direct              22.4          he881be0_0            bioconda   
   htslib                     1.21          h5efdd21_0            bioconda   
@@ -29,41 +29,41 @@ List of packages in environment: "/opt/conda"
   kernel-headers_linux-64    3.10.0        he073ed8_18           conda-forge
   keyutils                   1.6.3         hb9d3cd8_0            conda-forge
   krb5                       1.21.3        h659f571_0            conda-forge
-  ld_impl_linux-64           2.44          ha97dd6f_2            conda-forge
-  libblas                    3.9.0         38_h4a7cf45_openblas  conda-forge
-  libcblas                   3.9.0         38_h0358290_openblas  conda-forge
+  ld_impl_linux-64           2.45          bootstrap_ha15bf96_4  conda-forge
+  libblas                    3.11.0        4_h4a7cf45_openblas   conda-forge
+  libcblas                   3.11.0        4_h0358290_openblas   conda-forge
   libcurl                    8.8.0         hca28451_1            conda-forge
-  libdeflate                 1.24          h86f0d12_0            conda-forge
+  libdeflate                 1.25          h17f619e_0            conda-forge
   libedit                    3.1.20250104  pl5321h7949ede_0      conda-forge
   libev                      4.33          hd590300_2            conda-forge
   libffi                     3.4.6         h2dba641_1            conda-forge
-  libgcc                     15.2.0        h767d61c_7            conda-forge
-  libgcc-ng                  15.2.0        h69a702a_7            conda-forge
-  libgfortran                15.2.0        h69a702a_7            conda-forge
-  libgfortran5               15.2.0        hcd61629_7            conda-forge
-  libgomp                    15.2.0        h767d61c_7            conda-forge
+  libgcc                     15.2.0        he0feb66_15           conda-forge
+  libgcc-ng                  15.2.0        h69a702a_15           conda-forge
+  libgfortran                15.2.0        h69a702a_15           conda-forge
+  libgfortran5               15.2.0        h68bc16d_15           conda-forge
+  libgomp                    15.2.0        he0feb66_15           conda-forge
   libiconv                   1.18          h3b78370_2            conda-forge
   libidn2                    2.3.8         hfac485b_1            conda-forge
-  liblapack                  3.9.0         38_h47877c9_openblas  conda-forge
+  liblapack                  3.11.0        4_h47877c9_openblas   conda-forge
   liblzma                    5.8.1         hb9d3cd8_2            conda-forge
   liblzma-devel              5.8.1         hb9d3cd8_2            conda-forge
   libnghttp2                 1.58.0        h47da74e_1            conda-forge
   libnsl                     2.0.1         hb9d3cd8_1            conda-forge
-  libopenblas                0.3.30        pthreads_h94d23a6_3   conda-forge
+  libopenblas                0.3.30        pthreads_h94d23a6_4   conda-forge
   libsqlite                  3.46.0        hde9e2c9_0            conda-forge
   libssh2                    1.11.0        h0841786_0            conda-forge
-  libstdcxx                  15.2.0        h8f9b012_7            conda-forge
-  libstdcxx-ng               15.2.0        h4852527_7            conda-forge
+  libstdcxx                  15.2.0        h934c35e_15           conda-forge
+  libstdcxx-ng               15.2.0        hdf11a46_15           conda-forge
   libunistring               0.9.10        h7f98852_0            conda-forge
   libxcrypt                  4.4.36        hd590300_1            conda-forge
   libxml2                    2.9.14        h22db469_4            conda-forge
   libzlib                    1.2.13        h4ab18f5_6            conda-forge
   llvm-openmp                8.0.1         hc9558a2_0            conda-forge
-  ncbi-vdb                   3.2.1         h9948957_0            bioconda   
+  ncbi-vdb                   3.3.0         h9948957_0            bioconda   
   ncurses                    6.5           h2d0b736_3            conda-forge
   numpy                      1.21.6        py37h976b520_0        conda-forge
   openmp                     8.0.1         0                     conda-forge
-  openssl                    3.5.4         h26f9b46_0            conda-forge
+  openssl                    3.6.0         h26f9b46_0            conda-forge
   ossuuid                    1.6.2         h5888daf_1001         conda-forge
   perl                       5.32.1        7_hd590300_perl5      conda-forge
   perl-alien-build           2.48          pl5321hec16e2b_0      bioconda   
@@ -87,7 +87,7 @@ List of packages in environment: "/opt/conda"
   perl-file-temp             0.2304        pl5321hd8ed1ab_0      conda-forge
   perl-file-which            1.24          pl5321hd8ed1ab_0      conda-forge
   perl-importer              0.026         pl5321hd8ed1ab_0      conda-forge
-  perl-io-compress           2.213         pl5321h503566f_0      bioconda   
+  perl-io-compress           2.214         pl5321h503566f_0      bioconda   
   perl-io-zlib               1.15          pl5321hdfd78af_1      bioconda   
   perl-json                  4.10          pl5321hdfd78af_1      bioconda   
   perl-json-xs               4.04          pl5321h9948957_0      bioconda   
@@ -100,7 +100,7 @@ List of packages in environment: "/opt/conda"
   perl-scope-guard           0.21          pl5321hd8ed1ab_0      conda-forge
   perl-storable              3.15          pl5321hb9d3cd8_2      conda-forge
   perl-sub-info              0.002         pl5321hd8ed1ab_0      conda-forge
-  perl-term-table            0.025         pl5321hdfd78af_0      bioconda   
+  perl-term-table            0.028         pl5321hdfd78af_0      bioconda   
   perl-test-fatal            0.016         pl5321ha770c72_0      conda-forge
   perl-test-warnings         0.031         pl5321ha770c72_0      conda-forge
   perl-test2-suite           0.000145      pl5321hdfd78af_0      bioconda   
@@ -135,6 +135,7 @@ List of packages in environment: "/opt/conda"
   zlib                       1.2.13        h4ab18f5_6            conda-forge
   zstd                       1.5.6         ha6fb4c9_0            conda-forge
 ```
+
 </details>
 
 ## Example Usage
