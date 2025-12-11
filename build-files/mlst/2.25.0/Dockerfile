@@ -49,8 +49,11 @@ rm -v v${MLST_VER}.tar.gz
 # add providencia scheme
 COPY ./providencia/ /mlst-${MLST_VER}/db/pubmlst/providencia/
 
-RUN echo "providencia\tProvidencia" >> /mlst-${MLST_VER}/db/scheme_species_map.tab &&\
-    ./mlst-${MLST_VER}/scripts/mlst-make_blast_db
+RUN echo "providencia\tProvidencia" >> /mlst-${MLST_VER}/db/scheme_species_map.tab && \
+echo "Contents of /mlst-${MLST_VER}/db/scheme_species_map.tab after adding Providencia scheme:" && \
+cat /mlst-${MLST_VER}/db/scheme_species_map.tab && \
+echo "Now building blast db for all pubMLST schemes included..." && \
+./mlst-${MLST_VER}/scripts/mlst-make_blast_db
 
 # set PATH and perl local settings
 ENV PATH="${PATH}:/mlst-${MLST_VER}/bin:" \
@@ -72,7 +75,6 @@ FROM app AS test
 # test commands stolen shamelessly from https://github.com/tseemann/mlst/blob/master/.travis.yml
 COPY mlst-tests.sh .
 RUN bash mlst-tests.sh
-
 
 # downloading an E. coli (from CT) with a known newer sequence type ST15199 which was designated on 2023-10-16
 # MLST scheme info here (from Enterobase): https://pubmlst.org/bigsdb?page=profileInfo&db=pubmlst_escherichia_seqdef&scheme_id=1&profile_id=15199

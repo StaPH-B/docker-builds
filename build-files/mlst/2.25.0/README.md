@@ -20,7 +20,7 @@ Each subdirectory in `/mlst-2.25.0/db/pubmlst/<scheme-name>/` contains a file `d
 
 Available schemes found here: [https://github.com/tseemann/mlst/tree/master/db/pubmlst](https://github.com/tseemann/mlst/tree/master/db/pubmlst)
 
-The Providencia spp. scheme (last updated 2025-12-11) was manually added to this docker image since it is not included by default with mlst v2.25.0. The FASTA files were downloaded from pubMLST.org and added to mlst's pubmlst database files & scheme. Users can either provide the argument --scheme providencia or allow for the auto-detection feature to detect the scheme automatically when typing Providencia genomes.
+The Providencia spp. scheme (last updated 2025-12-11) was manually added to this docker image since it is not included by default with mlst v2.25.0. The FASTA files were downloaded from pubMLST.org and added to mlst's pubmlst database files & scheme. Users can either provide the argument `--scheme providencia` or allow for the auto-detection feature to detect the scheme automatically when typing Providencia genomes.
 
 ```bash
 # sorted list of available mlst schemes
