@@ -46,6 +46,12 @@ wget -q https://github.com/tseemann/mlst/archive/v${MLST_VER}.tar.gz && \
 tar -xzf v${MLST_VER}.tar.gz && \
 rm -v v${MLST_VER}.tar.gz
 
+# add providencia scheme
+COPY ./providencia/ /mlst-${MLST_VER}/db/pubmlst/providencia/
+
+RUN echo "providencia\tProvidencia" >> /mlst-${MLST_VER}/db/scheme_species_map.tab &&\
+    ./mlst-${MLST_VER}/scripts/mlst-make_blast_db
+
 # set PATH and perl local settings
 ENV PATH="${PATH}:/mlst-${MLST_VER}/bin:" \
     LC_ALL=C.UTF-8
@@ -67,32 +73,16 @@ FROM app AS test
 COPY mlst-tests.sh .
 RUN bash mlst-tests.sh
 
-# need unzip for the datasets tool
-RUN apt-get update && apt-get install -y --no-install-recommends unzip
-
-# for pinning the version of NCBI datasets that is downloaded for this test
-ARG DATASETS_VER="18.10.2"
-
-# install ncbi datasets tool (pre-compiled binary)
-RUN wget -q https://github.com/ncbi/datasets/releases/download/v${DATASETS_VER}/linux-amd64.cli.package.zip && \
-  unzip linux-amd64.cli.package.zip && \
-  rm -v linux-amd64.cli.package.zip && \
-  chmod +x dataformat datasets
 
 # downloading an E. coli (from CT) with a known newer sequence type ST15199 which was designated on 2023-10-16
 # MLST scheme info here (from Enterobase): https://pubmlst.org/bigsdb?page=profileInfo&db=pubmlst_escherichia_seqdef&scheme_id=1&profile_id=15199
 # E. coli genome: https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_032604515.1/
 # BioSample: SAMN37796909
-ARG GENBANK_ACCESSION="GCA_032604515.1"
-RUN datasets download genome accession ${GENBANK_ACCESSION} --filename ${GENBANK_ACCESSION}.zip && \
-    mkdir -v ${GENBANK_ACCESSION}-download && \
-    unzip ${GENBANK_ACCESSION}.zip -d ${GENBANK_ACCESSION}-download && \
-    rm -v ${GENBANK_ACCESSION}.zip && \
-    mv -v ${GENBANK_ACCESSION}-download/ncbi_dataset/data/${GENBANK_ACCESSION}/${GENBANK_ACCESSION}*.fna ${GENBANK_ACCESSION}-download/ncbi_dataset/data/${GENBANK_ACCESSION}/${GENBANK_ACCESSION}.genomic.fna && \
-    mlst ${GENBANK_ACCESSION}-download/ncbi_dataset/data/${GENBANK_ACCESSION}/${GENBANK_ACCESSION}.genomic.fna | tee mlst.${GENBANK_ACCESSION}.tsv && \
-    echo && \
+RUN wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/032/604/515/GCA_032604515.1_PDT001925635.1/GCA_032604515.1_PDT001925635.1_genomic.fna.gz &&\
+    gunzip GCA_032604515.1_PDT001925635.1_genomic.fna.gz &&\
+    mlst GCA_032604515.1_PDT001925635.1_genomic.fna | tee Ecoli.tsv && \
     echo "Checking for ST15199 in the mlst results now..." && \
-    grep "15199" mlst.${GENBANK_ACCESSION}.tsv
+    grep "15199" Ecoli.tsv
 
 # Test for Serretia scheme (ST349)
 RUN wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/001/065/325/GCF_001065325.1_ASM106532v1/GCF_001065325.1_ASM106532v1_genomic.fna.gz &&\
@@ -101,8 +91,7 @@ RUN wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/001/065/325/GCF_0010653
     echo "Checking for ST349 in the Serretia results now..." && \
     grep '349' Serretia.tsv
 
-### THIS TEST DOES NOT WORK SINCE PROVIDENCIA SCHEME IS NOT INCLUDED BY DEFAULT WITH MLST V2.25.0
 # Providencia (ST19)
-#RUN wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/001/558/855/GCF_001558855.2_ASM155885v2/GCF_001558855.2_ASM155885v2_genomic.fna.gz &&\
-#    gunzip GCF_001558855.2_ASM155885v2_genomic.fna.gz &&\
-#    mlst GCF_001558855.2_ASM155885v2_genomic.fna | tee Providencia.tsv
+RUN wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/001/558/855/GCF_001558855.2_ASM155885v2/GCF_001558855.2_ASM155885v2_genomic.fna.gz &&\
+    gunzip GCF_001558855.2_ASM155885v2_genomic.fna.gz &&\
+    mlst GCF_001558855.2_ASM155885v2_genomic.fna | tee Providencia.tsv

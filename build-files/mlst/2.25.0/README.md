@@ -42,13 +42,14 @@ mgallisepticum_2 mgenitalium mhaemolytica mhominis mhominis_3 mhyopneumoniae
 mhyorhinis mhyosynoviae miowae mplutonius mpneumoniae msciuri msynoviae 
 mycobacteria_2 neisseria oralstrep orhinotracheale otsutsugamushi pacnes_3 
 paeruginosa pdamselae pfluorescens pgingivalis plarvae pmultocida pmultocida_2 
-ppentosaceus pputida proteus psalmonis ranatipestifer rhodococcus sagalactiae 
-saureus sbsec scanis schromogenes sdysgalactiae senterica_achtman_2 
+ppentosaceus pputida proteus providencia psalmonis ranatipestifer rhodococcus 
+sagalactiae saureus sbsec scanis schromogenes sdysgalactiae senterica_achtman_2 
 sepidermidis serratia sgallolyticus shaemolyticus shewanella shominis siniae 
 sinorhizobium smaltophilia smitis spneumoniae spseudintermedius spyogenes ssuis 
 staphlugdunensis sthermophilus streptomyces streptothermophilus suberis 
 szooepidemicus taylorella tenacibaculum tpallidum tvaginalis ureaplasma 
-vcholerae vcholerae_2 vibrio vparahaemolyticus vtapetis vvulnificus wolbachia
+vcholerae vcholerae_2 vibrio vparahaemolyticus vtapetis vvulnificus wolbachia 
+xfastidiosa ypseudotuberculosis_achtman_3 yruckeri
 ```
 
 ## Example Usage
