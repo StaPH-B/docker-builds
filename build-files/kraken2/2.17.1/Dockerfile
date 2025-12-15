@@ -61,9 +61,9 @@ RUN kraken2 --help && \
 
 # set working dir and download test k2 database inside
 WORKDIR /kraken2-db
-RUN  echo "downloading kraken2 db from here: https://genome-idx.s3.amazonaws.com/kraken/k2_viral_20230605.tar.gz" && \
-    wget -q https://genome-idx.s3.amazonaws.com/kraken/k2_viral_20230605.tar.gz && \
-    tar -zxf k2_viral_20230605.tar.gz
+RUN  echo "downloading kraken2 db from here: https://genome-idx.s3.amazonaws.com/kraken/k2_viral_20251015.tar.gz" && \
+    wget -q https://genome-idx.s3.amazonaws.com/kraken/k2_viral_20251015.tar.gz && \
+    tar -zxf k2_viral_20251015.tar.gz
 
 # set working dir for running test commands below
 WORKDIR /test
