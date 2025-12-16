@@ -1,4 +1,3 @@
-
 ##### ------------------------------------------------------------------------------------------------ #####
 ##### This caller workflow tests, builds, and pushes the image to Docker Hub and Quay using the most   #####
 ##### recent version of Freyja and downloading the most recent variant information.                    #####
@@ -18,6 +17,26 @@ jobs:
   update:
     if: github.repository == 'StaPH-B/docker-builds'
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        FREYJA_PATHOGEN:
+          - SARS-CoV-2
+          - MPX
+          - H5Nx
+          - H5Nx-cattle
+          - H1N1
+          - FLU-B-VIC
+          - H3N2
+          - MEASLESgenome
+          - RSVa
+          - RSVb
+          - DENV1
+          - DENV2
+          - DENV3
+          - DENV4
+          - MTB
+
     steps:    
       - name: pull repo
         uses: actions/checkout@v4     
@@ -25,7 +44,7 @@ jobs:
       - name: set freyja version
         id: latest_version
         run: |
-          version=2.0.1
+          version=2.0.2
           echo "version=$version" >> $GITHUB_OUTPUT 
           
           file=build-files/freyja/$version/Dockerfile
@@ -44,13 +63,18 @@ jobs:
           target: test
           load: true
           push: false
-          tags: freyja:update
+          tags: freyja:update-${{ matrix.FREYJA_PATHOGEN }}
+          build-args: |
+            FREYJA_PATHOGEN=${{ matrix.FREYJA_PATHOGEN }}
 
       - name: get freyja database version
         id: db_version
         run: |
-          docker run freyja:update freyja demix --version
-          version=$(docker run freyja:update freyja demix --version | grep . | grep -v Barcode | head -n 1)
+          docker run freyja:update-${{ matrix.FREYJA_PATHOGEN }} \
+            freyja demix --version --pathogen ${{ matrix.FREYJA_PATHOGEN }}
+          version=$(docker run freyja:update-${{ matrix.FREYJA_PATHOGEN }} \
+            freyja demix --version --pathogen ${{ matrix.FREYJA_PATHOGEN }} \
+            | tail -n 3 | head -n 1)
           echo "the latest version is $version"
           echo "version=$version" >> $GITHUB_OUTPUT
 
@@ -60,7 +84,24 @@ jobs:
           date=$(date '+%Y-%m-%d')
           echo "the date is $date"
           echo "date=$date" >> $GITHUB_OUTPUT
-      
+
+      - name: Set image tags
+        id: tags
+        run: |
+          TAGS="staphb/freyja:${{ steps.latest_version.outputs.version }}-${{ matrix.FREYJA_PATHOGEN }}-${{ steps.db_version.outputs.version }}-${{ steps.date.outputs.date }}
+          quay.io/staphb/freyja:${{ steps.latest_version.outputs.version }}-${{ matrix.FREYJA_PATHOGEN }}-${{ steps.db_version.outputs.version }}-${{ steps.date.outputs.date }}"
+
+          if [ "${{ matrix.FREYJA_PATHOGEN }}" = "SARS-CoV-2" ]; then
+            TAGS="$TAGS
+            staphb/freyja:latest
+            quay.io/staphb/freyja:latest"
+          fi
+
+          echo "tags<<EOF" >> $GITHUB_OUTPUT
+          echo "$TAGS" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+
       - name: Login to DockerHub
         uses: docker/login-action@v3
         with:
@@ -81,11 +122,9 @@ jobs:
           file: ${{ steps.latest_version.outputs.file }}
           target: app
           push: true
-          tags: |
-            staphb/freyja:${{ steps.latest_version.outputs.version }}-${{ steps.db_version.outputs.version }}-${{ steps.date.outputs.date }}
-            staphb/freyja:latest
-            quay.io/staphb/freyja:${{ steps.latest_version.outputs.version }}-${{ steps.db_version.outputs.version }}-${{ steps.date.outputs.date }}
-            quay.io/staphb/freyja:latest
+          build-args: |
+            FREYJA_PATHOGEN=${{ matrix.FREYJA_PATHOGEN }}
+          tags: ${{ steps.tags.outputs.tags }}
 
       - name: Image digest
         run: echo ${{ steps.docker_build_and_push.outputs.digest }}
