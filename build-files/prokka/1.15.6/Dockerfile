@@ -7,7 +7,7 @@ FROM ubuntu:noble AS app
 ARG PROKKA_VER
 ARG MINCED_VER
 
-LABEL base.image="mambaorg/micromamba:2.4.0-ubuntu22.04"
+LABEL base.image="ubuntu:noble"
 LABEL dockerfile.version="1"
 LABEL software="Prokka"
 LABEL software.version="${PROKKA_VER}"
@@ -44,13 +44,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # dpkg-dev and gcc is for suppressing a warning (may be removed)
 
 # install minced
-RUN wget https://github.com/ctSkennerton/minced/releases/download/${MINCED_VER}/minced \
+RUN wget -q https://github.com/ctSkennerton/minced/releases/download/${MINCED_VER}/minced \
     https://github.com/ctSkennerton/minced/releases/download/${MINCED_VER}/minced.jar &&\
     chmod +x minced* &&\ 
     mv minced* /usr/local/bin/
 
 # install prokka
-RUN wget https://github.com/tseemann/prokka/archive/refs/tags/v${PROKKA_VER}.tar.gz &&\
+RUN wget -q https://github.com/tseemann/prokka/archive/refs/tags/v${PROKKA_VER}.tar.gz &&\
     tar -xvf v${PROKKA_VER}.tar.gz && rm v${PROKKA_VER}.tar.gz
 
 ENV PATH=$PATH:/prokka-${PROKKA_VER}/bin \
