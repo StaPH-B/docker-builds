@@ -75,4 +75,4 @@ RUN prokka --listdb &&\
     prodigal -h &&\
     tbl2asn --help
 
-RUN prokka /prokka-${PROKKA_VER}/test genome.fna
+RUN prokka /prokka-${PROKKA_VER}/test/genome.fna
