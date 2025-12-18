@@ -15,7 +15,9 @@ Basic information on how to use this tool:
 Additional information:
 
 This image uses the most up-to-date fasta file for emm typing by downloading from https://ftp.cdc.gov/pub/infectious_diseases/biotech/tsemm/alltrimmed.tfa. The out-of-date files are removed and overwritten at the time of building and deployment.
-  
+
+This image is rebuilt every month on Dockerhub and Quay.io with the tag ${emmtyper version}-${data image was deployed}.
+
 Full documentation: https://github.com/MDU-PHL/emmtyper
 
 ## Example Usage
