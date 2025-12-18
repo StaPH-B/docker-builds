@@ -38,7 +38,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ncbi-tools-bin \
     default-jre-headless \
     dpkg-dev \
-    gcc
+    gcc &&\
+    rm -rf /var/lib/apt/lists/* && apt-get autoclean  
 
 # ncbi-tools-bin provides table2asn
 # dpkg-dev and gcc is for suppressing a warning (may be removed)
