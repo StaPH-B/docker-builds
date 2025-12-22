@@ -9,12 +9,12 @@ Basic information on how to use this tool:
 * executable: `bcftools`
 * help: `--help`
 * version: `--version`
-* description: BCFtools is a program for variant calling and manipulating files in the Variant Call Format (VCF) and its binary counterpart BCF. 
+* description: BCFtools is a program for variant calling and manipulating files in the Variant Call Format (VCF) and its binary counterpart BCF.
 
 Additional information:
 
 This container includes bcftools compiled with **libdeflate** for a better cloud performance. Also, "polysomy" and plugins are enabled in this image.
-  
+
 Full documentation: https://samtools.github.io/bcftools/howtos/index.html
 
 ## Example Usage

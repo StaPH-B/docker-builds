@@ -42,14 +42,12 @@ LABEL software.version="${SAMTOOLS_VER}"
 LABEL description="Tools (written in C using htslib) for manipulating next-generation sequencing data"
 LABEL website="https://github.com/samtools/samtools"
 LABEL license="https://github.com/samtools/samtools/blob/develop/LICENSE"
-LABEL maintainer="Shelby Bennett"
-LABEL maintainer.email="shelby.bennett@dgs.virginia.gov"
-LABEL maintainer2="Curtis Kapsak"
-LABEL maintainer2.email="kapsakcj@gmail.com"
-LABEL maintainer3="Erin Young"
-LABEL maintainer3.email="eriny@utah.gov"
-LABEL maintainer4="Kutluhan Incekara"
-LABEL maintainer4.email="kutluhan.incekara@ct.gov"
+LABEL maintainer="Curtis Kapsak"
+LABEL maintainer.email="kapsakcj@gmail.com"
+LABEL maintainer2="Erin Young"
+LABEL maintainer2.email="eriny@utah.gov"
+LABEL maintainer3="Kutluhan Incekara"
+LABEL maintainer3.email="kutluhan.incekara@ct.gov"
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -90,11 +88,14 @@ RUN apt-get update && apt-get install --no-install-recommends -y wget ca-certifi
 
 WORKDIR /test
 
-RUN wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123.consensus.fa && \
-    wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123.primertrim.sorted.bam && \
-    wget -q https://raw.githubusercontent.com/artic-network/artic-ncov2019/master/primer_schemes/nCoV-2019/V3/nCoV-2019.primer.bed && \
-    samtools stats SRR13957123.primertrim.sorted.bam && \
-    samtools faidx SRR13957123.consensus.fa && \
-    samtools ampliconstats nCoV-2019.primer.bed SRR13957123.primertrim.sorted.bam > SRR13957123_ampliconstats.txt && \
-    plot-ampliconstats plot SRR13957123_ampliconstats.txt && \
-    ls
+RUN echo "Testing samtools stats and samtools faidx on SARS-CoV-2 amplicon data" && \
+wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123.consensus.fa && \
+wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123.primertrim.sorted.bam && \
+wget -q https://raw.githubusercontent.com/artic-network/artic-ncov2019/master/primer_schemes/nCoV-2019/V3/nCoV-2019.primer.bed && \
+samtools stats SRR13957123.primertrim.sorted.bam > SRR13957123.stats.txt && \
+echo "Showing first 20 lines of samtools stats output:" && \
+head -n 20 SRR13957123.stats.txt && \
+samtools faidx SRR13957123.consensus.fa && \
+samtools ampliconstats nCoV-2019.primer.bed SRR13957123.primertrim.sorted.bam > SRR13957123_ampliconstats.txt && \
+plot-ampliconstats plot SRR13957123_ampliconstats.txt && \
+ls
