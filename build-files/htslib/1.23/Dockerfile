@@ -62,7 +62,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     liblzma5 \
     libcurl3-gnutls \
     libdeflate0 \
-    ca-certificates \ 
+    ca-certificates \
+    procps \ 
     && apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # copy in htslib executables from builder stage
@@ -85,12 +86,15 @@ FROM app AS test
 # check that these three executables are available
 RUN bgzip --help && tabix --help && htsfile --help
 
-RUN apt-get update && apt-get install --no-install-recommends -y wget
+RUN apt-get update && apt-get install --no-install-recommends -y wget file
 
 # use on actual files
-RUN wget -q https://github.com/StaPH-B/docker-builds/raw/master/tests/SARS-CoV-2/SRR13957123_1.fastq.gz && \
-    gunzip SRR13957123_1.fastq.gz && \
-    bgzip SRR13957123_1.fastq
+RUN echo "Downloading test FASTQ file and running bgzip on it..." && \
+wget -q https://github.com/StaPH-B/docker-builds/raw/master/tests/SARS-CoV-2/SRR13957123_1.fastq.gz && \
+gunzip SRR13957123_1.fastq.gz && \
+bgzip SRR13957123_1.fastq && \
+echo "Running the file cmd to check that bgzip created a valid BGZF file..." && \
+file SRR13957123_1.fastq.gz
 
 # FYI Test suite "make test" now performed in the builder stage since app and
 # test stages do not include htslib source code.
