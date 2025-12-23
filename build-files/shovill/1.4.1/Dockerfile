@@ -7,7 +7,7 @@ ARG SEQKIT_VER="2.12.0"
 ARG KMC_VER="3.2.4"
 ARG LIGHTER_VER="1.1.1"
 ARG TRIMMOMATIC_VER="0.39"
-# previously used bwa 0.7.17, not sure if newer versions are compatible
+# previously used bwa 0.7.17
 ARG BWA_VER="0.7.19"
 # not sure if a more recent samtools is compatible or not, conda yml says higher than 1.10
 ARG SAMTOOLS_VER="1.16.1"
@@ -26,7 +26,11 @@ FROM ubuntu:jammy AS builder
 
 # a lot of the builder stage code is from samtools 1.22.1 dockerfile
 ARG SAMTOOLS_VER
+ARG BWA_VER
+ARG SPADES_VER
 
+# install dependencies required for compiling various tools
+# requirements for spades: cmake, build-essential
 RUN apt-get update && apt-get install --no-install-recommends -y \
     libncurses5-dev \
     libbz2-dev \
@@ -38,12 +42,15 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     gcc \
     wget \
     make \
+    cmake \
+    build-essential \
     perl \
     bzip2 \
     gnuplot \
     ca-certificates
 
 # download, compile, and install samtools
+# where are samtools binaries installed?
 RUN wget -q https://github.com/samtools/samtools/releases/download/${SAMTOOLS_VER}/samtools-${SAMTOOLS_VER}.tar.bz2 && \
     tar -xjf samtools-${SAMTOOLS_VER}.tar.bz2 && \
     cd samtools-${SAMTOOLS_VER} && \
@@ -51,6 +58,27 @@ RUN wget -q https://github.com/samtools/samtools/releases/download/${SAMTOOLS_VE
     make && \
     make install && \
     make test
+
+# bwa
+RUN echo "Installing BWA version ${BWA_VER}..." && \
+wget -q https://github.com/lh3/bwa/archive/refs/tags/v${BWA_VER}.tar.gz && \
+tar -xzf v${BWA_VER}.tar.gz && \
+rm -v v${BWA_VER}.tar.gz && \
+cd bwa-${BWA_VER} && \
+make && \
+mv -v bwa /usr/local/bin/bwa
+
+# SPAdes install from source and compile
+# This route of installation takes longer but at least SPAdes runs successfully. Apparently there are some issues with pre-compiled binaries and the OS: -11 spades-hammer error I was receiving is a sign of this known issue.
+# TODO - move to builder stage
+RUN echo "Installing SPAdes version ${SPADES_VER} from source..." && \
+wget -q https://github.com/ablab/spades/archive/refs/tags/v${SPADES_VER}.tar.gz && \
+tar -xzf v${SPADES_VER}.tar.gz && \
+rm -v v${SPADES_VER}.tar.gz && \
+cd spades-${SPADES_VER}/assembler && \
+PREFIX=/usr/local ./spades_compile.sh
+
+
 
 # just praying that jammy will work
 FROM ubuntu:jammy AS app
@@ -112,16 +140,6 @@ apt-get clean && apt-get autoclean && \
 rm -rfv /var/lib/apt/lists/* && \
 update-alternatives --install /usr/bin/python python /usr/bin/python3 10
 
-# SPAdes install from source and compile
-# This route of installation takes longer but at least SPAdes runs successfully. Apparently there are some issues with pre-compiled binaries and the OS: -11 spades-hammer error I was receiving is a sign of this known issue.
-# TODO - move to builder stage
-RUN echo "Installing SPAdes version ${SPADES_VER} from source..." && \
-wget -q https://github.com/ablab/spades/archive/refs/tags/v${SPADES_VER}.tar.gz && \
-tar -xzf v${SPADES_VER}.tar.gz && \
-rm -v v${SPADES_VER}.tar.gz && \
-cd spades-${SPADES_VER}/assembler && \
-PREFIX=/usr/local ./spades_compile.sh
-
 # seqkit install
 RUN echo "Installing seqkit version ${SEQKIT_VER}..." && \
 wget -q https://github.com/shenwei356/seqkit/releases/download/v${SEQKIT_VER}/seqkit_linux_amd64.tar.gz && \
@@ -133,13 +151,14 @@ mv -v seqkit /usr/local/bin/seqkit
 RUN echo "Installing KMC version ${KMC_VER}..." && \
 mkdir kmc && \
 cd kmc && \
-wget https://github.com/refresh-bio/KMC/releases/download/v${KMC_VER}/KMC${KMC_VER}.linux.x64.tar.gz && \
+wget -q https://github.com/refresh-bio/KMC/releases/download/v${KMC_VER}/KMC${KMC_VER}.linux.x64.tar.gz && \
 tar -xzf KMC${KMC_VER}.linux.x64.tar.gz && \
 rm -v KMC${KMC_VER}.linux.x64.tar.gz && \
 echo "Contents of /kmc/bin:" && \
 ls -lah /kmc/bin
 
 # lighter
+## TODO - move to builder stage
 RUN wget https://github.com/mourisl/Lighter/archive/v${LIGHTER_VER}.tar.gz && \
 tar -zxf v${LIGHTER_VER}.tar.gz && \
 rm -rvf v${LIGHTER_VER}.tar.gz && \
@@ -158,23 +177,18 @@ echo "#!/bin/bash" >> trimmomatic && \
 echo "exec java -jar /trimmomatic/Trimmomatic-${TRIMMOMATIC_VER}/trimmomatic-${TRIMMOMATIC_VER}.jar """"$""@"""" " >> trimmomatic && \
 chmod +x trimmomatic
 
-# bwa (mem) install
-# TODO - move to builder stage
-RUN echo "Installing BWA version ${BWA_VER}..." && \
-mkdir bwa && \
-cd bwa && \
-wget -q https://github.com/lh3/bwa/archive/refs/tags/v${BWA_VER}.tar.gz && \
-tar -xzf v${BWA_VER}.tar.gz && \
-rm -v v${BWA_VER}.tar.gz && \
-cd bwa-${BWA_VER} && \
-make
-
 # samtools install
 # TODO - look at samtools 1.23 dockerfile to see if any optimizations can be made here, additional dependencies etc
-# copy in samtools executables from builder stage
+# copy in samtools, spades, and bwa executables from builder stage
 COPY --from=builder /usr/local/bin/* /usr/local/bin/
-RUN echo "Last step copied in samtools from builder stage. Here is contents of /usr/local/bin/:" && \
+RUN echo "Last step copied in samtools and spades from builder stage. Here is contents of /usr/local/bin/:" && \
 ls -lah /usr/local/bin/
+
+# copy over stuff from /usr/local/share/spades/ in builder stage to here so spades.py --version
+COPY --from=builder /usr/local/share/spades/ /usr/local/share/spades/
+RUN echo "Last step copied in /usr/local/share/spades/ from builder stage. Here is contents of /usr/local/share/:" && \
+ls -lah /usr/local/share/*
+
 
 # skesa 2.3.0 binary (skesa 2.4.0 binary works better on ubuntu:bionic, so not upgrading here)
 # This installs SKESA v2.5.1 binary. Version in CPP code does not match Github release version tag. https://github.com/ncbi/SKESA/blob/skesa.2.4.0_saute.1.3.0_2/skesa.cpp#L397
@@ -253,7 +267,6 @@ WORKDIR /data
 
 # set $PATH's
 ENV PATH="${PATH}:\
-/SPAdes-${SPADES_VER}-Linux/bin:\
 /kmc/bin:\
 /Lighter-${LIGHTER_VER}:\
 /trimmomatic:\
@@ -282,7 +295,16 @@ RUN cd /shovill-${SHOVILL_VER}/ && \
 perl --version && \
 samtools --version && \
 skesa --version && \
+echo "contents of /usr/local/share/:" && \
+ls -lah /usr/local/share/ && \
+echo && \
+echo "contents of /usr/local/bin/:" && \
+ls -lah /usr/local/bin/ && \
+echo "running which spades.py --version:" && \
+which spades.py && \
+echo && \
 spades.py --version && \
+echo && \
 ! shovill --doesnotexist && \
 echo "TESTING SHOVILL + SPADES" && \
 shovill --ram 8 --cpus 2 --outdir out.spades --assembler spades --R1 test/R1.fq.gz --R2 test/R2.fq.gz --nostitch --noreadcorr --nocorr && \
