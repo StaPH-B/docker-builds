@@ -213,7 +213,7 @@ mv -v gfa_connector.centos.7.9.2009 /usr/local/bin/gfa_connector && \
 mv -v skesa.centos.7.9.2009 /usr/local/bin/skesa && \
 chmod -v +x /usr/local/bin/skesa /usr/local/bin/gfa_connector
 
-# MEGAHIT install
+# MEGAHIT
 RUN echo "Installing MEGAHIT version ${MEGAHIT_VER}..." && \
 wget -q https://github.com/voutcn/megahit/releases/download/v${MEGAHIT_VER}/MEGAHIT-${MEGAHIT_VER}-Linux-x86_64-static.tar.gz && \
 tar -xzf MEGAHIT-${MEGAHIT_VER}-Linux-x86_64-static.tar.gz && \
@@ -257,7 +257,7 @@ mkdir /data
 # set /data as final working directory
 WORKDIR /data
 
-# set $PATH's
+# set $PATH's and LC_ALL for singularity compatibility
 ENV PATH="${PATH}:\
 /kmc/bin:\
 /shovill-${SHOVILL_VER}/bin" \
@@ -282,7 +282,7 @@ echo "Testing shovill installation..." && \
 cd /shovill-${SHOVILL_VER}/ && \
 ! shovill --doesnotexist && \
 SHOVILL="shovill --ram ${RAM} --cpus $(nproc) --R1 test/R1.fq.gz --R2 test/R2.fq.gz" && \
-for ASM in spades skesa megahit velvet ; do echo "TESTING SHOVILL + ${ASM}"; ${SHOVILL} --outdir ${ASM} --assembler ${ASM} ; seqkit stats $ASM/contigs.fa; done
+for ASM in spades skesa megahit velvet ; do echo "TESTING SHOVILL + ${ASM}..."; ${SHOVILL} --outdir ${ASM} --assembler ${ASM} ; seqkit stats $ASM/contigs.fa; done
 
 # test SKESA options combos
 # these bash for loops are WILD!
