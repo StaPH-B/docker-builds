@@ -10,7 +10,7 @@ Additional tools:
 - [megahit](https://github.com/voutcn/megahit) 1.1.4
 - perl 5.34.0
 - [pilon](https://github.com/broadinstitute/pilon) 1.24
-- python 3.x.x
+- python 3.10.42
 - [samclip](https://github.com/tseemann/samclip) 0.4.0
 - [samtools](https://github.com/samtools/samtools) 1.16.1
 - [seqkit](https://github.com/shenwei356/seqkit) 2.12.0

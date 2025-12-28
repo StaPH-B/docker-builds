@@ -41,25 +41,26 @@ ARG VELVET_VER
 # install dependencies required for compiling various tools
 # requirements for spades: cmake, build-essential
 RUN apt-get update && apt-get install --no-install-recommends -y \
-    libncurses5-dev \
-    libbz2-dev \
-    liblzma-dev \
-    libcurl4-gnutls-dev \
-    zlib1g-dev \
-    libssl-dev \
-    libdeflate-dev \
-    gcc \
-    wget \
-    make \
-    cmake \
-    build-essential \
-    perl \
-    bzip2 \
-    gnuplot \
-    ca-certificates
+libncurses5-dev \
+libbz2-dev \
+liblzma-dev \
+libcurl4-gnutls-dev \
+zlib1g-dev \
+libssl-dev \
+libdeflate-dev \
+gcc \
+wget \
+make \
+cmake \
+build-essential \
+perl \
+bzip2 \
+gnuplot \
+ca-certificates
 
 # download, compile, and install samtools
-RUN wget -q https://github.com/samtools/samtools/releases/download/${SAMTOOLS_VER}/samtools-${SAMTOOLS_VER}.tar.bz2 && \
+RUN echo "Installing SAMtools version ${SAMTOOLS_VER}..." && \
+wget -q https://github.com/samtools/samtools/releases/download/${SAMTOOLS_VER}/samtools-${SAMTOOLS_VER}.tar.bz2 && \
 tar -xjf samtools-${SAMTOOLS_VER}.tar.bz2 && \
 cd samtools-${SAMTOOLS_VER} && \
 ./configure && \
@@ -139,18 +140,15 @@ LABEL maintainer.email="kapsakcj@gmail.com"
 # install dependencies, cleanup apt garbage
 # TODO - check if any can be removed after install (like gcc, g++, make, etc.)
 # required for samtools: libdeflate-dev, zlib1g, libncurses5, bzip2, liblzma5, libcurl3-gnutls (trying with libcurl4-gnutls), gnuplot
-# Needed for spades.py to work: update-alternatives for python3
-# maybe also needed for spades.py: python3-distutils, cmake
+# Needed for spades.py: update-alternatives (for python3), python3-distutils, cmake, libgomp1?
+# Needed perl module for shovill: libfindbin-libs-perl
 RUN apt-get update && apt-get install -y --no-install-recommends \
 python3 \
 python3-distutils \
+libgomp1 \
 wget \
 ca-certificates \
 zlib1g \
-make \
-gcc \
-g++ \
-cmake \
 libpthread-stubs0-dev \
 openjdk-25-jre-headless \
 unzip \
@@ -219,7 +217,7 @@ wget -q https://github.com/voutcn/megahit/releases/download/v${MEGAHIT_VER}/MEGA
 tar -xzf MEGAHIT-${MEGAHIT_VER}-Linux-x86_64-static.tar.gz && \
 rm -v MEGAHIT-${MEGAHIT_VER}-Linux-x86_64-static.tar.gz && \
 mv -v MEGAHIT-${MEGAHIT_VER}-Linux-x86_64-static/bin/* /usr/local/bin/ && \
-chmod -v +x -v /usr/local/bin/megahit
+chmod -v +x /usr/local/bin/megahit
 
 # pilon
 RUN echo "Installing pilon version ${PILON_VER}..." && \
@@ -245,8 +243,7 @@ wget -q https://raw.githubusercontent.com/tseemann/samclip/master/samclip && \
 mv -v samclip /usr/local/bin/samclip && \
 chmod -v +x /usr/local/bin/samclip
 
-# aaannnddd finally install shovill itself
-# extra perl module I had to install via apt-get: libfindbin-libs-perl
+# aaannnddd finally install Shovill itself
 # create /data for working directory
 RUN echo "Installing shovill version ${SHOVILL_VER}..." && \
 wget -q https://github.com/tseemann/shovill/archive/v${SHOVILL_VER}.tar.gz && \
@@ -258,6 +255,7 @@ mkdir /data
 WORKDIR /data
 
 # set $PATH's and LC_ALL for singularity compatibility
+# most installed programs are in /usr/local/bin which is already in $PATH
 ENV PATH="${PATH}:\
 /kmc/bin:\
 /shovill-${SHOVILL_VER}/bin" \
