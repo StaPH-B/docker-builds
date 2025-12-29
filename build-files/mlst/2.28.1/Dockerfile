@@ -32,7 +32,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  file \
  procps \
  zlib1g \
- libgomp1 && \
+ libgomp1 \
+ bioperl && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # get any2fasta; move binary to /usr/local/bin which is already in $PATH
@@ -95,7 +96,7 @@ bats -T --abort test/test.sh
 # BioSample: SAMN37796909
 RUN wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/032/604/515/GCA_032604515.1_PDT001925635.1/GCA_032604515.1_PDT001925635.1_genomic.fna.gz &&\
     gunzip GCA_032604515.1_PDT001925635.1_genomic.fna.gz &&\
-    mlst GCA_032604515.1_PDT001925635.1_genomic.fna | tee Ecoli.tsv && \
+    mlst --scheme ecoli_achtman_4 GCA_032604515.1_PDT001925635.1_genomic.fna | tee Ecoli.tsv && \
     echo "Checking for ST15199 in the mlst results now..." && \
     grep "15199" Ecoli.tsv
 
