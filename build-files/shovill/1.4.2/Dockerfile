@@ -261,6 +261,9 @@ ENV PATH="${PATH}:\
 /shovill-${SHOVILL_VER}/bin" \
 LC_ALL=C
 
+# set default command to show shovill help options
+CMD ["shovill", "--help"]
+
 ### TEST STAGE ###
 FROM app AS test
 
