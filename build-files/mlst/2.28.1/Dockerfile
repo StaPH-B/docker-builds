@@ -106,13 +106,13 @@ RUN wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/001/065/325/GCF_0010653
     echo "Checking for ST349 in the Serretia results now..." && \
     grep '349' Serretia.tsv
 
-# Providencia (ST19)
-# checking both typical TSV output and JSON output for expected ST19 result
+# Providencia stuartii (ST19 by Providencia spp. scheme, ST15 by P. stuartii scheme)
+# checking both typical TSV output and JSON output for expected ST19 and ST 15 results
 RUN wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/001/558/855/GCF_001558855.2_ASM155885v2/GCF_001558855.2_ASM155885v2_genomic.fna.gz &&\
     gunzip GCF_001558855.2_ASM155885v2_genomic.fna.gz &&\
     mlst --scheme providencia GCF_001558855.2_ASM155885v2_genomic.fna | tee Providencia.tsv && \
-    echo "Checking for ST19 in the Providencia results now..." && \
+    echo "Checking for ST19 in the Providencia results TSV now..." && \
     grep '19' Providencia.tsv && \
-    mlst --scheme providencia GCF_001558855.2_ASM155885v2_genomic.fna --json out.json && \
-    echo "Checking JSON output for ST19 in the Providencia results now..." && \
-    grep '"sequence_type" : "19"' out.json
+    mlst --scheme pstuartii GCF_001558855.2_ASM155885v2_genomic.fna --json out.json && \
+    echo "Checking JSON output for ST15 in the Pstuartii results JSON now..." && \
+    grep '"sequence_type" : "15"' out.json
