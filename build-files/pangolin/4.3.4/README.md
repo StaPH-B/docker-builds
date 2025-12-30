@@ -25,7 +25,7 @@ List of packages in environment: "/opt/conda/envs/pangolin"
   boost-cpp                  1.78.0        h2c5509c_4            conda-forge
   brotli-python              1.1.0         py38h17151c0_1        conda-forge
   bzip2                      1.0.8         hda65f42_8            conda-forge
-  ca-certificates            2025.10.5     hbd8a1cb_0            conda-forge
+  ca-certificates            2025.11.12    hbd8a1cb_0            conda-forge
   certifi                    2024.8.30     pyhd8ed1ab_0          conda-forge
   cffi                       1.17.0        py38heb5c249_0        conda-forge
   charset-normalizer         3.4.0         pyhd8ed1ab_0          conda-forge
@@ -60,40 +60,40 @@ List of packages in environment: "/opt/conda/envs/pangolin"
   jsonschema-specifications  2024.10.1     pyhd8ed1ab_0          conda-forge
   jupyter_core               5.8.1         pyh31011fe_0          conda-forge
   k8                         1.2           h6618dc6_1            bioconda   
-  kernel-headers_linux-64    5.14.0        he073ed8_2            conda-forge
+  kernel-headers_linux-64    5.14.0        he073ed8_3            conda-forge
   keyutils                   1.6.3         hb9d3cd8_0            conda-forge
   krb5                       1.21.3        h659f571_0            conda-forge
-  ld_impl_linux-64           2.44          ha97dd6f_2            conda-forge
+  ld_impl_linux-64           2.45          bootstrap_ha15bf96_5  conda-forge
   libasprintf                0.25.1        h3f43e3d_1            conda-forge
-  libblas                    3.9.0         38_h4a7cf45_openblas  conda-forge
-  libcap                     2.76          h0b2e76d_0            conda-forge
-  libcblas                   3.9.0         38_h0358290_openblas  conda-forge
+  libblas                    3.11.0        5_h4a7cf45_openblas   conda-forge
+  libcap                     2.77          h3ff7636_0            conda-forge
+  libcblas                   3.11.0        5_h0358290_openblas   conda-forge
   libcbor                    0.10.2        hcb278e6_0            conda-forge
   libedit                    3.1.20250104  pl5321h7949ede_0      conda-forge
   libffi                     3.5.2         h9ec8514_0            conda-forge
   libfido2                   1.14.0        h4446dcb_0            conda-forge
-  libgcc                     15.2.0        h767d61c_7            conda-forge
-  libgcc-ng                  15.2.0        h69a702a_7            conda-forge
+  libgcc                     15.2.0        he0feb66_16           conda-forge
+  libgcc-ng                  15.2.0        h69a702a_16           conda-forge
   libgettextpo               0.25.1        h3f43e3d_1            conda-forge
-  libgfortran                15.2.0        h69a702a_7            conda-forge
-  libgfortran-ng             15.2.0        h69a702a_7            conda-forge
-  libgfortran5               15.2.0        hcd61629_7            conda-forge
-  libgomp                    15.2.0        h767d61c_7            conda-forge
+  libgfortran                15.2.0        h69a702a_16           conda-forge
+  libgfortran-ng             15.2.0        h69a702a_16           conda-forge
+  libgfortran5               15.2.0        h68bc16d_16           conda-forge
+  libgomp                    15.2.0        he0feb66_16           conda-forge
   libiconv                   1.18          h3b78370_2            conda-forge
-  liblapack                  3.9.0         38_h47877c9_openblas  conda-forge
-  liblapacke                 3.9.0         38_h6ae95b6_openblas  conda-forge
+  liblapack                  3.11.0        5_h47877c9_openblas   conda-forge
+  liblapacke                 3.11.0        5_h6ae95b6_openblas   conda-forge
   liblzma                    5.8.1         hb9d3cd8_2            conda-forge
   liblzma-devel              5.8.1         hb9d3cd8_2            conda-forge
   libnsl                     2.0.1         hb9d3cd8_1            conda-forge
-  libopenblas                0.3.30        pthreads_h94d23a6_3   conda-forge
+  libopenblas                0.3.30        pthreads_h94d23a6_4   conda-forge
   libopenssl-static          3.6.0         hb03c661_0            conda-forge
   libpng                     1.6.43        h2797004_0            conda-forge
   libprotobuf                3.21.12       hfc55251_2            conda-forge
   libsqlite                  3.46.0        hde9e2c9_0            conda-forge
-  libstdcxx                  15.2.0        h8f9b012_7            conda-forge
-  libstdcxx-ng               15.2.0        h4852527_7            conda-forge
-  libudev1                   258.2         h07e904d_0            conda-forge
-  libuuid                    2.41.2        he9a06e4_0            conda-forge
+  libstdcxx                  15.2.0        h934c35e_16           conda-forge
+  libstdcxx-ng               15.2.0        hdf11a46_16           conda-forge
+  libudev1                   258.3         h6569c3e_0            conda-forge
+  libuuid                    2.41.3        h5347b49_0            conda-forge
   libxcrypt                  4.4.36        hd590300_1            conda-forge
   libzlib                    1.2.13        h4ab18f5_6            conda-forge
   mafft                      7.526         h4bc722e_0            conda-forge
@@ -121,7 +121,7 @@ List of packages in environment: "/opt/conda/envs/pangolin"
   python-fastjsonschema      2.20.0        pyhd8ed1ab_0          conda-forge
   python_abi                 3.8           8_cp38                conda-forge
   pyyaml                     6.0.2         py38h2019614_0        conda-forge
-  readline                   8.2           h8c095d6_2            conda-forge
+  readline                   8.3           h853b02a_0            conda-forge
   referencing                0.35.1        pyhd8ed1ab_0          conda-forge
   requests                   2.32.3        pyhd8ed1ab_0          conda-forge
   reretry                    0.11.8        pyhd8ed1ab_0          conda-forge
@@ -131,14 +131,14 @@ List of packages in environment: "/opt/conda/envs/pangolin"
   smmap                      5.0.0         pyhd8ed1ab_0          conda-forge
   snakemake-minimal          7.24.0        pyhdfd78af_1          bioconda   
   stopit                     1.1.2         py_0                  conda-forge
-  sysroot_linux-64           2.34          h087de78_2            conda-forge
+  sysroot_linux-64           2.34          h087de78_3            conda-forge
   tabulate                   0.9.0         pyhd8ed1ab_1          conda-forge
   throttler                  1.2.2         pyhd8ed1ab_0          conda-forge
   tk                         8.6.13        noxft_h4845f30_101    conda-forge
   toposort                   1.10          pyhd8ed1ab_0          conda-forge
   traitlets                  5.14.3        pyhd8ed1ab_0          conda-forge
   typing_extensions          4.12.2        pyha770c72_0          conda-forge
-  tzdata                     2025b         h78e105d_0            conda-forge
+  tzdata                     2025c         hc9c84f9_1            conda-forge
   ucsc-fatovcf               473           he8037a5_0            bioconda   
   ucsc-stringify             472           he8037a5_0            bioconda   
   urllib3                    2.2.3         pyhd8ed1ab_0          conda-forge
