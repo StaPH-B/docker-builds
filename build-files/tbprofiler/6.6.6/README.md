@@ -6,18 +6,68 @@ The pipeline aligns reads to the H37Rv reference using bowtie2, BWA or minimap2 
 
 ## Database
 
-This tool relies on a database to run. The version (AKA git commit hash) of the database that is included in the docker image is `00a0db4e`. This is from the GitHub repository https://github.com/jodyphelan/tbdb. This can be confirmed in the json file: `/opt/conda/share/tbprofiler/tbdb.variables.json`:
+This tool relies on a database to run. The version (AKA git commit hash) of the database that is included in the docker image is `13b6ed45`. This is from the GitHub repository https://github.com/jodyphelan/tbdb. This can be confirmed in the json file: `/opt/conda/share/tbprofiler/tbdb/variables.json`:
 
 ```bash
-$ grep 'commit' /opt/conda/share/tbprofiler/tbdb.variables.json
-0.444 {"db-schema-version": "2.0.0", "snpEff_db": "Mycobacterium_tuberculosis_h37rv", "drugs": ["rifampicin", "isoniazid", "ethambutol", "pyrazinamide", "moxifloxacin", "levofloxacin", "bedaquiline", "delamanid", "pretomanid", "linezolid", "streptomycin", "amikacin", "kanamycin", "capreomycin", "clofazimine", "ethionamide", "para-aminosalicylic_acid", "cycloserine"], "tb-profiler-version": ">=6.6.0,<7.0.0", "version": {"name": "tbdb", "repo": "https://github.com/jodyphelan/tbdb.git", "branch": "HEAD", "commit": "33305126", "status": "clean", "author": "Jody Phelan", "date": "Thu Jul 17 11:27:24 2025 +0100", "db-schema-version": "2.0.0", "tb-profiler-version": ">=6.6.0,<7.0.0"}, "amplicon": false, "files": {"ref": "tbdb.fasta", "gff": "tbdb.gff", "bed": "tbdb.bed", "json_db": "tbdb.dr.json", "variables": "tbdb.variables.json", "spoligotype_spacers": "tbdb.spoligotype_spacers.txt", "spoligotype_annotations": "tbdb.spoligotype_list.csv", "bedmask": "tbdb.mask.bed", "rules": "tbdb.rules.yml", "barcode": "tbdb.barcode.bed"}}
+$ cat /opt/conda/share/tbprofiler/tbdb.variables.json
+{
+    "db-schema-version": "2.0.0",
+    "snpEff_db": "Mycobacterium_tuberculosis_h37rv",
+    "drugs": [
+        "rifampicin",
+        "isoniazid",
+        "ethambutol",
+        "pyrazinamide",
+        "moxifloxacin",
+        "levofloxacin",
+        "bedaquiline",
+        "delamanid",
+        "pretomanid",
+        "linezolid",
+        "streptomycin",
+        "amikacin",
+        "kanamycin",
+        "capreomycin",
+        "clofazimine",
+        "ethionamide",
+        "para-aminosalicylic_acid",
+        "cycloserine"
+    ],
+    "tb-profiler-version": ">=6.6.0,<7.0.0",
+    "type": "reference",
+    "version": {
+        "name": "tbdb",
+        "repo": "https://github.com/jodyphelan/tbdb.git",
+        "branch": "HEAD",
+        "commit": "13b6ed45",
+        "status": "clean",
+        "author": "jodyphelan",
+        "date": "Tue Aug 5 10:37:18 2025 +0100",
+        "db-schema-version": "2.0.0",
+        "tb-profiler-version": ">=6.6.0,<7.0.0"
+    },
+    "amplicon": false,
+    "files": {
+        "snpEff_config": "snpeff/snpEff.config",
+        "ref": "genome.fasta",
+        "gff": "genome.gff",
+        "bed": "genes.bed",
+        "json_db": "mutations.json",
+        "variables": "variables.json",
+        "spoligotype_spacers": "spoligotype_spacers.txt",
+        "spoligotype_annotations": "spoligotype_list.csv",
+        "bedmask": "mask.bed",
+        "rules": "rules.yml",
+        "barcode": "barcode.bed"
+    }
+}
 ```
 
 Additionally you can run the command `tb-profiler list_db` to list the same information
 
 ```bash
 $ tb-profiler list_db
-tbdb    00a0db4e        Jody Phelan     Sun Feb 16 11:09:04 2025 +0100  /opt/conda/share/tbprofiler/tbdb]
+tbdb    13b6ed45        jodyphelan      Tue Aug 5 10:37:18 2025 +0100   /opt/conda/share/tbprofiler/tbdb
 ```
 
 <details>
