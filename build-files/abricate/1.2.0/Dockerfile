@@ -58,6 +58,9 @@ ENV PATH="/abricate-${ABRICATE_VER}/bin:/any2fasta-${ANY2FASTA_VERSION}:$PATH"\
 # set up default databases
 RUN abricate --setupdb
 
+# default command when running without commands
+CMD ["abricate", "--help"]
+
 # final working directory is /data
 WORKDIR /data
 
