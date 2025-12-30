@@ -39,8 +39,7 @@ ENV LC_ALL=C.UTF-8 \
 # increase number of open files
 # install software into the base micromamba environment, pinning the version
 # clean up conda garbage
-RUN ulimit -n 65536 && \
-  micromamba install --yes --name base -f "/seqsender-${SEQSENDER_VERSION}/env.yaml" && \
+RUN micromamba install --yes --name base -f "/seqsender-${SEQSENDER_VERSION}/env.yaml" && \
   micromamba clean --all --force-pkgs-dirs --yes
 
 # default command is to pull up help options
