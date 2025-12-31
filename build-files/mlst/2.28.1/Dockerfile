@@ -2,7 +2,7 @@ FROM ubuntu:jammy AS app
 
 ARG MLST_VER="2.28.1"
 # mlst requires any2fasta 0.6.0 or higher: https://github.com/tseemann/mlst/blob/master/environment.yml
-ARG ANY2FASTA_VER="0.6.2"
+ARG ANY2FASTA_VER="0.8.1"
 # mlst requires blast 2.16.0 or higher
 ARG BLAST_VER="2.17.0"
 

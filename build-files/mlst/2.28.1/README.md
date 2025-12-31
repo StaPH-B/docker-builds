@@ -6,7 +6,7 @@ Additional tools:
 
 - ncbi-blast+ 2.17.0
 - perl 5.34.0
-- any2fasta 0.6.2
+- any2fasta 0.8.1
 
 Full documentation: [https://github.com/tseemann/mlst](https://github.com/tseemann/mlst)
 
