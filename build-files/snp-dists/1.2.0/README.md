@@ -9,6 +9,13 @@ Full documentation: [https://github.com/tseemann/snp-dists](https://github.com/t
 ## Example Usage
 
 ```bash
-# run shovill on the test FASTQ files bundled with shovill
-shovill --outdir /data/out.spades --assembler spades --R1 /shovill-1.1.0/test/R1.fq.gz --R2 /shovill-1.1.0/test/R2.fq.gz
+# run snp-dists on the test alignment file bundled with snp-dists
+wget -q https://raw.githubusercontent.com/tseemann/snp-dists/refs/heads/master/test/good.aln
+snp-dists good.aln > good.out
+cat good.out 
+        seq1    seq2    seq3    seq4
+seq1    0       1       2       3
+seq2    1       0       3       4
+seq3    2       3       0       4
+seq4    3       4       4       0
 ```
