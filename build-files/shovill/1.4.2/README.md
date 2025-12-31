@@ -7,7 +7,7 @@ Additional tools:
 - [bwa](https://github.com/lh3/bwa/) 0.7.19
 - [kmc](https://github.com/refresh-bio/KMC) 3.2.4
 - [lighter](https://github.com/mourisl/Lighter) 1.1.3
-- [megahit](https://github.com/voutcn/megahit) 1.1.4
+- [megahit](https://github.com/voutcn/megahit) 1.2.9
 - perl 5.34.0
 - [pilon](https://github.com/broadinstitute/pilon) 1.24
 - python 3.10.42

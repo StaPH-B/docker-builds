@@ -2,9 +2,9 @@
 ARG SHOVILL_VER="1.4.2"
 # previously used bwa 0.7.17, needs to be 0.7.17 or higher
 ARG BWA_VER="0.7.19"
-# version not specified in conda yml, so going with most recent release as of Dec 2025
+# csvtk version not specified in conda yml, so going with most recent release as of Dec 2025
 ARG CSVTK_VER="0.36.0"
-# should be 1.2 or higher
+# flash should be 1.2 or higher
 ARG FLASH_VER="1.2.11"
 # guessing again for kmc since its not pinned, just 3.2 or higher
 ARG KMC_VER="3.2.4"
@@ -14,13 +14,13 @@ ARG LIGHTER_VER="1.1.3"
 ARG MEGAHIT_VER="1.2.9"
 # not sure if this upgraded pilon version is compatible, previously used 1.22. Should be 1.22 or higher
 ARG PILON_VER="1.24"
-# not sure if a more recent samtools is compatible or not, conda yml says higher than 1.10, sticking with 1.16.1 since it's worked previously
+# not sure if a more recent samtools is compatible or not, conda yml says higher than 1.10, sticking with 1.16.1 since it worked previously
 ARG SAMTOOLS_VER="1.16.1"
 # just guessing on seqkit version as this is not pinned
 ARG SEQKIT_VER="2.12.0"
 # SKESA needs to be 2.5 or higher
 # Opting not to use SKESA_VER since the binaries on Github change names frequently and are not versioned well
-# should be 3.11 or higher, but less than 4.0.0
+# spades should be 3.11 or higher, but less than 4.0.0
 ARG SPADES_VER="3.15.5"
 # should be 0.36 or higher
 ARG TRIMMOMATIC_VER="0.40"
@@ -86,7 +86,7 @@ rm -v v${SPADES_VER}.tar.gz && \
 cd spades-${SPADES_VER}/assembler && \
 PREFIX=/usr/local ./spades_compile.sh
 
-# lighter
+# Lighter
 RUN echo "Installing Lighter version ${LIGHTER_VER}..." && \
 wget -q https://github.com/mourisl/Lighter/archive/v${LIGHTER_VER}.tar.gz && \
 tar -zxf v${LIGHTER_VER}.tar.gz && \
@@ -95,7 +95,7 @@ cd Lighter-${LIGHTER_VER} && \
 make && \
 mv -v lighter /usr/local/bin/lighter
 
-# Velvet 1.2.10
+# Velvet
 RUN echo "Installing VELVET version ${VELVET_VER}..." && \
 wget -q https://github.com/dzerbino/velvet/archive/v${VELVET_VER}.tar.gz && \
 tar -xzf v${VELVET_VER}.tar.gz && \
@@ -106,7 +106,7 @@ ls -lah && \
 mv -v velveth /usr/local/bin/velveth && \
 mv -v velvetg /usr/local/bin/velvetg
 
-# Install Flash
+# Flash
 RUN echo "Installing FLASH version ${FLASH_VER}..." && \
 wget -q https://sourceforge.net/projects/flashpage/files/FLASH-${FLASH_VER}.tar.gz && \
 tar -zxf FLASH-${FLASH_VER}.tar.gz && \
@@ -138,9 +138,8 @@ LABEL maintainer="Curtis Kapsak"
 LABEL maintainer.email="kapsakcj@gmail.com"
 
 # install dependencies, cleanup apt garbage
-# TODO - check if any can be removed after install (like gcc, g++, make, etc.)
 # required for samtools: libdeflate-dev, zlib1g, libncurses5, bzip2, liblzma5, libcurl3-gnutls (trying with libcurl4-gnutls), gnuplot
-# Needed for spades.py: update-alternatives (for python3), python3-distutils, cmake, libgomp1?
+# Needed for spades.py: update-alternatives (for python3), python3-distutils, cmake, libgomp1 (blast also requires this)
 # Needed perl module for shovill: libfindbin-libs-perl
 RUN apt-get update && apt-get install -y --no-install-recommends \
 python3 \
@@ -195,8 +194,7 @@ echo "exec java -jar /trimmomatic/trimmomatic-${TRIMMOMATIC_VER}.jar """"$""@"""
 chmod -v +x trimmomatic && \
 mv -v trimmomatic /usr/local/bin/trimmomatic
 
-# samtools, bwa, spads install into app stage
-# copy in samtools, spades, and bwa executables from builder stage
+# copy in samtools, spades, and bwa executables into app stage from builder stage
 COPY --from=builder /usr/local/bin/* /usr/local/bin/
 
 # copy over stuff from /usr/local/share/spades/ in builder stage to here so "spades.py --version" works
