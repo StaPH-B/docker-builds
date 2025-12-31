@@ -69,6 +69,8 @@ WORKDIR /data
 # set locale for singularity compatibility; no need to set PATH as /usr/local/bin is already there
 ENV LC_ALL=C
 
+CMD ["snp-dists", "--help"]
+
 ### Test stage
 FROM app AS test
 
