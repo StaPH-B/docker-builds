@@ -84,11 +84,10 @@ apt-get autoclean && rm -rf /var/lib/apt/lists/*
 # setting working directory to /test
 WORKDIR /test
 
-# sed is required because when you run snp-dists, it prints the version number in the output header line. So to compare to the expected output, we need to remove that string first.
+# Run a simple test from snp-dists testing framework
 RUN echo "Testing snp-dists with one test from testing framework..." && \
 wget -q https://raw.githubusercontent.com/tseemann/snp-dists/refs/heads/master/test/good.aln && \
 wget -q https://raw.githubusercontent.com/tseemann/snp-dists/refs/heads/master/test/good.res && \
-snp-dists good.aln > good.out && \
-sed -i "s|snp-dists ${SNP_DISTS_VER}||g" good.out && \
+snp-dists -b good.aln > good.out && \
 diff -bB good.out good.res && \
 echo "snp-dists version ${SNP_DISTS_VER} test completed successfully!"
