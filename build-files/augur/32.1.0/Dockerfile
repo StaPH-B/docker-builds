@@ -66,7 +66,7 @@ RUN git clone https://github.com/nextstrain/zika-tutorial && \
         --sequence-index results/sequence_index.tsv \
         --metadata data/metadata.tsv \
         --exclude config/dropped_strains.txt \
-        --output results/filtered.fasta \
+        --output-sequences results/filtered.fasta \
         --group-by country year month \
         --sequences-per-group 20 \
         --min-date 2012 && \
@@ -117,3 +117,5 @@ RUN git clone https://github.com/nextstrain/zika-tutorial && \
         --auspice-config config/auspice_config.json \
         --output auspice/zika.json && \
     head auspice/zika.json
+
+RUN pip list
