@@ -18,7 +18,8 @@ LABEL maintainer3="Erin Young"
 LABEL maintainer3.email="eriny@utah.gov"
 
 # install dependencies via apt; cleanup apt garbage; set locale to en_US.UTF-8
-RUN apt-get update && apt-get install -y zlib1g-dev \
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    zlib1g-dev \
     bzip2 \
     libbz2-dev \
     liblzma-dev \
