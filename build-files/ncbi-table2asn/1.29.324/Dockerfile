@@ -2,8 +2,8 @@ ARG RELEASE_DATE="2025-09-16"
 
 FROM ubuntu:jammy AS app
 
-# version doesn't show appear anywhere on ftp; only can be determined via command-line
-# this docker image was built 2022-12-13 and this was the current version
+# The directory structure is by date as opposed to version. 
+# A list of software versions should be found at a location similar to https://ftp.ncbi.nlm.nih.gov/asn1-converters/versions/CURRENT/documentation/VERSIONS
 ARG TABLE2ASN_VER="1.29.324"
 ARG RELEASE_DATE
 
