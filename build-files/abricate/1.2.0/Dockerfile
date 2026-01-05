@@ -20,7 +20,7 @@ LABEL maintainer2.email="ines.mendes@theiagen.com"
 
 # install dependencies
 # removed: emboss
-# ncbi-blast+ version in apt for ubuntu:focal = v2.9.0 
+# ncbi-blast+ version in apt for ubuntu:noble = v2.12.0 
 RUN apt-get update && apt-get install -y --no-install-recommends \
   bioperl \
   gzip \
