@@ -211,6 +211,7 @@ The licenses of the open-source software that is contained in these Docker image
 | SNP-sites | GNU GPLv3 | https://github.com/sanger-pathogens/snp-sites/blob/master/LICENSE |
 | SNVPhyl-tools | Apache 2.0 | https://github.com/phac-nml/snvphyl-tools/blob/master/LICENSE |
 | SPAdes | GNU GPLv2 | https://github.com/ablab/spades/blob/main/LICENSE |
+| Spestimator | MIT | https://github.com/erinyoung/Spestimator?tab=MIT-1-ov-file |
 | SRA-toolkit | Public Domain | https://github.com/ncbi/sra-tools/blob/master/LICENSE |
 | SRST2 | BSD | https://github.com/katholt/srst2/blob/master/LICENSE.txt |
 | Staramr | Apache 2.0 | https://github.com/phac-nml/staramr/blob/master/LICENSE |
