@@ -13,8 +13,7 @@ Additional tools:
 
 Additional information:
 
-This image uses the most up-to-date databases at the time of building. This image is rebuilt every month on Dockerhub and Quay.io with the tag `${abricate version}-${data image was deployed}` as well as `latest`.
-
+This image uses the most up-to-date databases at the time of building.
 
 ## Example Usage
 
