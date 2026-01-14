@@ -131,5 +131,3 @@ sed -i -E -e 's|Severe acute respiratory syndrome coronavirus 2 isolate SARS-CoV
 column -s, -t lineage_report.csv
 
 RUN micromamba list -n pangolin
-
-#sed -iE -e 's|Severe acute respiratory syndrome coronavirus 2 isolate SARS-CoV-2/human/||g' -e 's|^("[^"]*[0-9]{4})[^"]*"|\1"|g' lineage_report.csv && \
