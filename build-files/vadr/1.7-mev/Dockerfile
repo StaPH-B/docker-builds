@@ -2,6 +2,8 @@ ARG VADR_VERSION=1.7
 
 FROM staphb/vadr:$VADR_VERSION AS app
 
+ARG VADR_VERSION
+
 # for easy upgrade later. LC_ALL set for singularity compatibility
 ENV VADR_MEV_MODELS_VER="1.02"
 
@@ -29,8 +31,23 @@ CMD ["v-annotate.pl", "-h"]
 
 FROM app AS test 
 
+ARG VADR_VERSION
+
 # testing that executable is in PATH
 RUN v-annotate.pl -h && fasta-trim-terminal-ambigs.pl -h || echo "prints to stderr for some reason"
+
+WORKDIR /test_files
+
+# modified from https://github.com/ncbi/vadr/blob/master/testfiles/github-issues/do-issue-tests.sh
+RUN wget https://raw.githubusercontent.com/ncbi/vadr/refs/heads/master/testfiles/github-issues/iss91-trimscript/iss91-trimscript.fa && \
+    fasta-trim-terminal-ambigs.pl --3rules iss91-trimscript.fa > iss91-2.fa && \
+    head iss91-2.fa && \
+    fasta-trim-terminal-ambigs.pl --3rules --ten 3 iss91-trimscript.fa > iss91-3.fa && \
+    head iss91-3.fa && \
+    fasta-trim-terminal-ambigs.pl --3rules --ten 2 iss91-trimscript.fa > iss91-4.fa && \
+    head iss91-4.fa && \
+    fasta-trim-terminal-ambigs.pl --3rules --fifty 10 iss91-trimscript.fa > iss91-5.fa && \
+    head iss91-5.fa
 
 WORKDIR /test
 
