@@ -20,15 +20,15 @@ LABEL maintainer2.email="eriny@utah.gov"
 # removed because likely unnecessary since we are not compiling from source: make g++
 # libgomp1 required for makeblastdb
 RUN apt-get update && apt-get install -y --no-install-recommends \
-  ca-certificates \
-  wget \ 
-  curl \
-  libgomp1 \
-  hmmer \
-  procps \
-  gzip && \
-  apt-get autoclean && \
-  rm -rf /var/lib/apt/lists/*
+ca-certificates \
+wget \
+curl \
+libgomp1 \
+hmmer \
+procps \
+gzip && \
+apt-get autoclean && \
+rm -rf /var/lib/apt/lists/*
 
 # download and install amrfinderplus pre-compiled binaries; make /data
 RUN mkdir amrfinder && cd /amrfinder && \
