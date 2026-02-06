@@ -13,8 +13,7 @@ LABEL maintainer="Kutluhan Incekara"
 LABEL maintainer.email="kutluhan.incekara@ct.gov"
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    wget \
-    ncbi-blast+ &&\
+    wget &&\
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 RUN wget --quiet --no-check-certificate https://github.com/bbuchfink/diamond/releases/download/v${DIAMOND_VER}/diamond-linux64.tar.gz &&\

@@ -5,7 +5,7 @@ Main tool: [diamond](https://github.com/bbuchfink/diamond)
 Code repository: https://github.com/bbuchfink/diamond
 
 Additional tools:
-- ncbi-blast+ : 2.12.0
+- none
 
 Basic information on how to use this tool:
 - executable: `diamond`
