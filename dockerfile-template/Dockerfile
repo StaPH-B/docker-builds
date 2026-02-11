@@ -11,7 +11,7 @@
 # 'FROM' defines where the Dockerfile is starting to build from. This command has to come first in the file
 # The 'as' keyword lets you name the folowing stage. The production image uses everything to the 'app' stage.
 
-FROM ubuntu:jammy as app
+FROM ubuntu:noble AS app
 
 # List all software versions are ARGs near the top of the dockerfile
 # 'ARG' sets environment variables during the build stage
@@ -66,7 +66,7 @@ WORKDIR /data
 ##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
 
 # A second FROM insruction creates a new stage
-FROM app as test
+FROM app AS test
 
 # set working directory so that all test inputs & outputs are kept in /test
 WORKDIR /test
