@@ -1,13 +1,13 @@
 
 ARG GOTREE_VER="0.5.1"
 # 'FROM' defines where the Dockerfile is starting to build from.
-FROM ubuntu:jammy AS app
+FROM ubuntu:noble AS app
 
 # List all software versions are ARGs near the top of the dockerfile
 ARG GOTREE_VER
 
 # 'LABEL' instructions tag the image with metadata
-LABEL base.image="ubuntu:jammy"
+LABEL base.image="ubuntu:noble"
 LABEL dockerfile.version="1"
 LABEL software="gotree"
 LABEL software.version="${GOTREE_VER}"
