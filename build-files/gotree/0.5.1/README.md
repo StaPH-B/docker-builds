@@ -10,7 +10,7 @@ Basic information on how to use this tool:
 - version: `version`
 - description: A comprehensive set of command-line tools for manipulating, modifying, and computing statistics on phylogenetic trees (Newick, Nexus, PhyloXML).
 
-Full documentation: https://github.com/evolbioinfo/gotree
+Full documentation: [https://github.com/evolbioinfo/gotree/blob/master/docs/index.md](https://github.com/evolbioinfo/gotree/blob/master/docs/index.md)
 
 ## Example Usage
 
