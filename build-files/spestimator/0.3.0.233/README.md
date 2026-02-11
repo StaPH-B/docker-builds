@@ -5,7 +5,7 @@ Main tool: [spestimator](https://github.com/erinyoung/Spestimator)
 Code repository: https://github.com/erinyoung/Spestimator
 
 Additional tools:
-- list: blast+
+- list: blast+ v2.12.0
 
 Basic information on how to use this tool:
 - executable: spestimator
