@@ -1,11 +1,11 @@
 ARG PANDAS_VER="3.0.0"
 
-FROM ubuntu:noble AS app
+FROM ubuntu:jammy AS app
 
 ARG PANDAS_VER
 
 # 'LABEL' instructions tag the image with metadata that might be important to the user
-LABEL base.image="ubuntu:noble"
+LABEL base.image="ubuntu:jammy"
 LABEL dockerfile.version="1"
 LABEL software="pandas"
 LABEL software.version="${PANDAS_VER}"
