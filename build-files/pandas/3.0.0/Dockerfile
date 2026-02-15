@@ -1,11 +1,11 @@
 ARG PANDAS_VER="3.0.0"
 
-FROM ubuntu:jammy AS app
+FROM ubuntu:noble AS app
 
 ARG PANDAS_VER
 
 # 'LABEL' instructions tag the image with metadata that might be important to the user
-LABEL base.image="ubuntu:jammy"
+LABEL base.image="ubuntu:noble"
 LABEL dockerfile.version="1"
 LABEL software="pandas"
 LABEL software.version="${PANDAS_VER}"
@@ -22,7 +22,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python3-pip && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-RUN pip install --no-cache-dir pandas==${PANDAS_VER}
+RUN pip install --no-cache-dir --break-system-packages pandas==${PANDAS_VER}
 
 # 'CMD' instructions set a default command when the container is run. This is typically 'tool --help.'
 CMD [ "pip", "list" ]
