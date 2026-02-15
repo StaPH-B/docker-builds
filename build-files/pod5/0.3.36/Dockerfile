@@ -21,10 +21,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     procps && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-# Corecct code to install the new version
+# Preferred/Correct code to install the new version
 #RUN pip3 install --no-cache --break-system-packages pod5==${POD5_TOOLS_VERSION}
 
-# Hardcode version to allow the donwload of 0.3.36 specific pod5 version
+# Hardcode version to allow the download of 0.3.36 specific pod5 version
 RUN pip3 install --no-cache --break-system-packages git+https://github.com/nanoporetech/pod5-file-format.git@v0.3.36
 
 WORKDIR /data
