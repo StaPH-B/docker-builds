@@ -1,6 +1,6 @@
 # VADR container
 
-Main tool : [VADR](https://github.com/ncbi/vadr)
+Main tool : [VADR](https://github.com/NLM-DIR/vadr)
 
 Additional tools:
 
@@ -27,7 +27,7 @@ Basic information on how to use this tool:
 
 VADR models should be downloaded separately and mounted/bound to the container at runtime. The default location for VADR models is `/opt/vadr/vadr-models/`.
 
-A larger list of vadr models can be found in [VADR's documentation](https://github.com/ncbi/vadr/wiki/Available-VADR-model-files) for download and mounting/binding during runtime. An example for SARS-CoV-2 is below.
+A larger list of vadr models can be found in [VADR's documentation](https://github.com/NLM-DIR/vadr/wiki/Available-VADR-model-files) for download and mounting/binding during runtime. An example for SARS-CoV-2 is below.
 
 ## Example Usage
 
