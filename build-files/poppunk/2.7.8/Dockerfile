@@ -30,9 +30,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Create PopPUNK conda environment called poppunk-env from bioconda recipe
 # clean up conda garbage
-RUN micromamba create -n poppunk-env -c conda-forge -c bioconda poppunk=${POPPUNK_VERSION} && \
+RUN micromamba create -n poppunk-env -c conda-forge -c bioconda \
+    poppunk=${POPPUNK_VERSION} \
+    setuptools && \
     micromamba clean -a -f -y
-
+    
 # set the environment, put new conda env in PATH by default; set locales to UTF-8
 ENV PATH="/opt/conda/envs/poppunk-env/bin:${PATH}" \
     LC_ALL=C.UTF-8
