@@ -34,9 +34,9 @@ RUN micromamba create -n poppunk-env -c conda-forge -c bioconda \
     poppunk=${POPPUNK_VERSION} && \
     micromamba clean -a -f -y
 
-# Install setuptools separately
-RUN micromamba install -n poppunk-env -c conda-forge setuptools -y
-
+# Install setuptools separately and create a workaround for pkg_resources
+RUN micromamba install -n poppunk-env -c conda-forge setuptools pip -y && \
+    /opt/conda/envs/poppunk-env/bin/pip install --force-reinstall setuptools
     
 # set the environment, put new conda env in PATH by default; set locales to UTF-8
 ENV PATH="/opt/conda/envs/poppunk-env/bin:${PATH}" \
