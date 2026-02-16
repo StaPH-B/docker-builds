@@ -1,4 +1,4 @@
-# SeqSender 1.3.3 container
+# SeqSender 1.3.9 container
 
 Main tool: [SeqSender](https://github.com/CDCgov/seqsender)
 
