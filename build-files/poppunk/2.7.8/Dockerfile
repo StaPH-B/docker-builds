@@ -30,9 +30,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Create PopPUNK conda environment called poppunk-env from bioconda recipe
 # clean up conda garbage
-RUN micromamba create -n poppunk-env -c conda-forge -c bioconda \
-    poppunk=${POPPUNK_VERSION} && \
-    micromamba clean -a -f -y
+RUN micromamba create -n poppunk-env -c conda-forge -c bioconda pkg_resources poppunk=2.7.8 &&
 
 # Install setuptools separately and create a workaround for pkg_resources
 RUN micromamba install -n poppunk-env -c conda-forge setuptools pip -y && \
