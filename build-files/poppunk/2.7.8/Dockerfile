@@ -30,13 +30,19 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Create PopPUNK conda environment called poppunk-env from bioconda recipe
 # clean up conda garbage
+# RUN micromamba create -n poppunk-env -c conda-forge -c bioconda \
+#     poppunk=${POPPUNK_VERSION} \
+#     setuptools && \
+#     micromamba clean -a -f -y
+
+# Testing using 3.11 Python, because 3.12 may have setuptools issues.
 RUN micromamba create -n poppunk-env -c conda-forge -c bioconda \
-    poppunk=${POPPUNK_VERSION} \
-    setuptools && \
+    python=3.11 \
+    poppunk=${POPPUNK_VERSION} && \
     micromamba clean -a -f -y
 
 # Force reinstall setuptools to ensure pkg_resources is available
-RUN /opt/conda/envs/poppunk-env/bin/pip install --force-reinstall setuptools
+#RUN /opt/conda/envs/poppunk-env/bin/pip install --force-reinstall setuptools
 
     
 # set the environment, put new conda env in PATH by default; set locales to UTF-8
