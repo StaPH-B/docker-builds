@@ -1,11 +1,11 @@
-FROM python:3.9.17-slim AS app
+FROM python:3.10-slim AS app
 
 USER root
 WORKDIR /
 
 ARG POD5_TOOLS_VERSION="0.3.36"
 
-LABEL base.image="python:3.9.17-slim"
+LABEL base.image="python:3.10-slim"
 LABEL dockerfile.version="1"
 LABEL software="pod5"
 LABEL software.version="${POD5_TOOLS_VERSION}"
