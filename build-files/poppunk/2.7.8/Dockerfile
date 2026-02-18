@@ -53,6 +53,10 @@ WORKDIR /data
 
 CMD ["poppunk", "--help"]
 
+# Check setuptools version (temporary diagnostic line) -------------------------
+RUN micromamba run -n poppunk-env pip show setuptools
+
+
 # new base for testing
 FROM app AS test
 
