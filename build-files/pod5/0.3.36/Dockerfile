@@ -21,9 +21,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     procps && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-#RUN pip3 install --no-cache pod5==${POD5_TOOLS_VERSION}
-RUN pip3 install --no-cache-dir --upgrade pip && \
-    pip3 install --no-cache-dir pod5==0.3.36
+RUN pip3 install --no-cache pod5==${POD5_TOOLS_VERSION}
 
 WORKDIR /data
 
