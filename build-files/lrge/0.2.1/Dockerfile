@@ -22,10 +22,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-RUN wget -q https://github.com/mbhall88/lrge/releases/download/lrge-${LRGE_VER}/lrge-${LRGE_VER}-x86_64-unknown-linux-gnu.tar.gz && \
-    tar -xvf lrge-${LRGE_VER}-x86_64-unknown-linux-gnu.tar.gz && \
-    mv lrge-${LRGE_VER}-x86_64-unknown-linux-gnu/lrge /usr/local/bin && \
-    rm -rf lrge-${LRGE_VER}-x86_64-unknown-linux-gnu.tar.gz lrge-0.1.3-x86_64-unknown-linux-gnu
+RUN wget -q https://github.com/mbhall88/lrge/releases/download/lrge-${LRGE_VER}/lrge-${LRGE_VER}-aarch64-unknown-linux-gnu.tar.gz
+ && \
+    tar -xvf lrge-${LRGE_VER}-aarch64-unknown-linux-gnu.tar.gz && \
+    mv lrge-${LRGE_VER}-aarch64-unknown-linux-gnu/lrge /usr/local/bin && \
+    rm -rf lrge-${LRGE_VER}-aarch64-unknown-linux-gnu.tar.gz lrge-0.1.3-x86_64-unknown-linux-gnu
 
 # 'CMD' instructions set a default command when the container is run. This is typically 'tool --help.'
 CMD [ "lrge", "--help" ]
