@@ -28,20 +28,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     procps && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-#-------------------------------------------------------------------------
-# Create PopPUNK conda environment called poppunk-env from bioconda recipe
-# Original line from 2.7.7
-# RUN micromamba create -n poppunk-env -c conda-forge -c bioconda poppunk=${POPPUNK_VERSION} && \
-#     micromamba clean -a -f -y
-
-# Test out a different version of setuptools
+# Using an older version of setuptools. Current throws an error in the docker (Feb 2026)
 RUN micromamba create -n poppunk-env -c conda-forge -c bioconda \
     poppunk=${POPPUNK_VERSION} \
-    setuptools=80.10.2 && \
+    setuptools=81.0.0 && \
     micromamba clean -a -f -y
 
-
-#----------------------------------------------------------------------------------    
 # set the environment, put new conda env in PATH by default; set locales to UTF-8
 ENV PATH="/opt/conda/envs/poppunk-env/bin:${PATH}" \
     LC_ALL=C.UTF-8
