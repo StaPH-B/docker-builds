@@ -5,7 +5,7 @@ Main tool: [pod5](https://github.com/nanoporetech/pod5-file-format)
 Code repository: [https://github.com/nanoporetech/pod5-file-format](https://github.com/nanoporetech/pod5-file-format)
 
 Additional tools:
-- python 3.9.17
+- python 3.10.0
 
 Basic information on how to use this tool:
 
