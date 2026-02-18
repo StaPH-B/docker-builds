@@ -37,11 +37,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Test out a different version of setuptools
 RUN micromamba create -n poppunk-env -c conda-forge -c bioconda \
     poppunk=${POPPUNK_VERSION} \
-    setuptools=80.9.0 && \
+    setuptools=80.10.2 && \
     micromamba clean -a -f -y
 
-# Force reinstall setuptools to ensure pkg_resources is available
-#RUN /opt/conda/envs/poppunk-env/bin/pip install --force-reinstall setuptools
 
 #----------------------------------------------------------------------------------    
 # set the environment, put new conda env in PATH by default; set locales to UTF-8
@@ -52,10 +50,6 @@ ENV PATH="/opt/conda/envs/poppunk-env/bin:${PATH}" \
 WORKDIR /data
 
 CMD ["poppunk", "--help"]
-
-# Check setuptools version (temporary diagnostic line) -------------------------
-RUN micromamba run -n poppunk-env pip show setuptools
-
 
 # new base for testing
 FROM app AS test
