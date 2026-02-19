@@ -24,7 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN wget -q https://github.com/rrwick/Autocycler/archive/refs/tags/v${AUTOCYCLER_VER}.tar.gz && \
     tar -xvf v${AUTOCYCLER_VER}.tar.gz && \
     rm v${AUTOCYCLER_VER}.tar.gz && \
-    micromamba env create --file /Autocycler-${AUTOCYCLER_VER}/scripts/environment.yml --name autocycler && \
+    micromamba env create --file /Autocycler-${AUTOCYCLER_VER}/pipelines/Conda_environment_file_by_Ryan_Wick/environment.yml --name autocycler && \
     micromamba clean -a -f -y && \
     rm -rf /Autocycler-${AUTOCYCLER_VER} && \
     mkdir /data
