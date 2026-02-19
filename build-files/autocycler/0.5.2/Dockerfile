@@ -24,11 +24,11 @@ WORKDIR /usr/local/bin
 
 # install autocycler and helper scripts
 RUN wget -q https://github.com/rrwick/Autocycler/releases/download/v${AUTOCYCLER_VER}/autocycler-linux-x86_64-musl-v${AUTOCYCLER_VER}.tar.gz && \
-    tar -vxf autocycler-linux-x86_64-musl-v${AUTOCYCLER_VER}.tar.gz && \
+    tar -xf autocycler-linux-x86_64-musl-v${AUTOCYCLER_VER}.tar.gz && \
     rm autocycler-linux-x86_64-musl-v${AUTOCYCLER_VER}.tar.gz && \
-    wget -q https://github.com/rrwick/Autocycler/releases/download/v${AUTOCYCLER_VER}/autocycler-helper-scripts-v${AUTOCYCLER_VER}.tar.gz && \
-    tar -vxf autocycler-helper-scripts-v${AUTOCYCLER_VER}.tar.gz && \
-    rm autocycler-helper-scripts-v${AUTOCYCLER_VER}.tar.gz
+    wget -q https://github.com/rrwick/Autocycler/releases/download/v${AUTOCYCLER_VER}/autocycler-documentation-v${AUTOCYCLER_VER}.tar.gz && \
+    tar -xf autocycler-documentation-v${AUTOCYCLER_VER}.tar.gz && \
+    rm autocycler-documentation-v${AUTOCYCLER_VER}.tar.gz
 
 ENV PATH=$PATH LC_ALL=C
 
