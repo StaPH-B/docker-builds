@@ -11,8 +11,47 @@ Main tool: [<program>](link to program)
   
 Code repository:
 
+<!--
+Dependencies installed in layers in the 'app' stage are listed here.
+
 Additional tools:
 - list: version
+
+-->
+
+<!--
+Dependencies installed via pip or micromamba are listed here
+
+# for micromamaba
+```bash
+micromabma list -n <environment_name>
+```
+
+<details>
+<summary>Additional dependencies installed via micromamba:</summary>
+
+```
+
+```
+</details>
+</br>
+
+# for pip
+```bash
+pip list
+```
+
+<details>
+<summary>Additional dependencies installed via pip:</summary>
+
+```
+
+```
+</details>
+</br>
+
+-->
+
 
 Basic information on how to use this tool:
 - executable: <tool>
