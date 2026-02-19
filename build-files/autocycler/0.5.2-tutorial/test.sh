@@ -1,5 +1,5 @@
-# stolen from https://github.com/rrwick/Autocycler/wiki/Demo-dataset
-threads="4"
+# taken from https://github.com/rrwick/Autocycler/wiki/Demo-dataset
+threads="16"
 genome_size="242000"
 
 autocycler subsample --reads reads.fastq.gz --out_dir subsampled_reads --genome_size "$genome_size"
@@ -7,7 +7,7 @@ autocycler subsample --reads reads.fastq.gz --out_dir subsampled_reads --genome_
 mkdir assemblies
 for assembler in flye miniasm raven; do
     for i in 01 02 03 04; do
-        "$assembler".sh subsampled_reads/sample_"$i".fastq assemblies/"$assembler"_"$i" "$threads" "$genome_size"
+        autocycler helper "$assembler" --reads subsampled_reads/sample_"$i".fastq --out_prefix assemblies/"$assembler"_"$i" --threads "$threads" --genome_size "$genome_size"
     done
 done
 rm subsampled_reads/*.fastq
