@@ -1,5 +1,5 @@
 # taken from https://github.com/rrwick/Autocycler/wiki/Demo-dataset
-threads="16"
+threads="4"
 genome_size="242000"
 
 autocycler subsample --reads reads.fastq.gz --out_dir subsampled_reads --genome_size "$genome_size"
