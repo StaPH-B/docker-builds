@@ -28,7 +28,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   curl \
   && apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-RUN wget https://snpeff.blob.core.windows.net/versions/snpEff_v${SNPEFF_DOWNLOAD_VER}_core.zip && \
+RUN wget https://snpeff-public.s3.amazonaws.com/versions/snpEff_v${SNPEFF_DOWNLOAD_VER}_core.zip && \
   unzip snpEff_v${SNPEFF_DOWNLOAD_VER}_core.zip && \
   rm snpEff_v${SNPEFF_DOWNLOAD_VER}_core.zip
 
