@@ -1,4 +1,5 @@
 # Use NVIDIA CUDA image as the base image
+# Cuda is version 13.1.1
 FROM nvidia/cuda:13.1.1-base-ubuntu24.04 AS app
 
 ARG DORADO_VER="1.4.0"
