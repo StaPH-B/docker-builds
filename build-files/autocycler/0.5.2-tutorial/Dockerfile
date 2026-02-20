@@ -58,16 +58,10 @@ RUN autocycler --help && \
     autocycler --version
 
 COPY test.sh .
-
-# Demo Dataset from Link Below
-RUN wget -q https://github.com/rrwick/Autocycler/wiki/Demo-dataset/autocycler-demo-dataset.tar && \
+    
+RUN wget -q https://github.com/rrwick/Autocycler/releases/download/v0.1.0/autocycler-demo-dataset.tar && \
     tar -vxf autocycler-demo-dataset.tar && \
     bash test.sh && \
     head autocycler_out/consensus_assembly.fasta
-    
-# RUN wget -q https://github.com/rrwick/Autocycler/releases/download/v0.1.0/autocycler-demo-dataset.tar && \
-#     tar -vxf autocycler-demo-dataset.tar && \
-#     bash test.sh && \
-#     head autocycler_out/consensus_assembly.fasta
 
 RUN micromamba list -n autocycler
