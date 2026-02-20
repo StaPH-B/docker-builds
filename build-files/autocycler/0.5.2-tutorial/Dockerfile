@@ -68,7 +68,7 @@ COPY test.sh .
 # Runs test using demo dataset but with subsampled reads to improve efficiency
 RUN wget -q https://github.com/rrwick/Autocycler/releases/download/v0.1.0/autocycler-demo-dataset.tar && \
     tar -xf autocycler-demo-dataset.tar && \
-    zcat reads.fastq.gz | head -n 20000 | gzip > reads_small.fastq.gz && \
+    (zcat reads.fastq.gz || true) | head -n 20000 | gzip > reads_small.fastq.gz && \
     mv reads_small.fastq.gz reads.fastq.gz && \
     bash test.sh
 
