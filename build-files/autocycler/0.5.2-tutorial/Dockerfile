@@ -15,10 +15,30 @@ LABEL license="https://github.com/rrwick/Autocycler/blob/main/LICENSE"
 LABEL maintainer="Erin Young"
 LABEL maintainer.email="eriny@utah.gov"
 
+# RUN apt-get update && apt-get install -y --no-install-recommends \
+#     wget \
+#     ca-certificates && \
+#     apt-get autoclean && rm -rf /var/lib/apt/lists/*
+
+# New
 RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
-    ca-certificates && \
+    ca-certificates \
+    git \
+    curl \
+    build-essential && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
+
+# Install Rust to Download Autocycler according to https://github.com/rrwick/Autocycler/wiki/Software-requirements-and-installation
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+ENV PATH="/root/.cargo/bin:${PATH}"
+
+# Build Autocycler from source with cargo using Rust
+RUN git clone --branch v${AUTOCYCLER_VER} --depth 1 https://github.com/rrwick/Autocycler.git && \
+    cd Autocycler && \
+    cargo build --release && \
+    cp target/release/autocycler /usr/local/bin/autocycler && \
+    cd / && rm -rf Autocycler
 
 # get conda environment file for extra tools
 RUN wget -q https://github.com/rrwick/Autocycler/archive/refs/tags/v${AUTOCYCLER_VER}.tar.gz && \
@@ -29,16 +49,16 @@ RUN wget -q https://github.com/rrwick/Autocycler/archive/refs/tags/v${AUTOCYCLER
     rm -rf /Autocycler-${AUTOCYCLER_VER} && \
     mkdir /data
 
-# install autocycler and helper scripts
-WORKDIR /usr/local/bin
+# # install autocycler and helper scripts
+# WORKDIR /usr/local/bin
 
-#Updated to autocycler-documentation
-RUN wget https://github.com/rrwick/Autocycler/releases/download/v${AUTOCYCLER_VER}/autocycler-linux-x86_64-musl-v${AUTOCYCLER_VER}.tar.gz && \
-    tar -xf autocycler-linux-x86_64-musl-v${AUTOCYCLER_VER}.tar.gz && \
-    rm autocycler-linux-x86_64-musl-v${AUTOCYCLER_VER}.tar.gz && \
-    wget https://github.com/rrwick/Autocycler/releases/download/v${AUTOCYCLER_VER}/autocycler-documentation-v${AUTOCYCLER_VER}.tar.gz && \
-    tar -xf autocycler-documentation-v${AUTOCYCLER_VER}.tar.gz && \
-    rm autocycler-documentation-v${AUTOCYCLER_VER}.tar.gz
+# #Updated to autocycler-documentation
+# RUN wget https://github.com/rrwick/Autocycler/releases/download/v${AUTOCYCLER_VER}/autocycler-linux-x86_64-musl-v${AUTOCYCLER_VER}.tar.gz && \
+#     tar -xf autocycler-linux-x86_64-musl-v${AUTOCYCLER_VER}.tar.gz && \
+#     rm autocycler-linux-x86_64-musl-v${AUTOCYCLER_VER}.tar.gz && \
+#     wget https://github.com/rrwick/Autocycler/releases/download/v${AUTOCYCLER_VER}/autocycler-documentation-v${AUTOCYCLER_VER}.tar.gz && \
+#     tar -xf autocycler-documentation-v${AUTOCYCLER_VER}.tar.gz && \
+#     rm autocycler-documentation-v${AUTOCYCLER_VER}.tar.gz
 
 ENV PATH="/opt/conda/envs/autocycler/bin/:/opt/conda/bin/:${PATH}" \
     LC_ALL=C.UTF-8
