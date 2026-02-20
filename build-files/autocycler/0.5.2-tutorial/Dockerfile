@@ -15,12 +15,6 @@ LABEL license="https://github.com/rrwick/Autocycler/blob/main/LICENSE"
 LABEL maintainer="Erin Young"
 LABEL maintainer.email="eriny@utah.gov"
 
-# RUN apt-get update && apt-get install -y --no-install-recommends \
-#     wget \
-#     ca-certificates && \
-#     apt-get autoclean && rm -rf /var/lib/apt/lists/*
-
-# New
 RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
     ca-certificates \
@@ -49,17 +43,6 @@ RUN wget -q https://github.com/rrwick/Autocycler/archive/refs/tags/v${AUTOCYCLER
     rm -rf /Autocycler-${AUTOCYCLER_VER} && \
     mkdir /data
 
-# # install autocycler and helper scripts
-# WORKDIR /usr/local/bin
-
-# #Updated to autocycler-documentation
-# RUN wget https://github.com/rrwick/Autocycler/releases/download/v${AUTOCYCLER_VER}/autocycler-linux-x86_64-musl-v${AUTOCYCLER_VER}.tar.gz && \
-#     tar -xf autocycler-linux-x86_64-musl-v${AUTOCYCLER_VER}.tar.gz && \
-#     rm autocycler-linux-x86_64-musl-v${AUTOCYCLER_VER}.tar.gz && \
-#     wget https://github.com/rrwick/Autocycler/releases/download/v${AUTOCYCLER_VER}/autocycler-documentation-v${AUTOCYCLER_VER}.tar.gz && \
-#     tar -xf autocycler-documentation-v${AUTOCYCLER_VER}.tar.gz && \
-#     rm autocycler-documentation-v${AUTOCYCLER_VER}.tar.gz
-
 ENV PATH="/opt/conda/envs/autocycler/bin/:/opt/conda/bin/:${PATH}" \
     LC_ALL=C.UTF-8
 
@@ -75,10 +58,16 @@ RUN autocycler --help && \
     autocycler --version
 
 COPY test.sh .
-    
-RUN wget -q https://github.com/rrwick/Autocycler/releases/download/v0.1.0/autocycler-demo-dataset.tar && \
+
+# Demo Dataset from Link Below
+RUN wget -q https://github.com/rrwick/Autocycler/wiki/Demo-dataset/autocycler-demo-dataset.tar && \
     tar -vxf autocycler-demo-dataset.tar && \
     bash test.sh && \
     head autocycler_out/consensus_assembly.fasta
+    
+# RUN wget -q https://github.com/rrwick/Autocycler/releases/download/v0.1.0/autocycler-demo-dataset.tar && \
+#     tar -vxf autocycler-demo-dataset.tar && \
+#     bash test.sh && \
+#     head autocycler_out/consensus_assembly.fasta
 
 RUN micromamba list -n autocycler
