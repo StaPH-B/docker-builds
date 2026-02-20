@@ -58,10 +58,18 @@ RUN autocycler --help && \
     autocycler --version
 
 COPY test.sh .
-    
+
+# # Uncomment to run full reads in the assembler
+# RUN wget -q https://github.com/rrwick/Autocycler/releases/download/v0.1.0/autocycler-demo-dataset.tar && \
+#     tar -vxf autocycler-demo-dataset.tar && \
+#     bash test.sh && \
+#     head autocycler_out/consensus_assembly.fasta
+
+# Runs test using demo dataset but with subsampled reads to improve efficiency
 RUN wget -q https://github.com/rrwick/Autocycler/releases/download/v0.1.0/autocycler-demo-dataset.tar && \
-    tar -vxf autocycler-demo-dataset.tar && \
-    bash test.sh && \
-    head autocycler_out/consensus_assembly.fasta
+    tar -xf autocycler-demo-dataset.tar && \
+    zcat reads.fastq.gz | head -n 20000 | gzip > reads_small.fastq.gz && \
+    mv reads_small.fastq.gz reads.fastq.gz && \
+    bash test.sh
 
 RUN micromamba list -n autocycler
