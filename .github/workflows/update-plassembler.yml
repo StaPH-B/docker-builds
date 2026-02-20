@@ -26,7 +26,7 @@ jobs:
       - name: set version
         id: latest_version
         run: |
-          version=1.8.1
+          version=1.8.2
           echo "version=$version" >> $GITHUB_OUTPUT 
           
           file=build-files/plassembler/$version/Dockerfile
