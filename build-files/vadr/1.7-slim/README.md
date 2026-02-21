@@ -23,7 +23,7 @@ Basic information on how to use this tool:
 
 ## Additional information
 
-**This image does not contain any VADR models by default**, as the files are large and result in a large/bloated docker image. This is meant to be the "slim" docker image for VADR v1.7 and is useful in bioinformatics workflows (especially those run in the cloud/HPC environments) as the overheard for downloading the docker image is lower than the docker images that do include the models.
+**This image does not contain any VADR models by default**, as the files are large and result in a large/bloated docker image. This is meant to be the "slim" docker image for VADR v1.7 and is useful in bioinformatics workflows (especially those run in the cloud/HPC environments) as the overhead for downloading the docker image is lower than the docker images that do include the models.
 
 VADR models should be downloaded separately and mounted/bound to the container at runtime. The default location for VADR models is `/opt/vadr/vadr-models/`.
 
