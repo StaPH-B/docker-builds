@@ -42,19 +42,16 @@ rm -v ${PANGOLIN_VER}.tar.gz && \
 mv -v pangolin-* pangolin
 
 # modify environment.yml to pin specific versions during install
-# pin specific versions of usher, scorpio, pangolin-data, constellations, and pulp
+# pin specific versions of usher, scorpio, pangolin-data, and constellations
 # create the conda environment using modified environment.yml
-# line to remove "defaults" channel to ensure that it isn't used due to Anaconda's recent ToS changes
-#TODOS
-# 1. see if we ran remove the line that removes defaults channel as it's no longer in source yml
-# 2. Add line to pin setuptools less than 82.0
+# PIP_NO_BUILD_ISOLATION=0 is needed to avoid pip install step from trying to create its own temporary environment with setuptools >82.0.0 which does not contain pkg_resources since it's deprecated; pkg_resources is needed for the pip install portion of the environment.yml. Conda needs pkg_resources (installed via setuptools <82.0.0) when installing stuff via pip.
 RUN sed -i "s|usher.*|usher=${USHER_VER}|" /pangolin/environment.yml && \
 sed -i "s|scorpio.git|scorpio.git@${SCORPIO_VER}|" /pangolin/environment.yml && \
 sed -i "s|pangolin-data.git|pangolin-data.git@${PANGOLIN_DATA_VER}|" /pangolin/environment.yml && \
 sed -i "s|constellations.git|constellations.git@${CONSTELLATIONS_VER}|" /pangolin/environment.yml && \
-sed -i "12 a\  - pulp=2.7.0" /pangolin/environment.yml && \
-sed -i "12 a\  - setuptools<81.0.0" /pangolin/environment.yml && \
+sed -i "12 a\  - setuptools<82.0" /pangolin/environment.yml && \
 cat /pangolin/environment.yml && \
+export PIP_NO_BUILD_ISOLATION=0 && \
 micromamba create -n pangolin -y -f /pangolin/environment.yml && \
 micromamba clean -a -y -f
 
