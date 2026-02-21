@@ -23,7 +23,7 @@ Basic information on how to use this tool:
 
 ## Additional information
 
-:warning: **This docker image DOES contain VADR models by default.** We originally intended for this to the the slim docker image, but a change in v1.7's installation script resulted in the models being included in the image. We have left the models in the image for now and have created a separate docker image `staphb/vadr:1.7-slim` which does not include the models. Please see the dockerfile & README here for the actual "slim" version of the vadr docker image: [`build-files/vadr/1.7-slim/`](./1.7-slim/).
+:warning: **This docker image DOES contain VADR models by default.** We originally intended for this to the the slim docker image, but a change in v1.7's installation script resulted in the models being included in the image. We have left the models in the image for now and have created a separate docker image `staphb/vadr:1.7-slim` which does not include the models. Please see the dockerfile & README here for the actual "slim" version of the vadr docker image: [`build-files/vadr/1.7-slim/`](../1.7-slim/).
 
 These model files are included:
 

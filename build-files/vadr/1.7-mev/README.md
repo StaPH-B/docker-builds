@@ -34,7 +34,7 @@ Most of the VADR model files are located at `/opt/vadr/vadr-models` in the conta
 
 Please note that VADR may need a large amount of RAM (>16 GB) for many MeV sequences, especially those that are highly divergent.
 
-:warning: **This docker image DOES contain other VADR models by default.** We originally intended for this to only contain the Measles VADR model files, but a change in v1.7's installation script resulted in the models being included in the image. We have left the models in the image for now and have created a separate docker image `staphb/vadr:1.7-slim` which does not include the models. Please see the dockerfile & README here for the actual "slim" version of the vadr docker image: [`build-files/vadr/1.7-slim/`](./1.7-slim/).
+:warning: **This docker image DOES contain other VADR models by default.** We originally intended for this to only contain the Measles VADR model files, but a change in v1.7's installation script resulted in the models being included in the image. We have left the models in the image for now and have created a separate docker image `staphb/vadr:1.7-slim` which does not include the models. Please see the dockerfile & README here for the actual "slim" version of the vadr docker image: [`build-files/vadr/1.7-slim/`](../1.7-slim/).
 
 These model files are included:
 
