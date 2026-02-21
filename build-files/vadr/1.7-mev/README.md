@@ -1,6 +1,6 @@
 # VADR container
 
-Main tool : [VADR](https://github.com/ncbi/vadr)
+Main tool : [VADR](https://github.com/NLM-DIR/vadr)
 
 Additional tools:
 
@@ -29,10 +29,20 @@ Included models:
 
 Most of the VADR model files are located at `/opt/vadr/vadr-models` in the container filesystem and this path is stored in the globally accessible bash variable `$VADRMODELDIR`. For most applications, there is no need to specify `v-annotate.pl --mdir /path/to/model/files` since `$VADRMODELDIR` is set in the environment.
 
-- Full documentation: https://github.com/ncbi/vadr/wiki
+- Full documentation: https://github.com/NLM-DIR/vadr/wiki
 - MeV documentation: https://github.com/greninger-lab/vadr-models-mev
 
 Please note that VADR may need a large amount of RAM (>16 GB) for many MeV sequences, especially those that are highly divergent.
+
+:warning: **This docker image DOES contain other VADR models by default.** We originally intended for this to only contain the Measles VADR model files, but a change in v1.7's installation script resulted in the models being included in the image. We have left the models in the image for now and have created a separate docker image `staphb/vadr:1.7-slim` which does not include the models. Please see the dockerfile & README here for the actual "slim" version of the vadr docker image: [`build-files/vadr/1.7-slim/`](./1.7-slim/).
+
+These model files are included:
+
+- Coronaviridae (coronaviruses including sars-cov-2) v1.3-3
+- Influenza v1.6.3-2
+- MPXV v1.4.2-1
+- RSV v1.5-2
+- SARS-CoV-2 v1.3-2
 
 ## Example Usage
 
