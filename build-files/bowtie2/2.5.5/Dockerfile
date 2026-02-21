@@ -21,7 +21,7 @@ LABEL maintainer.email="holly.halstead@doh.wa.gov"
 RUN apt-get update && apt-get install -y --no-install-recommends\
   perl \
   zlib1g \
-  libncurses5 \
+  libncurses6 \
   bzip2 \
   liblzma-dev \
   bedtools \
