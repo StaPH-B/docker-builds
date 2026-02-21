@@ -1,6 +1,6 @@
 # VADR container
 
-Main tool : [VADR](https://github.com/ncbi/vadr)
+Main tool : [VADR](https://github.com/NLM-DIR/vadr)
 
 Additional tools:
 
@@ -23,19 +23,11 @@ Basic information on how to use this tool:
 
 ## Additional information
 
-:warning: **This docker image DOES contain VADR models by default.** We originally intended for this to the the slim docker image, but a change in v1.7's installation script resulted in the models being included in the image. We have left the models in the image for now and have created a separate docker image `staphb/vadr:1.7-slim` which does not include the models. Please see the dockerfile & README here for the actual "slim" version of the vadr docker image: [`build-files/vadr/1.7-slim/`](../1.7-slim/).
+**This image does not contain any VADR models by default**, as the files are large and result in a large/bloated docker image. This is meant to be the "slim" docker image for VADR v1.7 and is useful in bioinformatics workflows (especially those run in the cloud/HPC environments) as the overhead for downloading the docker image is lower than the docker images that do include the models.
 
-These model files are included:
+VADR models should be downloaded separately and mounted/bound to the container at runtime. The default location for VADR models is `/opt/vadr/vadr-models/`.
 
-- Coronaviridae (coronaviruses including sars-cov-2) v1.3-3
-- Influenza v1.6.3-2
-- MPXV v1.4.2-1
-- RSV v1.5-2
-- SARS-CoV-2 v1.3-2
-
-The default location for VADR models is `/opt/vadr/vadr-models/`.
-
-A larger list of vadr models can be found in [VADR's documentation](https://github.com/ncbi/vadr/wiki/Available-VADR-model-files) for download and mounting/binding during runtime. An example for SARS-CoV-2 is below.
+A larger list of vadr models can be found in [VADR's documentation](https://github.com/NLM-DIR/vadr/wiki/Available-VADR-model-files) for download and mounting/binding during runtime. An example for SARS-CoV-2 is below.
 
 ## Example Usage
 
