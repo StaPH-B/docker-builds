@@ -1,10 +1,10 @@
 
 
-FROM ubuntu:jammy AS app
+FROM ubuntu:noble AS app
 
 ARG AUTOCYCLER_VER="0.6.0"
 
-LABEL base.image="ubuntu:jammy"
+LABEL base.image="ubuntu:noble"
 LABEL dockerfile.version="1"
 LABEL software="Autocycler"
 LABEL software.version="${AUTOCYCLER_VER}"
@@ -16,17 +16,16 @@ LABEL maintainer.email="raheelsyedahmed@gmail.com"
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
-    ca-certificates
+    ca-certificates && \
+    apt-get autoclean && rm -rf /var/lib/apt/lists/*
     
 
 WORKDIR /usr/local/bin
 
-# install autocycler and helper scripts
-RUN wget -q https://github.com/rrwick/Autocycler/releases/download/v${AUTOCYCLER_VER}/autocycler-linux-x86_64-musl-v${AUTOCYCLER_VER}.tar.gz
-
-RUN tar -vxf autocycler-linux-x86_64-musl-v${AUTOCYCLER_VER}.tar.gz
-
-RUN rm autocycler-linux-x86_64-musl-v${AUTOCYCLER_VER}.tar.gz
+#  autocycler installation step
+RUN wget -q https://github.com/rrwick/Autocycler/releases/download/v${AUTOCYCLER_VER}/autocycler-linux-x86_64-musl-v${AUTOCYCLER_VER}.tar.gz && \
+    tar -vxf autocycler-linux-x86_64-musl-v${AUTOCYCLER_VER}.tar.gz && \
+    rm autocycler-linux-x86_64-musl-v${AUTOCYCLER_VER}.tar.gz
 
 # Removed this section of installations since helper scripts are not available for this release.
 # See: https://github.com/rrwick/Autocycler/releases/tag/v0.6.0
