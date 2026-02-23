@@ -1,7 +1,7 @@
 # sourced from https://github.com/StaPH-B/docker-builds/blob/master/dockerfile-template/Dockerfile_mamba
 FROM mambaorg/micromamba:2.5.0-ubuntu24.04 AS app
 
-ARG SEQSENDER_VERSION=1.3.91
+ARG SEQSENDER_VERSION=1.3.93
 
 # build and run as root users since micromamba image has 'mambauser' set as the $USER
 USER root
