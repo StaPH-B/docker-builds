@@ -18,6 +18,7 @@ LABEL maintainer.email="fraser.combe@theiagen.com"
 # Install dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
+    curl \
     ca-certificates \
     pigz && \
     rm -rf /var/lib/apt/lists/* && apt-get autoclean
