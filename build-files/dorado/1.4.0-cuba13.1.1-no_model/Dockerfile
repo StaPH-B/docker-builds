@@ -1,8 +1,8 @@
-FROM nvidia/cuda:13.1.1-base-ubuntu24.04 AS app
+FROM nvidia/cuda:12.2.0-base-ubuntu22.04 AS app
 
 ARG DORADO_VER="1.4.0"
 
-LABEL base.image="nvidia/cuda:13.1.1-base-ubuntu24.04"
+LABEL base.image="nvidia/cuda:12.2.0-base-ubuntu22.04"
 LABEL dockerfile.version="1"
 LABEL software="Dorado"
 LABEL software.version="${DORADO_VER}"
