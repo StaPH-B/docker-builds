@@ -1,11 +1,10 @@
 # Use NVIDIA CUDA image as the base image
-# Cuda is version 13.1.1
-FROM nvidia/cuda:13.1.1-base-ubuntu24.04 AS app
+FROM nvidia/cuda:12.2.0-base-ubuntu24.04 AS app
 
 ARG DORADO_VER="1.4.0"
 
 # Metadata
-LABEL base.image="nvidia/cuda:13.1.1-base-ubuntu24.04"
+LABEL base.image="nvidia/cuda:12.2.0-base-ubuntu24.04"
 LABEL dockerfile.version="1"
 LABEL software="dorado ${DORADO_VER}"
 LABEL software.version="${DORADO_VER}"
