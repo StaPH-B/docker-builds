@@ -17,9 +17,10 @@ LABEL maintainer.email="eriny@utah.gov"
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
-    ca-certificates \
+    ca-certificates && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
+    
 # get conda environment file for extra tools
 RUN wget -q https://github.com/rrwick/Autocycler/archive/refs/tags/v${AUTOCYCLER_VER}.tar.gz && \
     tar -xvf v${AUTOCYCLER_VER}.tar.gz && \
