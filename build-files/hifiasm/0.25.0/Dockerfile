@@ -47,12 +47,16 @@ CMD ["hifiasm", "-h"]
 WORKDIR /data
 
 ## Test ##
+FROM app AS test
+
 RUN apt-get update && apt-get install -y wget
+
 # test hiifiasm
 RUN wget https://github.com/chhylp123/hifiasm/releases/download/v0.7/chr11-2M.fa.gz &&\
     hifiasm -o test -t4 -f0 chr11-2M.fa.gz 2> test.log &&\
     awk '/^S/{print ">"$2;print $3}' test.bp.p_ctg.gfa > test.p_ctg.fa &&\
     head -c 500 test.p_ctg.fa
-# test yak
+
+    # test yak
 RUN yak count -K1.5g -t4 -o test.yak chr11-2M.fa.gz 2> yak.log &&\
     tail -n 4 yak.log
