@@ -28,6 +28,8 @@ RUN wget https://github.com/lh3/yak/archive/refs/tags/v${YAK_VER}.tar.gz &&\
 ## App ##
 FROM ubuntu:noble AS app
 
+ARG HIFIASM_VER
+
 LABEL base.image="ubuntu:noble"
 LABEL dockerfile.version="1"
 LABEL software="hifiasm"
