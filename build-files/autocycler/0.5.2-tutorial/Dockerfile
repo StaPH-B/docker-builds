@@ -18,21 +18,7 @@ LABEL maintainer.email="eriny@utah.gov"
 RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
     ca-certificates \
-    git \
-    curl \
-    build-essential && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
-
-# Install Rust to Download Autocycler according to https://github.com/rrwick/Autocycler/wiki/Software-requirements-and-installation
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-ENV PATH="/root/.cargo/bin:${PATH}"
-
-# Build Autocycler from source with cargo using Rust
-RUN git clone --branch v${AUTOCYCLER_VER} --depth 1 https://github.com/rrwick/Autocycler.git && \
-    cd Autocycler && \
-    cargo build --release && \
-    cp target/release/autocycler /usr/local/bin/autocycler && \
-    cd / && rm -rf Autocycler
 
 # get conda environment file for extra tools
 RUN wget -q https://github.com/rrwick/Autocycler/archive/refs/tags/v${AUTOCYCLER_VER}.tar.gz && \
