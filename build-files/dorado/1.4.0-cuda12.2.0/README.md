@@ -14,7 +14,7 @@ Additional information:
 
 - Cuda drivers >= 12.2.0 are required for gpu support.
 - Use **"--gpus all"** flag to activate gpu support in docker. E.g.
-`docker run -it --gpus all staphb/dorado:1.4.0-cuda13.1.1-no_model bash`
+`docker run -it --gpus all staphb/dorado:1.4.0-cuda12.2.0-no_model bash`
 - support for Fast5 files and basecalling models for DNA R10.4.1 4kHz data, DNA R9.4.1, and RNA002 were removed after v0.9.6
 - Below is the list of basecalling models included in the Docker image:
 <details><summary>Click to see all models</summary>
