@@ -49,7 +49,7 @@ RUN git clone https://bitbucket.org/genomicepidemiology/plasmidfinder_db.git /da
     cd /database && python3 INSTALL.py kma_index
 
 # install plasmidfinder to specific tag/version; make /data
-RUN pip3 install --no-cache-dir PlasmidFinder==${PLASMIDFINDER_VER} && \
+RUN pip3 install --no-cache-dir --break-system-packages PlasmidFinder==${PLASMIDFINDER_VER} && \
     mkdir /data
 
 # set $PATH and locale settings for singularity compatibility
