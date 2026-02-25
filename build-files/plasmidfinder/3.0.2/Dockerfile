@@ -38,10 +38,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY --from=kma /usr/local/bin/*    /usr/local/bin/
     
 # download plasmindfinder database
-RUN wget https://bitbucket.org/genomicepidemiology/plasmidfinder_db/get/${DB_COMMIT_HASH}.tar.gz &&\
-    mkdir /database &&\
-    tar -C /database --strip-components=1 -xvf ${DB_COMMIT_HASH}.tar.gz &&\
-    rm ${DB_COMMIT_HASH}.tar.gz  &&\
+# RUN wget https://bitbucket.org/genomicepidemiology/plasmidfinder_db/get/${DB_COMMIT_HASH}.tar.gz &&\
+#     mkdir /database &&\
+#     tar -C /database --strip-components=1 -xvf ${DB_COMMIT_HASH}.tar.gz &&\
+#     rm ${DB_COMMIT_HASH}.tar.gz  &&\
+#     cd /database && python3 INSTALL.py kma_index
+
+# New Code line for plasmidfinder
+RUN git clone https://bitbucket.org/genomicepidemiology/plasmidfinder_db.git /database &&\
     cd /database && python3 INSTALL.py kma_index
 
 # install plasmidfinder to specific tag/version; make /data
