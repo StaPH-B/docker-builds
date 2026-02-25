@@ -44,8 +44,15 @@ COPY --from=kma /usr/local/bin/*    /usr/local/bin/
 #     rm ${DB_COMMIT_HASH}.tar.gz  &&\
 #     cd /database && python3 INSTALL.py kma_index
 
-# New Code line for plasmidfinder
-RUN git clone https://bitbucket.org/genomicepidemiology/plasmidfinder_db.git /database &&\
+# # New Code line for plasmidfinder
+# RUN git clone https://bitbucket.org/genomicepidemiology/plasmidfinder_db.git /database &&\
+#     cd /database && python3 INSTALL.py kma_index
+
+# Different fix
+RUN wget https://bitbucket.org/genomicepidemiology/plasmidfinder_db/get/2.2.0.tar.gz &&\
+    mkdir /database &&\
+    tar -C /database --strip-components=1 -xvf 2.2.0.tar.gz &&\
+    rm 2.2.0.tar.gz &&\
     cd /database && python3 INSTALL.py kma_index
 
 # install plasmidfinder to specific tag/version; make /data
