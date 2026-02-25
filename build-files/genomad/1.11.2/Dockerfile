@@ -51,7 +51,7 @@ RUN wget -q https://github.com/soedinglab/MMseqs2/releases/download/${MMSEQS2_VE
 
 # get genomad
 RUN wget -q https://github.com/apcamargo/genomad/archive/refs/tags/v${GENOMAD_VER}.tar.gz && \
-    python3 -m pip install --no-cache-dir v${GENOMAD_VER}.tar.gz && \
+    python3 -m pip install --no-cache-dir --break-system-packages v${GENOMAD_VER}.tar.gz && \
     rm -rf v${GENOMAD_VER}.tar.gz && \
     mkdir /data
 
