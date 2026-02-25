@@ -49,10 +49,10 @@ COPY --from=kma /usr/local/bin/*    /usr/local/bin/
 #     cd /database && python3 INSTALL.py kma_index
 
 # Different fix
-RUN wget https://bitbucket.org/genomicepidemiology/plasmidfinder_db/get/2.2.0.tar.gz &&\
+RUN wget "https://bitbucket.org/genomicepidemiology/plasmidfinder_db/get/49c24c1.tar.gz" &&\
     mkdir /database &&\
-    tar -C /database --strip-components=1 -xvf 2.2.0.tar.gz &&\
-    rm 2.2.0.tar.gz &&\
+    tar -C /database --strip-components=1 -xvf 49c24c1.tar.gz &&\
+    rm 49c24c1.tar.gz &&\
     cd /database && python3 INSTALL.py kma_index
 
 # install plasmidfinder to specific tag/version; make /data
