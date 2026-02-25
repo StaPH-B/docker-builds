@@ -7,7 +7,8 @@ ARG PLASMIDFINDER_VER="3.0.2"
 # If a commit does not have a verion, I think we should do what we do for the other *finder tools and use the latest commit
 # see here: https://bitbucket.org/genomicepidemiology/plasmidfinder_db/commits/4add282963c788762cdc3c6e91eb46c3d109f19b
 # commit date: 2025-09-10
-ARG DB_COMMIT_HASH="2.2.0"
+#ARG DB_COMMIT_HASH="2.2.0"
+# Feb 25, 2026 - using git clone in addition to the commit in order to download the database
 
 LABEL base.image="ubuntu:noble"
 LABEL dockerfile.version="1"
@@ -38,11 +39,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY --from=kma /usr/local/bin/*    /usr/local/bin/
     
 # download plasmindfinder database
-
-# # New Code line for plasmidfinder
-# RUN git clone https://bitbucket.org/genomicepidemiology/plasmidfinder_db.git /database &&\
-#     cd /database && python3 INSTALL.py kma_index
-
 RUN git clone https://bitbucket.org/genomicepidemiology/plasmidfinder_db.git /database &&\
     cd /database &&\
     git checkout 49c24c1 &&\
