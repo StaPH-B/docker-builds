@@ -55,7 +55,8 @@ RUN wget -q https://github.com/apcamargo/genomad/archive/refs/tags/v${GENOMAD_VE
     rm -rf v${GENOMAD_VER}.tar.gz && \
     mkdir /data
 
-ENV PATH="/mmseqs/bin:$PATH" LC_ALL=C 
+#ENV PATH="/mmseqs/bin:$PATH" LC_ALL=C 
+ENV PATH="/mmseqs/bin:$PATH" LC_ALL=C CUDA_VISIBLE_DEVICES=""
 
 # downloads latest database, which is version 1.7 and about ~1.6 G in size
 RUN genomad download-database .
