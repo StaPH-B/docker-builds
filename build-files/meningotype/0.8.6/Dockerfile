@@ -76,7 +76,7 @@ RUN wget -q https://github.com/tseemann/mlst/archive/v${MLST_VER}.tar.gz && \
 
 # get meningotype
 RUN wget -q https://github.com/MDU-PHL/meningotype/archive/refs/tags/v${MENINGOTYPE_VER}.tar.gz && \
-    pip install --no-cache-dir v${MENINGOTYPE_VER}.tar.gz && \
+    pip install --no-cache-dir --break-system-packages v${MENINGOTYPE_VER}.tar.gz && \
     rm -rf v${MENINGOTYPE_VER}.tar.gz && \
     meningotype -h
 
