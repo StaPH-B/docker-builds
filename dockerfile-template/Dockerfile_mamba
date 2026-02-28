@@ -18,7 +18,7 @@
 
 # 'FROM' defines the base docker image. This command has to come first in the file
 # The 'as' keyword lets you name the folowing stage. The production image uses everything to the 'app' stage.
-FROM mambaorg/micromamba:2.3.0-ubuntu22.04 AS app
+FROM mambaorg/micromamba:2.5.0-ubuntu22.04 AS app
 
 # List all software versions are ARGs near the top of the dockerfile
 # 'ARG' sets environment variables during the build stage
@@ -32,7 +32,7 @@ WORKDIR /
 
 # 'LABEL' instructions tag the image with metadata that might be important to the user
 
-LABEL base.image="mambaorg/micromamba:2.3.0-ubuntu22.04"
+LABEL base.image="mambaorg/micromamba:2.5.0-ubuntu22.04"
 LABEL dockerfile.version="1"
 LABEL software="SOFTWARENAME"
 LABEL software.version="${SOFTWARENAME_VERSION}"
