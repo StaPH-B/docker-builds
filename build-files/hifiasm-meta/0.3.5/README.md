@@ -9,7 +9,7 @@ Additional tools:
 
 Basic information on how to use this tool:
 - executable: `hifiasm_meta`
-- help: `hifiasm_meta`
+- help: `-h`
 - version: `--version`
 - description: A hifiasm fork for metagenome assembly using Hifi reads.
 
