@@ -49,11 +49,18 @@ RUN wget -q https://github.com/soedinglab/MMseqs2/releases/download/${MMSEQS2_VE
     tar -xvf mmseqs-linux-avx2.tar.gz && \
     rm mmseqs-linux-avx2.tar.gz
 
-# get genomad
+# get genomad add (with tensorflow cpu and tensorflow)
 RUN wget -q https://github.com/apcamargo/genomad/archive/refs/tags/v${GENOMAD_VER}.tar.gz && \
     python3 -m pip install --no-cache-dir --break-system-packages v${GENOMAD_VER}.tar.gz && \
+    python3 -m pip install --no-cache-dir --break-system-packages tensorflow-cpu && \
     rm -rf v${GENOMAD_VER}.tar.gz && \
     mkdir /data
+    
+# get genomad (without tensorflow CPU) (Intitially was throwing an error)
+# RUN wget -q https://github.com/apcamargo/genomad/archive/refs/tags/v${GENOMAD_VER}.tar.gz && \
+#     python3 -m pip install --no-cache-dir --break-system-packages v${GENOMAD_VER}.tar.gz && \
+#     rm -rf v${GENOMAD_VER}.tar.gz && \
+#     mkdir /data
 
 #ENV PATH="/mmseqs/bin:$PATH" LC_ALL=C 
 ENV PATH="/mmseqs/bin:$PATH" LC_ALL=C CUDA_VISIBLE_DEVICES=""
