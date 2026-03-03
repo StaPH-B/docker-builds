@@ -43,10 +43,10 @@ WORKDIR /data
 ## Test ##
 FROM app AS test
 
-RUN apt-get update && apt-get install -y wget
+RUN hifiasm_meta
 
-# test hifiasm-meta
-RUN wget https://zenodo.org/records/5908204/files/zymoD6331std-ecoli-ten-percent.fq.gz?download=1 -O test.fq.gz &&\
-    hifiasm_meta -t4 --force-rs -o asm test.fq.gz 2>asm.log
+# test hifiasm-meta (requires ~18GB of RAM.)
+# RUN apt-get update && apt-get install -y wget
+# RUN wget -q https://zenodo.org/records/5908204/files/zymoD6331std-ecoli-ten-percent.fq.gz?download=1 -O test.fq.gz &&\
+#     hifiasm_meta -t4 --force-rs -o asm test.fq.gz 2>asm.log
 
-# note: the test requires 18GB of RAM.
