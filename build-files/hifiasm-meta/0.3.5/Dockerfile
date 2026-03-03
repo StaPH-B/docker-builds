@@ -32,7 +32,7 @@ LABEL license="https://github.com/xfengnefx/hifiasm-meta/blob/meta/LICENSE"
 LABEL maintainer="Kutluhan Incekara"
 LABEL maintainer.email="kutluhan.incekara@ct.gov"
 
-COPY --from=builder /usr/local/bin/ /usr/local/bin/
+COPY --from=builder /usr/local/bin/hifiasm_meta /usr/local/bin/
 
 ENV LC_ALL=C
 
