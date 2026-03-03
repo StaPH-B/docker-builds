@@ -43,7 +43,7 @@ WORKDIR /data
 ## Test ##
 FROM app AS test
 
-RUN hifiasm_meta
+RUN hifiasm_meta -h
 
 # test hifiasm-meta (requires ~18GB of RAM.)
 # RUN apt-get update && apt-get install -y wget
