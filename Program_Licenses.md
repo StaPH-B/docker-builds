@@ -83,6 +83,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Gubbins | GNU GPLv2 | https://github.com/nickjcroucher/gubbins/blob/master/LICENSE |
 | HeatCluster | GPL-3.0 | https://github.com/DrB-S/heatcluster/blob/main/LICENSE ; https://github.com/erinyoung/heatcluster/blob/main/LICENSE |
 | Hifiasm | MIT | https://github.com/chhylp123/hifiasm/blob/master/LICENSE |
+| hifiasm-meta | MIT | https://github.com/xfengnefx/hifiasm-meta/blob/meta/LICENSE |
 | Hmmer | BSD-3 | http://eddylab.org/software/hmmer/Userguide.pdf |
 | HoCoRT | MIT | https://github.com/ignasrum/hocort?tab=MIT-1-ov-file#readme |
 | homopolish | GNU GPLv3 | https://github.com/ythuang0522/homopolish/blob/master/LICENSE |
