@@ -230,7 +230,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Trycycler | GNU GPLv3 | https://github.com/rrwick/Trycycler/blob/master/LICENSE |
 | Unicycler | GNU GPLv3 | https://github.com/rrwick/Unicycler/blob/master/LICENSE |
 | UShER | MIT | https://github.com/yatisht/usher/blob/master/LICENSE |
-| VADR | Public Domain | https://github.com/nawrockie/vadr/blob/master/LICENSE |
+| VADR | Public Domain | https://github.com/NLM-DIR/vadr/blob/master/LICENSE |
 | Verkko | Public Domain | https://github.com/marbl/verkko/blob/master/README.licenses |
 | VIBRANT | GNU GPLv3 | https://github.com/AnantharamanLab/VIBRANT/blob/master/LICENSE |
 | VIGOR4 | GNU GPLv3 | https://github.com/JCVenterInstitute/VIGOR4/blob/master/LICENSE.txt |
