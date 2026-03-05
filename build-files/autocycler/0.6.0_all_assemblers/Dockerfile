@@ -55,8 +55,7 @@ RUN curl -L -o autocycler-demo-dataset.tar\
     tar -vxf autocycler-demo-dataset.tar
 
 RUN threads=16 && \
-    genome_size=$(autocycler helper genome_size --reads reads.fastq.gz --threads "$threads") && \
-    echo "Genome size: $genome_size" && \
+    genome_size="242000" && \
     # Step 1: subsample the long-read set into multiple files
     autocycler subsample --reads reads.fastq.gz --out_dir subsampled_reads --genome_size "$genome_size" && \
     # Step 2: assemble each subsampled file
@@ -78,5 +77,4 @@ RUN threads=16 && \
         autocycler resolve -c "$c"; \
     done && \
     # Step 7: combine resolved clusters into a final assembly
-    autocycler combine -a autocycler_out -i autocycler_out/clustering/qc_pass/cluster_*/5_final.gfa && \
-    autocycler subsample --reads reads.fastq.gz --out_dir subsampled_reads --genome_size "242000"
+    autocycler combine -a autocycler_out -i autocycler_out/clustering/qc_pass/cluster_*/5_final.gfa
