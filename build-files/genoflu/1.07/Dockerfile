@@ -43,9 +43,29 @@ CMD [ "genoflu.py", "--help" ]
 # We use `test` for the test image
 FROM app AS test
 
+# install unzip for unzipping zip archive from NCBI
+RUN apt-get update && apt-get install -y --no-install-recommends unzip
+
+# install ncbi datasets tool (pre-compiled binary); place in $PATH
+RUN echo "Downloading and installing NCBI datasets tool... " && \
+wget -q https://ftp.ncbi.nlm.nih.gov/pub/datasets/command-line/LATEST/linux-amd64/datasets && \
+chmod +x datasets && \
+mv -v datasets /usr/local/bin
+
+# download test H5N1 genome, should be genotype D1.8 which was assigned in v1.07 of GenoFlu
+RUN datasets download genome accession GCA_055461155.1 && \
+unzip -o ncbi_dataset.zip && \
+rm -v ncbi_dataset.zip && \
+mv -v ncbi_dataset/data/GCA_055461155.1/GCA_055461155.1_ASM5546115v1_genomic.fna . && \
+genoflu.py -f GCA_055461155.1_ASM5546115v1_genomic.fna && \
+grep 'D1.8' *_stats.tsv
+
 # getting all the exectubles in bin
 RUN genoflu.py --help && genoflu.py --version
 
 # testing a genome
 RUN wget -q https://raw.githubusercontent.com/USDA-VS/GenoFLU/main/test/test-genome-A1.fasta && \
   genoflu.py -f test-genome-A1.fasta
+
+# for generating list of packages installed via micromamba in tool-specific README
+RUN micromamba list
