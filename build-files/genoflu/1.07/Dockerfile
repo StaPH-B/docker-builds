@@ -53,6 +53,7 @@ chmod +x datasets && \
 mv -v datasets /usr/local/bin
 
 # download test H5N1 genome, should be genotype D1.8 which was assigned in v1.07 of GenoFlu
+# https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_055461155.1/
 RUN datasets download genome accession GCA_055461155.1 && \
 unzip -o ncbi_dataset.zip && \
 rm -v ncbi_dataset.zip && \
