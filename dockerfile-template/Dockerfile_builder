@@ -1,129 +1,122 @@
-##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
-##### Thank you for using this Dockerfile template!                     #####
-##### This is an outline for the flow of building a docker image.       #####
-##### The docker image is built to the 'app' stage on dockerhub/quay.   #####
-##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
+##### ------------------------------------------------------------------ #####
+##### Hardened Multi-Stage Dockerfile Template                           #####
+#####                                                                    #####
+##### Features                                                           #####
+##### - Multi-stage build                                                #####
+##### - Minimal runtime image                                            #####
+##### - Non-root runtime user                                            #####
+##### - OCI metadata labels                                              #####
+##### - Checksum verification for downloads                              #####
+##### - Clean apt usage                                                  #####
+##### - Reproducible build support                                       #####
+##### ------------------------------------------------------------------ #####
 
-##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
-##### Sometimes tools required to build a tool are not needed to run    #####
-##### it. This means that images are larger than they need to be. A way #####
-##### to reduce the size of an image, is to have a stage prior to 'app' #####
-##### where these temporarily-required tools are installed. Then, only  #####
-##### relevant executables and files are copied in to the 'app' stage.  #####
-##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
+############################
+# Stage 1 — Builder
+############################
 
-##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
-##### Step 1. Set up the builder stage as the first stage.              #####
-##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
+FROM ubuntu:22.04 AS builder
 
-# Please note, all 'LABEL', 'ENV', and 'CMD' instructions will be lost
-# Also, files and executables are not carried over unless they are explicitly copied.
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-# 'FROM' defines where the Dockerfile is starting to build from. This command has to come first in the file
-FROM ubuntu:jammy as builder
+ENV DEBIAN_FRONTEND=noninteractive
 
-# 'RUN' executes code during the build
-# Install dependencies via apt-get or yum if using a centos or fedora base
-RUN apt-get update && apt-get install -y --no-install-recommends \
- dependency_a \
- dependency_b \
- dependency_c && \
- apt-get autoclean && rm -rf /var/lib/apt/lists/*
+# ----- Software versions -----
+ARG SOFTWARE_VER="1.0.0"
+ARG DEPENDENCY_VER="1.0.0"
 
-# Install and/or setup more things. Make /data for use as a working dir
-# For readability, limit one install per 'RUN' statement.
+# ----- Install build dependencies -----
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    wget \
+    curl \
+    build-essential \
+    git \
+ && rm -rf /var/lib/apt/lists/*
 
-# Example: install ncbi-blast+ 2.9.0 pre-compiled linux binaries
-ARG BLAST_VER=2.9.0
+WORKDIR /build
 
-RUN wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/${BLAST_VER}/ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz && \
- tar -xzf ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz && \
- rm ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz
+# ----- Example: Download and verify software -----
+# Replace with your software source
+# Always verify downloads with SHA256 when possible
 
-##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
-##### Step 2. Set up the base image in the 'app' stage.                 #####
-##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
+ARG SOFTWARE_SHA256="CHECKSUM_HERE"
 
-# 'FROM' defines where the Dockerfile is starting to build from. This command has to come first in the file
-# The 'as' keyword lets you name the folowing stage. The production image uses everything to the 'app' stage.
+RUN wget https://example.com/software-${SOFTWARE_VER}.tar.gz \
+ && echo "${SOFTWARE_SHA256} software-${SOFTWARE_VER}.tar.gz" | sha256sum -c - \
+ && tar -xzf software-${SOFTWARE_VER}.tar.gz \
+ && rm software-${SOFTWARE_VER}.tar.gz
 
-FROM ubuntu:jammy as app
+# ----- Build software if required -----
+# RUN cd software-${SOFTWARE_VER} && make
 
-# List all software versions are ARGs near the top of the dockerfile
-# 'ARG' sets environment variables during the build stage
-# ARG variables are ONLY available during image build, they do not persist in the final image
-ARG SOFTWARENAME_VER="1.0.0"
 
-# 'LABEL' instructions tag the image with metadata that might be important to the user
-LABEL base.image="ubuntu:jammy"
-LABEL dockerfile.version="1"
-LABEL software="SoftwareName"
-LABEL software.version="${SOFTWARENAME_VER}"
-LABEL description="This software does X, Y, AND Z!"
-LABEL website="https://github.com/StaPH-B/docker-builds"
-LABEL license="https://github.com/StaPH-B/docker-builds/blob/master/LICENSE"
-LABEL maintainer="FirstName LastName"
-LABEL maintainer.email="my.email@email.com"
+############################
+# Stage 2 — Runtime
+############################
 
-# copy in files and executables into app stage
-COPY --from=builder <source> <destination>
+FROM ubuntu:22.04 AS app
 
-# example copy in blast executable
-ARG BLAST_VER=2.9.0
-COPY --from=builder /bwa/bwa-${BWA_VER}/bwa /usr/local/bin
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-# 'RUN' executes code during the build
-# Install dependencies via apt-get or yum if using a centos or fedora base
-# Please ensure ALL dependencies for running the tool make it into this stage
-RUN apt-get update && apt-get install -y --no-install-recommends \
- dependency_a \
- dependency_b \
- dependency_c && \
- apt-get autoclean && rm -rf /var/lib/apt/lists/*
+ENV DEBIAN_FRONTEND=noninteractive
 
-# Install and/or setup more things. Make /data for use as a working dir
-# For readability, limit one install per 'RUN' statement.
+# ----- Software version ARGs -----
+ARG SOFTWARE_VER="1.0.0"
 
-# 'ENV' instructions set environment variables that persist from the build into the resulting image
-# Use for e.g. $PATH and locale settings for compatibility with Singularity
-ENV PATH="/software-${SOFTWARENAME_VER}/bin:$PATH" \
- LC_ALL=C
+# ----- OCI image metadata -----
+LABEL org.opencontainers.image.title="SoftwareName" \
+      org.opencontainers.image.description="Generic containerized tool" \
+      org.opencontainers.image.version="${SOFTWARE_VER}" \
+      org.opencontainers.image.source="https://github.com/your-org/your-repo" \
+      org.opencontainers.image.licenses="MIT" \
+      org.opencontainers.image.authors="Maintainer Name"
 
-# 'CMD' instructions set a default command when the container is run. This is typically 'tool --help.'
-CMD [ "tool", "--help" ]
+# ----- Install runtime dependencies -----
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    dependency_a \
+    dependency_b \
+ && rm -rf /var/lib/apt/lists/*
 
-# 'WORKDIR' sets working directory
+# ----- Create non-root user -----
+RUN useradd --system --create-home --uid 10001 appuser
+
+# ----- Copy compiled binaries from builder -----
+COPY --from=builder /build/software-${SOFTWARE_VER}/bin/tool /usr/local/bin/
+
+# ----- Set executable permissions -----
+RUN chmod 0755 /usr/local/bin/tool
+
+# ----- Environment variables -----
+ENV PATH="/usr/local/bin:$PATH" \
+    LC_ALL=C
+
+# ----- Working directory -----
 WORKDIR /data
 
-##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
-##### Step 3. Set up the testing stage.                                 #####
-##### The docker image is built to the 'test' stage before merging, but #####
-##### the test stage (or any stage after 'app') will be lost.           #####
-##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
+# ----- Switch to non-root user -----
+USER appuser
 
-# A second FROM insruction creates a new stage
-# The test stage must be downstream from 'app'
-FROM app as test
+# ----- Default command -----
+CMD ["tool", "--help"]
 
-# set working directory so that all test inputs & outputs are kept in /test
+
+############################
+# Stage 3 — Testing
+############################
+
+FROM app AS test
+
 WORKDIR /test
 
-# print help and version info; check dependencies (not all software has these options available)
-# Mostly this ensures the tool of choice is in path and is executable
-RUN softwarename --help && \
- softwarename --check && \
- softwarename --version
+# ----- Basic runtime checks -----
+RUN tool --help
+RUN tool --version
 
-# Demonstrate that the program is successfully installed - which is highly dependant on what the tool is.
-
-# Run the program's internal tests if available, for example with SPAdes:
-RUN spades.py --test
-
-# Option 1: write your own tests in a bash script in the same directory as your Dockerfile and copy them:
-COPY my_tests.sh .
-RUN bash my_tests.sh
-
-# Option 2: write below common usage cases, for example with tb-profiler:
-RUN wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR166/009/ERR1664619/ERR1664619_1.fastq.gz && \
-    wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR166/009/ERR1664619/ERR1664619_2.fastq.gz && \
-    tb-profiler profile -1 ERR1664619_1.fastq.gz -2 ERR1664619_2.fastq.gz -t 4 -p ERR1664619 --txt
+# ----- Example test dataset -----
+# Replace with tool-specific tests
+# RUN wget https://example.com/testdata.fastq
+# RUN tool testdata.fastq > output.txt
