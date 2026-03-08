@@ -1,4 +1,4 @@
-ARG MENINGOTYPE_VER="0.9.0"
+ARG MENINGOTYPE_VER="0.8.6"
 ARG ISPCR_VER="33"
 ARG MLST_VER="2.23.0"
 ARG ANY2FASTA_VER="0.4.2"
@@ -57,6 +57,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     procps \
     python3 \
     python3-pip && \
+    git && \        # ← added this March 8, 2026
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /usr/local/bin/* /usr/local/bin/
