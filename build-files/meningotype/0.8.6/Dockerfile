@@ -1,4 +1,4 @@
-ARG MENINGOTYPE_VER="0.8.6"
+ARG MENINGOTYPE_VER="0.8.6b"
 ARG ISPCR_VER="33"
 ARG MLST_VER="2.23.0"
 ARG ANY2FASTA_VER="0.4.2"
@@ -82,7 +82,7 @@ RUN wget -q https://github.com/tseemann/mlst/archive/v${MLST_VER}.tar.gz && \
 #     meningotype -h
 
 RUN pip install --no-cache-dir --break-system-packages \
-    git+https://github.com/MDU-PHL/meningotype.git@2b0dc89
+    git+https://github.com/MDU-PHL/meningotype.git@35c4a5bff24fbc3625f92ce575d7c2e99ecd4378
 
 # set PATH and perl local settings
 ENV PATH="${PATH}:/mlst-${MLST_VER}/bin:" \
