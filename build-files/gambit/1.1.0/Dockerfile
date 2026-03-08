@@ -1,12 +1,10 @@
 # Software installation, no database files
-#FROM mambaorg/micromamba:0.27.0 as app_base
 FROM mambaorg/micromamba:2.5.0 AS app_base
 
 ARG GAMBIT_SOFTWARE_VERSION="1.1.0"
 ARG GAMBIT_GIT_TAG=v${GAMBIT_SOFTWARE_VERSION}
 ARG GAMBIT_SRC_URL=https://github.com/jlumpe/gambit/archive/refs/tags/${GAMBIT_GIT_TAG}.tar.gz
 
-#LABEL base.image="mambaorg/micromamba:0.27.0"
 LABEL base.image="mambaorg/micromamba:2.5.0"
 LABEL dockerfile.version="1"
 LABEL software="GAMBIT"
@@ -58,7 +56,7 @@ ADD --chown=$MAMBA_USER:$MAMBA_USER $GAMBIT_DB_SIGNATURES_URL $GAMBIT_DB_PATH/
 
 
 # Run test
-FROM app as test
+FROM app AS test
 
 COPY test.sh .
 RUN bash test.sh
