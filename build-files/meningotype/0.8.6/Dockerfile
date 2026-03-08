@@ -81,8 +81,21 @@ RUN wget -q https://github.com/tseemann/mlst/archive/v${MLST_VER}.tar.gz && \
 #     rm -rf v${MENINGOTYPE_VER}.tar.gz && \
 #     meningotype -h
 
+# Attempted patch with direct hard code commit
+# RUN pip install --no-cache-dir --break-system-packages \
+#     git+https://github.com/MDU-PHL/meningotype.git@35c4a5bff24fbc3625f92ce575d7c2e99ecd4378
+
+# Attempted hard code and HTTP bug fix
 RUN pip install --no-cache-dir --break-system-packages \
-    git+https://github.com/MDU-PHL/meningotype.git@35c4a5bff24fbc3625f92ce575d7c2e99ecd4378
+    git+https://github.com/MDU-PHL/meningotype.git@35c4a5b && \
+    sed -i 's/import urllib/import urllib\nimport urllib.request/' \
+        /usr/local/lib/python3.12/dist-packages/meningotype/meningotype.py && \
+    sed -i 's/urllib\.urlretrieve/urllib.request.urlretrieve/g' \
+        /usr/local/lib/python3.12/dist-packages/meningotype/meningotype.py && \
+    sed -i 's/from urllib.error import HTTPError/from urllib.error import HTTPError/' \
+        /usr/local/lib/python3.12/dist-packages/meningotype/meningotype.py
+
+RUN meningotype --updatedb
 
 # set PATH and perl local settings
 ENV PATH="${PATH}:/mlst-${MLST_VER}/bin:" \
