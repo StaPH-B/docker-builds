@@ -45,7 +45,7 @@ RUN curl -L https://github.com/lh3/minimap2/releases/download/v${MINIMAP2_VER}/m
     tar -jxvf - --no-same-owner
 
 # install kaptive
-RUN pip install --no-cache-dir kaptive==${KAPTIVE_VER}
+RUN pip install --no-cache-dir --break-system-packages kaptive==${KAPTIVE_VER}
 
 # move databases
 RUN wget -q https://github.com/klebgenomics/Kaptive/releases/download/v${KAPTIVE_VER}/kaptive-${KAPTIVE_VER}.tar.gz && \
