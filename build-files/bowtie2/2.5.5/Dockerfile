@@ -1,8 +1,8 @@
 # FROM defines the base docker image to start from. This command has to come first in the file
 
-FROM staphb/samtools:1.23 as samtools
+FROM staphb/samtools:1.23 AS samtools
 
-FROM ubuntu:noble as app
+FROM ubuntu:noble AS app
 
 ARG BOWTIE2VER=2.5.5
 
@@ -41,12 +41,14 @@ RUN wget -q https://github.com/BenLangmead/bowtie2/releases/download/v${BOWTIE2V
 
 ENV PATH="/bowtie2-${BOWTIE2VER}-linux-x86_64:$PATH"
 
-CMD bowtie2 -h
+# Shell format
+# CMD bowtie2 -h
+CMD ["bowtie2", "-h"]
 
 # set working directory
 WORKDIR /data
 
-FROM app as test
+FROM app AS test
 
 RUN bowtie2 -h
 
