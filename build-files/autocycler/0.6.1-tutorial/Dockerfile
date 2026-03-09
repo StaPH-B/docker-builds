@@ -15,31 +15,31 @@ LABEL license="https://github.com/rrwick/Autocycler/blob/main/LICENSE"
 LABEL maintainer="Raheel Ahmed"
 LABEL maintainer.email="raheelsyedahmed@gmail.com"
 
-COPY environment.yml /tmp/environment.yml
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    wget ca-certificates && \
+    apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-RUN micromamba install -y --name base -f /tmp/environment.yml && \
+RUN wget https://github.com/rrwick/Autocycler/archive/refs/tags/v${AUTOCYCLER_VER}.tar.gz && \
+    tar -xvf v${AUTOCYCLER_VER}.tar.gz && \
+    micromamba install -y --name base -f /Autocycler-${AUTOCYCLER_VER}/pipelines/Conda_environment_file_by_Ryan_Wick/environment.yml && \
     micromamba clean -a -f -y && \
+    rm -rf v${AUTOCYCLER_VER}.tar.gz /Autocycler-${AUTOCYCLER_VER} && \
     mkdir /data
+
+WORKDIR /opt/conda/bin
+
+# Downloading autocycler and moving it to appropriate env path.
+RUN wget https://github.com/rrwick/Autocycler/releases/download/v${AUTOCYCLER_VER}/autocycler-linux-x86_64-musl-v${AUTOCYCLER_VER}.tar.gz && \
+    tar -xzf autocycler-linux-x86_64-musl-v${AUTOCYCLER_VER}.tar.gz && \
+    rm autocycler-linux-x86_64-musl-v${AUTOCYCLER_VER}.tar.gz
 
 # Put env first on PATH
 ENV PATH="/opt/conda/bin/:${PATH}" \
  LC_ALL=C.UTF-8
 
-# Downloading autocycler and moving it to appropriate env path.
-WORKDIR /opt/conda/bin
-RUN curl -L -o autocycler-linux-x86_64-musl-v${AUTOCYCLER_VER}.tar.gz \
-    https://github.com/rrwick/Autocycler/releases/download/v${AUTOCYCLER_VER}/autocycler-linux-x86_64-musl-v${AUTOCYCLER_VER}.tar.gz && \
-    tar -xzf autocycler-linux-x86_64-musl-v${AUTOCYCLER_VER}.tar.gz && \
-    rm autocycler-linux-x86_64-musl-v${AUTOCYCLER_VER}.tar.gz
-
-# Testing to see if path is designated properly.
-RUN autocycler --help && autocycler --version
-
-# Ensure long read assemblers and helper software are installed by micromamba.
-RUN micromamba list | grep -E "canu|curl|flye|metamdbg|miniasm|minimap2|minipolish|myloasm|necat|nextdenovo|nextpolish|plassembler|racon|raven-assembler|wtdbg"
+CMD ["autocycler", "--help"]
 
 WORKDIR /data
-
 
 # Test stage
 FROM app AS test
