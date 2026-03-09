@@ -48,11 +48,14 @@ RUN curl -L https://github.com/lh3/minimap2/releases/download/v${MINIMAP2_VER}/m
 RUN pip install --no-cache-dir --break-system-packages kaptive==${KAPTIVE_VER}
 
 # move databases
-RUN wget -q https://github.com/klebgenomics/Kaptive/releases/download/v${KAPTIVE_VER}/kaptive-${KAPTIVE_VER}.tar.gz && \
+RUN wget -q https://github.com/klebgenomics/Kaptive/archive/refs/tags/v${KAPTIVE_VER}.tar.gz && \
     tar -vxf kaptive-${KAPTIVE_VER}.tar.gz --no-same-owner && \
     mkdir -p /data /kaptive/ && \
     mv /kaptive-${KAPTIVE_VER}/reference_database /kaptive/reference_database && \
     rm -rf kaptive-${KAPTIVE_VER}.tar.gz kaptive-${KAPTIVE_VER}
+    
+# NOTE: in v3.2.1+, reference_database moved to src/kaptive/data/reference_database. Use line below.
+# mv /Kaptive-${KAPTIVE_VER}/src/kaptive/data/reference_database /kaptive/reference_database
 
 # download Vibrio parahemolyticus database; mv gbk files to where the other references are
 RUN wget -q https://github.com/aldertzomer/vibrio_parahaemolyticus_genomoserotyping/archive/refs/tags/${VP_GENOMOSEROTYPING_VER}.tar.gz && \
