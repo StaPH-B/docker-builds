@@ -77,7 +77,7 @@ RUN artic minion --normalise 200 --threads 4 --model r941_prom_sup_g5014 --read-
     ls test1*
 
 # running artic as it pulls schemes from github
-RUN artic minion --normalise 200 --threads 4 --model r941_prom_sup_g5014 --read-file SRR22452250_1_filtered.fastq --scheme-name sars-cov-2  --scheme-version  V5.3.2 test2 && \
+RUN artic minion --normalise 200 --threads 4 --model r941_prom_sup_g5014 --read-file SRR22452250_1_filtered.fastq --scheme-name sars-cov-2  --scheme-version  V5.3.2 --scheme-length 400 test2 && \
     ls test2*
 
 RUN echo "included models" && \
