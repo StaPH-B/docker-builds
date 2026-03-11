@@ -50,8 +50,7 @@ ENV PATH="${PATH}" \
     LC_ALL=C.UTF-8 \
     CGE_BLASTN=/usr/bin/blastn \
     CGE_PLASMIDFINDER_DB=/plasmidfinder_db \
-    PLASMID_DB=/plasmidfinder_db \
-    HOME=/root
+    PLASMID_DB=/plasmidfinder_db
 
 # set final working directory for production docker image (app layer only)
 WORKDIR /data
