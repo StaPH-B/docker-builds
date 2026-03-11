@@ -82,7 +82,7 @@ COPY --from=builder /usr/local/bin/* /usr/local/bin/
 # install minipolish
 RUN wget https://github.com/rrwick/Minipolish/archive/refs/tags/v${MINIPOLISH_VER}.tar.gz && \
   tar -vxf v${MINIPOLISH_VER}.tar.gz && \
-  pip install v${MINIPOLISH_VER}.tar.gz && \
+  pip install --break-system-packages v${MINIPOLISH_VER}.tar.gz && \
   rm v${MINIPOLISH_VER}.tar.gz 
 # in theory, this can be tested with python3 -m pytest
 
