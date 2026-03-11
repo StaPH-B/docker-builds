@@ -33,7 +33,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY --from=kma /usr/local/bin/*    /usr/local/bin/
     
 # download plasmindfinder database
-RUN git clone -b plasmidfinder-${PLASMIDFINDER_VER} --depth 1 https://git@bitbucket.org/genomicepidemiology/plasmidfinder_db.git &&\
+RUN git clone -b plasmidfinder-${PLASMIDFINDER_VER} --depth 1 https://bitbucket.org/genomicepidemiology/plasmidfinder_db.git &&\
     cd plasmidfinder_db &&\
     python INSTALL.py &&\
     rm -rf .git
