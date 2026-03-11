@@ -34,4 +34,3 @@ seqkit fa2fq <file name(s)>
 
 
 ```
-
