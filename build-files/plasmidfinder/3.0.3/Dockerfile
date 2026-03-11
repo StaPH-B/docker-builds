@@ -2,6 +2,9 @@ FROM staphb/kma:1.6.4 AS kma
 
 FROM ubuntu:noble AS app
 
+# set env to avoid /.gitconfig permission error on AWS
+ENV HOME=/root
+
 ARG PLASMIDFINDER_VER="3.0.3"
 
 LABEL base.image="ubuntu:noble"
@@ -47,7 +50,8 @@ ENV PATH="${PATH}" \
     LC_ALL=C.UTF-8 \
     CGE_BLASTN=/usr/bin/blastn \
     CGE_PLASMIDFINDER_DB=/plasmidfinder_db \
-    PLASMID_DB=/plasmidfinder_db
+    PLASMID_DB=/plasmidfinder_db \
+    HOME=/root
 
 # set final working directory for production docker image (app layer only)
 WORKDIR /data
