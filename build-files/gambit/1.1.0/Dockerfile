@@ -51,23 +51,11 @@ ARG GAMBIT_DB_BASE_URL=https://storage.googleapis.com/jlumpe-gambit/public/datab
 ARG GAMBIT_DB_GENOMES_URL=$GAMBIT_DB_BASE_URL/gambit-refseq-curated-1.0.gdb
 ARG GAMBIT_DB_SIGNATURES_URL=$GAMBIT_DB_BASE_URL/gambit-refseq-curated-1.0.gs
 
-LABEL base.image="mambaorg/micromamba:2.5.0"
-LABEL dockerfile.version="1"
-LABEL software="GAMBIT"
-LABEL software.version=${GAMBIT_SOFTWARE_VERSION}
-LABEL description="Rapid genomic-distance comparison for taxonomic identification of microbial pathogens"
-LABEL website="https://github.com/jlumpe/gambit"
-LABEL license="https://github.com/jlumpe/gambit/blob/master/LICENSE"
-LABEL maintainer1="Kevin Libuit"
-LABEL maintainer.email1="kevin.libuit@theiagen.com"
-LABEL maintainer2="Michelle Scribner"
-LABEL maintainer.email2="michelle.scribner@theiagen.com"
-LABEL maintainer3="Jared Lumpe"
-LABEL maintainer.email3="jared@jaredlumpe.com"
-
 ADD --chown=$MAMBA_USER:$MAMBA_USER $GAMBIT_DB_GENOMES_URL $GAMBIT_DB_PATH/
 ADD --chown=$MAMBA_USER:$MAMBA_USER $GAMBIT_DB_SIGNATURES_URL $GAMBIT_DB_PATH/
 
+WORKDIR /data
+CMD ["gambit", "--help"]
 
 # Run test
 FROM app AS test
