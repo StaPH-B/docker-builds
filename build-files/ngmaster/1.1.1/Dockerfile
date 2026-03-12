@@ -1,4 +1,4 @@
-FROM mambaorg/micromamba:2.5.0 as app
+FROM mambaorg/micromamba:2.5.0 AS app
 
 # build and run as root users since micromamba image has 'mambauser' set as the $USER
 USER root
@@ -49,7 +49,7 @@ ENV PATH="/opt/conda/bin:${PATH}" \
 WORKDIR /data
 
 # test layer
-FROM app as test
+FROM app AS test
 
 # so that mamba/conda env is active when running below commands
 ENV ENV_NAME="base"
