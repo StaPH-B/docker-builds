@@ -1,5 +1,5 @@
-FROM node:13.13.0
-LABEL base.image="node:13.13.0-slim"
+FROM node:20.19.0
+LABEL base.image="node:20.19.0-slim"
 LABEL version="1"
 LABEL software="auspice"
 LABEL software.version="v2.68.0"
