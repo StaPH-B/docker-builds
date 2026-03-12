@@ -9,8 +9,14 @@ LABEL software.version="${RASUSA_VER}}"
 LABEL description="Randomly subsample sequencing reads to a specified coverage."
 LABEL website="https://github.com/mbhall88/rasusa"
 LABEL license="https://github.com/mbhall88/rasusa/blob/master/LICENSE"
-LABEL maintainer="Raheel Ahmed"
-LABEL maintainer.email="raheelsyedahmed@gmail.com"
+LABEL maintainer="Jake Garfin"
+LABEL maintainer.email="jake.garfin@state.mn.us"
+LABEL maintainer2="Curtis Kapsak"
+LABEL maintainer2.email="kapsakcj@gmail.com"
+LABEL maintainer3="Erin Young"
+LABEL maintainer3.email="eriny@utah.gov"
+LABEL maintainer4="Raheel Ahmed"
+LABEL maintainer4.email="raheelsyedahmed@gmail.com"
 
 WORKDIR /opt
 
