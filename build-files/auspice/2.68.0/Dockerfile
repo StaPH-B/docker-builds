@@ -26,8 +26,8 @@ RUN curl -L https://github.com/nextstrain/auspice/archive/v${AUSPICE_VERSION}.ta
 #set up global install to be available for non-root user "node"
 ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
 ENV PATH=$PATH:/home/node/.npm-global/bin
-RUN npm -g config set user node &&\
-  npm install --global /home/node/auspice &&\
+
+RUN npm install --global /home/node/auspice &&\
   auspice build
 
 #expose the auspice port to all connections
