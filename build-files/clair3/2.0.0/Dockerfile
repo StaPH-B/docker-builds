@@ -102,8 +102,10 @@ LABEL software.version="${CLAIR3_VER}"
 LABEL description="A deep learning-based germline small variant caller for long-reads."
 LABEL website="https://github.com/HKU-BAL/Clair3"
 LABEL license="https://github.com/HKU-BAL/Clair3/blob/master/LICENSE.md"
-LABEL maintainer="Raheel Ahmed"
-LABEL maintainer.email="raheelsyedahmed@gmail.com"
+LABEL maintainer="Kutluhan Incekara"
+LABEL maintainer.email="kutluhan.incekara@ct.gov"
+LABEL maintainer2="Raheel Ahmed"
+LABEL maintainer2.email="raheelsyedahmed@gmail.com"
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
