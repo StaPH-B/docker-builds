@@ -1,4 +1,6 @@
 FROM node:20.19.0
+ARG AUSPICE_VERSION=2.68.0
+
 LABEL base.image="node:20.19.0-slim"
 LABEL version="1"
 LABEL software="auspice"
@@ -8,8 +10,6 @@ LABEL website="https://github.com/nextstrain/auspice"
 LABEL license="https://github.com/nextstrain/auspice/blob/master/LICENSE.txt"
 LABEL maintainer="Kelsey Florek"
 LABEL maintainer.email="kelsey.florek@slh.wisc.edu"
-
-ARG AUSPICE_VERSION=2.68.0
 
 #get curl so we can download auspice
 RUN apt-get update && apt-get install -y curl
