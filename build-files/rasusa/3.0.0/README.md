@@ -19,6 +19,10 @@ Note that rasusa requires certain parameters:
     * Can be compressed via gzip
     * If 2 inputs are passed to `reads`, it is assumed they are paired-end reads.
 
+Note:
+Version 3.0.0 introduces a major change from versions < 3.0.0.
+* deps: Subsampling results for a fixed seed will differ from versions < 3.0.0. This is caused by internal algorithmic changes in the rand crate (0.8.5 -> 0.10.0) and requires a major version bump.
+
 ## Example Usage
 
 ```bash
