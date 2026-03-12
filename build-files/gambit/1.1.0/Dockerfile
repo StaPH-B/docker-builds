@@ -64,6 +64,12 @@ LABEL maintainer2.email="michelle.scribner@theiagen.com"
 LABEL maintainer3="Jared Lumpe"
 LABEL maintainer3.email="jared@jaredlumpe.com"
 
+# Install ps (procps) required for Nextflow workflows
+USER root
+RUN apt-get update && apt-get install -y --no-install-recommends procps && \
+    rm -rf /var/lib/apt/lists/*
+USER $MAMBA_USER
+
 ADD --chown=$MAMBA_USER:$MAMBA_USER $GAMBIT_DB_GENOMES_URL $GAMBIT_DB_PATH/
 ADD --chown=$MAMBA_USER:$MAMBA_USER $GAMBIT_DB_SIGNATURES_URL $GAMBIT_DB_PATH/
 
