@@ -6,6 +6,7 @@ ARG GAMBIT_DB_SIGNATURES_URL=$GAMBIT_DB_BASE_URL/gambit-refseq-curated-1.0.gs
 # Software installation, no database files
 FROM mambaorg/micromamba:2.5.0 AS app_base
 
+ARG GAMBIT_SRC_URL=https://github.com/jlumpe/gambit/archive/refs/tags/${GAMBIT_GIT_TAG}.tar.gz
 ARG GAMBIT_SOFTWARE_VERSION
 ARG GAMBIT_DB_BASE_URL
 ARG GAMBIT_DB_GENOMES_URL
