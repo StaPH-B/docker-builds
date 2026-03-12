@@ -1,4 +1,4 @@
-# ngmaster 1.0.0 container
+# ngmaster 1.1.1 container
 
 Main tool : [ngmaster](https://github.com/MDU-PHL/ngmaster)
 
@@ -6,10 +6,10 @@ In silico multi-antigen sequence typing for Neisseria gonorrhoeae (NG-MAST).
 
 Additional tools:
 
-- any2fasta 0.4.2
+- any2fasta 0.8.1
 - mlst 2.23.0
-- python 3.9.0
-- biopython 1.80
+- python >= 3.9.0 
+- biopython 1.86
 - perl 5.32.1
 - bioperl 1.7.9
 
