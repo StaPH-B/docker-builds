@@ -1,17 +1,19 @@
-ARG GAMBIT_SOFTWARE_VERSION="1.1.0"
 ARG GAMBIT_DB_BASE_URL=https://storage.googleapis.com/jlumpe-gambit/public/databases/refseq-curated/1.0
 ARG GAMBIT_DB_GENOMES_URL=$GAMBIT_DB_BASE_URL/gambit-refseq-curated-1.0.gdb
 ARG GAMBIT_DB_SIGNATURES_URL=$GAMBIT_DB_BASE_URL/gambit-refseq-curated-1.0.gs
+ARG GAMBIT_SOFTWARE_VERSION="1.1.0"
+ARG GAMBIT_GIT_TAG=v${GAMBIT_SOFTWARE_VERSION}
 ARG GAMBIT_SRC_URL=https://github.com/jlumpe/gambit/archive/refs/tags/${GAMBIT_GIT_TAG}.tar.gz
 
 # Software installation, no database files
 FROM mambaorg/micromamba:2.5.0 AS app_base
 
-ARG GAMBIT_SRC_URL
-ARG GAMBIT_SOFTWARE_VERSION
 ARG GAMBIT_DB_BASE_URL
 ARG GAMBIT_DB_GENOMES_URL
 ARG GAMBIT_DB_SIGNATURES_URL
+ARG GAMBIT_SOFTWARE_VERSION
+ARG GAMBIT_GIT_TAG
+ARG GAMBIT_SRC_URL
 
 # Environment
 ENV GAMBIT_DB_PATH=/gambit-db
@@ -41,11 +43,12 @@ ENV PATH="/opt/conda/bin:${PATH}"
 # With database files added
 FROM app_base AS app
 
-ARG GAMBIT_SRC_URL
-ARG GAMBIT_SOFTWARE_VERSION
 ARG GAMBIT_DB_BASE_URL
 ARG GAMBIT_DB_GENOMES_URL
 ARG GAMBIT_DB_SIGNATURES_URL
+ARG GAMBIT_SOFTWARE_VERSION
+ARG GAMBIT_GIT_TAG
+ARG GAMBIT_SRC_URL
 
 LABEL base.image="mambaorg/micromamba:2.5.0"
 LABEL dockerfile.version="1"
