@@ -107,4 +107,10 @@ WORKDIR /test
 
 RUN wget https://github.com/rrwick/Unicycler/raw/refs/heads/main/sample_data/long_reads_high_depth.fastq.gz
 
-RUN miniasm_and_minipolish.sh long_reads_high_depth.fastq.gz 4 > test.gfa && head test.gfa
+#RUN miniasm_and_minipolish.sh long_reads_high_depth.fastq.gz 4 > test.gfa && head test.gfa
+
+# Testing the test data without using the wrapper script
+RUN minimap2 -x ava-ont -t 4 long_reads_high_depth.fastq.gz long_reads_high_depth.fastq.gz > overlaps.paf && \
+    miniasm -f long_reads_high_depth.fastq.gz overlaps.paf -s 50 -e 1 > test.gfa && \
+    minipolish --threads 4 long_reads_high_depth.fastq.gz test.gfa > polished.gfa && \
+    head polished.gfa
