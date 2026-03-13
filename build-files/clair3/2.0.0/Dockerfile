@@ -112,16 +112,51 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     procps && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-# Copy conda env and built binaries from builder
-COPY --from=builder /opt/conda /opt/conda
-COPY --from=builder /opt/bin /opt/bin
-COPY --from=builder /opt/models /opt/models
-
-# Generate symlinks for /opt and /clair3
-RUN ln -s /opt /clair3
+# Install packages needed for Clair3.
+RUN micromamba install \
+    -c conda-forge \
+    -c bioconda \
+    python=3.11 \
+    samtools \
+    whatshap \
+    parallel \
+    zstd \
+    xz \
+    zlib \
+    bzip2 \
+    pigz \
+    boost-cpp \
+    -y && \
+    micromamba clean -a -f -y
 
 ENV CONDA_PREFIX=/opt/conda
 ENV PATH=${CONDA_PREFIX}/bin:/opt/conda/bin:/opt/bin:/clair3:/clair3/models:${PATH} LC_ALL=C.UTF-8 LANG=C.UTF-8
+
+# Copy conda env and built binaries from builder
+COPY --from=builder /opt/bin /opt/bin
+COPY --from=builder /opt/models /opt/models
+
+# Install uv for faster installation, then install relevant pytorch libraries and required packages.
+RUN pip install --no-cache-dir uv && \
+    uv pip install --python ${CONDA_PREFIX}/bin/python \
+      torch torchvision \
+      --index-url https://download.pytorch.org/whl/cpu && \
+    uv pip install --python ${CONDA_PREFIX}/bin/python \
+      numpy \
+      h5py \
+      hdf5plugin \
+      numexpr \
+      tqdm \
+      cffi \
+      torchmetrics
+
+# Relink required pypy3 tools
+RUN ln -sf /opt/bin/pypy3.11-v7.3.20-linux64/bin/pypy3 ${CONDA_PREFIX}/bin/pypy3 && \
+    ln -sf /opt/bin/pypy3.11-v7.3.20-linux64/bin/pypy3 ${CONDA_PREFIX}/bin/pypy
+
+
+# Generate symlinks for /opt and /clair3
+RUN ln -s /opt /clair3
 
 RUN mkdir /data
 WORKDIR /data
@@ -129,9 +164,9 @@ WORKDIR /data
 
 FROM app AS test
 
-RUN ln -s /opt /clair3
-
-RUN apt-get update && apt-get install -y wget 
+RUN apt-get update && \
+    apt-get install -y wget && \
+    apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 RUN run_clair3.sh --help && \
     run_clair3.sh --version
