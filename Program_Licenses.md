@@ -11,6 +11,7 @@ The licenses of the open-source software that is contained in these Docker image
 | ANIclustermap | MIT | https://github.com/moshi4/ANIclustermap/blob/main/LICENSE |
 | artic | MIT | https://github.com/artic-network/fieldbioinformatics/blob/master/LICENSE |
 | artic-ncov2019-epi2me | MPL 2.0 | https://github.com/epi2me-labs/wf-artic/blob/master/LICENSE |
+| artic-tools | MIT | https://github.com/will-rowe/artic-tools/blob/master/LICENSE |
 | any2fasta | GNU GPLv3 | https://github.com/tseemann/any2fasta/blob/master/LICENSE |
 | ArborView | Apache 2.0 | https://github.com/phac-nml/ArborView/tree/main?tab=readme-ov-file#legal-and-compliance-information |
 | ARIBA | GNU GPLv3 | https://github.com/sanger-pathogens/ariba/blob/master/LICENSE |
