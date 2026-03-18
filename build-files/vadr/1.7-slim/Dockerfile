@@ -54,6 +54,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # use vadr-install.sh script to install VADR into $VADRINSTALLDIR (set to /opt/vadr)
 # remove directory that's no longer needed
 # remove all vadr models (as this is a slim image and models are large)
+# find and remove `*fa` files that take up ~20 MB space and are unnecessary when running VADR
 # install perl module Mozilla::CA required in VADR v1.6.4
 RUN mkdir -p ${VADRINSTALLDIR}/vadr-${VADR_VERSION} /data ${VADRMODELDIR} && \
   cd ${VADRINSTALLDIR} && \ 
@@ -68,6 +69,8 @@ RUN mkdir -p ${VADRINSTALLDIR}/vadr-${VADR_VERSION} /data ${VADRMODELDIR} && \
   rm -rf ${VADRINSTALLDIR}/vadr-models-calici && \
   rm -rf ${VADRINSTALLDIR}/vadr-models-flavi && \
   echo "DONE DELETING VADR MODELS" && \
+  cd / && \
+  find /opt -type f -iname "*fa" -delete && \
   yes | cpan install Mozilla::CA
 
 # set working directory
