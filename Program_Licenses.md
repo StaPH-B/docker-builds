@@ -202,6 +202,7 @@ The licenses of the open-source software that is contained in these Docker image
 | shigatyper | non-standard license see --> | https://github.com/CFSAN-Biostatistics/shigatyper/blob/master/LICENSE |
 | ShigEiFinder | GNU GPLv3 | https://github.com/LanLab/ShigEiFinder/blob/main/LICENSE |
 | Shovill | GNU GPLv3 | https://github.com/tseemann/shovill/blob/master/LICENSE |
+| simplot-cl | GNU GPLv3 | https://github.com/hodcroftlab/simplot-cl/blob/main/LICENSE.txt |
 | SISTR | Apache 2.0 | https://github.com/phac-nml/sistr_cmd/blob/master/LICENSE |
 | SKA | MIT | https://github.com/simonrharris/SKA/blob/master/LICENSE |
 | SKA2 | Apache 2.0 | https://github.com/bacpop/ska.rust/blob/master/LICENSE |
