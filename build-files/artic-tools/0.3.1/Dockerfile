@@ -1,6 +1,8 @@
+ARG ARTIC_TOOLS_VER="0.3.1"
+
 FROM ubuntu:noble AS builder
 
-ARG ARTIC_TOOLS_VER="0.3.1"
+ARG ARTIC_TOOLS_VER
 
 # Installs certificate requirements, make and build essentials, and git
 # An earlier version of gcc and g++ are installed to match the version of make the author used to compile the source code.
@@ -45,7 +47,7 @@ RUN cd build && \
 
 FROM ubuntu:noble AS app
 
-ARG ARTIC_TOOLS_VER="0.3.1"
+ARG ARTIC_TOOLS_VER
 
 LABEL base.image="ubuntu:noble"
 LABEL dockerfile.version="1"
