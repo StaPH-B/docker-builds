@@ -86,11 +86,11 @@ CMD ["artic-tools", "-h"]
 
 FROM app AS test
 
-# Curl used for downloading test primer schemes and files in tests/data
-RUN apt-get update && apt-get -y install --no-install-recommends \
-    curl
-
 WORKDIR /test
+
+# Copy some test files over from build stage
+COPY --from=builder /opt/artic-tools/tests/data/SCoV2.scheme.v3.bed /test/SCoV2.scheme.v3.bed
+COPY --from=builder /opt/artic-tools/tests/data/CVR1.merged.vcf.gz /test/CVR1.merged.vcf.gz
 
 # Help and version checks for both the binary and its subcommands
 RUN artic-tools --help && \
@@ -104,8 +104,6 @@ RUN artic-tools check_vcf --help && \
 # Get scheme, validate scheme, and check_vcf commands.
 RUN artic-tools get_scheme ebola
 
-RUN curl -o SCoV2.scheme.v3.bed https://raw.githubusercontent.com/will-rowe/artic-tools/b3a5d3cfe37f6e1a7ef1a2cdf339d5227843726d/tests/data/SCoV2.scheme.v3.bed && \
-    artic-tools validate_scheme SCoV2.scheme.v3.bed
+RUN artic-tools validate_scheme SCoV2.scheme.v3.bed
 
-RUN curl -o CVR1.merged.vcf.gz https://raw.githubusercontent.com/will-rowe/artic-tools/b3a5d3cfe37f6e1a7ef1a2cdf339d5227843726d/tests/data/CVR1.merged.vcf.gz && \
-    artic-tools check_vcf -o summary.txt --vcfOut variants_passed.txt CVR1.merged.vcf.gz SCoV2.scheme.v3.bed
+RUN artic-tools check_vcf -o summary.txt --vcfOut variants_passed.txt CVR1.merged.vcf.gz SCoV2.scheme.v3.bed
