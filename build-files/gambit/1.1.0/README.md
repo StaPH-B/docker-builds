@@ -10,6 +10,9 @@ GAMBIT (Genomic Approximation Method for Bacterial Identification and Tracking) 
 
 GAMBIT is built using [micromamba](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html) with the following dependencies:
 
+<details>
+<summary>Dependencies</summary>
+  
 | Dependency | Version | Notes |
 |---|---|---|
 | Python | ==3.11 | |
@@ -24,6 +27,7 @@ GAMBIT is built using [micromamba](https://mamba.readthedocs.io/en/latest/user_g
 | click | >=8.0 | |
 | setuptools | | |
 | pandas | >=2.0 | |
+</details>
 
 ## Example Usage
 
