@@ -1,12 +1,10 @@
-FROM mambaorg/micromamba:2.5.0-ubuntu24.04 AS app
+FROM python:3.13.12-slim AS app
 
 ARG SIMPLOT_CL_VER="1.0.3"
 
-USER root
-
 WORKDIR /
 
-LABEL base.image="mambaorg/micromamba:2.5.0-ubuntu24.04"
+LABEL base.image="python:3.13.12-slim"
 LABEL dockerfile.version="1"
 LABEL software="simplot-cl"
 LABEL software.version="${SIMPLOT_CL_VER}"
@@ -20,7 +18,9 @@ LABEL maintainer.email="raheelsyedahmed@gmail.com"
 RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
     ca-certificates \
-    procps && \
+    procps \
+    mafft \
+    libgomp1 && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # Decompress source code in /opt and llink /opt/simplot-cl-1.0.3 to /usr/local/bin for discovery in python path.
@@ -32,14 +32,11 @@ RUN wget -q https://github.com/hodcroftlab/simplot-cl/archive/refs/tags/v${SIMPL
     chmod +x /opt/simplot-cl-1.0.3/simplot.py && \
     ln -s /opt/simplot-cl-${SIMPLOT_CL_VER}/simplot.py /usr/local/bin/simplot.py
 
-# Install from environment available in source code folder.
-RUN micromamba install --name base -f /opt/simplot-cl-${SIMPLOT_CL_VER}/environment.yml -y && \
-    micromamba clean -a -f -y && \
-    mkdir /data
+# Install packages listed in installation steps for simplot-cl.
+RUN pip install --no-cache biopython pandas numpy matplotlib argcomplete
 
 # Add micromamba packages to path and set locale.
-ENV PATH="/opt/conda/bin/:${PATH}" \
-    LC_ALL=C.UTF-8
+ENV LC_ALL=C
 
 WORKDIR /data
 
@@ -51,8 +48,8 @@ FROM app AS test
 
 ARG SIMPLOT_CL_VER="1.0.3"
 
-# List micromamba dependencies
-RUN micromamba list -n base
+# List package dependencies
+RUN pip freeze
 
 WORKDIR /test
 
