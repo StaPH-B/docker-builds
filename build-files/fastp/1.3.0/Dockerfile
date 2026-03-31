@@ -1,6 +1,6 @@
 FROM ubuntu:noble AS app
 
-ARG FASTP_VER="1.3.0"
+ARG FASTP_VER="1.3.1"
 
 LABEL base.image="ubuntu:noble"
 LABEL dockerfile.version="1"
@@ -14,12 +14,14 @@ LABEL maintainer.email="kutluhan.incekara@ct.gov"
 LABEL maintainer2="Raheel Ahmed"
 LABEL maintainer2.email="raheelsyedahmed@gmail.com"
 
-WORKDIR /opt
+WORKDIR /usr/local/bin
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
     ca-certificates \
     jq \
+    python3 \
+    python-is-python3 \
     procps && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
@@ -27,8 +29,11 @@ RUN wget http://opengene.org/fastp/fastp.${FASTP_VER} && \
     mv fastp.${FASTP_VER} fastp && \
     chmod a+x ./fastp
 
-ENV PATH="/opt:$PATH" \
-    LC_ALL=C
+RUN wget https://raw.githubusercontent.com/OpenGene/fastp/v${FASTP_VER}/parallel.py \
+    -O /usr/local/bin/parallel.py && \
+    chmod +x /usr/local/bin/parallel.py
+
+ENV LC_ALL=C
 
 WORKDIR /data
 
@@ -47,6 +52,7 @@ RUN fastp --help && \
 RUN jq --help && \
     jq --version
 
+RUN parallel.py -h
 
 # downloading sars-cov-2 fastq test files
 RUN wget -q \
