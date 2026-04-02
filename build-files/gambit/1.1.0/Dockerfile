@@ -64,5 +64,9 @@ CMD ["gambit", "--help"]
 
 # Run test
 FROM app AS test
+USER root
+RUN apt-get update && apt-get install -y --no-install-recommends wget && \
+    rm -rf /var/lib/apt/lists/*
+USER $MAMBA_USER
 COPY test.sh .
 RUN bash test.sh
