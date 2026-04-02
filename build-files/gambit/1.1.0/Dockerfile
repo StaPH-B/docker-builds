@@ -8,8 +8,8 @@ ARG GAMBIT_SRC_URL=https://github.com/jlumpe/gambit/archive/refs/tags/${GAMBIT_G
 # Builder stage: compiles GAMBIT from source
 FROM mambaorg/micromamba:2.5.0 AS builder
 ARG GAMBIT_SRC_URL
-COPY --chown=$MAMBA_USER:$MAMBA_USER env.yaml /tmp/env.yaml
-RUN micromamba install -y -n base -f /tmp/env.yaml && \
+COPY --chown=$MAMBA_USER:$MAMBA_USER builder_env.yaml /tmp/builder_env.yaml
+RUN micromamba install -y -n base -f /tmp/builder_env.yaml && \
     micromamba clean --all --yes
 ARG MAMBA_DOCKERFILE_ACTIVATE=1
 USER root
