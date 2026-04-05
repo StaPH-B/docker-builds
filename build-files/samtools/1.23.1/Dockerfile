@@ -59,10 +59,11 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     libncurses6 \
     bzip2 \
     liblzma5 \
-    libcurl4t64 \
+    libcurl3t64-gnutls \
     libdeflate0 \
     gnuplot \
     && apt-get autoclean && rm -rf /var/lib/apt/lists/*
+
     
 # copy in samtools executables from builder stage
 COPY --from=builder /usr/local/bin/* /usr/local/bin/
