@@ -56,10 +56,10 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install --no-install-recommends -y \
     perl \
     zlib1g \
-    libncurses5 \
+    libncurses6 \
     bzip2 \
     liblzma5 \
-    libcurl3-gnutls \
+    libcurl4-gnutls \
     libdeflate0 \
     gnuplot \
     && apt-get autoclean && rm -rf /var/lib/apt/lists/*
