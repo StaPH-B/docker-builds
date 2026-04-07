@@ -1,0 +1,48 @@
+name: PR Docker Validation
+
+on:
+  pull_request:
+    paths:
+      - 'build-files/**/Dockerfile'
+
+jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@main
+        with:
+          fetch-depth: 0
+      - id: changed-files
+        uses: tj-actions/changed-files@main
+        with:
+          files: build-files/*/*/Dockerfile
+          json: true
+      - id: set-matrix
+        run: |
+          FILES='${{ steps.changed-files.outputs.all_changed_files }}'
+          MATRIX=$(echo "$FILES" | jq -c 'map(split("/")) | map({tool: .[1], version: .[2], path: join("/"), context: (.[0:3] | join("/"))})')
+          echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
+
+  # Call the Linter in parallel for every changed file
+  lint:
+    needs: detect-changes
+    strategy:
+      matrix:
+        include: ${{ fromJson(needs.detect-changes.outputs.matrix) }}
+    uses: ./.github/workflows/lint_pr_dockerfile.yml
+    with:
+      dockerfile_path: ${{ matrix.path }}
+
+  # Call the Builder in parallel for every changed file
+  build:
+    needs: detect-changes
+    strategy:
+      matrix:
+        include: ${{ fromJson(needs.detect-changes.outputs.matrix) }}
+    uses: ./.github/workflows/build_and_test_pr_dockerfile.yml
+    with:
+      context_path: ${{ matrix.context }}
+      tool_name: ${{ matrix.tool }}
+      version: ${{ matrix.version }}
