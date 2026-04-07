@@ -1,0 +1,67 @@
+# syntax=docker/dockerfile:1
+
+##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
+##### StaPH-B Java (OpenJDK) Builder Template                           #####
+##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
+
+# Set software and Java version
+ARG SOFTWARENAME_VERSION="2.7.1"
+ARG JAVA_VERSION="17"
+
+##### ----- STEP 1: BUILDER STAGE ----- #####
+FROM openjdk:${JAVA_VERSION}-jdk-slim-noble AS builder
+
+ARG SOFTWARENAME_VERSION
+
+# Install build tools (e.g., gradlew or maven if needed)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    wget ca-certificates unzip && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Example: Download and unzip a pre-compiled JAR tool (like GATK or Picard)
+RUN wget https://github.com/example/tool/releases/download/v${SOFTWARENAME_VERSION}/tool.zip && \
+    unzip tool.zip && \
+    mv tool-${SOFTWARENAME_VERSION} /opt/tool
+
+##### ----- STEP 2: APP STAGE ----- #####
+# Use JRE to save ~200MB of space
+FROM openjdk:${JAVA_VERSION}-jre-slim-noble AS app
+
+ARG SOFTWARENAME_VERSION
+
+# Install Runtime Dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    deps && \
+    apt-get autoclean && rm -rf /var/lib/apt/lists/*
+
+# Setup Non-Root User
+RUN groupadd -r staphb && useradd -r -g staphb staphb
+
+# Copy the tool from the builder
+COPY --from=builder /opt/tool /opt/tool
+
+# Java jars often need a wrapper script or alias
+RUN printf '#!/bin/bash\njava -jar /opt/tool/tool.jar "$@"\n' > /usr/local/bin/toolname && \
+    chmod +x /usr/local/bin/toolname
+
+# Set Environment Variables & Path
+ENV PATH="/opt/tool:$PATH" \
+    LC_ALL=C.UTF-8
+
+# 5. Metadata Labels
+LABEL org.opencontainers.image.created="2024-05-20" \
+      org.opencontainers.image.base.name="openjdk:17-jre-slim-noble" \
+      org.opencontainers.image.title="SOFTWARENAME" \
+      org.opencontainers.image.version="${SOFTWARENAME_VERSION}" \
+      org.opencontainers.image.authors="firstName lastName <example@email.com>"
+
+WORKDIR /data
+USER staphb
+
+# Java tools usually run via 'java -jar ...'
+CMD ["java", "-jar", "/opt/tool/tool.jar", "--help"]
+
+##### ----- STEP 3: TEST STAGE ----- #####
+FROM app AS test
+WORKDIR /test
+RUN java -jar /opt/tool/tool.jar --version
