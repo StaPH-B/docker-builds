@@ -1,0 +1,37 @@
+name: Build and Test
+
+on:
+  workflow_call:
+    inputs:
+      context_path:
+        required: true
+        type: string
+      tool_name:
+        required: true
+        type: string
+      version:
+        required: true
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Build to Test Stage
+        uses: docker/build-push-action@v5
+        with:
+          context: ${{ inputs.context_path }}
+          target: test
+          load: true
+          tags: ${{ inputs.tool_name }}:${{ inputs.version }}
+          cache-from: type=gha,scope=${{ inputs.tool_name }}
+          cache-to: type=gha,mode=max,scope=${{ inputs.tool_name }}
+
+      - name: Verify Labels & Smoke Test
+        run: |
+          IMAGE="${{ inputs.tool_name }}:${{ inputs.version }}"
+          # Label check logic here...
+          docker run --rm $IMAGE ps --help
