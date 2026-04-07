@@ -20,27 +20,37 @@ ARG SOFTWARENAME_VER="1.0.0"
 
 # 'LABEL' instructions tag the image with metadata. 
 # NOTE: The "org.opencontainers" labels are REQUIRED to pass StaPH-B CI tests.
-LABEL org.opencontainers.image.base.name="ubuntu:jammy" \
+
+# Required Metadata Labels
+# These follow the OCI Image Spec. They help users and automated systems 
+# identify what is inside the container.
+LABEL \
+      # The date this image was last updated (Manually update this!)
       org.opencontainers.image.created="2024-05-20" \
+      # The exact base image used for the 'app' stage (Must match the FROM instruction above)
+      org.opencontainers.image.base.name="ubuntu:jammy" \
+      # The name of the software (e.g., "BWA" or "Samtools")
       org.opencontainers.image.title="SoftwareName" \
+      # The version of the software itself
       org.opencontainers.image.version="${SOFTWARENAME_VER}" \
+      # The version of THIS Dockerfile (increment if you change the build logic)
       org.opencontainers.image.revision="1" \
-      org.opencontainers.image.description="This software does X, Y, and Z!" \
+      # A human-readable description of the tool
+      org.opencontainers.image.description="A brief description of what this tool does" \
+      # The project homepage or GitHub repository
       org.opencontainers.image.url="https://github.com/StaPH-B/docker-builds" \
+      # Where users can find instructions or manuals for the software
       org.opencontainers.image.documentation="https://github.com/StaPH-B/docker-builds" \
+      # Link to the source code used to build the image (which is often a GitHub url)
       org.opencontainers.image.source="https://github.com/StaPH-B/docker-builds" \
+      # The software license (e.g., MIT, GPL-3.0, Apache-2.0) for the software
       org.opencontainers.image.licenses="GPL-3.0" \
-      org.opencontainers.image.authors="firstName lastName <example@email.com>" \
-      dockerfile.version="1"
+      # The person/group maintaining this Dockerfile
+      org.opencontainers.image.authors="firstName lastName <example@email.com>"
 
 # 'RUN' executes code during the build.
 # StaPH-B Requirement: You MUST install 'procps' and 'hostname' for Nextflow compatibility.
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    procps \
-    hostname \
-    sed \
-    wget \
-    ca-certificates \
     dependency_a \
     dependency_b && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
