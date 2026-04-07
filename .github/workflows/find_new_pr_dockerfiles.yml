@@ -44,30 +44,43 @@ jobs:
 
       - name: Generate Matrix
         id: set-matrix
+        env:
+          PR_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         run: |
-          # Initialize matrix as empty array to avoid fromJson errors
           MATRIX="[]"
           HAS_CHANGES="false"
 
           if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            # Manual inputs
             T1="${{ github.event.inputs.tool1 }}"
             V1="${{ github.event.inputs.version1 }}"
             T2="${{ github.event.inputs.tool2 }}"
             V2="${{ github.event.inputs.version2 }}"
             
-            MATRIX="[{\"tool\": \"$T1\", \"version\": \"$V1\", \"path\": \"build-files/$T1/$V1/Dockerfile\", \"context\": \"build-files/$T1/$V1\"}"
-            
-            if [ -n "$T2" ] && [ -n "$V2" ]; then
-              MATRIX="$MATRIX, {\"tool\": \"$T2\", \"version\": \"$V2\", \"path\": \"build-files/$T2/$V2/Dockerfile\", \"context\": \"build-files/$T2/$V2\"}"
-            fi
-            MATRIX="$MATRIX]"
+            # Use jq to build the matrix array safely. 
+            # This handles the optional second tool automatically.
+            MATRIX=$(jq -n -c \
+              --arg t1 "$T1" --arg v1 "$V1" \
+              --arg t2 "$T2" --arg v2 "$V2" \
+              '[
+                {tool: $t1, version: $v1, path: "build-files/\($t1)/\($v1)/Dockerfile", context: "build-files/\($t1)/\($v1)"},
+                (if $t2 != "" and $v2 != "" then {tool: $t2, version: $v2, path: "build-files/\($t2)/\($v2)/Dockerfile", context: "build-files/\($t2)/\($v2)"} else empty end)
+              ]')
             HAS_CHANGES="true"
           
           else
-            FILES='${{ steps.changed-files.outputs.all_changed_files }}'
-            if [ "$FILES" != "[]" ] && [ -n "$FILES" ]; then
-              # Transform PR file list into JSON structure
-              MATRIX=$(echo "$FILES" | jq -c 'map(split("/")) | map({tool: .[1], version: .[2], path: join("/"), context: (.[0:3] | join("/"))})')
+            # PR Logic: Use the PR_FILES environment variable
+            if [[ -n "$PR_FILES" && "$PR_FILES" != "[]" ]]; then
+              # Transform PR file list into the required JSON structure
+              MATRIX=$(echo "$PR_FILES" | jq -c '
+                map(split("/")) 
+                | map({
+                    tool: .[1], 
+                    version: .[2], 
+                    path: join("/"), 
+                    context: (.[0:3] | join("/"))
+                  })
+              ')
               HAS_CHANGES="true"
             fi
           fi
