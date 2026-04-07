@@ -12,7 +12,7 @@
 
 # 'FROM' defines where the Dockerfile is starting to build from.
 # The 'as app' naming is required for the PR validation tests.
-FROM ubuntu:jammy as app
+FROM ubuntu:noble as app
 
 # List all software versions as ARGs near the top of the dockerfile.
 # ARG variables are ONLY available during image build.
