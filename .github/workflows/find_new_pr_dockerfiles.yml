@@ -4,6 +4,20 @@ on:
   pull_request:
     paths:
       - 'build-files/**/Dockerfile'
+  workflow_dispatch:
+    inputs:
+      tool1:
+        description: 'First Tool Name'
+        required: true
+      version1:
+        description: 'First Version'
+        required: true
+      tool2:
+        description: 'Second Tool Name (Optional)'
+        required: false
+      version2:
+        description: 'Second Version (Optional)'
+        required: false
 
 permissions:
   pull-requests: write
@@ -18,17 +32,50 @@ jobs:
       - uses: actions/checkout@main
         with:
           fetch-depth: 0
-      - id: changed-files
+      - name: Get changed files in PR
+        if: github.event_name == 'pull_request'
+        id: changed-files
         uses: tj-actions/changed-files@main
         with:
           files: build-files/*/*/Dockerfile
           json: true
-      - id: set-matrix
-        run: |
-          FILES='${{ steps.changed-files.outputs.all_changed_files }}'
-          MATRIX=$(echo "$FILES" | jq -c 'map(split("/")) | map({tool: .[1], version: .[2], path: join("/"), context: (.[0:3] | join("/"))})')
-          echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
 
+
+       - name: Generate Matrix
+        id: set-matrix
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            # MANUAL DISPATCH LOGIC
+            T1="${{ github.event.inputs.tool1 }}"
+            V1="${{ github.event.inputs.version1 }}"
+            T2="${{ github.event.inputs.tool2 }}"
+            V2="${{ github.event.inputs.version2 }}"
+            
+            # Start building the JSON array
+            MATRIX="[{\"tool\": \"$T1\", \"version\": \"$V1\", \"path\": \"build-files/$T1/$V1/Dockerfile\", \"context\": \"build-files/$T1/$V1\"}"
+            
+            # Append second tool only if both tool2 and version2 are provided
+            if [ -n "$T2" ] && [ -n "$V2" ]; then
+              MATRIX="$MATRIX, {\"tool\": \"$T2\", \"version\": \"$V2\", \"path\": \"build-files/$T2/$V2/Dockerfile\", \"context\": \"build-files/$T2/$V2\"}"
+            fi
+            
+            MATRIX="$MATRIX]"
+            echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          
+          else
+            # PULL REQUEST LOGIC
+            FILES='${{ steps.changed-files.outputs.all_changed_files }}'
+            if [ "$FILES" == "[]" ] || [ -z "$FILES" ]; then
+              echo "has_changes=false" >> $GITHUB_OUTPUT
+            else
+              # Transform PR file list into the same JSON structure
+              MATRIX=$(echo "$FILES" | jq -c 'map(split("/")) | map({tool: .[1], version: .[2], path: join("/"), context: (.[0:3] | join("/"))})')
+              echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
+              echo "has_changes=true" >> $GITHUB_OUTPUT
+            fi
+          fi
+          
   # Call the Linter in parallel for every changed file
   lint:
     needs: detect-changes
