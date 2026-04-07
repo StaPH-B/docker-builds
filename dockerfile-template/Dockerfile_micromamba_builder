@@ -1,0 +1,81 @@
+# syntax=docker/dockerfile:1
+
+##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
+##### StaPH-B Micromamba Builder Template                              #####
+##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
+##### Step 1: Use Micromamba to build the environment.                  #####
+##### Step 2: Copy the environment to a clean Ubuntu Noble image.       #####
+##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
+
+# Set the software version as a global argument
+ARG SOFTWARENAME_VERSION="1.0.4"
+
+##### ----- STEP 1: BUILDER STAGE ----- #####
+FROM mambaorg/micromamba:2.5.0-noble AS builder
+
+# Re-declare ARG for use in this stage
+ARG SOFTWARENAME_VERSION
+
+# Switch to root to ensure we have permissions to create the environment
+USER root
+
+# Install the software into a specific prefix.
+# We install into /opt/conda to make it easy to copy in one piece later.
+RUN micromamba install -y -n base -c conda-forge -c bioconda \
+    SOFTWARENAME=${SOFTWARENAME_VERSION} && \
+    micromamba clean -a -f -y
+
+RUN micromamba list
+
+##### ----- STEP 2: APP STAGE ----- #####
+# We start from a clean Ubuntu Noble image to keep the size as small as possible.
+FROM ubuntu:noble AS app
+
+# Re-declare ARG for labels
+ARG SOFTWARENAME_VERSION
+
+# StaPH-B Requirement: 'procps', 'hostname', and 'sed' for Nextflow compatibility.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    deps && \
+    apt-get autoclean && rm -rf /var/lib/apt/lists/*
+
+# Required for CI and security best practices.
+RUN groupadd -r staphb && useradd -r -g staphb staphb
+
+# This brings only the binaries and libraries, not the Micromamba engine or cache.
+COPY --from=builder /opt/conda /opt/conda
+
+# Ensure the path points to our new environment and set the locale.
+ENV PATH="/opt/conda/bin:${PATH}" \
+    LC_ALL=C.UTF-8
+
+# Metadata Labels (REQUIRED for StaPH-B CI)
+LABEL org.opencontainers.image.created="2024-05-20" \
+      org.opencontainers.image.base.name="ubuntu:noble" \
+      org.opencontainers.image.title="SOFTWARENAME" \
+      org.opencontainers.image.version="${SOFTWARENAME_VERSION}" \
+      org.opencontainers.image.revision="1" \
+      org.opencontainers.image.description="Description of this tool" \
+      org.opencontainers.image.url="https://github.com/StaPH-B/docker-builds" \
+      org.opencontainers.image.documentation="https://github.com/StaPH-B/docker-builds" \
+      org.opencontainers.image.source="https://github.com/StaPH-B/docker-builds" \
+      org.opencontainers.image.licenses="GPL-3.0" \
+      org.opencontainers.image.authors="firstName lastName <example@email.com>"
+
+# 6. Set Working Directory
+WORKDIR /data
+
+# 7. Final runtime configuration
+USER staphb
+CMD ["tool", "--help"]
+
+##### ----- STEP 3: TEST STAGE ----- #####
+FROM app AS test
+
+WORKDIR /test
+
+# Basic Check
+RUN tool --version && tool --help
+
+# Test the software
+RUN tool -i input.file -o outdir
