@@ -5,6 +5,10 @@ on:
     paths:
       - 'build-files/**/Dockerfile'
 
+permissions:
+  pull-requests: write
+  contents: read
+
 jobs:
   detect-changes:
     runs-on: ubuntu-latest
