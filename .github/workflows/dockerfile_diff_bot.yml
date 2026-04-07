@@ -6,11 +6,10 @@ on:
 
 jobs:
   compare-dockerfiles:
-    # Trigger only on PRs when the specific handle and command are mentioned
+    # Trigger whenever the bot handle is mentioned in a PR
     if: |
       github.event.issue.pull_request && 
-      contains(github.event.comment.body, '@staphb-dockerbuilds-diff') &&
-      contains(github.event.comment.body, 'list diff')
+      contains(github.event.comment.body, '@staphb-dockerbuilds-diff')
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
@@ -27,13 +26,15 @@ jobs:
         run: |
           COMMENT_BODY="${{ github.event.comment.body }}"
           
-          # Find the line containing the command and extract the 3 parameters
-          # Regex looks for 'list diff' followed by three space-separated strings
-          RAW_PARAMS=$(echo "$COMMENT_BODY" | grep -i "list diff" | sed -E 's/.*list diff +([^ ]+) +([^ ]+) +([^ ]+).*/\1 \2 \3/')
+          # 1. Extract everything after the bot handle
+          # 2. Strip "list diff" if it happens to be there
+          # 3. Pull the next three words as IMAGE, OLD, NEW
+          PAYLOAD=$(echo "$COMMENT_BODY" | sed -E 's/.*@staphb-dockerbuilds-diff //I')
+          CLEAN_PARAMS=$(echo "$PAYLOAD" | sed -E 's/^list diff //I')
           
-          IMAGE=$(echo "$RAW_PARAMS" | awk '{print $1}')
-          OLD_VER=$(echo "$RAW_PARAMS" | awk '{print $2}')
-          NEW_VER=$(echo "$RAW_PARAMS" | awk '{print $3}')
+          IMAGE=$(echo "$CLEAN_PARAMS" | awk '{print $1}')
+          OLD_VER=$(echo "$CLEAN_PARAMS" | awk '{print $2}')
+          NEW_VER=$(echo "$CLEAN_PARAMS" | awk '{print $3}')
           
           FILE_OLD="build-files/$IMAGE/$OLD_VER/Dockerfile"
           FILE_NEW="build-files/$IMAGE/$NEW_VER/Dockerfile"
@@ -44,7 +45,7 @@ jobs:
 
           # Validation
           if [[ -z "$IMAGE" || -z "$OLD_VER" || -z "$NEW_VER" ]]; then
-            echo "error_msg=Format error. Use: @staphb-dockerbuilds-diff list diff <image> <old> <new>" >> $GITHUB_OUTPUT
+            echo "error_msg=Format error. Expected: @staphb-dockerbuilds-diff <image> <old> <new>" >> $GITHUB_OUTPUT
             exit 0
           fi
 
