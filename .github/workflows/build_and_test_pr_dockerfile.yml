@@ -80,6 +80,7 @@ jobs:
           docker run --rm $IMAGE ps --help
 
       - name: Validate Metadata Labels
+        id: labels
         run: |
           IMAGE="${{ inputs.tool_name }}:app"
           REQUIRED_LABELS=(
@@ -107,6 +108,7 @@ jobs:
           if [ "$FAILED" -eq 1 ]; then exit 1; fi
 
       - name: Validate Working Directory
+        id: workdir
         run: |
           IMAGE="${{ inputs.tool_name }}:app"
           WORKDIR=$(docker inspect --format '{{.Config.WorkingDir}}' "$IMAGE")
@@ -119,6 +121,7 @@ jobs:
           fi
 
       - name: Validate Non-Root User
+        id: user
         run: |
           IMAGE="${{ inputs.tool_name }}:app"
           # This captures the USER value from the image metadata
@@ -133,6 +136,7 @@ jobs:
           fi
 
       - name: Validate Nextflow Dependencies
+        id: nextflow
         run: |
           IMAGE="${{ inputs.tool_name }}:app"
           
@@ -167,3 +171,36 @@ jobs:
           ignore-unfixed: true # Focus only on things your team can actually fix
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
+
+      - name: Generate PR Report
+        if: always() # Ensure this runs even if a previous validation step failed
+        run: |
+          echo "## Build Report: ${{ inputs.tool_name }}" > report.md
+          echo "| Check | Status |" >> report.md
+          echo "| :--- | :--- |" >> report.md
+          
+          # Check labels
+          if [ "${{ steps.labels.outcome }}" == "success" ]; then echo "| Metadata Labels | [PASS] |" >> report.md; else echo "| Metadata Labels | [FAIL] |" >> report.md; fi
+          
+          # Check WORKDIR
+          if [ "${{ steps.workdir.outcome }}" == "success" ]; then echo "| Working Directory (/data) | [PASS] |" >> report.md; else echo "| Working Directory (/data) | [FAIL] |" >> report.md; fi
+          
+          # Check User
+          if [ "${{ steps.user.outcome }}" == "success" ]; then echo "| Non-Root User | [PASS] |" >> report.md; else echo "| Non-Root User | [FAIL] |" >> report.md; fi
+          
+          # Check Nextflow
+          if [ "${{ steps.nextflow.outcome }}" == "success" ]; then echo "| Nextflow Dependencies | [PASS] |" >> report.md; else echo "| Nextflow Dependencies | [FAIL] |" >> report.md; fi
+
+          # Add size information
+          echo -e "\n### Image Sizes" >> report.md
+          echo "| Stage | Size |" >> report.md
+          echo "| :--- | :--- |" >> report.md
+          echo "| App Stage | $(docker images --format '{{.Size}}' ${{ inputs.tool_name }}:app) |" >> report.md
+          echo "| Test Stage | $(docker images --format '{{.Size}}' ${{ inputs.tool_name }}:test) |" >> report.md
+
+      - name: Post Report to PR
+        if: always()
+        uses: marocchino/sticky-pull-request-comment@main
+        with:
+          header: report-${{ inputs.tool_name }}-${{ inputs.version }}
+          path: report.md
