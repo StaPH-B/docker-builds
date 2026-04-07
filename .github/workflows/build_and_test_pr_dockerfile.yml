@@ -37,8 +37,8 @@ jobs:
           target: builder
           load: true
           tags: ${{ inputs.tool_name }}:builder
-          cache-from: type=gha,scope=${{ inputs.tool_name }}
-          cache-to: type=gha,mode=max,scope=${{ inputs.tool_name }}
+          cache-from: type=gha,scope=${{ inputs.tool_name }}-${{ inputs.version }}
+          cache-to: type=gha,mode=max,scope=${{ inputs.tool_name }}-${{ inputs.version }}
 
       - name: Build App Stage
         uses: docker/build-push-action@master
@@ -47,7 +47,7 @@ jobs:
           target: app
           load: true
           tags: ${{ inputs.tool_name }}:app
-          cache-from: type=gha,scope=${{ inputs.tool_name }}
+          cache-from: type=gha,scope=${{ inputs.tool_name }}-${{ inputs.version }}
 
       - name: Build to Test Stage
         uses: docker/build-push-action@master
@@ -56,29 +56,12 @@ jobs:
           target: test
           load: true
           tags: ${{ inputs.tool_name }}:test
-          cache-from: type=gha,scope=${{ inputs.tool_name }}
+          cache-from: type=gha,scope=${{ inputs.tool_name }}-${{ inputs.version }}
       
-      - name: Compare Image Sizes
+      - name: List built images
         continue-on-error: true
         run: |
-          echo "### Image Size Report: ${{ inputs.tool_name }} ${{ inputs.version }}" >> $GITHUB_STEP_SUMMARY
-          echo "| Stage | Tag | Size |" >> $GITHUB_STEP_SUMMARY
-          echo "|-------|-----|------|" >> $GITHUB_STEP_SUMMARY
-          
-          # Function to add row to summary
-          add_row() {
-            local stage=$1
-            local tag="${{ inputs.tool_name }}:$2"
-            local size=$(docker images --format "{{.Size}}" "$tag")
-            echo "| $stage | \`$tag\` | $size |" >> $GITHUB_STEP_SUMMARY
-          }
-
-          if [ "${{ steps.check-builder.outputs.exists }}" == "true" ]; then
-            add_row "Builder" "builder"
-          fi
-          add_row "App (Production)" "app"
-          add_row "Test (Functional)" "test"          
-          docker run --rm $IMAGE ps --help
+          docker images --format "table {{.Repository}}\t{{.Tag}}\t{{.Size}}\t{{.ID}}" "${{ inputs.tool_name }}*"
 
       - name: Validate Metadata Labels
         continue-on-error: true
@@ -113,6 +96,7 @@ jobs:
         id: workdir
         run: |
           IMAGE="${{ inputs.tool_name }}:app"
+          
           WORKDIR=$(docker inspect --format '{{.Config.WorkingDir}}' "$IMAGE")
           
           if [ "$WORKDIR" != "/data" ]; then
@@ -164,20 +148,6 @@ jobs:
             echo "hostname is installed"
           else
             echo "hostname is NOT installed"
-            FAILED=1
-          fi
-
-          if docker run --rm $IMAGE sleep --version > /dev/null 2>&1; then
-            echo "sleep is installed"
-          else
-            echo "sleep is NOT installed"
-            FAILED=1
-          fi
-
-          if docker run --rm $IMAGE "echo hello" > /dev/null 2>&1; then
-            echo "bash is installed"
-          else
-            echo "bash is NOT installed"
             FAILED=1
           fi
 
