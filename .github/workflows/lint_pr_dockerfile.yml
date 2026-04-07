@@ -14,7 +14,7 @@ jobs:
       - uses: actions/checkout@main
 
       - name: Static Analysis (Hadolint)
-        uses: hadolint/hadolint-action@main
+        uses: hadolint/hadolint-action@master
         with:
           dockerfile: ${{ inputs.dockerfile_path }}
           ignore: DL3008
