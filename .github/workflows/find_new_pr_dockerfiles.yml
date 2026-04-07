@@ -28,10 +28,12 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
+      has_changes: ${{ steps.set-matrix.outputs.has_changes }}
     steps:
       - uses: actions/checkout@main
         with:
           fetch-depth: 0
+
       - name: Get changed files in PR
         if: github.event_name == 'pull_request'
         id: changed-files
@@ -40,45 +42,42 @@ jobs:
           files: build-files/*/*/Dockerfile
           json: true
 
-
-       - name: Generate Matrix
+      - name: Generate Matrix
         id: set-matrix
         run: |
+          # Initialize matrix as empty array to avoid fromJson errors
+          MATRIX="[]"
+          HAS_CHANGES="false"
+
           if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
-            # MANUAL DISPATCH LOGIC
             T1="${{ github.event.inputs.tool1 }}"
             V1="${{ github.event.inputs.version1 }}"
             T2="${{ github.event.inputs.tool2 }}"
             V2="${{ github.event.inputs.version2 }}"
             
-            # Start building the JSON array
             MATRIX="[{\"tool\": \"$T1\", \"version\": \"$V1\", \"path\": \"build-files/$T1/$V1/Dockerfile\", \"context\": \"build-files/$T1/$V1\"}"
             
-            # Append second tool only if both tool2 and version2 are provided
             if [ -n "$T2" ] && [ -n "$V2" ]; then
               MATRIX="$MATRIX, {\"tool\": \"$T2\", \"version\": \"$V2\", \"path\": \"build-files/$T2/$V2/Dockerfile\", \"context\": \"build-files/$T2/$V2\"}"
             fi
-            
             MATRIX="$MATRIX]"
-            echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
-            echo "has_changes=true" >> $GITHUB_OUTPUT
+            HAS_CHANGES="true"
           
           else
-            # PULL REQUEST LOGIC
             FILES='${{ steps.changed-files.outputs.all_changed_files }}'
-            if [ "$FILES" == "[]" ] || [ -z "$FILES" ]; then
-              echo "has_changes=false" >> $GITHUB_OUTPUT
-            else
-              # Transform PR file list into the same JSON structure
+            if [ "$FILES" != "[]" ] && [ -n "$FILES" ]; then
+              # Transform PR file list into JSON structure
               MATRIX=$(echo "$FILES" | jq -c 'map(split("/")) | map({tool: .[1], version: .[2], path: join("/"), context: (.[0:3] | join("/"))})')
-              echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
-              echo "has_changes=true" >> $GITHUB_OUTPUT
+              HAS_CHANGES="true"
             fi
           fi
           
-  # Call the Linter in parallel for every changed file
+          echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
+          echo "has_changes=$HAS_CHANGES" >> $GITHUB_OUTPUT
+
   lint:
     needs: detect-changes
+    if: needs.detect-changes.outputs.has_changes == 'true'
     strategy:
       matrix:
         include: ${{ fromJson(needs.detect-changes.outputs.matrix) }}
@@ -86,9 +85,9 @@ jobs:
     with:
       dockerfile_path: ${{ matrix.path }}
 
-  # Call the Builder in parallel for every changed file
   build:
     needs: detect-changes
+    if: needs.detect-changes.outputs.has_changes == 'true'
     strategy:
       matrix:
         include: ${{ fromJson(needs.detect-changes.outputs.matrix) }}
