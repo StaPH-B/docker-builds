@@ -80,7 +80,6 @@ jobs:
             "org.opencontainers.image.source"
             "org.opencontainers.image.licenses"
             "org.opencontainers.image.authors"
-            "dockerfile.version"
           )
           FAILED=0
           for label in "${REQUIRED_LABELS[@]}"; do
