@@ -1,0 +1,27 @@
+name: Lint Dockerfile
+
+on:
+  workflow_call:
+    inputs:
+      dockerfile_path:
+        required: true
+        type: string
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+
+      - name: Static Analysis (Hadolint)
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: ${{ inputs.dockerfile_path }}
+          # Ignore specific rules if they are too strict for your team
+          ignore: DL3008
+
+      - name: Custom Structural Check
+        run: |
+          FILE="${{ inputs.dockerfile_path }}"
+          if ! grep -qi "AS app" "$FILE"; then echo "FATAL: Missing 'AS app' stage"; exit 1; fi
+          if ! grep -qi "AS test" "$FILE"; then echo "FATAL: Missing 'AS test' stage"; exit 1; fi
