@@ -1,0 +1,21 @@
+name: base
+channels:
+  - conda-forge
+dependencies:
+  - python ==3.11
+  - pip
+  # Build requirements
+  - c-compiler
+  - cython >=3.0
+  - numpy >=1.24
+  # Runtime requirements (also needed at build time for pip install)
+  - numpy >=1.24,<2.0
+  - sqlalchemy >=2.0
+  - biopython >=1.80
+  - alembic >=1.13
+  - attrs >=23
+  - cattrs >=23.0
+  - click >=8.0
+  - h5py >=3.9
+  - setuptools
+  - scipy >=1.11
