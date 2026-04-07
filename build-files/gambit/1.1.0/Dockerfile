@@ -70,3 +70,5 @@ RUN apt-get update && apt-get install -y --no-install-recommends wget && \
 USER $MAMBA_USER
 COPY test.sh .
 RUN bash test.sh
+
+RUN micromamba list
