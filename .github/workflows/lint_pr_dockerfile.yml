@@ -14,14 +14,90 @@ jobs:
       - uses: actions/checkout@main
 
       - name: Static Analysis (Hadolint)
-        uses: hadolint/hadolint-action@v3.1.0
+        uses: hadolint/hadolint-action@main
         with:
           dockerfile: ${{ inputs.dockerfile_path }}
-          # Ignore specific rules if they are too strict for your team
           ignore: DL3008
 
-      - name: Custom Structural Check
+      - name: Structural and Instruction Check
         run: |
           FILE="${{ inputs.dockerfile_path }}"
-          if ! grep -qi "AS app" "$FILE"; then echo "FATAL: Missing 'AS app' stage"; exit 1; fi
-          if ! grep -qi "AS test" "$FILE"; then echo "FATAL: Missing 'AS test' stage"; exit 1; fi
+          FAILED=0
+
+          if ! grep -qi "AS app" "$FILE"; then 
+            echo "Error: Missing 'AS app' stage."
+            FAILED=1
+          fi
+          if ! grep -qi "AS test" "$FILE"; then 
+            echo "Error: Missing 'AS test' stage."
+            FAILED=1
+          fi
+
+      - name: CMD Check
+        run: |
+          FILE="${{ inputs.dockerfile_path }}"
+          if ! grep -qi "^CMD " "$FILE"; then
+            echo "Error: Missing CMD instruction. Dockerfiles must define a default runtime command."
+            FAILED=1
+          else
+            echo "Success: CMD instruction found."
+          fi
+
+          if [ "$FAILED" -eq 1 ]; then exit 1; fi
+
+      - name: Base Image Consistency Check
+        run: |
+          FILE="${{ inputs.dockerfile_path }}"
+          
+          CURRENT_BASE=$(grep -iE "^FROM.*[Aa][Ss] [Aa][Pp][Pp]" "$FILE" | awk '{print $2}')
+          
+          echo "Initial app parent: $CURRENT_BASE"
+
+          while grep -qiE "^FROM.*[Aa][Ss] $CURRENT_BASE(\s|$)" "$FILE"; do
+            echo "Alias detected: $CURRENT_BASE is an intermediate stage. Tracing back..."
+            # Update CURRENT_BASE to the image used by that previous stage
+            CURRENT_BASE=$(grep -iE "^FROM.*[Aa][Ss] $CURRENT_BASE(\s|$)" "$FILE" | awk '{print $2}')
+          done
+          
+          # Extract the value of the org.opencontainers.image.base.name label
+          # This regex handles both double and single quotes
+          LABEL_IMAGE=$(grep -i "org.opencontainers.image.base.name=" "$FILE" | sed -E 's/.*base.name=["'\'']([^"'\'']+)["'\'']/\1/')
+          
+          if [ -z "$LABEL_IMAGE" ]; then
+            echo "Error: Label 'org.opencontainers.image.base.name' is missing from the Dockerfile."
+          fi
+
+          if [ "$CURRENT_BASE" != "$LABEL_IMAGE" ]; then
+            echo "Error: Base image mismatch."
+            echo "Dockerfile uses 'FROM $FROM_IMAGE' but the OCI label is set to '$LABEL_IMAGE'."
+          else
+            echo "Success: Base image and OCI label match."
+          fi
+
+      - name: Micromamba validation
+        run: |
+          FILE="${{ inputs.dockerfile_path }}"
+          # If 'micromamba' is used anywhere in the file...
+          if grep -qi "micromamba" "$FILE"; then
+            if ! cat "$FILE" | grep -qi "micromamba list"; then
+              echo "Error: Micromamba detected, but 'micromamba list' is missing."
+              FAILED=1
+            else
+              echo "Success: Micromamba list found ."
+            fi
+          fi
+
+      - name: Pip Validation
+        run: |  
+          # If 'pip install' is used anywhere in the file...
+          if grep -qi "pip install" "$FILE"; then
+            # ...it must have a pip list command
+            if ! cat "$FILE" | grep -qi "pip list"; then
+              echo "Error: Pip installation detected, but 'pip list' is missing."
+              FAILED=1
+            else
+              echo "Success: Pip list found."
+            fi
+          fi
+
+          if [ "$FAILED" -eq 1 ]; then exit 1; fi
