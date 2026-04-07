@@ -134,10 +134,11 @@ jobs:
           else
             echo "Success: Container runs as non-root user: $USER_VAL"
           fi
-
+          
       - name: Validate Nextflow Dependencies
         id: nextflow
         run: |
+          # Define IMAGE locally so it is available in this shell session
           IMAGE="${{ inputs.tool_name }}:app"
           
           # List of essential binaries for Nextflow runtime
@@ -148,6 +149,7 @@ jobs:
           echo "------------------------------------------------"
 
           for cmd in "${NEXTFLOW_DEPS[@]}"; do
+            # Use 'command -v' inside the container to check for the binary
             if ! docker run --rm --entrypoint /bin/sh "$IMAGE" -c "command -v $cmd" > /dev/null 2>&1; then
               echo "Error: Nextflow dependency '$cmd' is missing from the app stage."
               FAILED=1
