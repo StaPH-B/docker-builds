@@ -1,7 +1,7 @@
 FROM ubuntu:noble AS app
 
 ARG CHECKM_VER="1.2.5"
-ARG PPLACER_VER="v1.1.alpha22"
+ARG PPLACER_VER="1.1.alpha22"
 
 LABEL base.image="ubuntu:noble"
 LABEL dockerfile.version="1"
