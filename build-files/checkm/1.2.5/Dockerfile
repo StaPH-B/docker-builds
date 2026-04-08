@@ -26,9 +26,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN pip install --no-cache-dir --break-system-packages numpy matplotlib pysam checkm-genome==${CHECKM_VER}
 
 # download pplacer
-RUN wget -q https://github.com/matsen/pplacer/releases/download/${PPLACER_VER}/pplacer-linux-${PPLACER_VER}.zip && \
-    unzip pplacer-linux-${PPLACER_VER}.zip && \
-    rm pplacer-linux-${PPLACER_VER}.zip
+# No more version controlled zip file
+RUN wget -q https://github.com/matsen/pplacer/releases/download/v${PPLACER_VER}/pplacer-linux-x86_64.zip && \
+    unzip pplacer-linux-x86_64.zip && \
+    rm pplacer-linux-x86_64.zip
 
 ENV PATH=$PATH:/pplacer-Linux-${PPLACER_VER} \
     LC_ALL=C
