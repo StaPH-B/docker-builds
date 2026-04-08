@@ -3,7 +3,7 @@ name: PR Docker Validation
 on:
   pull_request:
     paths:
-      - 'build-files/**/Dockerfile'
+      - 'build-files/*/*/Dockerfile'
   workflow_dispatch:
     inputs:
       tool1:
