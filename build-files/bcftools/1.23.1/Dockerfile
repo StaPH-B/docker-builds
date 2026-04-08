@@ -110,7 +110,7 @@ RUN echo "Testing bcftools polysomy..." && \
   head psmy/dist.dat
 
 RUN echo "Reading test data from Google Cloud to validate GCS support" && \
-  bcftools head -h 20 gs://genomics-public-data/references/hg38/v0/1000G_phase1.snps.high_confidence.hg38.vcf.gz
+  bcftools head -h 20 gs://gcp-public-data--broad-references/hg38/v0/1000G_phase1.snps.high_confidence.hg38.vcf.gz
 
 RUN  echo "Reading test data from S3 to validate AWS support" && \
   bcftools head -h 20 s3://human-pangenomics/T2T/CHM13/assemblies/variants/GATK_CHM13v2.0_Resource_Bundle/resources-broad-hg38-v0-1000G_phase1.snps.high_confidence.hg38.t2t-chm13-v2.0.vcf.gz
