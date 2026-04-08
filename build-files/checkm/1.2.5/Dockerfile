@@ -23,7 +23,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # install checkm and its dependencies
-RUN pip install --no-cache-dir numpy matplotlib pysam checkm-genome==${CHECKM_VER}
+RUN pip install --no-cache-dir --break-system-packages numpy matplotlib pysam checkm-genome==${CHECKM_VER}
 
 # download pplacer
 RUN wget -q https://github.com/matsen/pplacer/releases/download/${PPLACER_VER}/pplacer-linux-${PPLACER_VER}.zip && \
