@@ -28,7 +28,7 @@ LABEL \
       # The date this image was last updated (Manually update this!)
       org.opencontainers.image.created="2024-05-20" \
       # The exact base image used for the 'app' stage (Must match the FROM instruction above)
-      org.opencontainers.image.base.name="ubuntu:jammy" \
+      org.opencontainers.image.base.name="ubuntu:noble" \
       # The name of the software (e.g., "BWA" or "Samtools")
       org.opencontainers.image.title="SoftwareName" \
       # The version of the software itself
