@@ -1,4 +1,4 @@
-# This called workflow builds a docker container, targeting the "app" stage and pushes the image to Docker Hub.
+# This called workflow builds a docker container, targeting the "app" stage and pushes the image to Docker Hub and Quay.
 
 name: Build and deploy image
 
@@ -26,7 +26,7 @@ on:
         required: false
         type: string
       cache:
-        required: true
+        required: false
         type: string
       container_name:
         required: true
@@ -44,120 +44,112 @@ on:
         required: false
         type: boolean
 
-
 jobs:
-
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Check Out Repo (+ download Git LFS dependencies)  # each job runs in an isolated environment, so need to check out the repo in each job
-        uses: actions/checkout@v4
+      - name: Check Out Repo
+        uses: actions/checkout@main
         with:
           lfs: true
 
-      # Git LFS not used by StaPH-B but maybe useful in some people's forks
       - name: Checkout LFS objects
         run: git lfs checkout
 
       - name: Set up Docker Buildx
-        id: buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Cache Docker layers  # also need to set up the cache in each job, using the same prefix (here ${{ runner.os }}-buildx) makes it sharable between jobs
-        uses: actions/cache@v4
-        with:
-          path: /tmp/.buildx-cache-${{ inputs.cache }}
-          key: ${{ runner.os }}-buildx-${{ inputs.cache }}-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-buildx-${{ inputs.cache }}
+        uses: docker/setup-buildx-action@master
 
       - name: Docker meta
         id: meta
-        uses: docker/metadata-action@v5 # trying this to resolve issues with pushing identical images to quay. info here: https://github.com/docker/build-push-action/issues/452
+        uses: docker/metadata-action@master
         with:
           images: |
-            ${{ inputs.repository_name }}/${{ inputs.container_name }}:${{ inputs.tag }}
-            ${{ inputs.repository_name }}/${{ inputs.container_name }}:latest
-            quay.io/${{ inputs.repository_name }}/${{ inputs.container_name }}:${{ inputs.tag }}
-            quay.io/${{ inputs.repository_name }}/${{ inputs.container_name }}:latest
+            ${{ inputs.repository_name }}/${{ inputs.container_name }}
+            ${{ inputs.push_quay && format('quay.io/{0}/{1}', inputs.repository_name, inputs.container_name) || '' }}
+          tags: |
+            type=raw,value=${{ inputs.tag }}
+            type=raw,value=latest,enable=${{ inputs.push_latest_tag }}
 
       - name: Login to DockerHub
-        uses: docker/login-action@v3
+        uses: docker/login-action@master
         with:
           username: ${{ secrets.docker_username }}
           password: ${{ secrets.docker_access_token }}
 
       - name: Login to Quay
-        uses: docker/login-action@v3
         if: ${{ inputs.push_quay }}
+        uses: docker/login-action@master
         with:
           registry: quay.io
           username: ${{ secrets.quay_username }}
           password: ${{ secrets.quay_robot_token }}
 
-      - name: Build and push user-defined tag to DockerHub
-        id: docker_build_user_defined_tag
-        uses: docker/build-push-action@v5
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@master
         with:
           context: ${{ inputs.path_to_context }}
           file: ${{ inputs.path_to_context }}/${{ inputs.dockerfile_name }}
           target: app
           push: true
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=local,src=/tmp/.buildx-cache-${{ inputs.cache }}
-          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-${{ inputs.cache }}-new # mode=max means export layers from all stage to cache
-          tags: | # pushing to dockerhub for only the user-defined inputs.tag
-            ${{ inputs.repository_name }}/${{ inputs.container_name }}:${{ inputs.tag }}
+          tags: ${{ steps.meta.outputs.tags }}
 
-      - name: Build and push latest tag to DockerHub
-        id: docker_build_latest_tag
-        uses: docker/build-push-action@v5
+      - name: Update Docker Hub README
         if: ${{ inputs.push_latest_tag }}
-        with:
-          context: ${{ inputs.path_to_context }}
-          file: ${{ inputs.path_to_context }}/${{ inputs.dockerfile_name }}
-          target: app
-          push: true
-          labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=local,src=/tmp/.buildx-cache-${{ inputs.cache }}
-          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-${{ inputs.cache }}-new # mode=max means export layers from all stage to cache
-          tags: | # pushing to dockerhub for only latest tag
-            ${{ inputs.repository_name }}/${{ inputs.container_name }}:latest
-
-      - name: Build and push user-defined tag to Quay
-        id: quay_build_user_defined_tag
-        uses: docker/build-push-action@v5
-        if: ${{ inputs.push_quay }}
-        with:
-          context: ${{ inputs.path_to_context }}
-          file: ${{ inputs.path_to_context }}/${{ inputs.dockerfile_name }}
-          target: app
-          push: true
-          labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=local,src=/tmp/.buildx-cache-${{ inputs.cache }}
-          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-${{ inputs.cache }}-new # mode=max means export layers from all stage to cache
-          tags: | # pushing to quay for only user-defined inputs.tag
-            quay.io/${{ inputs.repository_name }}/${{ inputs.container_name }}:${{ inputs.tag }}
-
-      - name: Build and push latest tag to Quay
-        id: quay_build_latest_tag
-        uses: docker/build-push-action@v5
-        if: ${{ inputs.push_quay && inputs.push_latest_tag }}
-        with:
-          context: ${{ inputs.path_to_context }}
-          file: ${{ inputs.path_to_context }}/${{ inputs.dockerfile_name }}
-          target: app
-          push: true
-          labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=local,src=/tmp/.buildx-cache-${{ inputs.cache }}
-          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-${{ inputs.cache }}-new # mode=max means export layers from all stage to cache
-          tags: | # pushing to quay for only latest
-            quay.io/${{ inputs.repository_name }}/${{ inputs.container_name }}:latest     
-
-      - name: Move cache # apparently prevents the cache from growing in size forever
+        continue-on-error: true
         run: |
-          rm -rf /tmp/.buildx-cache-${{ inputs.cache }}
-          mv /tmp/.buildx-cache-${{ inputs.cache }}-new /tmp/.buildx-cache-${{ inputs.cache }}
+          README_PATH="${{ inputs.path_to_context }}/README.md"
+          if [ -f "$README_PATH" ]; then
+            echo "Attempting to update Docker Hub description for ${{ inputs.container_name }}..."
+            
+            # Get JWT Token
+            TOKEN=$(curl -s -H "Content-Type: application/json" -X POST \
+              -d '{"username": "${{ secrets.docker_username }}", "password": "${{ secrets.docker_access_token }}"}' \
+              https://hub.docker.com/v2/users/login/ | jq -r .token)
+            
+            if [ "$TOKEN" != "null" ]; then
+              RESPONSE=$(jq -n --rawfile readme "$README_PATH" '{full_description: $readme}' | \
+                curl -s -o /dev/null -w "%{http_code}" -X PATCH \
+                -H "Authorization: JWT $TOKEN" \
+                -H "Content-Type: application/json" \
+                -d @- \
+                "https://hub.docker.com/v2/repositories/${{ inputs.repository_name }}/${{ inputs.container_name }}/")
+              
+              if [ "$RESPONSE" == "200" ]; then
+                echo "Successfully updated Docker Hub README."
+              else
+                echo "Failed to update Docker Hub README. Status code: $RESPONSE"
+                echo "This is likely due to the bot account lacking 'Delete/Admin' permissions."
+              fi
+            else
+              echo "Failed to authenticate with Docker Hub API."
+            fi
+          fi
+
+      - name: Update Quay README
+        if: ${{ inputs.push_quay && inputs.push_latest_tag }}
+        continue-on-error: true
+        run: |
+          README_PATH="${{ inputs.path_to_context }}/README.md"
+          if [ -f "$README_PATH" ]; then
+            echo "Attempting to update Quay description for ${{ inputs.container_name }}..."
+            
+            README_CONTENT=$(cat "$README_PATH")
+            JSON_BODY=$(jq -n --arg desc "$README_CONTENT" '{description: $desc}')
+            
+            RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" -X PUT \
+              -H "Authorization: Bearer ${{ secrets.quay_robot_token }}" \
+              -H "Content-Type: application/json" \
+              -d "$JSON_BODY" \
+              "https://quay.io/api/v1/repository/${{ inputs.repository_name }}/${{ inputs.container_name }}")
+            
+            if [ "$RESPONSE" == "200" ]; then
+              echo "Successfully updated Quay README."
+            else
+              echo "Failed to update Quay README. Status code: $RESPONSE"
+            fi
+          fi
 
       - name: Image digest
-        run: echo ${{ steps.docker_build_user_defined_tag.outputs.digest }}
+        run: echo ${{ steps.docker_build.outputs.digest }}

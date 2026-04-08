@@ -1,0 +1,113 @@
+name: PR Docker Validation
+
+on:
+  pull_request:
+    paths:
+      - 'build-files/*/*/Dockerfile'
+  workflow_dispatch:
+    inputs:
+      tool1:
+        description: 'First Tool Name'
+        required: true
+      version1:
+        description: 'First Version'
+        required: true
+      tool2:
+        description: 'Second Tool Name (Optional)'
+        required: false
+      version2:
+        description: 'Second Version (Optional)'
+        required: false
+
+permissions:
+  pull-requests: write
+  contents: read
+
+jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+      has_changes: ${{ steps.set-matrix.outputs.has_changes }}
+    steps:
+      - uses: actions/checkout@main
+        with:
+          fetch-depth: 0
+
+      - name: Get changed files in PR
+        if: github.event_name == 'pull_request'
+        id: changed-files
+        uses: tj-actions/changed-files@main
+        with:
+          files: build-files/*/*/Dockerfile
+          json: true
+
+      - name: Generate Matrix
+        id: set-matrix
+        env:
+          # We pull the raw output into an environment variable
+          RAW_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
+        run: |
+          MATRIX="[]"
+          HAS_CHANGES="false"
+
+          # Correctly check the event type using the GitHub context
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            T1="${{ github.event.inputs.tool1 }}"
+            V1="${{ github.event.inputs.version1 }}"
+            T2="${{ github.event.inputs.tool2 }}"
+            V2="${{ github.event.inputs.version2 }}"
+            
+            # Use jq to build the JSON array safely
+            MATRIX=$(jq -n -c \
+              --arg t1 "$T1" --arg v1 "$V1" \
+              --arg t2 "$T2" --arg v2 "$V2" \
+              '[
+                {tool: $t1, version: $v1, path: "build-files/\($t1)/\($v1)/Dockerfile", context: "build-files/\($t1)/\($v1)"},
+                (if $t2 != "" and $v2 != "" then {tool: $t2, version: $v2, path: "build-files/\($t2)/\($v2)/Dockerfile", context: "build-files/\($t2)/\($v2)"} else empty end)
+              ]')
+            HAS_CHANGES="true"
+          
+          else
+            # PR Logic: Handle the escaped quotes in the input string
+            # We use sed to remove backslashes before passing to jq
+            CLEAN_FILES=$(echo "$RAW_FILES" | sed 's/\\"/"/g')
+            
+            if [[ -n "$CLEAN_FILES" && "$CLEAN_FILES" != "[]" ]]; then
+              MATRIX=$(echo "$CLEAN_FILES" | jq -c '
+                map(split("/")) 
+                | map({
+                    tool: .[1], 
+                    version: .[2], 
+                    path: join("/"), 
+                    context: (.[0:3] | join("/"))
+                  })
+              ')
+              HAS_CHANGES="true"
+            fi
+          fi
+          
+          echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
+          echo "has_changes=$HAS_CHANGES" >> $GITHUB_OUTPUT
+          
+  lint:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.has_changes == 'true'
+    strategy:
+      matrix:
+        include: ${{ fromJson(needs.detect-changes.outputs.matrix) }}
+    uses: ./.github/workflows/lint_pr_dockerfile.yml
+    with:
+      dockerfile_path: ${{ matrix.path }}
+
+  build:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.has_changes == 'true'
+    strategy:
+      matrix:
+        include: ${{ fromJson(needs.detect-changes.outputs.matrix) }}
+    uses: ./.github/workflows/build_and_test_pr_dockerfile.yml
+    with:
+      context_path: ${{ matrix.context }}
+      tool_name: ${{ matrix.tool }}
+      version: ${{ matrix.version }}

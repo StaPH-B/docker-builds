@@ -1,3 +1,5 @@
+# syntax=docker/dockerfile:1
+
 ##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
 ##### Thank you for using this Dockerfile template!                     #####
 ##### This is an outline for the flow of building a docker image.       #####
@@ -8,56 +10,75 @@
 ##### Step 1. Set up the base image in the first stage.                 #####
 ##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
 
-# 'FROM' defines where the Dockerfile is starting to build from. This command has to come first in the file
-# The 'as' keyword lets you name the folowing stage. The production image uses everything to the 'app' stage.
+# 'FROM' defines where the Dockerfile is starting to build from.
+# The 'as app' naming is required for the PR validation tests.
+FROM ubuntu:noble as app
 
-FROM ubuntu:jammy as app
-
-# List all software versions are ARGs near the top of the dockerfile
-# 'ARG' sets environment variables during the build stage
-# ARG variables are ONLY available during image build, they do not persist in the final image
+# List all software versions as ARGs near the top of the dockerfile.
+# ARG variables are ONLY available during image build.
 ARG SOFTWARENAME_VER="1.0.0"
 
-# 'LABEL' instructions tag the image with metadata that might be important to the user
-LABEL base.image="ubuntu:jammy"
-LABEL dockerfile.version="1"
-LABEL software="SoftwareName"
-LABEL software.version="${SOFTWARENAME_VER}"
-LABEL description="This software does X, Y, AND Z!"
-LABEL website="https://github.com/StaPH-B/docker-builds"
-LABEL license="https://github.com/StaPH-B/docker-builds/blob/master/LICENSE"
-LABEL maintainer="FirstName LastName"
-LABEL maintainer.email="my.email@email.com"
+# 'LABEL' instructions tag the image with metadata. 
+# NOTE: The "org.opencontainers" labels are REQUIRED to pass StaPH-B CI tests.
 
-# 'RUN' executes code during the build
-# Install dependencies via apt-get or yum if using a centos or fedora base
+# Required Metadata Labels
+# These follow the OCI Image Spec. They help users and automated systems 
+# identify what is inside the container.
+LABEL \
+      # The date this image was last updated (Manually update this!)
+      org.opencontainers.image.created="2024-05-20" \
+      # The exact base image used for the 'app' stage (Must match the FROM instruction above)
+      org.opencontainers.image.base.name="ubuntu:noble" \
+      # The name of the software (e.g., "BWA" or "Samtools")
+      org.opencontainers.image.title="SoftwareName" \
+      # The version of the software itself
+      org.opencontainers.image.version="${SOFTWARENAME_VER}" \
+      # The version of THIS Dockerfile (increment if you change the build logic)
+      org.opencontainers.image.revision="1" \
+      # A human-readable description of the tool
+      org.opencontainers.image.description="A brief description of what this tool does" \
+      # The project homepage or GitHub repository
+      org.opencontainers.image.url="https://github.com/StaPH-B/docker-builds" \
+      # Where users can find instructions or manuals for the software
+      org.opencontainers.image.documentation="https://github.com/StaPH-B/docker-builds" \
+      # Link to the source code used to build the image (which is often a GitHub url)
+      org.opencontainers.image.source="https://github.com/StaPH-B/docker-builds" \
+      # The software license (e.g., MIT, GPL-3.0, Apache-2.0) for the software
+      org.opencontainers.image.licenses="GPL-3.0" \
+      # The person/group maintaining this Dockerfile
+      org.opencontainers.image.authors="firstName lastName <example@email.com>"
+
+# 'RUN' executes code during the build.
+# StaPH-B Requirement: You MUST install 'procps' and 'hostname' for Nextflow compatibility.
 RUN apt-get update && apt-get install -y --no-install-recommends \
- dependency_a \
- dependency_b \
- dependency_c && \
- apt-get autoclean && rm -rf /var/lib/apt/lists/*
+    dependency_a \
+    dependency_b && \
+    apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-# Install and/or setup more things. Make /data for use as a working dir
-# For readability, limit one install per 'RUN' statement.
+# Setup Non-Root User
+# Running as 'root' is a security risk. Your PR will fail if a user is not set.
+RUN groupadd -r staphb && useradd -r -g staphb staphb
 
 # Example: install ncbi-blast+ 2.9.0 pre-compiled linux binaries
 ARG BLAST_VER=2.9.0
-
 RUN wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/${BLAST_VER}/ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz && \
- tar -xzf ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz && \
- rm ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz && \
- mkdir /data
+    tar -xzf ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz && \
+    rm ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz
 
-# 'ENV' instructions set environment variables that persist from the build into the resulting image
-# Use for e.g. $PATH and locale settings for compatibility with Singularity
-ENV PATH="/software-${SOFTWARENAME_VER}/bin:$PATH" \
- LC_ALL=C
+# 'ENV' instructions set environment variables that persist into the resulting image.
+ENV PATH="/ncbi-blast-${BLAST_VER}+/bin:$PATH" \
+    LC_ALL=C
 
-# 'CMD' instructions set a default command when the container is run. This is typically 'tool --help.'
-CMD [ "tool", "--help" ]
-
-# 'WORKDIR' sets working directory
+# 'WORKDIR' sets the default working directory. 
+# StaPH-B Requirement: This MUST be set to /data.
 WORKDIR /data
+
+# Switch to the non-root user.
+USER staphb
+
+# 'CMD' instructions set a default command. This is typically 'tool --help.'
+CMD [ "blastn", "-help" ]
+
 
 ##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
 ##### Step 2. Set up the testing stage.                                 #####
@@ -65,28 +86,20 @@ WORKDIR /data
 ##### the test stage (or any stage after 'app') will be lost.           #####
 ##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
 
-# A second FROM insruction creates a new stage
+# A second FROM instruction creates a new stage for automated testing.
 FROM app as test
 
-# set working directory so that all test inputs & outputs are kept in /test
+# Set working directory so that all test inputs & outputs are kept in /test
+# We switch back to root briefly if we need to install test-only tools, 
+# but generally, we stay as the 'staphb' user.
 WORKDIR /test
 
-# print help and version info; check dependencies (not all software has these options available)
-# Mostly this ensures the tool of choice is in path and is executable
-RUN softwarename --help && \
- softwarename --check && \
- softwarename --version
+# Print help and version info to ensure the tool is in the PATH and executable.
+RUN blastn -version
 
-# Demonstrate that the program is successfully installed - which is highly dependant on what the tool is.
+# Option 1: Run your own tests in a bash script and copy them:
+# COPY my_tests.sh .
+# RUN bash my_tests.sh
 
-# Run the program's internal tests if available, for example with SPAdes:
-RUN spades.py --test
-
-# Option 1: write your own tests in a bash script in the same directory as your Dockerfile and copy them:
-COPY my_tests.sh .
-RUN bash my_tests.sh
-
-# Option 2: write below common usage cases, for example with tb-profiler:
-RUN wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR166/009/ERR1664619/ERR1664619_1.fastq.gz && \
-    wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR166/009/ERR1664619/ERR1664619_2.fastq.gz && \
-    tb-profiler profile -1 ERR1664619_1.fastq.gz -2 ERR1664619_2.fastq.gz -t 4 -p ERR1664619 --txt
+# Option 2: Write out usage cases directly:
+# RUN wget <data_url> && blastn -query input.fasta ...
