@@ -8,7 +8,6 @@ jobs:
   compare-dockerfiles:
     # Trigger whenever the bot handle is mentioned in a PR
     if: |
-      github.event.issue.pull_request != null &&
       contains(github.event.comment.body, '@staphb-dockerbuilds-diff')
     runs-on: ubuntu-latest
     permissions:
