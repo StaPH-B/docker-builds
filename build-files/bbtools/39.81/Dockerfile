@@ -51,7 +51,8 @@ RUN wget -q https://github.com/biod/sambamba/releases/download/v${SAMBAMBAVER}/s
     chmod +x /usr/local/bin/sambamba
 
 # download and install bbtools
-RUN wget -q https://sourceforge.net/projects/bbmap/files/BBMap_${BBTOOLSVER}.tar.gz && \
+RUN wget -q https://sourceforge.net/projects/bbmap/files/BBMap_${BBTOOLSVER}.tar.gz/download \
+    -O BBMap_${BBTOOLSVER}.tar.gz && \
     tar -xzf BBMap_${BBTOOLSVER}.tar.gz && \
     rm BBMap_${BBTOOLSVER}.tar.gz && \
     mkdir /data
