@@ -1,0 +1,10 @@
+{
+  "name": "pstuartii",
+  "description": "P. stuartii MLST",
+  "locii": 7,
+  "download_date": "2026-04-10",
+  "last_updated": "2025-11-20",
+  "source": "pubmlst",
+  "API": "https://rest.pubmlst.org/db/pubmlst_providencia_seqdef/schemes/2",
+  "authenticated": true
+}
