@@ -59,13 +59,14 @@ LABEL maintainer2.email="kapsakcj@gmail.com"
 # install dependencies required for running bcftools
 # https://github.com/samtools/bcftools/blob/develop/INSTALL#L29
 RUN apt-get update && apt-get install --no-install-recommends -y \
-  perl\
+  perl \
+  libvcftools-perl \
   zlib1g \
   gsl-bin \
   bzip2 \
   liblzma5 \
   libcurl3-gnutls \
-  libdeflate0 \  
+  libdeflate0 \
   procps \
   && apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
