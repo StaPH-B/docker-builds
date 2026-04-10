@@ -48,11 +48,18 @@ RUN curl -L https://github.com/lh3/minimap2/releases/download/v${MINIMAP2_VER}/m
 RUN pip install --no-cache-dir --break-system-packages kaptive==${KAPTIVE_VER}
 
 # move databases
+# RUN wget -q https://github.com/klebgenomics/Kaptive/archive/refs/tags/v${KAPTIVE_VER}.tar.gz && \
+#     tar -vxf v${KAPTIVE_VER}.tar.gz --no-same-owner && \
+#     mkdir -p /data /kaptive/ && \
+#     mv /Kaptive-${KAPTIVE_VER}/reference_database /kaptive/reference_database && \
+#     rm -rf v${KAPTIVE_VER}.tar.gz Kaptive-${KAPTIVE_VER}
+
 RUN wget -q https://github.com/klebgenomics/Kaptive/archive/refs/tags/v${KAPTIVE_VER}.tar.gz && \
-    tar -vxf v${KAPTIVE_VER}.tar.gz --no-same-owner && \
+    tar -xf v${KAPTIVE_VER}.tar.gz --no-same-owner && \
     mkdir -p /data /kaptive/ && \
-    mv /Kaptive-${KAPTIVE_VER}/reference_database /kaptive/reference_database && \
+    mv /Kaptive-${KAPTIVE_VER}/src/kaptive/data /kaptive/reference_database && \
     rm -rf v${KAPTIVE_VER}.tar.gz Kaptive-${KAPTIVE_VER}
+    
     
 # NOTE: in v3.2.1+, reference_database moved to src/kaptive/data/reference_database. Use line below.
 # mv /Kaptive-${KAPTIVE_VER}/src/kaptive/data/reference_database /kaptive/reference_database
