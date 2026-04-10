@@ -94,13 +94,6 @@ RUN bcftools --help && bcftools plugin -lv
 
 # install wget for downloading test files
 RUN apt-get update && apt-get install -y wget vcftools
-
-# # install wget and vcftools for downloading test files and running perl-based tests
-# RUN apt-get update && apt-get install --no-install-recommends -y \
-#   wget \
-#   vcftools \
-#   ca-certificates \
-#   && apt-get autoclean && rm -rf /var/lib/apt/lists/*
   
 RUN echo "Downloading test SC2 BAM and FASTA and running bcftools mpileup and bcftools call test commands..." && \
   wget -q https://raw.githubusercontent.com/artic-network/artic-ncov2019/master/primer_schemes/nCoV-2019/V4/SARS-CoV-2.reference.fasta && \
