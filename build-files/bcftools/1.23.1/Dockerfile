@@ -92,11 +92,12 @@ RUN bcftools --help && bcftools plugin -lv
 # # install wget for downloading test files
 # RUN apt-get update && apt-get install -y wget vcftools
 
-# Installing wget and vcftools for downloading files, github needs tabix
+# Installing wget and vcftools for downloading files, github needs tabix and ca-certificates
 RUN apt-get update && apt-get install --no-install-recommends -y \
   wget \
   vcftools \
   tabix \
+  ca-certificates \
   && apt-get autoclean && rm -rf /var/lib/apt/lists/*
   
 RUN echo "Downloading test SC2 BAM and FASTA and running bcftools mpileup and bcftools call test commands..." && \
