@@ -1,11 +1,11 @@
-FROM ubuntu:noble AS app
+FROM python:3.12-slim AS app
 
 ARG MLST_VER="2.33.0"
 # mlst requires any2fasta 0.6.0 or higher: https://github.com/tseemann/mlst/blob/master/environment.yml
 ARG ANY2FASTA_VER="0.8.1"
 # mlst requires blast 2.16.0 or higher
 ARG BLAST_VER="2.17.0"
-
+ARG MLSTDB_VER="1.1.1"
 
 LABEL base.image="ubuntu:noble"
 LABEL dockerfile.version="1"
@@ -50,10 +50,12 @@ RUN wget -q https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/${BLAST_VER}/n
     ln -vs /ncbi-blast-${BLAST_VER}+/bin/* /usr/local/bin/
 
 # get mlst
-RUN echo "Downloading and installing mlst v${MLST_VER}..." && \
-wget -q https://github.com/tseemann/mlst/archive/v${MLST_VER}.tar.gz && \
-tar -xzf v${MLST_VER}.tar.gz && \
-rm -v v${MLST_VER}.tar.gz
+RUN wget -q https://github.com/tseemann/mlst/archive/v${MLST_VER}.tar.gz && \
+    tar -xzf v${MLST_VER}.tar.gz && \
+    rm -v v${MLST_VER}.tar.gz
+
+# get mlstdb
+RUN pip install https://github.com/MDU-PHL/mlstdb/archive/refs/tags/v${MLSTDB_VER}.tar.gz
 
 # set PATH and perl local settings
 ENV PATH="${PATH}:/mlst-${MLST_VER}/bin:" \
@@ -61,6 +63,8 @@ LC_ALL=C.UTF-8
 
 # check dependencies and list available schemes
 RUN mlst --check && mlst --list
+
+RUN mlstdb --help && mlstdb --version
 
 WORKDIR /data
 
@@ -79,7 +83,6 @@ ARG EXE="bin/barrnap --threads 4"
 # Create custom database directory
 RUN mkdir -p /opt/custom_mlst/pubmlst
 
-
 # Unfortunately, Providencia stuartii entries have been gated behind PubMLST's API. 
 # I generated the following pubmlst and blast folders using mlstdb update --input pstuartii_scheme.tab as needed for the following test #3.
 # Copy the pre-built mlstdb directories
@@ -90,7 +93,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  git && \
  apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-# install (recent version of) bats for testing framework since version in apt for ubuntu:jammy does not include the bats "--abort" option
+RUN mlst --help && mlst --version
+ 
+RUN mlstdb --help && mlstdb --version
+
+ # install (recent version of) bats for testing framework since version in apt for ubuntu:jammy does not include the bats "--abort" option
 RUN git clone https://github.com/bats-core/bats-core.git && \
 cd bats-core && \
 ./install.sh /usr/local
