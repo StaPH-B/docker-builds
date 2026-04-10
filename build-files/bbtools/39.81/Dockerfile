@@ -8,7 +8,7 @@ FROM staphb/htslib:1.23.1 AS htslib
 FROM ubuntu:noble AS app
 
 ARG SAMBAMBAVER=1.0.1
-ARG BBTOOLSVER=39.81
+ARG BBTOOLSVER=39.81b
 
 LABEL base.image="ubuntu:noble"
 LABEL dockerfile.version="1"
@@ -51,11 +51,11 @@ RUN wget -q https://github.com/biod/sambamba/releases/download/v${SAMBAMBAVER}/s
     chmod +x /usr/local/bin/sambamba
 
 # download and install bbtools
-RUN wget -q https://downloads.sourceforge.net/bbmap/BBMap_${BBTOOLSVER}.tar.gz \
-    -O BBMap_${BBTOOLSVER}.tar.gz && \
+RUN wget -q https://sourceforge.net/projects/bbmap/files/BBMap_${BBTOOLSVER}.tar.gz && \
     tar -xzf BBMap_${BBTOOLSVER}.tar.gz && \
     rm BBMap_${BBTOOLSVER}.tar.gz && \
     mkdir /data
+
 
 ENV PATH=/bbmap/:$PATH \
     LC_ALL=C
