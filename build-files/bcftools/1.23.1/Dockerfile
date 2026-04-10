@@ -97,9 +97,15 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   vcftools \
   && apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-RUN echo "Downloading test SC2 BAM and FASTA and running bcftools mpileup and bcftools call test commands..." && \
-  wget -q https://raw.githubusercontent.com/artic-network/artic-ncov2019/master/primer_schemes/nCoV-2019/V4/SARS-CoV-2.reference.fasta && \
-  wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123.primertrim.sorted.bam && \
+# RUN echo "Downloading test SC2 BAM and FASTA and running bcftools mpileup and bcftools call test commands..." && \
+#   wget -q https://raw.githubusercontent.com/artic-network/artic-ncov2019/master/primer_schemes/nCoV-2019/V4/SARS-CoV-2.reference.fasta && \
+#   wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123.primertrim.sorted.bam && \
+#   bcftools mpileup -A -d 200 -B -Q 0 -f SARS-CoV-2.reference.fasta SRR13957123.primertrim.sorted.bam | \
+#   bcftools call -mv -Ov -o SRR13957123.vcf
+
+RUN echo "Downloading test SC2 BAM and FASTA..." && \
+  wget --no-verbose https://raw.githubusercontent.com/artic-network/artic-ncov2019/master/primer_schemes/nCoV-2019/V4/SARS-CoV-2.reference.fasta && \
+  wget --no-verbose https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123.primertrim.sorted.bam && \
   bcftools mpileup -A -d 200 -B -Q 0 -f SARS-CoV-2.reference.fasta SRR13957123.primertrim.sorted.bam | \
   bcftools call -mv -Ov -o SRR13957123.vcf
   
