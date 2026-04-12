@@ -1,6 +1,6 @@
 FROM ubuntu:noble AS app
 
-ARG SOFTWARENAME_VER="0.3.0.324"
+ARG SOFTWARENAME_VER="0.3.0.234"
 
 LABEL base.image="ubuntu:noble"
 LABEL dockerfile.version="1"
