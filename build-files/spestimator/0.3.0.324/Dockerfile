@@ -19,7 +19,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python3-pip && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-RUN pip install --no-cache-dir spestimator==${SOFTWARENAME_VER} && \
+RUN pip install --no-cache-dir --break-system-packages spestimator==${SOFTWARENAME_VER} && \
     spestimator -h && \
     mkdir /data
 
