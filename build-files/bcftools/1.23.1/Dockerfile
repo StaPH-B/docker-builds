@@ -67,6 +67,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   libcurl3-gnutls \
   libdeflate0 \
   procps \
+  tabix \
+  vcftools \
   && apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # copy in bcftools executables from builder stage
@@ -95,8 +97,6 @@ RUN bcftools --help && bcftools plugin -lv
 # Installing wget and vcftools for downloading files, github needs tabix and ca-certificates
 RUN apt-get update && apt-get install --no-install-recommends -y \
   wget \
-  vcftools \
-  tabix \
   ca-certificates \
   && apt-get autoclean && rm -rf /var/lib/apt/lists/*
   
