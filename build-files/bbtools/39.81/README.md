@@ -19,8 +19,10 @@ Basic information on how to use this tool:
 > BBTools is a suite of fast, multithreaded bioinformatics tools designed for analysis of DNA and RNA sequence data. BBTools can handle common sequencing file formats such as fastq, fasta, sam, scarf, fasta+qual, compressed or raw, with autodetection of quality encoding and interleaving.
 
 Additional information:
+```
++-------------------------+----------------------------------------------------------------------------------+------------------------------------------------------------------------+
 | Script                  | Purpose                                                                          | Comment                                                                |
-|-------------------------|----------------------------------------------------------------------------------|------------------------------------------------------------------------|
++-------------------------+----------------------------------------------------------------------------------+------------------------------------------------------------------------+
 | bbcms.sh                | Performs error correction using a Count-Min Sketch                               | Intended for metagenome assembly assembly                              |
 | bbcountunique.sh        | Counts unique kmers in reads                                                     |                                                                        |
 | bbduk.sh                | Trims, filters or masks reads using kmers                                        |                                                                        |
@@ -89,7 +91,9 @@ Additional information:
 | testformat2.sh          | Generates extensive statistics by reading the full file                          |                                                                        |
 | translate6frames.sh     | Translates nucleotide sequence into amino acid sequence in all frames            |                                                                        |
 | vcf2gff.sh              | Converts vcf format to gff format                                                |                                                                        |
-  
++-------------------------+----------------------------------------------------------------------------------+------------------------------------------------------------------------+
+```
+
 Full documentation: https://bbmap.org/docs
 
 ## Example Usage
