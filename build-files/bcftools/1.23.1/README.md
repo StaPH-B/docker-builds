@@ -4,6 +4,10 @@ Main tool: [bcftools](https://github.com/samtools/bcftools)
 
 Code repository: https://github.com/samtools/bcftools
 
+Additional tools:
+* vcftools version 0.1.16
+* tabix verison 1.19
+
 Basic information on how to use this tool:
 
 * executable: `bcftools`
