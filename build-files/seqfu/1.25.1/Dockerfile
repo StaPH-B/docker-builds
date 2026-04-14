@@ -83,7 +83,11 @@ RUN mv test/test-check.sh test/test-check.sh_skip && \
     bash test/mini.sh
 
 # testing on user-supplied files
+# RUN wget -q https://github.com/StaPH-B/docker-builds/raw/master/tests/SARS-CoV-2/SRR13957123_1.fastq.gz && \
+#     wget -q https://github.com/StaPH-B/docker-builds/raw/master/tests/SARS-CoV-2/SRR13957123_2.fastq.gz && \
+#     seqfu check SRR13957123_1.fastq.gz SRR13957123_2.fastq.gz > seqfu_check_test.txt && \
+#     seqfu count -f SRR13957123_1.fastq.gz -r SRR13957123_2.fastq.gz > seqfu_count_test.txt
 RUN wget -q https://github.com/StaPH-B/docker-builds/raw/master/tests/SARS-CoV-2/SRR13957123_1.fastq.gz && \
     wget -q https://github.com/StaPH-B/docker-builds/raw/master/tests/SARS-CoV-2/SRR13957123_2.fastq.gz && \
     seqfu check SRR13957123_1.fastq.gz SRR13957123_2.fastq.gz > seqfu_check_test.txt && \
-    seqfu count -f SRR13957123_1.fastq.gz -r SRR13957123_2.fastq.gz > seqfu_count_test.txt
+    seqfu count SRR13957123_1.fastq.gz SRR13957123_2.fastq.gz > seqfu_count_test.txt
