@@ -5,7 +5,7 @@ Main tool : [staramr](https://github.com/phac-nml/staramr)
 Additional tools:
 
 - mlst 2.23.0
-- ncbi-blast+ 2.12.0+
+- ncbi-blast+ 2.16.0+
 - any2fasta 0.4.2
 - Databases for PlasmidFinder, PointFinder, ResFinder
 
