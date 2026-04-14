@@ -57,7 +57,8 @@ COPY --from=builder /root/seqfu2-${SEQFU_VER}/bin /usr/local/bin
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     ca-certificates \
-    wget && \
+    wget \
+    libpcre3 && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 ENV LC_ALL=C
