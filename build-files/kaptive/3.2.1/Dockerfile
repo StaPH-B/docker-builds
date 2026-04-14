@@ -90,12 +90,20 @@ RUN echo "downloading an A. baumannii genome & testing Kaptive..." && \
 
 WORKDIR /test2
 # test with K. pneumoniae; testing both k and o locus
+# RUN echo "downloading an K. pneumoniae genome & testing Kaptive..." && \
+#     wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/022/268/055/GCA_022268055.1_PDT000434809.1/GCA_022268055.1_PDT000434809.1_genomic.fna.gz && \
+#     gzip -d GCA_022268055.1_PDT000434809.1_genomic.fna.gz && \
+#     kaptive assembly /kaptive/reference_database/Klebsiella_k_locus_primary_reference.gbk GCA_022268055.1_PDT000434809.1_genomic.fna -o kpneu_k.txt && \
+#     kaptive assembly /kaptive/reference_database/Klebsiella_o_locus_primary_reference.gbk GCA_022268055.1_PDT000434809.1_genomic.fna -o kpneu_o.txt && \
+#     head kpneu_k.txt kpneu_o.txt
+
+# Changing the directory to 'assemblies/' instead of the current working directory
 RUN echo "downloading an K. pneumoniae genome & testing Kaptive..." && \
-    wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/022/268/055/GCA_022268055.1_PDT000434809.1/GCA_022268055.1_PDT000434809.1_genomic.fna.gz && \
-    gzip -d GCA_022268055.1_PDT000434809.1_genomic.fna.gz && \
-    kaptive assembly /kaptive/reference_database/Klebsiella_k_locus_primary_reference.gbk GCA_022268055.1_PDT000434809.1_genomic.fna -o kpneu_k.txt && \
-    kaptive assembly /kaptive/reference_database/Klebsiella_o_locus_primary_reference.gbk GCA_022268055.1_PDT000434809.1_genomic.fna -o kpneu_o.txt && \
-    head kpneu_k.txt kpneu_o.txt
+    mkdir -p assemblies && \
+    wget -q -P assemblies/ https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/022/268/055/GCA_022268055.1_PDT000434809.1/GCA_022268055.1_PDT000434809.1_genomic.fna.gz && \
+    gzip -d assemblies/*.fna.gz && \
+    kaptive assembly kpsc_k assemblies/*.fna -o kaptive_results.tsv && \
+    head kaptive_results.tsv
 
 WORKDIR /test3
 # test with recommended usage in documentatation
