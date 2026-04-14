@@ -106,11 +106,18 @@ RUN echo "downloading an K. pneumoniae genome & testing Kaptive..." && \
     head kaptive_results.tsv
 
 WORKDIR /test3
-# test with recommended usage in documentatation
+# # test with recommended usage in documentatation
+# RUN echo "downloading an K. pneumoniae genome & testing Kaptive..." && \
+#     wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/022/268/055/GCA_022268055.1_PDT000434809.1/GCA_022268055.1_PDT000434809.1_genomic.fna.gz && \
+#     gzip -d GCA_022268055.1_PDT000434809.1_genomic.fna.gz && \
+#     kaptive assembly kpsc_k assemblies/*.fna -o kaptive_results.tsv && \
+#     head kaptive_results.tsv
+
+# test with recommended usage in documentation
 RUN echo "downloading an K. pneumoniae genome & testing Kaptive..." && \
     wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/022/268/055/GCA_022268055.1_PDT000434809.1/GCA_022268055.1_PDT000434809.1_genomic.fna.gz && \
     gzip -d GCA_022268055.1_PDT000434809.1_genomic.fna.gz && \
-    kaptive assembly kpsc_k assemblies/*.fna -o kaptive_results.tsv && \
+    kaptive assembly kpsc_k GCA_022268055.1_PDT000434809.1_genomic.fna -o kaptive_results.tsv && \
     head kaptive_results.tsv
 
 WORKDIR /test4
