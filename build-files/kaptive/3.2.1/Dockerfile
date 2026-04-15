@@ -95,7 +95,7 @@ WORKDIR /test2
 # test with K. pneumoniae; testing both k and o locus
 RUN echo "downloading an K. pneumoniae genome & testing Kaptive..." && \
     mkdir -p assemblies && \
-    wget -P assemblies/ wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/022/268/055/GCA_022268055.1_PDT000434809.1/GCA_022268055.1_PDT000434809.1_genomic.fna.gz && \
+    wget -P assemblies/ https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/022/268/055/GCA_022268055.1_PDT000434809.1/GCA_022268055.1_PDT000434809.1_genomic.fna.gz && \
     gzip -d assemblies/*.fna.gz && \
     kaptive assembly /kaptive/reference_database/Klebsiella_k_locus_primary_reference.gbk assemblies/*.fna -o kpneu_k.txt && \
     kaptive assembly /kaptive/reference_database/Klebsiella_o_locus_primary_reference.gbk assemblies/*.fna -o kpneu_o.txt && \
