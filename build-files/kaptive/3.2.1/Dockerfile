@@ -79,6 +79,8 @@ FROM app AS test
 
 RUN kaptive --help && kaptive --version
 
+RUN echo "listing downloaded databases..." && ls /kaptive/reference_database
+
 WORKDIR /test1
 
 # test with A. baumannii; testing both k and o locus
@@ -93,7 +95,7 @@ WORKDIR /test2
 # test with K. pneumoniae; testing both k and o locus
 RUN echo "downloading an K. pneumoniae genome & testing Kaptive..." && \
     mkdir -p assemblies && \
-    wget -q -P assemblies/ wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/022/268/055/GCA_022268055.1_PDT000434809.1/GCA_022268055.1_PDT000434809.1_genomic.fna.gz && \
+    wget -P assemblies/ wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/022/268/055/GCA_022268055.1_PDT000434809.1/GCA_022268055.1_PDT000434809.1_genomic.fna.gz && \
     gzip -d assemblies/*.fna.gz && \
     kaptive assembly /kaptive/reference_database/Klebsiella_k_locus_primary_reference.gbk assemblies/*.fna -o kpneu_k.txt && \
     kaptive assembly /kaptive/reference_database/Klebsiella_o_locus_primary_reference.gbk assemblies/*.fna -o kpneu_o.txt && \
@@ -102,7 +104,7 @@ RUN echo "downloading an K. pneumoniae genome & testing Kaptive..." && \
 WORKDIR /test3
 RUN echo "downloading an K. pneumoniae genome & testing Kaptive..." && \
     mkdir -p assemblies && \
-    wget -q -P assemblies/ https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/022/268/055/GCA_022268055.1_PDT000434809.1/GCA_022268055.1_PDT000434809.1_genomic.fna.gz && \
+    wget -P assemblies/ https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/022/268/055/GCA_022268055.1_PDT000434809.1/GCA_022268055.1_PDT000434809.1_genomic.fna.gz && \
     gzip -d assemblies/*.fna.gz && \
     kaptive assembly kpsc_k assemblies/*.fna -o kaptive_results.tsv && \
     head kaptive_results.tsv
@@ -111,7 +113,7 @@ WORKDIR /test4
 # test with recommended usage in documentatation
 RUN echo "downloading an K. pneumoniae genome & testing Kaptive..." && \
     mkdir -p assemblies && \
-    wget -q -P assemblies/ https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/022/268/055/GCA_022268055.1_PDT000434809.1/GCA_022268055.1_PDT000434809.1_genomic.fna.gz && \
+    wget -P assemblies/ https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/022/268/055/GCA_022268055.1_PDT000434809.1/GCA_022268055.1_PDT000434809.1_genomic.fna.gz && \
     gzip -d assemblies/*.fna.gz && \
     kaptive assembly kpsc_k assemblies/*.fna -o kaptive_results.tsv && \
     head kaptive_results.tsv
@@ -120,7 +122,7 @@ WORKDIR /test5
 # test with recommended usage in documentation
 RUN echo "downloading an K. pneumoniae genome & testing Kaptive..." && \
     mkdir -p assemblies && \
-    wget -q -P assemblies/ https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/022/268/055/GCA_022268055.1_PDT000434809.1/GCA_022268055.1_PDT000434809.1_genomic.fna.gz && \
+    wget -P assemblies/ https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/022/268/055/GCA_022268055.1_PDT000434809.1/GCA_022268055.1_PDT000434809.1_genomic.fna.gz && \
     gzip -d assemblies/*.fna.gz && \
     kaptive assembly kpsc_k assemblies/*.fna -o kaptive_results.tsv && \
     head kaptive_results.tsv
