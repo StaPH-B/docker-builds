@@ -89,15 +89,17 @@ RUN echo "downloading an A. baumannii genome & testing Kaptive..." && \
     kaptive assembly /kaptive/reference_database/Acinetobacter_baumannii_OC_locus_primary_reference.gbk GCA_016486705.1_PDT000751301.1_genomic.fna -o abau_oc.txt && head abau_oc.txt
 
 WORKDIR /test2
-# test with K. pneumoniae; testing both k and o locus
-# RUN echo "downloading an K. pneumoniae genome & testing Kaptive..." && \
-#     wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/022/268/055/GCA_022268055.1_PDT000434809.1/GCA_022268055.1_PDT000434809.1_genomic.fna.gz && \
-#     gzip -d GCA_022268055.1_PDT000434809.1_genomic.fna.gz && \
-#     kaptive assembly /kaptive/reference_database/Klebsiella_k_locus_primary_reference.gbk GCA_022268055.1_PDT000434809.1_genomic.fna -o kpneu_k.txt && \
-#     kaptive assembly /kaptive/reference_database/Klebsiella_o_locus_primary_reference.gbk GCA_022268055.1_PDT000434809.1_genomic.fna -o kpneu_o.txt && \
-#     head kpneu_k.txt kpneu_o.txt
 
-# Changing the directory to 'assemblies/' instead of the current working directory
+# test with K. pneumoniae; testing both k and o locus
+RUN echo "downloading an K. pneumoniae genome & testing Kaptive..." && \
+    mkdir -p assemblies && \
+    wget -q -P assemblies/ wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/022/268/055/GCA_022268055.1_PDT000434809.1/GCA_022268055.1_PDT000434809.1_genomic.fna.gz && \
+    gzip -d assemblies/*.fna.gz && \
+    kaptive assembly /kaptive/reference_database/Klebsiella_k_locus_primary_reference.gbk assemblies/*.fna -o kpneu_k.txt && \
+    kaptive assembly /kaptive/reference_database/Klebsiella_o_locus_primary_reference.gbk assemblies/*.fna -o kpneu_o.txt && \
+    head kpneu_k.txt kpneu_o.txt
+
+WORKDIR /test3
 RUN echo "downloading an K. pneumoniae genome & testing Kaptive..." && \
     mkdir -p assemblies && \
     wget -q -P assemblies/ https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/022/268/055/GCA_022268055.1_PDT000434809.1/GCA_022268055.1_PDT000434809.1_genomic.fna.gz && \
@@ -105,22 +107,25 @@ RUN echo "downloading an K. pneumoniae genome & testing Kaptive..." && \
     kaptive assembly kpsc_k assemblies/*.fna -o kaptive_results.tsv && \
     head kaptive_results.tsv
 
-WORKDIR /test3
-# # test with recommended usage in documentatation
-# RUN echo "downloading an K. pneumoniae genome & testing Kaptive..." && \
-#     wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/022/268/055/GCA_022268055.1_PDT000434809.1/GCA_022268055.1_PDT000434809.1_genomic.fna.gz && \
-#     gzip -d GCA_022268055.1_PDT000434809.1_genomic.fna.gz && \
-#     kaptive assembly kpsc_k assemblies/*.fna -o kaptive_results.tsv && \
-#     head kaptive_results.tsv
-
-# test with recommended usage in documentation
+WORKDIR /test4
+# test with recommended usage in documentatation
 RUN echo "downloading an K. pneumoniae genome & testing Kaptive..." && \
-    wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/022/268/055/GCA_022268055.1_PDT000434809.1/GCA_022268055.1_PDT000434809.1_genomic.fna.gz && \
-    gzip -d GCA_022268055.1_PDT000434809.1_genomic.fna.gz && \
-    kaptive assembly kpsc_k GCA_022268055.1_PDT000434809.1_genomic.fna -o kaptive_results.tsv && \
+    mkdir -p assemblies && \
+    wget -q -P assemblies/ https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/022/268/055/GCA_022268055.1_PDT000434809.1/GCA_022268055.1_PDT000434809.1_genomic.fna.gz && \
+    gzip -d assemblies/*.fna.gz && \
+    kaptive assembly kpsc_k assemblies/*.fna -o kaptive_results.tsv && \
     head kaptive_results.tsv
 
-WORKDIR /test4
+WORKDIR /test5
+# test with recommended usage in documentation
+RUN echo "downloading an K. pneumoniae genome & testing Kaptive..." && \
+    mkdir -p assemblies && \
+    wget -q -P assemblies/ https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/022/268/055/GCA_022268055.1_PDT000434809.1/GCA_022268055.1_PDT000434809.1_genomic.fna.gz && \
+    gzip -d assemblies/*.fna.gz && \
+    kaptive assembly kpsc_k assemblies/*.fna -o kaptive_results.tsv && \
+    head kaptive_results.tsv
+
+WORKDIR /test6
 
 ### test with at 2 Vibrio parahaemolyticus genomes with a known serotype. These 2 are pulled from the publication describing custom database ##
 # GCA_001558495.2 - expect OL1 and KL1
