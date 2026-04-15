@@ -6,7 +6,7 @@ USER root
 
 WORKDIR /
 
-LABEL base.image="mambaorg/micromamba:2.5.0-ubuntu24.04"
+LABEL base.image="mambaorg/micromamba:2.5.0-ubuntu22.04"
 LABEL dockerfile.version="1"
 LABEL software="verkko"
 LABEL software.version="${VERKKO_VER}"
