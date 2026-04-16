@@ -46,7 +46,7 @@ seqfu check \
   SRR13957123_2.fastq.gz
 
 seqfu count \
-  -f SRR13957123_1.fastq.gz \
-  -r SRR13957123_2.fastq.gz
+  SRR13957123_1.fastq.gz \
+  SRR13957123_2.fastq.gz
 ```
 
