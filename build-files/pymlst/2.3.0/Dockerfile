@@ -21,7 +21,7 @@ RUN apt-get update && apt-get install -y \
 #     mv bin/${MACHTYPE}/* /usr/local/bin/
 
 ## Troubleshooting
-RUN wget https://genome-test.gi.ucss.edu/~kent/src/blatSrc${BLAT_VER}.zip &&\
+RUN wget https://genome-test.gi.ucsc.edu/~kent/src/blatSrc${BLAT_VER}.zip &&\
     unzip blatSrc${BLAT_VER}.zip  &&\
     cd blatSrc &&\
     mkdir -p bin/${MACHTYPE} &&\
