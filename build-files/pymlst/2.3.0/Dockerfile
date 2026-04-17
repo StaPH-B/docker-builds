@@ -1,7 +1,7 @@
 ARG PYMLST_VER="2.3.1"
 
 ## Builder ##
-FROM ubuntu:jammy AS blat
+FROM ubuntu:noble AS blat
 
 ARG BLAT_VER="35"
 ARG MACHTYPE="x86_64-pc-linux-gnu"
@@ -36,11 +36,11 @@ RUN wget https://genome-test.gi.ucsc.edu/~kent/src/blatSrc${BLAT_VER}.zip &&\
     mv bin/${MACHTYPE}/* /usr/local/bin/
 
 ## App ##
-FROM ubuntu:jammy AS app 
+FROM ubuntu:noble AS app 
 
 ARG PYMLST_VER
 
-LABEL base.image="ubuntu:jammy"
+LABEL base.image="ubuntu:noble"
 LABEL dockerfile.version="1"
 LABEL software="pyMLST"
 LABEL software.version="${PYMLST_VER}"
@@ -90,14 +90,14 @@ RUN wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/032/604/515/GCA_0326045
 RUN claMLST import MLST_DB escherichia spp. -m achtman &&\
     claMLST search MLST_DB GCA_032604515.1_PDT001925635.1_genomic.fna
 
-#cg/wgMLST
-# initiliaze db
-RUN wgMLST import WGMLST_DB Escherichia coli
-# add assemblies
-RUN wgMLST add WGMLST_DB GCA_032604515.1_PDT001925635.1_genomic.fna -s 2023BM00142 &&\
-    wgMLST add WGMLST_DB GCA_032847695.1_PDT001947824.1_genomic.fna -s 2023BM00149 &&\
-    wgMLST add WGMLST_DB GCA_034261675.1_PDT002019551.2_genomic.fna -s 2023BM00164 &&\
-    wgMLST add WGMLST_DB GCA_037026425.1_PDT002098409.1_genomic.fna -s 2024BM00013
-# check db and calculate cgMLST distances
-RUN wgMLST stats WGMLST_DB &&\
-    wgMLST distance WGMLST_DB
+# #cg/wgMLST
+# # initiliaze db
+# RUN wgMLST import WGMLST_DB Escherichia coli
+# # add assemblies
+# RUN wgMLST add WGMLST_DB GCA_032604515.1_PDT001925635.1_genomic.fna -s 2023BM00142 &&\
+#     wgMLST add WGMLST_DB GCA_032847695.1_PDT001947824.1_genomic.fna -s 2023BM00149 &&\
+#     wgMLST add WGMLST_DB GCA_034261675.1_PDT002019551.2_genomic.fna -s 2023BM00164 &&\
+#     wgMLST add WGMLST_DB GCA_037026425.1_PDT002098409.1_genomic.fna -s 2024BM00013
+# # check db and calculate cgMLST distances
+# RUN wgMLST stats WGMLST_DB &&\
+#     wgMLST distance WGMLST_DB
