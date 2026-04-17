@@ -63,7 +63,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y\
 COPY --from=blat /usr/local/bin/* /usr/local/bin/
 
 # install pymlst
-RUN pip3 install --no-cache pymlst==${PYMLST_VER}
+#RUN pip3 install --no-cache pymlst==${PYMLST_VER}
+RUN pip3 install --no-cache --break-system-packages pymlst==${PYMLST_VER}
 
 CMD pyMLST -h && claMLST -h && wgMLST -h
 
