@@ -30,9 +30,9 @@ RUN wget https://genome-test.gi.ucsc.edu/~kent/src/blatSrc${BLAT_VER}.zip &&\
     mkdir -p lib/${MACHTYPE} &&\
     make HOME=$PWD MACHTYPE=${MACHTYPE} \
         C_INCLUDE_PATH=/usr/include/openssl:/usr/include \
-        LIBRARY_PATH=/usr/lib \
+        LIBRARY_PATH=/usr/lib/x86_64-linux-gnu \
         CFLAGS="-fcommon" \
-        LDFLAGS="-lssl -lcrypto" &&\
+        L="-lssl -lcrypto -luuid -lm -lz -lpthread" &&\
     mv bin/${MACHTYPE}/* /usr/local/bin/
 
 ## App ##
