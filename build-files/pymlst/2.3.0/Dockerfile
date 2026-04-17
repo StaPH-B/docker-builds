@@ -1,7 +1,7 @@
 ARG PYMLST_VER="2.3.0"
 
 ## Builder ##
-FROM ubuntu:noble AS blat
+FROM ubuntu:jammy AS blat
 
 ARG BLAT_VER="37"
 ARG MACHTYPE="x86_64-pc-linux-gnu"
@@ -36,11 +36,11 @@ RUN wget https://genome-test.gi.ucsc.edu/~kent/src/blatSrc${BLAT_VER}.zip &&\
     mv bin/${MACHTYPE}/* /usr/local/bin/
 
 ## App ##
-FROM ubuntu:noble AS app 
+FROM ubuntu:jammy AS app 
 
 ARG PYMLST_VER
 
-LABEL base.image="ubuntu:noble"
+LABEL base.image="ubuntu:jammy"
 LABEL dockerfile.version="1"
 LABEL software="pyMLST"
 LABEL software.version="${PYMLST_VER}"
