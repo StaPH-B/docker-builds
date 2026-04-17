@@ -3,7 +3,7 @@ ARG PYMLST_VER="2.3.1"
 ## Builder ##
 FROM ubuntu:noble AS blat
 
-ARG BLAT_VER="37"
+ARG BLAT_VER="36"
 ARG MACHTYPE="x86_64-pc-linux-gnu"
 
 RUN apt-get update && apt-get install -y \
