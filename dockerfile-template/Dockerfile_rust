@@ -1,0 +1,113 @@
+# syntax=docker/dockerfile:1
+
+##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
+##### StaPH-B Rust Builder Template                                     #####
+##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
+##### Step 1: Use the Rust toolchain to compile the binary.             #####
+##### Step 2: Copy the binary to a clean Ubuntu Noble stage.            #####
+##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
+
+# Set the software version as a global argument
+ARG SOFTWARENAME_VERSION="0.5.0"
+
+##### ----- STEP 1: BUILDER STAGE ----- #####
+# Use the official Rust slim image on Noble to ensure library compatibility.
+FROM rust:1.82-slim-noble AS builder
+
+# Re-declare ARG for use in this stage
+ARG SOFTWARENAME_VERSION
+
+# Install build-time system dependencies
+# Some Rust crates (like rust-htslib or openssl) need C headers to compile.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    wget \
+    ca-certificates \
+    build-essential \
+    pkg-config \
+    libssl-dev \
+    zlib1g-dev \
+    libbz2-dev \
+    liblzma-dev && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Download and Compile the software
+# Use cargo's cache mount to speed up subsequent builds
+RUN wget https://github.com/example/tool/archive/v${SOFTWARENAME_VERSION}.tar.gz && \
+    tar -xzf v${SOFTWARENAME_VERSION}.tar.gz
+
+WORKDIR /tool-${SOFTWARENAME_VERSION}
+
+# Compile in release mode for maximum performance
+RUN cargo build --release
+
+##### ----- STEP 2: APP STAGE ----- #####
+# We switch to pure Ubuntu Noble for the final image.
+FROM ubuntu:noble AS app
+
+# Re-declare ARG for labels
+ARG SOFTWARENAME_VERSION
+
+# Bioinformatic Rust tools often depend on these specific compression libraries.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    deps \
+    libssl3 \
+    zlib1g \
+    libbz2-1.0 \
+    liblzma5 && \
+    apt-get autoclean && rm -rf /var/lib/apt/lists/*
+
+# Required by CI: StaPH-B images must run as a non-root user.
+RUN groupadd -r staphb && useradd -r -g staphb staphb
+
+# This keeps the image size tiny because it doesn't include the Rust compiler.
+COPY --from=builder /tool-${SOFTWARENAME_VERSION}/target/release/toolname /usr/local/bin/
+
+ENV LC_ALL=C.UTF-8 \
+    PATH="/usr/local/bin:${PATH}"
+
+# Set Working Directory
+WORKDIR /data
+
+
+# Required Metadata Labels
+# These follow the OCI Image Spec. They help users and automated systems 
+# identify what is inside the container.
+LABEL \
+      # The date this image was last updated (Manually update this!)
+      org.opencontainers.image.created="2024-05-20" \
+      # The exact base image used for the 'app' stage (Must match the FROM instruction above)
+      org.opencontainers.image.base.name="ubuntu:noble" \
+      # The name of the software (e.g., "BWA" or "Samtools")
+      org.opencontainers.image.title="SoftwareName" \
+      # The version of the software itself
+      org.opencontainers.image.version="${SOFTWARENAME_VER}" \
+      # The version of THIS Dockerfile (increment if you change the build logic)
+      org.opencontainers.image.revision="1" \
+      # A human-readable description of the tool
+      org.opencontainers.image.description="A brief description of what this tool does" \
+      # The project homepage or GitHub repository
+      org.opencontainers.image.url="https://github.com/StaPH-B/docker-builds" \
+      # Where users can find instructions or manuals for the software
+      org.opencontainers.image.documentation="https://github.com/StaPH-B/docker-builds" \
+      # Link to the source code used to build the image (which is often a GitHub url)
+      org.opencontainers.image.source="https://github.com/StaPH-B/docker-builds" \
+      # The software license (e.g., MIT, GPL-3.0, Apache-2.0) for the software
+      org.opencontainers.image.licenses="GPL-3.0" \
+      # The person/group maintaining this Dockerfile
+      org.opencontainers.image.authors="firstName lastName <example@email.com>"
+
+# Final runtime configuration
+USER staphb
+CMD ["toolname", "--help"]
+
+##### ----- STEP 3: TEST STAGE ----- #####
+FROM app AS test
+
+# Set working directory for tests
+WORKDIR /test
+
+# Basic Check: Verify tool is in PATH and can execute
+RUN toolname --version && toolname --help
+
+# Run small test suite
+# RUN toolname -i test_input.fasta -o test_output.txt

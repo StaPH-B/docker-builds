@@ -1,129 +1,100 @@
-##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
-##### Thank you for using this Dockerfile template!                     #####
-##### This is an outline for the flow of building a docker image.       #####
-##### The docker image is built to the 'app' stage on dockerhub/quay.   #####
-##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
+# syntax=docker/dockerfile:1
 
-##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
-##### Sometimes tools required to build a tool are not needed to run    #####
-##### it. This means that images are larger than they need to be. A way #####
-##### to reduce the size of an image, is to have a stage prior to 'app' #####
-##### where these temporarily-required tools are installed. Then, only  #####
-##### relevant executables and files are copied in to the 'app' stage.  #####
-##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
-
-##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
-##### Step 1. Set up the builder stage as the first stage.              #####
-##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
-
-# Please note, all 'LABEL', 'ENV', and 'CMD' instructions will be lost
-# Also, files and executables are not carried over unless they are explicitly copied.
-
-# 'FROM' defines where the Dockerfile is starting to build from. This command has to come first in the file
-FROM ubuntu:jammy as builder
-
-# 'RUN' executes code during the build
-# Install dependencies via apt-get or yum if using a centos or fedora base
-RUN apt-get update && apt-get install -y --no-install-recommends \
- dependency_a \
- dependency_b \
- dependency_c && \
- apt-get autoclean && rm -rf /var/lib/apt/lists/*
-
-# Install and/or setup more things. Make /data for use as a working dir
-# For readability, limit one install per 'RUN' statement.
-
-# Example: install ncbi-blast+ 2.9.0 pre-compiled linux binaries
-ARG BLAST_VER=2.9.0
-
-RUN wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/${BLAST_VER}/ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz && \
- tar -xzf ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz && \
- rm ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz
-
-##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
-##### Step 2. Set up the base image in the 'app' stage.                 #####
-##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
-
-# 'FROM' defines where the Dockerfile is starting to build from. This command has to come first in the file
-# The 'as' keyword lets you name the folowing stage. The production image uses everything to the 'app' stage.
-
-FROM ubuntu:jammy as app
-
-# List all software versions are ARGs near the top of the dockerfile
-# 'ARG' sets environment variables during the build stage
-# ARG variables are ONLY available during image build, they do not persist in the final image
+# Use ARG so the version only needs to be defined once at the top.
 ARG SOFTWARENAME_VER="1.0.0"
 
-# 'LABEL' instructions tag the image with metadata that might be important to the user
-LABEL base.image="ubuntu:jammy"
-LABEL dockerfile.version="1"
-LABEL software="SoftwareName"
-LABEL software.version="${SOFTWARENAME_VER}"
-LABEL description="This software does X, Y, AND Z!"
-LABEL website="https://github.com/StaPH-B/docker-builds"
-LABEL license="https://github.com/StaPH-B/docker-builds/blob/master/LICENSE"
-LABEL maintainer="FirstName LastName"
-LABEL maintainer.email="my.email@email.com"
+##### ----- STEP 1: BUILDER STAGE ----- #####
+# We use a 'builder' stage to compile or download software. 
+# This keeps the final 'app' image small by leaving out compilers and 
+# temporary files that aren't needed to actually run the tool.
+FROM ubuntu:noble AS builder
 
-# copy in files and executables into app stage
-COPY --from=builder <source> <destination>
+# Re-declare ARGs so they are available in this stage
+ARG SOFTWARENAME_VER
 
-# example copy in blast executable
-ARG BLAST_VER=2.9.0
-COPY --from=builder /bwa/bwa-${BWA_VER}/bwa /usr/local/bin
-
-# 'RUN' executes code during the build
-# Install dependencies via apt-get or yum if using a centos or fedora base
-# Please ensure ALL dependencies for running the tool make it into this stage
+# Install build-time dependencies (e.g., compilers, wget, git)
 RUN apt-get update && apt-get install -y --no-install-recommends \
- dependency_a \
- dependency_b \
- dependency_c && \
- apt-get autoclean && rm -rf /var/lib/apt/lists/*
+    wget \
+    ca-certificates \
+    build-essential \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install and/or setup more things. Make /data for use as a working dir
-# For readability, limit one install per 'RUN' statement.
+# Basic format for downloading from GitHub. 
+RUN wget https://github.com/example/tool/archive/v${SOFTWARENAME_VER}.tar.gz && \
+    tar -xzf v${SOFTWARENAME_VER}.tar.gz
 
-# 'ENV' instructions set environment variables that persist from the build into the resulting image
-# Use for e.g. $PATH and locale settings for compatibility with Singularity
-ENV PATH="/software-${SOFTWARENAME_VER}/bin:$PATH" \
- LC_ALL=C
+##### ----- STEP 2: APP STAGE ----- #####
+# This is the "real" image that users will pull and run.
+FROM ubuntu:noble AS app
 
-# 'CMD' instructions set a default command when the container is run. This is typically 'tool --help.'
-CMD [ "tool", "--help" ]
+# Re-declare ARGs so they are available in this stage
+ARG SOFTWARENAME_VER="1.0.0"
 
-# 'WORKDIR' sets working directory
+# Install Runtime Dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    deps \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Setup Non-Root User
+# Create a new user because running as 'root' is a security risk.
+RUN groupadd -r staphb && useradd -r -g staphb staphb
+
+# 3. Copy only the necessary binaries from the builder stage
+COPY --from=builder /tool-${SOFTWARENAME_VER}/bin/* /usr/local/bin/
+
+# Set Environment Variables
+# LC_ALL=C ensures consistent text sorting/processing across different systems.
+ENV LC_ALL=C \
+    PATH="/usr/local/bin:$PATH"
+
+# Set Working Directory to /data
 WORKDIR /data
 
-##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
-##### Step 3. Set up the testing stage.                                 #####
-##### The docker image is built to the 'test' stage before merging, but #####
-##### the test stage (or any stage after 'app') will be lost.           #####
-##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
+# Required Metadata Labels
+# These follow the OCI Image Spec. They help users and automated systems 
+# identify what is inside the container.
+LABEL \
+      # The date this image was last updated (Manually update this!)
+      org.opencontainers.image.created="2024-05-20" \
+      # The exact base image used for the 'app' stage (Must match the FROM instruction above)
+      org.opencontainers.image.base.name="ubuntu:noble" \
+      # The name of the software (e.g., "BWA" or "Samtools")
+      org.opencontainers.image.title="SoftwareName" \
+      # The version of the software itself
+      org.opencontainers.image.version="${SOFTWARENAME_VER}" \
+      # The version of THIS Dockerfile (increment if you change the build logic)
+      org.opencontainers.image.revision="1" \
+      # A human-readable description of the tool
+      org.opencontainers.image.description="A brief description of what this tool does" \
+      # The project homepage or GitHub repository
+      org.opencontainers.image.url="https://github.com/StaPH-B/docker-builds" \
+      # Where users can find instructions or manuals for the software
+      org.opencontainers.image.documentation="https://github.com/StaPH-B/docker-builds" \
+      # Link to the source code used to build the image (which is often a GitHub url)
+      org.opencontainers.image.source="https://github.com/StaPH-B/docker-builds" \
+      # The software license (e.g., MIT, GPL-3.0, Apache-2.0) for the software
+      org.opencontainers.image.licenses="GPL-3.0" \
+      # The person/group maintaining this Dockerfile
+      org.opencontainers.image.authors="firstName lastName <example@email.com>"
 
-# A second FROM insruction creates a new stage
-# The test stage must be downstream from 'app'
-FROM app as test
+# Switch to the non-root user defined earlier
+USER staphb
 
-# set working directory so that all test inputs & outputs are kept in /test
+# CMD defines what runs when a user types 'docker run <image>'. 
+# Usually, we set this to the tool's help menu.
+CMD ["tool", "--help"]
+
+##### ----- STEP 3: TEST STAGE ----- #####
+# This stage is used by GitHub Actions to verify the build. 
+# It is not pushed to the final registry.
+FROM app AS test
+
+# Set working directory for test outputs
 WORKDIR /test
 
-# print help and version info; check dependencies (not all software has these options available)
-# Mostly this ensures the tool of choice is in path and is executable
-RUN softwarename --help && \
- softwarename --check && \
- softwarename --version
+# Basic Check: Verify the tool can be found in the PATH and executes.
+# This prevents "broken" images from being merged.
+RUN tool --version && tool --help
 
-# Demonstrate that the program is successfully installed - which is highly dependant on what the tool is.
-
-# Run the program's internal tests if available, for example with SPAdes:
-RUN spades.py --test
-
-# Option 1: write your own tests in a bash script in the same directory as your Dockerfile and copy them:
-COPY my_tests.sh .
-RUN bash my_tests.sh
-
-# Option 2: write below common usage cases, for example with tb-profiler:
-RUN wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR166/009/ERR1664619/ERR1664619_1.fastq.gz && \
-    wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR166/009/ERR1664619/ERR1664619_2.fastq.gz && \
-    tb-profiler profile -1 ERR1664619_1.fastq.gz -2 ERR1664619_2.fastq.gz -t 4 -p ERR1664619 --txt
+# Run a small test to ensure a container would run as expected.
+# RUN wget input.fasta && tool -i test_input.fasta -o test_output.txt

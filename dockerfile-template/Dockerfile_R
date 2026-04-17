@@ -1,0 +1,115 @@
+# syntax=docker/dockerfile:1
+
+##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
+##### StaPH-B R-Language Builder Template                               #####
+##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
+##### Step 1: Use Rocker to compile R packages and dependencies.        #####
+##### Step 2: Copy the R library to a clean Ubuntu Noble stage.         #####
+##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
+
+# Set the R version as a global argument for reproducibility
+ARG R_VERSION="4.4.1"
+
+##### ----- STEP 1: BUILDER STAGE ----- #####
+# Rocker/r-ver is the industry standard for reproducible R environments.
+FROM rocker/r-ver:${R_VERSION} AS builder
+
+# Install system dependencies required to COMPILE common R packages
+# (e.g., devtools, tidyverse, or Bioconductor packages)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    libxml2-dev \
+    zlib1g-dev \
+    pandoc \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install R packages
+# We use 'install2.r' (a Rocker utility) because it has better error handling for CI.
+# Use the -error flag so the build fails if a package fails to install.
+RUN install2.r --error --skipinstalled \
+    tidyverse \
+    BiocManager
+
+# Install specific bioinformatics packages via Bioconductor
+RUN Rscript -e 'BiocManager::install(c("ggtree", "treeio"))'
+
+##### ----- STEP 2: APP STAGE ----- #####
+FROM ubuntu:noble AS app
+
+# Re-declare ARGs for labels
+ARG R_VERSION
+ARG SOFTWARENAME_VERSION="1.0.0"
+
+# Install Runtime Dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    r-base-core \
+    procps \
+    hostname \
+    sed \
+    ca-certificates \
+    libcurl4 \
+    libxml2 \
+    && apt-get autoclean && rm -rf /var/lib/apt/lists/*
+
+# Create a non-root user.
+RUN groupadd -r staphb && useradd -r -g staphb staphb
+
+# Copy the R library from the builder stage
+COPY --from=builder /usr/local/lib/R/site-library /usr/local/lib/R/site-library
+
+# Set Environment Variables
+ENV LC_ALL=C.UTF-8 \
+    PATH="/usr/local/bin:${PATH}"
+
+# Set Working Directory
+WORKDIR /data
+
+# Metadata Labels (REQUIRED for StaPH-B CI)
+
+# Required Metadata Labels
+# These follow the OCI Image Spec. They help users and automated systems 
+# identify what is inside the container.
+LABEL \
+      # The date this image was last updated (Manually update this!)
+      org.opencontainers.image.created="2024-05-20" \
+      # The exact base image used for the 'app' stage (Must match the FROM instruction above)
+      org.opencontainers.image.base.name="ubuntu:noble" \
+      # The name of the software (e.g., "BWA" or "Samtools")
+      org.opencontainers.image.title="SoftwareName" \
+      # The version of the software itself
+      org.opencontainers.image.version="${SOFTWARENAME_VER}" \
+      # The version of THIS Dockerfile (increment if you change the build logic)
+      org.opencontainers.image.revision="1" \
+      # A human-readable description of the tool
+      org.opencontainers.image.description="A brief description of what this tool does" \
+      # The project homepage or GitHub repository
+      org.opencontainers.image.url="https://github.com/StaPH-B/docker-builds" \
+      # Where users can find instructions or manuals for the software
+      org.opencontainers.image.documentation="https://github.com/StaPH-B/docker-builds" \
+      # Link to the source code used to build the image (which is often a GitHub url)
+      org.opencontainers.image.source="https://github.com/StaPH-B/docker-builds" \
+      # The software license (e.g., MIT, GPL-3.0, Apache-2.0) for the software
+      org.opencontainers.image.licenses="GPL-3.0" \
+      # The person/group maintaining this Dockerfile
+      org.opencontainers.image.authors="firstName lastName <example@email.com>"
+
+# Final runtime configuration
+USER staphb
+
+# For R tools, we often set the default command to an Rscript execution or the R console help.
+CMD ["R", "--version"]
+
+##### ----- STEP 3: TEST STAGE ----- #####
+FROM app AS test
+
+# Set working directory for tests
+WORKDIR /test
+
+# Basic Check: Verify R can load the primary packages we installed.
+# If these fail, the build fails.
+RUN Rscript -e 'library(ggtree); print("ggtree loaded successfully")'
+
+# Optional: Run a specific R script test
+# COPY test_script.R .
+# RUN Rscript test_script.R

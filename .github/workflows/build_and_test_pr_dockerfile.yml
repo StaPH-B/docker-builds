@@ -1,0 +1,203 @@
+name: Build and Test
+
+on:
+  workflow_call:
+    inputs:
+      context_path:
+        required: true
+        type: string
+      tool_name:
+        required: true
+        type: string
+      version:
+        required: true
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+      - uses: docker/setup-buildx-action@master
+
+      - name: Check for Builder Stage
+        id: check-builder
+        run: |
+          if grep -qi "AS builder" "${{ inputs.context_path }}/Dockerfile"; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Build Builder Stage
+        if: steps.check-builder.outputs.exists == 'true'
+        uses: docker/build-push-action@master
+        with:
+          context: ${{ inputs.context_path }}
+          target: builder
+          load: true
+          tags: ${{ inputs.tool_name }}:builder
+          cache-from: type=gha,scope=${{ inputs.tool_name }}-${{ inputs.version }}
+          cache-to: type=gha,mode=max,scope=${{ inputs.tool_name }}-${{ inputs.version }}
+
+      - name: Build App Stage
+        uses: docker/build-push-action@master
+        with:
+          context: ${{ inputs.context_path }}
+          target: app
+          load: true
+          tags: ${{ inputs.tool_name }}:app
+          cache-from: type=gha,scope=${{ inputs.tool_name }}-${{ inputs.version }}
+
+      - name: Build to Test Stage
+        uses: docker/build-push-action@master
+        with:
+          context: ${{ inputs.context_path }}
+          target: test
+          load: true
+          tags: ${{ inputs.tool_name }}:test
+          cache-from: type=gha,scope=${{ inputs.tool_name }}-${{ inputs.version }}
+      
+      - name: List built images
+        continue-on-error: true
+        run: |
+          docker images --format "table {{.Repository}}\t{{.Tag}}\t{{.Size}}\t{{.ID}}" "${{ inputs.tool_name }}*"
+
+      - name: Validate Metadata Labels
+        continue-on-error: true
+        id: labels
+        run: |
+          IMAGE="${{ inputs.tool_name }}:app"
+          REQUIRED_LABELS=(
+            "org.opencontainers.image.created"
+            "org.opencontainers.image.base.name"
+            "org.opencontainers.image.title"
+            "org.opencontainers.image.version"
+            "org.opencontainers.image.revision"
+            "org.opencontainers.image.description"
+            "org.opencontainers.image.url"
+            "org.opencontainers.image.documentation"
+            "org.opencontainers.image.source"
+            "org.opencontainers.image.licenses"
+            "org.opencontainers.image.authors"
+          )
+          FAILED=0
+          for label in "${REQUIRED_LABELS[@]}"; do
+            VALUE=$(docker inspect --format '{{ index .Config.Labels "'$label'"}}' "$IMAGE")
+            if [ -z "$VALUE" ] || [ "$VALUE" == "<no value>" ]; then
+              echo "Error: Label '$label' is missing from the app stage."
+              FAILED=1
+            fi
+          done
+          if [ "$FAILED" -eq 1 ]; then exit 1; fi
+
+      - name: Validate Working Directory
+        id: workdir
+        run: |
+          IMAGE="${{ inputs.tool_name }}:app"
+          
+          WORKDIR=$(docker inspect --format '{{.Config.WorkingDir}}' "$IMAGE")
+          
+          if [ "$WORKDIR" != "/data" ]; then
+            echo "Error: WORKDIR is set to '$WORKDIR'. It must be set exactly to /data."
+            exit 1
+          else
+            echo "Success: WORKDIR is correctly set to /data"
+          fi
+
+      - name: Validate Non-Root User
+        continue-on-error: true
+        id: user
+        run: |
+          IMAGE="${{ inputs.tool_name }}:app"
+          # This captures the USER value from the image metadata
+          USER_VAL=$(docker inspect --format '{{.Config.User}}' "$IMAGE")
+          
+          # Check for empty, root, or UID 0
+          if [ -z "$USER_VAL" ] || [ "$USER_VAL" == "root" ] || [ "$USER_VAL" == "0" ] || [ "$USER_VAL" == "0:0" ]; then
+            echo "Error: Container user is '$USER_VAL'. It must be a non-root user."
+            exit 1
+          else
+            echo "Success: Container runs as non-root user: $USER_VAL"
+          fi
+          
+      - name: Validate Nextflow Dependencies
+        continue-on-error: true
+        id: nextflow
+        run: |
+          # Define IMAGE locally so it is available in this shell session
+          IMAGE="${{ inputs.tool_name }}:app"
+
+          FAILED=0
+          if docker run --rm $IMAGE ps --version > /dev/null 2>&1; then
+            echo "ps is installed"
+          else
+            echo "ps is NOT installed"
+            FAILED=1
+          fi
+
+          if docker run --rm $IMAGE sed --version > /dev/null 2>&1; then
+            echo "sed is installed"
+          else
+            echo "sed is NOT installed"
+            FAILED=1
+          fi
+
+          if docker run --rm $IMAGE hostname --version > /dev/null 2>&1; then
+            echo "hostname is installed"
+          else
+            echo "hostname is NOT installed"
+            FAILED=1
+          fi
+
+          if [ "$FAILED" -eq 1 ]; then
+            echo "Critical: This image is missing utilities required by Nextflow."
+            echo "Tip: Install 'procps' (for ps) and 'bash' in your Dockerfile."
+            exit 1
+          fi
+
+      - name: Run Trivy Vulnerability Scanner
+        continue-on-error: true
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${{ inputs.tool_name }}:app
+          format: 'table'
+          exit-code: '1' # Fails the build if vulnerabilities are found
+          ignore-unfixed: true # Focus only on things your team can actually fix
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+
+      - name: Generate PR Report
+        continue-on-error: true
+        if: always() # Ensure this runs even if a previous validation step failed
+        run: |
+          echo "## Build Report: ${{ inputs.tool_name }} ${{ inputs.version }}" > report.md
+          echo "| Check | Status |" >> report.md
+          echo "| :--- | :--- |" >> report.md
+          
+          # Check labels
+          if [ "${{ steps.labels.outcome }}" == "success" ]; then echo "| Metadata Labels | [PASS] |" >> report.md; else echo "| Metadata Labels | [FAIL] |" >> report.md; fi
+          
+          # Check WORKDIR
+          if [ "${{ steps.workdir.outcome }}" == "success" ]; then echo "| Working Directory (/data) | [PASS] |" >> report.md; else echo "| Working Directory (/data) | [FAIL] |" >> report.md; fi
+          
+          # Check User
+          if [ "${{ steps.user.outcome }}" == "success" ]; then echo "| Non-Root User | [PASS] |" >> report.md; else echo "| Non-Root User | [FAIL] |" >> report.md; fi
+          
+          # Check Nextflow
+          if [ "${{ steps.nextflow.outcome }}" == "success" ]; then echo "| Nextflow Dependencies | [PASS] |" >> report.md; else echo "| Nextflow Dependencies | [FAIL] |" >> report.md; fi
+
+          # Add size information
+          echo -e "\n### Image Sizes" >> report.md
+          echo "| Stage | Size |" >> report.md
+          echo "| :--- | :--- |" >> report.md
+          echo "| App Stage | $(docker images --format '{{.Size}}' ${{ inputs.tool_name }}:app) |" >> report.md
+          echo "| Test Stage | $(docker images --format '{{.Size}}' ${{ inputs.tool_name }}:test) |" >> report.md
+
+      - name: Post Report to PR
+        if: always()
+        uses: marocchino/sticky-pull-request-comment@main
+        with:
+          header: report-${{ inputs.tool_name }}-${{ inputs.version }}
+          path: report.md
+
