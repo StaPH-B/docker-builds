@@ -11,7 +11,8 @@ RUN apt-get update && apt-get install -y \
     wget \
     unzip \
     libssl-dev \
-    libpng-dev
+    libpng-dev \
+    uuid-dev
 
 # RUN wget https://genome-test.gi.ucsc.edu/~kent/src/blatSrc${BLAT_VER}.zip &&\
 #     unzip blatSrc${BLAT_VER}.zip  &&\
