@@ -66,7 +66,8 @@ COPY --from=blat /usr/local/bin/* /usr/local/bin/
 #RUN pip3 install --no-cache pymlst==${PYMLST_VER}
 RUN pip3 install --no-cache --break-system-packages pymlst==${PYMLST_VER}
 
-CMD pyMLST -h && claMLST -h && wgMLST -h
+#CMD pyMLST -h && claMLST -h && wgMLST -h
+CMD ["sh", "-c", "pyMLST -h && claMLST -h && wgMLST -h"]
 
 ENV LC_ALL=C
 
