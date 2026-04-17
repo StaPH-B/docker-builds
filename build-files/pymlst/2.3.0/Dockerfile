@@ -31,7 +31,8 @@ RUN wget https://genome-test.gi.ucsc.edu/~kent/src/blatSrc${BLAT_VER}.zip &&\
     make HOME=$PWD MACHTYPE=${MACHTYPE} \
         C_INCLUDE_PATH=/usr/include/openssl:/usr/include \
         LIBRARY_PATH=/usr/lib \
-        CFLAGS="-fcommon" &&\
+        CFLAGS="-fcommon" \
+        LDFLAGS="-lssl -lcrypto" &&\
     mv bin/${MACHTYPE}/* /usr/local/bin/
 
 ## App ##
