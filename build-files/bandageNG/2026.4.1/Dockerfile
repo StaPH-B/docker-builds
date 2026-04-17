@@ -26,6 +26,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libdbus-1-3 \
     libxcb1 \
     libx11-6 \
+    libxcb-cursor0 \
     imagemagick && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
@@ -61,12 +62,6 @@ RUN BandageNG --version && \
 RUN echo "Base help message" && \
     BandageNG --help
 
-# RUN apt-get update && apt-get install -y --no-install-recommends \
-#     wget \
-#     ca-certificates \
-#     git && \
-#     apt-get autoclean && rm -rf /var/lib/apt/lists/*
-
 RUN wget -q https://github.com/asl/BandageNG/archive/refs/tags/v${BANDAGENG_VER}.tar.gz && \
     tar -xzf v${BANDAGENG_VER}.tar.gz && \
     mv BandageNG-${BANDAGENG_VER}/tests /test/bandage_tests && \
@@ -75,3 +70,4 @@ RUN wget -q https://github.com/asl/BandageNG/archive/refs/tags/v${BANDAGENG_VER}
 
 RUN cd bandage_tests && \
     ./bandage_command_line_tests.sh /usr/local/bin/BandageNG
+
