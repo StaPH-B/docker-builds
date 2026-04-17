@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     wget \
     unzip \
+    libssl-dev \
     libpng-dev
 
 # RUN wget https://genome-test.gi.ucsc.edu/~kent/src/blatSrc${BLAT_VER}.zip &&\
