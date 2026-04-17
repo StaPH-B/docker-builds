@@ -12,12 +12,24 @@ RUN apt-get update && apt-get install -y \
     unzip \
     libpng-dev
 
-RUN wget https://genome-test.gi.ucsc.edu/~kent/src/blatSrc${BLAT_VER}.zip &&\
+# RUN wget https://genome-test.gi.ucsc.edu/~kent/src/blatSrc${BLAT_VER}.zip &&\
+#     unzip blatSrc${BLAT_VER}.zip  &&\
+#     cd blatSrc &&\
+#     mkdir -p bin/${MACHTYPE} &&\
+#     mkdir -p lib/${MACHTYPE} &&\
+#     make HOME=$PWD MACHTYPE=${MACHTYPE} C_INCLUDE_PATH=/usr/include LIBRARY_PATH=/usr/lib CFLAGS="-fcommon" &&\
+#     mv bin/${MACHTYPE}/* /usr/local/bin/
+
+## Troubleshooting
+RUN wget https://genome-test.gi.ucss.edu/~kent/src/blatSrc${BLAT_VER}.zip &&\
     unzip blatSrc${BLAT_VER}.zip  &&\
     cd blatSrc &&\
     mkdir -p bin/${MACHTYPE} &&\
     mkdir -p lib/${MACHTYPE} &&\
-    make HOME=$PWD MACHTYPE=${MACHTYPE} C_INCLUDE_PATH=/usr/include LIBRARY_PATH=/usr/lib CFLAGS="-fcommon" &&\
+    make HOME=$PWD MACHTYPE=${MACHTYPE} \
+        C_INCLUDE_PATH=/usr/include/openssl:/usr/include \
+        LIBRARY_PATH=/usr/lib \
+        CFLAGS="-fcommon" &&\
     mv bin/${MACHTYPE}/* /usr/local/bin/
 
 ## App ##
