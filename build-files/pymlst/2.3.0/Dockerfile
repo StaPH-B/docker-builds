@@ -1,4 +1,4 @@
-ARG PYMLST_VER="2.3.0"
+ARG PYMLST_VER="2.3.1"
 
 ## Builder ##
 FROM ubuntu:jammy AS blat
