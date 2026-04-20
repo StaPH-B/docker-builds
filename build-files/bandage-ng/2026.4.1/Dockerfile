@@ -26,25 +26,21 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libdbus-1-3 \
     libxcb1 \
     libx11-6 \
-    libxcb-cursor0 \
     imagemagick && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /usr/local/bin
+WORKDIR /opt
 
 RUN wget -q https://github.com/asl/BandageNG/releases/download/v${BANDAGENG_VER}/BandageNG-Linux-2aefa98.AppImage && \
-    mv BandageNG-Linux-2aefa98.AppImage /usr/local/bin/BandageNG.AppImage && \
-    chmod +x BandageNG.AppImage && \
-    ./BandageNG.AppImage --appimage-extract
+    mv BandageNG-Linux-2aefa98.AppImage /opt/BandageNG.AppImage && \
+    chmod +x ./BandageNG.AppImage && \
+    ./BandageNG.AppImage --appimage-extract && \
+    rm ./BandageNG.AppImage
 
-ENV LD_LIBRARY_PATH=/usr/local/bin/squashfs-root/usr/lib
-ENV QT_PLUGIN_PATH=/usr/local/bin/squashfs-root/usr/plugins
-ENV OPENSSL_ia32cap=~0x20000000
 ENV LANG=C.UTF-8
 ENV LC_ALL=C.UTF-8
-ENV QT_LOGGING_RULES="*.debug=false"
 
-RUN ln -s /usr/local/bin/squashfs-root/usr/bin/BandageNG /usr/local/bin/BandageNG
+RUN ln -s /opt/squashfs-root/usr/bin/BandageNG /usr/local/bin/BandageNG
 
 
 CMD ["BandageNG", "--helpall"]
@@ -71,3 +67,10 @@ RUN wget -q https://github.com/asl/BandageNG/archive/refs/tags/v${BANDAGENG_VER}
 RUN cd bandage_tests && \
     ./bandage_command_line_tests.sh /usr/local/bin/BandageNG
 
+# This should generate an output image nearly identical to bandage_tests/test.png
+RUN BandageNG image bandage_tests/inputs/test.gfa output.png
+
+# Columns are filepath, node count, edge count, smallest edge overlap, largest edge overlap, total length, total length no overlaps,
+# dead ends, % dead ends, connected components, largest component, total length orphaned nodes, N50, 
+# shortest node, lower quartile node, median node, upper quartile node, longest node, median depth, and estimated sequence length
+RUN BandageNG info bandage_tests/inputs/test.gfa --tsv
