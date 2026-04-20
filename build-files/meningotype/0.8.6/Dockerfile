@@ -70,10 +70,10 @@ RUN wget -q https://github.com/tseemann/any2fasta/archive/refs/tags/v${ANY2FASTA
     mv -v any2fasta-${ANY2FASTA_VER}/any2fasta /usr/local/bin && \
     rm -rf any2fasta-${ANY2FASTA_VER}
 
-# get mlst
-RUN wget -q https://github.com/tseemann/mlst/archive/v${MLST_VER}.tar.gz && \
-    tar -xzf v${MLST_VER}.tar.gz && \
-    rm -v v${MLST_VER}.tar.gz
+# # get mlst
+# RUN wget -q https://github.com/tseemann/mlst/archive/v${MLST_VER}.tar.gz && \
+#     tar -xzf v${MLST_VER}.tar.gz && \
+#     rm -v v${MLST_VER}.tar.gz
 
 # get meningotype
 # RUN wget -q https://github.com/MDU-PHL/meningotype/archive/refs/tags/v${MENINGOTYPE_VER}.tar.gz && \
@@ -85,6 +85,15 @@ RUN wget -q https://github.com/tseemann/mlst/archive/v${MLST_VER}.tar.gz && \
 # RUN pip install --no-cache-dir --break-system-packages \
 #     git+https://github.com/MDU-PHL/meningotype.git@35c4a5bff24fbc3625f92ce575d7c2e99ecd4378
 
+# get mlst
+RUN wget -q https://github.com/tseemann/mlst/archive/v${MLST_VER}.tar.gz && \
+    tar -xzf v${MLST_VER}.tar.gz && \
+    rm -v v${MLST_VER}.tar.gz
+
+# set PATH and perl local settings
+ENV PATH="${PATH}:/mlst-${MLST_VER}/bin:" \
+    LC_ALL=C.UTF-8
+
 # Attempted hard code and HTTP bug fix
 RUN pip install --no-cache-dir --break-system-packages \
     git+https://github.com/MDU-PHL/meningotype.git@35c4a5b && \
@@ -94,15 +103,6 @@ RUN pip install --no-cache-dir --break-system-packages \
         /usr/local/lib/python3.12/dist-packages/meningotype/meningotype.py && \
     sed -i 's/from urllib.error import HTTPError/from urllib.error import HTTPError/' \
         /usr/local/lib/python3.12/dist-packages/meningotype/meningotype.py
-
-RUN meningotype --updatedb
-
-# set PATH and perl local settings
-ENV PATH="${PATH}:/mlst-${MLST_VER}/bin:" \
-    LC_ALL=C.UTF-8
-
-# update the database
-RUN meningotype --updatedb
 
 # 'CMD' instructions set a default command when the container is run. This is typically 'tool --help.'
 CMD [ "meningotype", "--help" ]
