@@ -155,6 +155,29 @@ jobs:
             exit 1
           fi
 
+      - name: Validate Micromamba Channels
+        continue-on-error: true
+        id: mamba-channels
+        run: |
+          IMAGE="${{ inputs.tool_name }}:app"
+          
+          # Check if micromamba is even in the image before testing
+          if ! docker run --rm $IMAGE which micromamba > /dev/null 2>&1; then
+            echo "Micromamba not found, skipping channel check."
+            exit 0
+          fi
+
+          # List configured channels
+          CHANNELS=$(docker run --rm $IMAGE micromamba config show channels)
+          
+          if echo "$CHANNELS" | grep -qi "defaults"; then
+            echo "Error: The 'defaults' channel was detected in the micromamba configuration."
+            echo "Please use 'conda-forge' and 'bioconda' instead."
+            exit 1
+          else
+            echo "Success: 'defaults' channel is not in use."
+          fi
+
       - name: Run Trivy Vulnerability Scanner
         continue-on-error: true
         uses: aquasecurity/trivy-action@master
@@ -185,6 +208,8 @@ jobs:
           
           # Check Nextflow
           if [ "${{ steps.nextflow.outcome }}" == "success" ]; then echo "| Nextflow Dependencies | [PASS] |" >> report.md; else echo "| Nextflow Dependencies | [FAIL] |" >> report.md; fi
+
+          if [ "${{ steps.mamba-channels.outcome }}" == "success" ]; then echo "| Micromamba Channels | [PASS] |" >> report.md; else echo "| Micromamba Channels | [FAIL] |" >> report.md; fi
 
           # Add size information
           echo -e "\n### Image Sizes" >> report.md
