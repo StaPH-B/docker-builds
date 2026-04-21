@@ -1,29 +1,36 @@
-<!--
-Thank your for contributing to the Staph-B community!
-Please fill in the appropriate checklist below and delete whatever is not relevant.
+## Description
 
-These recommendations are not meant as a means to keep people from contributing. 
-If you need assistance with the following measures, submit your pull request anyway, and we will work with you...
-Or you can contact us beforehand via slack or by sumitting a pull request https://github.com/StaPH-B/docker-builds/issues
+*Please fill in so we understand what this PR is for*
 
-Documentation on how to contribute can be found at https://staphb.org/docker-builds/contribute/
-Documentation for how to create a Dockerfile can be found at https://staph-b.github.io/docker-builds/make_containers
-A recommended Dockerfile template can be found at https://github.com/StaPH-B/docker-builds/blob/master/dockerfile-template/Dockerfile
+**Tool Name:** (e.g., samtools)
 
+**Tool Version:** (e.g., 1.16.1)
 
-Please replace all '[ ]' with '[X]' to demonstrate completion.
--->
+**Purpose of PR:** (e.g., New tool addition / Version bump / Bug fix)
 
-Pull Request (PR) checklist:
-- [ ] Include a description of what is in this pull request in this message.
-- [ ] The dockerfile successfully builds to a test target for the user creating the PR. (i.e. `docker build --tag samtools:1.15test --target test docker-builds/build-files/samtools/1.15` )
-- [ ] Directory structure as name of the tool in lower case with special characters removed with a subdirectory of the version number in build-files (i.e. `docker-builds/build-files/spades/3.12.0/Dockerfile`)
-   - [ ] (optional) All test files are located in same directory as the Dockerfile (i.e. `build-files/shigatyper/2.0.1/test.sh`)
-- [ ] Create a simple container-specific [README.md](https://github.com/StaPH-B/docker-builds/blob/master/.github/workflow-templates/readme-template.md) in the same directory as the Dockerfile (i.e. `docker-builds/build-files/spades/3.12.0/README.md`)
-   - [ ] If this README is longer than 30 lines, there is an explanation as to why more detail was needed
-- [ ] Dockerfile includes the recommended [LABELS](https://github.com/StaPH-B/docker-builds/blob/master/dockerfile-template/Dockerfile#L8-L18) 
-- [ ] Main [README.md](https://github.com/StaPH-B/docker-builds/blob/master/README.md) has been updated to include the tool and/or version of the dockerfile(s) in this PR
-- [ ] [Program_Licenses.md](https://github.com/StaPH-B/docker-builds/blob/master/Program_Licenses.md) contains the tool(s) used in this PR and has been updated for any missing
+---
 
+## PR Checklist
+*Replace '[ ]' with '[x]' to mark off your progress.*
+*Leave them blank if you're stuck!*
 
-<!-- If this PR is for something else, please add extra descriptions -->
+### 1. Repository Standards
+*These are also checked in github actions. Don't panic if one or more of these fail.
+- [ ] **Pathing:** Files are in `build-files/<tool_name>/<version>/` (lowercase).
+- [ ] **Stages:** Dockerfile includes both `AS app` and `AS test` stages.
+- [ ] **Runtime:** `WORKDIR` is set to `/data` and a `CMD` is defined.
+- [ ] **Security:** Container is configured to run as a **non-root** user.
+- [ ] **Linting:** Required OCI Labels are included in the Dockerfile.
+
+### 2. Documentation & Metadata
+- [ ] **Tool README:** A `README.md` exists in the tool's version directory.
+- [ ] **Central Registry:** Main `README.md` and `Program_Licenses.md` are updated.
+
+### 3. Verification
+- [ ] **Local Build:** I have verified the build locally:
+  `docker build --target test -t tool:test build-files/<tool>/<version>/`
+
+> ### A Note on Automated Tests
+> To help keep our containers secure and consistent, a bot will scan your PR 
+> for layout and security standards. **If the tests fail, don't worry!** It's a 
+> normal part of our process. We’ll work with you to fix any red flags.
