@@ -16,16 +16,9 @@ LABEL maintainer.email="raheelsyedahmed@gmail.com"
 RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
     ca-certificates \
-    libglx-mesa0 \
-    libgl1 \
     libopengl0 \
+    libgl1 \
     libegl1 \
-    libfontconfig1 \
-    libfreetype6 \
-    libglib2.0-0 \
-    libdbus-1-3 \
-    libxcb1 \
-    libx11-6 \
     imagemagick && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
@@ -39,8 +32,9 @@ RUN wget -q https://github.com/asl/BandageNG/releases/download/v${BANDAGENG_VER}
 
 ENV LANG=C.UTF-8
 ENV LC_ALL=C.UTF-8
+ENV LD_LIBRARY_PATH=/opt/squashfs-root/usr/lib:/opt/squashfs-root/usr/lib/x86_64-linux-gnu
 
-RUN ln -s /opt/squashfs-root/usr/bin/BandageNG /usr/local/bin/BandageNG
+RUN ln -s /opt/squashfs-root/AppRun /usr/local/bin/BandageNG
 
 
 CMD ["BandageNG", "--helpall"]
