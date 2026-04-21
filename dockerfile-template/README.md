@@ -1,7 +1,7 @@
 <!-- 
 Please edit this readme with some basic information about the tool and how to use this container. 
 - Include information about databases and additional files that are included.
-- Keep it short - you don't need to recreate the documentation from the creators.
+- Keep it short - don't recreate the documentation from the creators.
 - Do not just copy and paste the readme or help for the tool. 
 -->
 
@@ -13,6 +13,40 @@ Code repository:
 
 Additional tools:
 - list: version
+
+<!-- 
+Please add dependencies installed via micromamba. 
+-->
+
+<details>
+<summary>Additional tools installed via micromamba:</summary>
+
+```
+List of packages in environment: "/opt/conda"
+
+  Name                     Version       Build                 Channel    
+────────────────────────────────────────────────────────────────────────────
+  _openmp_mutex            4.5           20_gnu                conda-forge
+  about-time               4.2.1         pyhd
+```
+</details>
+
+<!-- 
+Please add dependencies installed via pip. 
+-->
+
+<details>
+<summary>Additional tools installed via pip:</summary>
+
+```
+Package                Version
+---------------------- -----------
+annotated-types        0.7.0
+Brotli                 1.2.0
+certifi                2025.11.12
+```
+
+</details>
 
 Basic information on how to use this tool:
 - executable: <tool>
