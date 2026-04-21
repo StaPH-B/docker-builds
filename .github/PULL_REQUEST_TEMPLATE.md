@@ -15,7 +15,6 @@
 *Leave them blank if you're stuck!*
 
 ### 1. Repository Standards
-*These are also checked in github actions. Don't panic if one or more of these fail.
 - [ ] **Pathing:** Files are in `build-files/<tool_name>/<version>/` (lowercase).
 - [ ] **Stages:** Dockerfile includes both `AS app` and `AS test` stages.
 - [ ] **Runtime:** `WORKDIR` is set to `/data` and a `CMD` is defined.
