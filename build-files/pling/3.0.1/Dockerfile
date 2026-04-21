@@ -41,15 +41,17 @@ WORKDIR /test
 RUN pling --help && pling --version
 
 # adapted from https://pling.readthedocs.io/latest/tutorial.html
-# Unfortunately the old link: https://figshare.com/ndownloader/files/48723568 is no longer readily accessible through curl or wget.
-COPY fastas.tar.xz /test/fastas.tar.xz
-    
-RUN tar -xvf fastas.tar.xz && \
-    cd fastas && \
-    ls -d -1 $PWD/*.fna > ../input.txt && \
-    cd .. && \
+# The link used in the prior dockerfile, https://figshare.com/ndownloader/files/48723568 , can be to download fastas.tar.xz 
+# if used over Codespaces or if Figshare is not impacted by firewalls or security software with the following command:
+# wget --content-disposition https://figshare.com/ndownloader/files/48723568
+
+# For local builds, we can use the Figshare API instead.
+RUN curl -L https://api.figshare.com/v2/file/download/48723568 -o fastas.tar.xz && \
+    tar -xvf fastas.tar.xz && \
+    ls -d $(pwd)/fastas/*.fna > input.txt && \
     head -n 20 input.txt > test.txt
-    
-RUN pling cluster align test.txt pling_out --cores 8 --sourmash --visualisation all
+
+RUN pling cluster align test.txt pling_out --cores 4 --sourmash --visualisation all &&\
+    cat pling_out/all_plasmids_distances.tsv
 
 RUN micromamba list -n base
