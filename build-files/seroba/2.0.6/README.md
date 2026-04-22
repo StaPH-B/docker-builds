@@ -7,19 +7,20 @@ Code repository: https://github.com/GlobalPneumoSeq/seroba
 <details><summary>Additional tools installed via micromamba:</summary>
 
 ```
+List of packages in environment: "/opt/conda"
+
   Name                     Version       Build                  Channel    
 ─────────────────────────────────────────────────────────────────────────────
-  _libgcc_mutex            0.1           conda_forge            conda-forge
-  _openmp_mutex            4.5           2_gnu                  conda-forge
+  _openmp_mutex            4.5           20_gnu                 conda-forge
   ariba                    2.14.3        py36he1b5a44_0         bioconda   
   bcftools                 1.9           h68d8f2e_9             bioconda   
   beautifulsoup4           4.12.3        pyha770c72_0           conda-forge
   biopython                1.79          py36h8f6f2f9_0         conda-forge
   bowtie2                  2.5.4         h7071971_4             bioconda   
   brotlipy                 0.7.0         py36h8f6f2f9_1001      conda-forge
-  bzip2                    1.0.8         h4bc722e_7             conda-forge
-  c-ares                   1.34.5        hb9d3cd8_0             conda-forge
-  ca-certificates          2025.8.3      hbd8a1cb_0             conda-forge
+  bzip2                    1.0.8         hda65f42_9             conda-forge
+  c-ares                   1.34.6        hb03c661_0             conda-forge
+  ca-certificates          2026.4.22     hbd8a1cb_0             conda-forge
   cd-hit                   4.8.1         h43eeafb_11            bioconda   
   certifi                  2021.5.30     py36h5fab9bb_0         conda-forge
   cffi                     1.14.4        py36h211aa47_0         conda-forge
@@ -29,7 +30,7 @@ Code repository: https://github.com/GlobalPneumoSeq/seroba
   cycler                   0.11.0        pyhd8ed1ab_0           conda-forge
   dbus                     1.13.6        hfdff14a_1             conda-forge
   dendropy                 5.0.8         pyhdfd78af_1           bioconda   
-  expat                    2.7.1         hecca717_0             conda-forge
+  expat                    2.7.5         hecca717_0             conda-forge
   fontconfig               2.14.2        h14ed4e7_0             conda-forge
   freetype                 2.12.1        h267a509_2             conda-forge
   gettext                  0.25.1        h3f43e3d_1             conda-forge
@@ -48,40 +49,40 @@ Code repository: https://github.com/GlobalPneumoSeq/seroba
   kmc                      3.2.4         h6dccd9a_2             bioconda   
   krb5                     1.20.1        hf9c8cef_0             conda-forge
   lcms2                    2.12          hddcbb42_0             conda-forge
-  ld_impl_linux-64         2.44          h1423503_1             conda-forge
+  ld_impl_linux-64         2.45.1        bootstrap_ha15bf96_2   conda-forge
   libasprintf              0.25.1        h3f43e3d_1             conda-forge
   libasprintf-devel        0.25.1        h3f43e3d_1             conda-forge
-  libblas                  3.9.0         34_h59b9bed_openblas   conda-forge
-  libcblas                 3.9.0         34_he106b2a_openblas   conda-forge
+  libblas                  3.11.0        6_h4a7cf45_openblas    conda-forge
+  libcblas                 3.11.0        6_h0358290_openblas    conda-forge
   libclang                 9.0.1         default_hb4e5071_5     conda-forge
   libcurl                  7.87.0        h6312ad2_0             conda-forge
-  libdeflate               1.24          h86f0d12_0             conda-forge
+  libdeflate               1.25          h17f619e_0             conda-forge
   libedit                  3.1.20191231  h46ee950_2             conda-forge
   libev                    4.33          hd590300_2             conda-forge
-  libexpat                 2.7.1         hecca717_0             conda-forge
+  libexpat                 2.7.5         hecca717_0             conda-forge
   libffi                   3.2.1         he1b5a44_1007          conda-forge
-  libgcc                   15.1.0        h767d61c_4             conda-forge
-  libgcc-ng                15.1.0        h69a702a_4             conda-forge
+  libgcc                   15.2.0        he0feb66_18            conda-forge
+  libgcc-ng                15.2.0        h69a702a_18            conda-forge
   libgettextpo             0.25.1        h3f43e3d_1             conda-forge
   libgettextpo-devel       0.25.1        h3f43e3d_1             conda-forge
-  libgfortran              15.1.0        h69a702a_4             conda-forge
-  libgfortran5             15.1.0        hcea5267_4             conda-forge
+  libgfortran              15.2.0        h69a702a_18            conda-forge
+  libgfortran5             15.2.0        h68bc16d_18            conda-forge
   libglib                  2.66.3        hbe7bbb4_0             conda-forge
-  libgomp                  15.1.0        h767d61c_4             conda-forge
+  libgomp                  15.2.0        he0feb66_18            conda-forge
   libiconv                 1.18          h3b78370_2             conda-forge
-  libidn2                  2.3.8         ha4ef2c3_0             conda-forge
-  liblapack                3.9.0         34_h7ac8fdf_openblas   conda-forge
+  libidn2                  2.3.8         hfac485b_1             conda-forge
+  liblapack                3.11.0        6_h47877c9_openblas    conda-forge
   libllvm9                 9.0.1         default_hc23dcda_7     conda-forge
   libnghttp2               1.51.0        hdcd2b5c_0             conda-forge
-  libopenblas              0.3.30        pthreads_h94d23a6_2    conda-forge
+  libopenblas              0.3.32        pthreads_h94d23a6_0    conda-forge
   libpng                   1.6.43        h2797004_0             conda-forge
   libsqlite                3.46.0        hde9e2c9_0             conda-forge
   libssh2                  1.10.0        haa6b8db_3             conda-forge
-  libstdcxx                15.1.0        h8f9b012_4             conda-forge
-  libstdcxx-ng             15.1.0        h4852527_4             conda-forge
+  libstdcxx                15.2.0        h934c35e_18            conda-forge
+  libstdcxx-ng             15.2.0        hdf11a46_18            conda-forge
   libtiff                  4.2.0         hf544144_3             conda-forge
   libunistring             0.9.10        h7f98852_0             conda-forge
-  libuuid                  2.38.1        h0b41bf4_0             conda-forge
+  libuuid                  2.42          h5347b49_0             conda-forge
   libwebp-base             1.6.0         hd42ef1d_0             conda-forge
   libxcb                   1.17.0        h8a09558_0             conda-forge
   libxcrypt                4.4.36        hd590300_1             conda-forge
@@ -93,7 +94,7 @@ Code repository: https://github.com/GlobalPneumoSeq/seroba
   matplotlib-base          3.3.4         py36hd391965_0         conda-forge
   mummer                   3.23          pl5321h503566f_21      bioconda   
   ncurses                  6.1           hf484d3e_1002          conda-forge
-  nspr                     4.37          h29cc59b_0             conda-forge
+  nspr                     4.38          h29cc59b_0             conda-forge
   nss                      3.100         hca3bf56_0             conda-forge
   numpy                    1.19.5        py36hfc0c790_2         conda-forge
   olefile                  0.46          pyh9f0ad1d_1           conda-forge
@@ -129,12 +130,12 @@ Code repository: https://github.com/GlobalPneumoSeq/seroba
   sysroot_linux-64         2.17          h0157908_18            conda-forge
   tk                       8.6.13        noxft_h4845f30_101     conda-forge
   tornado                  6.1           py36h8f6f2f9_1         conda-forge
-  tzdata                   2025b         h78e105d_0             conda-forge
+  tzdata                   2025c         hc9c84f9_1             conda-forge
   urllib3                  1.26.15       pyhd8ed1ab_0           conda-forge
   wget                     1.20.3        ha56f1ee_1             conda-forge
   wheel                    0.37.1        pyhd8ed1ab_0           conda-forge
-  xorg-libxau              1.0.12        hb9d3cd8_0             conda-forge
-  xorg-libxdmcp            1.1.5         hb9d3cd8_0             conda-forge
+  xorg-libxau              1.0.12        hb03c661_1             conda-forge
+  xorg-libxdmcp            1.1.5         hb03c661_1             conda-forge
   xz                       5.2.6         h166bdaf_0             conda-forge
   yaml                     0.2.5         h280c20c_3             conda-forge
   zlib                     1.2.13        h4ab18f5_6             conda-forge
