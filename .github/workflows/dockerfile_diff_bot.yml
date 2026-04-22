@@ -1,0 +1,85 @@
+name: Dockerfile Diff Bot
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  compare-dockerfiles:
+    # Trigger whenever the bot handle is mentioned in a PR
+    if: |
+      contains(github.event.comment.body, '@staphb-dockerbuilds-diff')
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
+
+    steps:
+      - name: Checkout Pull Request Code
+        uses: actions/checkout@main
+        with:
+          ref: refs/pull/${{ github.event.issue.number }}/head
+
+      - name: Parse and Compare
+        id: diff_gen
+        run: |
+          COMMENT_BODY="${{ github.event.comment.body }}"
+          
+          # 1. Extract everything after the bot handle
+          # 2. Strip "list diff" if it happens to be there
+          # 3. Pull the next three words as IMAGE, OLD, NEW
+          PAYLOAD=$(echo "$COMMENT_BODY" | sed -E 's/.*@staphb-dockerbuilds-diff //I')
+          CLEAN_PARAMS=$(echo "$PAYLOAD" | sed -E 's/^list diff //I')
+          
+          IMAGE=$(echo "$CLEAN_PARAMS" | awk '{print $1}')
+          OLD_VER=$(echo "$CLEAN_PARAMS" | awk '{print $2}')
+          NEW_VER=$(echo "$CLEAN_PARAMS" | awk '{print $3}')
+          
+          FILE_OLD="build-files/$IMAGE/$OLD_VER/Dockerfile"
+          FILE_NEW="build-files/$IMAGE/$NEW_VER/Dockerfile"
+
+          echo "image_name=$IMAGE" >> $GITHUB_OUTPUT
+          echo "old_ver=$OLD_VER" >> $GITHUB_OUTPUT
+          echo "new_ver=$NEW_VER" >> $GITHUB_OUTPUT
+
+          # Validation
+          if [[ -z "$IMAGE" || -z "$OLD_VER" || -z "$NEW_VER" ]]; then
+            echo "error_msg=Format error. Expected: @staphb-dockerbuilds-diff <image> <old> <new>" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          if [[ ! -f "$FILE_OLD" ]]; then
+            echo "error_msg=File not found: $FILE_OLD" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          if [[ ! -f "$FILE_NEW" ]]; then
+            echo "error_msg=File not found: $FILE_NEW" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # Generate Diff
+          DIFF_RESULT=$(diff -u "$FILE_OLD" "$FILE_NEW" || true)
+          
+          if [ -z "$DIFF_RESULT" ]; then
+            echo "diff_output=No changes found between these versions." >> $GITHUB_OUTPUT
+          else
+            {
+              echo 'diff_output<<EOF'
+              echo "$DIFF_RESULT"
+              echo 'EOF'
+            } >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Post Comment to PR
+        uses: peter-evans/create-or-update-comment@main
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            ### Dockerfile Diff: ${{ steps.diff_gen.outputs.image_name }}
+            Comparing: ${{ steps.diff_gen.outputs.old_ver }} -> ${{ steps.diff_gen.outputs.new_ver }}
+            
+            ${{ steps.diff_gen.outputs.error_msg }}
+            
+            ```diff
+            ${{ steps.diff_gen.outputs.diff_output }}
+            ```
