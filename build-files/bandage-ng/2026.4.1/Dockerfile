@@ -36,6 +36,7 @@ ENV LD_LIBRARY_PATH=/opt/squashfs-root/usr/lib:/opt/squashfs-root/usr/lib/x86_64
 
 RUN ln -s /opt/squashfs-root/AppRun /usr/local/bin/BandageNG
 
+WORKDIR /data
 
 CMD ["BandageNG", "--helpall"]
 
