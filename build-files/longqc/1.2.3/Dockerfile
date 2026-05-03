@@ -57,7 +57,7 @@ WORKDIR /test
 RUN echo -e "\n\nMain help message: " && longQC.py --help && \
     echo -e "\n\nrunqc help message: " && longqc runqc -h && \
     echo -e "\n\nsampleqc help message: " && LongQC sampleqc -h && \
-    longqc.py --version
+    longQC.py --version
 
 # ONT test dataset download
 RUN wget -q https://github.com/bactopia/bactopia-tests/raw/646919e3f8174f6cc1a462a78109ba8fdbcd92d3/species/portiera/reads/nanopore/ERR3772599.fastq.gz && \
