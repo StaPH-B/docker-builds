@@ -50,7 +50,8 @@ FROM app AS test
 
 RUN bamtools --help
 
-RUN wget -q https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123.sorted.bam &&\
-    bamtools stats -insert -in SRR13957123.sorted.bam
+ADD https://raw.githubusercontent.com/StaPH-B/docker-builds/master/tests/SARS-CoV-2/SRR13957123.sorted.bam .
+    
+RUN bamtools stats -insert -in SRR13957123.sorted.bam
 
 
