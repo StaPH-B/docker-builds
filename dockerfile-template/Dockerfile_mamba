@@ -12,7 +12,7 @@
 
 # 'FROM' defines where the Dockerfile is starting to build from.
 # The 'AS app' naming is required for the PR validation tests.
-FROM mambaorg/micromamba:2.5.0-noble AS app
+FROM mambaorg/micromamba:2.6.0-noble AS app
 
 # catches hidden failures in piped install steps
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -36,7 +36,7 @@ USER root
 # NOTE: The "org.opencontainers" labels are REQUIRED to pass StaPH-B CI tests.
 LABEL \
       # The exact base image used for the 'app' stage
-      org.opencontainers.image.base.name="docker.io/library/mambaorg/micromamba:2.5.0-noble" \
+      org.opencontainers.image.base.name="docker.io/library/mambaorg/micromamba:2.6.0-noble" \
       # The name of the software (e.g., "BWA" or "Samtools")
       org.opencontainers.image.title="SoftwareName" \
       # The version of the software itself
