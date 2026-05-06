@@ -21,7 +21,7 @@ ARG SOFTWARENAME_VER="1.0.0"
 
 # 'FROM' defines where the Dockerfile is starting to build from.
 # The 'AS builder' naming is optional, but useful in the PR validation tests.
-FROM mambaorg/micromamba:2.5.0-noble AS builder
+FROM mambaorg/micromamba:2.6.0-noble AS builder
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
