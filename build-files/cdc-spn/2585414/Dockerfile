@@ -101,6 +101,7 @@ RUN fasterq-dump ERR1795461 --split-files -O /test_data \
      -r /Spn_Scripts_Reference/SPN_Reference_DB/SPN_Sero_Gene-DB_Final.fasta \
      -o /test_output \
      -n ERR1795461 \
+     2>&1 \
   && cat /test_output/OUT_SeroType_Results.txt \
   && grep -q "6B" /test_output/OUT_SeroType_Results.txt \
   && echo "PASS: Serotype 6B correctly called" \
