@@ -89,6 +89,8 @@ FROM app AS test
 
 WORKDIR /test_data
 
+ARG CACHE_BUST
+
 # install sra-toolkit for test data download
 RUN apt-get update && apt-get install -y sra-toolkit \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
