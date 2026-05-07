@@ -89,14 +89,13 @@ FROM app AS test
 
 WORKDIR /test_data
 
-ARG CACHE_BUST
-
 # install sra-toolkit for test data download
 RUN apt-get update && apt-get install -y sra-toolkit \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # run test - ERR1795461 is Streptococcus pneumoniae, expected serotype 6B
-RUN fasterq-dump ERR1795461 --split-files -O /test_data \
+RUN echo "test run: ERR1795461 - expected serotype 6B" \
+  && fasterq-dump ERR1795461 --split-files -O /test_data \
   && perl /Spn_Scripts_Reference/SPN_Serotyper.pl \
      -1 /test_data/ERR1795461_1.fastq \
      -2 /test_data/ERR1795461_2.fastq \
@@ -105,6 +104,7 @@ RUN fasterq-dump ERR1795461 --split-files -O /test_data \
      -n ERR1795461 \
      2>&1 \
   && cat /test_output/OUT_SeroType_Results.txt \
-  && grep -q "6B" /test_output/OUT_SeroType_Results.txt \
-  && echo "PASS: Serotype 6B correctly called" \
+  && (grep -q "6B" /test_output/OUT_SeroType_Results.txt \
+      && echo "PASS: Serotype 6B correctly called" \
+      || { echo "FAIL: Expected serotype 6B not found in output"; cat /test_output/OUT_SeroType_Results.txt; exit 1; }) \
   && rm -rf /test_data /test_output
