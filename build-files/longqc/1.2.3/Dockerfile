@@ -1,27 +1,22 @@
-FROM python:3.9.17-slim AS app
 ARG LONGQC_VER="1.2.3"
 
-LABEL base.image="python:3.9.17-slim"
-LABEL dockerfile.version="1"
-LABEL software="LongQC"
-LABEL software.version="${LONGQC_VER}"
-LABEL description="A tool for the data quality control of the PacBio and ONT long reads, and it has two functionalities: sample QC and platform QC."
-LABEL website="https://github.com/yfukasawa/LongQC"
-LABEL license="https://github.com/yfukasawa/LongQC/blob/master/LICENSE"
-LABEL maintainer="Raheel Ahmed"
-LABEL maintainer.email="raheelsyedahmed@gmail.com"
+FROM python:3.9.17-slim AS builder
+ARG LONGQC_VER
 
-# Installation of base libraries needed for longqc to work. Note: libhts-dev and build-essential are needed for installing pysam and edlib.
+WORKDIR /opt
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
     ca-certificates \
     libhts-dev \
-    procps \
     build-essential && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
+RUN python -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
 RUN pip install --no-cache-dir \
-    "numpy>=1.21.0" \
+    numpy \
     scipy \
     "matplotlib>=2.1.2" \
     scikit-learn \
@@ -38,13 +33,37 @@ RUN wget https://github.com/yfukasawa/LongQC/archive/refs/tags/v${LONGQC_VER}.ta
 
 RUN cd /opt/LongQC/minimap2-coverage && \
     make && \
-    sed -i '1s;^;#!/usr/local/bin/python\n;' /opt/LongQC/longQC.py && \
-    chmod +x /opt/LongQC/longQC.py && \
-    ln -s /opt/LongQC/longQC.py /usr/local/bin/longqc && \
+    sed -i '1s;^;#!/usr/bin/env python\n;' /opt/LongQC/longQC.py && \
+    chmod +x /opt/LongQC/longQC.py
+
+
+FROM python:3.9.17-slim AS app
+ARG LONGQC_VER
+
+LABEL base.image="python:3.9.17-slim"
+LABEL dockerfile.version="1"
+LABEL software="LongQC"
+LABEL software.version="${LONGQC_VER}"
+LABEL description="A tool for the data quality control of the PacBio and ONT long reads, and it has two functionalities: sample QC and platform QC."
+LABEL website="https://github.com/yfukasawa/LongQC"
+LABEL license="https://github.com/yfukasawa/LongQC/blob/master/LICENSE"
+LABEL maintainer="Raheel Ahmed"
+LABEL maintainer.email="raheelsyedahmed@gmail.com"
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    wget \
+    ca-certificates \
+    procps \
+    libhts3 && \
+    apt-get autoclean && rm -rf /var/lib/apt/lists/*
+
+COPY --from=builder /opt/venv /opt/venv
+COPY --from=builder /opt/LongQC /opt/LongQC
+
+RUN ln -s /opt/LongQC/longQC.py /usr/local/bin/longqc && \
     ln -s /opt/LongQC/longQC.py /usr/local/bin/LongQC
 
-ENV PATH="/opt/LongQC:/opt/LongQC/minimap2-coverage:${PATH}"
-ENV LC_ALL=C
+ENV PATH="/opt/LongQC:/opt/LongQC/minimap2-coverage:/opt/venv/bin:${PATH}" LC_ALL=C
 
 WORKDIR /data
 
