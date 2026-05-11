@@ -17,6 +17,8 @@ LABEL maintainer.email="kutluhan.incekara@ct.gov"
 # circos tools version is 0.23-1 in noble
 RUN apt-get update && apt-get install --no-install-recommends -y \
     wget \
+    libgd-perl \
+    liblist-moreutils-perl \
     # install all circos deps the lazy way
     $(apt-cache depends circos=0.69.9+dfsg-2 | grep "Depends:" | awk '{print $2}' | grep -v '<') \
     && apt-get autoclean && rm -rf /var/lib/apt/lists/*
