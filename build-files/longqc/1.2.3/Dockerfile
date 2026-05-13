@@ -83,3 +83,7 @@ RUN echo -e "\n\nMain help message: " && longQC.py --help && \
 RUN wget -q https://github.com/bactopia/bactopia-tests/raw/646919e3f8174f6cc1a462a78109ba8fdbcd92d3/species/portiera/reads/nanopore/ERR3772599.fastq.gz && \
     longQC.py sampleqc -x ont-ligation -o longqc_ONT_out ERR3772599.fastq.gz && \
     ls longqc_ONT_out/
+
+RUN wget -q https://downloads.pacbcloud.com/public/dataset/2021-11-Microbial-96plex/demultiplexed-reads/m64004_210929_143746.bc2002.bam && \
+    longQC.py sampleqc -x pb-sequel -o longqc_PB_out m64004_210929_143746.bc2002.bam && \
+    ls longqc_PB_out
