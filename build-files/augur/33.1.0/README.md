@@ -13,7 +13,7 @@ Note: Auspice is a different tool.
 ## Additional dependencies
 
 - fasttree 2.1.11-2
-- python 3.12.13
+- python 3.14.5
 - iqtree 2.0.7+dfsg-1+b2
 - mafft 7.505-1
 - raxml 8.2.13+dfsg-2+b1
