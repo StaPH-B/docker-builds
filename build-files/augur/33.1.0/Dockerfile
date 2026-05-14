@@ -1,11 +1,11 @@
-FROM python:3.14-slim AS app
+FROM python:3.13-slim AS app
 
 ARG AUGUR_VER="33.1.0"
 ARG SEQKIT_VER="2.13.0"
 
 # LABEL instructions tag the image with metadata that might be important to the user
 # Optional, but highly recommended
-LABEL base.image="python:3.14-slim"
+LABEL base.image="python:3.13-slim"
 LABEL dockerfile.version="1"
 LABEL software="augur"
 LABEL software.version=${AUGUR_VER}
