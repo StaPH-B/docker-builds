@@ -5,14 +5,15 @@ FROM ubuntu:noble AS builder
 
 ARG FALCO_VER
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install --no-install-recommends -y \
     wget \
+    ca-certificates \
     build-essential \
     zlib1g-dev \
     libhts-dev && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-RUN wget https://github.com/smithlabcode/falco/releases/download/v${FALCO_VER}/falco-${FALCO_VER}.tar.gz &&\
+RUN wget -q https://github.com/smithlabcode/falco/releases/download/v${FALCO_VER}/falco-${FALCO_VER}.tar.gz &&\
     mkdir /opt/falco &&\
     tar --strip-components=1 -C /opt/falco -xvf falco-${FALCO_VER}.tar.gz &&\
     cd /opt/falco &&\
