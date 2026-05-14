@@ -16,7 +16,7 @@ ARG MINIMAP2_VER
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
-    libncurses5-dev \
+    libncurses-dev \
     libbz2-dev \
     liblzma-dev \
     libcurl4-gnutls-dev \
@@ -101,7 +101,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install --no-install-recommends -y \
     perl \
     zlib1g \
-    libncurses5 \
+    libncurses6 \
     bzip2 \
     libdeflate-dev \
     liblzma-dev \
