@@ -1,11 +1,11 @@
-FROM python:3.12-slim AS app
+FROM python:3.13-slim AS app
 
 ARG AUGUR_VER="33.1.0"
 ARG SEQKIT_VER="2.13.0"
 
 # LABEL instructions tag the image with metadata that might be important to the user
 # Optional, but highly recommended
-LABEL base.image="python:3.12-slim"
+LABEL base.image="python:3.13-slim"
 LABEL dockerfile.version="1"
 LABEL software="augur"
 LABEL software.version=${AUGUR_VER}
@@ -35,9 +35,15 @@ RUN wget -q https://github.com/shenwei356/seqkit/releases/download/v${SEQKIT_VER
 	rm seqkit_linux_amd64.tar.gz
 
 # install augur
+# RUN wget -q https://github.com/nextstrain/augur/archive/refs/tags/${AUGUR_VER}.tar.gz && \
+#     tar -xzf ${AUGUR_VER}.tar.gz && \
+#     pip install ${AUGUR_VER}.tar.gz --no-cache-dir && \
+#     rm -v ${AUGUR_VER}.tar.gz
+
+# install augur w/ typing extensions
 RUN wget -q https://github.com/nextstrain/augur/archive/refs/tags/${AUGUR_VER}.tar.gz && \
     tar -xzf ${AUGUR_VER}.tar.gz && \
-    pip install ${AUGUR_VER}.tar.gz --no-cache-dir && \
+    pip install typing_extensions ${AUGUR_VER}.tar.gz --no-cache-dir && \
     rm -v ${AUGUR_VER}.tar.gz
 
 # augur tree calls iqtree 
