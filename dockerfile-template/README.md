@@ -7,8 +7,10 @@ Please edit this readme with some basic information about the tool and how to us
 
 # <program> container
 
+This images is part of the StaPH-B/docker-builds project. More information can be found at https://github.com/StaPH-B/docker-builds.
+
 Main tool: [<program>](link to program)
-  
+
 Code repository:
 
 Additional tools:
