@@ -122,11 +122,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 # copy in samtools, htslib, and minimap2 executables from builder stage
 COPY --from=builder /usr/local/bin/* /usr/local/bin/
 
-# # install medaka via pip
-# RUN pip install medaka-cpu==${MEDAKA_VER} --extra-index-url https://download.pytorch.org/whl/cpu --no-cache-dir && \
-#     pip install pyabpoa==${PYABPOA_VER} --no-cache-dir
-
-# install medaka with break system packages
+# install medaka with pip break system packages (ubuntu noble specific)
 RUN pip install medaka==${MEDAKA_VER} --extra-index-url https://download.pytorch.org/whl/cpu --no-cache-dir --break-system-packages && \
     pip install pyabpoa==${PYABPOA_VER} --no-cache-dir --break-system-packages
 
