@@ -68,5 +68,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 RUN wget -q https://github.com/bactopia/bactopia-tests/raw/refs/heads/main/species/portiera/reads/nanopore/ERR3772599.fastq.gz && \
-    metaMDBG asm --out-dir ./ERR3772599/ --in-ont ERR3772599.fastq.gz --threads 8
+    metaMDBG asm --out-dir ./ERR3772599/ --in-ont ERR3772599.fastq.gz --threads 8 && \
+    cd ERR3772599 && \
+    gunzip contigs.fasta.gz && \
+    head contigs.fasta
 
