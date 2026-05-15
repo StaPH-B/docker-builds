@@ -127,7 +127,7 @@ COPY --from=builder /usr/local/bin/* /usr/local/bin/
 #     pip install pyabpoa==${PYABPOA_VER} --no-cache-dir
 
 # install medaka with break system packages
-RUN pip install medaka-cpu==${MEDAKA_VER} --extra-index-url https://download.pytorch.org/whl/cpu --no-cache-dir --break-system-packages && \
+RUN pip install medaka==${MEDAKA_VER} --extra-index-url https://download.pytorch.org/whl/cpu --no-cache-dir --break-system-packages && \
     pip install pyabpoa==${PYABPOA_VER} --no-cache-dir --break-system-packages
 
 ENV LC_ALL=C
