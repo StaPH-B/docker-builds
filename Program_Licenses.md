@@ -26,6 +26,7 @@ The licenses of the open-source software that is contained in these Docker image
 | BBTools | non-standard - see `licence.txt` and `legal.txt` that is included in docker image under `/bbmap/docs/`; Also on sourceforge repo for BBTools | https://github.com/bbushnell/BBTools/blob/master/license.txt |
 | bcftools | MIT & **GNU GPLv3** | https://github.com/samtools/bcftools/blob/develop/LICENSE |
 | bedtools | MIT | https://github.com/arq5x/bedtools2/blob/master/LICENSE |
+| bedder-rs| MIT | https://github.com/quinlan-lab/bedder-rs/blob/main/LICENSE |
 | bindashtree | MIT | https://github.com/jianshu93/bindashtree?tab=MIT-1-ov-file#readme |
 | blast+ | Public Domain | https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/scripts/projects/blast/LICENSE |
 | bowtie2 | GNU GPLv3 | https://github.com/BenLangmead/bowtie2/blob/master/LICENSE |
