@@ -18,7 +18,8 @@ WORKDIR /opt
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
-    ca-certificates && \
+    ca-certificates \
+    procps && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 RUN wget -q https://github.com/quinlan-lab/bedder-rs/releases/download/v${BEDDER_RS_VER}/bedder-static-linux-x86_64 && \
