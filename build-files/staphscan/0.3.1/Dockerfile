@@ -26,8 +26,8 @@ ARG BLAST_VER=2.17.0
 
 # Mash installation (> 2.0)
 RUN wget -q https://github.com/marbl/Mash/releases/download/v${MASH_VER}/mash-Linux64-v${MASH_VER}.tar && \
-    tar -xvf mash-Linux64-v2.3.tar && \
-    mv mash-Linux64-v2.3/mash /usr/local/bin/ && \
+    tar -xvf mash-Linux64-v${MASH_VER}.tar && \
+    mv mash-Linux64-v${MASH_VER}/mash /usr/local/bin/ && \
     rm mash-Linux64-v${MASH_VER}.tar && \
     rm -rf mash-Linux64-v${MASH_VER} && \
     mash --version
@@ -67,4 +67,3 @@ RUN wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/013/425/GCF_000013425.
     gunzip GCF_000013425.1_ASM1342v1_genomic.fna.gz && \
     staphscan -i GCF_000013425.1_ASM1342v1_genomic.fna -o staphscan_output && \
     rm GCF_000013425.1_ASM1342v1_genomic.fna
-
