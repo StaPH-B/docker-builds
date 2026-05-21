@@ -26,6 +26,7 @@ The licenses of the open-source software that is contained in these Docker image
 | BBTools | non-standard - see `licence.txt` and `legal.txt` that is included in docker image under `/bbmap/docs/`; Also on sourceforge repo for BBTools | https://github.com/bbushnell/BBTools/blob/master/license.txt |
 | bcftools | MIT & **GNU GPLv3** | https://github.com/samtools/bcftools/blob/develop/LICENSE |
 | bedtools | MIT | https://github.com/arq5x/bedtools2/blob/master/LICENSE |
+| bedder-rs| MIT | https://github.com/quinlan-lab/bedder-rs/blob/main/LICENSE |
 | bindashtree | MIT | https://github.com/jianshu93/bindashtree?tab=MIT-1-ov-file#readme |
 | blast+ | Public Domain | https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/scripts/projects/blast/LICENSE |
 | bowtie2 | GNU GPLv3 | https://github.com/BenLangmead/bowtie2/blob/master/LICENSE |
@@ -126,6 +127,7 @@ The licenses of the open-source software that is contained in these Docker image
 | MaSuRCA | GNU GPLv3 | https://github.com/alekseyzimin/masurca/blob/master/LICENSE.txt
 | Medaka | Mozilla Public License 2.0 | https://github.com/nanoporetech/medaka/blob/master/LICENSE.md |
 | meningotype | GNU General Public License v3.0 | https://github.com/MDU-PHL/meningotype/blob/master/LICENSE |
+| metaMDBG | MIT | https://github.com/GaetanBenoitDev/metaMDBG/blob/main/LICENSE.md |
 | Metaphlan | MIT | https://github.com/biobakery/MetaPhlAn/blob/master/license.txt |
 | MIDAS | GNU GPLv3 |https://github.com/snayfach/MIDAS/blob/master/LICENSE |
 | minimap2 | MIT | https://github.com/lh3/minimap2/blob/master/LICENSE.txt |
