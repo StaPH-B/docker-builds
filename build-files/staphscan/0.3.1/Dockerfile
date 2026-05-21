@@ -38,14 +38,12 @@ RUN wget -q ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/${BLAST_VER}/ncb
     mv ncbi-blast-${BLAST_VER}+/bin/* /usr/local/bin/ && \
     rm ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz &&\
     rm -rf ncbi-blast-${BLAST_VER}+ && \
-    blastn -help && \
-    blastp -help
+    blastn -help
 
 # StaphSCAN installation
 RUN wget -q https://github.com/riccabolla/StaphSCAN/archive/refs/tags/v${STAPHSCAN_VER}.tar.gz && \
-    tar -xzf v${STAPHSCAN_VER}.tar.gz && \
-    pip install --no-cache-dir ./StaphSCAN-${STAPHSCAN_VER} && \
-    rm -rf v${STAPHSCAN_VER}.tar.gz StaphSCAN-${STAPHSCAN_VER}
+    pip install --no-cache-dir v${STAPHSCAN_VER}.tar.gz && \
+    rm -rf v${STAPHSCAN_VER}.tar.gz
 
 ENV LC_ALL=C
 
@@ -66,4 +64,5 @@ RUN staphscan --help && \
 RUN wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/013/425/GCF_000013425.1_ASM1342v1/GCF_000013425.1_ASM1342v1_genomic.fna.gz && \
     gunzip GCF_000013425.1_ASM1342v1_genomic.fna.gz && \
     staphscan -i GCF_000013425.1_ASM1342v1_genomic.fna -o staphscan_output && \
-    rm GCF_000013425.1_ASM1342v1_genomic.fna
+    head staphscan_output/staphscan_summary.tsv
+#14 8.157 Analysis complete.
