@@ -1,5 +1,7 @@
 FROM python:3.13-slim AS app
 ARG STAPHSCAN_VER="0.3.1"
+ARG MASH_VER=2.3
+ARG BLAST_VER=2.17.0
 
 LABEL base.image="python:3.13-slim"
 LABEL dockerfile.version="1"
@@ -21,12 +23,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     perl && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-ARG MASH_VER=2.3
-ARG BLAST_VER=2.17.0
-
 # Mash installation (> 2.0)
 RUN wget -q https://github.com/marbl/Mash/releases/download/v${MASH_VER}/mash-Linux64-v${MASH_VER}.tar && \
-    tar -xvf mash-Linux64-v${MASH_VER}.tar && \
+    tar -xvf mash-Linux64-v${MASH_VER}.tar --no-same-owner && \
     mv mash-Linux64-v${MASH_VER}/mash /usr/local/bin/ && \
     rm mash-Linux64-v${MASH_VER}.tar && \
     rm -rf mash-Linux64-v${MASH_VER} && \
