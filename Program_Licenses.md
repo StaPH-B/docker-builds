@@ -118,6 +118,7 @@ The licenses of the open-source software that is contained in these Docker image
 | legsta | GNU GPLv3 | https://github.com/tseemann/legsta/blob/master/LICENSE |
 | liftoff | GNU GPLv3 | https://github.com/agshumate/Liftoff/blob/master/LICENSE.md |
 | lima | BSD-3 | https://github.com/PacificBiosciences/barcoding/blob/master/LICENSE |
+| longqc | MIT | https://github.com/yfukasawa/LongQC/blob/master/LICENSE |
 | longshot | MIT | https://github.com/pjedge/longshot/blob/master/LICENSE |
 | lrge | MIT | https://github.com/mbhall88/lrge?tab=MIT-1-ov-file#readme |
 | Lyve-SET  | MIT | https://github.com/lskatz/lyve-SET/blob/master/LICENSE |
