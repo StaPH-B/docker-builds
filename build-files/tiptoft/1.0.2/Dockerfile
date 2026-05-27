@@ -57,6 +57,7 @@ ENV PATH="/opt/venv/bin:$PATH" \
 
 # Installing curl so that tiptoft_database_downloader works.
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    procps \
     curl && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
