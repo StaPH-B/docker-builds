@@ -13,7 +13,7 @@ Note: Auspice is a different tool.
 ## Additional dependencies
 
 - fasttree 2.1.11-2
-- python 3.14.5
+- python 3.12.13
 - iqtree 2.0.7+dfsg-1+b2
 - mafft 7.505-1
 - raxml 8.2.13+dfsg-2+b1
@@ -42,7 +42,7 @@ jsonschema-specifications 2025.9.1
 kiwisolver                1.5.0
 matplotlib                3.10.8
 networkx                  3.6.1
-nextstrain-augur          33.0.1
+nextstrain-augur          33.2.0
 numpy                     2.4.4
 packaging                 26.0
 pandas                    2.3.3

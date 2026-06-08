@@ -49,7 +49,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-
 RUN wget -q https://github.com/artic-network/fieldbioinformatics/archive/refs/tags/v${ARTIC_VER}.tar.gz && \
     tar -vxf v${ARTIC_VER}.tar.gz && \
     cd /fieldbioinformatics-${ARTIC_VER} && ls && \
