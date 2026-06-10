@@ -133,8 +133,9 @@ mv -v datasets /usr/local/bin
 # XFG.3.5 | PX025687.1 | introduced in pango-designation 1.35 https://github.com/cov-lineages/pango-designation/commit/cb430033b29f760b7f013ff7114790c5b4b6f9b4
 # XFG.5.1.4 | PV979512.1 | introduced in pango-designation 1.36 https://github.com/cov-lineages/pango-designation/commit/9bc6a238df1bcda12f548b239a86c7ce7fbcf2a3
 # PQ.17.11 | PX697933.1 | introduced in pango-designation 1.37 https://github.com/cov-lineages/pango-designation/commit/38e4ffc100689e8979c786623e62a1d2887f46e9
+# XFG.6.14 | PX670354.1 | introduced in pango-designation 1.39 https://github.com/cov-lineages/pango-designation/commit/2079448d187e4f5308953a529cb24936723eeeac
 # sed is to make output more readable by removing extra text in sequence names
-RUN datasets download virus genome accession ON924087.1,OQ381818.1,OR177999.1,OR461132.1,OR598183.1,OR716684.1,PP189069.1,PP218754.1,PQ073669.1,PP770375.1,PQ034842.1,PQ277908.1,PQ725776.1,PV666687.1,PX025687.1,PV979512.1,PX697933.1 && \
+RUN datasets download virus genome accession ON924087.1,OQ381818.1,OR177999.1,OR461132.1,OR598183.1,OR716684.1,PP189069.1,PP218754.1,PQ073669.1,PP770375.1,PQ034842.1,PQ277908.1,PQ725776.1,PV666687.1,PX025687.1,PV979512.1,PX697933.1,PX670354.1 && \
 unzip -o ncbi_dataset.zip && \
 rm -v ncbi_dataset.zip && \
 pangolin ncbi_dataset/data/genomic.fna && \
