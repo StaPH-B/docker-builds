@@ -14,17 +14,26 @@ ARG SCORPIO_VER="v0.3.19"
 ARG CONSTELLATIONS_VER="v0.1.12"
 ARG USHER_VER="0.6.3"
 
-# metadata labels
-LABEL base.image="mambaorg/micromamba:2.8.1-ubuntu24.04"
-LABEL dockerfile.version="1"
-LABEL software="pangolin"
-LABEL software.version=${PANGOLIN_VER}
-LABEL description="Conda environment for Pangolin. Pangolin: Software package for assigning SARS-CoV-2 genome sequences to global lineages."
-LABEL website="https://github.com/cov-lineages/pangolin"
-LABEL license="GNU General Public License v3.0"
-LABEL license.url="https://github.com/cov-lineages/pangolin/blob/master/LICENSE.txt"
-LABEL maintainer="Curtis Kapsak"
-LABEL maintainer.email="kapsakcj@gmail.com"
+# metadata labels for the image; using OCI labels spec:
+LABEL \
+# The exact base image used for the 'app' stage
+org.opencontainers.image.base.name="mambaorg/micromamba:2.8.1-ubuntu24.04" \
+# The name of the software (e.g., "BWA" or "Samtools")
+org.opencontainers.image.title="pangolin" \
+# The version of the software itself
+org.opencontainers.image.version="${PANGOLIN_VER}" \
+# The version of THIS Dockerfile (increment if you change the build logic)
+org.opencontainers.image.revision="1" \
+# A human-readable description of the tool
+org.opencontainers.image.description="Conda environment for Pangolin. Pangolin: Software package for assigning SARS-CoV-2 genome sequences to global lineages." \
+# The project homepage or GitHub repository
+org.opencontainers.image.url="https://github.com/cov-lineages/pangolin" \
+# Where users can find instructions or manuals for the software
+org.opencontainers.image.documentation="https://github.com/cov-lineages/pangolin" \
+# The software license (e.g., MIT, GPL-3.0, Apache-2.0) for the software
+org.opencontainers.image.licenses="GPL-3.0" \
+# The person/group maintaining this Dockerfile
+org.opencontainers.image.authors="Curtis Kapsak <kapsakcj@gmail.com>"
 
 # install dependencies; cleanup apt garbage
 RUN apt-get update && apt-get install -y --no-install-recommends \
