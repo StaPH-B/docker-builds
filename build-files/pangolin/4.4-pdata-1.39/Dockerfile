@@ -33,7 +33,11 @@ org.opencontainers.image.documentation="https://github.com/cov-lineages/pangolin
 # The software license (e.g., MIT, GPL-3.0, Apache-2.0) for the software
 org.opencontainers.image.licenses="GPL-3.0" \
 # The person/group maintaining this Dockerfile
-org.opencontainers.image.authors="Curtis Kapsak <kapsakcj@gmail.com>"
+org.opencontainers.image.authors="Curtis Kapsak <kapsakcj@gmail.com>" \
+# The date the image was created
+org.opencontainers.image.created='2026-06-11T10:02:28Z' \
+# Where the dockerfile for the image can be found
+org.opencontainers.image.source=https://github.com/StaPH-B/docker-builds/pangolin/4.4-pdata-1.39
 
 # install dependencies; cleanup apt garbage
 RUN apt-get update && apt-get install -y --no-install-recommends \
