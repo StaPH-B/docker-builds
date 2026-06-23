@@ -15,31 +15,32 @@ List of packages in environment: "/opt/conda/envs/mykrobe"
 ───────────────────────────────────────────────────────────────────────
   _openmp_mutex       4.5           20_gnu                conda-forge
   anytree             2.13.0        pyhcf101f3_1          conda-forge
-  backports.zstd      1.5.0         py312h90b7ffd_0       conda-forge
-  biopython           1.87          py312h4c3975b_0       conda-forge
-  brotli-python       1.2.0         py312hdb49522_1       conda-forge
+  backports.zstd      1.6.0         py312h90b7ffd_0       conda-forge
+  biopython           1.86          py312h47b2149_0       pkgs/main  
+  blas                2.308         openblas              conda-forge
+  blas-devel          3.11.0        8_h1ea3ea9_openblas   conda-forge
+  brotli-python       1.2.0         py312h3dd09e2_0       pkgs/main  
   bzip2               1.0.8         hda65f42_9            conda-forge
   c-ares              1.34.6        hb03c661_0            conda-forge
-  ca-certificates     2026.5.20     hbd8a1cb_0            conda-forge
-  certifi             2026.5.20     pyhd8ed1ab_0          conda-forge
+  ca-certificates     2026.6.17     hbd8a1cb_0            conda-forge
+  certifi             2026.6.17     pyhd8ed1ab_0          conda-forge
   charset-normalizer  3.4.7         pyhd8ed1ab_0          conda-forge
   dnspython           2.8.0         pyhcf101f3_0          conda-forge
   h2                  4.3.0         pyhcf101f3_0          conda-forge
   hpack               4.1.0         pyhd8ed1ab_0          conda-forge
   hyperframe          6.1.0         pyhd8ed1ab_0          conda-forge
   icu                 75.1          he02047a_0            conda-forge
-  idna                3.17          pyhcf101f3_0          conda-forge
+  idna                3.18          pyhcf101f3_0          conda-forge
   keyutils            1.6.3         hb9d3cd8_0            conda-forge
-  krb5                1.22.2        ha1258a1_0            conda-forge
+  krb5                1.22.2        hbde042b_1            conda-forge
   ld_impl_linux-64    2.45.1        default_hbd61a6d_102  conda-forge
-  libabseil           20240722.0    cxx17_hbbce691_4      conda-forge
   libblas             3.11.0        8_h4a7cf45_openblas   conda-forge
-  libboost            1.86.0        hed09d94_4            conda-forge
+  libboost            1.88.0        hed09d94_6            conda-forge
   libcblas            3.11.0        8_h0358290_openblas   conda-forge
   libcurl             8.20.0        hcf29cc6_0            conda-forge
   libedit             3.1.20250104  pl5321h7949ede_0      conda-forge
   libev               4.33          hd590300_2            conda-forge
-  libexpat            2.8.1         hecca717_0            conda-forge
+  libexpat            2.8.1         hecca717_1            conda-forge
   libffi              3.5.2         h3435931_0            conda-forge
   libgcc              15.2.0        he0feb66_19           conda-forge
   libgcc-ng           15.2.0        h69a702a_19           conda-forge
@@ -47,6 +48,7 @@ List of packages in environment: "/opt/conda/envs/mykrobe"
   libgfortran5        15.2.0        h68bc16d_19           conda-forge
   libgomp             15.2.0        he0feb66_19           conda-forge
   liblapack           3.11.0        8_h47877c9_openblas   conda-forge
+  liblapacke          3.11.0        8_h6ae95b6_openblas   conda-forge
   liblzma             5.8.3         hb03c661_0            conda-forge
   libnghttp2          1.68.1        h877daf1_0            conda-forge
   libnsl              2.0.1         hb9d3cd8_1            conda-forge
@@ -55,20 +57,22 @@ List of packages in environment: "/opt/conda/envs/mykrobe"
   libssh2             1.11.1        hcf80075_0            conda-forge
   libstdcxx           15.2.0        h934c35e_19           conda-forge
   libstdcxx-ng        15.2.0        hdf11a46_19           conda-forge
-  libuuid             2.42.1        h5347b49_0            conda-forge
+  libuuid             2.42.2        h5347b49_0            conda-forge
   libxcrypt           4.4.36        hd590300_1            conda-forge
   libzlib             1.3.2         h25fd6f3_2            conda-forge
-  mongodb             6.0.16        h4be24d9_1            conda-forge
+  mongodb             7.0.34        he2e579a_0            conda-forge
   mongoengine         0.29.3        pyhcf101f3_0          conda-forge
   mykrobe             0.13.0        py312h20b014d_5       bioconda   
   ncurses             6.6           hdb14827_0            conda-forge
-  numpy               1.26.4        py312heda63a1_0       conda-forge
-  openssl             3.6.2         h35e630c_0            conda-forge
+  numpy               1.26.4        py312hc213724_1       pkgs/main  
+  numpy-base          1.26.4        py312hf387b04_1       pkgs/main  
+  openblas            0.3.33        pthreads_h6ec200e_0   conda-forge
+  openssl             3.6.3         h35e630c_0            conda-forge
   packaging           26.2          pyhc364b38_0          conda-forge
   pandas              3.0.3         py312h8ecdadd_0       conda-forge
-  pcre                8.45          h9c3ff4c_0            conda-forge
-  pip                 26.1.2        pyh8b19718_0          conda-forge
-  pymongo             4.17.0        py312h1289d80_0       conda-forge
+  pcre2               10.47         haa7fec5_0            conda-forge
+  pip                 24.2          pyhd8ed1ab_0          conda-forge
+  pymongo             4.17.0        py312h47b2149_0       pkgs/main  
   pysocks             1.7.1         pyha55dd90_7          conda-forge
   python              3.12.13       hd63d673_0_cpython    conda-forge
   python-dateutil     2.9.0.post0   pyhe01879c_2          conda-forge
