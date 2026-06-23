@@ -43,7 +43,7 @@ FROM app AS test
 
 ARG SKETCH_VER="235"
 
-# tool sanity and reference sketch integrity
+# verify tool and reference sketch integrity
 WORKDIR /db
 RUN mash --version && mash -h && \
     mash info RefSeqProkSketchesv${SKETCH_VER}.msh | head -n 10

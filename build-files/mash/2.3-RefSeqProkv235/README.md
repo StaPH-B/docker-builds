@@ -15,9 +15,9 @@ Basic information on how to use this tool:
 
 Additional information:
 
-This container bundles Mash 2.3 with a refreshed RefSeq prokaryotic reference sketch at `/db/RefSeqProkSketchesv235.msh`.
+This container includes Mash 2.3 and a refreshed RefSeq prokaryotic reference sketch at `/db/RefSeqProkSketchesv235.msh`.
 
-The sketch replaces the 2019 `RefSeqSketchesDefaults.msh` that ships with `staphb/mash:2.3`. It is regenerated from RefSeq representative bacterial genomes by Erin Young's [`update_mash_dist`](https://github.com/erinyoung/update_mash_dist) pipeline (Mash 2.3, default k=21 / s=1000) and published to Zenodo:
+The sketch replaces the 2019 `RefSeqSketchesDefaults.msh` distributed with `staphb/mash:2.3`. It is regenerated from RefSeq representative bacterial genomes by Erin Young's [`update_mash_dist`](https://github.com/erinyoung/update_mash_dist) pipeline (Mash 2.3, default k=21 / s=1000) and published to Zenodo:
 - Version: v235 (published 2026-05-19)
 - Zenodo record: 20293962
 - DOI: [10.5281/zenodo.20293962](https://doi.org/10.5281/zenodo.20293962)
@@ -30,7 +30,7 @@ Full documentation: https://mash.readthedocs.io/en/latest/
 ```bash
 # genome vs. genome
 mash dist genome1.fna genome2.fna
-# screen reads or an assembly against the bundled RefSeq sketch
+# screen reads or an assembly against the included RefSeq sketch
 mash screen /db/RefSeqProkSketchesv235.msh assembly.fna | sort -gr > screen.tab
 # identify the closest reference for an assembly
 mash dist /db/RefSeqProkSketchesv235.msh assembly.fna | sort -gk3 | head
