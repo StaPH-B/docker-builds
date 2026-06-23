@@ -1,4 +1,4 @@
-FROM mambaorg/micromamba:2.5.0-ubuntu24.04 AS app
+FROM mambaorg/micromamba:2.8.1-ubuntu24.04 AS app
 
 # Version arguments
 # ARG variables only persist during build time
@@ -10,7 +10,7 @@ USER root
 # set workdir to default for building; set to /data at the end
 WORKDIR /
 
-LABEL base.image="mambaorg/micromamba:2.5.0-ubuntu24.04"
+LABEL base.image="mambaorg/micromamba:2.8.1-ubuntu24.04"
 LABEL dockerfile.version="1"
 LABEL software="Panaroo"
 LABEL software.version=${PANAROO_SOFTWARE_VERSION}
