@@ -27,42 +27,42 @@ List of packages in environment: "/opt/conda/envs/piranha"
   aws-c-sdkutils                         0.2.4         h8b1a151_4                    conda-forge
   aws-checksums                          0.2.10        h8b1a151_0                    conda-forge
   backports.zstd                         1.6.0         py312h90b7ffd_0               conda-forge
-#14 1.080   tabix                                  1.11          hdfd78af_0                    bioconda   
-#14 1.080   tabixpp                                1.1.2         hbefcdb2_4                    bioconda   
-#14 1.080   tabulate                               0.10.0        pyhcf101f3_0                  conda-forge
-#14 1.080   tar                                    1.35          h3b78370_0                    conda-forge
-#14 1.080   tenacity                               9.1.4         pyhcf101f3_0                  conda-forge
-#14 1.080   tensordict                             0.1.2         pyh6074d0b_0                  conda-forge
-#14 1.080   throttler                              1.2.2         pyhd8ed1ab_0                  conda-forge
-#14 1.080   tk                                     8.6.13        noxft_h366c992_103            conda-forge
-#14 1.080   toml                                   0.10.2        pyhcf101f3_3                  conda-forge
-#14 1.080   tqdm                                   4.68.3        pyh8f84b5b_0                  conda-forge
-#14 1.080   traitlets                              5.15.1        pyhcf101f3_0                  conda-forge
-#14 1.080   typing-extensions                      4.15.0        h396c80c_0                    conda-forge
-#14 1.080   typing_extensions                      4.15.0        pyhcf101f3_0                  conda-forge
-#14 1.080   tzdata                                 2025c         hc9c84f9_1                    conda-forge
-#14 1.080   urllib3                                2.7.0         pyhd8ed1ab_0                  conda-forge
-#14 1.080   vcflib                                 1.0.15        h3fa9d83_1                    bioconda   
-#14 1.080   wget                                   1.25.0        h653f8fd_1                    conda-forge
-#14 1.080   wheel                                  0.47.0        pyhd8ed1ab_0                  conda-forge
-#14 1.080   wrapt                                  1.17.0        py312h5eee18b_0               pkgs/main  
-#14 1.080   wurlitzer                              3.1.1         pyhd8ed1ab_1                  conda-forge
-#14 1.080   xorg-libice                            1.1.2         hb9d3cd8_0                    conda-forge
-#14 1.080   xorg-libsm                             1.2.6         he73a12e_0                    conda-forge
-#14 1.080   xorg-libx11                            1.8.13        he1eb515_0                    conda-forge
-#14 1.080   xorg-libxau                            1.0.12        hb03c661_1                    conda-forge
-#14 1.080   xorg-libxdmcp                          1.1.5         hb03c661_1                    conda-forge
-#14 1.080   xorg-libxext                           1.3.7         hb03c661_0                    conda-forge
-#14 1.080   xorg-libxfixes                         6.0.2         hb03c661_0                    conda-forge
-#14 1.080   xorg-libxi                             1.8.3         hb03c661_0                    conda-forge
-#14 1.080   xorg-libxrandr                         1.5.5         hb03c661_0                    conda-forge
-#14 1.080   xorg-libxrender                        0.9.12        hb9d3cd8_0                    conda-forge
-#14 1.080   xorg-libxt                             1.3.1         hb9d3cd8_0                    conda-forge
-#14 1.080   xorg-libxtst                           1.2.5         hb9d3cd8_3                    conda-forge
-#14 1.080   yaml                                   0.2.5         h280c20c_3                    conda-forge
-#14 1.080   yte                                    1.9.4         pyhd8ed1ab_0                  conda-forge
-#14 1.080   zlib                                   1.3.2         h25fd6f3_2                    conda-forge
-#14 1.080   zstd                                   1.5.7         hb78ec9c_6                    conda-forge
+  tabix                                  1.11          hdfd78af_0                    bioconda   
+  tabixpp                                1.1.2         hbefcdb2_4                    bioconda   
+  tabulate                               0.10.0        pyhcf101f3_0                  conda-forge
+  tar                                    1.35          h3b78370_0                    conda-forge
+  tenacity                               9.1.4         pyhcf101f3_0                  conda-forge
+  tensordict                             0.1.2         pyh6074d0b_0                  conda-forge
+  throttler                              1.2.2         pyhd8ed1ab_0                  conda-forge
+  tk                                     8.6.13        noxft_h366c992_103            conda-forge
+  toml                                   0.10.2        pyhcf101f3_3                  conda-forge
+  tqdm                                   4.68.3        pyh8f84b5b_0                  conda-forge
+  traitlets                              5.15.1        pyhcf101f3_0                  conda-forge
+  typing-extensions                      4.15.0        h396c80c_0                    conda-forge
+  typing_extensions                      4.15.0        pyhcf101f3_0                  conda-forge
+  tzdata                                 2025c         hc9c84f9_1                    conda-forge
+  urllib3                                2.7.0         pyhd8ed1ab_0                  conda-forge
+  vcflib                                 1.0.15        h3fa9d83_1                    bioconda   
+  wget                                   1.25.0        h653f8fd_1                    conda-forge
+  wheel                                  0.47.0        pyhd8ed1ab_0                  conda-forge
+  wrapt                                  1.17.0        py312h5eee18b_0               pkgs/main  
+  wurlitzer                              3.1.1         pyhd8ed1ab_1                  conda-forge
+  xorg-libice                            1.1.2         hb9d3cd8_0                    conda-forge
+  xorg-libsm                             1.2.6         he73a12e_0                    conda-forge
+  xorg-libx11                            1.8.13        he1eb515_0                    conda-forge
+  xorg-libxau                            1.0.12        hb03c661_1                    conda-forge
+  xorg-libxdmcp                          1.1.5         hb03c661_1                    conda-forge
+  xorg-libxext                           1.3.7         hb03c661_0                    conda-forge
+  xorg-libxfixes                         6.0.2         hb03c661_0                    conda-forge
+  xorg-libxi                             1.8.3         hb03c661_0                    conda-forge
+  xorg-libxrandr                         1.5.5         hb03c661_0                    conda-forge
+  xorg-libxrender                        0.9.12        hb9d3cd8_0                    conda-forge
+  xorg-libxt                             1.3.1         hb9d3cd8_0                    conda-forge
+  xorg-libxtst                           1.2.5         hb9d3cd8_3                    conda-forge
+  yaml                                   0.2.5         h280c20c_3                    conda-forge
+  yte                                    1.9.4         pyhd8ed1ab_0                  conda-forge
+  zlib                                   1.3.2         h25fd6f3_2                    conda-forge
+  zstd                                   1.5.7         hb78ec9c_6                    conda-forge
 ```
 
 </details>
