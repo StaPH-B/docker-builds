@@ -2,7 +2,7 @@ ARG CLAIR3_VER="2.0.1"
 
 # Builder Stage
 # Credit to https://github.com/HKU-BAL/Clair3/blob/main/Dockerfile for reference code
-FROM mambaorg/micromamba:2.5.0-ubuntu24.04 AS builder
+FROM mambaorg/micromamba:2.8.1-ubuntu24.04 AS builder
 ARG CLAIR3_VER
 USER root
 WORKDIR /opt/bin
@@ -92,12 +92,12 @@ RUN set -eux; \
     
 
 # App Stage
-FROM mambaorg/micromamba:2.5.0-ubuntu24.04 AS app
+FROM mambaorg/micromamba:2.8.1-ubuntu24.04 AS app
 ARG CLAIR3_VER
 USER root
 WORKDIR /opt/bin
 
-LABEL base.image="mambaorg/micromamba:2.5.0-ubuntu24.04"
+LABEL base.image="mambaorg/micromamba:2.8.1-ubuntu24.04"
 LABEL dockerfile.version="1"
 LABEL software="CLAIR3"
 LABEL software.version="${CLAIR3_VER}"
