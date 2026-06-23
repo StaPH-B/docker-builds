@@ -1,4 +1,4 @@
-FROM mambaorg/micromamba:2.5.0-ubuntu24.04 AS app
+FROM mambaorg/micromamba:2.8.1-ubuntu24.04 AS app
 
 # ARG variables only persist during build time
 ARG MYKROBE_VER="0.13.0"
@@ -12,7 +12,7 @@ WORKDIR /
 
 
 # metadata labels
-LABEL base.image="mambaorg/micromamba:2.5.0-ubuntu24.04"
+LABEL base.image="mambaorg/micromamba:2.8.1-ubuntu24.04"
 LABEL dockerfile.version="1"
 LABEL software="Mykrobe, Genotyphi, and Sonneityping"
 LABEL software.version="${MYKROBE_VER}"
