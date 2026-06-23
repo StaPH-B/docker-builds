@@ -1,6 +1,6 @@
 ARG PIRANHA_VER="1.6.2"
 
-FROM mambaorg/micromamba:2.5.0-ubuntu22.04 AS app
+FROM mambaorg/micromamba:2.8.1-ubuntu22.04 AS app
 
 ARG PIRANHA_VER
 
@@ -10,7 +10,7 @@ USER root
 WORKDIR /
 
 # metadata labels
-LABEL base.image="mambaorg/micromamba:2.5.0-ubuntu22.04"
+LABEL base.image="mambaorg/micromamba:2.8.1-ubuntu22.04"
 LABEL dockerfile.version="1"
 LABEL software="piranha"
 LABEL software.version=${PIRANHA_VER}
