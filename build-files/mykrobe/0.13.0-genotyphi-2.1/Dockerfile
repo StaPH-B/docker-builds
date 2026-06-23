@@ -132,6 +132,8 @@ RUN mykrobe predict --sample Ssonnei --species sonnei --format json_and_csv --ou
     python /sonneityping/parse_mykrobe_predict.py --jsons Ssonnei.json --alleles /sonneityping/alleles.txt --prefix sonneityping && \
     column -t -s $'\t' sonneityping_predictResults.tsv
 
+RUN micromamba list -n mykrobe
+
 ### OUTPUT FROM mykrobe panels describe run on 2026-06-08: ###
 # Species summary:
 	
