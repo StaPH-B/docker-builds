@@ -1,0 +1,107 @@
+name: Deploy Documentation
+
+on:
+  workflow_dispatch:
+    inputs:
+      tool:
+        description: "Tool name"
+        required: true
+      version:
+        description: "Version folder"
+        required: true
+      repository_name:
+        description: "Registry namespace (e.g., staphb)"
+        default: "staphb"
+      push_dockerhub:
+        description: "Update Docker Hub?"
+        type: boolean
+        default: true
+      push_quay:
+        description: "Update Quay.io?"
+        type: boolean
+        default: true
+      pr_id:
+        description: "Optional: PR ID to comment on"
+        required: false
+
+run-name: Deploy README for ${{ github.event.inputs.tool }} (${{ github.event.inputs.version }})
+
+permissions:
+  pull-requests: write
+  contents: read
+
+jobs:
+  deploy-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+
+      - name: Verify README existence
+        id: check_file
+        run: |
+          FILE_PATH="build-files/${{ inputs.tool }}/${{ inputs.version }}/README.md"
+          if [ -f "$FILE_PATH" ]; then
+            echo "path=$FILE_PATH" >> $GITHUB_OUTPUT
+          else
+            echo "Error: README.md not found at $FILE_PATH"
+            exit 1
+          fi
+
+      - name: Update Docker Hub Description
+        id: dockerhub
+        if: ${{ inputs.push_dockerhub }}
+        uses: peter-evans/dockerhub-description@v4
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          # DOCKER_HUB_ACCESS_TOKEN_XXX must have the persmissions to Read, Write, & Delete
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN_XXX }}
+          repository: ${{ inputs.repository_name }}/${{ inputs.tool }}
+          readme-filepath: ${{ steps.check_file.outputs.path }}
+        
+        # QUAY_OAUTH_TOKEN is an application token generated in user/org settings.
+        # It must have Administrator or Create Repositories permission level.
+      - name: Update Quay.io Description
+        id: quay
+        if: ${{ inputs.push_quay }}
+        continue-on-error: true
+        run: |
+          README_CONTENT=$(cat ${{ steps.check_file.outputs.path }})
+          JSON_PAYLOAD=$(jq -n --arg msg "$README_CONTENT" '{description: $msg}')
+
+          curl -s -X PUT \
+            -H "Authorization: Bearer ${{ secrets.QUAY_OAUTH_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d "$JSON_PAYLOAD" \
+            "https://quay.io/api/v1/repository/${{ inputs.repository_name }}/${{ inputs.tool }}"
+
+      - name: Post Status to PR
+        if: ${{ inputs.pr_id != '' && always() }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "### Documentation Deployment Report" > report.md
+          echo "| Registry | Status |" >> report.md
+          echo "| :--- | :--- |" >> report.md
+          
+          # Logic for Docker Hub status
+          if [ "${{ inputs.push_dockerhub }}" == "false" ]; then
+            echo "| Docker Hub | SKIPPED |" >> report.md
+          elif [ "${{ steps.dockerhub.outcome }}" == "success" ]; then
+            echo "| Docker Hub | PASS |" >> report.md
+          else
+            echo "| Docker Hub | FAIL |" >> report.md
+          fi
+
+          # Logic for Quay status
+          if [ "${{ inputs.push_quay }}" == "false" ]; then
+            echo "| Quay.io | SKIPPED |" >> report.md
+          elif [ "${{ steps.quay.outcome }}" == "success" ]; then
+            echo "| Quay.io | PASS |" >> report.md
+          else
+            echo "| Quay.io | FAIL |" >> report.md
+          fi
+
+          echo -e "\n**Source Path:** \`${{ steps.check_file.outputs.path }}\`" >> report.md
+          
+          gh pr comment ${{ inputs.pr_id }} --repo ${{ github.repository }} --body-file report.md
