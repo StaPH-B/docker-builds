@@ -4,8 +4,91 @@ Main tool: [LisSero](https://github.com/MDU-PHL/LisSero)
 
 Code repository: https://github.com/MDU-PHL/LisSero
 
-Additional tools:
-- ncbi-blast+ (blastn): >=2.10.0
+<details>
+<summary>Additional tools installed via micromamba:</summary>
+
+```
+  Name                     Version       Build                 Channel
+────────────────────────────────────────────────────────────────────────────
+  _openmp_mutex            4.5           20_gnu                conda-forge
+  biopython                1.87          py314h5bd0f2a_0       conda-forge
+  blast                    2.17.0        h66d330f_0            bioconda
+  bzip2                    1.0.8         hda65f42_9            conda-forge
+  c-ares                   1.34.6        hb03c661_0            conda-forge
+  ca-certificates          2026.6.17     hbd8a1cb_0            conda-forge
+  click                    8.4.1         pyhc90fa1f_0          conda-forge
+  curl                     8.21.0        hcf29cc6_0            conda-forge
+  entrez-direct            24.0          he881be0_0            bioconda
+  icu                      78.3          h33c6efd_0            conda-forge
+  ispcr                    33            h7b50bb2_6            bioconda
+  keyutils                 1.6.3         hb9d3cd8_0            conda-forge
+  krb5                     1.22.2        hbde042b_1            conda-forge
+  ld_impl_linux-64         2.45.1        default_hbd61a6d_102  conda-forge
+  libblas                  3.11.0        8_h4a7cf45_openblas   conda-forge
+  libcblas                 3.11.0        8_h0358290_openblas   conda-forge
+  libcurl                  8.21.0        hcf29cc6_0            conda-forge
+  libedit                  3.1.20250104  pl5321h7949ede_0      conda-forge
+  libev                    4.33          hd590300_2            conda-forge
+  libexpat                 2.8.1         hecca717_1            conda-forge
+  libffi                   3.5.2         h3435931_0            conda-forge
+  libgcc                   15.2.0        he0feb66_19           conda-forge
+  libgcc-ng                15.2.0        h69a702a_19           conda-forge
+  libgfortran              15.2.0        h69a702a_19           conda-forge
+  libgfortran5             15.2.0        h68bc16d_19           conda-forge
+  libgomp                  15.2.0        he0feb66_19           conda-forge
+  libidn2                  2.3.8         hfac485b_1            conda-forge
+  liblapack                3.11.0        8_h47877c9_openblas   conda-forge
+  liblzma                  5.8.3         hb03c661_0            conda-forge
+  libmpdec                 4.0.0         hb03c661_1            conda-forge
+  libnghttp2               1.68.1        h877daf1_0            conda-forge
+  libopenblas              0.3.33        pthreads_h94d23a6_0   conda-forge
+  libsqlite                3.53.2        hf4e2dac_1            conda-forge
+  libssh2                  1.11.1        hcf80075_0            conda-forge
+  libstdcxx                15.2.0        h934c35e_19           conda-forge
+  libunistring             0.9.10        h7f98852_0            conda-forge
+  libuuid                  2.42.2        h5347b49_0            conda-forge
+  libxcrypt                4.4.36        hd590300_1            conda-forge
+  libzlib                  1.3.2         h25fd6f3_2            conda-forge
+  lissero                  0.4.10        pyhdfd78af_0          bioconda
+  loguru                   0.7.3         pyh707e725_0          conda-forge
+  ncbi-vdb                 3.4.1         hd63eeec_0            bioconda
+  ncurses                  6.6           hdb14827_0            conda-forge
+  numpy                    2.5.0         py314h2b28147_0       conda-forge
+  openssl                  3.6.3         h35e630c_0            conda-forge
+  pcre2                    10.47         haa7fec5_0            conda-forge
+  perl                     5.32.1        7_hd590300_perl5      conda-forge
+  perl-archive-tar         3.12          pl5321hdfd78af_0      bioconda
+  perl-carp                1.50          pl5321hd8ed1ab_0      conda-forge
+  perl-common-sense        3.75          pl5321hd8ed1ab_0      conda-forge
+  perl-compress-raw-bzip2  2.214         pl5321hda65f42_0      conda-forge
+  perl-compress-raw-zlib   2.214         pl5321h4dac143_0      conda-forge
+  perl-encode              3.24          pl5321hb03c661_0      conda-forge
+  perl-exporter            5.74          pl5321hd8ed1ab_0      conda-forge
+  perl-exporter-tiny       1.002002      pl5321hd8ed1ab_0      conda-forge
+  perl-extutils-makemaker  7.70          pl5321hd8ed1ab_0      conda-forge
+  perl-io-compress         2.216         pl5321h503566f_0      bioconda
+  perl-io-zlib             1.15          pl5321hdfd78af_1      bioconda
+  perl-json                4.11          pl5321hdfd78af_0      bioconda
+  perl-json-xs             4.04          pl5321h9948957_0      bioconda
+  perl-list-moreutils      0.430         pl5321hdfd78af_0      bioconda
+  perl-list-moreutils-xs   0.430         pl5321h7b50bb2_5      bioconda
+  perl-parent              0.243         pl5321hd8ed1ab_0      conda-forge
+  perl-pathtools           3.75          pl5321hb9d3cd8_2      conda-forge
+  perl-scalar-list-utils   1.70          pl5321hb03c661_0      conda-forge
+  perl-storable            3.15          pl5321hb9d3cd8_2      conda-forge
+  perl-types-serialiser    1.01          pl5321hdfd78af_0      bioconda
+  procps-ng                4.0.6         h18c060e_0            conda-forge
+  python                   3.14.6        habeac84_100_cp314    conda-forge
+  python_abi               3.14          8_cp314               conda-forge
+  readline                 8.3           h853b02a_0            conda-forge
+  tk                       8.6.13        noxft_h366c992_103    conda-forge
+  tzdata                   2025c         hc9c84f9_1            conda-forge
+  wget                     1.25.0        h653f8fd_1            conda-forge
+  zlib                     1.3.2         h25fd6f3_2            conda-forge
+  zstd                     1.5.7         hb78ec9c_6            conda-forge
+```
+
+</details>
 
 Basic information on how to use this tool:
 - executable: lissero
