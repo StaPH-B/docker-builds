@@ -144,7 +144,7 @@ The licenses of the open-source software that is contained in these Docker image
 | myloasm | MIT | https://github.com/bluenote-1577/myloasm/blob/main/LICENSE |
 | NanoPlot | GNU GPLv3 | https://github.com/wdecoster/NanoPlot/blob/master/LICENSE |
 | NCBI AMRFinderPlus | Public Domain | https://github.com/ncbi/amr/blob/master/LICENSE |
-| NCBI Datasets | Public Domain | https://github.com/ncbi/datasets/blob/master/pkgs/ncbi-datasets-cli/LICENSE.md |
+| NCBI Datasets | Public Domain | https://github.com/ncbi/datasets/blob/master/LICENSE.md |
 | NCBI table2asn | Public Domain | unknown |
 | ngmaster | GNU GPLv3 | https://github.com/MDU-PHL/ngmaster/blob/master/LICENSE |
 | ONTime | MIT | https://github.com/mbhall88/ontime/blob/main/LICENSE |
