@@ -1,9 +1,9 @@
-FROM ubuntu:jammy AS app
+FROM ubuntu:noble AS app
 
 ARG MASH_VER="v2.3"
 ARG SKETCH_VER="235"
 
-LABEL base.image="ubuntu:jammy"
+LABEL base.image="ubuntu:noble"
 LABEL dockerfile.version="1"
 LABEL software="Mash"
 LABEL software.version="2.3"
