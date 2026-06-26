@@ -1,4 +1,4 @@
-FROM mambaorg/micromamba:2.1.1-ubuntu22.04 AS app
+FROM mambaorg/micromamba:2.8.1-ubuntu24.04 AS app
 
 ARG LISSERO_VERSION="0.4.10"
 
@@ -6,7 +6,7 @@ USER root
 
 WORKDIR /
 
-LABEL base.image="mambaorg/micromamba:2.1.1-ubuntu22.04"
+LABEL base.image="mambaorg/micromamba:2.8.1-ubuntu24.04"
 LABEL dockerfile.version="1"
 LABEL software="LisSero"
 LABEL software.version="${LISSERO_VERSION}"
