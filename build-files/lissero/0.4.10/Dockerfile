@@ -39,3 +39,5 @@ RUN wget -q "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/008/285/GCF_000008
 
 RUN lissero --version && \
     blastn -version
+
+RUN micromamba list -n base
