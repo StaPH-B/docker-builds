@@ -21,3 +21,11 @@ ADD https://github.com/Nextomics/NextDenovo/releases/download/${NEXTDENOVO_VER}/
 RUN tar -xvzf ./NextDenovo.tgz -C /opt/ && rm ./NextDenovo.tgz
 
 ENV PATH="/opt/NextDenovo:$PATH"
+
+CMD [ "nextDenovo", "--help" ]
+
+FROM app AS test
+
+WORKDIR /opt/NextDenovo/test_data
+
+RUN nextDenovo run.cfg
