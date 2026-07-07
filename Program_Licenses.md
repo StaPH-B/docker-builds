@@ -148,6 +148,7 @@ The licenses of the open-source software that is contained in these Docker image
 | NCBI Datasets | Public Domain | https://github.com/ncbi/datasets/blob/master/LICENSE.md |
 | NCBI table2asn | Public Domain | unknown |
 | NextDenovo | GNU GPLv3 | https://github.com/Nextomics/NextDenovo/blob/master/LICENSE |
+| nextPolish | GNU GPLv3 | https://github.com/Nextomics/NextPolish/blob/master/LICENSE |
 | ngmaster | GNU GPLv3 | https://github.com/MDU-PHL/ngmaster/blob/master/LICENSE |
 | ONTime | MIT | https://github.com/mbhall88/ontime/blob/main/LICENSE |
 | OrthoFinder | GNU GPLv3 | https://github.com/davidemms/OrthoFinder/blob/master/License.md |
