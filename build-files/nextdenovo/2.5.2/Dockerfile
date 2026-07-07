@@ -12,6 +12,9 @@ LABEL license="https://github.com/Nextomics/NextDenovo/blob/master/LICENSE"
 LABEL maintainer="Weifan Lv"
 LABEL maintainer.email="lvweifan@pku.edu.cn"
 
+RUN apt-get update && apt-get install -y --no-install-recommends procps && \
+  apt-get autoclean && rm -rf /var/lib/apt/lists/*
+
 RUN pip install paralleltask --break-system-packages
 
 RUN mkdir -p /opt
