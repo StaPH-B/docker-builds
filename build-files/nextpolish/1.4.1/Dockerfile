@@ -1,8 +1,8 @@
-FROM ubuntu:focal as app
+FROM ubuntu:noble as app
 
 ARG NEXTPOLISH_VER="v1.4.1"
 
-LABEL base.image="ubuntu:focal"
+LABEL base.image="ubuntu:noble"
 LABEL dockerfile.version="1"
 LABEL software="NextPolish"
 LABEL software.version="1.4.1"
@@ -24,13 +24,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   procps \
   && apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-RUN pip install paralleltask
+RUN pip install paralleltask --break-system-packages
 
 RUN mkdir -p /opt
 
 ADD https://github.com/Nextomics/NextPolish/releases/download/${NEXTPOLISH_VER}/NextPolish.tgz ./NextPolish.tgz
 
-RUN tar -xvzf ./NextPolish.tgz -C /opt/ && rm ./NextPolish.tgz && CFLAGS="-fno-common" && cd /opt/NextPolish && make
+RUN tar -xvzf ./NextPolish.tgz -C /opt/ \
+  && rm ./NextPolish.tgz \
+  && cd /opt/NextPolish \
+  && sed -i 's/const uint8_t rle_auxtab/extern const uint8_t rle_auxtab/g' util/bwa/rle.h \
+  && make
 
 ENV PATH="/opt/NextPolish:$PATH"
 
