@@ -1,4 +1,4 @@
-FROM ubuntu:noble as app
+FROM ubuntu:noble AS app
 
 ARG NEXTPOLISH_VER="v1.4.1"
 
@@ -30,6 +30,7 @@ RUN mkdir -p /opt
 
 ADD https://github.com/Nextomics/NextPolish/releases/download/${NEXTPOLISH_VER}/NextPolish.tgz ./NextPolish.tgz
 
+# Note: applying patch for the GCC issue "https://github.com/Nextomics/NextPolish/issues/118"
 RUN tar -xvzf ./NextPolish.tgz -C /opt/ \
   && rm ./NextPolish.tgz \
   && cd /opt/NextPolish \
