@@ -1,4 +1,4 @@
-# StaphSCAN container
+# StaphSCAN v0.4.0 container
 
 Main tool: [StaphSCAN](https://github.com/riccabolla/StaphSCAN)
   
