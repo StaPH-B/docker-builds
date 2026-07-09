@@ -1,4 +1,4 @@
-# StaphSCAN v0.4.0 container
+# StaphSCAN container
 
 Main tool: [StaphSCAN](https://github.com/riccabolla/StaphSCAN)
   
@@ -22,6 +22,8 @@ Basic information on how to use this tool:
 - description: A genome-based tool for Surveillance through Comprehensive Analysis and staNdardized reporting of Staphylococcus aureus.
 
 Additional information:
+
+Bollini, R., Cento, V. StaphSCAN: a genomic surveillance framework for Staphylococcus aureus. BMC Genomics (2026). https://doi.org/10.1186/s12864-026-13165-0
 
 Available StaphScan Modules:
 - agr
