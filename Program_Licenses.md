@@ -162,6 +162,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Pavian | GNU GPLv3 | https://github.com/fbreitwieser/pavian/blob/master/DESCRIPTION |
 | pbmm2 | BSD-3 | https://github.com/PacificBiosciences/pbmm2/blob/develop/LICENSE |
 | pbptyper | MIT | https://github.com/rpetit3/pbptyper/blob/main/LICENSE |
+| PBSIM3 | GNU GPLv2 | https://github.com/yukiteruono/pbsim3/blob/master/COPYING |
 | pbtk | BSD-3 | https://github.com/PacificBiosciences/pbtk/blob/main/LICENSE.txt |
 | Phyml | GNU GPLv3 | https://github.com/stephaneguindon/phyml/blob/master/COPYING |
 | phyTreeViz | MIT | https://github.com/moshi4/phyTreeViz/blob/main/LICENSE |
