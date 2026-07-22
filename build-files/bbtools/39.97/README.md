@@ -6,8 +6,8 @@ Code repository: https://sourceforge.net/projects/bbmap/ and https://github.com/
 
 Additional tools:
 
-- samtools: 1.23.1
-- htslib: 1.23.1
+- samtools: 1.24
+- htslib: 1.24
 - sambamba: 1.0.1
 
 Basic information on how to use this tool:
