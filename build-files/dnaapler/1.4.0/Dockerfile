@@ -21,7 +21,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
     ca-certificates \
     procps \
-    python3-pip && \
+    python3-pip \
+    gzip \
+    bzip2 \
+    xz-utils && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 RUN wget -q https://github.com/soedinglab/MMseqs2/releases/download/${MMSEQS2_VER}/mmseqs-linux-sse41.tar.gz && \
@@ -58,3 +61,6 @@ RUN wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/025/259/185/GCA_0252591
     dnaapler mystery --prefix mystery_test --output mystery_test -i CP104365.1.fasta && \ 
     dnaapler plasmid --prefix plasmid_test --output plasmid_test -i CP104365.1.fasta && \
     ls mystery_test plasmid_test
+
+
+RUN pip list
