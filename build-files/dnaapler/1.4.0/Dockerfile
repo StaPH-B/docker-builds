@@ -31,9 +31,9 @@ RUN wget -q https://github.com/soedinglab/MMseqs2/releases/download/${MMSEQS2_VE
     tar -vxf mmseqs-linux-sse41.tar.gz && \
     rm mmseqs-linux-sse41.tar.gz
 
-RUN wget https://github.com/gbouras13/dnaapler/archive/refs/tags/v1.4.0.tar.gz && \
-    pip install --no-cache-dir --break-system-packages  v1.4.0.tar.gz && \
-    rm v1.4.0.tar.gz
+RUN wget https://github.com/gbouras13/dnaapler/archive/refs/tags/v${DNAAPLER_VER}.tar.gz && \
+    pip install --no-cache-dir --break-system-packages  v${DNAAPLER_VER}.tar.gz && \
+    rm v${DNAAPLER_VER}.tar.gz
 
 # Set PATH and LC_ALL for compatibility
 ENV PATH="/mmseqs/bin:$PATH" \
