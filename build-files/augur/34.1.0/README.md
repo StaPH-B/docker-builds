@@ -25,45 +25,45 @@ Note: Auspice is a different tool.
 <summary>Additional tools installed via pip:</summary>
 
 ```
-	Package                   Version
-	------------------------- -----------
-	attrs                     26.1.0
-	backports.zstd            1.6.0
-	bcbio-gff                 0.7.1
-	biopython                 1.87
-	contourpy                 1.3.3
-	cvxopt                    1.3.3
-	cycler                    0.12.1
-	docutils                  0.23
-	fonttools                 4.63.0
-	isal                      1.8.0
-	isodate                   0.7.2
-	jsonschema                4.26.0
-	jsonschema-specifications 2025.9.1
-	kiwisolver                1.5.0
-	matplotlib                3.11.0
-	networkx                  3.6.1
-	nextstrain-augur          33.4.1
-	numpy                     2.5.0
-	packaging                 26.2
-	pandas                    2.3.3
-	phylo-treetime            0.12.1
-	pillow                    12.2.0
-	pip                       25.0.1
-	pyfastx                   2.3.1
-	pyparsing                 3.3.2
-	python-calamine           0.7.0
-	python-dateutil           2.9.0.post0
-	pytz                      2026.2
-	PyYAML                    6.0.3
-	referencing               0.37.0
-	rpds-py                   2026.5.1
-	scipy                     1.18.0
-	six                       1.17.0
-	typing_extensions         4.15.0
-	tzdata                    2026.2
-	xopen                     2.1.0
-	zlib-ng                   1.0.0
+Package                   Version
+------------------------- -----------
+attrs                     26.1.0
+backports.zstd            1.6.0
+bcbio-gff                 0.7.1
+biopython                 1.87
+contourpy                 1.3.3
+cvxopt                    1.3.3
+cycler                    0.12.1
+docutils                  0.23
+fonttools                 4.63.0
+isal                      1.8.0
+isodate                   0.7.2
+jsonschema                4.26.0
+jsonschema-specifications 2025.9.1
+kiwisolver                1.5.0
+matplotlib                3.11.1
+networkx                  3.6.1
+nextstrain-augur          34.1.0
+numpy                     2.5.1
+packaging                 26.2
+pandas                    2.3.3
+phylo-treetime            0.12.1
+pillow                    12.3.0
+pip                       25.0.1
+pyfastx                   2.3.1
+pyparsing                 3.3.2
+python-calamine           0.8.2
+python-dateutil           2.9.0.post0
+pytz                      2026.2
+PyYAML                    6.0.3
+referencing               0.37.0
+rpds-py                   2026.6.3
+scipy                     1.18.0
+six                       1.17.0
+typing_extensions         4.16.0
+tzdata                    2026.3
+xopen                     2.1.0
+zlib-ng                   1.0.0
 
 ```
 
