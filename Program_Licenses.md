@@ -133,6 +133,7 @@ The licenses of the open-source software that is contained in these Docker image
 | metaMDBG | MIT | https://github.com/GaetanBenoitDev/metaMDBG/blob/main/LICENSE.md |
 | Metaphlan | MIT | https://github.com/biobakery/MetaPhlAn/blob/master/license.txt |
 | MIDAS | GNU GPLv3 |https://github.com/snayfach/MIDAS/blob/master/LICENSE |
+| minibwa | MIT | https://github.com/lh3/minibwa/blob/master/LICENSE.txt |
 | minimap2 | MIT | https://github.com/lh3/minimap2/blob/master/LICENSE.txt |
 | miniasm | MIT | https://github.com/lh3/miniasm/blob/master/LICENSE.txt |
 | minipolish | GNU GPLv3 | https://github.com/rrwick/Minipolish/blob/main/LICENSE |
