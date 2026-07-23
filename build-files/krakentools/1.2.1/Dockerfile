@@ -2,9 +2,8 @@ FROM ubuntu:noble AS app
 
 WORKDIR /
 
-# using a git commit because the last release was over three years ago, despite recent(ish) activity in the repo's main branch
-# this commit is from 2025-08-01: https://github.com/jenniferlu717/KrakenTools/commit/3199bea2b4768b2bb435f04483f5af3d8e51d4ae
-ARG KRAKENTOOLS_VERSION="3199bea2b4768b2bb435f04483f5af3d8e51d4ae"
+# FYI, KRAKENTOOLS is more likely to use tags than update a release
+ARG KRAKENTOOLS_VERSION="1.2.1"
 
 # LABEL instructions tag the image with metadata that might be important to the user
 LABEL base.image="ubuntu:noble"
@@ -32,9 +31,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN pip install --no-cache-dir --break-system-packages biopython==1.84 \
     pandas==2.2.3
 
-RUN wget https://github.com/jenniferlu717/KrakenTools/archive/${KRAKENTOOLS_VERSION}.tar.gz && \
-    tar -vxf ${KRAKENTOOLS_VERSION}.tar.gz && \
-    rm -rf ${KRAKENTOOLS_VERSION}.tar.gz && \
+RUN wget https://github.com/jenniferlu717/KrakenTools/archive/refs/tags/v${KRAKENTOOLS_VERSION}.tar.gz && \
+    tar -vxf v${KRAKENTOOLS_VERSION}.tar.gz && \
+    rm -rf v${KRAKENTOOLS_VERSION}.tar.gz && \
     cd /KrakenTools-${KRAKENTOOLS_VERSION} && \
     chmod +x *
 
