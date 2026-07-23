@@ -43,7 +43,7 @@ WORKDIR /data
 
 CMD ["extract_kraken_reads.py", "--help"]
 
-FROM staphb/kraken2:2.17.1-viral-20251015 as test-data
+FROM staphb/kraken2:2.17.1-viral-20251015 AS test-data
 
 WORKDIR /testdata
 
