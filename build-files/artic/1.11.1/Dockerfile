@@ -58,12 +58,12 @@ WORKDIR /test
 
 # using on "real" data (sample files were not sequenced with version 5.3.2 primers)
 # filtering fastq files
-RUN wget -q ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR224/050/SRR22452250/SRR22452250_1.fastq.gz && \
+RUN wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR224/050/SRR22452250/SRR22452250_1.fastq.gz && \
     artic guppyplex --min-length 400 --max-length 700  --directory . --prefix SRR22452250_1.fastq.gz --output SRR22452250_1_filtered.fastq
 
 # running artic minion with user-provided bed and reference
-RUN wget -q https://raw.githubusercontent.com/artic-network/primer-schemes/master/nCoV-2019/V5.3.2/SARS-CoV-2.primer.bed && \
-    wget -q https://raw.githubusercontent.com/artic-network/primer-schemes/master/nCoV-2019/V5.3.2/SARS-CoV-2.reference.fasta
+RUN wget https://raw.githubusercontent.com/artic-network/primer-schemes/master/nCoV-2019/V5.3.2/SARS-CoV-2.primer.bed && \
+    wget https://raw.githubusercontent.com/artic-network/primer-schemes/master/nCoV-2019/V5.3.2/SARS-CoV-2.reference.fasta
 
 RUN artic minion --normalise 200 --threads 4 --model r941_prom_sup_g5014 --read-file SRR22452250_1_filtered.fastq --bed SARS-CoV-2.primer.bed --ref SARS-CoV-2.reference.fasta test1 && \
     ls test1*
