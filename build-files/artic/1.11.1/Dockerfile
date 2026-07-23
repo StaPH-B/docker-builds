@@ -1,10 +1,10 @@
 ARG ARTIC_VER=1.11.1
 
-FROM mambaorg/micromamba:2.5.0-ubuntu24.04 AS app
+FROM mambaorg/micromamba:2.8.1-ubuntu24.04 AS app
 
 ARG ARTIC_VER
 
-LABEL base.image="mambaorg/micromamba:2.5.0-ubuntu24.04"
+LABEL base.image="mambaorg/micromamba:2.8.1-ubuntu24.04"
 LABEL dockerfile.version="1"
 LABEL software="artic"
 LABEL software.version="${ARTIC_VER}"
