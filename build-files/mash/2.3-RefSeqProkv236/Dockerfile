@@ -39,7 +39,7 @@ WORKDIR /data
 
 FROM app AS test
 
-ARG SKETCH_VER="235"
+ARG SKETCH_VER
 
 # verify tool and reference sketch integrity
 WORKDIR /db
