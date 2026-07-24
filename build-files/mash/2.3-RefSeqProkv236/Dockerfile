@@ -33,7 +33,7 @@ RUN mkdir /db && cd /db && \
 
 ENV LC_ALL=C
 
-CMD ["/bin/bash", "-c", "mash -h && echo '** RefSeq prokaryotic reference sketch (v235) is located at /db/RefSeqProkSketchesv235.msh'"]
+CMD ["/bin/bash", "-c", "mash -h && echo '** RefSeq prokaryotic reference sketch (v236) is located at /db/RefSeqProkSketchesv236.msh'"]
 
 WORKDIR /data
 
