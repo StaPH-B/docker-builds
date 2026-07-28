@@ -25,6 +25,8 @@ Basic information on how to use this tool:
 
 Additional information:
 
+Bollini R, Cento V. PCNE: A Tool for Plasmid Copy Number Estimation. Bioinformatics and Biology Insights. 2026;20. [doi:10.1177/11779322251410037](https://doi.org/10.1177/11779322251410037)
+
 PCNE can use as input:
 
 - short reads (paired-end)
