@@ -24,7 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /build
-n
+
 RUN wget -q https://github.com/lh3/bwa/archive/refs/tags/v${BWA_VER}.tar.gz && \
     tar -xzf v${BWA_VER}.tar.gz && \
     cd bwa-${BWA_VER} && \
@@ -101,6 +101,7 @@ WORKDIR /data
 
 CMD [ "pcne", "--help" ]
 
+# test
 FROM app AS test
 
 WORKDIR /test
