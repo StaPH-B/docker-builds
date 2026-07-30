@@ -1,4 +1,3 @@
-FROM python:3.13-slim AS app
 ARG PCNE_VER="3.3.1"
 ARG R_VER=4.4.3
 ARG BWA_VER=0.7.18
@@ -6,8 +5,57 @@ ARG MINIMAP2_VER=2.3
 ARG SAMTOOLS_VER=1.20
 ARG BEDTOOLS_VER=2.31.1
 
+FROM python:3.13-slim AS builder
+
+ARG BWA_VER
+ARG MINIMAP2_VER
+ARG SAMTOOLS_VER
+ARG BEDTOOLS_VER
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    wget \
+    ca-certificates \
+    build-essential \
+    zlib1g-dev \
+    libbz2-dev \
+    liblzma-dev \
+    libncurses5-dev \
+    libcurl4-gnutls-dev && \
+    apt-get autoclean && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /build
+n
+RUN wget -q https://github.com/lh3/bwa/archive/refs/tags/v${BWA_VER}.tar.gz && \
+    tar -xzf v${BWA_VER}.tar.gz && \
+    cd bwa-${BWA_VER} && \
+    make && \
+    mv bwa /usr/local/bin/
+
+RUN wget -q https://github.com/lh3/minimap2/releases/download/v${MINIMAP2_VER}/minimap2-${MINIMAP2_VER}.tar.bz2 && \
+    tar -xjf minimap2-${MINIMAP2_VER}.tar.bz2 && \
+    cd minimap2-${MINIMAP2_VER} && \
+    make && \
+    mv minimap2 /usr/local/bin/
+
+RUN wget -q https://github.com/samtools/samtools/releases/download/${SAMTOOLS_VER}/samtools-${SAMTOOLS_VER}.tar.bz2 && \
+    tar -xjf samtools-${SAMTOOLS_VER}.tar.bz2 && \
+    cd samtools-${SAMTOOLS_VER} && \
+    ./configure && \
+    make && \
+    make install
+
+RUN wget -q https://github.com/arq5x/bedtools2/releases/download/v${BEDTOOLS_VER}/bedtools-${BEDTOOLS_VER}.tar.gz && \
+    tar -xzf bedtools-${BEDTOOLS_VER}.tar.gz && \
+    cd bedtools2 && \
+    make && \
+    mv bin/bedtools /usr/local/bin/
+
+FROM python:3.13-slim AS app
+
+ARG PCNE_VER
+
 LABEL base.image="python:3.13-slim"
-LABEL dockerfile.version="1"
+LABEL dockerfile.version="2"
 LABEL software="PCNE"
 LABEL software.version="${PCNE_VER}"
 LABEL description="A tool to estimate the copy numbers of plasmids detected in an assembled genome"
@@ -16,18 +64,20 @@ LABEL license="https://github.com/riccabolla/PCNE/blob/main/LICENSE"
 LABEL maintainer="Riccardo Bollini"
 LABEL maintainer.email="riccardo.bollini@hunimed.eu / bollach@virgilio.it"
 
-WORKDIR /opt
+COPY --from=builder /usr/local/bin/bwa /usr/local/bin/
+COPY --from=builder /usr/local/bin/minimap2 /usr/local/bin/
+COPY --from=builder /usr/local/bin/samtools /usr/local/bin/
+COPY --from=builder /usr/local/bin/bedtools /usr/local/bin/
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     procps \
     wget \
     ca-certificates \
-    build-essential \
-    zlib1g-dev \
-    libbz2-dev \
-    liblzma-dev \
-    libncurses5-dev \
-    libcurl4-gnutls-dev \
+    zlib1g \
+    libbz2-1.0 \
+    liblzma5 \
+    libncurses5 \
+    libcurl3-gnutls \
     r-base \
     r-cran-readr \
     r-cran-dplyr \
@@ -35,50 +85,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     r-cran-purrr && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-# BWA installation
-RUN wget -q https://github.com/lh3/bwa/archive/refs/tags/v${BWA_VER}.tar.gz && \
-    tar -xzf v${BWA_VER}.tar.gz && \
-    cd bwa-${BWA_VER} && \
-    make && \
-    mv bwa /usr/local/bin/ && \
-    cd .. && \
-    rm -rf bwa-${BWA_VER} v${BWA_VER}.tar.gz
-
-# Minimap2 installation
-RUN wget -q https://github.com/lh3/minimap2/releases/download/v${MINIMAP2_VER}/minimap2-${MINIMAP2_VER}.tar.bz2 && \
-    tar -xjf minimap2-${MINIMAP2_VER}.tar.bz2 && \
-    cd minimap2-${MINIMAP2_VER} && \
-    make && \
-    mv minimap2 /usr/local/bin/ && \
-    cd .. && \
-    rm -rf minimap2-${MINIMAP2_VER} minimap2-${MINIMAP2_VER}.tar.bz2
-
-# Samtools installation
-RUN wget -q https://github.com/samtools/samtools/releases/download/${SAMTOOLS_VER}/samtools-${SAMTOOLS_VER}.tar.bz2 && \
-    tar -xjf samtools-${SAMTOOLS_VER}.tar.bz2 && \
-    cd samtools-${SAMTOOLS_VER} && \
-    ./configure && \
-    make && \
-    make install && \
-    cd .. && \
-    rm -rf samtools-${SAMTOOLS_VER} samtools-${SAMTOOLS_VER}.tar.bz2
-
-# Bedtools installation
-RUN wget -q https://github.com/arq5x/bedtools2/releases/download/v${BEDTOOLS_VER}/bedtools-${BEDTOOLS_VER}.tar.gz && \
-    tar -xzf bedtools-${BEDTOOLS_VER}.tar.gz && \
-    cd bedtools2 && \
-    make && \
-    mv bin/bedtools /usr/local/bin/ && \
-    cd .. && \
-    rm -rf bedtools2 bedtools-${BEDTOOLS_VER}.tar.gz
+WORKDIR /opt
 
 # PCNE installation
 RUN wget -q https://github.com/riccabolla/PCNE/archive/refs/tags/v${PCNE_VER}.tar.gz && \
     tar -xzf v${PCNE_VER}.tar.gz && \
     mv PCNE-${PCNE_VER} /opt/PCNE && \
     chmod +x /opt/PCNE/bin/pcne /opt/PCNE/bin/pcne_long && \
-    ln -s /opt/PCNE/bin/pcne /usr/local/bin/pcne && \
-    ln -s /opt/PCNE/bin/pcne_long /usr/local/bin/pcne_long && \
     rm v${PCNE_VER}.tar.gz
 
 ENV LC_ALL=C
