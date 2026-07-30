@@ -5,7 +5,7 @@ ARG MINIMAP2_VER=2.30
 ARG SAMTOOLS_VER=1.20
 ARG BEDTOOLS_VER=2.31.1
 
-FROM rocker/r-ver:${R_VER} as builder
+FROM rocker/r-ver:${R_VER} AS builder
 
 ARG BWA_VER
 ARG MINIMAP2_VER
@@ -21,6 +21,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     liblzma-dev \
     libcurl4-openssl-dev \
     libncurses-dev && \
+    python3 && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /build
@@ -44,15 +45,16 @@ RUN wget -q https://github.com/samtools/samtools/releases/download/${SAMTOOLS_VE
     make -j$(nproc) && \
     make install
 
-RUN wget -q https://github.com/arq5x/bedtools2/releases/download/v${BEDTOOLS_VER}/bedtools-${BEDTOOLS_VER}.tar.gz && \
-    tar -xzf bedtools-${BEDTOOLS_VER}.tar.gz && \
-    cd bedtools2 && \
+RUN wget -q https://github.com/arq5x/bedtools2/archive/refs/tags/v${BEDTOOLS_VER}.tar.gz && \
+    tar -xzf v${BEDTOOLS_VER}.tar.gz && \
+    cd bedtools2-${BEDTOOLS_VER} && \
     make -j$(nproc) && \
     cp bin/bedtools /usr/local/bin/
 
-FROM rocker/r-ver:${R_VER} as app
+FROM rocker/r-ver:${R_VER} AS app
 
 ARG PCNE_VER
+ARG R_VER
 
 LABEL base.image="rocker/r-ver:${R_VER}"
 LABEL dockerfile.version="1"
@@ -103,7 +105,7 @@ CMD ["pcne", "--help"]
 
 WORKDIR /data
 
-FROM app as test
+FROM app AS test
 
 # test
 WORKDIR /test
