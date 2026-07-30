@@ -20,7 +20,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libbz2-dev \
     liblzma-dev \
     libcurl4-openssl-dev \
-    libncurses-dev && \
+    libncurses-dev \
     python3 && \
     rm -rf /var/lib/apt/lists/*
 
