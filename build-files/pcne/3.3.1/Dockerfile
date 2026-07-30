@@ -64,6 +64,7 @@ LABEL description="Plasmid Copy Number Estimator"
 LABEL website="https://github.com/riccabolla/PCNE"
 LABEL license="MIT"
 LABEL maintainer="riccabolla"
+LABEL maintainer.email="riccardo.bollini@hunimed.eu / bollach@virgilio.it"
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     procps \
