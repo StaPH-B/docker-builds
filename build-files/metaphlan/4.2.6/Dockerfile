@@ -1,6 +1,6 @@
 FROM mambaorg/micromamba:2.8.1-ubuntu22.04 AS app
 
-ARG METAPHLAN_VER="4.2.5"
+ARG METAPHLAN_VER="4.2.6"
 
 USER root
 
