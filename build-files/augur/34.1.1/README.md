@@ -26,7 +26,7 @@ Note: Auspice is a different tool.
 
 ```
 Package                   Version
-------------------------- -----------
+------------------------- ------------
 attrs                     26.1.0
 backports.zstd            1.6.0
 bcbio-gff                 0.7.1
@@ -43,7 +43,7 @@ jsonschema-specifications 2025.9.1
 kiwisolver                1.5.0
 matplotlib                3.11.1
 networkx                  3.6.1
-nextstrain-augur          34.1.0
+nextstrain-augur          34.1.1
 numpy                     2.5.1
 packaging                 26.2
 pandas                    2.3.3
@@ -54,7 +54,7 @@ pyfastx                   2.3.1
 pyparsing                 3.3.2
 python-calamine           0.8.2
 python-dateutil           2.9.0.post0
-pytz                      2026.2
+pytz                      2026.3.post1
 PyYAML                    6.0.3
 referencing               0.37.0
 rpds-py                   2026.6.3
@@ -64,7 +64,6 @@ typing_extensions         4.16.0
 tzdata                    2026.3
 xopen                     2.1.0
 zlib-ng                   1.0.0
-
 ```
 
 </details>
