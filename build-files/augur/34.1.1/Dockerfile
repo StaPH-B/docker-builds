@@ -1,6 +1,6 @@
 FROM python:3.12-slim AS app
 
-ARG AUGUR_VER="34.1.0"
+ARG AUGUR_VER="34.1.1"
 ARG SEQKIT_VER="2.13.0"
 
 # LABEL instructions tag the image with metadata that might be important to the user
