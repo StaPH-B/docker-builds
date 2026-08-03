@@ -23,15 +23,15 @@ List of packages in environment: "/opt/conda"
   asttokens                      3.0.2         pyhd8ed1ab_0             conda-forge
   async-lru                      2.3.0         pyhcf101f3_0             conda-forge
   attrs                          26.1.0        pyhcf101f3_0             conda-forge
-  aws-c-auth                     0.10.4        hb7a77c6_1               conda-forge
-  aws-c-cal                      0.9.14        h2aa3ae6_4               conda-forge
-  aws-c-common                   0.14.2        hb03c661_0               conda-forge
-  aws-c-compression              0.3.2         h720e601_4               conda-forge
-  aws-c-http                     0.11.0        h38ae05a_4               conda-forge
-  aws-c-io                       0.27.3        h6f4d18d_1               conda-forge
-  aws-c-s3                       0.12.8        h46fcd08_1               conda-forge
-  aws-c-sdkutils                 0.2.7         h720e601_2               conda-forge
-  aws-checksums                  0.2.10        h720e601_4               conda-forge
+  aws-c-auth                     0.10.4        h4610da3_2               conda-forge
+  aws-c-cal                      0.9.15        h6bbde05_1               conda-forge
+  aws-c-common                   0.14.3        hb03c661_0               conda-forge
+  aws-c-compression              0.3.2         h01ee8f8_5               conda-forge
+  aws-c-http                     0.11.0        hbe094ff_5               conda-forge
+  aws-c-io                       0.27.5        h4f381ba_1               conda-forge
+  aws-c-s3                       0.13.1        h7508075_1               conda-forge
+  aws-c-sdkutils                 0.2.7         h01ee8f8_3               conda-forge
+  aws-checksums                  0.2.10        h01ee8f8_5               conda-forge
   babel                          2.18.0        pyhcf101f3_1             conda-forge
   backports.zstd                 1.6.0         py310h69bd2ac_0          conda-forge
   bcbio-gff                      0.7.1         pyhdfd78af_3             bioconda   
@@ -65,7 +65,7 @@ List of packages in environment: "/opt/conda"
   bx-python                      0.14.0        py310h5850263_1          bioconda   
   bzip2                          1.0.8         hda65f42_9               conda-forge
   c-ares                         1.34.8        hb03c661_0               conda-forge
-  ca-certificates                2026.6.17     hbd8a1cb_0               conda-forge
+  ca-certificates                2026.7.22     hbd8a1cb_0               conda-forge
   cached-property                1.5.2         hd8ed1ab_2               conda-forge
   cached_property                1.5.2         pyha770c72_2             conda-forge
   cairo                          1.18.4        he90730b_1               conda-forge
@@ -77,13 +77,13 @@ List of packages in environment: "/opt/conda"
   cmseq                          1.0.4         pyhb7b1952_0             bioconda   
   comm                           0.2.3         pyhe01879c_0             conda-forge
   contourpy                      1.3.2         py310h3788b33_0          conda-forge
-  curl                           8.21.0        hae6b9f4_2               conda-forge
+  curl                           8.21.0        heca4667_4               conda-forge
   cycler                         0.12.1        pyhcf101f3_2             conda-forge
   debugpy                        1.8.21        py310h25320af_0          conda-forge
   decorator                      5.3.1         pyhd8ed1ab_0             conda-forge
   defusedxml                     0.7.1         pyhd8ed1ab_0             conda-forge
   dendropy                       5.0.11        pyhdfd78af_0             bioconda   
-  diamond                        2.2.4         he361c42_0               bioconda   
+  diamond                        2.2.5         he361c42_0               bioconda   
   entrez-direct                  24.0          he881be0_0               bioconda   
   exceptiongroup                 1.3.1         pyhd8ed1ab_0             conda-forge
   executing                      2.2.1         pyhd8ed1ab_0             conda-forge
@@ -92,40 +92,40 @@ List of packages in environment: "/opt/conda"
   font-ttf-inconsolata           3.000         h77eed37_0               conda-forge
   font-ttf-source-code-pro       2.038         h77eed37_0               conda-forge
   font-ttf-ubuntu                0.83          h77eed37_3               conda-forge
-  fontconfig                     2.18.1        h27c8c51_0               conda-forge
+  fontconfig                     2.18.2        h27c8c51_0               conda-forge
   fonts-conda-ecosystem          1             0                        conda-forge
   fonts-conda-forge              1             hc364b38_1               conda-forge
   fonttools                      4.63.0        py310h3406613_0          conda-forge
   fqdn                           1.5.1         pyhd8ed1ab_1             conda-forge
-  freetype                       2.14.3        ha770c72_0               conda-forge
+  freetype                       2.14.3        ha770c72_1               conda-forge
   fribidi                        1.0.16        hb03c661_0               conda-forge
   gawk                           5.4.1         h0a3468a_0               conda-forge
-  gcc_impl_linux-64              15.2.0        he0086c7_19              conda-forge
-  gcc_linux-64                   15.2.0        h7be306e_27              conda-forge
-  gfortran_impl_linux-64         15.2.0        h281d09f_19              conda-forge
+  gcc_impl_linux-64              16.1.0        h5fcb69b_1               conda-forge
+  gcc_linux-64                   16.1.0        h5fd2508_0               conda-forge
+  gfortran_impl_linux-64         16.1.0        h08e1a1a_1               conda-forge
   glpk                           5.0           h445213a_0               conda-forge
   gmp                            6.3.0         hac33072_2               conda-forge
   graphite2                      1.3.15        hecca717_0               conda-forge
   gsl                            2.7           he838d99_0               conda-forge
-  gxx_impl_linux-64              15.2.0        hda75c37_19              conda-forge
-  gxx_linux-64                   15.2.0        hcb00b6d_27              conda-forge
+  gxx_impl_linux-64              16.1.0        he33a5f8_1               conda-forge
+  gxx_linux-64                   16.1.0        h5525346_0               conda-forge
   h11                            0.16.0        pyhcf101f3_1             conda-forge
-  h2                             4.3.0         pyhcf101f3_0             conda-forge
+  h2                             4.4.0         pyhcf101f3_0             conda-forge
   h5py                           3.16.0        nompi_py310hb9a6f38_102  conda-forge
-  harfbuzz                       14.2.1        ha770c72_1               conda-forge
+  harfbuzz                       14.3.0        ha770c72_0               conda-forge
   hclust2                        1.0.0         pyh864c0ab_1             bioconda   
-  hdf5                           2.1.0         nompi_h654f344_110       conda-forge
+  hdf5                           2.1.0         nompi_hc529623_111       conda-forge
   hpack                          4.2.0         pyhd8ed1ab_0             conda-forge
   htslib                         1.24          ha79157c_0               bioconda   
   httpcore                       1.0.9         pyh29332c3_0             conda-forge
   httpx                          0.28.1        pyhd8ed1ab_0             conda-forge
   hyperframe                     6.1.0         pyhd8ed1ab_0             conda-forge
-  icu                            78.3          h33c6efd_1               conda-forge
+  icu                            78.3          h54a6638_2               conda-forge
   idna                           3.18          pyhcf101f3_0             conda-forge
   importlib-metadata             9.0.0         pyhcf101f3_0             conda-forge
   ipykernel                      7.3.0         pyha191276_0             conda-forge
   ipython                        8.37.0        pyh8f84b5b_0             conda-forge
-  iqtree                         3.1.2         h8471819_0               bioconda   
+  iqtree                         3.1.3         h8471819_0               bioconda   
   isoduration                    20.11.0       pyhd8ed1ab_1             conda-forge
   jedi                           0.20.0        pyhcf101f3_0             conda-forge
   jinja2                         3.1.6         pyhcf101f3_1             conda-forge
@@ -134,7 +134,7 @@ List of packages in environment: "/opt/conda"
   jsonschema                     4.26.0        pyhcf101f3_0             conda-forge
   jsonschema-specifications      2025.9.1      pyhcf101f3_0             conda-forge
   jsonschema-with-format-nongpl  4.26.0        hcf101f3_0               conda-forge
-  jupyter-builder                1.1.1         pyhcf101f3_0             conda-forge
+  jupyter-builder                1.2.1         pyhcf101f3_0             conda-forge
   jupyter-lsp                    2.3.1         pyhcf101f3_0             conda-forge
   jupyter_client                 8.9.1         pyhcf101f3_0             conda-forge
   jupyter_core                   5.9.1         pyhc90fa1f_0             conda-forge
@@ -152,7 +152,7 @@ List of packages in environment: "/opt/conda"
   lark                           1.3.1         pyhd8ed1ab_0             conda-forge
   lcms2                          2.19.1        h0c24ade_1               conda-forge
   ld_impl_linux-64               2.46.1        default_hbd61a6d_102     conda-forge
-  lerc                           4.1.0         hdb68285_0               conda-forge
+  lerc                           4.2.0         hdb68285_0               conda-forge
   libaec                         1.1.5         h088129d_0               conda-forge
   libasprintf                    0.25.1        h3f43e3d_1               conda-forge
   libblas                        3.11.0        8_h4a7cf45_openblas      conda-forge
@@ -160,24 +160,24 @@ List of packages in environment: "/opt/conda"
   libbrotlidec                   1.2.0         hb03c661_1               conda-forge
   libbrotlienc                   1.2.0         hb03c661_1               conda-forge
   libcblas                       3.11.0        8_h0358290_openblas      conda-forge
-  libcurl                        8.21.0        hae6b9f4_2               conda-forge
+  libcurl                        8.21.0        heca4667_4               conda-forge
   libdeflate                     1.25          h17f619e_0               conda-forge
   libedit                        3.1.20250104  pl5321h7949ede_0         conda-forge
   libev                          4.33          hd590300_2               conda-forge
   libexpat                       2.8.1         hecca717_1               conda-forge
   libffi                         3.5.2         h3435931_0               conda-forge
-  libfreetype                    2.14.3        ha770c72_0               conda-forge
-  libfreetype6                   2.14.3        h73754d4_0               conda-forge
-  libgcc                         15.2.0        he0feb66_19              conda-forge
-  libgcc-devel_linux-64          15.2.0        hcc6f6b0_119             conda-forge
-  libgcc-ng                      15.2.0        h69a702a_19              conda-forge
+  libfreetype                    2.14.3        ha770c72_1               conda-forge
+  libfreetype6                   2.14.3        h73754d4_1               conda-forge
+  libgcc                         16.1.0        ha9f2e26_1               conda-forge
+  libgcc-devel_linux-64          16.1.0        h59071f9_101             conda-forge
+  libgcc-ng                      16.1.0        h69a702a_1               conda-forge
   libgettextpo                   0.25.1        h3f43e3d_1               conda-forge
-  libgfortran                    15.2.0        h69a702a_19              conda-forge
-  libgfortran5                   15.2.0        h68bc16d_19              conda-forge
-  libglib                        2.88.2        h0d30a3d_0               conda-forge
-  libgomp                        15.2.0        he0feb66_19              conda-forge
-  libharfbuzz                    14.2.1        h17a8019_1               conda-forge
-  libharfbuzz-devel              14.2.1        h17a8019_1               conda-forge
+  libgfortran                    16.1.0        h69a702a_1               conda-forge
+  libgfortran5                   16.1.0        h79bb938_1               conda-forge
+  libglib                        2.88.3        h0d30a3d_0               conda-forge
+  libgomp                        16.1.0        he0feb66_1               conda-forge
+  libharfbuzz                    14.3.0        h17a8019_0               conda-forge
+  libharfbuzz-devel              14.3.0        h17a8019_0               conda-forge
   libiconv                       1.18          h3b78370_2               conda-forge
   libidn2                        2.3.8         hfac485b_1               conda-forge
   libjpeg-turbo                  3.2.0         hb03c661_0               conda-forge
@@ -187,14 +187,14 @@ List of packages in environment: "/opt/conda"
   libnsl                         2.0.1         hb9d3cd8_1               conda-forge
   libopenblas                    0.3.33        pthreads_h94d23a6_0      conda-forge
   libpng                         1.6.58        h421ea60_0               conda-forge
-  libpsl                         0.22.0        h49b2146_1               conda-forge
-  libsanitizer                   15.2.0        h90f66d4_19              conda-forge
+  libpsl                         0.23.0        hf670292_0               conda-forge
+  libsanitizer                   16.1.0        hf2715c6_1               conda-forge
   libsodium                      1.0.22        h280c20c_1               conda-forge
-  libsqlite                      3.53.3        h0c1763c_0               conda-forge
+  libsqlite                      3.53.4        hf4e2dac_0               conda-forge
   libssh2                        1.11.1        hcf80075_0               conda-forge
-  libstdcxx                      15.2.0        h934c35e_19              conda-forge
-  libstdcxx-devel_linux-64       15.2.0        hd446a21_119             conda-forge
-  libstdcxx-ng                   15.2.0        hdf11a46_19              conda-forge
+  libstdcxx                      16.1.0        h934c35e_1               conda-forge
+  libstdcxx-devel_linux-64       16.1.0        h41cdd0d_101             conda-forge
+  libstdcxx-ng                   16.1.0        hdf11a46_1               conda-forge
   libtiff                        4.7.2         h9d88235_0               conda-forge
   libunistring                   0.9.10        h7f98852_0               conda-forge
   libuuid                        2.42.2        h5347b49_0               conda-forge
@@ -204,69 +204,19 @@ List of packages in environment: "/opt/conda"
   libxcrypt                      4.4.36        hd590300_1               conda-forge
   libxml2                        2.15.3        h49c6c72_0               conda-forge
   libxml2-16                     2.15.3        hca6bf5a_0               conda-forge
-  libzlib                        1.3.2         h25fd6f3_2               conda-forge
+  libzlib                        1.3.2         h25fd6f3_3               conda-forge
   mafft                          7.526         h4bc722e_0               conda-forge
   make                           4.4.1         hb9d3cd8_2               conda-forge
   markupsafe                     3.0.3         py310h3406613_1          conda-forge
   mash                           2.3           hb105d93_9               bioconda   
   matplotlib-base                3.10.9        py310hfde16b3_0          conda-forge
   matplotlib-inline              0.2.2         pyhd8ed1ab_0             conda-forge
-  metaphlan                      4.2.5         pyhdfd78af_0             bioconda   
+  metaphlan                      4.2.6         pyhdfd78af_0             bioconda   
   minimap2                       2.31          h118bc1c_0               bioconda   
   mistune                        3.3.4         pyhcf101f3_0             conda-forge
-  mpfr                           4.2.2         he0a73b1_0               conda-forge
-  munkres                        1.1.4         pyhd8ed1ab_1             conda-forge
-  muscle                         5.3           h9948957_3               bioconda   
-  nbclient                       0.11.0        pyhd8ed1ab_0             conda-forge
-  nbconvert-core                 7.17.1        pyhcf101f3_0             conda-forge
-  nbformat                       5.10.4        pyhd8ed1ab_1             conda-forge
-  ncbi-vdb                       3.4.1         hd63eeec_0               bioconda   
-  ncurses                        6.6           hdb14827_0               conda-forge
-  nest-asyncio2                  1.7.2         pyhcf101f3_0             conda-forge
-  notebook                       7.6.1         pyhcf101f3_0             conda-forge
-  notebook-shim                  0.2.4         pyhd8ed1ab_1             conda-forge
-  numpy                          2.2.6         py310hefbff90_0          conda-forge
-  openjpeg                       2.5.4         h55fea9a_0               conda-forge
-  openssl                        3.6.3         h35e630c_0               conda-forge
-  overrides                      7.7.0         pyhd8ed1ab_1             conda-forge
-  packaging                      26.2          pyhc364b38_0             conda-forge
-  pandas                         2.3.3         py310h0158d43_2          conda-forge
-  pandoc                         3.10          ha770c72_0               conda-forge
-  pandocfilters                  1.5.0         pyhd8ed1ab_0             conda-forge
-  pango                          1.56.4        hda50119_1               conda-forge
-  parso                          0.8.7         pyhcf101f3_0             conda-forge
-  patsy                          1.0.2         pyhcf101f3_0             conda-forge
-  pcre2                          10.47         haa7fec5_0               conda-forge
-  perl                           5.32.1        7_hd590300_perl5         conda-forge
-  perl-archive-tar               3.12          pl5321hdfd78af_0         bioconda   
-  perl-carp                      1.50          pl5321hd8ed1ab_0         conda-forge
-  perl-common-sense              3.75          pl5321hd8ed1ab_0         conda-forge
-  perl-compress-raw-bzip2        2.214         pl5321hda65f42_0         conda-forge
-  perl-compress-raw-zlib         2.214         pl5321h4dac143_0         conda-forge
-  perl-encode                    3.24          pl5321hb03c661_0         conda-forge
-  perl-exporter                  5.74          pl5321hd8ed1ab_0         conda-forge
-  perl-exporter-tiny             1.002002      pl5321hd8ed1ab_0         conda-forge
-  perl-extutils-makemaker        7.70          pl5321hd8ed1ab_0         conda-forge
-  perl-io-compress               2.216         pl5321h503566f_0         bioconda   
-  perl-io-zlib                   1.15          pl5321hdfd78af_1         bioconda   
-  perl-json                      4.11          pl5321hdfd78af_0         bioconda   
-  perl-json-xs                   4.04          pl5321h9948957_0         bioconda   
-  perl-list-moreutils            0.430         pl5321hdfd78af_0         bioconda   
-  perl-list-moreutils-xs         0.430         pl5321h7b50bb2_5         bioconda   
-  perl-parent                    0.243         pl5321hd8ed1ab_0         conda-forge
-  perl-pathtools                 3.75          pl5321hb9d3cd8_2         conda-forge
-  perl-scalar-list-utils         1.70          pl5321hb03c661_0         conda-forge
-  perl-storable                  3.15          pl5321hb9d3cd8_2         conda-forge
-  perl-types-serialiser          1.01          pl5321hdfd78af_0         bioconda   
-  pexpect                        4.9.0         pyhd8ed1ab_1             conda-forge
-  phylophlan                     3.2.1         pyhdfd78af_1             bioconda   
-  pickleshare                    0.7.5         pyhd8ed1ab_1004          conda-forge
-  pillow                         12.3.0        py310h5a73078_0          conda-forge
-  pip                            26.1.2        pyh8b19718_0             conda-forge
-  pixman                         0.46.4        h54a6638_2               conda-forge
   platformdirs                   4.11.0        pyhcf101f3_0             conda-forge
-  prometheus_client              0.25.0        pyhd8ed1ab_0             conda-forge
-  prompt-toolkit                 3.0.52        pyha770c72_0             conda-forge
+  prometheus_client              0.26.0        pyhd8ed1ab_0             conda-forge
+  prompt-toolkit                 3.0.53        pyha770c72_0             conda-forge
   psutil                         7.2.2         py310h139afa4_0          conda-forge
   pthread-stubs                  0.4           hb9d3cd8_1002            conda-forge
   ptyprocess                     0.7.0         pyhd8ed1ab_1             conda-forge
@@ -278,11 +228,11 @@ List of packages in environment: "/opt/conda"
   pysocks                        1.7.1         pyha55dd90_7             conda-forge
   python                         3.10.20       h267e890_1_cpython       conda-forge
   python-dateutil                2.9.0.post0   pyhe01879c_2             conda-forge
-  python-fastjsonschema          2.21.2        pyhe01879c_0             conda-forge
+  python-fastjsonschema          2.22.1        pyhcf101f3_0             conda-forge
   python-json-logger             4.1.0         pyhd8ed1ab_0             conda-forge
   python-tzdata                  2026.3        pyhd8ed1ab_0             conda-forge
   python_abi                     3.10          8_cp310                  conda-forge
-  pytz                           2026.2        pyhcf101f3_0             conda-forge
+  pytz                           2026.3.post1  pyhcf101f3_0             conda-forge
   pyyaml                         6.0.3         py310h3406613_1          conda-forge
   pyzmq                          27.1.0        py310ha71cbf4_3          conda-forge
   qhull                          2020.2        h434a139_5               conda-forge
@@ -310,63 +260,13 @@ List of packages in environment: "/opt/conda"
   r-cli                          3.6.6         r45h3697838_0            conda-forge
   r-clipr                        0.8.1         r45hc72bb7e_0            conda-forge
   r-clock                        0.7.4         r45h3697838_0            conda-forge
-  r-cluster                      2.1.8.2       r45heaba542_0            conda-forge
+  r-cluster                      2.1.8.3       r45heaba542_0            conda-forge
   r-codetools                    0.2_20        r45hc72bb7e_2            conda-forge
   r-colorspace                   2.1_3         r45h54b55ab_0            conda-forge
   r-commonmark                   2.0.0         r45h54b55ab_1            conda-forge
-  r-compositions                 2.0_9         r45h0e4624f_1            conda-forge
-  r-conflicted                   1.2.0         r45h785f33e_3            conda-forge
-  r-cpp11                        0.5.5         r45h785f33e_0            conda-forge
-  r-crayon                       1.5.3         r45hc72bb7e_2            conda-forge
-  r-crul                         1.6.0         r45hc72bb7e_1            conda-forge
-  r-curl                         7.1.0         r45h10955f1_0            conda-forge
-  r-data.table                   1.18.4        r45h1c8cec4_0            conda-forge
-  r-dbi                          1.3.0         r45hc72bb7e_0            conda-forge
-  r-dbplyr                       2.6.0         r45hc72bb7e_0            conda-forge
-  r-deoptimr                     1.2_0         r45hc72bb7e_0            conda-forge
-  r-diagram                      1.6.5         r45ha770c72_4            conda-forge
-  r-digest                       0.6.39        r45h3697838_0            conda-forge
-  r-dplyr                        1.2.1         r45h3697838_0            conda-forge
-  r-dtplyr                       1.3.3         r45hc72bb7e_0            conda-forge
-  r-e1071                        1.7_17        r45h3697838_0            conda-forge
-  r-ecodive                      2.2.6         r45h54b55ab_1            conda-forge
-  r-ellipsis                     0.3.3         r45h54b55ab_0            conda-forge
-  r-emmeans                      2.0.4         r45hc72bb7e_0            conda-forge
-  r-essentials                   4.5           r45hd8ed1ab_2006         conda-forge
-  r-estimability                 2.0.0         r45hc72bb7e_0            conda-forge
-  r-evaluate                     1.0.5         r45hc72bb7e_1            conda-forge
-  r-fansi                        1.0.7         r45h54b55ab_0            conda-forge
-  r-farver                       2.1.2         r45h3697838_2            conda-forge
-  r-fastmap                      1.2.0         r45h3697838_2            conda-forge
-  r-fillpattern                  1.0.3         r45hc72bb7e_0            conda-forge
-  r-fontawesome                  0.5.3         r45hc72bb7e_1            conda-forge
-  r-forcats                      1.0.1         r45hc72bb7e_0            conda-forge
-  r-foreach                      1.5.2         r45hc72bb7e_4            conda-forge
-  r-foreign                      0.8_91        r45h54b55ab_0            conda-forge
-  r-formatr                      1.14          r45hc72bb7e_3            conda-forge
-  r-fs                           2.1.0         r45h3697838_0            conda-forge
-  r-future                       1.75.0        r45hc72bb7e_0            conda-forge
-  r-future.apply                 1.20.2        r45hc72bb7e_0            conda-forge
-  r-gargle                       1.6.1         r45h785f33e_0            conda-forge
-  r-generics                     0.1.4         r45hc72bb7e_1            conda-forge
-  r-getopt                       1.21.1        r45ha770c72_0            conda-forge
-  r-ggbeeswarm                   0.7.3         r45hc72bb7e_0            conda-forge
-  r-ggnewscale                   0.5.2         r45hc72bb7e_1            conda-forge
-  r-ggplot2                      4.0.3         r45h785f33e_0            conda-forge
-  r-ggrepel                      0.9.8         r45h3697838_0            conda-forge
-  r-ggtext                       0.1.2         r45hc72bb7e_4            conda-forge
-  r-gistr                        0.9.0         r45hc72bb7e_4            conda-forge
-  r-glmnet                       5.0           r45ha36cffa_0            conda-forge
-  r-globals                      0.19.1        r45hc72bb7e_0            conda-forge
-  r-glue                         1.8.1         r45h54b55ab_0            conda-forge
-  r-googledrive                  2.1.2         r45hc72bb7e_1            conda-forge
-  r-googlesheets4                1.1.2         r45h785f33e_1            conda-forge
-  r-gower                        1.0.2         r45h54b55ab_0            conda-forge
-  r-gridtext                     0.1.6         r45h3697838_0            conda-forge
-  r-gtable                       0.3.6         r45hc72bb7e_1            conda-forge
   r-hardhat                      1.4.3         r45hc72bb7e_0            conda-forge
   r-haven                        2.5.5         r45h6d565e7_1            conda-forge
-  r-hexbin                       1.28.5        r45heaba542_1            conda-forge
+  r-hexbin                       1.28.6        r45heaba542_0            conda-forge
   r-highr                        0.12          r45hc72bb7e_0            conda-forge
   r-hms                          1.1.4         r45hc72bb7e_0            conda-forge
   r-htmltools                    0.5.9         r45h3697838_0            conda-forge
@@ -443,7 +343,7 @@ List of packages in environment: "/opt/conda"
   r-rbokeh                       0.5.2         r45hc72bb7e_5            conda-forge
   r-rcolorbrewer                 1.1_3         r45h785f33e_4            conda-forge
   r-rcpp                         1.1.2         r45h3697838_0            conda-forge
-  r-rcpparmadillo                15.4.0_1      r45h3704496_0            conda-forge
+  r-rcpparmadillo                15.4.2_1      r45h3704496_0            conda-forge
   r-rcppeigen                    0.3.4.0.2     r45h3704496_1            conda-forge
   r-readr                        2.2.0         r45h3697838_0            conda-forge
   r-readxl                       1.5.0         r45h10e25cc_0            conda-forge
@@ -464,56 +364,6 @@ List of packages in environment: "/opt/conda"
   r-s7                           0.2.2         r45h54b55ab_0            conda-forge
   r-sass                         0.4.10        r45h3697838_1            conda-forge
   r-scales                       1.4.0         r45hc72bb7e_1            conda-forge
-  r-selectr                      0.6_0         r45hc72bb7e_0            conda-forge
-  r-shape                        1.4.6.1       r45ha770c72_2            conda-forge
-  r-shiny                        1.14.0        r45h785f33e_0            conda-forge
-  r-slam                         0.1_56        r45h7b2432b_0            conda-forge
-  r-sourcetools                  0.1.7_2       r45h3697838_0            conda-forge
-  r-sp                           2.2_3         r45h54b55ab_0            conda-forge
-  r-sparsevctrs                  0.3.6         r45h54b55ab_0            conda-forge
-  r-spatial                      7.3_18        r45h54b55ab_1            conda-forge
-  r-squarem                      2026.1        r45hc72bb7e_0            conda-forge
-  r-stringi                      1.8.7         r45h3d52c89_2            conda-forge
-  r-stringr                      1.6.0         r45h785f33e_0            conda-forge
-  r-survival                     3.8_9         r45h54b55ab_0            conda-forge
-  r-sys                          3.4.3         r45h54b55ab_1            conda-forge
-  r-systemfonts                  1.3.2         r45h74f4acd_0            conda-forge
-  r-tensora                      0.36.2.1      r45h54b55ab_2            conda-forge
-  r-textshaping                  1.0.5         r45h74f4acd_0            conda-forge
-  r-tibble                       3.3.1         r45h54b55ab_0            conda-forge
-  r-tidyr                        1.3.2         r45h3697838_0            conda-forge
-  r-tidyselect                   1.2.1         r45hc72bb7e_2            conda-forge
-  r-tidyverse                    2.0.0         r45h785f33e_3            conda-forge
-  r-timechange                   0.4.0         r45h3697838_0            conda-forge
-  r-timedate                     4052.112      r45hc72bb7e_0            conda-forge
-  r-tinytex                      0.60          r45hc72bb7e_0            conda-forge
-  r-triebeard                    0.4.1         r45h3697838_4            conda-forge
-  r-ttr                          0.24.4        r45h54b55ab_2            conda-forge
-  r-tzdb                         0.5.0         r45h3697838_2            conda-forge
-  r-urltools                     1.7.3.1       r45h3697838_1            conda-forge
-  r-utf8                         1.2.6         r45h54b55ab_1            conda-forge
-  r-uuid                         1.2_2         r45h54b55ab_0            conda-forge
-  r-vctrs                        0.7.3         r45h3697838_0            conda-forge
-  r-vegan                        2.7_5         r45h11cdb10_0            conda-forge
-  r-vipor                        0.4.7         r45hc72bb7e_2            conda-forge
-  r-viridislite                  0.4.3         r45hc72bb7e_0            conda-forge
-  r-vroom                        1.7.1         r45h3697838_0            conda-forge
-  r-withr                        3.0.3         r45hc72bb7e_0            conda-forge
-  r-xfun                         0.60          r45h54b55ab_0            conda-forge
-  r-xml2                         1.6.0         r45he78afff_0            conda-forge
-  r-xtable                       1.8_8         r45hc72bb7e_0            conda-forge
-  r-xts                          0.14.2        r45h54b55ab_0            conda-forge
-  r-yaml                         2.3.12        r45h54b55ab_0            conda-forge
-  r-zoo                          1.8_15        r45h54b55ab_0            conda-forge
-  raxml                          8.2.13        h7b50bb2_3               bioconda   
-  readline                       8.3           h853b02a_0               conda-forge
-  referencing                    0.37.0        pyhcf101f3_0             conda-forge
-  requests                       2.34.2        pyhcf101f3_0             conda-forge
-  rfc3339-validator              0.1.4         pyhd8ed1ab_1             conda-forge
-  rfc3986-validator              0.1.1         pyh9f0ad1d_0             conda-forge
-  rfc3987-syntax                 1.1.0         pyhe01879c_1             conda-forge
-  rpds-py                        0.30.0        py310hd8f68c5_0          conda-forge
-  s2n                            1.7.5         h7e3ee7f_1               conda-forge
   samtools                       1.24          h9dcdb79_1               bioconda   
   scipy                          1.15.2        py310h1d65ade_0          conda-forge
   seaborn                        0.13.2        hd8ed1ab_3               conda-forge
@@ -534,8 +384,8 @@ List of packages in environment: "/opt/conda"
   tktable                        2.10          h5a7a40f_8               conda-forge
   tomli                          2.4.1         pyhcf101f3_0             conda-forge
   tornado                        6.5.7         py310h7c4b9e2_0          conda-forge
-  tqdm                           4.69.0        pyh8f84b5b_0             conda-forge
-  traitlets                      5.15.1        pyhcf101f3_0             conda-forge
+  tqdm                           4.70.0        pyh8f84b5b_0             conda-forge
+  traitlets                      5.16.1        pyhcf101f3_0             conda-forge
   trimal                         1.5.1         h9948957_0               bioconda   
   typing-extensions              4.16.0        h69aa097_0               conda-forge
   typing_extensions              4.16.0        pyhcf101f3_0             conda-forge
@@ -561,7 +411,7 @@ List of packages in environment: "/opt/conda"
   yaml                           0.2.5         h280c20c_3               conda-forge
   zeromq                         4.3.5         h09e67af_11              conda-forge
   zipp                           4.1.0         pyhcf101f3_0             conda-forge
-  zlib                           1.3.2         h25fd6f3_2               conda-forge
+  zlib                           1.3.2         h25fd6f3_3               conda-forge
   zlib-ng                        2.3.3         hceb46e0_1               conda-forge
   zstd                           1.5.7         hb78ec9c_6               conda-forge
 ```
