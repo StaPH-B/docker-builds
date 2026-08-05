@@ -4,15 +4,15 @@ FROM staphb/vadr:${VADR_VERSION}-slim AS app
 
 # for easy upgrade later. LC_ALL set for singularity compatibility
 ENV VADR_VERSION=${VADR_VERSION} \
-    VADR_SARSCOV2_MODELS_VERSION="1.3-2"
+    VADR_SARSCOV2_MODELS_VERSION="1.6.3-1"
 
 LABEL base.image="staphb/vadr:${VADR_VERSION}"
 LABEL dockerfile.version="1"
 LABEL software="VADR"
 LABEL software.version="${VADR_VERSION}"
 LABEL description="Classification and annotation of viral sequences based on RefSeq annotation"
-LABEL website="https://github.com/ncbi/vadr"
-LABEL license="https://github.com/ncbi/vadr/blob/master/LICENSE"
+LABEL website="https://github.com/NLM-DIR/vadr"
+LABEL license="https://github.com/NLM-DIR/vadr/blob/master/LICENSE"
 LABEL maintainer="Curtis Kapsak"
 LABEL maintainer.email="kapsakcj@gmail.com"
 

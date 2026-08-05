@@ -1,14 +1,14 @@
 # VADR container
 
-Main tool : [VADR](https://github.com/ncbi/vadr)
+Main tool : [VADR](https://github.com/NLM-DIR/vadr)
 
 Additional tools:
 
-- perl v5.34.0
+- perl v5.38.2
 - infernal v1.1.5
-- ncbi-blast+ v2.15.0
+- ncbi-blast+ v2.17.0
 - fasta v36.3.8h (the tool, not the file format)
-- minimap2 2.26-r1175
+- minimap2 2.230-r1287
 
 Basic information on how to use this tool:
 
@@ -25,12 +25,12 @@ Basic information on how to use this tool:
 
 Included models:
 
-- SARS-CoV-2 version 1.3-2 (`--mkey sarscov2`)
+- SARS-CoV-2 version 1.6.3-1 (`--mkey sarscov2`)
 
 Most of the VADR model files are located at `/opt/vadr/vadr-models` in the container filesystem and this path is stored in the globally accessible bash variable `$VADRMODELDIR`. For most applications, there is no need to specify `v-annotate.pl --mdir /path/to/model/files` since `$VADRMODELDIR` is set in the environment.
 
-- Full documentation: https://github.com/ncbi/vadr/wiki
-- SARS-CoV-2 model documentation: https://github.com/ncbi/vadr/wiki/Coronavirus-annotation
+- Full documentation: https://github.com/NLM-DIR/vadr/wiki
+- SARS-CoV-2 model documentation: https://github.com/NLM-DIR/vadr/wiki/Coronavirus-annotation
 
 ## Example Usage
 
