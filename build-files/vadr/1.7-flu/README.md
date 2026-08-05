@@ -1,6 +1,6 @@
 # VADR container
 
-Main tool : [VADR](https://github.com/ncbi/vadr)
+Main tool : [VADR](https://github.com/NLM-DIR/vadr)
 
 Additional tools:
 
@@ -29,8 +29,8 @@ Included models:
 
 Most of the VADR model files are located at `/opt/vadr/vadr-models` in the container filesystem and this path is stored in the globally accessible bash variable `$VADRMODELDIR`. For most applications, there is no need to specify `v-annotate.pl --mdir /path/to/model/files` since `$VADRMODELDIR` is set in the environment.
 
-- Full documentation: https://github.com/ncbi/vadr/wiki
-- Flu model documentation: https://github.com/ncbi/vadr/wiki/Influenza-annotation
+- Full documentation: https://github.com/NLM-DIR/vadr/wiki
+- Flu model documentation: https://github.com/NLM-DIR/vadr/wiki/Influenza-annotation
 - Flu model publication: https://doi.org/10.1093/database/baae091
 
 ## Example Usage
