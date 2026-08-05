@@ -11,8 +11,8 @@ LABEL dockerfile.version="1"
 LABEL software="VADR"
 LABEL software.version="${VADR_VERSION}"
 LABEL description="Classification and annotation of viral sequences based on RefSeq annotation"
-LABEL website="https://github.com/ncbi/vadr"
-LABEL license="https://github.com/ncbi/vadr/blob/master/LICENSE"
+LABEL website="https://github.com/NLM-DIR/vadr"
+LABEL license="https://github.com/NLM-DIR/vadr/blob/master/LICENSE"
 LABEL maintainer="Curtis Kapsak"
 LABEL maintainer.email="kapsakcj@gmail.com"
 
@@ -44,7 +44,7 @@ fasta-trim-terminal-ambigs.pl -h || echo "prints to stderr for some reason"
 
 WORKDIR /test
 
-### COMMENTING OUT RSV TEST BELOW SINCE THIS TEST CAN CONSUME UPWARDS OF 30GB RAM ###
+### COMMENTING OUT RSV TEST BELOW SINCE THIS TEST CAN CONSUME UPWARDS OF 16GB RAM (I think?) ###
 ### it runs fine when you have that much RAM available, but not in GHActions runners that are limited to 7GB RAM ###
 
 # download a test RSV genome, run through VADR using RSV models
