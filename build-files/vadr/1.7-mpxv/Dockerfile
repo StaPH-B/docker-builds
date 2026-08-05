@@ -2,7 +2,7 @@ ARG VADR_VERSION=1.7
 
 FROM staphb/vadr:${VADR_VERSION}-slim AS app
 
-# for easy upgrade later. LC_ALL set for singularity compatibility
+# for easy upgrade later
 ENV VADR_VERSION=${VADR_VERSION} \
     VADR_MPXV_MODELS_VERSION="1.4.2-1"
 
@@ -11,8 +11,8 @@ LABEL dockerfile.version="1"
 LABEL software="VADR"
 LABEL software.version="${VADR_VERSION}"
 LABEL description="Classification and annotation of viral sequences based on RefSeq annotation"
-LABEL website="https://github.com/ncbi/vadr"
-LABEL license="https://github.com/ncbi/vadr/blob/master/LICENSE"
+LABEL website="https://github.com/NLM-DIR/vadr"
+LABEL license="https://github.com/NLM-DIR/vadr/blob/master/LICENSE"
 LABEL maintainer="Curtis Kapsak"
 LABEL maintainer.email="kapsakcj@gmail.com"
 

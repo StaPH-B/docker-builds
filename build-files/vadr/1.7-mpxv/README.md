@@ -1,14 +1,14 @@
 # VADR container
 
-Main tool : [VADR](https://github.com/ncbi/vadr)
+Main tool : [VADR](https://github.com/NLM-DIR/vadr)
 
 Additional tools:
 
-- perl v5.34.0
+- perl v5.38.2
 - infernal v1.1.5
-- ncbi-blast+ v2.15.0
+- ncbi-blast+ v2.17.0
 - fasta v36.3.8h (the tool, not the file format)
-- minimap2 2.26-r1175
+- minimap2 2.30-r1287
 
 Basic information on how to use this tool:
 
@@ -31,8 +31,8 @@ Most of the VADR model files are located at `/opt/vadr/vadr-models` in the conta
 
 Be aware that some Mpox sequences may take up to **30 minutes** to annotate, depending on how divergent it is from the RefSeq NC_063383 sequence. Some sequences may only take a minute or so.
 
-- Full documentation: https://github.com/ncbi/vadr/wiki
-- MPOX/MPXV model documentation: https://github.com/ncbi/vadr/wiki/Mpox-virus-annotation
+- Full documentation: https://github.com/NLM-DIR/vadr/wiki
+- MPOX/MPXV model documentation: https://github.com/NLM-DIR/vadr/wiki/Mpox-virus-annotation
 
 ## Example Usage
 
