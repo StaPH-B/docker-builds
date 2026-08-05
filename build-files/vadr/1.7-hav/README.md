@@ -1,14 +1,14 @@
 # VADR container
 
-Main tool : [VADR](https://github.com/ncbi/vadr)
+Main tool : [VADR](https://github.com/NLM-DIR/vadr)
 
 Additional tools:
 
-- perl v5.34.0
+- perl v5.38.2
 - infernal v1.1.5
-- ncbi-blast+ v2.15.0
+- ncbi-blast+ v2.17.0
 - fasta v36.3.8h (the tool, not the file format)
-- minimap2 2.26-r1175
+- minimap2 2.30-r1287
 
 Basic information on how to use this tool:
 
@@ -25,12 +25,12 @@ Basic information on how to use this tool:
 
 Included models:
 
-- HAV version 1.0.0 (`-mkey hav.vadr`)
+- HAV v1.0 + 2 commits. Specifically commit [`b1f29b2`](https://github.com/greninger-lab/vadr-models-hav/commit/b1f29b2) is downloaded from the greninger-lab repository (`-mkey hav`)
 
 Most of the VADR model files are located at `/opt/vadr/vadr-models` in the container filesystem and this path is stored in the globally accessible bash variable `$VADRMODELDIR`. For most applications, there is no need to specify `v-annotate.pl --mdir /path/to/model/files` since `$VADRMODELDIR` is set in the environment. 
 
-- Full documentation: https://github.com/ncbi/vadr/wiki
-- HAV model documentation: https://github.com/theiagen/VADR_models
+- Full documentation: https://github.com/NLM-DIR/vadr/wiki
+- HAV model documentation: https://github.com/greninger-lab/vadr-models-hav
 
 ## Example Usage
 
@@ -39,11 +39,11 @@ Most of the VADR model files are located at `/opt/vadr/vadr-models` in the conta
 fasta-trim-terminal-ambigs.pl input.consensus.fa > trimmed.fasta
 
 # run v-annotate.pl using HAV models to annotate an HAV FASTA file
-# the "-mkey hav.vadr" option is required to specify the HAV model
+# the "-mkey hav" option is required to specify the HAV model
 v-annotate.pl --split \
      -r \
      -xnocomp \
-     -mkey hav.vadr \
+     -mkey hav \
      trimmed.fasta \
      hav-test-output
 

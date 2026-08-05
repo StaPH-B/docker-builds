@@ -4,11 +4,11 @@ Main tool : [VADR](https://github.com/NLM-DIR/vadr)
 
 Additional tools:
 
-- perl v5.34.0
+- perl v5.38.2
 - infernal v1.1.5
-- ncbi-blast+ v2.15.0
+- ncbi-blast+ v2.17.0
 - fasta v36.3.8h (the tool, not the file format)
-- minimap2 2.26-r1175
+- minimap2 2.30-r1287
 
 Basic information on how to use this tool:
 

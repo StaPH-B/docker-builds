@@ -4,26 +4,33 @@ FROM staphb/vadr:${VADR_VERSION}-slim AS app
 
 # for easy upgrade later. LC_ALL set for singularity compatibility
 ENV VADR_VERSION=${VADR_VERSION} \
-    VADR_HAV_MODELS_VER="1.0.0"
+    VADR_HAV_MODELS_COMMIT="b1f29b2"
+    #VADR_HAV_MODELS_VER="1.0"
 
 LABEL base.image="staphb/vadr:${VADR_VERSION}"
 LABEL dockerfile.version="1"
 LABEL software="VADR"
 LABEL software.version="${VADR_VERSION}"
 LABEL description="Classification and annotation of viral sequences based on RefSeq annotation"
-LABEL website="https://github.com/ncbi/vadr"
-LABEL license="https://github.com/ncbi/vadr/blob/master/LICENSE"
+LABEL website="https://github.com/NLM-DIR/vadr"
+LABEL license="https://github.com/NLM-DIR/vadr/blob/master/LICENSE"
 LABEL maintainer="Curtis Kapsak"
 LABEL maintainer.email="kapsakcj@gmail.com"
 
 WORKDIR /
 
-# download release of HAV VADR model files and move files into $VADRMODELDIR; clean up extra copies (original downloaded files)
-RUN wget https://github.com/theiagen/VADR_models/archive/refs/tags/v${VADR_HAV_MODELS_VER}.tar.gz && \
-    tar -xf v${VADR_HAV_MODELS_VER}.tar.gz && \
-    rm -v v${VADR_HAV_MODELS_VER}.tar.gz && \ 
-    cp -nvr /VADR_models-${VADR_HAV_MODELS_VER}/hav/* ${VADRMODELDIR} && \
-    rm -rf /VADR_models-${VADR_HAV_MODELS_VER}
+# install git. Can remove this in the future if we switch to downloading a release tarball instead of cloning the repo and checking out a specific commit
+RUN apt-get update && apt-get install -y --no-install-recommends \
+git \
+&& apt-get autoclean && rm -rf /var/lib/apt/lists/*
+
+# download latest available commit (as of 2026-08-04) of HAV VADR model files and move files into $VADRMODELDIR
+# if another release is made in the future, we should change the below code to download the release tarball instead of cloning the repo and checking out a specific commit
+RUN git clone https://github.com/greninger-lab/vadr-models-hav.git && \
+cd vadr-models-hav && \
+git checkout ${VADR_HAV_MODELS_COMMIT} && \
+mv -v hav/* ${VADRMODELDIR} && \
+ls -l ${VADRMODELDIR}
 
 # set working directory
 WORKDIR /data
@@ -54,6 +61,6 @@ RUN echo "testing HAV functionality..." && \
     v-annotate.pl --split \
         -r \
         -xnocomp \
-        -mkey hav.vadr \
+        -mkey hav \
         hav.trimmed.fasta \
         hav-vadr-test-output
