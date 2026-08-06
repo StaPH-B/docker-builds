@@ -4,7 +4,7 @@ FROM staphb/vadr:${VADR_VERSION}-slim AS app
 
 # for easy upgrade later
 ENV VADR_VERSION=${VADR_VERSION} \
-    VADR_HAV_MODELS_COMMIT="b1f29b2"
+    VADR_HAV_MODELS_COMMIT="b1f29b27bc77acf4b0ab8acc61dac7355ffc912e"
     #VADR_HAV_MODELS_VER="1.0"
 
 LABEL base.image="staphb/vadr:${VADR_VERSION}"
@@ -19,18 +19,14 @@ LABEL maintainer.email="kapsakcj@gmail.com"
 
 WORKDIR /
 
-# install git. Can remove this in the future if we switch to downloading a release tarball instead of cloning the repo and checking out a specific commit
-RUN apt-get update && apt-get install -y --no-install-recommends \
-git \
-&& apt-get autoclean && rm -rf /var/lib/apt/lists/*
-
-# download latest available commit (as of 2026-08-04) of HAV VADR model files and move files into $VADRMODELDIR
-# if another release is made in the future, we should change the below code to download the release tarball instead of cloning the repo and checking out a specific commit
-RUN git clone https://github.com/greninger-lab/vadr-models-hav.git && \
-cd vadr-models-hav && \
-git checkout ${VADR_HAV_MODELS_COMMIT} && \
-mv -v hav/* ${VADRMODELDIR} && \
-ls -l ${VADRMODELDIR}
+# download latest available commit (as of 2026-08-06) of HAV VADR model files and move files into $VADRMODELDIR
+RUN wget https://github.com/greninger-lab/vadr-models-hav/archive/${VADR_HAV_MODELS_COMMIT}.zip && \
+    unzip ${VADR_HAV_MODELS_COMMIT}.zip && \
+    cd vadr-models-hav-${VADR_HAV_MODELS_COMMIT} && \
+    ls && \
+    mv -v hav/* ${VADRMODELDIR} && \
+    ls -l ${VADRMODELDIR} && \
+    rm -rf /vadr-models-hav-${VADR_HAV_MODELS_COMMIT} /${VADR_HAV_MODELS_COMMIT}.zip
 
 # set working directory
 WORKDIR /data
@@ -42,8 +38,8 @@ FROM app AS test
 # testing that executable is in PATH
 # v-build.pl -h to ensure required perl modules are available (See issue #1393)
 RUN v-annotate.pl -h &&  \
-v-build.pl -h && \
-fasta-trim-terminal-ambigs.pl -h || echo "prints to stderr for some reason"
+    v-build.pl -h && \
+    fasta-trim-terminal-ambigs.pl -h || echo "prints to stderr for some reason"
 
 # running vadr tests
 #NOTE: These tests require the flavi and calici models to be present, which are not included in this image. These tests are however run in the docker build process for the `build-files/vadr/1.6.4-2505/Dockerfile` image.
