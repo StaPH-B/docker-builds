@@ -4,7 +4,7 @@ FROM staphb/vadr:${VADR_VERSION}-slim AS app
 
 # for easy upgrade later
 ENV VADR_VERSION=${VADR_VERSION} \
-    VADR_FLU_MODELS_VER="1.6.3-2"
+    VADR_FLU_MODELS_VER="1.7-1"
 
 LABEL base.image="staphb/vadr:${VADR_VERSION}"
 LABEL dockerfile.version="1"
