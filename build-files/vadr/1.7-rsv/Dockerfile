@@ -4,7 +4,7 @@ FROM staphb/vadr:${VADR_VERSION}-slim AS app
 
 # for easy upgrade later. LC_ALL set for singularity compatibility
 ENV VADR_VERSION=${VADR_VERSION} \
-    VADR_RSV_MODELS_VER="1.5-2"
+    VADR_RSV_MODELS_VER="1.7-1"
 
 LABEL base.image="staphb/vadr:${VADR_VERSION}"
 LABEL dockerfile.version="1"
@@ -35,8 +35,8 @@ FROM app AS test
 # testing that executable is in PATH
 # v-build.pl -h to ensure required perl modules are available (See issue #1393)
 RUN v-annotate.pl -h &&  \
-v-build.pl -h && \
-fasta-trim-terminal-ambigs.pl -h || echo "prints to stderr for some reason"
+    v-build.pl -h && \
+    fasta-trim-terminal-ambigs.pl -h || echo "prints to stderr for some reason"
 
 # running vadr tests
 #NOTE: These tests require the flavi and calici models to be present, which are not included in this image. These tests are however run in the docker build process for the `build-files/vadr/1.6.4-2505/Dockerfile` image.

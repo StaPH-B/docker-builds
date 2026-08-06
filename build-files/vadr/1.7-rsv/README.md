@@ -25,7 +25,7 @@ Basic information on how to use this tool:
 
 Included models:
 
-- RSV version 1.5-2 (`-mkey rsv`)
+- RSV version 1.7-1 (`-mkey rsv`)
 
 Most of the VADR model files are located at `/opt/vadr/vadr-models` in the container filesystem and this path is stored in the globally accessible bash variable `$VADRMODELDIR`. For most applications, there is no need to specify `v-annotate.pl --mdir /path/to/model/files` since `$VADRMODELDIR` is set in the environment. 
 
