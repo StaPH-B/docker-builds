@@ -1,4 +1,4 @@
-## Builder
+
 ARG LJA_VER="0.2"
 
 ## Builder ##
