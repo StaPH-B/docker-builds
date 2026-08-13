@@ -1,8 +1,15 @@
 # syntax=docker/dockerfile:1
 
+# Use ARG so the version only needs to be defined once at the top.
+ARG SOFTWARENAME_VER="1.0.0"
+ARG JAVA_VERSION="17"
+
 ##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
 ##### Thank you for using this Dockerfile template!                     #####
 ##### This is an outline for the flow of building a docker image.       #####
+##### Compling software not needed at runtime is downloaded in the      #####
+##### builder stage, and then the actually needed items are copied to   #####
+##### the app stage.                                                    #####
 ##### The docker image is built to the 'app' stage on dockerhub/quay.   #####
 ##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
 
@@ -10,9 +17,31 @@
 ##### Step 1. Set up the base image in the first stage.                 #####
 ##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
 
+# Please note, all 'LABEL', 'ENV', and 'CMD' instructions will be lost
+# Also, files and executables are not carried over unless they are explicitly copied.
+
+# 'FROM' defines where the Dockerfile is starting to build from.
+# The 'AS builder' naming is optional, but useful in the PR validation tests.
+FROM openjdk:${JAVA_VERSION}-jdk-slim-noble AS builder
+
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+# List all software versions as ARGs near the top of the dockerfile.
+# ARG variables are ONLY available during image build.
+ARG SOFTWARENAME_VER
+
+# 'RUN' executes code during the build
+# Install dependencies via apt-get or yum if using a centos or fedora base
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    dependency_a \
+    dependency_b \
+    dependency_c && \
+    apt-get autoclean && rm -rf /var/lib/apt/lists/*
+
+
 # 'FROM' defines where the Dockerfile is starting to build from.
 # The 'AS app' naming is required for the PR validation tests.
-FROM ubuntu:noble AS app
+FROM openjdk:${JAVA_VERSION}-jre-slim-noble AS app
 
 # catches hidden failures in piped install steps
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -21,7 +50,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # List all software versions as ARGs near the top of the dockerfile.
 # ARG variables are ONLY available during image build.
-ARG SOFTWARENAME_VER="1.0.0"
+ARG SOFTWARENAME_VER
 
 # default user id that can be overwritten for those that need to re-build images
 ARG UID=1000
@@ -32,7 +61,7 @@ ARG UID=1000
 # NOTE: The "org.opencontainers" labels are REQUIRED to pass StaPH-B CI tests.
 LABEL \
       # The exact base image used for the 'app' stage
-      org.opencontainers.image.base.name="docker.io/library/ubuntu:noble" \
+      org.opencontainers.image.base.name="docker.io/library/openjdk:${JAVA_VERSION}-jre-slim-noble" \
       # The name of the software (e.g., "BWA" or "Samtools")
       org.opencontainers.image.title="SoftwareName" \
       # The version of the software itself
@@ -50,6 +79,9 @@ LABEL \
       # The person/group maintaining this Dockerfile
       org.opencontainers.image.authors="firstName lastName <example@email.com>"
 
+# COPY only the necessary files from the builder stage
+COPY --from=builder /tool-${SOFTWARENAME_VER}/bin/* /usr/local/bin/
+
 # 'RUN' executes code during the build.
 RUN apt-get update && apt-get install -y --no-install-recommends \
     dependency_a \
@@ -62,11 +94,9 @@ RUN useradd -m -u ${UID} -s /bin/bash appuser && \
     mkdir -p /data /tmp && \
     chown -R appuser:appuser /data
 
-# Example: install ncbi-blast+ 2.9.0 pre-compiled linux binaries
-ARG BLAST_VER=2.9.0
-RUN wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/${BLAST_VER}/ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz && \
-    tar -xzf ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz && \
-    rm ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz
+# Java jars often need a wrapper script or alias
+RUN printf '#!/bin/bash\njava -jar /opt/tool/tool.jar "$@"\n' > /usr/local/bin/toolname && \
+    chmod +x /usr/local/bin/toolname
 
 # 'ENV' instructions set environment variables that persist into the resulting image.
 ENV PATH="/ncbi-blast-${BLAST_VER}+/bin:$PATH" \
@@ -75,6 +105,7 @@ ENV PATH="/ncbi-blast-${BLAST_VER}+/bin:$PATH" \
     LC_ALL=C
 
 # 'WORKDIR' sets the default working directory. 
+# StaPH-B Requirement: This MUST be set to /data.
 WORKDIR /data
 
 # Switch to the non-root user.
@@ -98,7 +129,8 @@ USER appuser
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Set working directory so that all test inputs & outputs are kept in /test
-# Switch back to root briefly to install test-only tools (i.e. wget)
+# We switch back to root briefly if we need to install test-only tools, 
+# but generally, we stay as the 'staphb' user.
 WORKDIR /test
 
 # Print help and version info to ensure the tool is in the PATH and executable.
