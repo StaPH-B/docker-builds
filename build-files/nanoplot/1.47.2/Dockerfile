@@ -1,7 +1,7 @@
 FROM ubuntu:noble AS app
 
 # for easy upgrade later. ARG variables only persist during image build time.
-ARG NANOPLOT_VER="1.47.1"
+ARG NANOPLOT_VER="1.47.2"
 
 LABEL base.image="ubuntu:noble"
 LABEL dockerfile.version="1"
