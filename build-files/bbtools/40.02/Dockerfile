@@ -8,7 +8,7 @@ FROM staphb/htslib:1.24 AS htslib
 FROM ubuntu:noble AS app
 
 ARG SAMBAMBAVER=1.0.1
-ARG BBTOOLSVER=39.97
+ARG BBTOOLSVER=40.02
 
 LABEL base.image="ubuntu:noble"
 LABEL dockerfile.version="1"
