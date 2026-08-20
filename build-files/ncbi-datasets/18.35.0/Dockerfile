@@ -1,6 +1,6 @@
 FROM ubuntu:noble AS app
 
-ARG DATASETS_VER="18.33.1"
+ARG DATASETS_VER="18.35.0"
 
 LABEL base.image="ubuntu:noble"
 LABEL dockerfile.version="1"
