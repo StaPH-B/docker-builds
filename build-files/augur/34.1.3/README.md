@@ -28,9 +28,9 @@ Note: Auspice is a different tool.
 Package                   Version
 ------------------------- ------------
 attrs                     26.1.0
-backports.zstd            1.6.0
+backports.zstd            1.7.0
 bcbio-gff                 0.7.1
-biopython                 1.87
+biopython                 1.88
 contourpy                 1.3.3
 cvxopt                    1.3.3
 cycler                    0.12.1
@@ -43,9 +43,9 @@ jsonschema-specifications 2025.9.1
 kiwisolver                1.5.0
 matplotlib                3.11.1
 networkx                  3.6.1
-nextstrain-augur          34.1.1
-numpy                     2.5.1
-packaging                 26.2
+nextstrain-augur          34.1.3
+numpy                     2.5.2
+packaging                 26.3
 pandas                    2.3.3
 phylo-treetime            0.12.1
 pillow                    12.3.0
