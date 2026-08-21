@@ -121,6 +121,7 @@ The licenses of the open-source software that is contained in these Docker image
 | lima | BSD-3 | https://github.com/PacificBiosciences/barcoding/blob/master/LICENSE |
 | lissero | GNU GPLv3 | https://github.com/MDU-PHL/LisSero/blob/master/LICENSE |
 | LJA | BSD-3 | https://github.com/AntonBankevich/LJA/blob/main/LICENSE |
+| LongReadSum | MIT | https://github.com/WGLab/LongReadSum/blob/main/LICENSE |
 | longshot | MIT | https://github.com/pjedge/longshot/blob/master/LICENSE |
 | lrge | MIT | https://github.com/mbhall88/lrge?tab=MIT-1-ov-file#readme |
 | Lyve-SET  | MIT | https://github.com/lskatz/lyve-SET/blob/master/LICENSE |
