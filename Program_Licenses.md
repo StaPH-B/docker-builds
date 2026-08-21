@@ -9,6 +9,7 @@ The licenses of the open-source software that is contained in these Docker image
 | ABRicate | GNU GPLv2 | https://github.com/tseemann/abricate/blob/master/LICENSE |
 | ACI | MIT | https://github.com/erinyoung/ACI/blob/main/LICENSE |
 | ANIclustermap | MIT | https://github.com/moshi4/ANIclustermap/blob/main/LICENSE |
+| ART | GNU GPLv3 | https://www.niehs.nih.gov/research/resources/software/biostatistics/art |
 | artic | MIT | https://github.com/artic-network/fieldbioinformatics/blob/master/LICENSE |
 | artic-ncov2019-epi2me | MPL 2.0 | https://github.com/epi2me-labs/wf-artic/blob/master/LICENSE |
 | artic-tools | MIT | https://github.com/will-rowe/artic-tools/blob/master/LICENSE |
@@ -20,10 +21,13 @@ The licenses of the open-source software that is contained in these Docker image
 | Auspice | GNU Affero GPLv3 | https://github.com/nextstrain/auspice/blob/master/LICENSE.txt |
 | Autocycler | GNU General Public License v3.0 | https://github.com/rrwick/Autocycler/blob/main/LICENSE |
 | Bakta | GNU GPLv3 | https://github.com/oschwengers/bakta/blob/main/LICENSE |
+| Bamtools | MIT | https://github.com/pezmaster31/bamtools/blob/master/LICENSE |
 | Bandage | GNU GPLv3 | https://github.com/rrwick/Bandage?tab=GPL-3.0-1-ov-file#readme |
+| BandageNG | GNU GPLv3 | https://github.com/asl/BandageNG/blob/dev/COPYING |
 | BBTools | non-standard - see `licence.txt` and `legal.txt` that is included in docker image under `/bbmap/docs/`; Also on sourceforge repo for BBTools | https://github.com/bbushnell/BBTools/blob/master/license.txt |
 | bcftools | MIT & **GNU GPLv3** | https://github.com/samtools/bcftools/blob/develop/LICENSE |
 | bedtools | MIT | https://github.com/arq5x/bedtools2/blob/master/LICENSE |
+| bedder-rs| MIT | https://github.com/quinlan-lab/bedder-rs/blob/main/LICENSE |
 | bindashtree | MIT | https://github.com/jianshu93/bindashtree?tab=MIT-1-ov-file#readme |
 | blast+ | Public Domain | https://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/lxr/source/scripts/projects/blast/LICENSE |
 | bowtie2 | GNU GPLv3 | https://github.com/BenLangmead/bowtie2/blob/master/LICENSE |
@@ -115,6 +119,9 @@ The licenses of the open-source software that is contained in these Docker image
 | legsta | GNU GPLv3 | https://github.com/tseemann/legsta/blob/master/LICENSE |
 | liftoff | GNU GPLv3 | https://github.com/agshumate/Liftoff/blob/master/LICENSE.md |
 | lima | BSD-3 | https://github.com/PacificBiosciences/barcoding/blob/master/LICENSE |
+| lissero | GNU GPLv3 | https://github.com/MDU-PHL/LisSero/blob/master/LICENSE |
+| LJA | BSD-3 | https://github.com/AntonBankevich/LJA/blob/main/LICENSE |
+| LongReadSum | MIT | https://github.com/WGLab/LongReadSum/blob/main/LICENSE |
 | longshot | MIT | https://github.com/pjedge/longshot/blob/master/LICENSE |
 | lrge | MIT | https://github.com/mbhall88/lrge?tab=MIT-1-ov-file#readme |
 | Lyve-SET  | MIT | https://github.com/lskatz/lyve-SET/blob/master/LICENSE |
@@ -124,8 +131,10 @@ The licenses of the open-source software that is contained in these Docker image
 | MaSuRCA | GNU GPLv3 | https://github.com/alekseyzimin/masurca/blob/master/LICENSE.txt
 | Medaka | Mozilla Public License 2.0 | https://github.com/nanoporetech/medaka/blob/master/LICENSE.md |
 | meningotype | GNU General Public License v3.0 | https://github.com/MDU-PHL/meningotype/blob/master/LICENSE |
+| metaMDBG | MIT | https://github.com/GaetanBenoitDev/metaMDBG/blob/main/LICENSE.md |
 | Metaphlan | MIT | https://github.com/biobakery/MetaPhlAn/blob/master/license.txt |
 | MIDAS | GNU GPLv3 |https://github.com/snayfach/MIDAS/blob/master/LICENSE |
+| minibwa | MIT | https://github.com/lh3/minibwa/blob/master/LICENSE.txt |
 | minimap2 | MIT | https://github.com/lh3/minimap2/blob/master/LICENSE.txt |
 | miniasm | MIT | https://github.com/lh3/miniasm/blob/master/LICENSE.txt |
 | minipolish | GNU GPLv3 | https://github.com/rrwick/Minipolish/blob/main/LICENSE |
@@ -139,8 +148,10 @@ The licenses of the open-source software that is contained in these Docker image
 | myloasm | MIT | https://github.com/bluenote-1577/myloasm/blob/main/LICENSE |
 | NanoPlot | GNU GPLv3 | https://github.com/wdecoster/NanoPlot/blob/master/LICENSE |
 | NCBI AMRFinderPlus | Public Domain | https://github.com/ncbi/amr/blob/master/LICENSE |
-| NCBI Datasets | Public Domain | https://github.com/ncbi/datasets/blob/master/pkgs/ncbi-datasets-cli/LICENSE.md |
+| NCBI Datasets | Public Domain | https://github.com/ncbi/datasets/blob/master/LICENSE.md |
 | NCBI table2asn | Public Domain | unknown |
+| NextDenovo | GNU GPLv3 | https://github.com/Nextomics/NextDenovo/blob/master/LICENSE |
+| nextPolish | GNU GPLv3 | https://github.com/Nextomics/NextPolish/blob/master/LICENSE |
 | ngmaster | GNU GPLv3 | https://github.com/MDU-PHL/ngmaster/blob/master/LICENSE |
 | ONTime | MIT | https://github.com/mbhall88/ontime/blob/main/LICENSE |
 | OrthoFinder | GNU GPLv3 | https://github.com/davidemms/OrthoFinder/blob/master/License.md |
@@ -154,7 +165,9 @@ The licenses of the open-source software that is contained in these Docker image
 | Pavian | GNU GPLv3 | https://github.com/fbreitwieser/pavian/blob/master/DESCRIPTION |
 | pbmm2 | BSD-3 | https://github.com/PacificBiosciences/pbmm2/blob/develop/LICENSE |
 | pbptyper | MIT | https://github.com/rpetit3/pbptyper/blob/main/LICENSE |
+| PBSIM3 | GNU GPLv2 | https://github.com/yukiteruono/pbsim3/blob/master/COPYING |
 | pbtk | BSD-3 | https://github.com/PacificBiosciences/pbtk/blob/main/LICENSE.txt |
+| PCNE | MIT | https://github.com/riccabolla/PCNE/blob/main/LICENSE |
 | Phyml | GNU GPLv3 | https://github.com/stephaneguindon/phyml/blob/master/COPYING |
 | phyTreeViz | MIT | https://github.com/moshi4/phyTreeViz/blob/main/LICENSE |
 | Piggy | GNU GPLv3 | https://github.com/harry-thorpe/piggy/blob/master/LICENSE |
@@ -219,6 +232,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Spestimator | MIT | https://github.com/erinyoung/Spestimator?tab=MIT-1-ov-file |
 | SRA-toolkit | Public Domain | https://github.com/ncbi/sra-tools/blob/master/LICENSE |
 | SRST2 | BSD | https://github.com/katholt/srst2/blob/master/LICENSE.txt |
+| StaphSCAN | MIT | https://github.com/riccabolla/StaphSCAN/blob/main/LICENSE |
 | Staramr | Apache 2.0 | https://github.com/phac-nml/staramr/blob/master/LICENSE |
 | stxtyper | Public Domain | https://github.com/ncbi/stxtyper/blob/main/LICENSE |
 | sylph | MIT | https://github.com/bluenote-1577/sylph/blob/main/LICENSE |
@@ -233,7 +247,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Trycycler | GNU GPLv3 | https://github.com/rrwick/Trycycler/blob/master/LICENSE |
 | Unicycler | GNU GPLv3 | https://github.com/rrwick/Unicycler/blob/master/LICENSE |
 | UShER | MIT | https://github.com/yatisht/usher/blob/master/LICENSE |
-| VADR | Public Domain | https://github.com/nawrockie/vadr/blob/master/LICENSE |
+| VADR | Public Domain | https://github.com/NLM-DIR/vadr/blob/master/LICENSE |
 | Verkko | Public Domain | https://github.com/marbl/verkko/blob/master/README.licenses |
 | VIBRANT | GNU GPLv3 | https://github.com/AnantharamanLab/VIBRANT/blob/master/LICENSE |
 | VIGOR4 | GNU GPLv3 | https://github.com/JCVenterInstitute/VIGOR4/blob/master/LICENSE.txt |
@@ -241,3 +255,4 @@ The licenses of the open-source software that is contained in these Docker image
 | VirSorter2 | GNU GPLv2 | https://github.com/jiarong/VirSorter2/blob/master/LICENSE |
 | VirulenceFinder | Apache 2.0 | https://bitbucket.org/genomicepidemiology/virulencefinder/src/master/ |
 | wtdbg2 | GNU GPLv3 | https://github.com/ruanjue/wtdbg2/blob/master/LICENSE.txt |
+
