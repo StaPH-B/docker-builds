@@ -1,7 +1,11 @@
 source 'https://rubygems.org'
 
-gem "github-pages", '193', group: :jekyll_plugins
+# Follow the current GitHub Pages-supported dependency set so security and compliance fixes
+# can be applied through routine bundle updates without editing this file each time.
+gem "github-pages", "~> 228", group: :jekyll_plugins
 
 # enable tzinfo-data for local build
 # gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
 gem 'jekyll-paginate'
+gem 'webrick'
+gem 'faraday-retry'
