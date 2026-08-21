@@ -2,7 +2,7 @@
 FROM python:3.14-slim AS app
 
 ARG STARAMR_VER="0.12.3"
-ARG MLST_VER="2.32.2"
+ARG MLST_VER="2.35.0"
 ARG ANY2FASTA_VERSION="0.8.1"
 
 LABEL base.image="python:3.14-slim"
