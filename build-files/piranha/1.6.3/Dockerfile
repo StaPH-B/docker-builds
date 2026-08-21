@@ -66,8 +66,19 @@ WORKDIR /test
 
 # test on test sequences supplied with Piranha code; shamelessly stolen and modified from https://github.com/polio-nanopore/piranha/blob/main/.github/workflows/piranha.yml
 # first test is a subset that analyzes 2 barcodes (05 and 07)
+
+RUN piranha -i /piranha-${PIRANHA_VER}/piranha/test/pak_run/demultiplexed \
+    --verbose \
+    -b /piranha-${PIRANHA_VER}/piranha/test/pak_run/barcodes01.csv \
+    -t 2 && \
+    head a*/detailed_run_report.csv
+
+WORKDIR /test_1
 # second test analyzes all test data supplied with Piranha code (7 barcodes)
-RUN piranha -i /piranha-${PIRANHA_VER}/piranha/test/pak_run/demultiplexed --verbose -b /piranha-${PIRANHA_VER}/piranha/test/pak_run/barcodes01.csv -t 2 2>&1 | tee piranha.log && \
-    piranha -i /piranha-${PIRANHA_VER}/piranha/test/pak_run/demultiplexed --verbose -b /piranha-${PIRANHA_VER}/piranha/test/pak_run/barcodes.csv -t 2 2>&1 | tee piranha_all.log
+RUN piranha -i /piranha-${PIRANHA_VER}/piranha/test/pak_run/demultiplexed \
+    --verbose \
+    -b /piranha-${PIRANHA_VER}/piranha/test/pak_run/barcodes.csv \
+    -t 2 &&\
+    head a*/detailed_run_report.csv
 
 RUN micromamba list -n piranha
