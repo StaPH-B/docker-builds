@@ -61,7 +61,7 @@ RUN threads=2 && \
     # Step 2: assemble each subsampled file
     mkdir assemblies && \
     for assembler in canu flye metamdbg miniasm necat nextdenovo plassembler raven; do \
-        for i in 01 02 03 04; do \
+        for i in 01 02; do \
             autocycler helper "$assembler" --reads subsampled_reads/sample_"$i".fastq --out_prefix assemblies/"$assembler"_"$i" --threads "$threads" --genome_size "$genome_size"; \
         done; \
     done && \
@@ -78,3 +78,5 @@ RUN threads=2 && \
     done && \
     # Step 7: combine resolved clusters into a final assembly
     autocycler combine -a autocycler_out -i autocycler_out/clustering/qc_pass/cluster_*/5_final.gfa
+
+RUN micromamba list
