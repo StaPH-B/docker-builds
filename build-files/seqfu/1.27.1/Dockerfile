@@ -95,3 +95,5 @@ RUN wget -q https://github.com/StaPH-B/docker-builds/raw/master/tests/SARS-CoV-2
     wget -q https://github.com/StaPH-B/docker-builds/raw/master/tests/SARS-CoV-2/SRR13957123_2.fastq.gz && \
     seqfu check SRR13957123_1.fastq.gz SRR13957123_2.fastq.gz > seqfu_check_test.txt && \
     seqfu count SRR13957123_1.fastq.gz SRR13957123_2.fastq.gz > seqfu_count_test.txt
+
+RUN seqfu --help
