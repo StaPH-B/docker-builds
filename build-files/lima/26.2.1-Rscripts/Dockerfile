@@ -16,7 +16,7 @@ LABEL license="https://github.com/PacificBiosciences/barcoding/blob/master/LICEN
 LABEL maintainer="Kutluhan Incekara"
 LABEL maintainer.email="kutluhan.incekara@ct.gov"
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install --no-install-recommends -y \
     r-base \
     r-cran-ggplot2 \
     r-cran-dplyr \
