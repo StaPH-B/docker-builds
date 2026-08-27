@@ -1,0 +1,135 @@
+name: deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      tool:
+        description: "Tool to deploy. Must match filepath: build-files/<tool>/version/Dockerfile"
+        required: true
+      version:
+        description: "Version to deploy. Must match filepath: build-files/tool/<version>/Dockerfile"
+        required: true
+      docker_image_tag:
+        description: "Tag to push (usually matches version)"
+        required: true
+      pr_id:
+        description: "Optional: PR ID to comment on (e.g., 123)"
+        required: false
+      push_quay:
+        description: "Deploy to Quay?"
+        type: boolean
+        default: true
+      push_latest_tag:
+        description: "Overwrite latest tag?"
+        type: boolean
+        default: true
+      repository_name:
+        description: "Repository name. <repository>/tool:tag (Usually staphb)"
+        default: "staphb"
+
+run-name: Deploy ${{ github.event.inputs.tool }} version ${{ github.event.inputs.version }}
+
+# These permissions are for commenting on the designated PR after completion
+permissions:
+  pull-requests: write
+  contents: read
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+        with:
+          lfs: true
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@master
+
+        # This puts together the tags that will be used and
+        # adds the image.created and image.source labels
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@master
+        with:
+          images: |
+            ${{ inputs.repository_name }}/${{ inputs.tool }}
+            ${{ inputs.push_quay && format('quay.io/{0}/{1}', inputs.repository_name, inputs.tool) || '' }}
+          tags: |
+            type=raw,value=${{ inputs.docker_image_tag }}
+            type=raw,value=latest,enable=${{ inputs.push_latest_tag }}
+          labels: |
+            org.opencontainers.image.created={{date 'YYYY-MM-DDTHH:mm:ssZ'}}
+            org.opencontainers.image.source=https://github.com/StaPH-B/docker-builds/${{ inputs.tool }}/${{ inputs.docker_image_tag }}
+
+      - name: Login to DockerHub
+        uses: docker/login-action@master
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+      - name: Login to Quay
+        if: ${{ inputs.push_quay }}
+        uses: docker/login-action@master
+        with:
+          registry: quay.io
+          username: ${{ secrets.QUAY_USERNAME }}
+          password: ${{ secrets.QUAY_ROBOT_TOKEN }}
+
+        # This builds the Dockerfile to test (to ensure it still builds)
+      - name: Build Test Stage
+        uses: docker/build-push-action@master
+        with:
+          context: ./build-files/${{ inputs.tool }}/${{ inputs.version }}
+          target: test
+          load: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+        # This pushes the 'app' stage with the tags and repos from the "Docker meta" step
+      - name: Push App Stage
+        id: push_step
+        uses: docker/build-push-action@master
+        with:
+          context: ./build-files/${{ inputs.tool }}/${{ inputs.version }}
+          target: app
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+
+        # if a PR id supplied, this creates a comment on that PR when complete
+      - name: Post Comment to PR
+        if: ${{ inputs.pr_id != '' && success() }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr comment ${{ inputs.pr_id }} --body "### Deployment Complete
+          
+          Thank you for your contribution to the StaPH-B docker-builds repository. The image for **${{ inputs.tool }}** has been successfully built and deployed.
+
+          | Registry | Image Tag |
+          | :--- | :--- |
+          | **Docker Hub** | \`${{ inputs.repository_name }}/${{ inputs.tool }}:${{ inputs.docker_image_tag }}\` |
+          | **Quay.io** | \`${{ inputs.push_quay && format('quay.io/{0}/{1}:{2}', inputs.repository_name, inputs.tool, inputs.docker_image_tag) || 'Not deployed' }}\` |
+          | **Latest Tag** | ${{ inputs.push_latest_tag && 'Updated' || 'Not updated' }} |
+
+          **Image Digest:**
+          \`${{ steps.push_step.outputs.digest }}\`
+          
+          We appreciate your efforts in maintaining high-quality containers for the public health community."
+
+  run-apptainer:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Apptainer
+        run: |
+            sudo add-apt-repository -y ppa:apptainer/ppa
+            sudo apt-get update
+            sudo apt-get install -y apptainer
+
+      - name: Test Apptainer Run
+        run: |
+            # 'apptainer run' pulls the docker image and executes the default CMD
+            apptainer run docker://${{ github.event.inputs.repository_name }}/${{ github.event.inputs.tool }}:${{ github.event.inputs.docker_image_tag }}
