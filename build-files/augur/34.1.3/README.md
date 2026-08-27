@@ -58,7 +58,7 @@ pytz                      2026.3.post1
 PyYAML                    6.0.3
 referencing               0.37.0
 rpds-py                   2026.6.3
-scipy                     1.18.0
+scipy                     1.18.1
 six                       1.17.0
 typing_extensions         4.16.0
 tzdata                    2026.3
