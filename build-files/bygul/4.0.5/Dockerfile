@@ -12,6 +12,8 @@ LABEL software.version=${BYGUL_SOFTWARE_VERSION}
 LABEL description="Bygul: Amplicon & Metagenomics Read Simulator"
 LABEL website="https://github.com/andersen-lab/Bygul"
 LABEL license="https://github.com/andersen-lab/Bygul/blob/main/LICENSE"
+LABEL maintainer="Maryam Ahmadi Jeshvaghane | ANDERSEN LAB | Scripps research institute"
+LABEL maintainer.email="mahmadi@scripps.edu"
 
 # Ensure Conda bin directory is primary in PATH
 ENV PATH="/opt/conda/envs/bygul-env/bin:${PATH}" \
