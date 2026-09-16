@@ -26,7 +26,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 #install emmtyper and dependencies
-RUN micromamba create -n emmtyper -y -c conda-forge -c bioconda emmtyper=${EMMTYPER_VER} && \
+RUN micromamba create -n emmtyper -y -c conda-forge -c bioconda emmtyper=${EMMTYPER_VER} python==3.13 && \
     micromamba clean -a -f -y
 
 # set the environment

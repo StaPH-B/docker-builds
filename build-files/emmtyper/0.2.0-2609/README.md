@@ -57,11 +57,11 @@ List of packages in environment: "/opt/conda/envs/emmtyper"
   libidn2                  2.3.8         hfac485b_1            conda-forge
   liblapack                3.11.0        11_h47877c9_openblas  conda-forge
   liblzma                  5.8.3         hb03c661_1            conda-forge
+  liblzma-devel            5.8.3         hb03c661_1            conda-forge
   libmpdec                 4.0.0         hb03c661_2            conda-forge
   libnghttp2               1.68.1        h74cf4be_1            conda-forge
   libopenblas              0.3.34        pthreads_hf13c14d_2   conda-forge
   libpsl                   0.23.1        hd9e3e90_1            conda-forge
-  libpython                3.14.7        hdc7f604_106_cp314    conda-forge
   libsqlite                3.53.4        h13e7031_1            conda-forge
   libssh2                  1.11.1        h6154650_1            conda-forge
   libstdcxx                16.2.0        h934c35e_5            conda-forge
@@ -71,7 +71,7 @@ List of packages in environment: "/opt/conda/envs/emmtyper"
   libzlib                  1.3.2         h25fd6f3_3            conda-forge
   ncbi-vdb                 3.4.1         hd63eeec_0            bioconda   
   ncurses                  6.6           hdb14827_1            conda-forge
-  numpy                    2.5.3         py314hd3a7d6b_0       conda-forge
+  numpy                    2.5.3         py313hb5f73ae_0       conda-forge
   openssl                  3.6.4         h781a0a9_0            conda-forge
   pcre2                    10.47         h8b3dc9c_1            conda-forge
   perl                     5.32.1        9_h7cc23a3_perl5      conda-forge
@@ -95,15 +95,19 @@ List of packages in environment: "/opt/conda/envs/emmtyper"
   perl-scalar-list-utils   1.70          pl5321hb03c661_0      conda-forge
   perl-storable            3.15          pl5321hb9d3cd8_2      conda-forge
   perl-types-serialiser    1.01          pl5321hdfd78af_0      bioconda   
-  python                   3.14.7        hcd007b5_106_cp314    conda-forge
+  pip                      26.2.1        pyh145f28c_0          conda-forge
+  python                   3.13.0        h9ebbce0_101_cp313    conda-forge
   python-dateutil          2.9.0.post0   pyhe01879c_2          conda-forge
-  python_abi               3.14          9_cp314               conda-forge
+  python_abi               3.13          9_cp313               conda-forge
   readline                 8.3           hd6e31c0_1            conda-forge
-  scipy                    1.18.1        py314h36f0660_0       conda-forge
+  scipy                    1.18.1        py313he2a5f1a_0       conda-forge
   six                      1.17.0        pyhe01879c_1          conda-forge
   tk                       8.6.13        noxft_h1df4ec4_4      conda-forge
   tzdata                   2026c         h151e31d_0            conda-forge
   wget                     1.25.0        h653f8fd_1            conda-forge
+  xz                       5.8.3         ha02ee65_1            conda-forge
+  xz-gpl-tools             5.8.3         ha02ee65_1            conda-forge
+  xz-tools                 5.8.3         hb03c661_1            conda-forge
   zlib                     1.3.2         h25fd6f3_3            conda-forge
   zstd                     1.5.7         hb78ec9c_7            conda-forge
 ```
