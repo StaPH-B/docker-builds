@@ -59,5 +59,3 @@ RUN wget https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR197/068/SRR19787768/SRR19787768
     NanoPlot --fastq SRR19787768_1.fastq.gz --loglength --N50 -o /data/nanoplot-test && \
     ls -lh /data/nanoplot-test && \
     cat /data/nanoplot-test/NanoStats.txt
-
-RUN pip3 list && whatever
