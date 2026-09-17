@@ -1,4 +1,4 @@
-ARG SYLPH_VER="0.9.0"
+ARG SYLPH_VER="1.0.0"
 
 ## Builder ##
 FROM rust:1.90 AS builder
@@ -14,11 +14,11 @@ RUN apt update && \
     chmod +x /root/.cargo/bin/sylph
 
 ## App ##
-FROM ubuntu:jammy AS app
+FROM ubuntu:noble AS app
 
 ARG SYLPH_VER
 
-LABEL base.image="ubuntu:jammy"
+LABEL base.image="ubuntu:noble"
 LABEL dockerfile.version="1"
 LABEL software="sylph"
 LABEL software.version=${SYLPH_VER}
