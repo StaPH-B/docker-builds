@@ -2,6 +2,10 @@
 
 Main tool : [polypolish](https://github.com/rrwick/Polypolish/wiki/How-to-run-Polypolish)
 
+Additional tools:
+
+- bwa: 0.7.19
+
 Full documentation: [https://github.com/rrwick/Polypolish/wiki](https://github.com/rrwick/Polypolish/wiki)
 
 Polypolish "polishes" consensus files created during assembly of long reads with Illumina short reads. Polypolish is a little different than other polishing tools in that paired-end reads need to be aligned separatly to generate two sam files.
