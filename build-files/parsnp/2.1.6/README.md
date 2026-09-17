@@ -8,7 +8,7 @@ This container implements [ParSNP](https://github.com/marbl/parsnp) from the [Ha
 - [FastTree](https://github.com/morgannprice/fasttree/): `FastTree` or `fasttree` : 2.2.0
 - [RAxML](https://github.com/stamatak/standard-RAxML): `raxmlHPC-PTHREADS` : 8.2.13
 - [Mash](https://github.com/marbl/Mash/): `mash` : 2.3
-- [PhiPack](https://www.maths.otago.ac.nz/~dbryant/software/phimanual.pdf): `Phi` : 1.1
+- [PhiPack](https://www.maths.otago.ac.nz/~dbryant/software/phimanual.pdf): `Phi` : 0.0.20160614-5
 - [HarvestTools](https://harvest.readthedocs.io/en/latest/): `harvesttools` : 1.3
 - [FastANI](https://github.com/ParBLiSS/FastANI/): `fastani` : 1.34
 
