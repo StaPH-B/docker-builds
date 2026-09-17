@@ -1,14 +1,44 @@
 # syntax=docker/dockerfile:1
 
+# Use ARG so the version only needs to be defined once at the top.
+ARG SOFTWARENAME_VER="1.0.0"
+
 ##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
 ##### Thank you for using this Dockerfile template!                     #####
 ##### This is an outline for the flow of building a docker image.       #####
+##### Compling software not needed at runtime is downloaded in the      #####
+##### builder stage, and then the actually needed items are copied to   #####
+##### the app stage.                                                    #####
 ##### The docker image is built to the 'app' stage on dockerhub/quay.   #####
 ##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
 
 ##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
 ##### Step 1. Set up the base image in the first stage.                 #####
 ##### ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #####
+
+# Please note, all 'LABEL', 'ENV', and 'CMD' instructions will be lost
+# Also, files and executables are not carried over unless they are explicitly copied.
+
+# 'FROM' defines where the Dockerfile is starting to build from.
+# The 'AS builder' naming is optional, but useful in the PR validation tests.
+FROM mambaorg/micromamba:2.6.0-noble AS builder
+
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+# List all software versions as ARGs near the top of the dockerfile.
+# ARG variables are ONLY available during image build.
+ARG SOFTWARENAME_VER
+
+# Switch to root to ensure we have permissions to create the environment
+USER root
+
+# Pro tip: Install into /opt/conda to make it easy to copy into app
+RUN micromamba install -y -n base -c conda-forge -c bioconda \
+    SOFTWARENAME=${SOFTWARENAME_VERSION} && \
+    micromamba clean -a -f -y
+
+RUN micromamba list
+
 
 # 'FROM' defines where the Dockerfile is starting to build from.
 # The 'AS app' naming is required for the PR validation tests.
@@ -21,7 +51,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # List all software versions as ARGs near the top of the dockerfile.
 # ARG variables are ONLY available during image build.
-ARG SOFTWARENAME_VER="1.0.0"
+ARG SOFTWARENAME_VER
 
 # default user id that can be overwritten for those that need to re-build images
 ARG UID=1000
@@ -50,6 +80,9 @@ LABEL \
       # The person/group maintaining this Dockerfile
       org.opencontainers.image.authors="firstName lastName <example@email.com>"
 
+# This brings only the binaries and libraries, not the Micromamba engine or cache.
+COPY --from=builder /opt/conda /opt/conda
+
 # 'RUN' executes code during the build.
 RUN apt-get update && apt-get install -y --no-install-recommends \
     dependency_a \
@@ -75,6 +108,7 @@ ENV PATH="/ncbi-blast-${BLAST_VER}+/bin:$PATH" \
     LC_ALL=C
 
 # 'WORKDIR' sets the default working directory. 
+# StaPH-B Requirement: This MUST be set to /data.
 WORKDIR /data
 
 # Switch to the non-root user.
@@ -98,7 +132,8 @@ USER appuser
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Set working directory so that all test inputs & outputs are kept in /test
-# Switch back to root briefly to install test-only tools (i.e. wget)
+# We switch back to root briefly if we need to install test-only tools, 
+# but generally, we stay as the 'staphb' user.
 WORKDIR /test
 
 # Print help and version info to ensure the tool is in the PATH and executable.
@@ -110,3 +145,6 @@ RUN blastn -version
 
 # Option 2: Write out usage cases directly:
 # RUN wget <data_url> && blastn -query input.fasta ...
+
+# Note: since micromamba is not installed in 'app', there is no 
+# RUN micromamba list -n base
