@@ -1,0 +1,138 @@
+name: Lint Dockerfile
+
+on:
+  workflow_call:
+    inputs:
+      dockerfile_path:
+        required: true
+        type: string
+      tool_name:
+        required: true
+        type: string
+      version:
+        required: true
+        type: string
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+
+      - name: Hadolint linting
+        id: hadolint
+        continue-on-error: true
+        uses: hadolint/hadolint-action@master
+        with:
+          dockerfile: ${{ inputs.dockerfile_path }}
+          ignore: DL3008,DL3059
+          # DL3008 is for version pinning apt-get packages
+          # DL3059 is for multiple consecutive run instructions
+
+      - name: Check for 'app' and 'test' stages
+        id: stages
+        continue-on-error: true
+        run: |
+            FILE="${{ inputs.dockerfile_path }}"
+            FAILED=0
+
+            if ! grep -qi "AS app" "$FILE"; then 
+                echo "Error: Missing 'AS app' stage."
+                FAILED=1
+            fi
+
+            if ! grep -qi "AS test" "$FILE"; then 
+                echo "Error: Missing 'AS test' stage."
+                FAILED=1
+            fi
+
+            if [ "$FAILED" -eq 1 ]; then exit 1; fi
+
+      - name: Check for CMD
+        id: cmd
+        continue-on-error: true
+        run: |
+            FILE="${{ inputs.dockerfile_path }}"
+            if ! grep -qi "^CMD " "$FILE"; then
+                echo "Error: Missing CMD instruction. Dockerfiles must define a default runtime command."
+                exit 1
+            else
+                echo "Success: CMD instruction found."
+            fi
+
+      - name: Micromamba validation
+        id: micromamba
+        continue-on-error: true
+        run: |
+            FILE="${{ inputs.dockerfile_path }}"
+            # If 'micromamba' is used anywhere in the file...
+            if grep -qi "micromamba" "$FILE"; then
+                if ! cat "$FILE" | grep -qi "micromamba list"; then
+                    echo "Error: Micromamba detected, but 'micromamba list' is missing."
+                    exit 1
+                else
+                    echo "Success: Micromamba list found ."
+                fi
+            fi
+
+      - name: Pip Validation
+        id: pip
+        continue-on-error: true
+        run: |
+            FILE="${{ inputs.dockerfile_path }}"
+            # If 'pip install' is used anywhere in the file...
+            if grep -qi "pip install" "$FILE"; then
+                if ! cat "$FILE" | grep -qi "pip list"; then
+                    echo "Error: Pip installation detected, but 'pip list' is missing."
+                    exit 1
+                else
+                    echo "Success: Pip list found."
+                fi
+            fi
+  
+      - name: Generate Report
+        if: always()
+        run: |
+          echo "### Lint Report: ${{ inputs.tool_name }} (${{ inputs.version }})" > report.md
+          echo "Path: ${{ inputs.dockerfile_path }}" >> report.md
+          echo "" >> report.md
+          echo "| Check | Status |" >> report.md
+          echo "| :--- | :--- |" >> report.md
+          
+          FAILED=0
+          
+          add_row() {
+            local label=$1
+            local outcome=$2
+            local type=$3
+            if [[ "$outcome" == "success" ]]; then
+              echo "| $label | PASS |" >> report.md
+            else
+              echo "| $label | FAIL |" >> report.md
+              if [[ "$type" != "optional" ]]; then FAILED=1; fi
+            fi
+          }
+
+          add_row "Hadolint (External)" "${{ steps.hadolint.outcome }}" "optional"
+          add_row "Multi-stage Validation" "${{ steps.stages.outcome }}" "mandatory"
+          add_row "CMD Instruction" "${{ steps.cmd.outcome }}" "mandatory"
+          add_row "Micromamba Consistency" "${{ steps.micromamba.outcome }}" "mandatory"
+          add_row "Pip Consistency" "${{ steps.pip.outcome }}" "mandatory"
+
+          echo "" >> report.md
+          if [ "$FAILED" -eq 1 ]; then
+            echo "**Result: FAILED**" >> report.md
+            echo "One or more mandatory validation steps failed. Please review the action logs for details." >> report.md
+            exit 1
+          else
+            echo "**Result: PASSED**" >> report.md
+          fi
+
+      - name: Post Report to PR
+        # Only comment if it's a PR (avoids error on workflow_dispatch with no PR)
+        if: always() && github.event_name == 'pull_request'
+        uses: marocchino/sticky-pull-request-comment@main
+        with:
+          header: lint-${{ inputs.tool_name }}-${{ inputs.version }}
+          path: report.md
+        
