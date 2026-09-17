@@ -5,7 +5,7 @@ Main tool: [myloasm](https://myloasm-docs.github.io/)
 Code repository: https://github.com/bluenote-1577/myloasm
 
 Additional tools:
-- none
+- myloasm-kmc version 0.1.0
 
 Basic information on how to use this tool:
 - executable: `myloasm`
