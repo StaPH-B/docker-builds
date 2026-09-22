@@ -31,7 +31,7 @@ These model files are included:
 
 - Caliciviridae 1.7-2
 - Coronaviridae (coronaviruses including sars-cov-2) v1.3-3
-- Flaviviridae 1.7.2
+- Flaviviridae 1.7.2 (includes Dengue and HCV)
 - Influenza v1.7-2
 - MPXV v1.4.2-1
 - RSV v1.7-2
