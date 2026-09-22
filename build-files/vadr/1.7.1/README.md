@@ -1,6 +1,6 @@
 # VADR container
 
-Main tool : [VADR](https://github.com/ncbi/vadr)
+Main tool : [VADR](https://github.com/NLM-DIR/vadr)
 
 Additional tools:
 
@@ -45,7 +45,7 @@ $ ls -d /opt/vadr/vadr-models*
 /opt/vadr/vadr-models-corona  /opt/vadr/vadr-models-flu    /opt/vadr/vadr-models-rsv   /opt/vadr/vadr-models-zika
 ```
 
-A larger list of vadr models can be found in [VADR's documentation](https://github.com/ncbi/vadr/wiki/Available-VADR-model-files) for download and mounting/binding during runtime. An example for SARS-CoV-2 is below.
+A larger list of vadr models can be found in [VADR's documentation](https://github.com/NLM-DIR/vadr/wiki/Available-VADR-model-files) for download and mounting/binding during runtime. An example for SARS-CoV-2 is below.
 
 ## Example Usage
 

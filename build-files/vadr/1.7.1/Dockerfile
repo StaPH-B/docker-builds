@@ -26,8 +26,8 @@ LABEL dockerfile.version="1"
 LABEL software="VADR"
 LABEL software.version="${VADR_VERSION}"
 LABEL description="Classification and annotation of viral sequences based on RefSeq annotation"
-LABEL website="https://github.com/ncbi/vadr"
-LABEL license="https://github.com/ncbi/vadr/blob/master/LICENSE"
+LABEL website="https://github.com/NLM-DIR/vadr"
+LABEL license="https://github.com/NLM-DIR/vadr/blob/master/LICENSE"
 LABEL maintainer="Curtis Kapsak"
 LABEL maintainer.email="kapsakcj@gmail.com"
 
@@ -63,7 +63,7 @@ apt-get autoclean && rm -rf /var/lib/apt/lists/*
 # install perl module Mozilla::CA required in VADR v1.6.4
 RUN mkdir -p ${VADRINSTALLDIR}/vadr-${VADR_VERSION} /data ${VADRMODELDIR} && \
 cd ${VADRINSTALLDIR} && \ 
-wget -q https://github.com/ncbi/vadr/archive/refs/tags/vadr-${VADR_VERSION}.tar.gz && \
+wget -q https://github.com/NLM-DIR/vadr/archive/refs/tags/vadr-${VADR_VERSION}.tar.gz && \
 tar -xzf vadr-${VADR_VERSION}.tar.gz -C vadr-${VADR_VERSION} --strip-components 1 && \
 rm vadr-${VADR_VERSION}.tar.gz && \
 sed -i 's|CALICIVERSION="1.2-1"|CALICIVERSION="1.7-2"|' vadr-${VADR_VERSION}/vadr-install.sh && \
