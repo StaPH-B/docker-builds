@@ -9,7 +9,7 @@ Additional tools:
 - minimap2 2.30-r1287
 - ncbi-blast+ v2.17.0
 - perl v5.34.0
-- python3 VERSION??
+- python3 3.12.3
 - R2DT v2.3
 
 Basic information on how to use this tool:
@@ -29,12 +29,12 @@ Basic information on how to use this tool:
 
 These model files are included:
 
-- Caliciviridae 1.2-1
+- Caliciviridae 1.7-2
 - Coronaviridae (coronaviruses including sars-cov-2) v1.3-3
 - Flaviviridae 1.7.2
-- Influenza v1.6.3-2
+- Influenza v1.7-2
 - MPXV v1.4.2-1
-- RSV v1.5-2
+- RSV v1.7-2
 - SARS-CoV-2 v1.6.3-1
 - Zika 1.7.1-2
 
