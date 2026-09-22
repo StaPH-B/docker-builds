@@ -38,7 +38,12 @@ These model files are included:
 - SARS-CoV-2 v1.6.3-1
 - Zika 1.7.1-2
 
-The default location for VADR models is `/opt/vadr/vadr-models/`.
+The default location for VADR models (bash variable `$VADRMODELDIR`) is `/opt/vadr/vadr-models/`. Some model files are stored in their own subdirectories:
+```bash
+$ ls -d /opt/vadr/vadr-models*
+/opt/vadr/vadr-models         /opt/vadr/vadr-models-flavi  /opt/vadr/vadr-models-mpxv  /opt/vadr/vadr-models-sarscov2
+/opt/vadr/vadr-models-corona  /opt/vadr/vadr-models-flu    /opt/vadr/vadr-models-rsv   /opt/vadr/vadr-models-zika
+```
 
 A larger list of vadr models can be found in [VADR's documentation](https://github.com/ncbi/vadr/wiki/Available-VADR-model-files) for download and mounting/binding during runtime. An example for SARS-CoV-2 is below.
 
