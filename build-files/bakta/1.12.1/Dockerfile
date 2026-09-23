@@ -1,9 +1,9 @@
-FROM mambaorg/micromamba:2.9.0-ubuntu22.04 AS app
+FROM mambaorg/micromamba:2.5.0-ubuntu22.04 AS app
 
 ARG BAKTA_VER="1.12.1"
 
 # 'LABEL' instructions tag the image with metadata that might be important to the user
-LABEL base.image="mambaorg/micromamba:2.9.0-ubuntu22.04"
+LABEL base.image="mambaorg/micromamba:2.5.0-ubuntu22.04"
 LABEL dockerfile.version="1"
 LABEL software="Bakta"
 LABEL software.version="${BAKTA_VER}"
@@ -40,7 +40,7 @@ RUN bakta --help && \
     bakta --version
 
 RUN bakta_db list && \
-    bakta_db download --type light 
+    bakta_db download --type light
 
 RUN wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/195/815/GCF_000195815.1_ASM19581v1/GCF_000195815.1_ASM19581v1_genomic.fna.gz && \
     gunzip GCF_000195815.1_ASM19581v1_genomic.fna.gz && \
