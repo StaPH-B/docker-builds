@@ -1,6 +1,6 @@
 ARG FASTPLONG_VER="0.7.1"
 
-FROM ubuntu:jammy AS app
+FROM ubuntu:noble AS app
 
 # List all software versions are ARGs near the top of the dockerfile
 # 'ARG' sets environment variables during the build stage
@@ -8,7 +8,7 @@ FROM ubuntu:jammy AS app
 ARG FASTPLONG_VER
 
 # 'LABEL' instructions tag the image with metadata that might be important to the user
-LABEL base.image="ubuntu:jammy"
+LABEL base.image="ubuntu:noble"
 LABEL dockerfile.version="1"
 LABEL software="fastplong"
 LABEL software.version="${FASTPLONG_VER}"
