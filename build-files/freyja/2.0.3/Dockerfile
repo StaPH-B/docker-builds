@@ -61,7 +61,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     git && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-FROM base_test AS test1
+FROM base_test AS test
 
 # Grab test data from Freyja version 1.3.4
 RUN wget -O /data/Freyja_WWSC2.bam https://github.com/StaPH-B/docker-builds/blob/master/build-files/freyja/1.3.4/tests/Freyja_WWSC2.bam?raw=true && \
