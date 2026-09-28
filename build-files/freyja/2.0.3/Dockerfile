@@ -40,7 +40,7 @@ RUN micromamba create -n freyja-env -c conda-forge -c bioconda \
 RUN freyja update --pathogen ${FREYJA_PATHOGEN}
 
 # make directory editable
-RUN chmod -R 777 /opt/conda/envs/freyja-env/lib/python3.11/site-packages/freyja/data
+RUN chmod -R 777 /opt/conda/envs/freyja-env/lib/python*/site-packages/freyja/data
 
 # set working directory to /data
 WORKDIR /data
@@ -62,6 +62,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 FROM base_test AS test
+
+# Setting arg since args don't carry over from previous stage
+ARG FREYJA_PATHOGEN="SARS-CoV-2"
 
 # Grab test data from Freyja version 1.3.4
 RUN wget -O /data/Freyja_WWSC2.bam https://github.com/StaPH-B/docker-builds/blob/master/build-files/freyja/1.3.4/tests/Freyja_WWSC2.bam?raw=true && \
