@@ -1,8 +1,10 @@
-FROM mambaorg/micromamba:2.5.0-ubuntu22.04 AS app
+ARG FREYJA_SOFTWARE_VERSION="2.0.5"
+
+FROM mambaorg/micromamba:2.9.0-ubuntu22.04 AS app
 
 # Version arguments
 # ARG variables only persist during build time
-ARG FREYJA_SOFTWARE_VERSION="2.0.5"
+ARG FREYJA_SOFTWARE_VERSION
 ARG FREYJA_PATHOGEN="SARS-CoV-2"
 ARG PANDAS_SOFTWARE_VERSION="2.3.3"
 
@@ -11,7 +13,7 @@ USER root
 # set workdir to default for building; set to /data at the end
 WORKDIR /
 
-LABEL base.image="mambaorg/micromamba:2.5.0-ubuntu22.04"
+LABEL base.image="mambaorg/micromamba:2.9.0-ubuntu22.04"
 LABEL dockerfile.version="1"
 LABEL software="Freyja"
 LABEL software.version=${FREYJA_SOFTWARE_VERSION}
@@ -28,6 +30,12 @@ LABEL maintainer3.email="eriny@utah.gov"
 # set the environment, put new conda env in PATH by default
 ENV PATH="/opt/conda/envs/freyja-env/bin:/opt/conda/envs/env/bin:${PATH}" \
     LC_ALL=C.UTF-8
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    wget \
+    ca-certificates \
+    procps && \
+    apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 RUN micromamba create -n freyja-env -c conda-forge -c bioconda \
     freyja=${FREYJA_SOFTWARE_VERSION} \
@@ -49,38 +57,55 @@ WORKDIR /data
 CMD [ "freyja", "--help" ]
 
 # new base for testing
-FROM app AS base_test
+FROM app AS test
+
+ARG FREYJA_SOFTWARE_VERSION
 
 RUN freyja --help && freyja --version
 
-# install dependencies; cleanup apt garbage
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    wget \
-    ca-certificates \
-    procps \
-    git && \
-    apt-get autoclean && rm -rf /var/lib/apt/lists/*
-
-FROM base_test AS test
-
-# Setting arg since args don't carry over from previous stage
-ARG FREYJA_PATHOGEN="SARS-CoV-2"
+WORKDIR /test
 
 # Grab test data from Freyja version 1.3.4
-RUN wget -O /data/Freyja_WWSC2.bam https://github.com/StaPH-B/docker-builds/blob/master/build-files/freyja/1.3.4/tests/Freyja_WWSC2.bam?raw=true && \
-    wget -P /data https://raw.githubusercontent.com/StaPH-B/docker-builds/master/build-files/freyja/1.3.4/tests/Freyja_depths.tsv && \
-    wget -P /data https://raw.githubusercontent.com/StaPH-B/docker-builds/master/build-files/freyja/1.3.4/tests/Freyja_variants.tsv && \
-    wget -P /data https://raw.githubusercontent.com/StaPH-B/docker-builds/master/build-files/freyja/1.3.4/tests/nCoV-2019.reference.fasta
+RUN wget -O /test/Freyja_WWSC2.bam https://github.com/StaPH-B/docker-builds/blob/master/build-files/freyja/1.3.4/tests/Freyja_WWSC2.bam?raw=true && \
+    wget -P /test https://raw.githubusercontent.com/StaPH-B/docker-builds/master/build-files/freyja/1.3.4/tests/Freyja_depths.tsv && \
+    wget -P /test https://raw.githubusercontent.com/StaPH-B/docker-builds/master/build-files/freyja/1.3.4/tests/Freyja_variants.tsv && \
+    wget -P /test https://raw.githubusercontent.com/StaPH-B/docker-builds/master/build-files/freyja/1.3.4/tests/nCoV-2019.reference.fasta
 
 # Run Freyja
-RUN freyja variants /data/Freyja_WWSC2.bam --variants /data/test_variants.tsv --depths /data/test_depths.tsv --ref /data/nCoV-2019.reference.fasta && \
-    freyja demix /data/test_variants.tsv /data/test_depths.tsv --output /data/test_demix.tsv
+RUN freyja variants /test/Freyja_WWSC2.bam --variants /test/test_variants.tsv --depths /test/test_depths.tsv --ref /test/nCoV-2019.reference.fasta && \
+    freyja demix /test/test_variants.tsv /test/test_depths.tsv --output /test/test_demix.tsv
 
 # Check validity of outputs
-RUN head /data/test_variants.tsv && \
-    head /data/test_depths.tsv && \
-    head /data/test_demix.tsv && \
-    grep "Omicron" /data/test_demix.tsv
+RUN head /test/test_variants.tsv && \
+    head /test/test_depths.tsv && \
+    head /test/test_demix.tsv && \
+    grep "Omicron" /test/test_demix.tsv
+
+# Using Freyja test data
+
+WORKDIR /test_1
+
+RUN wget https://github.com/andersen-lab/Freyja/archive/refs/tags/v${FREYJA_SOFTWARE_VERSION}.tar.gz && \
+    tar -vxf v${FREYJA_SOFTWARE_VERSION}.tar.gz
+
+RUN freyja plot Freyja-${FREYJA_SOFTWARE_VERSION}/freyja/data/agg_outputs.tsv --output test_plot.pdf && \
+    ls test_plot.pdf
+
+RUN freyja dash Freyja-${FREYJA_SOFTWARE_VERSION}/freyja/data/test_sweep.tsv \
+                Freyja-${FREYJA_SOFTWARE_VERSION}/freyja/data/sweep_metadata.csv \
+                Freyja-${FREYJA_SOFTWARE_VERSION}/freyja/data/title.txt \
+                Freyja-${FREYJA_SOFTWARE_VERSION}/freyja/data/introContent.txt \
+                --lineageyml Freyja-${FREYJA_SOFTWARE_VERSION}/freyja/data/lineages.yml \
+                --output test_dash.html && \
+    ls test_dash.html
+
+
+RUN freyja get-lineage-def B.1.1.7 \
+                  --annot Freyja-${FREYJA_SOFTWARE_VERSION}/freyja/data/NC_045512_Hu-1.gff \
+                  --ref Freyja-${FREYJA_SOFTWARE_VERSION}/freyja/data/NC_045512_Hu-1.fasta \
+                  --output lineage_def.txt && \
+    head lineage_def.txt
+
 
 # print barcode version and freyja version
 RUN freyja demix --version --pathogen ${FREYJA_PATHOGEN}
@@ -90,36 +115,3 @@ RUN freyja update --help
 
 # list installed deps
 RUN micromamba list -n freyja-env
-
-# Checking to ensure plot works with pandas 2.3.3
-FROM base_test AS test2
-
-RUN wget -P /data https://raw.githubusercontent.com/andersen-lab/Freyja/refs/heads/main/freyja/data/agg_outputs.tsv
-
-RUN freyja plot /data/agg_outputs.tsv --output /data/test_plot.pdf
-
-# Checking to ensure dash works with pandas 2.3.
-FROM base_test AS test3
-
-RUN wget -P /data https://raw.githubusercontent.com/andersen-lab/Freyja/refs/heads/main/freyja/data/test_sweep.tsv && \
-    wget -P /data https://raw.githubusercontent.com/andersen-lab/Freyja/refs/heads/main/freyja/data/sweep_metadata.csv && \
-    wget -P /data https://raw.githubusercontent.com/andersen-lab/Freyja/refs/heads/main/freyja/data/title.txt && \
-    wget -P /data https://raw.githubusercontent.com/andersen-lab/Freyja/refs/heads/main/freyja/data/introContent.txt && \
-    wget -P /data https://raw.githubusercontent.com/andersen-lab/Freyja/refs/heads/main/freyja/data/lineages.yml
-
-RUN freyja dash /data/test_sweep.tsv \
-                /data/sweep_metadata.csv \
-                /data/title.txt \
-                /data/introContent.txt \
-                --lineageyml /data/lineages.yml \
-                --output test_dash.html
-
-FROM base_test AS test4
-
-RUN wget -P /data https://raw.githubusercontent.com/andersen-lab/Freyja/refs/heads/main/freyja/data/NC_045512_Hu-1.gff && \
-    wget -P /data https://raw.githubusercontent.com/andersen-lab/Freyja/refs/heads/main/freyja/data/NC_045512_Hu-1.fasta
-
-RUN freyja get-lineage-def B.1.1.7 \
-                  --annot /data/NC_045512_Hu-1.gff \
-                  --ref /data/NC_045512_Hu-1.fasta \
-                  --output lineage_def.txt
