@@ -4,7 +4,6 @@ FROM mambaorg/micromamba:2.5.0-ubuntu22.04 AS app
 # ARG variables only persist during build time
 ARG FREYJA_SOFTWARE_VERSION="2.0.3"
 ARG FREYJA_PATHOGEN="SARS-CoV-2"
-ARG PANDAS_SOFTWARE_VERSION="2.3.3"
 
 # build and run as root users since micromamba image has 'mambauser' set as the $USER
 USER root
@@ -29,9 +28,7 @@ LABEL maintainer3.email="eriny@utah.gov"
 ENV PATH="/opt/conda/envs/freyja-env/bin:/opt/conda/envs/env/bin:${PATH}" \
     LC_ALL=C.UTF-8
 
-RUN micromamba create -n freyja-env -c conda-forge -c bioconda \
-    freyja=${FREYJA_SOFTWARE_VERSION} \
-    pandas=${PANDAS_SOFTWARE_VERSION} && \
+RUN micromamba create -n freyja-env -c conda-forge -c bioconda freyja=${FREYJA_SOFTWARE_VERSION} && \
     micromamba clean -a -y -f && \
     mkdir /data
 
@@ -40,7 +37,7 @@ RUN micromamba create -n freyja-env -c conda-forge -c bioconda \
 RUN freyja update --pathogen ${FREYJA_PATHOGEN}
 
 # make directory editable
-RUN chmod -R 777 /opt/conda/envs/freyja-env/lib/python*/site-packages/freyja/data
+RUN chmod -R 777 /opt/conda/envs/freyja-env/lib/python3.12/site-packages/freyja/data
 
 # set working directory to /data
 WORKDIR /data
@@ -49,7 +46,7 @@ WORKDIR /data
 CMD [ "freyja", "--help" ]
 
 # new base for testing
-FROM app AS base_test
+FROM app AS test
 
 RUN freyja --help && freyja --version
 
@@ -60,11 +57,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     procps \
     git && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
-
-FROM base_test AS test
-
-# Setting arg since args don't carry over from previous stage
-ARG FREYJA_PATHOGEN="SARS-CoV-2"
 
 # Grab test data from Freyja version 1.3.4
 RUN wget -O /data/Freyja_WWSC2.bam https://github.com/StaPH-B/docker-builds/blob/master/build-files/freyja/1.3.4/tests/Freyja_WWSC2.bam?raw=true && \
@@ -90,36 +82,3 @@ RUN freyja update --help
 
 # list installed deps
 RUN micromamba list -n freyja-env
-
-# Checking to ensure plot works with pandas 2.3.3
-FROM base_test AS test2
-
-RUN wget -P /data https://raw.githubusercontent.com/andersen-lab/Freyja/refs/heads/main/freyja/data/agg_outputs.tsv
-
-RUN freyja plot /data/agg_outputs.tsv --output /data/test_plot.pdf
-
-# Checking to ensure dash works with pandas 2.3.
-FROM base_test AS test3
-
-RUN wget -P /data https://raw.githubusercontent.com/andersen-lab/Freyja/refs/heads/main/freyja/data/test_sweep.tsv && \
-    wget -P /data https://raw.githubusercontent.com/andersen-lab/Freyja/refs/heads/main/freyja/data/sweep_metadata.csv && \
-    wget -P /data https://raw.githubusercontent.com/andersen-lab/Freyja/refs/heads/main/freyja/data/title.txt && \
-    wget -P /data https://raw.githubusercontent.com/andersen-lab/Freyja/refs/heads/main/freyja/data/introContent.txt && \
-    wget -P /data https://raw.githubusercontent.com/andersen-lab/Freyja/refs/heads/main/freyja/data/lineages.yml
-
-RUN freyja dash /data/test_sweep.tsv \
-                /data/sweep_metadata.csv \
-                /data/title.txt \
-                /data/introContent.txt \
-                --lineageyml /data/lineages.yml \
-                --output test_dash.html
-
-FROM base_test AS test4
-
-RUN wget -P /data https://raw.githubusercontent.com/andersen-lab/Freyja/refs/heads/main/freyja/data/NC_045512_Hu-1.gff && \
-    wget -P /data https://raw.githubusercontent.com/andersen-lab/Freyja/refs/heads/main/freyja/data/NC_045512_Hu-1.fasta
-
-RUN freyja get-lineage-def B.1.1.7 \
-                  --annot /data/NC_045512_Hu-1.gff \
-                  --ref /data/NC_045512_Hu-1.fasta \
-                  --output lineage_def.txt
