@@ -1,7 +1,7 @@
 FROM ubuntu:noble AS app
 
 # for easy upgrade later. LC_ALL set for singularity compatibility
-ENV VADR_VERSION="1.7.1" \
+ENV VADR_VERSION="1.7.2" \
 LC_ALL=C \
 VADRINSTALLDIR=/opt/vadr
 
@@ -57,7 +57,7 @@ apt-get autoclean && rm -rf /var/lib/apt/lists/*
 # download vadr source code
 # decompress souce code
 # remove tarfile
-# sed to edit vadr-install.sh to pin up-to-date model versions (as of September 2026). Basically replicate changes made in VADR v1.7.2: https://github.com/NLM-DIR/vadr/pull/100/changes
+# sed to edit vadr-install.sh prevent any model files from being downloaded (similar to how we did it in /build-files/vadr/1.7-slim/Dockerfile). Deletes these lines: https://github.com/NLM-DIR/vadr/blob/vadr-1.7.1/vadr-install.sh#L317-L375
 # use vadr-install.sh script to install VADR into $VADRINSTALLDIR (set to /opt/vadr)
 # remove directory that's no longer needed
 # install perl module Mozilla::CA required in VADR v1.6.4
@@ -66,10 +66,7 @@ cd ${VADRINSTALLDIR} && \
 wget -q https://github.com/NLM-DIR/vadr/archive/refs/tags/vadr-${VADR_VERSION}.tar.gz && \
 tar -xzf vadr-${VADR_VERSION}.tar.gz -C vadr-${VADR_VERSION} --strip-components 1 && \
 rm vadr-${VADR_VERSION}.tar.gz && \
-sed -i 's|CALICIVERSION="1.2-1"|CALICIVERSION="1.7-2"|' vadr-${VADR_VERSION}/vadr-install.sh && \
-sed -i 's|SARSCOV2VERSION="1.3-2"|SARSCOV2VERSION="1.6.3-1"|' vadr-${VADR_VERSION}/vadr-install.sh && \
-sed -i 's|FLUVERSION="1.6.3"|FLUVERSION="1.7-2"|' vadr-${VADR_VERSION}/vadr-install.sh && \
-sed -i 's|RSVVERSION="1.5-2"|RSVVERSION="1.7-1"|' vadr-${VADR_VERSION}/vadr-install.sh && \
+sed -i '317,375d' vadr-${VADR_VERSION}/vadr-install.sh && \
 bash vadr-${VADR_VERSION}/vadr-install.sh linux && \
 rm -rf vadr-${VADR_VERSION}/ && \
 yes | cpan install Mozilla::CA
@@ -88,11 +85,13 @@ RUN v-annotate.pl -h &&  \
   v-build.pl -h && \
   fasta-trim-terminal-ambigs.pl -h || echo "prints to stderr for some reason"
 
-# copy calici model files into VADRMODELDIR to allow VADR tests to pass completely
-# run vadr tests
-RUN cp -nv ${VADRINSTALLDIR}/vadr-models-calici/* ${VADRMODELDIR} && \
-rm -rf ${VADRINSTALLDIR}/vadr-models-calici/ && \
-/opt/vadr/vadr/testfiles/do-install-tests-local.sh
+ARG VADR_SARSCOV2_MODELS_VERSION="1.6.3-1"
+
+# install sarscov2 models into test stage ONLY
+RUN wget -O vadr-models-sarscov2.tar.gz https://ftp.ncbi.nlm.nih.gov/pub/nawrocki/vadr-models/sarscov2/${VADR_SARSCOV2_MODELS_VERSION}/vadr-models-sarscov2-${VADR_SARSCOV2_MODELS_VERSION}.tar.gz && \
+tar -xf vadr-models-sarscov2.tar.gz && \
+cp -nv vadr-models-sarscov2-${VADR_SARSCOV2_MODELS_VERSION}/* ${VADRMODELDIR} && \
+rm -rf vadr-models-sarscov2*
 
 WORKDIR /test
 
@@ -107,7 +106,7 @@ fasta-trim-terminal-ambigs.pl \
   --maxlen 30000 \
   > SRR13957123.consensus.trimmed.fasta && \
 v-annotate.pl --noseqnamemax --glsearch -s -r --nomisc --mkey sarscov2 \
-  --mdir /opt/vadr/vadr-models-sarscov2 --lowsim5seq 6 --lowsim3seq 6 --alt_fail lowscore,insertnn,deletinn \
+  --lowsim5seq 6 --lowsim3seq 6 --alt_fail lowscore,insertnn,deletinn \
   "SRR13957123.consensus.trimmed.fasta" \
   "SRR13957123-vadr-outdir" && \
 ls SRR13957123-vadr-outdir
