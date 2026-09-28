@@ -1,4 +1,4 @@
-ARG POLYPOLISH_VER="0.6.1"
+ARG POLYPOLISH_VER="0.7.1"
 
 FROM rust:1.98.0 AS builder
 
