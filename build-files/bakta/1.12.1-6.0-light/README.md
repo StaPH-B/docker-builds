@@ -2,7 +2,6 @@
 
 Main tool: [bakta](https://github.com/oschwengers/bakta)
 
-
 <details>
 <summary>Additional tools installed via micromamba:</summary>
 
@@ -125,12 +124,11 @@ Basic information on how to use this tool:
 
 Additional information:
 
-WARNING : Image does not contain a database. 
-  
+This image contains the version 6.0 light database. It is located in /db/db-light and set as BAKTA_DB so that --db doesn't have to be used.
+
 Full documentation: https://github.com/oschwengers/bakta/
 
-## Example Usage
-
+Example Usage
 ```bash
-bakta sample.fasta --db <path to database> --threads 20 --prefix sample
+bakta sample.fasta --threads 20 --prefix sample 
 ```
