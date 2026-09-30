@@ -43,7 +43,7 @@ WORKDIR /data
 FROM staphb/sratoolkit AS data
 
 RUN fasterq-dump SRR31499991 &&\
-    gzip SRR31499991_1.fastq
+    gzip SRR31499991.fastq
 
 ## Test ##
 FROM app AS test 
