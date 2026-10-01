@@ -3,15 +3,19 @@ ARG TGSFILTER_VER=1.11
 ## Builder ##
 FROM ubuntu:noble AS builder
 
+# Note: 1.11 was not released. The latest commit hash is a47b30e
+ARG COMMIT_HASH="a47b30e0ead89e5c8f474a6f26fc8fdf483fefe5"
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
-    git \
+    wget \
+    unzip \
     ca-certificates && \
     apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-# Note: 1.11 was not released. The latest commit hash is a47b30e
-RUN git clone https://github.com/HuiyangYu/TGSFilter.git &&\
-    cd TGSFilter &&\
+RUN wget https://github.com/HuiyangYu/TGSFilter/archive/${COMMIT_HASH}.zip &&\
+    unzip ${COMMIT_HASH}.zip &&\
+    cd TGSFilter-${COMMIT_HASH} &&\
     sed -i 's/-fPIE/-no-pie/' Makefile &&\
     make &&\
     mv ./bin/tgsfilter /usr/local/bin/
