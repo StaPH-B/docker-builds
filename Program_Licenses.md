@@ -155,6 +155,7 @@ The licenses of the open-source software that is contained in these Docker image
 | NCBI table2asn | Public Domain | unknown |
 | NextDenovo | GNU GPLv3 | https://github.com/Nextomics/NextDenovo/blob/master/LICENSE |
 | nextPolish | GNU GPLv3 | https://github.com/Nextomics/NextPolish/blob/master/LICENSE |
+| nextPolish2 | non-standard | https://github.com/Nextomics/NextPolish2/blob/main/LICENSE |
 | ngmaster | GNU GPLv3 | https://github.com/MDU-PHL/ngmaster/blob/master/LICENSE |
 | ONTime | MIT | https://github.com/mbhall88/ontime/blob/main/LICENSE |
 | OrthoFinder | GNU GPLv3 | https://github.com/davidemms/OrthoFinder/blob/master/License.md |
