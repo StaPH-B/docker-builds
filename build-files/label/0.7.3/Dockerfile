@@ -31,7 +31,7 @@ RUN wget https://github.com/CDCgov/label/releases/download/v${LABEL_VER}/label-v
 ENV PATH="/flu-amd/:$PATH" \
     LC_ALL=C
 
-CMD ["label", "-h"]
+CMD ["LABEL", "-h"]
 
 WORKDIR /data
 
