@@ -29,7 +29,7 @@ jobs:
           version=0.2.0
           echo "version=$version" >> $GITHUB_OUTPUT 
           
-          file=build-files/emmtyper/0.2.0-2412/Dockerfile
+          file=build-files/emmtyper/0.2.0-2609/Dockerfile
           ls $file
           echo "file=$file" >> $GITHUB_OUTPUT
 
