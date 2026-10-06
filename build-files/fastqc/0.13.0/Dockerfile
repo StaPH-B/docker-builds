@@ -66,7 +66,7 @@ COPY --from=fastq /data/test*fastq.gz /test/
 
 # Run fastqc
 RUN echo "Running FastQC with the test fastq files"
-RUN fastqc test_1.fastq.gz test_2.fastq.gz
+RUN fastqc test_1.fastq.gz test_2.fastq.gz --outdir .
 
 # Check validity of outputs. The expected number of sequences should be '669558' in both the fastq files.
 # If the test output is different, something went wrong.
