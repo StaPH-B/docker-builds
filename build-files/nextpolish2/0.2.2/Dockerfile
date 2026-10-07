@@ -6,7 +6,7 @@ USER root
 
 WORKDIR /
 
-LABEL base.image="mambaorg/micromamba:2.3.0-ubuntu22.04"
+LABEL base.image="mambaorg/micromamba:2.9.0-ubuntu22.04"
 LABEL dockerfile.version="1"
 LABEL software="SOFTWARENAME"
 LABEL software.version="${NEXTPOLISH2_VER}"
