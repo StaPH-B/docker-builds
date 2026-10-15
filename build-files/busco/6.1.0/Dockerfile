@@ -97,9 +97,9 @@ RUN wget https://gitlab.com/ezlab/busco/-/archive/${BUSCO_VER}/busco-${BUSCO_VER
     tar -xvf busco-${BUSCO_VER}.tar.gz
 
 # run tests for bacteria and eukaryota
-RUN busco -i /test/busco-${BUSCO_VER}/test_data/bacteria/genome.fna -c 8 -m geno -f --out test_bacteria
-RUN busco -i /test/busco-${BUSCO_VER}/test_data/eukaryota/genome.fna -c 8 -m geno -f --out test_eukaryota
-RUN busco -i /test/busco-${BUSCO_VER}/test_data/eukaryota/genome.fna -l eukaryota_odb10 -c 8 -m geno -f --out test_eukaryota_augustus --augustus
+RUN busco -i /test/busco-${BUSCO_VER}/test_data/bacteria/genome.fna -c 4 -m geno -f --out test_bacteria
+RUN busco -i /test/busco-${BUSCO_VER}/test_data/eukaryota/genome.fna -c 4 -m geno -f --out test_eukaryota
+RUN busco -i /test/busco-${BUSCO_VER}/test_data/eukaryota/genome.fna -l eukaryota_odb10 -c 4 -m geno -f --out test_eukaryota_augustus --augustus
 
 # generate plot
 RUN mkdir my_summaries &&\
