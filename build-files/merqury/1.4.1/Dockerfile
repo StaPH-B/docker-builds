@@ -49,8 +49,8 @@ WORKDIR /data
 ## Test ##
 FROM app AS test 
 
-RUN wget https://gembox.cbcb.umd.edu/triobinning/athal_COL.fasta &&\
-    wget https://obj.umiacs.umd.edu/marbl_publications/merqury/athal/a_thal.k18.meryl.tar.gz &&\
+RUN wget -q https://gembox.cbcb.umd.edu/triobinning/athal_COL.fasta &&\
+    wget -q https://obj.umiacs.umd.edu/marbl_publications/merqury/athal/a_thal.k18.meryl.tar.gz &&\
     tar -xf a_thal.k18.meryl.tar.gz
 
 RUN merqury.sh F1.k18.meryl athal_COL.fasta test &&\
