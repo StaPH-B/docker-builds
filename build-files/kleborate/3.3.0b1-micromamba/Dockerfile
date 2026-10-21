@@ -60,8 +60,10 @@ ln -s /opt/conda/share/amrfinderplus/data/${AMRFINDER_DB_VER} /opt/conda/share/a
 RUN pip install --no-cache-dir kleborate==${KLEBORATE_VER} pandas && \
 pip uninstall mash -y
 
+RUN echo "1" | python /opt/conda/lib/python3.11/site-packages/kleborate/shared/setup_cgmlst.py
+
 # set working directory
-WORKDIR /data
+# WORKDIR /data
 
 CMD [ "kleborate", "--help" ]
 
@@ -71,7 +73,6 @@ WORKDIR /test
 
 # from https://kleborate.readthedocs.io/en/latest/Installation.html
 RUN wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/002/813/595/GCF_002813595.1_ASM281359v1/GCF_002813595.1_ASM281359v1_genomic.fna.gz && \
-echo "1" | python ../opt/conda/lib/python3.11/site-packages/kleborate/shared/setup_cgmlst.py && \
 kleborate -a GCF_002813595.1_ASM281359v1_genomic.fna.gz -o kleborate_test -p kpsc && \
 head kleborate_test/klebsiella_pneumo_complex_output.txt
 
