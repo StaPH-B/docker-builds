@@ -1,0 +1,193 @@
+name: Update Bot
+
+on:
+  issue_comment:
+    types: [created]
+  issues:
+    types: [opened, edited]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  process-update:
+    # Only run on issues (not PR comments) mentioning @update-bot
+    if: |
+      (github.event.issue.pull_request == null) &&
+      (
+        (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@update-bot')) ||
+        (github.event_name == 'issues' && contains(github.event.issue.body, '@update-bot'))
+      )
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@main
+        with:
+          fetch-depth: 0
+
+      - name: Process Update Request
+        env:
+          EVENT_BODY: ${{ github.event_name == 'issue_comment' && github.event.comment.body || github.event.issue.body }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          # Helper to post comments back to the issue
+          comment_on_issue() {
+            if [ -n "${ISSUE_NUMBER:-}" ]; then
+              gh issue comment "$ISSUE_NUMBER" --body "$1" || true
+            fi
+          }
+
+          # 1. Extract command line starting with @update-bot
+          cmd_line=$(echo "$EVENT_BODY" | grep -m1 '@update-bot' | sed 's/.*@update-bot/@update-bot/' | tr -d '`' || true)
+
+          if [ -z "\$cmd_line" ]; then
+            echo "No @update-bot command detected."
+            exit 0
+          fi
+
+          # 2. Tokenize command safely without eval (avoids shell injection)
+          read -ra tokens <<< "\$cmd_line"
+
+          if [ "\${#tokens[@]}" -lt 2 ]; then
+            comment_on_issue "**@update-bot error:** Incomplete command. Syntax: \`@update-bot <tool> prior=<old version> new=<new version> <ARG>=<val>\`"
+            exit 1
+          fi
+
+          tool="\${tokens[1]}"
+          prior=""
+          new=""
+          declare -A extra_args
+
+          strip_quotes() {
+            local val="\$1"
+            val="\${val%\"}"
+            val="\${val#\"}"
+            val="\${val%\'}"
+            val="\${val#\'}"
+            echo "\$val"
+          }
+
+          # 3. Parse versions and ARG key-value pairs
+          for token in "\${tokens[@]:2}"; do
+            case "\$token" in
+              prior=*)
+                prior=$(strip_quotes "${token#prior=}")
+                ;;
+              new=*)
+                new=$(strip_quotes "${token#new=}")
+                ;;
+              *=*)
+                key="\${token%%=*}"
+                raw_val="\${token#*=}"
+                extra_args["\$key"]=$(strip_quotes "$raw_val")
+                ;;
+              *)
+                if [ -z "\$prior" ]; then
+                  prior=$(strip_quotes "$token")
+                elif [ -z "\$new" ]; then
+                  new=$(strip_quotes "$token")
+                fi
+                ;;
+            esac
+          done
+
+          if [ -z "$prior" ] \vert{}\vert{} [ -z "$new" ]; then
+            comment_on_issue "**@update-bot error:** Both \`prior\` and \`new\` versions must be defined."
+            exit 1
+          fi
+
+          echo "Target Tool: \$tool"
+          echo "Prior Version: \$prior"
+          echo "New Version: \$new"
+
+          src_dir="build-files/$tool/$prior"
+          dst_dir="build-files/$tool/$new"
+
+          # 4. Validate paths
+          if [ ! -d "build-files/\$tool" ]; then
+            comment_on_issue "**@update-bot error:** Tool directory \`build-files/$tool\` not found."
+            exit 1
+          fi
+
+          if [ ! -d "\$src_dir" ]; then
+            available=\$(ls -1 "build-files/$tool" \vert{} tr '\n' ', ' \vert{} sed 's/,$//')
+            comment_on_issue "**@update-bot error:** Prior directory \`$src_dir\` does not exist. Available versions: \$available"
+            exit 1
+          fi
+
+          # 5. Copy files to the new directory (prior directory remains untouched)
+          mkdir -p "\$dst_dir"
+          cp -r "$src_dir"/* "$dst_dir"/
+          echo "Copied files from $src_dir to$dst_dir"
+
+          dockerfile="\$dst_dir/Dockerfile"
+          if [ ! -f "\$dockerfile" ]; then
+            comment_on_issue "**@update-bot error:** No \`Dockerfile\` found in \`$dst_dir\`."
+            exit 1
+          fi
+
+          # 6. Update ARGs in the new Dockerfile using sed
+          args_summary=""
+          for key in "\${!extra_args[@]}"; do
+            val="${extra_args[$key]}"
+            # Matches ARG KEY=... while preserving optional comments
+            sed -i -E "s|^([[:space:]]*ARG[[:space:]]+${key}[[:space:]]*=[[:space:]]*)([\"']?)[^\"'#]*([\"']?)([[:space:]]*(#.*)?)$|\1\"${val}\"\4\vert{}" "$dockerfile"
+            args_summary="\${args_summary}- \`${key}=\"${val}\"\`"\$'\n'
+          done
+
+          # Optional: update hardcoded LABEL software.version if set to prior
+          sed -i -E "s|^([[:space:]]*LABEL[[:space:]]+software\.version[[:space:]]*=[[:space:]]*)([\"']?)${prior}([\"']?)([[:space:]]*(#.*)?)$|\1\"${new}\"\4\vert{}" "$dockerfile"
+
+          # 7. Git commit and push
+          branch_name="update-$tool-$new"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git checkout -B "\$branch_name"
+          git add "\$dst_dir"
+
+          if git diff --staged --quiet; then
+            comment_on_issue "**@update-bot:** No changes detected for \`$dst_dir\`. Pull request was not created."
+            exit 0
+          fi
+
+          git commit -m "feat(\$tool): update $tool to $new"
+          git push origin "\$branch_name" --force
+
+          # 8. Create PR via GitHub CLI
+          pr_body=\$(cat << PR_EOF
+          ### Automated Container Update
+
+          Triggered by @update-bot in #\${ISSUE_NUMBER}.
+
+          - **Tool:** \`${tool}\`
+          - **Prior Version:** \`${prior}\`
+          - **New Version:** \`${new}\`
+          - **Source:** \`build-files/${tool}/${prior}/\`
+          - **Destination:** \`build-files/${tool}/${new}/\`
+          - **Updated ARGs:**
+          \${args_summary:-"- None specified"}
+
+          Closes #\${ISSUE_NUMBER}
+          PR_EOF
+          )
+
+          existing_pr=\$(gh pr list --head "\$branch_name" --json url --jq '.[0].url' || true)
+
+          if [ -n "\$existing_pr" ]; then
+            comment_on_issue "**@update-bot** updated branch \`$branch_name\` for existing PR: \$existing_pr"
+          else
+            new_pr=\$(gh pr create \
+              --base "\$DEFAULT_BRANCH" \
+              --head "\$branch_name" \
+              --title "Update $tool to$new" \
+              --body "\$pr_body")
+            comment_on_issue "**@update-bot** created pull request: \$new_pr"
+          fi
