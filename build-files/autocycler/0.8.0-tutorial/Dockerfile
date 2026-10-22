@@ -2,7 +2,8 @@ FROM mambaorg/micromamba:2.9.0-ubuntu24.04 AS app
 
 ARG AUTOCYCLER_VER="0.8.0"
 
-USER rootCollapse annotationCheck warning on line R5Check warning: Last USER should not be rootPR Docker Validation / lint (autocycler, 0.8.0-tutorial, build-files/autocycler/0.8.0-tutorial/Dockerfile, build-files/a... / lintView details
+USER root
+
 WORKDIR /
 
 LABEL base.image="mambaorg/micromamba:2.9.0-ubuntu24.04"
