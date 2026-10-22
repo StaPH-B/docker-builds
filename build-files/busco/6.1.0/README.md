@@ -3,7 +3,7 @@
 Main tool : [BUSCO](https://gitlab.com/ezlab/busco/)
 
 Additional tools:
-- BBTools 39.23
+- BBTools 40.05
 - HMMER 3.3
 - Prodigal 2.6.3
 - BLAST+ 2.16.0
