@@ -32,7 +32,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     && rm -rf /var/lib/apt/lists/* && apt-get autoclean
 
 # BioPython (python3-biopython installs 1.73. It causes python error in this version)
-RUN pip install --no-cache-dir biopython
+RUN pip install --no-cache-dir --break-system-packages biopython
 
 # bbtools
 RUN wget --progress=dot:giga https://sourceforge.net/projects/bbmap/files/BBMap_${BBMAP_VER}.tar.gz &&\
