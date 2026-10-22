@@ -13,7 +13,7 @@ LABEL license="https://github.com/oschwengers/bakta/blob/main/LICENSE"
 LABEL maintainer="Erin Young"
 LABEL maintainer.email="eriny@utah.gov"
 
-USER rootCollapse annotationCheck warning on line R16Check warning: Last USER should not be rootPR Docker Validation / lint (bakta, 1.12.2, build-files/bakta/1.12.2/Dockerfile, build-files/bakta/1.12.2) / lintView details
+USER root
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
