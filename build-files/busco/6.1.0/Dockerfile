@@ -3,7 +3,7 @@ ARG BUSCO_VER="6.1.0"
 FROM ubuntu:noble AS app
 
 ARG BUSCO_VER
-ARG BBMAP_VER="39.97"
+ARG BBMAP_VER="40.05"
 ARG BLAST_VER="2.17.0"
 ARG MINIPROT_VER="0.18"
 ARG SEPP_VER="4.5.5"
@@ -43,35 +43,35 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 # RUN pip install --no-cache-dir biopython
 
 # blast
-RUN wget https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/${BLAST_VER}/ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz &&\
+RUN wget --progress=dot:giga https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/${BLAST_VER}/ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz &&\
     tar -xvf ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz &&\
     rm ncbi-blast-${BLAST_VER}+-x64-linux.tar.gz
 
 # sepp 
-RUN wget https://github.com/smirarab/sepp/archive/refs/tags/v${SEPP_VER}.tar.gz &&\
+RUN wget --progress=dot:giga https://github.com/smirarab/sepp/archive/refs/tags/v${SEPP_VER}.tar.gz &&\
     tar -xvf v${SEPP_VER}.tar.gz && rm v${SEPP_VER}.tar.gz &&\
     cd sepp-${SEPP_VER} &&\
     python setup.py config -c && python setup.py install
 
 # bbtools
-RUN wget https://sourceforge.net/projects/bbmap/files/BBMap_${BBMAP_VER}.tar.gz &&\
+RUN wget --progress=dot:giga https://sourceforge.net/projects/bbmap/files/BBMap_${BBMAP_VER}.tar.gz &&\
     tar -xvf BBMap_${BBMAP_VER}.tar.gz &&\
     rm BBMap_${BBMAP_VER}.tar.gz &&\    
     mv /bbmap/* /usr/local/bin/
 
 # metaeuk
-RUN wget https://github.com/soedinglab/metaeuk/releases/download/${METAEUK_VER}/metaeuk-linux-sse41.tar.gz &&\
+RUN wget --progress=dot:giga https://github.com/soedinglab/metaeuk/releases/download/${METAEUK_VER}/metaeuk-linux-sse41.tar.gz &&\
     tar -xvf metaeuk-linux-sse41.tar.gz &&\
     rm metaeuk-linux-sse41.tar.gz &&\
     mv  /metaeuk/bin/* /usr/local/bin/
 
 # miniprot
-RUN wget https://github.com/lh3/miniprot/releases/download/v${MINIPROT_VER}/miniprot-${MINIPROT_VER}_x64-linux.tar.bz2 &&\
+RUN wget --progress=dot:giga https://github.com/lh3/miniprot/releases/download/v${MINIPROT_VER}/miniprot-${MINIPROT_VER}_x64-linux.tar.bz2 &&\
     tar -C /usr/local/bin/ --strip-components=1 --no-same-owner -xvf miniprot-${MINIPROT_VER}_x64-linux.tar.bz2 miniprot-${MINIPROT_VER}_x64-linux/miniprot &&\
     rm miniprot-${MINIPROT_VER}_x64-linux.tar.bz2
 
 # and finally busco
-RUN wget https://gitlab.com/ezlab/busco/-/archive/${BUSCO_VER}/busco-${BUSCO_VER}.tar.gz &&\
+RUN wget --progress=dot:giga https://gitlab.com/ezlab/busco/-/archive/${BUSCO_VER}/busco-${BUSCO_VER}.tar.gz &&\
     pip install --no-cache-dir --break-system-packages busco-${BUSCO_VER}.tar.gz && \
     rm busco-${BUSCO_VER}.tar.gz
 
@@ -93,7 +93,7 @@ RUN busco -h
 # getting test files
 WORKDIR /test
 
-RUN wget https://gitlab.com/ezlab/busco/-/archive/${BUSCO_VER}/busco-${BUSCO_VER}.tar.gz && \
+RUN wget --progress=dot:giga https://gitlab.com/ezlab/busco/-/archive/${BUSCO_VER}/busco-${BUSCO_VER}.tar.gz && \
     tar -xvf busco-${BUSCO_VER}.tar.gz
 
 # run tests for bacteria and eukaryota
@@ -109,7 +109,7 @@ RUN mkdir my_summaries &&\
 # using actual data (Salmonella genome)
 WORKDIR /test_2
 
-RUN wget -q https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/010/941/835/GCA_010941835.1_PDT000052640.3/GCA_010941835.1_PDT000052640.3_genomic.fna.gz  && \
+RUN wget --progress=dot:giga https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/010/941/835/GCA_010941835.1_PDT000052640.3/GCA_010941835.1_PDT000052640.3_genomic.fna.gz  && \
     gzip -d GCA_010941835.1_PDT000052640.3_genomic.fna.gz && \
     busco -m genome -i GCA_010941835.1_PDT000052640.3_genomic.fna -o busco_GCA_010941835.1 --cpu 4 --auto-lineage-prok && \
     head busco_GCA_010941835.1/short_summary*.txt
