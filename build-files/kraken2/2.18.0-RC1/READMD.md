@@ -1,4 +1,4 @@
-# Kraken2 2.1.5 container
+# Kraken2 container
 
 Main tool : [Kraken2](https://github.com/DerrickWood/kraken2/)
 
