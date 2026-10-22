@@ -69,7 +69,7 @@ RUN busco -h
 # offline test
 RUN wget --progress=dot:giga https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/010/941/835/GCA_010941835.1_PDT000052640.3/GCA_010941835.1_PDT000052640.3_genomic.fna.gz  && \
     gzip -d GCA_010941835.1_PDT000052640.3_genomic.fna.gz && \
-    busco --offline -l /busco_downloads/lineages/bacteria_odb12 -m genome -i GCA_010941835.1_PDT000052640.3_genomic.fna -o offline --cpu 4 && \
+    busco --offline -l /busco_downloads/lineages/bacteria_odb12.2 -m genome -i GCA_010941835.1_PDT000052640.3_genomic.fna -o offline --cpu 4 && \
     head offline/short_summary*.txt
 
 # auto-lineage-prok
