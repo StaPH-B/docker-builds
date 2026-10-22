@@ -18,7 +18,7 @@ Note: Auspice is a different tool.
 - mafft 7.505-1
 - raxml 8.2.13+dfsg-2+b1
 - vcftools 0.1.16-3+b1
-- seqkit 2.13.0
+- seqkit 2.14.0
 
 <details>
 
