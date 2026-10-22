@@ -19,8 +19,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
     ca-certificates \
     procps \
-    ncbi-blast+ \
-    && rm -rf /var/lib/apt/lists/*
+    ncbi-blast+ && \
+    apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
 # copy precompiled ispcr from staphb image    
 COPY --from=ispcr /usr/local/bin/isPcr /usr/local/bin/isPcr
