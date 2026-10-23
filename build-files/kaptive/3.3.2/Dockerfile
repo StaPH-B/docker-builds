@@ -60,6 +60,7 @@ RUN \
 # Kaptive has updated how they add databases
 # https://github.com/aldertzomer/vibrio_parahaemolyticus_genomoserotyping contains some Vibro schemes, but not the required metadata files
 # https://github.com/aldertzomer/vibrio_parahaemolyticus_genomoserotyping/pull/6 can be used to add these Vibrio schemes
+# NOTE: these commands below rely upon the presence of the add-db-metadata branch in the tombdstanton/vibrio_parahaemolyticus_genomoserotyping repo; if this branch is not available, the commands will fail. May need to change the strategy in the future
 RUN kaptive db add VibrioPara_Kaptivedb_K tomdstanton vibrio_parahaemolyticus_genomoserotyping -b add-db-metadata && \
     kaptive db add VibrioPara_Kaptivedb_O tomdstanton vibrio_parahaemolyticus_genomoserotyping -b add-db-metadata && \
     kaptive db ls
