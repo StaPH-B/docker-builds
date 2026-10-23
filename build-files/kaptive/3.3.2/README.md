@@ -15,9 +15,9 @@ Package    Version
 ---------- -------
 gb-io      0.4.0
 kaptive    3.3.2
-llvmlite   0.49.0
-numba      0.67.0
-numpy      2.5.3
+llvmlite   0.50.0
+numba      0.68.0
+numpy      2.5.4
 pip        24.0
 rammappy   0.1.3
 setuptools 68.1.2
