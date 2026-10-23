@@ -134,6 +134,7 @@ The licenses of the open-source software that is contained in these Docker image
 | MaSuRCA | GNU GPLv3 | https://github.com/alekseyzimin/masurca/blob/master/LICENSE.txt
 | Medaka | Mozilla Public License 2.0 | https://github.com/nanoporetech/medaka/blob/master/LICENSE.md |
 | meningotype | GNU General Public License v3.0 | https://github.com/MDU-PHL/meningotype/blob/master/LICENSE |
+| merqury | Public Domain | https://github.com/marbl/merqury/blob/master/LICENSE |
 | metaMDBG | MIT | https://github.com/GaetanBenoitDev/metaMDBG/blob/main/LICENSE.md |
 | Metaphlan | MIT | https://github.com/biobakery/MetaPhlAn/blob/master/license.txt |
 | MIDAS | GNU GPLv3 |https://github.com/snayfach/MIDAS/blob/master/LICENSE |
@@ -155,6 +156,7 @@ The licenses of the open-source software that is contained in these Docker image
 | NCBI table2asn | Public Domain | unknown |
 | NextDenovo | GNU GPLv3 | https://github.com/Nextomics/NextDenovo/blob/master/LICENSE |
 | nextPolish | GNU GPLv3 | https://github.com/Nextomics/NextPolish/blob/master/LICENSE |
+| nextPolish2 | non-standard | https://github.com/Nextomics/NextPolish2/blob/main/LICENSE |
 | ngmaster | GNU GPLv3 | https://github.com/MDU-PHL/ngmaster/blob/master/LICENSE |
 | ONTime | MIT | https://github.com/mbhall88/ontime/blob/main/LICENSE |
 | OrthoFinder | GNU GPLv3 | https://github.com/davidemms/OrthoFinder/blob/master/License.md |
@@ -240,6 +242,7 @@ The licenses of the open-source software that is contained in these Docker image
 | stxtyper | Public Domain | https://github.com/ncbi/stxtyper/blob/main/LICENSE |
 | sylph | MIT | https://github.com/bluenote-1577/sylph/blob/main/LICENSE |
 | TBProfiler | GNU GPLv3 | https://github.com/jodyphelan/TBProfiler/blob/master/LICENSE |
+| TGSFilter | GNU GPLv3 | https://github.com/HuiyangYu/TGSFilter/blob/main/LICENSE |
 | TipToft | GNU GPLv3 | https://github.com/andrewjpage/tiptoft/blob/master/LICENSE |
 | Tostadas | Apache-2.0 license | https://github.com/CDCgov/tostadas/blob/master/LICENSE |
 | toulligqc | GNU GPLv3 | https://github.com/GenomiqueENS/toulligQC/blob/master/LICENSE.txt |
