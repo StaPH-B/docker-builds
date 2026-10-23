@@ -26,7 +26,9 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
     g++ \
     rsync \
     cpanminus \
-    ncbi-blast+ && \
+    ncbi-blast+ \
+    python3 \
+    python-is-python3 && \
     rm -rf /var/lib/apt/lists/* && apt-get autoclean
 
 # perl module required for kraken2-build
@@ -55,6 +57,8 @@ FROM app AS test
 RUN kraken2 --help && \
     kraken2-build --help && \
     kraken2 --version && \
+    k2 --help && \
+    k2 classify --help && \
     blastn -version && \
     dustmasker -version && \
     segmasker -version
@@ -75,6 +79,20 @@ RUN wget --progress=dot:giga https://github.com/StaPH-B/docker-builds/blob/83ee3
     echo "printing contents of kraken2_report.txt" && \
     echo "----------------------------------------" && \
     cat kraken2_report.txt
+
+WORKDIR /test1
+
+# test k2 wrapper script classification
+RUN k2 classify \
+    --paired \
+    --db /kraken2-db \
+    --classified-out k2_cseqs#.fq \
+    --report k2_report.txt \
+    --output k2_classifiedreads.txt \
+    /test/SRR13957123_1.fastq.gz /test/SRR13957123_2.fastq.gz && \
+    echo "printing contents of k2_report.txt" && \
+    echo "----------------------------------------" && \
+    cat k2_report.txt
 
 ##### NO DATABASE INCLUDED WITH THIS DOCKER IMAGE #####
 ## User will need to mount a directory from their host machine that contains kraken2 database files 
