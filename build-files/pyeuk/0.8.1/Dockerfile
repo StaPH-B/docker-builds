@@ -34,7 +34,7 @@ WORKDIR /data
 ## Test ##
 FROM app AS test 
 
-RUN apt-get update && apt-get install -y --no-install-recommends git &&
+RUN apt-get update && apt-get install -y --no-install-recommends git
 
 RUN pyeuk fetch-test-data &&\
     cyclospora-typing run-all -s test_data/specimens -o ./outbreak_output &&\
