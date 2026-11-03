@@ -22,13 +22,13 @@ jobs:
 
       - name: Parse and Compare
         id: diff_gen
+        env:
+          COMMENT_BODY: ${{ github.event.comment.body }}
         run: |
-          COMMENT_BODY="${{ github.event.comment.body }}"
-          
           # 1. Extract everything after the bot handle
           # 2. Strip "list diff" if it happens to be there
           # 3. Pull the next three words as IMAGE, OLD, NEW
-          PAYLOAD=$(echo "$COMMENT_BODY" | sed -E 's/.*@staphb-dockerbuilds-diff //I')
+          PAYLOAD=$(printf '%s\n' "$COMMENT_BODY" | sed -E 's/.*@staphb-dockerbuilds-diff //I')
           CLEAN_PARAMS=$(echo "$PAYLOAD" | sed -E 's/^list diff //I')
           
           IMAGE=$(echo "$CLEAN_PARAMS" | awk '{print $1}')
