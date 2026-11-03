@@ -1,85 +1,186 @@
+
 name: Dockerfile Diff Bot
 
 on:
   issue_comment:
     types: [created]
 
+# Minimum permissions needed:
+# - contents: read to inspect Dockerfiles
+# - issues: write to post PR comments
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   compare-dockerfiles:
-    # Trigger whenever the bot handle is mentioned in a PR
+    # Only run for pull request comments mentioning @docker-diff
     if: |
-      contains(github.event.comment.body, '@staphb-dockerbuilds-diff')
+      github.event.issue.pull_request &&
+      contains(github.event.comment.body, '@docker-diff')
+
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
-      contents: read
 
     steps:
-      - name: Checkout Pull Request Code
+      - name: Checkout Pull Request
         uses: actions/checkout@main
         with:
           ref: refs/pull/${{ github.event.issue.number }}/head
+          persist-credentials: false
 
-      - name: Parse and Compare
+      - name: Parse Command and Generate Diff
         id: diff_gen
         env:
           COMMENT_BODY: ${{ github.event.comment.body }}
+        shell: bash
         run: |
-          # 1. Extract everything after the bot handle
-          # 2. Strip "list diff" if it happens to be there
-          # 3. Pull the next three words as IMAGE, OLD, NEW
-          PAYLOAD=$(printf '%s\n' "$COMMENT_BODY" | sed -E 's/.*@staphb-dockerbuilds-diff //I')
-          CLEAN_PARAMS=$(echo "$PAYLOAD" | sed -E 's/^list diff //I')
-          
-          IMAGE=$(echo "$CLEAN_PARAMS" | awk '{print $1}')
-          OLD_VER=$(echo "$CLEAN_PARAMS" | awk '{print $2}')
-          NEW_VER=$(echo "$CLEAN_PARAMS" | awk '{print $3}')
-          
-          FILE_OLD="build-files/$IMAGE/$OLD_VER/Dockerfile"
-          FILE_NEW="build-files/$IMAGE/$NEW_VER/Dockerfile"
+          set -euo pipefail
 
-          echo "image_name=$IMAGE" >> $GITHUB_OUTPUT
-          echo "old_ver=$OLD_VER" >> $GITHUB_OUTPUT
-          echo "new_ver=$NEW_VER" >> $GITHUB_OUTPUT
+          ROOT="$(pwd -P)"
+          MESSAGE=""
 
-          # Validation
-          if [[ -z "$IMAGE" || -z "$OLD_VER" || -z "$NEW_VER" ]]; then
-            echo "error_msg=Format error. Expected: @staphb-dockerbuilds-diff <image> <old> <new>" >> $GITHUB_OUTPUT
-            exit 0
-          fi
+          USAGE="Usage: @docker-diff IMAGE OLD NEW
+          Example: @docker-diff kraken2 2.1.3 2.1.4"
 
-          if [[ ! -f "$FILE_OLD" ]]; then
-            echo "error_msg=File not found: $FILE_OLD" >> $GITHUB_OUTPUT
-            exit 0
-          fi
-          if [[ ! -f "$FILE_NEW" ]]; then
-            echo "error_msg=File not found: $FILE_NEW" >> $GITHUB_OUTPUT
-            exit 0
-          fi
+          # Parse the command from its own line.
+          # The comment is an environment variable, never shell code.
+          IMAGE=""
+          OLD_VER=""
+          NEW_VER=""
+          FOUND_COMMAND=false
 
-          # Generate Diff
-          DIFF_RESULT=$(diff -u "$FILE_OLD" "$FILE_NEW" || true)
-          
-          if [ -z "$DIFF_RESULT" ]; then
-            echo "diff_output=No changes found between these versions." >> $GITHUB_OUTPUT
+          while IFS= read -r line || [[ -n "$line" ]]; do
+            if [[ "$line" =~ ^[[:space:]]*@docker-diff[[:space:]]+([^[:space:]]+)[[:space:]]+([^[:space:]]+)[[:space:]]+([^[:space:]]+)[[:space:]]*$ ]]; then
+              IMAGE="${BASH_REMATCH[1]}"
+              OLD_VER="${BASH_REMATCH[2]}"
+              NEW_VER="${BASH_REMATCH[3]}"
+              FOUND_COMMAND=true
+              break
+            fi
+          done <<< "$COMMENT_BODY"
+
+          if [[ "$FOUND_COMMAND" != true ]]; then
+            MESSAGE="Invalid Dockerfile diff command.
+
+          $USAGE"
+
           else
-            {
-              echo 'diff_output<<EOF'
-              echo "$DIFF_RESULT"
-              echo 'EOF'
-            } >> "$GITHUB_OUTPUT"
+            # Restrict values to safe path components.
+            VALID_PATTERN='^[A-Za-z0-9][A-Za-z0-9._+-]{0,63}$'
+
+            if [[ ! "$IMAGE" =~ $VALID_PATTERN ||
+                  ! "$OLD_VER" =~ $VALID_PATTERN ||
+                  ! "$NEW_VER" =~ $VALID_PATTERN ]]; then
+
+              MESSAGE="Invalid image or version name.
+
+          $USAGE"
+
+            else
+              OLD_FILE="$ROOT/build-files/$IMAGE/$OLD_VER/Dockerfile"
+              NEW_FILE="$ROOT/build-files/$IMAGE/$NEW_VER/Dockerfile"
+
+              # Resolve paths and reject symlinks escaping the repository.
+              if ! RESOLVED_OLD=$(realpath -e -- "$OLD_FILE" 2>/dev/null) ||
+                 ! RESOLVED_NEW=$(realpath -e -- "$NEW_FILE" 2>/dev/null); then
+
+                MESSAGE="Dockerfile not found.
+
+          Expected:
+          - build-files/$IMAGE/$OLD_VER/Dockerfile
+          - build-files/$IMAGE/$NEW_VER/Dockerfile"
+
+              elif [[ "$RESOLVED_OLD" != "$ROOT/"* ||
+                      "$RESOLVED_NEW" != "$ROOT/"* ]]; then
+
+                MESSAGE="Invalid Dockerfile path. Symlinks outside the repository are not allowed."
+
+              elif [[ ! -f "$RESOLVED_OLD" ||
+                      ! -f "$RESOLVED_NEW" ]]; then
+
+                MESSAGE="One or both Dockerfiles are not regular files."
+
+              else
+                # Generate unified diff.
+                DIFF_FILE="$RUNNER_TEMP/dockerfile.diff"
+
+                if diff -u \
+                  --label "$IMAGE/$OLD_VER/Dockerfile" \
+                  --label "$IMAGE/$NEW_VER/Dockerfile" \
+                  "$RESOLVED_OLD" \
+                  "$RESOLVED_NEW" > "$DIFF_FILE"; then
+
+                  MESSAGE="### Dockerfile Diff: $IMAGE
+
+          No changes found between $OLD_VER and $NEW_VER."
+
+                else
+                  DIFF_STATUS=$?
+
+                  if [[ "$DIFF_STATUS" -ne 1 ]]; then
+                    MESSAGE="Unable to compare Dockerfiles. Diff exited with status $DIFF_STATUS."
+
+                  elif [[ ! -s "$DIFF_FILE" ]]; then
+                    MESSAGE="### Dockerfile Diff: $IMAGE
+
+          No changes found between $OLD_VER and $NEW_VER."
+
+                  else
+                    DIFF_SIZE=$(wc -c < "$DIFF_FILE")
+
+                    if (( DIFF_SIZE > 45000 )); then
+                      MESSAGE="### Dockerfile Diff: $IMAGE
+
+          Comparing: $OLD_VER -> $NEW_VER
+
+          The diff is too large to post as a PR comment ($DIFF_SIZE bytes)."
+
+                    else
+                      # Generate a Markdown fence longer than any
+                      # backtick sequence appearing in the diff.
+                      LONGEST=$(awk '{
+                        while (match($0, /`+/)) {
+                          if (RLENGTH > max) max = RLENGTH
+                          $0 = substr($0, RSTART + RLENGTH)
+                        }
+                      } END { print max+0 }' "$DIFF_FILE")
+
+                      FENCE_LENGTH=$((LONGEST + 1))
+                      if (( FENCE_LENGTH < 3 )); then
+                        FENCE_LENGTH=3
+                      fi
+
+                      FENCE=$(printf '%*s' "$FENCE_LENGTH" '' | tr ' ' '`')
+                      DIFF_RESULT=$(cat "$DIFF_FILE")
+
+                      MESSAGE="### Dockerfile Diff: $IMAGE
+
+          Comparing: $OLD_VER -> $NEW_VER
+
+          ${FENCE}diff
+          ${DIFF_RESULT}
+          ${FENCE}"
+                    fi
+                  fi
+                fi
+              fi
+            fi
           fi
 
-      - name: Post Comment to PR
-        uses: peter-evans/create-or-update-comment@main
-        with:
-          issue-number: ${{ github.event.issue.number }}
-          body: |
-            ### Dockerfile Diff: ${{ steps.diff_gen.outputs.image_name }}
-            Comparing: ${{ steps.diff_gen.outputs.old_ver }} -> ${{ steps.diff_gen.outputs.new_ver }}
-            
-            ${{ steps.diff_gen.outputs.error_msg }}
-            
-            ```diff
-            ${{ steps.diff_gen.outputs.diff_output }}
-            ```
+          # Safely encode the comment as JSON.
+          # jq is available on GitHub-hosted Ubuntu runners.
+          jq -n --arg body "$MESSAGE" '{body: $body}' \
+            > "$RUNNER_TEMP/comment.json"
+
+      - name: Post Comment to Pull Request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.issue.number }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          gh api \
+            --method POST \
+            "repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments" \
+            --input "$RUNNER_TEMP/comment.json"
