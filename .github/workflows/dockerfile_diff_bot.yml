@@ -1,4 +1,3 @@
-
 name: Dockerfile Diff Bot
 
 on:
@@ -14,10 +13,11 @@ permissions:
 
 jobs:
   compare-dockerfiles:
-    # Only run for pull request comments mentioning @docker-diff
+    # Only run for pull request comments mentioning @staphb-diff
     if: |
       github.event.issue.pull_request &&
-      contains(github.event.comment.body, '@docker-diff')
+      contains(github.event.comment.body, '@staphb-diff') &&
+      contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.comment.author_association)
 
     runs-on: ubuntu-latest
 
@@ -39,8 +39,8 @@ jobs:
           ROOT="$(pwd -P)"
           MESSAGE=""
 
-          USAGE="Usage: @docker-diff IMAGE OLD NEW
-          Example: @docker-diff kraken2 2.1.3 2.1.4"
+          USAGE="Usage: @staphb-diff IMAGE OLD NEW
+          Example: @staphb-diff kraken2 2.1.3 2.1.4"
 
           # Parse the command from its own line.
           # The comment is an environment variable, never shell code.
@@ -50,7 +50,7 @@ jobs:
           FOUND_COMMAND=false
 
           while IFS= read -r line || [[ -n "$line" ]]; do
-            if [[ "$line" =~ ^[[:space:]]*@docker-diff[[:space:]]+([^[:space:]]+)[[:space:]]+([^[:space:]]+)[[:space:]]+([^[:space:]]+)[[:space:]]*$ ]]; then
+            if [[ "$line" =~ ^[[:space:]]*@staphb-diff[[:space:]]+([^[:space:]]+)[[:space:]]+([^[:space:]]+)[[:space:]]+([^[:space:]]+)[[:space:]]*$ ]]; then
               IMAGE="${BASH_REMATCH[1]}"
               OLD_VER="${BASH_REMATCH[2]}"
               NEW_VER="${BASH_REMATCH[3]}"
