@@ -35,16 +35,16 @@ contourpy                 1.4.0
 cvxopt                    1.3.3
 cycler                    0.12.1
 docutils                  0.23
-fonttools                 4.67.0
-isal                      1.8.0
+fonttools                 4.68.0
+isal                      1.9.1
 isodate                   0.7.2
 jsonschema                4.26.0
 jsonschema-specifications 2025.9.1
 kiwisolver                1.5.1
 matplotlib                3.11.2
 networkx                  3.7
-nextstrain-augur          34.2.1
-numpy                     2.5.4
+nextstrain-augur          34.3.0
+numpy                     2.5.5
 packaging                 26.3
 pandas                    2.3.3
 phylo-treetime            0.12.1
@@ -52,18 +52,18 @@ pillow                    13.0.0
 pip                       25.0.1
 pyfastx                   2.3.1
 pyparsing                 3.3.3
-python-calamine           0.9.0
-python-dateutil           3.0.0
-pytz                      2026.5
+python-calamine           0.9.1
+python-dateutil           4.0.0
+pytz                      2026.6
 referencing               0.37.0
 rpds-py                   2026.9.1
 ruamel.yaml               0.19.1
 scipy                     1.18.1
 six                       1.17.0
 typing_extensions         4.16.0
-tzdata                    2026.5
+tzdata                    2026.6
 xopen                     2.1.0
-zlib-ng                   1.0.0
+zlib-ng                   1.1.0
 ```
 
 </details>
