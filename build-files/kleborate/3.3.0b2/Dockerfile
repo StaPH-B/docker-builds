@@ -42,12 +42,12 @@ RUN micromamba install --name base -c conda-forge -c bioconda python=${PYTHON_VE
   micromamba clean -a -f -y && \
   mkdir /data
 
-# setup amrfinder database
-RUN amrfinder -u
-
 # set PATH
 ENV PATH="/opt/conda/bin/:${PATH}" \
 LC_ALL=C.UTF-8
+
+# setup amrfinder database
+RUN amrfinder -u
 
 # install kleborate; uninstall mash (that comes with kleborate via pypi, see: https://github.com/klebgenomics/Kleborate/issues/90); make /data
 RUN pip install --no-cache-dir kleborate==${KLEBORATE_VER} pandas && \
