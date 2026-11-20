@@ -190,6 +190,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Primer3 | GNU General Public License v2.0 | https://github.com/primer3-org/primer3/blob/main/LICENSE |
 | Prokka | GNU GPLv3 | https://raw.githubusercontent.com/tseemann/prokka/master/doc/LICENSE.Prokka |
 | pyCirclize | MIT | https://github.com/moshi4/pyCirclize/blob/main/LICENSE |
+| PyEuk | Apache 2.0 | https://github.com/veg/pyeuk/blob/master/LICENSE |
 | pyGenomeViz | MIT | https://github.com/moshi4/pyGenomeViz/blob/main/LICENSE |
 | pyMLST | GNU GPLv3 | https://github.com/bvalot/pyMLST/blob/master/LICENSE |
 | pypolca | MIT | https://github.com/gbouras13/pypolca/blob/main/LICENSE |
