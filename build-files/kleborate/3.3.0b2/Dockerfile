@@ -50,7 +50,7 @@ LC_ALL=C.UTF-8
 RUN amrfinder -u
 
 # install kleborate; uninstall mash (that comes with kleborate via pypi, see: https://github.com/klebgenomics/Kleborate/issues/90); make /data
-RUN pip install --no-cache-dir kleborate==${KLEBORATE_VER} pandas && \
+RUN pip install --no-cache-dir kleborate==${KLEBORATE_VER} pandas hAMRonization && \
   pip uninstall mash -y
 
 RUN echo "1" | python /opt/conda/lib/python3.11/site-packages/kleborate/shared/setup_cgmlst.py
@@ -111,4 +111,5 @@ RUN kleborate --help && \
   kleborate --version && \
   kleborate --list_modules && \
   amrfinder -l && \
+  pip list && \
   micromamba list -n base
