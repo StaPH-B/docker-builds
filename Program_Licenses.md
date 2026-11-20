@@ -134,6 +134,7 @@ The licenses of the open-source software that is contained in these Docker image
 | MaSuRCA | GNU GPLv3 | https://github.com/alekseyzimin/masurca/blob/master/LICENSE.txt
 | Medaka | Mozilla Public License 2.0 | https://github.com/nanoporetech/medaka/blob/master/LICENSE.md |
 | meningotype | GNU General Public License v3.0 | https://github.com/MDU-PHL/meningotype/blob/master/LICENSE |
+| merqury | Public Domain | https://github.com/marbl/merqury/blob/master/LICENSE |
 | metaMDBG | MIT | https://github.com/GaetanBenoitDev/metaMDBG/blob/main/LICENSE.md |
 | Metaphlan | MIT | https://github.com/biobakery/MetaPhlAn/blob/master/license.txt |
 | MIDAS | GNU GPLv3 |https://github.com/snayfach/MIDAS/blob/master/LICENSE |
@@ -189,6 +190,7 @@ The licenses of the open-source software that is contained in these Docker image
 | Primer3 | GNU General Public License v2.0 | https://github.com/primer3-org/primer3/blob/main/LICENSE |
 | Prokka | GNU GPLv3 | https://raw.githubusercontent.com/tseemann/prokka/master/doc/LICENSE.Prokka |
 | pyCirclize | MIT | https://github.com/moshi4/pyCirclize/blob/main/LICENSE |
+| PyEuk | Apache 2.0 | https://github.com/veg/pyeuk/blob/master/LICENSE |
 | pyGenomeViz | MIT | https://github.com/moshi4/pyGenomeViz/blob/main/LICENSE |
 | pyMLST | GNU GPLv3 | https://github.com/bvalot/pyMLST/blob/master/LICENSE |
 | pypolca | MIT | https://github.com/gbouras13/pypolca/blob/main/LICENSE |
