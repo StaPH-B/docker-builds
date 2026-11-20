@@ -8,7 +8,6 @@ ARG MASH_VER="2.3"
 ARG AMRFINDERPLUS_VER="4.2.7"
 ARG EZCLERMONT_VER="1.0.0"
 ARG ECTYPER_VER="2.0.0"
-ARG AMRFINDER_DB_VER="2026-08-07.1"
 ARG MISTTYPER_VER="1.5.0"
 #NOTE: stxtyper is installed as part of amrfinderplus since it's a submodule of amrfinderplus. StxTyper v1.0.42 comes installed with amrfinderplus v4.0.23
 #NOTE: dna_features_viewer is installed as a dependency of kleborate via pip (using kleborate's requirements.txt)
@@ -43,18 +42,12 @@ RUN micromamba install --name base -c conda-forge -c bioconda python=${PYTHON_VE
   micromamba clean -a -f -y && \
   mkdir /data
 
+# setup amrfinder database
+RUN amrfinder -u
+
 # set PATH
 ENV PATH="/opt/conda/bin/:${PATH}" \
 LC_ALL=C.UTF-8
-
-# download amrfinder databases and index them
-# done in this manner to pin the database version instead of pulling the latest version with `amrfinder -u`
-# softlink is required for `amrfinder -l` and typical `amrfinder` use cases to work properly
-RUN mkdir -p /opt/conda/share/amrfinderplus/data/${AMRFINDER_DB_VER} && \
-  echo "Downloading amrfinder databases and indexing them now..." && \
-  wget --progress=dot:giga -P /opt/conda/share/amrfinderplus/data/${AMRFINDER_DB_VER} ftp://ftp.ncbi.nlm.nih.gov/pathogen/Antimicrobial_resistance/AMRFinderPlus/database/4.0/${AMRFINDER_DB_VER}/* && \
-  amrfinder_index /opt/conda/share/amrfinderplus/data/${AMRFINDER_DB_VER} && \
-  ln -s /opt/conda/share/amrfinderplus/data/${AMRFINDER_DB_VER} /opt/conda/share/amrfinderplus/data/latest
 
 # install kleborate; uninstall mash (that comes with kleborate via pypi, see: https://github.com/klebgenomics/Kleborate/issues/90); make /data
 RUN pip install --no-cache-dir kleborate==${KLEBORATE_VER} pandas && \
@@ -117,4 +110,5 @@ RUN wget --progress=dot:giga https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/012/11
 RUN kleborate --help && \
   kleborate --version && \
   kleborate --list_modules && \
+  amrfinder -l && \
   micromamba list -n base
